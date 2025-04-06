@@ -335,7 +335,7 @@ public class MetaTileEntityAxialCompressor extends MultiblockWithDisplayBase imp
         ModularUI.Builder builder = super.createUITemplate(entityPlayer);
         if (this.isStructureFormed()) {
             builder.widget(new ImageWidget(10, 100, 156, 20, GuiTextures.DISPLAY)
-                    .setTooltip("gcys.universal.tooltip.pressure.target"));
+                    .setTooltip("gtqtcore.universal.tooltip.pressure.target"));
             builder.widget(new TextFieldWidget2(12, 108, 112, 16, () -> String.valueOf(targetPressure), value -> {
                 if (!value.isEmpty())
                     targetPressure = Math.max(GCYSValues.EARTH_PRESSURE, Math.min(Double.parseDouble(value), maxPressure));
@@ -374,11 +374,11 @@ public class MetaTileEntityAxialCompressor extends MultiblockWithDisplayBase imp
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gcys.multiblock.axial_compressor.tooltip.1",
+        tooltip.add(I18n.format("gtqtcore.multiblock.axial_compressor.tooltip.1",
                 NumberFormattingUtil.formatDoubleToCompactString(this.pressureRate),
                 NumberFormattingUtil.formatDoubleToCompactString(this.maxPressure), I18n.format(GCYSValues.PNF[GTQTUtil.getTierByPressure(this.maxPressure)])));
-        tooltip.add(I18n.format("gcys.multiblock.axial_compressor.tooltip.2", FLUID_USE_AMOUNT));
-        tooltip.add(I18n.format("gcys.multiblock.axial_compressor.tooltip.3", I18n.format(GTValues.VNF[this.tier])));
+        tooltip.add(I18n.format("gtqtcore.multiblock.axial_compressor.tooltip.2", FLUID_USE_AMOUNT));
+        tooltip.add(I18n.format("gtqtcore.multiblock.axial_compressor.tooltip.3", I18n.format(GTValues.VNF[this.tier])));
     }
 
     @Override

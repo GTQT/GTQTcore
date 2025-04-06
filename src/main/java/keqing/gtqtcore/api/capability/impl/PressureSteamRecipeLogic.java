@@ -25,9 +25,12 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
     @Override
     protected void updateRecipeProgress() {
         // do not simulate pressure so it keeps growing towards atmospheric
-        if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && drawPressure(this.recipePressure, false)) {
+        if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit()) {
             if (++this.progressTime > this.maxProgressTime) {
-                this.completeRecipe();
+                if (drawPressure(this.recipePressure, true)) {
+                    drawPressure(this.recipePressure, false);
+                    this.completeRecipe();
+                }
             }
 
             if (this.hasNotEnoughEnergy) {
@@ -52,8 +55,8 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
         final double containerPressure = container.getPressure();
         double pressureToChange;
 
-        // pressure changes by 1 percent per tick
-        if (pressure != GCYSValues.EARTH_PRESSURE) pressureToChange = containerPressure * 0.01;
+        // pressure changes
+        if (pressure != GCYSValues.EARTH_PRESSURE) pressureToChange = containerPressure * 0.2;
         else return true;
 
         if (pressure > GCYSValues.EARTH_PRESSURE) pressureToChange = -pressureToChange;
@@ -78,6 +81,48 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
         if (recipe.getRecipePropertyStorage() != null && recipe.hasProperty(PressureProperty.getInstance())) {
             this.recipePressure = recipe.getProperty(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
         }
+    }
+
+    @Override
+    public boolean checkRecipe(@Nonnull Recipe recipe) {
+        if (recipe.getRecipePropertyStorage() != null && recipe.hasProperty(PressureProperty.getInstance())) {
+            double pressure = recipe.getProperty(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
+
+            IPressureContainer container = this.getPressureContainer();
+            final double containerPressure = container.getPressure();
+            if (pressure > GCYSValues.EARTH_PRESSURE) {
+                if (containerPressure > pressure) return super.checkRecipe(recipe);
+            }
+            if (pressure < GCYSValues.EARTH_PRESSURE) {
+                if (containerPressure < pressure) return super.checkRecipe(recipe);
+            }
+        }
+        return false;
+    }
+
+    public boolean isPressureSuit() {
+        IPressureContainer container = this.getPressureContainer();
+        final double containerPressure = container.getPressure();
+        if (recipePressure > GCYSValues.EARTH_PRESSURE) return containerPressure > recipePressure * 0.95;
+        if (recipePressure < GCYSValues.EARTH_PRESSURE) return containerPressure < recipePressure * 1.05;
+        return true;
+    }
+
+    public void setMaxProgress(int maxProgress) {
+        IPressureContainer container = this.getPressureContainer();
+        final double containerPressure = container.getPressure();
+        int accelerate = 0;
+        if (recipePressure > GCYSValues.EARTH_PRESSURE) {
+            if (containerPressure > recipePressure * 10) {
+                accelerate = (int) Math.log10(containerPressure / recipePressure);
+            }
+        }
+        if (recipePressure < GCYSValues.EARTH_PRESSURE) {
+            if (containerPressure < recipePressure * 10) {
+                accelerate = (int) Math.log10(recipePressure / containerPressure);
+            }
+        }
+        this.maxProgressTime = maxProgress * (100 - accelerate * 5) / 100;
     }
 
     @Override

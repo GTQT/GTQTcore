@@ -53,4 +53,32 @@ public class NumberFormattingUtil {
     public static String formatDoubleToCompactString(double value) {
         return formatDoubleToCompactString(value, 3);
     }
+
+    public static int[] scaleDoublesToInts(double value1, double value2) {
+        // 计算放大倍率
+        int scaleFactor = calculateScaleFactor(value1, value2);
+        // 放大并转换为 int
+        int scaledValue1 = (int) (value1 * scaleFactor);
+        int scaledValue2 = (int) (value2 * scaleFactor);
+        return new int[]{scaledValue1, scaledValue2};
+    }
+
+    private static int calculateScaleFactor(double value1, double value2) {
+        // 获取两个值的小数位数
+        int decimalPlaces1 = getDecimalPlaces(value1);
+        int decimalPlaces2 = getDecimalPlaces(value2);
+        // 取较大的小数位数作为放大倍率的依据
+        int maxDecimalPlaces = Math.max(decimalPlaces1, decimalPlaces2);
+        // 计算放大倍率（10^maxDecimalPlaces）
+        return (int) Math.pow(10, maxDecimalPlaces);
+    }
+
+    private static int getDecimalPlaces(double value) {
+        String str = Double.toString(value);
+        int decimalIndex = str.indexOf('.');
+        if (decimalIndex == -1) {
+            return 0; // 没有小数部分
+        }
+        return str.length() - decimalIndex - 1; // 计算小数位数
+    }
 }

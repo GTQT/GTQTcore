@@ -6433,6 +6433,7 @@ gtqt.top.item_outputs=Producing Items:
 gtqt.top.fluid_outputs=Producing Fluids:
 gtqt.top.getparallelLimit=Parallel:
 gtqt.top.temperature=Temperature:
+gtqt.top.pressure=Pressure：
 gtqt.top.face=Facing:
 gtqt.top.in=Max Input//Actual Input:
 gtqt.top.on=Max Output//Actual Output:

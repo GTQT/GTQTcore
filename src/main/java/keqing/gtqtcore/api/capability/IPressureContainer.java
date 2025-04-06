@@ -2,6 +2,7 @@ package keqing.gtqtcore.api.capability;
 
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.GCYSValues;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -153,7 +154,7 @@ public interface IPressureContainer {
      * @return true if the pressure is safe for the container, else false
      */
     default boolean isPressureSafe(double pressure) {
-        return pressure <= getMaxPressure() && pressure >= getMinPressure();
+        return pressure <= getMaxPressure()*1.2 && pressure >= getMinPressure()*0.8;
     }
 
     /**
@@ -177,6 +178,11 @@ public interface IPressureContainer {
      * @param pos   the position of the explosion
      */
     default void causePressureExplosion(World world, BlockPos pos) {
+        GTQTLog.logger.info("Pressure Explosion at " + pos.toString());
+        GTQTLog.logger.info("Pressure " + getPressure());
+        GTQTLog.logger.info("Maximum Pressure " + getMaxPressure());
+        GTQTLog.logger.info("Minimum Pressure " + getMinPressure());
+
         if (world != null && !world.isRemote) {
             final float explosionPower = (float) Math.abs(Math.abs(Math.log10(getPressure())) - 4);
             world.setBlockToAir(pos);

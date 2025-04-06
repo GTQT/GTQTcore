@@ -1,13 +1,12 @@
 package keqing.gtqtcore.common.metatileentities.single.steam;
 
-import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.widgets.ImageWidget;
-import gregtech.api.gui.widgets.ProgressWidget;
+import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.SteamMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
@@ -16,6 +15,7 @@ import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.PressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureSteamRecipeLogic;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.NumberFormattingUtil;
 import net.minecraft.client.resources.I18n;
@@ -26,19 +26,21 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntitySteamVacuumChamber extends SteamMetaTileEntity implements IPressureMachine {
+import static keqing.gtqtcore.api.GCYSValues.*;
+import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
+
+public class MetaTileEntitySteamVacuumChamber extends SimpleSteamMetaTileEntity implements IPressureMachine {
 
     private PressureContainer pressureContainer;
 
-    public MetaTileEntitySteamVacuumChamber(ResourceLocation metaTileEntityId,boolean isHighPressure) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, Textures.COMPRESSOR_OVERLAY, true);
+    public MetaTileEntitySteamVacuumChamber(ResourceLocation metaTileEntityId, boolean isHighPressure) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, COMPRESS, Textures.COMPRESSOR_OVERLAY, false, isHighPressure);
         this.workableHandler = new PressureSteamRecipeLogic(this, GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES, isHighPressure, this.steamFluidTank, 1.0);
     }
 
@@ -50,17 +52,42 @@ public class MetaTileEntitySteamVacuumChamber extends SteamMetaTileEntity implem
     @Override
     protected void initializeInventory() {
         super.initializeInventory();
-        this.pressureContainer = new PressureContainer(this, 13E-5, GCYSValues.EARTH_PRESSURE, 1.0);
+        this.pressureContainer = new PressureContainer(this, decreaseDetailP[0], GCYSValues.EARTH_PRESSURE, 1.0);
     }
 
     @Override
-    protected IItemHandlerModifiable createImportItemHandler() {
-        return new NotifiableItemStackHandler(this, 4, this, false);
+    protected ModularUI.Builder createGuiTemplate(EntityPlayer player) {
+        RecipeMap<?> recipeMap = workableHandler.getRecipeMap();
+        int yOffset = 0;
+
+        ModularUI.Builder builder = super.createUITemplate(player);
+        addRecipeProgressBar(builder, recipeMap, yOffset);
+        addInventorySlotGroup(builder, importItems, importFluids, false, yOffset);
+        addInventorySlotGroup(builder, exportItems, exportFluids, true, yOffset);
+
+        if (exportItems.getSlots() + exportFluids.getTanks() <= 9) {
+            if (this.circuitInventory != null) {
+                SlotWidget circuitSlot = new GhostCircuitSlotWidget(circuitInventory, 0, 124, 62 + yOffset)
+                        .setBackgroundTexture(GuiTextures.SLOT_STEAM.get(isHighPressure), getCircuitSlotOverlay());
+                builder.widget(circuitSlot.setConsumer(this::getCircuitSlotTooltip))
+                        .widget(new ClickButtonWidget(115, 62 + yOffset, 9, 9, "", click -> circuitInventory.addCircuitValue(click.isShiftClick ? 5 : 1)).setShouldClientCallback(true).setButtonTexture(GuiTextures.BUTTON_INT_CIRCUIT_PLUS).setDisplayFunction(() -> circuitInventory.hasCircuitValue() && circuitInventory.getCircuitValue() < IntCircuitIngredient.CIRCUIT_MAX))
+                        .widget(new ClickButtonWidget(115, 71 + yOffset, 9, 9, "", click -> circuitInventory.addCircuitValue(click.isShiftClick ? -5 : -1)).setShouldClientCallback(true).setButtonTexture(GuiTextures.BUTTON_INT_CIRCUIT_MINUS).setDisplayFunction(() -> circuitInventory.hasCircuitValue() && circuitInventory.getCircuitValue() > IntCircuitIngredient.CIRCUIT_MIN));
+            }
+        }
+
+        // TODO add tooltip directly to ProgressWidget in CEu
+        builder.widget(new ImageWidget(4, 19, 10, 54, GuiTextures.SLOT)
+                        .setTooltip(getTooltips()))
+                .widget(new ProgressWidget(() -> pressureContainer.getPressurePercent(true), 4, 19, 10, 54)
+                        .setProgressBar(GuiTextures.PROGRESS_BAR_BOILER_EMPTY.get(true),
+                                GuiTextures.PROGRESS_BAR_BOILER_HEAT, ProgressWidget.MoveType.VERTICAL));
+
+        return builder;
     }
 
-    @Override
-    protected IItemHandlerModifiable createExportItemHandler() {
-        return new NotifiableItemStackHandler(this, 1, this, true);
+    private String getTooltips() {
+        return NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getPressure()) + "Pa / " +
+                NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()) + "Pa";
     }
 
     @Override
@@ -85,50 +112,12 @@ public class MetaTileEntitySteamVacuumChamber extends SteamMetaTileEntity implem
         }
     }
 
-    @Override
-    public ModularUI createUI(EntityPlayer player) {
-        return createUITemplate(player)
-                .slot(this.importItems, 0, 35, 25, GuiTextures.SLOT_STEAM.get(isHighPressure), GuiTextures.COMPRESSOR_OVERLAY_STEAM.get(isHighPressure))
-                .slot(this.importItems, 1, 53, 25, GuiTextures.SLOT_STEAM.get(isHighPressure), GuiTextures.COMPRESSOR_OVERLAY_STEAM.get(isHighPressure))
-                .slot(this.importItems, 2, 35, 43, GuiTextures.SLOT_STEAM.get(isHighPressure), GuiTextures.COMPRESSOR_OVERLAY_STEAM.get(isHighPressure))
-                .slot(this.importItems, 3, 53, 43, GuiTextures.SLOT_STEAM.get(isHighPressure), GuiTextures.COMPRESSOR_OVERLAY_STEAM.get(isHighPressure))
-
-                // TODO add tooltip directly to ProgressWidget in CEu
-                .widget(new ImageWidget(12, 21, 10, 54, GuiTextures.SLOT)
-                        .setTooltip(NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getPressure()) + "Pa / " +
-                                NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()) + "Pa"))
-                .widget(new ProgressWidget(() -> pressureContainer.getPressurePercent(true), 12, 21, 10, 54)
-                        .setProgressBar(GuiTextures.PROGRESS_BAR_BOILER_EMPTY.get(true),
-                                GuiTextures.PROGRESS_BAR_BOILER_HEAT, ProgressWidget.MoveType.VERTICAL))
-
-                .progressBar(workableHandler::getProgressPercent, 79, 35, 20, 18,
-                        GuiTextures.PROGRESS_BAR_COMPRESS_STEAM.get(isHighPressure), ProgressWidget.MoveType.HORIZONTAL, workableHandler.getRecipeMap())
-
-                .slot(this.exportItems, 0, 107, 35, true, false, GuiTextures.SLOT_STEAM.get(isHighPressure))
-
-                .build(getHolder(), player);
-    }
-
-    @Override
-    public ModularUI.Builder createUITemplate(@Nonnull EntityPlayer player) {
-        return ModularUI.builder(GuiTextures.BACKGROUND_STEAM.get(this.isHighPressure), 176, 166)
-                .label(6, 6, this.getMetaFullName()).shouldColor(false)
-
-                .widget((new ImageWidget(79, 51, 18, 18, GuiTextures.INDICATOR_NO_STEAM.get(this.isHighPressure)))
-                        .setPredicate(() -> this.workableHandler.isHasNotEnoughEnergy()))
-
-                .bindPlayerInventory(player.inventory, GuiTextures.SLOT_STEAM.get(this.isHighPressure), 0);
-    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-            tooltip.add(I18n.format("gcys.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMinPressure())]));
-            tooltip.add(I18n.format("gcys.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMaxPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMaxPressure())]));
-        } else {
-            tooltip.add(I18n.format("gregtech.tooltip.hold_shift"));
-        }
+        tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMinPressure())]));
+        tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMaxPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMaxPressure())]));
     }
 
     @Override

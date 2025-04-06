@@ -6417,6 +6417,7 @@ gtqt.top.item_outputs=正在生产物品：
 gtqt.top.fluid_outputs=正在生产流体：
 gtqt.top.getparallelLimit=并行：
 gtqt.top.temperature=温度：
+gtqt.top.pressure=压力：
 gtqt.top.face=面向：
 gtqt.top.in=最大输入//实际输入:
 gtqt.top.on=最大输出//实际输出:

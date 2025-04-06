@@ -318,21 +318,23 @@ behavior.tricorder.current_pressure=当前压力：%sPa
 behavior.tricorder.min_pressure=最小压力：%sPa
 behavior.tricorder.max_pressure=最大压力：%sPa
 
-
 # Generic Pressure Info
-gcys.universal.tooltip.pressure.minimum=最小压力容量：§a%sPa(§r%s§a)
-gcys.universal.tooltip.pressure.maximum=最大压力容量：§a%sPa(§r%s§a)
-gcys.universal.tooltip.pressure.target=压力目标
+gtqtcore.universal.tooltip.pressure.minimum=最小压力容量：§a%sPa(§r%s§a) -20%%
+gtqtcore.universal.tooltip.pressure.maximum=最大压力容量：§a%sPa(§r%s§a) +20%%
+gtqtcore.universal.tooltip.pressure.target=压力目标
 
 
 # Single Block Machines
 
 # Steam Ejector
-gcys.machine.steam_ejector.name=蒸汽喷射器
-gcys.steam_ejector.tooltip.1=创建你的第一个真空。
-gcys.steam_ejector.tooltip.2=每秒减少压力§b%sPa§7。
-gcys.steam_ejector.tooltip.3=每秒消耗%sL蒸汽。
+gtqtcore.machine.steam_ejector.name=蒸汽喷射器
+gtqtcore.steam_ejector.tooltip.1=创建你的第一个真空。
+gtqtcore.steam_ejector.tooltip.2=每秒减少压力§b%sPa§7。
+gtqtcore.steam_ejector.tooltip.3=每秒消耗%sL蒸汽。
+gtqtcore.steam_ejector.tooltip.4=每秒消耗%sEU电力。
 
+gtqtcore.steam_ejector.tooltip.5=创建你的第一个高压。
+gtqtcore.steam_ejector.tooltip.6=每秒增加压力§b%sPa§7。
 # Vacuum Chamber
 gcys.machine.steam_vacuum_chamber.name=小型蒸汽真空室
 
@@ -743,7 +745,7 @@ recipemap.taranium_reactor_mk3_recipes.name=塔兰金属超级反应堆 MkIII
 
 
 # Recipe Properties
-gcys.recipe.temperature=温度：%,dK
-gcys.recipe.pressure=压力：%sPa
-gcys.recipe.vacuum=真空度：%sPa
+gtqtcore.recipe.temperature=温度：%,dK
+gtqtcore.recipe.pressure=压力：%sPa ±5%%
+gtqtcore.recipe.vacuum=真空度：%sPa ±5%%
 

@@ -5,7 +5,10 @@ import gregtech.api.gui.resources.SteamTexture;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
+import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer;
+import gregtech.client.renderer.texture.custom.DrumRenderer;
 import keqing.gtqtcore.GTQTCore;
+import keqing.gtqtcore.client.render.ExtenderRender;
 import keqing.gtqtcore.client.render.textures.OverlayRenderer;
 import keqing.gtqtcore.client.textures.custom.IsaMillRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -131,6 +134,19 @@ public class GTQTTextures {
     public static SimpleOverlayRenderer POWER_SUPPLY_S8 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_viii");
     public static SimpleOverlayRenderer POWER_SUPPLY_S9 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_iv");
     public static SimpleOverlayRenderer POWER_SUPPLY_S10 = new SimpleOverlayRenderer("multiblock/power_supply/power_supply_vv");
+
+    public static final SimpleSidedCubeRenderer PLASTIC_CAN_OVERLAY = new SimpleSidedCubeRenderer("storage/drums/plastic_can_top");
+    public static final DrumRenderer PLASTIC_CAN =new  DrumRenderer("storage/drums/plastic_can");
+    public static final SimpleSidedCubeRenderer INV_BRIDGE = new SimpleSidedCubeRenderer("storage/bridges/inventory");
+    public static final SimpleSidedCubeRenderer TANK_BRIDGE = new SimpleSidedCubeRenderer("storage/bridges/tank");
+    public static final SimpleSidedCubeRenderer INV_TANK_BRIDGE = new SimpleSidedCubeRenderer("storage/bridges/inventory_tank");
+    public static final SimpleSidedCubeRenderer UNIVERSAL_BRIDGE = new SimpleSidedCubeRenderer("storage/bridges/universal");
+
+    public static final ExtenderRender INV_EXTENDER = new ExtenderRender("storage/extenders/inventory");
+    public static final ExtenderRender TANK_EXTENDER = new ExtenderRender("storage/extenders/tank");
+    public static final ExtenderRender INV_TANK_EXTENDER = new ExtenderRender("storage/extenders/inventory_tank");
+    public static final ExtenderRender UNIVERSAL_EXTENDER = new ExtenderRender("storage/extenders/universal");
+
     //怎么写？请看
     public static OrientedOverlayRenderer LIGHTNING_ROD_OVERLAY;
     public static OrientedOverlayRenderer CHEMICAL_PLANT;

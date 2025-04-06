@@ -322,19 +322,22 @@ behavior.tricorder.max_pressure=Maximum Pressure: %s Pa
 
 
 # Generic Pressure Info
-gcys.universal.tooltip.pressure.minimum=Minimum Pressure Capacity: §a%sPa (§r%s§a)
-gcys.universal.tooltip.pressure.maximum=Maximum Pressure Capacity: §a%sPa (§r%s§a)
-gcys.universal.tooltip.pressure.target=Pressure Target
+gtqtcore.universal.tooltip.pressure.minimum=Minimum Pressure Capacity: §a%sPa (§r%s§a) -20%%
+gtqtcore.universal.tooltip.pressure.maximum=Maximum Pressure Capacity: §a%sPa (§r%s§a) +20%%
+gtqtcore.universal.tooltip.pressure.target=Pressure Target
 
 
 # Single Block Machines
 
 # Steam Ejector
-gcys.machine.steam_ejector.name=Steam Ejector
-gcys.steam_ejector.tooltip.1=Creating your first Vacuum.
-gcys.steam_ejector.tooltip.2=Decreases pressure by §b%sPa§7 per second.
-gcys.steam_ejector.tooltip.3=Consumes %sL of Steam per second.
+gtqtcore.machine.steam_ejector.name=Steam Ejector
+gtqtcore.steam_ejector.tooltip.1=Creating your first Vacuum.
+gtqtcore.steam_ejector.tooltip.2=Decreases pressure by §b%sPa§7 per second.
+gtqtcore.steam_ejector.tooltip.3=Consumes %sL of Steam per second.
+gtqtcore.steam_ejector.tooltip.4=Consumes %sEU of Electrical per second.
 
+gtqtcore.steam_ejector.tooltip.5=Creating your first Pressure.
+gtqtcore.steam_ejector.tooltip.6=Increase pressure by §b%sPa§7 per second.
 # Vacuum Chamber
 gcys.machine.steam_vacuum_chamber.name=Small Steam Vacuum Chamber
 
@@ -747,7 +750,7 @@ recipemap.taranium_reactor_mk3_recipes.name=Taranium Hyper Reactor Mk.3
 
 
 # Recipe Properties
-gcys.recipe.temperature=Temperature: %,dK
-gcys.recipe.pressure=Pressure: %sPa
-gcys.recipe.vacuum=Vacuum: %sPa
+gtqtcore.recipe.temperature=Temperature: %,dK
+gtqtcore.recipe.pressure=Pressure: %sPa ±5%%
+gtqtcore.recipe.vacuum=Vacuum: %sPa ±5%%
 

@@ -27,7 +27,7 @@ public class PressureProperty extends RecipeProperty<Double> {
     @Override
     public void drawInfo(@Nonnull Minecraft minecraft, int x, int y, int color, Object value) {
         Double casted = castValue(value);
-        minecraft.fontRenderer.drawString(I18n.format(casted > 1 ? "gcys.recipe.pressure" : "gcys.recipe.vacuum",
+        minecraft.fontRenderer.drawString(I18n.format(casted > 1 ? "gtqtcore.recipe.pressure" : "gtqtcore.recipe.vacuum",
                 NumberFormattingUtil.formatDoubleToCompactString(casted)), x, y, color);
     }
 }

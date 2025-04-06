@@ -23,7 +23,8 @@
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "multiblocks.mixinGCYMMultiblockRecipeLogic"
+    "multiblocks.mixinGCYMMultiblockRecipeLogic",
+    "gregtech.MetaTileEntityDrumAccessor"
   ],
   "server": [],
   "client": [

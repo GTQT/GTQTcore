@@ -25,8 +25,8 @@ public class ItemBlockPressurePipe extends ItemBlockPipe<PressurePipeType, Press
     public void addInformation(@Nonnull ItemStack stack, @Nullable World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
         PressurePipeData pipeProperties = this.blockPipe.createItemProperties(stack);
-        tooltip.add(I18n.format("gcys.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pipeProperties.getMinPressure()), GCYSValues.PNF[getTierByPressure(pipeProperties.getMinPressure())]));
-        tooltip.add(I18n.format("gcys.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pipeProperties.getMaxPressure()), GCYSValues.PNF[getTierByPressure(pipeProperties.getMaxPressure())]));
-        tooltip.add(I18n.format("gcys.pipe.pressure.tooltip.volume", pipeProperties.getVolume()));
+        tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pipeProperties.getMinPressure()), GCYSValues.PNF[getTierByPressure(pipeProperties.getMinPressure())]));
+        tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pipeProperties.getMaxPressure()), GCYSValues.PNF[getTierByPressure(pipeProperties.getMaxPressure())]));
+        tooltip.add(I18n.format("gtqtcore.pipe.pressure.tooltip.volume", pipeProperties.getVolume()));
     }
 }

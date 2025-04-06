@@ -7,6 +7,7 @@ import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.api.pipenet.tile.TileEntityPipeBase;
 import gregtech.api.util.TaskScheduler;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.utils.NumberFormattingUtil;
@@ -33,6 +34,30 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
 
     public TileEntityPressurePipe() {/**/}
 
+    public double getPressure() {
+        PressurePipeNet net = getPipeNet();
+        if (net != null) {
+            return net.getPressure();
+        }
+        return GCYSValues.EARTH_PRESSURE;
+    }
+    public double getMinPressure() {
+        PressurePipeNet net = getPipeNet();
+        if (net != null) {
+            return net.getMinPressure();
+        }
+        return 0;
+    }
+    public double getMaxPressure() {
+        PressurePipeNet net = getPipeNet();
+        if (net != null) {
+            return net.getMaxPressure();
+        }
+        return 0;
+    }
+
+
+
     @Override
     public <T> T getCapabilityInternal(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == GTQTTileCapabilities.CAPABILITY_PRESSURE_CONTAINER) {
@@ -45,9 +70,9 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
     }
 
     public void checkPressure(double pressure) {
-        if (pressure > getNodeData().getMaxPressure()) {
+        if (pressure > getNodeData().getMaxPressure()*1.25) {
             causePressureExplosion();
-        } else if (pressure < getNodeData().getMinPressure()) {
+        } else if (pressure < getNodeData().getMinPressure()*0.8) {
             causePressureExplosion();
         }
     }

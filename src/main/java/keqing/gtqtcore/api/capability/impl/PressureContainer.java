@@ -33,6 +33,13 @@ public class PressureContainer extends MTETrait implements IPressureContainer {
         this.volume = volume;
         this.particles = volume * GCYSValues.EARTH_PRESSURE;
     }
+    public PressureContainer(MetaTileEntity metaTileEntity, double minPressure, double maxPressure,  double volume,double particles) {
+        super(metaTileEntity);
+        this.minPressure = minPressure;
+        this.maxPressure = maxPressure;
+        this.volume = volume;
+        this.particles = particles;
+    }
 
     @Override
     public double getMaxPressure() {

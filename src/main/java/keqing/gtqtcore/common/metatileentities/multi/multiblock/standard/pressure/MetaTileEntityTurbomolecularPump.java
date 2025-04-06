@@ -154,39 +154,38 @@ public class MetaTileEntityTurbomolecularPump extends MultiblockWithDisplayBase 
     protected BlockPattern createStructurePattern() {
         if (tier == GTValues.LuV) {
             return FactoryBlockPattern.start()
-                    .aisle("     ", "     ", "     ", "     ", " XGX ", " XGX ", " XGX ", " XXX ")
-                    .aisle(" F F ", " F F ", " FXF ", " FPF ", "XAAAX", "XPAPX", "XPAPX", "XBPBX")
-                    .aisle("     ", "  Z  ", " XAX ", " PAP ", "GAAAG", "GAAAG", "GAAAG", "XPSPX")
-                    .aisle(" F F ", " F F ", " FXF ", " FPF ", "XAAAX", "XPAPX", "XPAPX", "XBPBX")
-                    .aisle("     ", "     ", "     ", "     ", " XGX ", " XGX ", " XGX ", " XXX ")
+                    .aisle("  F  ", "  F  ", " XXX ", " XPX ", " XXX ", "  F  ", "  F  ")
+                    .aisle("     ", "     ", " XXX ", " XAX ", " XXX ", "     ", "     ").setRepeatable(2)
+                    .aisle("     ", "  X  ", " XTX ", "GTATX", " XTX ", "  G  ", "     ")
+                    .aisle("     ", "  X  ", "XTATX", "GAAAG", "XTATX", " XGX ", "     ").setRepeatable(3)
+                    .aisle("F   F", "FXXXF", "XBTBX", "XTSTX", "XBTBX", "FXXXF", "F   F")
                     .where('S', selfPredicate())
                     .where('F', states(getFrameState()))
-                    .where('X', states(getCasingState()).setMinGlobalLimited(32)
+                    .where('X', states(getCasingState()).setMinGlobalLimited(50)
                             .or(autoAbilities())
                             .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1))
                             .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)))
                     .where('G', states(getGlassState()))
-                    .where('A', airfoilPredicate())
-                    .where('P', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE)))
                     .where('B', states(MetaBlocks.MULTIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.EXTREME_ENGINE_INTAKE_CASING)))
-                    .where('Z', states(getCasingState())
-                            .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1)))
+                    .where('T', states(MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE)))
+                    .where('A', airfoilPredicate())
+                    .where('P', abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER))
                     .build();
         }
-        return FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.FRONT, RelativeDirection.DOWN)
-                .aisle("XXX", "XSX", "XXX")
-                .aisle("XGX", "GAG", "XGX").setRepeatable(4)
-                .aisle("FPF", "PPP", "FPF")
+
+        return FactoryBlockPattern.start()
+                .aisle("FXF", "XPX", "XXX")
+                .aisle("XXX", "GAG", "XXX").setRepeatable(4)
+                .aisle("FXF", "XSX", "XXX")
                 .where('S', selfPredicate())
                 .where('F', states(getFrameState()))
-                .where('X', states(getCasingState()).setMinGlobalLimited(20)
+                .where('X', states(getCasingState()).setMinGlobalLimited(27)
                         .or(autoAbilities())
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)))
                 .where('G', states(getGlassState()))
                 .where('A', airfoilPredicate())
-                .where('P', states(getCasingState())
-                        .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1)))
+                .where('P', abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER))
                 .build();
     }
 
@@ -337,7 +336,7 @@ public class MetaTileEntityTurbomolecularPump extends MultiblockWithDisplayBase 
         ModularUI.Builder builder = super.createUITemplate(entityPlayer);
         if (this.isStructureFormed()) {
             builder.widget(new ImageWidget(10, 100, 156, 20, GuiTextures.DISPLAY)
-                    .setTooltip("gcys.universal.tooltip.pressure.target"));
+                    .setTooltip("gtqtcore.universal.tooltip.pressure.target"));
             builder.widget(new TextFieldWidget2(12, 108, 112, 16, () -> String.valueOf(targetPressure), value -> {
                 if (!value.isEmpty())
                     targetPressure = Math.min(GCYSValues.EARTH_PRESSURE, Math.max(Double.parseDouble(value), minPressure));
@@ -376,11 +375,11 @@ public class MetaTileEntityTurbomolecularPump extends MultiblockWithDisplayBase 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gcys.multiblock.turbomolecular_pump.tooltip.1",
+        tooltip.add(I18n.format("gtqtcore.multiblock.turbomolecular_pump.tooltip.1",
                 NumberFormattingUtil.formatDoubleToCompactString(this.pressureRate),
                 NumberFormattingUtil.formatDoubleToCompactString(this.minPressure), I18n.format(GCYSValues.PNF[GTQTUtil.getTierByPressure(this.minPressure)])));
-        tooltip.add(I18n.format("gcys.multiblock.turbomolecular_pump.tooltip.2", FLUID_USE_AMOUNT));
-        tooltip.add(I18n.format("gcys.multiblock.turbomolecular_pump.tooltip.3", I18n.format(GTValues.VNF[this.tier])));
+        tooltip.add(I18n.format("gtqtcore.multiblock.turbomolecular_pump.tooltip.2", FLUID_USE_AMOUNT));
+        tooltip.add(I18n.format("gtqtcore.multiblock.turbomolecular_pump.tooltip.3", I18n.format(GTValues.VNF[this.tier])));
     }
 
     @Override
@@ -393,10 +392,10 @@ public class MetaTileEntityTurbomolecularPump extends MultiblockWithDisplayBase 
     @Override
     protected ICubeRenderer getFrontOverlay() {
         if (tier == GTValues.LuV) {
-            return GTQTTextures.HIGH_POWER_TURBOMOLECULAR_PUMP;
+            return GTQTTextures.SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY;
         }
 
-        return GTQTTextures.LOW_POWER_TURBOMOLECULAR_PUMP;
+        return GTQTTextures.SUBSONIC_AXIAL_COMPRESSOR_OVERLAY;
     }
 
     @Override
