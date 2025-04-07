@@ -3389,6 +3389,148 @@ gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4=当线圈等级大于配
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5=每提高1个§e电压等级§7，配方所需时间就变为原本的§l80%%§r§7。
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6=每提高1个§a线圈等级§7，每次运行可以多处理§l16§r§7个物品。
 
+# Drums
+gtqtcore.machine.drum.pe.name=聚乙烯（PE）罐
+gtqtcore.machine.drum.ptfe.name=聚四氟乙烯（PTFE）罐
+gtqtcore.machine.drum.zylon.name=柴龙纤维（Zylon）罐
+gtqtcore.machine.drum.pbi.name=聚苯并咪唑（PBI）罐
+gtqtcore.machine.drum.kevlar.name=凯夫拉（Kevlar）罐
+# Logistics
+gregtech.machine.delegator.tooltip.non_recursion=§6无法连接到其他的代理器！
+gregtech.top.delegator.delegating_face=代理面:
+
+gtqtcore.machine.bridge.inv.name=物品桥接器
+gtqtcore.machine.bridge.inv.tooltip=§b转接物品
+gtqtcore.machine.bridge.tank.name=流体桥接器
+gtqtcore.machine.bridge.tank.tooltip=§b转接流体
+gtqtcore.machine.bridge.inv_tank.name=两用桥接器
+gtqtcore.machine.bridge.inv_tank.tooltip=§b转接物品与流体
+gtqtcore.machine.bridge.universal.name=通用桥接器
+gtqtcore.machine.bridge.universal.tooltip=§b转接一切
+
+gtqtcore.machine.extender.inv.name=物品拓展器
+gtqtcore.machine.extender.inv.tooltip=§b转接物品
+gtqtcore.machine.extender.tank.name=流体拓展器
+gtqtcore.machine.extender.tank.tooltip=§b转接流体
+gtqtcore.machine.extender.inv_tank.name=两用拓展器
+gtqtcore.machine.extender.inv_tank.tooltip=§b转接物品与流体
+gtqtcore.machine.extender.universal.name=通用拓展器
+gtqtcore.machine.extender.universal.tooltip=§b转接一切
+
+#压力系统
+# Steam Ejector
+gtqtcore.machine.steam_ejector.bronze.name=蒸汽真空泵机
+gtqtcore.machine.steam_ejector.steel.name=高压蒸汽真空泵机
+gtqtcore.steam_ejector.tooltip.1=给予你第一片真空。
+gtqtcore.steam_ejector.tooltip.2=每秒减少压力§b%sPa§7。
+gtqtcore.steam_ejector.tooltip.3=每秒消耗%sL蒸汽。
+gtqtcore.steam_ejector.tooltip.4=每秒消耗%sEU电力。
+gtqtcore.steam_ejector.tooltip.5=创建你的第一个高压。
+gtqtcore.steam_ejector.tooltip.6=每秒增加压力§b%sPa§7。
+# Infinite Pressure Pump
+gtqtcore.machine.infinite_pressure_pump.name=无限压力泵
+gtqtcore.machine.infinite_pressure_pump.tooltip=§8你只需要§o§5绝§d对§4无§c所§e不§a能§b的§3创§7造§1模§5式§d力§r§8来使用它
+#储罐
+gtqtcore.machine.pressure_tank.i.name=大型压力储罐I
+gtqtcore.machine.pressure_tank.ii.name=大型压力储罐II
+gtqtcore.machine.pressure_tank.iii.name=大型压力储罐III
+#储罐
+gtqtcore.machine.gas_tank.bronze.name=小型压力缓存器（铜）
+gtqtcore.machine.gas_tank.steel.name=小型压力缓存器（钢）
+gtqtcore.machine.gas_tank.aluminium.name=小型压力缓存器（铝）
+gtqtcore.machine.gas_tank.stainlesssteel.name=小型压力缓存器（不锈钢）
+gtqtcore.machine.gas_tank.titanium.name=小型压力缓存器（钛）
+gtqtcore.machine.gas_tank.tungstensteel.name=小型压力缓存器（钨钢）
+gtqtcore.machine.gas_tank.hssg.name=小型压力缓存器（HSSG）
+gtqtcore.machine.gas_tank.naquadah.name=小型压力缓存器（硅岩）
+gtqtcore.machine.gas_tank.duranium.name=小型压力缓存器（铿铀）
+gtqtcore.machine.gas_tank.neutronium.name=小型压力缓存器（中子素）
+#单方块
+gtqtcore.machine.pressure_pump.ulv.name=真空泵机（ULV）
+gtqtcore.machine.pressure_pump.lv.name=真空泵机（§7LV§r）
+gtqtcore.machine.pressure_pump.mv.name=真空泵机（§bMV§r）
+gtqtcore.machine.pressure_pump.hv.name=真空泵机（§6HV§r）
+gtqtcore.machine.pressure_pump.ev.name=真空泵机（§5EV§r）
+gtqtcore.machine.pressure_pump.iv.name=真空泵机（§1IV§r）
+gtqtcore.machine.pressure_pump.luv.name=真空泵机（§dLuV§r）
+gtqtcore.machine.pressure_pump.zpm.name=真空泵机（§cZPM§r）
+gtqtcore.machine.pressure_pump.uv.name=真空泵机（§3UV§r）
+gtqtcore.machine.pressure_pump.uhv.name=真空泵机（§4UHV§r）
+gtqtcore.machine.pressure_pump.uev.name=真空泵机（§aUEV§r）
+gtqtcore.machine.pressure_pump.uiv.name=真空泵机（§2UIV§r）
+gtqtcore.machine.pressure_pump.uxv.name=真空泵机（§eUXV§r）
+gtqtcore.machine.pressure_pump.opv.name=真空泵机（§9OpV§r）
+
+gtqtcore.machine.pressure_compressor.ulv.name=压气机（ULV）
+gtqtcore.machine.pressure_compressor.lv.name=压气机（§7LV§r）
+gtqtcore.machine.pressure_compressor.mv.name=压气机（§bMV§r）
+gtqtcore.machine.pressure_compressor.hv.name=压气机（§6HV§r）
+gtqtcore.machine.pressure_compressor.ev.name=压气机（§5EV§r）
+gtqtcore.machine.pressure_compressor.iv.name=压气机（§1IV§r）
+gtqtcore.machine.pressure_compressor.luv.name=压气机（§dLuV§r）
+gtqtcore.machine.pressure_compressor.zpm.name=压气机（§cZPM§r）
+gtqtcore.machine.pressure_compressor.uv.name=压气机（§3UV§r）
+gtqtcore.machine.pressure_compressor.uhv.name=压气机（§4UHV§r）
+gtqtcore.machine.pressure_compressor.uev.name=压气机（§aUEV§r）
+gtqtcore.machine.pressure_compressor.uiv.name=压气机（§2UIV§r）
+gtqtcore.machine.pressure_compressor.uxv.name=压气机（§eUXV§r）
+gtqtcore.machine.pressure_compressor.opv.name=压气机（§9OpV§r）
+# Multi Block Hatches
+gtqtcore.machine.pressure_hatch.ulv.name=耐压力仓（ULV）
+gtqtcore.machine.pressure_hatch.lv.name=耐压力仓（§7LV§r）
+gtqtcore.machine.pressure_hatch.mv.name=耐压力仓（§bMV§r）
+gtqtcore.machine.pressure_hatch.hv.name=耐压力仓（§6HV§r）
+gtqtcore.machine.pressure_hatch.ev.name=耐压力仓（§5EV§r）
+gtqtcore.machine.pressure_hatch.iv.name=耐压力仓（§1IV§r）
+gtqtcore.machine.pressure_hatch.luv.name=耐压力仓（§dLuV§r）
+gtqtcore.machine.pressure_hatch.zpm.name=耐压力仓（§cZPM§r）
+gtqtcore.machine.pressure_hatch.uv.name=耐压力仓（§3UV§r）
+gtqtcore.machine.pressure_hatch.uhv.name=耐压力仓（§4UHV§r）
+gtqtcore.machine.pressure_hatch.uev.name=耐压力仓（§aUEV§r）
+gtqtcore.machine.pressure_hatch.uiv.name=耐压力仓（§2UIV§r）
+gtqtcore.machine.pressure_hatch.uxv.name=耐压力仓（§eUXV§r）
+gtqtcore.machine.pressure_hatch.opv.name=耐压力仓（§9OpV§r）
+# Pipes
+gtqtcore.pipe.pressure_pipe_low_vacuum.name=低真空管
+gtqtcore.pipe.pressure_pipe_medium_vacuum.name=中真空管
+gtqtcore.pipe.pressure_pipe_high_vacuum.name=高真空管
+gtqtcore.pipe.pressure_pipe_ultra_high_vacuum.name=超高真空管
+gtqtcore.pipe.pressure_pipe_extremely_high_vacuum.name=极高真空管
+gtqtcore.pipe.pressure_pipe_close_space_vacuum.name=封闭空间真空管
+gtqtcore.pipe.pressure_pipe_intergalactic_void_vacuum.name=星际虚空真空管
+gtqtcore.pipe.pressure_pipe_low_pressure.name=低压管
+gtqtcore.pipe.pressure_pipe_medium_pressure.name=中压管
+gtqtcore.pipe.pressure_pipe_high_pressure.name=高压管
+gtqtcore.pipe.pressure_pipe_ultra_high_pressure.name=超高压管
+gtqtcore.pipe.pressure_pipe_electron_degeneracy_pressure.name=电子简并压力管
+gtqtcore.pipe.pressure_pipe_white_dwarf_pressure.name=白矮星压力管
+gtqtcore.pipe.pressure_pipe_neutron_star_pressure.name=中子星压力管
+
+gtqtcore.pipe.pressure.tooltip.volume=体积：§a%sL
+# Axial Compressors
+gtqtcore.machine.axial_compressor.subsonic.name=亚音速轴流压缩机
+gtqtcore.machine.axial_compressor.supersonic.name=超音速轴流压缩机
+gtqtcore.multiblock.axial_compressor.tooltip.1=将压力增加§b%sPa/s§7至§a%sPa(§r%s§a)。
+gtqtcore.multiblock.axial_compressor.tooltip.2=增加压力时消耗§e%sL/s§7润滑剂。
+gtqtcore.multiblock.axial_compressor.tooltip.3=使用%s§7能量，不能超频。
+
+# Turbomolecular Pumps
+gtqtcore.machine.turbomolecular_pump.low_power.name=低功率涡轮分子泵
+gtqtcore.machine.turbomolecular_pump.high_power.name=高功率涡轮分子泵
+gtqtcore.multiblock.turbomolecular_pump.tooltip.1=将压力降低§b%sPa/s§7至§a%sPa(§r%s§a)。
+gtqtcore.multiblock.turbomolecular_pump.tooltip.2=降低压力时消耗§e%sL/s§7e润滑剂。
+gtqtcore.multiblock.turbomolecular_pump.tooltip.3=使用%s§7能量，不能超频。
+
+# Tricorder Info
+behavior.tricorder.current_pressure=当前压力：%sPa
+behavior.tricorder.min_pressure=最小压力：%sPa
+behavior.tricorder.max_pressure=最大压力：%sPa
+
+# Generic Pressure Info
+gtqtcore.universal.tooltip.pressure.minimum=最小压力容量：§a%sPa(§r%s§a) -20%%
+gtqtcore.universal.tooltip.pressure.maximum=最大压力容量：§a%sPa(§r%s§a) +20%%
+gtqtcore.universal.tooltip.pressure.target=压力目标
+
 gtqtcore.hc.count1=换热面积：%s 换热效率：%s
 gtqtcore.hc.count2=外壳等级：%s 玻璃等级：%s
 gtqtcore.hc.count3=高温热源缓存：%s 低温热量缓存：%s
@@ -4618,7 +4760,7 @@ gtqtcore.machine.ele_oil.name=电催破乳反应罐
 recipemap.ele_oil.name=电催破乳反应
 gtqtcore.machine.salt_flied.name=晒盐场
 tile.isa_casing.process_casing.name=加工厂外壳
-recipemap.keqing_net_recipes.name=序列研究
+recipemap.research_system_network.name=序列研究
 item.gt.tool.hammer_lv.name=风钻（LV）
 item.gt.tool.hammer_mv.name=风钻（MV）
 item.gt.tool.hammer_hv.name=风钻（HV）
@@ -4859,7 +5001,7 @@ gtqtcore.multiblock.kqn.threshold_decrement1=§c选取向前 10
 gtqtcore.multiblock.kqn.threshold_increment1=§a选取向后 10
 
 gtqtcore.multiblock.kqn.thresholdPercentage=研究序号：%s 研究大类：%s
-gtqtcore.machine.keqing_net.name=科研计算机
+gtqtcore.machine.research_system_network.name=科研计算机
 
 gtqtcore.machine.kqnet.tooltip.1=提供算力，研究对象与数据记录卡，选定好研究项目即可开始研究
 gtqtcore.machine.kqnet.tooltip.2=在界面内使用按钮进行操作，在研究界面内可通过切换类型转换研究对象

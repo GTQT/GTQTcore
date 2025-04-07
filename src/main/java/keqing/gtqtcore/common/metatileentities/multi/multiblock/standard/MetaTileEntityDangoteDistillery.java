@@ -162,13 +162,13 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.1"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.2"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.3"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.4"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.5"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.6"));
-        tooltip.add(I18n.format("gtlitecore.machine.dangote_distillery.tooltip.7"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.4"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.5"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
     }
 
     protected class DangoteDistilleryRecipeLogic extends MultiblockRecipeLogic {

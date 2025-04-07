@@ -67,7 +67,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> CATALYTIC_REFORMER_RECIPES = new RecipeMap<>("catalytic_reformer_recipes", 3, 3, 3, 6, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FURNACE);
     public static final RecipeMap<BlastRecipeBuilder> BURNER_REACTOR_RECIPES = new RecipeMap<>("burner_reactor_recipes", 3, 3, 3, 3, new BlastRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ARC);
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> CRYOGENIC_REACTOR_RECIPES = new RecipeMap<>("cryogenic_reactor_recipes", 3, 2, 2, 2, new NoCoilTemperatureRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.COOLING);
-    public static final RecipeMap<SimpleRecipeBuilder> CVD_RECIPES = new RecipeMap<>("cvd_recipes", 2, 2, 3, 3, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.COOLING);
+    public static final RecipeMap<PressureRecipeBuilder> CVD_RECIPES = new RecipeMap<>("cvd_recipes", 2, 2, 3, 3, new PressureRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.COOLING);
     public static final RecipeMap<SimpleRecipeBuilder> SAW_MILL = new RecipeMap<>("saw_mill", 2, 2, 0, 0, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.CUT);
     public static final RecipeMap<SimpleRecipeBuilder> PLASMA_CVD_RECIPES = new RecipeMap<>("plasma_cvd_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.COOLING);
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_BEAM_RECIPES = new RecipeMap<>("molecular_beam_recipes", 5, 5, 2, 1, new NoCoilTemperatureRecipeBuilder(), false).setSlotOverlay(false, false, false, NANOSCALE_OVERLAY_1).setSlotOverlay(false, false, true, NANOSCALE_OVERLAY_1).setSlotOverlay(false, true, false, NANOSCALE_OVERLAY_2).setSlotOverlay(false, true, true, NANOSCALE_OVERLAY_2).setSlotOverlay(true, false, true, NANOSCALE_OVERLAY_1).setSlotOverlay(true, true, true, NANOSCALE_OVERLAY_2).setProgressBar(PROGRESS_BAR_NANOSCALE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ELECTROLYZER);
@@ -75,7 +75,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> ION_IMPLANTATOR_RECIPES = new RecipeMap<>("ion_implanter_recipes", 3, 3, 1, 1, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ELECTROLYZER);
     public static final RecipeMap<SimpleRecipeBuilder> DRILLING_RECIPES = new RecipeMap<>("drill_recipes", 3, 1, 1, 1, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, true, GuiTextures.CRUSHED_ORE_OVERLAY).setSlotOverlay(true, false, true, GuiTextures.DUST_OVERLAY).setSound(GTSoundEvents.MACERATOR);
     public static final RecipeMap<BlastRecipeBuilder> CRYSTALLIZER_RECIPES = new RecipeMap<>("crystallization_recipes", 6, 1, 2, 3, new BlastRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FURNACE);
-    public static final RecipeMap<BlastRecipeBuilder> CZPULLER_RECIPES = new RecipeMap<>("czpuller_recipes", 3, 1, 1, 0, new BlastRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FURNACE);
+    public static final RecipeMap<TemperaturePressureRecipeBuilder> CZPULLER_RECIPES = new RecipeMap<>("czpuller_recipes", 3, 1, 1, 0, new TemperaturePressureRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_CRYSTALLIZATION, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FURNACE);
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> ROASTER_RECIPES = new RecipeMap<>("roaster_recipes", 3, 3, 3, 3, new NoCoilTemperatureRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.FURNACE);
     public static final RecipeMap<PCBFactoryRecipeBuilder> PCB_FACTORY_RECIPES = new RecipeMap<>("pcb_factory", 6, 9, 3, 0, new PCBFactoryRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.CIRCUIT_OVERLAY).setSlotOverlay(false, false, true, GuiTextures.CIRCUIT_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ASSEMBLER);
     public static final RecipeMap<SimpleRecipeBuilder> COMPONENT_ASSEMBLER_RECIPES;
@@ -112,7 +112,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_DISTILLATION_RECIPES;
     public static final RecipeMap<PrimitiveRecipeBuilder> PR_MIX;
     public static final RecipeMap<HeatRecipeBuilder> SALT_FLIED;
-    public static final RecipeMap<KQComputationRecipeBuilder> KEQING_NET_RECIES;
+    public static final RecipeMap<KQComputationRecipeBuilder> RESEARCH_SYSTEM_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK1_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK2_RECIPES;
     public static final RecipeMap<FuelRecipeBuilder> HYPER_REACTOR_MK3_RECIPES;
@@ -300,7 +300,7 @@ public class GTQTcoreRecipeMaps {
 
         PLASMA_FORGE = new RecipeMap<>("plasma_forge", 9, 9, 9, 9, new SimpleRecipeBuilder(), false);
 
-        KEQING_NET_RECIES = new RecipeMap<>("keqing_net_recipes", 2, 1, 1, 0, new KQComputationRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY).setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY).setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
+        RESEARCH_SYSTEM_RECIPES = new RecipeMap<>("research_system_network", 2, 1, 1, 0, new KQComputationRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, ProgressWidget.MoveType.HORIZONTAL).setSlotOverlay(false, false, GuiTextures.SCANNER_OVERLAY).setSlotOverlay(true, false, GuiTextures.RESEARCH_STATION_OVERLAY).setSound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.COMPUTATION);
 
         PAC_RECIPES = new RecipeMap<>("pac_recipes", 3, 3, 3, 3, new NeutronActivatorIORecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.ARC).allowEmptyOutput();
 

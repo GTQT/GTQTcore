@@ -567,7 +567,7 @@ public class EnzymesRecipes {
 
     public static void enzymesmix(Material material1,Material material2, int rate, int tier,int num)
     {
-        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+        GTQTcoreRecipeMaps.RESEARCH_SYSTEM_RECIPES.recipeBuilder()
                 .Tier(2)
                 .KI(12)
                 .input(BIO_0)

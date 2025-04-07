@@ -312,52 +312,6 @@ gregtech.material.light_hyper_fuel=轻型超能燃料
 gregtech.material.medium_hyper_fuel=中型超能燃料
 gregtech.material.heavy_hyper_fuel=重型超能燃料
 
-
-# Tricorder Info
-behavior.tricorder.current_pressure=当前压力：%sPa
-behavior.tricorder.min_pressure=最小压力：%sPa
-behavior.tricorder.max_pressure=最大压力：%sPa
-
-# Generic Pressure Info
-gtqtcore.universal.tooltip.pressure.minimum=最小压力容量：§a%sPa(§r%s§a) -20%%
-gtqtcore.universal.tooltip.pressure.maximum=最大压力容量：§a%sPa(§r%s§a) +20%%
-gtqtcore.universal.tooltip.pressure.target=压力目标
-
-
-# Single Block Machines
-
-# Steam Ejector
-gtqtcore.machine.steam_ejector.name=蒸汽喷射器
-gtqtcore.steam_ejector.tooltip.1=创建你的第一个真空。
-gtqtcore.steam_ejector.tooltip.2=每秒减少压力§b%sPa§7。
-gtqtcore.steam_ejector.tooltip.3=每秒消耗%sL蒸汽。
-gtqtcore.steam_ejector.tooltip.4=每秒消耗%sEU电力。
-
-gtqtcore.steam_ejector.tooltip.5=创建你的第一个高压。
-gtqtcore.steam_ejector.tooltip.6=每秒增加压力§b%sPa§7。
-# Vacuum Chamber
-gcys.machine.steam_vacuum_chamber.name=小型蒸汽真空室
-
-# Infinite Pressure Pump
-gcys.machine.infinite_pressure_pump.name=无限压力泵
-gcys.machine.infinite_pressure_pump.tooltip=§8你只需要§o§5绝§d对§4无§c所§e不§a能§b的§3创§7造§1模§5式§d力§r§8来使用它
-
-# Multi Block Hatches
-gcys.machine.pressure_hatch.ivv.name=星际虚空真空仓
-gcys.machine.pressure_hatch.csv.name=封闭空间真空仓
-gcys.machine.pressure_hatch.ehv.name=极高真空仓
-gcys.machine.pressure_hatch.uhv.name=超高真空仓
-gcys.machine.pressure_hatch.hv.name=高真空仓
-gcys.machine.pressure_hatch.mv.name=中真空仓
-gcys.machine.pressure_hatch.lv.name=低真空仓
-gcys.machine.pressure_hatch.lp.name=低压力仓
-gcys.machine.pressure_hatch.mp.name=中压力仓
-gcys.machine.pressure_hatch.hp.name=高压力仓
-gcys.machine.pressure_hatch.uhp.name=超高压力仓
-gcys.machine.pressure_hatch.edp.name=电子简并压力仓
-gcys.machine.pressure_hatch.wdp.name=白矮星压力仓
-gcys.machine.pressure_hatch.nsp.name=中子星压力仓
-
 # Multi Block Machines
 gcys.machine.ex_cvd.name=原子级化学气相沉淀
 gcys.machine.ion_implantator.name=离子注入发生器
@@ -399,20 +353,6 @@ gcys.machine.industrial_drill.name=工业钻机
 gcys.multiblock.industrial_drill.tooltip.1=钻取放置在钻头下方的方块。
 gcys.multiblock.industrial_drill.tooltip.2=目标方块在非消耗品时不会被破坏。
 
-# Axial Compressors
-gtqtcore.machine.axial_compressor.subsonic.name=亚音速轴流压缩机
-gtqtcore.machine.axial_compressor.supersonic.name=超音速轴流压缩机
-gtqtcore.multiblock.axial_compressor.tooltip.1=将压力增加§b%sPa/s§7至§a%sPa(§r%s§a)。
-gtqtcore.multiblock.axial_compressor.tooltip.2=增加压力时消耗§e%sL/s§7润滑剂。
-gtqtcore.multiblock.axial_compressor.tooltip.3=使用%s§7能量，不能超频。
-
-# Turbomolecular Pumps
-gtqtcore.machine.turbomolecular_pump.low_power.name=低功率涡轮分子泵
-gtqtcore.machine.turbomolecular_pump.high_power.name=高功率涡轮分子泵
-gtqtcore.multiblock.turbomolecular_pump.tooltip.1=将压力降低§b%sPa/s§7至§a%sPa(§r%s§a)。
-gtqtcore.multiblock.turbomolecular_pump.tooltip.2=降低压力时消耗§e%sL/s§7e润滑剂。
-gtqtcore.multiblock.turbomolecular_pump.tooltip.3=使用%s§7能量，不能超频。
-
 # CZ_Puller
 gcys.machine.cz_puller.name=柴可拉斯基硅生长反应仓
 
@@ -445,23 +385,7 @@ gcys.machine.dryer.uxv.tooltip=水分去除剂
 gcys.machine.dryer.opv.name=传奇干燥机
 gcys.machine.dryer.opv.tooltip=水分去除剂
 
-# Pipes
-gcys.pipe.pressure_pipe_low_vacuum.name=低真空管
-gcys.pipe.pressure_pipe_medium_vacuum.name=中真空管
-gcys.pipe.pressure_pipe_high_vacuum.name=高真空管
-gcys.pipe.pressure_pipe_ultra_high_vacuum.name=超高真空管
-gcys.pipe.pressure_pipe_extremely_high_vacuum.name=极高真空管
-gcys.pipe.pressure_pipe_close_space_vacuum.name=封闭空间真空管
-gcys.pipe.pressure_pipe_intergalactic_void_vacuum.name=星际虚空真空管
-gcys.pipe.pressure_pipe_low_pressure.name=低压管
-gcys.pipe.pressure_pipe_medium_pressure.name=中压管
-gcys.pipe.pressure_pipe_high_pressure.name=高压管
-gcys.pipe.pressure_pipe_ultra_high_pressure.name=超高压管
-gcys.pipe.pressure_pipe_electron_degeneracy_pressure.name=电子简并压力管
-gcys.pipe.pressure_pipe_white_dwarf_pressure.name=白矮星压力管
-gcys.pipe.pressure_pipe_neutron_star_pressure.name=中子星压力管
 
-gcys.pipe.pressure.tooltip.volume=体积：§a%sL
 
 
 # Blocks

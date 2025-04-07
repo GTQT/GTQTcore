@@ -47,6 +47,7 @@ public class GTQTRecipesManager {
         GCYMMultiblockRecipesOverwrite.init();
         BoronChain.init();
         EnzymesRecipes.init();
+        ExtruderRecipes.init();
         ArgChain.init();
         ChipHelper.init();
         CoverRecipes.init();

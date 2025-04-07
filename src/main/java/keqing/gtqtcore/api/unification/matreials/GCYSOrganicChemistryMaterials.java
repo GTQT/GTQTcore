@@ -337,7 +337,7 @@ public class GCYSOrganicChemistryMaterials {
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE,
                         GENERATE_FINE_WIRE,GENERATE_RING)
                 .components(Carbon, 14, Hydrogen, 10, Nitrogen, 2, Oxygen, 2)
-                .fluidPipeProperties(2000, 700, true)
+                .fluidPipeProperties(2000, 800, true)
                 .build()
                 .setFormula("(C6H4)2(CO)2(NH)2", true);
 

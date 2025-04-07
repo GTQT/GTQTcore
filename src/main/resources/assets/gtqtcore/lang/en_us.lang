@@ -3403,6 +3403,152 @@ gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4=When the coil grade is h
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5=Each increase in §eVoltage Grade§7 reduces the recipe time to §l80%%§r§7 of the original.
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6=Each increase in §aCoil Grade§7 allows processing §l16§r§7 more items per run.
 
+# Drums
+gtqtcore.machine.drum.pe.name=Polyethylene (PE) Drum
+gtqtcore.machine.drum.ptfe.name=Polytetrafluoroethylene (PTFE) Drum
+gtqtcore.machine.drum.zylon.name=Zylon Fiber Drum
+gtqtcore.machine.drum.pbi.name=Polybenzimidazole (PBI) Drum
+gtqtcore.machine.drum.kevlar.name=Kevlar Drum
+
+# Logistics
+gregtech.machine.delegator.tooltip.non_recursion=§6Cannot connect to other Delegators!
+gregtech.top.delegator.delegating_face=Delegation Face:
+
+gtqtcore.machine.bridge.inv.name=Item Bridge
+gtqtcore.machine.bridge.inv.tooltip=§bTransfers Items
+gtqtcore.machine.bridge.tank.name=Fluid Bridge
+gtqtcore.machine.bridge.tank.tooltip=§bTransfers Fluids
+gtqtcore.machine.bridge.inv_tank.name=Dual Bridge
+gtqtcore.machine.bridge.inv_tank.tooltip=§bTransfers Items & Fluids
+gtqtcore.machine.bridge.universal.name=Universal Bridge
+gtqtcore.machine.bridge.universal.tooltip=§bTransfers Everything
+
+gtqtcore.machine.extender.inv.name=Item Extender
+gtqtcore.machine.extender.inv.tooltip=§bExtends Item Transfer
+gtqtcore.machine.extender.tank.name=Fluid Extender
+gtqtcore.machine.extender.tank.tooltip=§bExtends Fluid Transfer
+gtqtcore.machine.extender.inv_tank.name=Dual Extender
+gtqtcore.machine.extender.inv_tank.tooltip=§bExtends Item & Fluid Transfer
+gtqtcore.machine.extender.universal.name=Universal Extender
+gtqtcore.machine.extender.universal.tooltip=§bExtends All Transfers
+
+# Pressure System
+# Steam Ejector
+gtqtcore.machine.steam_ejector.bronze.name=Steam Vacuum Pump
+gtqtcore.machine.steam_ejector.steel.name=High-Pressure Steam Vacuum Pump
+gtqtcore.steam_ejector.tooltip.1=Creates your first vacuum.
+gtqtcore.steam_ejector.tooltip.2=Decreases pressure by §b%sPa§7 per second.
+gtqtcore.steam_ejector.tooltip.3=Consumes %sL steam per second.
+gtqtcore.steam_ejector.tooltip.4=Consumes %sEU/s.
+gtqtcore.steam_ejector.tooltip.5=Creates your first high pressure.
+gtqtcore.steam_ejector.tooltip.6=Increases pressure by §b%sPa§7 per second.
+# Infinite Pressure Pump
+gtqtcore.machine.infinite_pressure_pump.name=Infinite Pressure Pump
+gtqtcore.machine.infinite_pressure_pump.tooltip=§8Requires §o§5AB§dSO§4LUTE§c_C§eRE§aAT§bIVE§3_M§7O§1DE§5_P§dOW§r§8 to operate
+# Pressure Tanks
+gtqtcore.machine.pressure_tank.i.name=Large Pressure Tank I
+gtqtcore.machine.pressure_tank.ii.name=Large Pressure Tank II
+gtqtcore.machine.pressure_tank.iii.name=Large Pressure Tank III
+# Gas Tanks
+gtqtcore.machine.gas_tank.bronze.name=Small Pressure Vessel (Bronze)
+gtqtcore.machine.gas_tank.steel.name=Small Pressure Vessel (Steel)
+gtqtcore.machine.gas_tank.aluminium.name=Small Pressure Vessel (Aluminium)
+gtqtcore.machine.gas_tank.stainlesssteel.name=Small Pressure Vessel (Stainless Steel)
+gtqtcore.machine.gas_tank.titanium.name=Small Pressure Vessel (Titanium)
+gtqtcore.machine.gas_tank.tungstensteel.name=Small Pressure Vessel (Tungsten Steel)
+gtqtcore.machine.gas_tank.hssg.name=Small Pressure Vessel (HSSG)
+gtqtcore.machine.gas_tank.naquadah.name=Small Pressure Vessel (Naquadah)
+gtqtcore.machine.gas_tank.duranium.name=Small Pressure Vessel (Duranium)
+gtqtcore.machine.gas_tank.neutronium.name=Small Pressure Vessel (Neutronium)
+# Single-block Machines
+gtqtcore.machine.pressure_pump.ulv.name=Vacuum Pump (ULV)
+gtqtcore.machine.pressure_pump.lv.name=Vacuum Pump (§7LV§r)
+gtqtcore.machine.pressure_pump.mv.name=Vacuum Pump (§bMV§r)
+gtqtcore.machine.pressure_pump.hv.name=Vacuum Pump (§6HV§r)
+gtqtcore.machine.pressure_pump.ev.name=Vacuum Pump (§5EV§r)
+gtqtcore.machine.pressure_pump.iv.name=Vacuum Pump (§1IV§r)
+gtqtcore.machine.pressure_pump.luv.name=Vacuum Pump (§dLuV§r)
+gtqtcore.machine.pressure_pump.zpm.name=Vacuum Pump (§cZPM§r)
+gtqtcore.machine.pressure_pump.uv.name=Vacuum Pump (§3UV§r)
+gtqtcore.machine.pressure_pump.uhv.name=Vacuum Pump (§4UHV§r)
+gtqtcore.machine.pressure_pump.uev.name=Vacuum Pump (§aUEV§r)
+gtqtcore.machine.pressure_pump.uiv.name=Vacuum Pump (§2UIV§r)
+gtqtcore.machine.pressure_pump.uxv.name=Vacuum Pump (§eUXV§r)
+gtqtcore.machine.pressure_pump.opv.name=Vacuum Pump (§9OpV§r)
+
+gtqtcore.machine.pressure_compressor.ulv.name=Pressure Compressor (ULV)
+gtqtcore.machine.pressure_compressor.lv.name=Pressure Compressor (§7LV§r)
+gtqtcore.machine.pressure_compressor.mv.name=Pressure Compressor (§bMV§r)
+gtqtcore.machine.pressure_compressor.hv.name=Pressure Compressor (§6HV§r)
+gtqtcore.machine.pressure_compressor.ev.name=Pressure Compressor (§5EV§r)
+gtqtcore.machine.pressure_compressor.iv.name=Pressure Compressor (§1IV§r)
+gtqtcore.machine.pressure_compressor.luv.name=Pressure Compressor (§dLuV§r)
+gtqtcore.machine.pressure_compressor.zpm.name=Pressure Compressor (§cZPM§r)
+gtqtcore.machine.pressure_compressor.uv.name=Pressure Compressor (§3UV§r)
+gtqtcore.machine.pressure_compressor.uhv.name=Pressure Compressor (§4UHV§r)
+gtqtcore.machine.pressure_compressor.uev.name=Pressure Compressor (§aUEV§r)
+gtqtcore.machine.pressure_compressor.uiv.name=Pressure Compressor (§2UIV§r)
+gtqtcore.machine.pressure_compressor.uxv.name=Pressure Compressor (§eUXV§r)
+gtqtcore.machine.pressure_compressor.opv.name=Pressure Compressor (§9OpV§r)
+
+# Multi Block Hatches
+gtqtcore.machine.pressure_hatch.ulv.name=Pressure Resistant Hatch（ULV）
+gtqtcore.machine.pressure_hatch.lv.name=Pressure Resistant Hatch（§7LV§r）
+gtqtcore.machine.pressure_hatch.mv.name=Pressure Resistant Hatch（§bMV§r）
+gtqtcore.machine.pressure_hatch.hv.name=Pressure Resistant Hatch（§6HV§r）
+gtqtcore.machine.pressure_hatch.ev.name=Pressure Resistant Hatch（§5EV§r）
+gtqtcore.machine.pressure_hatch.iv.name=Pressure Resistant Hatch（§1IV§r）
+gtqtcore.machine.pressure_hatch.luv.name=Pressure Resistant Hatch（§dLuV§r）
+gtqtcore.machine.pressure_hatch.zpm.name=Pressure Resistant Hatch（§cZPM§r）
+gtqtcore.machine.pressure_hatch.uv.name=Pressure Resistant Hatch（§3UV§r）
+gtqtcore.machine.pressure_hatch.uhv.name=Pressure Resistant Hatch（§4UHV§r）
+gtqtcore.machine.pressure_hatch.uev.name=Pressure Resistant Hatch（§aUEV§r）
+gtqtcore.machine.pressure_hatch.uiv.name=Pressure Resistant Hatch（§2UIV§r）
+gtqtcore.machine.pressure_hatch.uxv.name=Pressure Resistant Hatch（§eUXV§r）
+gtqtcore.machine.pressure_hatch.opv.name=Pressure Resistant Hatch（§9OpV§r）
+
+# Pipes
+gtqtcore.pipe.pressure_pipe_low_vacuum.name=Low Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_medium_vacuum.name=Medium Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_high_vacuum.name=High Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_ultra_high_vacuum.name=Ultra High Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_extremely_high_vacuum.name=Extremely High Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_close_space_vacuum.name=Closed Space Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_intergalactic_void_vacuum.name=Intergalactic Void Vacuum Pipe
+gtqtcore.pipe.pressure_pipe_low_pressure.name=Low Pressure Pipe
+gtqtcore.pipe.pressure_pipe_medium_pressure.name=Medium Pressure Pipe
+gtqtcore.pipe.pressure_pipe_high_pressure.name=High Pressure Pipe
+gtqtcore.pipe.pressure_pipe_ultra_high_pressure.name=Ultra High Pressure Pipe
+gtqtcore.pipe.pressure_pipe_electron_degeneracy_pressure.name=Electron Degeneracy Pressure Pipe
+gtqtcore.pipe.pressure_pipe_white_dwarf_pressure.name=White Dwarf Pressure Pipe
+gtqtcore.pipe.pressure_pipe_neutron_star_pressure.name=Neutron Star Pressure Pipe
+
+gtqtcore.pipe.pressure.tooltip.volume=Volume: §a%sL
+
+# Axial Compressors
+gtqtcore.machine.axial_compressor.subsonic.name=Subsonic Axial Compressor
+gtqtcore.machine.axial_compressor.supersonic.name=Supersonic Axial Compressor
+gtqtcore.multiblock.axial_compressor.tooltip.1=Increases pressure by §b%sPa/s§7 to §a%sPa(§r%s§a).
+gtqtcore.multiblock.axial_compressor.tooltip.2=Consumes §e%sL/s§7 lubricant during operation.
+gtqtcore.multiblock.axial_compressor.tooltip.3=Requires %s§7 energy, cannot be overclocked.
+
+# Turbomolecular Pumps
+gtqtcore.machine.turbomolecular_pump.low_power.name=Low-Power Turbomolecular Pump
+gtqtcore.machine.turbomolecular_pump.high_power.name=High-Power Turbomolecular Pump
+gtqtcore.multiblock.turbomolecular_pump.tooltip.1=Decreases pressure by §b%sPa/s§7 to §a%sPa(§r%s§a).
+gtqtcore.multiblock.turbomolecular_pump.tooltip.2=Consumes §e%sL/s§7 lubricant during operation.
+gtqtcore.multiblock.turbomolecular_pump.tooltip.3=Requires %s§7 energy, cannot be overclocked.
+
+# Tricorder Info
+behavior.tricorder.current_pressure=Current Pressure: %sPa
+behavior.tricorder.min_pressure=Minimum Pressure: %sPa
+behavior.tricorder.max_pressure=Maximum Pressure: %sPa
+
+# Generic Pressure Info
+gtqtcore.universal.tooltip.pressure.minimum=Min Pressure Rating: §a%sPa(§r%s§a) -20%%
+gtqtcore.universal.tooltip.pressure.maximum=Max Pressure Rating: §a%sPa(§r%s§a) +20%%
+gtqtcore.universal.tooltip.pressure.target=Pressure Target
+
 gtqtcore.hc.count1=Heat Exchange Area: %s Heat Exchange Efficiency: %s
 gtqtcore.hc.count2=Shell Level: %s Glass Level: %s
 gtqtcore.hc.count3=High-Temperature Heat Source Buffer: %s Low-Temperature Heat Buffer: %s
@@ -4635,7 +4781,7 @@ gtqtcore.machine.ele_oil.name=Electrochemical Demulsifier Reaction Tank
 recipemap.ele_oil.name=Electrochemical Demulsifier Reaction
 gtqtcore.machine.salt_flied.name=Salt Field
 tile.isa_casing.process_casing.name=Processing Plant Shell
-recipemap.keqing_net_recipes.name=Sequence Research
+recipemap.research_system_network.name=Sequence Research
 item.gt.tool.hammer_lv.name=Wind Drill (LV)
 item.gt.tool.hammer_mv.name=Wind Drill (MV)
 item.gt.tool.hammer_hv.name=Wind Drill (HV)
@@ -4876,7 +5022,7 @@ gtqtcore.multiblock.kqn.threshold_decrement1=§cSelect Forward 10
 gtqtcore.multiblock.kqn.threshold_increment1=§aSelect Backward 10
 
 gtqtcore.multiblock.kqn.thresholdPercentage=Research Number: %s Research Kind: %s
-gtqtcore.machine.keqing_net.name=Research Computer
+gtqtcore.machine.research_system_network.name=Research Computer
 
 gtqtcore.machine.kqnet.tooltip.1=Provide computing power, research objects and data record cards, and select a research project to start researching
 gtqtcore.machine.kqnet.tooltip.2=Use buttons within the interface for operation, and switch types within the research interface to change research objects

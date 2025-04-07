@@ -28,7 +28,6 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityDataBank;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityHPCA;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
 import keqing.gtqtcore.api.recipes.properties.MachineTierProperty;
 import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
 import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
@@ -40,7 +39,6 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTil
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityEnzymesReaction;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityGeneMutagenesis;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityPhotolithographyFactory;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.decoration.MetaTileEntityHolographicDisplay;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -69,7 +67,6 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
@@ -88,7 +85,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityResearchSystemNetWork(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.KEQING_NET_RECIES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.RESEARCH_SYSTEM_RECIPES);
         this.recipeMapWorkable = new ResearchStationRecipeLogic(this);
     }
 

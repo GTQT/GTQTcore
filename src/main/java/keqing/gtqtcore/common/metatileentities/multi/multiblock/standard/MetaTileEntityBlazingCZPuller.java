@@ -26,9 +26,16 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.GCYSValues;
+import keqing.gtqtcore.api.capability.IPressureContainer;
+import keqing.gtqtcore.api.capability.IPressureMachine;
+import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
+import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
@@ -48,13 +55,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CZPULLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
-public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockController implements IHeatingCoil {
+public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockController implements IHeatingCoil, IPressureMachine {
     protected static int heatingCoilLevel;
     private int blastFurnaceTemperature;
     private FluidStack pyrotheumFluid = Pyrotheum.getFluid(heatingCoilLevel);
+    private IPressureContainer container;
 
     public MetaTileEntityBlazingCZPuller(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -77,12 +84,25 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
+    @Override
+    public IPressureContainer getPressureContainer() {
+        return this.container;
+    }
+
+    protected void initializeAbilities() {
+        super.initializeAbilities();
+        List<IPressureContainer> list = getAbilities(GTQTMultiblockAbility.PRESSURE_CONTAINER);
+        if (list.isEmpty()) {
+            this.container = new AtmosphericPressureContainer(this, 1.0);
+        } else {
+            this.container = list.get(0);
+        }
+    }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
         return new MetaTileEntityBlazingCZPuller(this.metaTileEntityId);
     }
-
 
 
     @Override
@@ -98,8 +118,8 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel),16));
-        setTimeReduce( (100 - (Math.min(heatingCoilLevel,15) * 5.0)) /100);
+        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel), 16));
+        setTimeReduce((100 - (Math.min(heatingCoilLevel, 15) * 5.0)) / 100);
     }
 
     @Override
@@ -119,7 +139,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY)))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY))
+                        .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
+                )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where('C', heatingCoils())
                 .where('P', states(getCasingState2()))
@@ -131,7 +153,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("EEM", "PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle("PEM", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .aisle("FXX", "PPP", "C#C", "C#C", "C#C", "XHX")
                 .aisle("ISO", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .where('X', getCasingState())
@@ -139,6 +161,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
                 .where('S', GTQTMetaTileEntities.BLAZING_CZ_PULLER, EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
+                .where('P', GTQTMetaTileEntities.PRESSURE_HATCH[GTValues.LV], EnumFacing.NORTH)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
@@ -213,7 +236,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         pyrotheumFluid = null;
     }
 
-    protected class BlazingBlastFurnaceWorkable extends GTQTMultiblockLogic {
+    protected class BlazingBlastFurnaceWorkable extends PressureMultiblockRecipeLogic {
 
         private final MetaTileEntityBlazingCZPuller combustionEngine;
 
@@ -222,21 +245,85 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
             this.combustionEngine = (MetaTileEntityBlazingCZPuller) tileEntity;
         }
 
+        @Override
         protected void updateRecipeProgress() {
             IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (canRecipeProgress && drawEnergy(recipeEUt, true) && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit() && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
                 drawEnergy(recipeEUt, false);
                 pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, true));
-                if (++progressTime > maxProgressTime) {
-                    completeRecipe();
+                if (++this.progressTime > this.maxProgressTime) {
+                    if (drawPressure(this.recipePressure, true)) {
+                        drawPressure(this.recipePressure, false);
+                        this.completeRecipe();
+                    }
                 }
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
+
+                if (this.hasNotEnoughEnergy) {
+                    if (this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                        this.hasNotEnoughEnergy = false;
+                    }
                 }
-            } else if (canRecipeProgress && !drawEnergy(recipeEUt, true) && this.recipeEUt > 0) {
+            } else if (this.recipeEUt > 0 || this.recipePressure != GCYSValues.EARTH_PRESSURE) {
                 this.hasNotEnoughEnergy = true;
-                this.decreaseProgress();
+                if (this.progressTime >= 2) {
+                    if (ConfigHolder.machines.recipeProgressLowEnergy) {
+                        this.progressTime = 1;
+                    } else {
+                        this.progressTime = Math.max(1, this.progressTime - 2);
+                    }
+                }
             }
         }
+
+
+        @Override
+        protected double getOverclockingDurationDivisor() {
+            return OCFirst ? Overclocking : 2.0;
+        }
+
+        @Override
+        protected double getOverclockingVoltageMultiplier() {
+            return OCFirst ? Overclocking : 2.0;
+        }
+
+
+        @Override
+        public void update() {
+            super.update();
+            if (autoParallelModel) {
+                autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec() / 19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
+                autoParallel = Math.min(autoParallel, limitAutoParallel);
+                autoParallel = Math.min(autoParallel, getMaxParallel());
+            }
+        }
+
+        public int getMinVoltage() {
+            if ((Math.min(this.getEnergyCapacity() / (energyHatchMaxWork == 0 ? 1 : energyHatchMaxWork), this.getMaxVoltage())) == 0)
+                return 1;
+            return (int) (Math.min(this.getEnergyCapacity() / (energyHatchMaxWork == 0 ? 1 : energyHatchMaxWork), this.getMaxVoltage()));
+        }
+
+        @Override
+        public int getParallelLimit() {
+            return autoParallelModel ? autoParallel : customParallel;
+        }
+
+        @Override
+        public long getMaxParallelVoltage() {
+            if (OCFirst) return super.getMaxParallelVoltage();
+            return super.getMaxVoltage() * getParallelLimit();
+        }
+
+        @Override
+        public long getMaximumOverclockVoltage() {
+            if (OCFirst) return energyContainer.getInputVoltage();
+            return super.getMaximumOverclockVoltage();
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress * timeReduce));
+        }
+
     }
 }

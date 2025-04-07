@@ -126,8 +126,8 @@ public class MetaTileEntityIndustrialDrill extends RecipeMapMultiblockController
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gcys.multiblock.industrial_drill.tooltip.1"));
-        tooltip.add(I18n.format("gcys.multiblock.industrial_drill.tooltip.2"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.industrial_drill.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.industrial_drill.tooltip.2"));
     }
 
     protected static class IndustrialDrillWorkableHandler extends MultiblockRecipeLogic {

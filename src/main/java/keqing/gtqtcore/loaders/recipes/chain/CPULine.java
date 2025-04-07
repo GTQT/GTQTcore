@@ -5,6 +5,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.MarkerMaterials.Color;
 import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.unification.TJMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -684,10 +685,12 @@ public class CPULine {
                 .duration(20000)
                 .EUt(VA[ZPM])
                 .fluidInputs(MetastableOganesson.getFluid(4000))
+                .input(block, Polysilicon, 32)
                 .input(dust, StrontiumCarbonate, 64)
                 .input(dust, Bohrium, 8)
                 .output(STRONTIUM_CARBONATE_BOHRIUM_BOULE)
-                .blastFurnaceTemp(9000)
+                .pressure(GCYSValues.increaseRecipesPressure[ZPM])
+                .temperature(9000)
                 .buildAndRegister();
     }
 
@@ -696,60 +699,65 @@ public class CPULine {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000 / (4 - tier))
                     .EUt(VA[tier])
+                    .pressure(GCYSValues.increaseRecipesPressure[tier])
                     .fluidInputs(Nitrogen.getFluid(4000))
                     .input(block, Polysilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (4 - tier) / 2)
-                    .blastFurnaceTemp(900 * tier)
+                    .temperature(900 * tier)
                     .buildAndRegister();
         }
         if (tier <= 4) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000 / (6 - tier))
                     .EUt(VA[tier])
+                    .pressure(GCYSValues.increaseRecipesPressure[tier])
                     .fluidInputs(Helium.getFluid(4000))
                     .input(block, Polysilicon, 32)
                     .input(dust, GalliumArsenide, 8)
                     .input(dust, material, 1)
                     .output(doule, (6 - tier) / 2)
-                    .blastFurnaceTemp(900 * tier)
+                    .temperature(900 * tier)
                     .buildAndRegister();
         }
         if (tier <= 6) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000 / (8 - tier))
                     .EUt(VA[tier])
+                    .pressure(GCYSValues.increaseRecipesPressure[tier])
                     .fluidInputs(Radon.getFluid(4000))
                     .input(block, Polysilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (8 - tier) / 2)
-                    .blastFurnaceTemp(900 * tier)
+                    .temperature(900 * tier)
                     .buildAndRegister();
         }
         if (tier <= 8) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000 / (10 - tier))
                     .EUt(VA[tier])
+                    .pressure(GCYSValues.increaseRecipesPressure[tier])
                     .fluidInputs(Xenon.getFluid(4000))
                     .input(block, Polysilicon, 32)
                     .input(dust, IndiumGalliumPhosphide, 8)
                     .input(dust, material, 1)
                     .output(doule, (10 - tier) / 2)
-                    .blastFurnaceTemp(900 * tier)
+                    .temperature(900 * tier)
                     .buildAndRegister();
         }
         if (tier <= 10) {
             CZPULLER_RECIPES.recipeBuilder()
                     .duration(20000 / (12 - tier))
                     .EUt(VA[tier])
+                    .pressure(GCYSValues.increaseRecipesPressure[tier])
                     .fluidInputs(MetastableOganesson.getFluid(4000))
                     .input(block, Polysilicon, 32)
                     .input(dust, NaquadriaGalliumIndium, 8)
                     .input(dust, material, 1)
                     .output(doule, (12 - tier) / 2)
-                    .blastFurnaceTemp(900 * tier)
+                    .temperature(900 * tier)
                     .buildAndRegister();
         }
 

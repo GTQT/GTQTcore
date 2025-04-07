@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 
 public class BlockPressurePipe extends BlockSimplePipe<PressurePipeType, PressurePipeData, WorldPressureNet> {
 
-    private static final String TRANSLATION_KEY = "gcys.pipe.pressure_pipe_%s";
+    private static final String TRANSLATION_KEY = "gtqtcore.pipe.pressure_pipe_%s";
 
     private final PressurePipeType pressurePipeType;
 

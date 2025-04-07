@@ -26,6 +26,7 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
     protected void updateRecipeProgress() {
         // do not simulate pressure so it keeps growing towards atmospheric
         if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit()) {
+            drawEnergy(recipeEUt, false);
             if (++this.progressTime > this.maxProgressTime) {
                 if (drawPressure(this.recipePressure, true)) {
                     drawPressure(this.recipePressure, false);

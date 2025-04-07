@@ -12,6 +12,7 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.Mods;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMetalCasing;
+import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -1798,6 +1799,253 @@ public class MetaTileEntityLoader {
                 .circuitMeta(6)
                 .EUt(VA[GTValues.IV])
                 .duration(300)
+                .buildAndRegister();
+
+        // Steam Pressure Machines
+        ModHandler.addShapedRecipe(true, "steam_ejector.bronze", STEAM_EJECTOR[0].getStackForm(),
+                "MGM", "LHL", "MEM",
+                'M', new UnificationEntry(pipeNormalFluid, TinAlloy),
+                'G', new UnificationEntry(block, Glass),
+                'L', new UnificationEntry(pipeLargeFluid, TinAlloy),
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL),
+                'E', new UnificationEntry(gear, Iron));
+
+        ModHandler.addShapedRecipe(true, "steam_ejector.steel", STEAM_EJECTOR[1].getStackForm(),
+                "MGM", "LHL", "MEM",
+                'M', new UnificationEntry(pipeNormalFluid, TinAlloy),
+                'G', new UnificationEntry(block, Glass),
+                'L', new UnificationEntry(pipeLargeFluid, TinAlloy),
+                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL),
+                'E', new UnificationEntry(gear, Steel));
+
+        ModHandler.addShapedRecipe(true, "subsonic_axial_compressor", SUBSONIC_AXIAL_COMPRESSOR.getStackForm(),
+                "PMP", "MHM", "KCK",
+                'P', new UnificationEntry(pipeNormalFluid, StainlessSteel),
+                'M', ELECTRIC_MOTOR_EV.getStackForm(),
+                'H', MetaTileEntities.HULL[3].getStackForm(),
+                'K', new UnificationEntry(cableGtSingle, BlackSteel),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV)
+        );
+
+        ModHandler.addShapedRecipe(true, "supersonic_axial_compressor", SUPERSONIC_AXIAL_COMPRESSOR.getStackForm(),
+                "PMP", "MHM", "KCK",
+                'P', new UnificationEntry(pipeNormalFluid, NiobiumTitanium),
+                'M', ELECTRIC_MOTOR_IV.getStackForm(),
+                'H', MetaTileEntities.HULL[4].getStackForm(),
+                'K', new UnificationEntry(cableGtSingle, Osmium),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.ZPM)
+        );
+
+        ModHandler.addShapedRecipe(true, "low_power_turbomolecular_pump", LOW_POWER_TURBOMOLECULAR_PUMP.getStackForm(),
+                "PMP", "MHM", "KCK",
+                'P', new UnificationEntry(pipeNormalFluid, Polytetrafluoroethylene),
+                'M', ELECTRIC_MOTOR_EV.getStackForm(),
+                'H', MetaTileEntities.HULL[3].getStackForm(),
+                'K', new UnificationEntry(cableGtSingle, BlackSteel),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.LuV)
+        );
+
+        ModHandler.addShapedRecipe(true, "high_power_turbomolecular_pump", HIGH_POWER_TURBOMOLECULAR_PUMP.getStackForm(),
+                "PMP", "MHM", "KCK",
+                'P', new UnificationEntry(pipeNormalFluid, Polybenzimidazole),
+                'M', ELECTRIC_MOTOR_IV.getStackForm(),
+                'H', MetaTileEntities.HULL[4].getStackForm(),
+                'K', new UnificationEntry(cableGtSingle, Osmium),
+                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.ZPM)
+        );
+
+        registerMachineRecipe(true, PRESSURE_HATCH,
+                "TPT", "PHP", "TPT",
+                'H', CraftingComponent.HULL,
+                'P', GLASS,
+                'T', CraftingComponent.PLATE);
+
+        registerMachineRecipe(true, PRESSURE_COMPRESSOR,
+                "TPT", "CHC", "TPT",
+                'H', CraftingComponent.HULL,
+                'C', CraftingComponent.CIRCUIT,
+                'P', CraftingComponent.MOTOR,
+                'T', CraftingComponent.ROTOR);
+
+        registerMachineRecipe(true, PRESSURE_PUMP,
+                "TPT", "CHC", "TPT",
+                'H', CraftingComponent.HULL,
+                'C', CraftingComponent.CIRCUIT,
+                'T', CraftingComponent.MOTOR,
+                'P', CraftingComponent.ROTOR);
+
+        for(int i=0;i<GAS_TANK.length;i++)
+        {
+            ModHandler.addShapedRecipe(true, "gas_tank"+i, GAS_TANK[i].getStackForm(),
+                    "PMP", "MHM", "PMP",
+                    'P', new UnificationEntry(pipeNormalFluid, MaterialHelper.Pipe[i]),
+                    'H', HULL[i].getStackForm(),
+                    'M', new UnificationEntry(screw, MaterialHelper.Plate[i])
+            );
+
+        }
+        ModHandler.addShapedRecipe(true, "pressure_tank.i", PRESSURE_TANK[0].getStackForm(),
+                "PMP", "MHM", "PMP",
+                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[1]),
+                'H', STEEL_DRUM.getStackForm(),
+                'M', new UnificationEntry(screw, MaterialHelper.Plate[1])
+        );
+        ModHandler.addShapedRecipe(true, "pressure_tank.ii", PRESSURE_TANK[1].getStackForm(),
+                "PMP", "MHM", "PMP",
+                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[3]),
+                'H', STAINLESS_STEEL_DRUM.getStackForm(),
+                'M', new UnificationEntry(screw, MaterialHelper.Plate[3])
+        );
+        ModHandler.addShapedRecipe(true, "pressure_tank.iii", PRESSURE_TANK[2].getStackForm(),
+                "PMP", "MHM", "PMP",
+                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[5]),
+                'H', TUNGSTENSTEEL_DRUM.getStackForm(),
+                'M', new UnificationEntry(screw, MaterialHelper.Plate[5])
+        );
+
+
+        // Inventory Bridge
+        ModHandler.addShapedRecipe(true, "inventory_bridge", INV_BRIDGE.getStackForm(),
+                "hP ", " H ", " Pw",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalItem, Nickel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(HULL[1])
+                .input(pipeNormalItem, Nickel, 2)
+                .output(INV_BRIDGE)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Tank Bridge
+        ModHandler.addShapedRecipe(true, "tank_bridge", TANK_BRIDGE.getStackForm(),
+                "h  ", "PHP", "  w",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalFluid, Steel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(4)
+                .input(HULL[1])
+                .input(pipeNormalFluid, Steel, 2)
+                .output(TANK_BRIDGE)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Inventory Tank Bridge
+        ModHandler.addShapedRecipe(true, "inventory_tank_bridge", INV_TANK_BRIDGE.getStackForm(),
+                "hP ", "QHQ", " Pw",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalItem, Nickel),
+                'Q', new UnificationEntry(pipeNormalFluid, Steel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(5)
+                .input(HULL[1])
+                .input(pipeNormalFluid, Steel, 2)
+                .input(pipeNormalItem, Nickel, 2)
+                .output(INV_TANK_BRIDGE)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Universal Bridge
+        ModHandler.addShapedRecipe(true, "universal_bridge", UNIVERSAL_BRIDGE.getStackForm(),
+                "SPR", "QHQ", "XPG",
+                'H', HULL[2].getStackForm(),
+                'P', new UnificationEntry(pipeNormalItem, Electrum),
+                'Q', new UnificationEntry(pipeNormalFluid, Aluminium),
+                'S', new UnificationEntry(spring, Aluminium),
+                'R', new UnificationEntry(rotor, Aluminium),
+                'G', new UnificationEntry(gear, Aluminium),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(5)
+                .input(HULL[2])
+                .input(circuit, MarkerMaterials.Tier.LV)
+                .input(rotor, Aluminium)
+                .input(gear, Aluminium)
+                .input(spring, Aluminium)
+                .input(pipeNormalFluid, Aluminium, 2)
+                .input(pipeNormalItem, Electrum, 2)
+                .output(UNIVERSAL_BRIDGE)
+                .EUt(VH[2])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Inventory Extender
+        ModHandler.addShapedRecipe(true, "inventory_extender", INV_EXTENDER.getStackForm(),
+                " hP", " H ", "Pw ",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalItem, Nickel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .input(HULL[1])
+                .input(pipeNormalItem, Nickel, 2)
+                .output(INV_EXTENDER)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Tank Extender
+        ModHandler.addShapedRecipe(true, "tank_extender", TANK_EXTENDER.getStackForm(),
+                "Ph ", " H ", " wP",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalFluid, Steel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(2)
+                .input(HULL[1])
+                .input(pipeNormalFluid, Steel, 2)
+                .output(TANK_EXTENDER)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Inventory Tank Extender
+        ModHandler.addShapedRecipe(true, "inventory_tank_extender", INV_TANK_EXTENDER.getStackForm(),
+                "PhQ", " H ", "QwP",
+                'H', HULL[1].getStackForm(),
+                'P', new UnificationEntry(pipeNormalFluid, Steel),
+                'Q', new UnificationEntry(pipeNormalItem, Nickel));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(3)
+                .input(HULL[1])
+                .input(pipeNormalFluid, Steel, 2)
+                .input(pipeNormalItem, Nickel, 2)
+                .output(INV_TANK_EXTENDER)
+                .EUt(VA[1])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
+        // Universal Extender
+        ModHandler.addShapedRecipe(true, "universal_extender", UNIVERSAL_EXTENDER.getStackForm(),
+                "PRQ", "XHG", "QSP",
+                'H', HULL[2].getStackForm(),
+                'P', new UnificationEntry(pipeNormalFluid, Aluminium),
+                'Q', new UnificationEntry(pipeNormalItem, Electrum),
+                'R', new UnificationEntry(rotor, Aluminium),
+                'G', new UnificationEntry(gear, Aluminium),
+                'S', new UnificationEntry(spring, Aluminium),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
+
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .circuitMeta(3)
+                .input(HULL[2])
+                .input(circuit, MarkerMaterials.Tier.LV)
+                .input(rotor, Aluminium)
+                .input(gear, Aluminium)
+                .input(spring, Aluminium)
+                .input(pipeNormalFluid, Aluminium, 2)
+                .input(pipeNormalItem, Electrum, 2)
+                .output(UNIVERSAL_EXTENDER)
+                .EUt(VA[2])
+                .duration(10 * SECOND)
                 .buildAndRegister();
     }
 }

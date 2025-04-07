@@ -72,6 +72,7 @@ public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
+
         this.size = context.getOrDefault("length", 1);
     }
 

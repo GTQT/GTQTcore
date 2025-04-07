@@ -5,7 +5,6 @@ import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
-import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -16,6 +15,8 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
@@ -24,6 +25,12 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
 import gregtech.common.metatileentities.MetaTileEntities;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.capability.IPressureContainer;
+import keqing.gtqtcore.api.capability.IPressureMachine;
+import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
+import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.client.resources.I18n;
@@ -45,17 +52,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implements IHeatingCoil , IPressureMachine {
     private int czpullerTemperarure;
-
+    private IPressureContainer container;
     public MetaTileEntityCZPuller(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CZPULLER_RECIPES);
-        this.recipeMapWorkable = new HeatingCoilRecipeLogic(this);
+        this.recipeMapWorkable = new CZPullerRecipeLogic(this);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCZPuller(metaTileEntityId);
+    }
+    @Override
+    public IPressureContainer getPressureContainer() {
+        return this.container;
     }
 
     @Override
@@ -66,7 +77,15 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
         }
         super.addDisplayText(textList);
     }
-
+    protected void initializeAbilities() {
+        super.initializeAbilities();
+        List<IPressureContainer> list = getAbilities(GTQTMultiblockAbility.PRESSURE_CONTAINER);
+        if (list.isEmpty()) {
+            this.container = new AtmosphericPressureContainer(this, 1.0);
+        } else {
+            this.container = list.get(0);
+        }
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -87,7 +106,9 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        return this.czpullerTemperarure >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        if (this.czpullerTemperarure >= recipe.getProperty(TemperatureProperty.getInstance(), 0))
+            return super.checkRecipe(recipe, consumeIfSuccess);
+        return false;
     }
 
     @Override
@@ -107,6 +128,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1).setPreviewCount(1))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1).setPreviewCount(1))
+                        .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(1))
                 )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
@@ -127,7 +149,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .aisle("YYYYYYY", " XN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
                 .aisle("YYYYYYY", "YC   CY", "XC   CX", "GC   CG", "GC   CG", "GC   CG", "GC   CG", "GCN NCG", "XXR RXX", " XXHXX ")
                 .aisle("YYYYYYY", " YN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
-                .aisle("YYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
+                .aisle("PYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
                 .aisle(" EIOFM ", "   S   ", "   X   ", "   G   ", "   G   ", "   G   ", "   G   ", "   G   ", "   X   ", "       ")
                 .where('S', GTQTMetaTileEntities.LARGE_CZ_PULLER, EnumFacing.SOUTH)
                 .where('X', MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
@@ -139,6 +161,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
+                .where('P', GTQTMetaTileEntities.PRESSURE_HATCH[GTValues.LV], EnumFacing.SOUTH)
                 .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.SOUTH)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
                 .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH);
@@ -173,5 +196,21 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return Textures.POWER_SUBSTATION_OVERLAY;
+    }
+
+    public static class CZPullerRecipeLogic extends PressureMultiblockRecipeLogic {
+
+        public CZPullerRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
+            super.modifyOverclockPre(values, storage);
+            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
+
+        protected @NotNull int[] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
+            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        }
     }
 }

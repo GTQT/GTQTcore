@@ -1010,6 +1010,7 @@ public class FirstDegreeMaterials {
         //  25103 Zylon
         GTQTMaterials.Zylon = new Material.Builder(getMaterialsId(), gregtechId("zylon"))
                 .polymer().fluid()
+                .fluidPipeProperties(800, 200, true, true, false, false)
                 .color(0xFFE000)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION, NO_SMASHING, NO_SMELTING, GENERATE_PLATE, GENERATE_FOIL)

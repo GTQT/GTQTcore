@@ -1,6 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -16,7 +16,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.api.recipes.recipeproperties.TemperatureProperty;
@@ -25,11 +24,15 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import keqing.gtqtcore.api.capability.IPressureContainer;
+import keqing.gtqtcore.api.capability.IPressureMachine;
+import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
+import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -49,9 +52,10 @@ import java.util.List;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
 
-public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil, IPressureMachine {
 
     int blastFurnaceTemperature;
+    private IPressureContainer container;
 
     public MetaTileEntityBurnerReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
@@ -61,8 +65,24 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
     }
 
     @Override
+    public IPressureContainer getPressureContainer() {
+        return this.container;
+    }
+
+    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityBurnerReactor(metaTileEntityId);
+    }
+
+    @Override
+    protected void initializeAbilities() {
+        super.initializeAbilities();
+        List<IPressureContainer> list = getAbilities(GTQTMultiblockAbility.PRESSURE_CONTAINER);
+        if (list.isEmpty()) {
+            this.container = new AtmosphericPressureContainer(this, 1.0);
+        } else {
+            this.container = list.get(0);
+        }
     }
 
     @Override
@@ -111,7 +131,9 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
 
     @Override
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
-        return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
+        if (this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0))
+            return super.checkRecipe(recipe, consumeIfSuccess);
+        return false;
     }
 
     @Override
@@ -124,7 +146,9 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
                 .aisle("F   F", "F X F", "FXSXF", "F X F", "F   F", "     ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState1()).setMinGlobalLimited(25)
-                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                        .or(autoAbilities(true, true, true, true, true, true, false))
+                        .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
+                )
                 .where('F', states(MetaBlocks.FRAMES.get(Materials.RedSteel).getBlock(Materials.RedSteel)))
                 .where('C', states(getCasingState2()))
                 .where('K', heatingCoils())
@@ -181,7 +205,7 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
         return this.blastFurnaceTemperature;
     }
 
-    public static class BurnerReactorRecipeLogic extends GCYMMultiblockRecipeLogic {
+    public static class BurnerReactorRecipeLogic extends PressureMultiblockRecipeLogic {
 
         public BurnerReactorRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
@@ -196,5 +220,8 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
             return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
         }
 
+        public int getParallelLimit() {
+            return this.metaTileEntity instanceof IParallelMultiblock && ((IParallelMultiblock) this.metaTileEntity).isParallel() ? ((IParallelMultiblock) this.metaTileEntity).getMaxParallel() : 1;
+        }
     }
 }

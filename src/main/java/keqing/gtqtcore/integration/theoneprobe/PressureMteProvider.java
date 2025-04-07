@@ -8,6 +8,7 @@ import keqing.gtqtcore.api.utils.NumberFormattingUtil;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressure.MetaTileEntityPressureTank;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityPressureBooster;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamEjector;
+import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityGasTank;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,6 +41,8 @@ public class PressureMteProvider implements IProbeInfoProvider {
                 }else if (mte instanceof MetaTileEntityPressureTank) {
                     if(((MetaTileEntityPressureTank) mte).isStructureFormed())
                         handlePressureContainer(((MetaTileEntityPressureTank) mte).getPressureContainer(), iProbeInfo);
+                }else if (mte instanceof MetaTileEntityGasTank) {
+                    handlePressureContainer(((MetaTileEntityGasTank) mte).getPressureContainer(), iProbeInfo);
                 }
             }
         }

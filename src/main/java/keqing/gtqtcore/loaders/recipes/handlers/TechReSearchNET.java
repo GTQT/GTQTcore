@@ -38,7 +38,6 @@ import static gregtech.common.blocks.MetaBlocks.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.ASSEMBLY_LINE;
 import static gregtech.common.metatileentities.MetaTileEntities.LARGE_CHEMICAL_REACTOR;
-import static gregtech.common.metatileentities.MetaTileEntities.ROTOR_HOLDER;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
@@ -1432,7 +1431,7 @@ public class TechReSearchNET {
                 .input(wireFine, Aluminium, 16)
                 .input(OPTICAL_PIPES[0], 8)
                 .fluidInputs(SolderingAlloy.getFluid(L * 4))
-                .output(KeQing_NET)
+                .output(RESEARCH_SYSTEM_NETWORK)
                 .duration(200).EUt(120).buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -3256,7 +3255,7 @@ public class TechReSearchNET {
     }
 
     public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item, OrePrefix prefix, Material material) {
-        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+        GTQTcoreRecipeMaps.RESEARCH_SYSTEM_RECIPES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
@@ -3270,7 +3269,7 @@ public class TechReSearchNET {
     }
 
     public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item1, MetaItem<?>.MetaValueItem item2) {
-        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+        GTQTcoreRecipeMaps.RESEARCH_SYSTEM_RECIPES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
@@ -3284,7 +3283,7 @@ public class TechReSearchNET {
     }
 
     public static void KQ_NET(int kind, int tier, int number, MetaItem<?>.MetaValueItem item, ItemStack itemStack) {
-        GTQTcoreRecipeMaps.KEQING_NET_RECIES.recipeBuilder()
+        GTQTcoreRecipeMaps.RESEARCH_SYSTEM_RECIPES.recipeBuilder()
                 .Tier(tier)
                 .KI(kind)
                 .input(DISK_0)
