@@ -24,7 +24,9 @@
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
     "multiblocks.mixinGCYMMultiblockRecipeLogic",
-    "gregtech.MetaTileEntityDrumAccessor"
+    "gregtech.MetaTileEntityDrumAccessor",
+    "gregtech.MetaTileEntityMufflerHatchMixin",
+    "gregtech.MultiblockRecipeLogicMixin"
   ],
   "server": [],
   "client": [

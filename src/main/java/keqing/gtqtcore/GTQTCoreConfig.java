@@ -74,6 +74,10 @@ public class GTQTCoreConfig {
         public boolean EnableObjSWind = true;
     }
     public static class MachineSwitch {
+        @Config.LangKey("惰性化消声仓工作")
+        @Config.RequiresMcRestart
+        public boolean enableDummyMufflers = false;
+
         @Config.Comment("延迟巨构设备检测频率，可改善TPS性能(目前只在压缩聚变 光刻厂 加速器 PCB 锻炉测试实装，可能会造成未知后果！)")
         @Config.RequiresMcRestart
         @Config.Name("Delay Structure Check switch")
