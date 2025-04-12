@@ -14,7 +14,6 @@
     "gregtech.MixinAssemblyLineManager",
     "gregtech.MixinBlockMachine",
     "gregtech.MixinBlockPipe",
-    "gregtech.MixinEllipsoidGenerator",
     "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
@@ -23,7 +22,6 @@
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "multiblocks.mixinGCYMMultiblockRecipeLogic",
     "gregtech.MetaTileEntityDrumAccessor",
     "gregtech.MetaTileEntityMufflerHatchMixin",
     "gregtech.MultiblockRecipeLogicMixin"

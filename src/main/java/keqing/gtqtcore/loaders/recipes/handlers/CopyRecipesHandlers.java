@@ -1,26 +1,22 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.chance.output.ChancedOutputList;
+import gregtech.api.recipes.chance.output.impl.ChancedItemOutput;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
-import gregtech.api.recipes.ingredients.GTRecipeOreInput;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
@@ -102,9 +98,11 @@ public class CopyRecipesHandlers {
             List<FluidStack> fluidOutputs = recipe.getFluidOutputs();
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
+
             int EUt = recipe.getEUt() * 4;
             int baseDuration= recipe.getDuration()/2;
             int tier=Math.min(5, GTUtility.getTierByVoltage(recipe.getEUt())+1);
+
             // generate builder
             RecipeBuilder<?> builder;
 
@@ -115,9 +113,29 @@ public class CopyRecipesHandlers {
 
             if(fluidInputs!=null)builder.fluidInputs(fluidInputs);
             if(fluidOutputs!=null)builder.fluidOutputs(fluidOutputs);
-            if(itemInputs!=null)builder.inputIngredients(itemInputs);
+
             if(itemOutputs!=null)builder.outputs(itemOutputs);
 
+            if (itemInputs != null) {
+                builder.inputIngredients(itemInputs);
+
+                // 使用 Stream API 简化查找逻辑
+                boolean hasCircuit = itemInputs.stream().anyMatch(input -> input instanceof IntCircuitIngredient);
+
+                if (!hasCircuit) {
+                    builder.circuitMeta(2);
+                }
+            }
+
+            /*
+            ChancedOutputList<ItemStack, ChancedItemOutput> chancedOutputs= recipe.getChancedOutputs();
+            chancedOutputs.getChancedEntries().forEach(chancedItemOutput -> {
+                if(chancedItemOutput.getChance()>0) {
+                    builder.chancedOutput(chancedItemOutput.getIngredient(), chancedItemOutput.getChance(), chancedItemOutput.getChanceBoost());
+                }
+            });
+
+             */
 
             builder.buildAndRegister();
         }

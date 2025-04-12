@@ -16,9 +16,9 @@ public class AluminiumLine {
     public static void init() {
 
         ELECTROBATH.recipeBuilder()
-                .input(dust, Alumina, 2)
-                .fluidOutputs(Aluminium.getFluid(576))
-                .fluidOutputs(Oxygen.getFluid(6000))
+                .input(dust, Alumina, 5)
+                .fluidOutputs(Aluminium.getFluid(288))
+                .fluidOutputs(Oxygen.getFluid(3000))
                 .tier(1)
                 .circuitMeta(1)
                 .duration(1600).EUt(VA[MV]).buildAndRegister();

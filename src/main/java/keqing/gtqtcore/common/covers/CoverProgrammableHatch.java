@@ -69,7 +69,7 @@ public class CoverProgrammableHatch extends CoverBase implements CoverWithUI, IT
                                 for (int slot = 0; slot < controller.getOutputInventory().getSlots(); slot++) {
                                     if (controller.getOutputInventory().getStackInSlot(slot).isEmpty()) {
                                         controller.getOutputInventory().setStackInSlot(slot, itemStack);
-                                        break;
+                                        return;
                                     }
                                 }
                             }
