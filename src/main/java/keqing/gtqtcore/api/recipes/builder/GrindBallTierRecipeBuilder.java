@@ -29,16 +29,16 @@ public class GrindBallTierRecipeBuilder extends RecipeBuilder<GrindBallTierRecip
 
     public int getLevel() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(GrindBallTierProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(GrindBallTierProperty.getInstance(), 0);
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(GrindBallTierProperty.KEY)) {
             this.grindBallTier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public GrindBallTierRecipeBuilder grindBallTier(int level) {

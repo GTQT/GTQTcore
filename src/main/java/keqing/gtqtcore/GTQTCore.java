@@ -1,5 +1,9 @@
 package keqing.gtqtcore;
 
+import gregicality.multiblocks.GregicalityMultiblocks;
+import gregtech.api.GregTechAPI;
+import gregtech.api.metatileentity.registry.MTEManager;
+import gregtech.api.unification.material.event.MaterialRegistryEvent;
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.GTQTAPI;
 import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
@@ -19,6 +23,7 @@ import keqing.gtqtcore.integration.GTQTIntegration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
@@ -26,12 +31,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
         name = "GTQTcore",
         acceptedMinecraftVersions = "[1.12.2,1.13)",
         version = "0.0.1-beta",
-        dependencies = "required-after:gregtech@[2.8.7-beta,);" +
-                "after:gcym@[1.2.7,);" +
-                "after:gregtechfoodoption@[1.11.0,);"
+        dependencies = "required-after:gregtech@[2.9.0-beta,);" +
+                "after:gcym@[1.8.0,);" +
+                "after:gregtechfoodoption@[1.8.0,);"
 )
 public class GTQTCore {
-    public static final String PACK = "1.7.4";
+    public static final String PACK = "1.8.0";
 
     public static final String MODID = "gtqtcore";
     public static final String NAME = "GTQT Core";
@@ -51,6 +56,15 @@ public class GTQTCore {
     public static IModuleManager moduleManager;
     // Will be available at the Pre-Initialization stage.
     public static IAdvancementManager advancementManager;
+
+    @SubscribeEvent
+    public static void registerMTERegistry(MTEManager.MTERegistryEvent event) {
+        GregTechAPI.mteManager.createRegistry(GTQTCore.MODID);
+    }
+    @SubscribeEvent
+    public static void createMaterialRegistry(MaterialRegistryEvent event) {
+        GregTechAPI.materialManager.createRegistry(GTQTCore.MODID);
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

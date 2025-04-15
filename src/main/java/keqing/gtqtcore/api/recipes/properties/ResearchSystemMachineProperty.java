@@ -1,10 +1,11 @@
 package keqing.gtqtcore.api.recipes.properties;
 
-
-import gregtech.api.recipes.recipeproperties.RecipeProperty;
+import gregtech.api.recipes.properties.RecipeProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagInt;
 
 public class ResearchSystemMachineProperty extends RecipeProperty<Integer> {
 
@@ -26,5 +27,14 @@ public class ResearchSystemMachineProperty extends RecipeProperty<Integer> {
             INSTANCE = new ResearchSystemMachineProperty();
         }
         return INSTANCE;
+    }
+    @Override
+    public NBTBase serialize(Object value) {
+        return new NBTTagInt(castValue(value));
+    }
+
+    @Override
+    public Object deserialize( NBTBase nbt) {
+        return ((NBTTagInt) nbt).getInt();
     }
 }

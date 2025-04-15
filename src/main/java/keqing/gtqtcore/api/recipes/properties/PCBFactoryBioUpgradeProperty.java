@@ -1,8 +1,10 @@
 package keqing.gtqtcore.api.recipes.properties;
 
-import gregtech.api.recipes.recipeproperties.RecipeProperty;
+import gregtech.api.recipes.properties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagInt;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Map;
@@ -46,5 +48,14 @@ public class PCBFactoryBioUpgradeProperty extends RecipeProperty<Integer> {
                                                         String shortName) {
         Validate.notNull(shortName);
         registeredPCBFactoryBioUpgradeTiers.put(tier, shortName);
+    }
+    @Override
+    public NBTBase serialize(Object value) {
+        return new NBTTagInt(castValue(value));
+    }
+
+    @Override
+    public Object deserialize( NBTBase nbt) {
+        return ((NBTTagInt) nbt).getInt();
     }
 }

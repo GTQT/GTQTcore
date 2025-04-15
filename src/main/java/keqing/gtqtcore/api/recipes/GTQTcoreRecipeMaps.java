@@ -8,11 +8,11 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.builders.*;
 import gregtech.api.unification.material.Materials;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantBuilder;
+import keqing.gtqtcore.api.recipes.builder.ChemicalPlantBuilder;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.machine.*;
-
+import keqing.gtqtcore.api.recipes.ui.ComponentAssemblyLineUI;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static keqing.gtqtcore.api.gui.GTQTGuiTextures.*;
 
@@ -27,7 +27,7 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<SimpleRecipeBuilder> SPINNER_RECIPES = new RecipeMap<>("spinner", 3, 1, 1, 0, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, false, GuiTextures.VIAL_OVERLAY_1).setSlotOverlay(false, false, true, GuiTextures.INT_CIRCUIT_OVERLAY).setSlotOverlay(false, true, GuiTextures.VIAL_OVERLAY_1).setSlotOverlay(true, false, GuiTextures.VIAL_OVERLAY_1).setProgressBar(GuiTextures.PROGRESS_BAR_COMPRESS, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.WIRECUTTER_TOOL);
 
-    public static final RecipeMap<SimpleRecipeBuilder> LARGE_MIXER_RECIPES = new RecipeMapLargeMixer<>("large_mixer", 9, 1, 6, 1, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY).setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_MIXER, ProgressWidget.MoveType.CIRCULAR).setSound(GTSoundEvents.MIXER);
+    public static final RecipeMap<SimpleRecipeBuilder> LARGE_MIXER_RECIPES = new RecipeMap<>("large_mixer", 9, 1, 6, 1, new SimpleRecipeBuilder(), false).setSlotOverlay(false, false, GuiTextures.DUST_OVERLAY).setSlotOverlay(true, false, GuiTextures.DUST_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_MIXER, ProgressWidget.MoveType.CIRCULAR).setSound(GTSoundEvents.MIXER);
 
     public static final RecipeMap<SimpleRecipeBuilder> REFINER_MACERATOR_RECIPES = new RecipeMap<>("refiner_macerator", 2, 2, 1, 1, new SimpleRecipeBuilder(), false).setProgressBar(GuiTextures.PROGRESS_BAR_CRACKING, ProgressWidget.MoveType.HORIZONTAL).setSound(GTSoundEvents.MACERATOR);
 
@@ -244,7 +244,7 @@ public class GTQTcoreRecipeMaps {
 
         DESULPHURIZATION_RECIPES = new RecipeMap<>("desulphurization_recipes", 0, 0, 2, 2, new SimpleRecipeBuilder(), false).setSound(GTSoundEvents.CHEMICAL_REACTOR);
 
-        COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1, 12, 0, new ComponentAssemblyLineRecipesTierRecipeBuilder(), false).setSound(GTSoundEvents.ASSEMBLER);
+        COMPONENT_ASSEMBLY_LINE_RECIPES = new RecipeMapComponentAssemblyLine<>("component_assembly_line_recipes", 12, 1, 12, 0, new ComponentAssemblyLineRecipesTierRecipeBuilder(), ComponentAssemblyLineUI::new).setSound(GTSoundEvents.ASSEMBLER);
 
         DIGESTER_RECIPES = new RecipeMap<>("digester_recipes", 4, 4, 4, 4, new SimpleRecipeBuilder(), false);
 

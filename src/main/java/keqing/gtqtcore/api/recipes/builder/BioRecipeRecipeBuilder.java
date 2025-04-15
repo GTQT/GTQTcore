@@ -30,15 +30,15 @@ public class BioRecipeRecipeBuilder extends RecipeBuilder<BioRecipeRecipeBuilder
 
     public int getRate() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(BioReactorProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(BioReactorProperty.getInstance(), 0);
     }
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(BioReactorProperty.KEY)) {
             this.rate(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
     public BioRecipeRecipeBuilder rate(int Tire) {
         if (Tire <= 0) {

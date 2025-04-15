@@ -1,8 +1,10 @@
 package keqing.gtqtcore.api.recipes.properties;
 
-import gregtech.api.recipes.recipeproperties.RecipeProperty;
+import gregtech.api.recipes.properties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagInt;
 
 public class GrindBallTierProperty extends RecipeProperty<Integer> {
     public static final String KEY = "grindball_tier";
@@ -29,5 +31,14 @@ public class GrindBallTierProperty extends RecipeProperty<Integer> {
         }else {
             return I18n.format("gtqtcore.recipe.grind_ball_aluminium");
         }
+    }
+    @Override
+    public NBTBase serialize(Object value) {
+        return new NBTTagInt(castValue(value));
+    }
+
+    @Override
+    public Object deserialize( NBTBase nbt) {
+        return ((NBTTagInt) nbt).getInt();
     }
 }

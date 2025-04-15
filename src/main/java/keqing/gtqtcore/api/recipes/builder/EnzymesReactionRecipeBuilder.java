@@ -23,12 +23,12 @@ public class EnzymesReactionRecipeBuilder extends RecipeBuilder<EnzymesReactionR
         super(recipeBuilder);
     }
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(EnzymesReactionProperty.KEY)) {
             this.rate(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
     @Override
     public EnzymesReactionRecipeBuilder copy() {
@@ -37,7 +37,7 @@ public class EnzymesReactionRecipeBuilder extends RecipeBuilder<EnzymesReactionR
 
     public int getRate() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(EnzymesReactionProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(EnzymesReactionProperty.getInstance(), 0);
     }
 
     public EnzymesReactionRecipeBuilder rate(int Tire) {

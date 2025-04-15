@@ -25,18 +25,17 @@ public class ForceFieldCoilRecipeBuilder extends RecipeBuilder<ForceFieldCoilRec
     }
 
     public int getTier() {
-        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage.getRecipePropertyValue(
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage.get(
                 ForceFieldCoilTierProperty.getInstance(), 0);
     }
 
     @Override
-    public boolean applyProperty( String key,
-                                  Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(ForceFieldCoilTierProperty.PROPERTY_KEY)) {
             this.tier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public ForceFieldCoilRecipeBuilder tier(int coilTier) {

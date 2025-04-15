@@ -3,9 +3,8 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.builders.BlastRecipeBuilder;
-import gregtech.api.recipes.recipeproperties.RecipePropertyStorage;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import gregtech.api.util.TextFormattingUtil;
@@ -37,7 +36,7 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(TemperatureProperty.KEY)) {
             this.temperature(((Number) value).intValue());
             return true;
@@ -46,7 +45,7 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
             this.pressure(((Number) value).doubleValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     @Nonnull
@@ -71,17 +70,17 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
 
     @Override
     public ValidationResult<Recipe> build() {
-        if (this.recipePropertyStorage == null) this.recipePropertyStorage = new RecipePropertyStorage();
-        if (this.recipePropertyStorage.hasRecipeProperty(TemperatureProperty.getInstance())) {
-            if (this.recipePropertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), -1) <= 0) {
+        if (this.recipePropertyStorage == null) this.recipePropertyStorage = RecipePropertyStorage.EMPTY;
+        if (this.recipePropertyStorage.contains(TemperatureProperty.getInstance())) {
+            if (this.recipePropertyStorage.get(TemperatureProperty.getInstance(), -1) <= 0) {
                 this.recipePropertyStorage.store(TemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
             }
         } else {
             this.recipePropertyStorage.store(TemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
         }
 
-        if (this.recipePropertyStorage.hasRecipeProperty(PressureProperty.getInstance())) {
-            if (this.recipePropertyStorage.getRecipePropertyValue(PressureProperty.getInstance(), -1.0D) <= 0) {
+        if (this.recipePropertyStorage.contains(PressureProperty.getInstance())) {
+            if (this.recipePropertyStorage.get(PressureProperty.getInstance(), -1.0D) <= 0) {
                 this.recipePropertyStorage.store(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
             }
         } else {
@@ -93,12 +92,12 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
 
     public int getTemperature() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(TemperatureProperty.getInstance(), 0);
     }
 
     public double getPressure() {
         return this.recipePropertyStorage == null ? 0.0D :
-                this.recipePropertyStorage.getRecipePropertyValue(PressureProperty.getInstance(), 0.0D);
+                this.recipePropertyStorage.get(PressureProperty.getInstance(), 0.0D);
     }
 
     @Override

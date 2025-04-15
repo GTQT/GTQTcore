@@ -145,17 +145,21 @@ dependencies {
     // implementation rfg.deobf('curse.maven:had-enough-items-557549:4543375')
     implementation rfg.deobf(files("libs/CTM-MC1.12.2-1.0.2.31.jar"))
     implementation rfg.deobf("curse.maven:code-chicken-lib-1-8-242818:2779848")
-    implementation rfg.deobf(files("libs/GregicalityMultiblocks-1.2.9.jar"))
-    implementation rfg.deobf(files("libs/gregtech-1.12.2-2.8.10-beta.jar"))
+
+    implementation rfg.deobf(files("libs/Supercritical-1.8.0.jar"))
+    implementation rfg.deobf(files("libs/gregtech-1.12.2-2.9.0-MeowmelMuku.jar"))
+    implementation rfg.deobf(files("libs/gtsteam-1.8.0.jar"))
+    implementation rfg.deobf(files("libs/GregicalityMultiblocks-1.8.0.jar"))
+    implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.8.0.jar"))
+
+    api("com.cleanroommc:groovyscript:1.2.0-hotfix1") { transitive = false }
+    api("com.cleanroommc:modularui:2.5.0-rc4") { transitive = false }
+
     implementation rfg.deobf(files("libs/!mixinbooter-8.9.jar"))
-    implementation rfg.deobf(files("libs/Supercritical-1.7.2.jar"))
     implementation rfg.deobf(files("libs/ae2-uel-v0.56.6.jar"))
-    implementation rfg.deobf(files("libs/gregtechfoodoption-1.12.2-1.11.0.jar"))
     implementation rfg.deobf(files("libs/Fluid Craft for AE2-2.6.6-r.jar"))
     implementation rfg.deobf(files("libs/jei_1.12.2-4.16.1.1003.jar"))
     implementation rfg.deobf(files("libs/theoneprobe-1.12-1.4.28.jar"))
-    implementation rfg.deobf(files("libs/groovyscript-1.1.1.jar"))
-    implementation rfg.deobf(files("libs/modularui-2.4.3.jar"))
     implementation rfg.deobf(files("libs/Chisel-MC1.12.2-1.0.2.45.jar"))
     implementation rfg.deobf(files("libs/architecturecraft-1.12-3.108.jar"))
     implementation rfg.deobf(files("libs/OpenComputers-MC1.12.2-1.8.6+cd8851e.jar"))

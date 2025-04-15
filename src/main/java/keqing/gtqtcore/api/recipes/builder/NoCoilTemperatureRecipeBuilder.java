@@ -3,7 +3,7 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import gregtech.api.util.TextFormattingUtil;
@@ -35,12 +35,12 @@ public class NoCoilTemperatureRecipeBuilder extends RecipeBuilder<NoCoilTemperat
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(NoCoilTemperatureProperty.KEY)) {
             this.temperature(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public NoCoilTemperatureRecipeBuilder temperature(int temperature) {
@@ -54,9 +54,9 @@ public class NoCoilTemperatureRecipeBuilder extends RecipeBuilder<NoCoilTemperat
 
     @Override
     public ValidationResult<Recipe> build() {
-        if (this.recipePropertyStorage == null) this.recipePropertyStorage = new RecipePropertyStorage();
-        if (this.recipePropertyStorage.hasRecipeProperty(NoCoilTemperatureProperty.getInstance())) {
-            if (this.recipePropertyStorage.getRecipePropertyValue(NoCoilTemperatureProperty.getInstance(), -1) <= 0) {
+        if (this.recipePropertyStorage == null) this.recipePropertyStorage = RecipePropertyStorage.EMPTY;
+        if (this.recipePropertyStorage.contains(NoCoilTemperatureProperty.getInstance())) {
+            if (this.recipePropertyStorage.get(NoCoilTemperatureProperty.getInstance(), -1) <= 0) {
                 this.recipePropertyStorage.store(NoCoilTemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
             }
         } else {
@@ -68,7 +68,7 @@ public class NoCoilTemperatureRecipeBuilder extends RecipeBuilder<NoCoilTemperat
 
     public int getTemperature() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(NoCoilTemperatureProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(NoCoilTemperatureProperty.getInstance(), 0);
     }
 
     @Override

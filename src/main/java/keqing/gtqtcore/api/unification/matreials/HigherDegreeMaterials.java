@@ -5,7 +5,7 @@ import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
-import gregtech.api.unification.material.properties.ToolProperty;
+import gregtech.api.unification.material.properties.MaterialToolProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.api.GTValues.UV;
@@ -38,7 +38,7 @@ public class HigherDegreeMaterials {
                 .flags(EXT2_METAL, GENERATE_SMALL_GEAR, GENERATE_RING, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_ROUND, GENERATE_FOIL, GENERATE_GEAR)
                 .components(Nickel, 2, Titanium, 3, Chrome, 1)
                 .rotorStats(15.0f, 7.0f, 3000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 5120, 3)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 5120, 3)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(6000, BlastProperty.GasTier.HIGHER)
                 .build();

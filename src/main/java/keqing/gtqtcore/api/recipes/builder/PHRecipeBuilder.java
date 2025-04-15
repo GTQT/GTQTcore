@@ -28,7 +28,7 @@ public class PHRecipeBuilder extends RecipeBuilder<PHRecipeBuilder> {
         return new PHRecipeBuilder(this);
     }
 
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(PHProperty.KEY)) {
             pH(((Number)value).doubleValue());
             return true;
@@ -41,7 +41,7 @@ public class PHRecipeBuilder extends RecipeBuilder<PHRecipeBuilder> {
             pHErrorRange(((Number) value).doubleValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public PHRecipeBuilder pH(double ph) {
@@ -101,17 +101,17 @@ public class PHRecipeBuilder extends RecipeBuilder<PHRecipeBuilder> {
 
     public double getPH() {
         return this.recipePropertyStorage == null ? 7D : this.recipePropertyStorage
-                .getRecipePropertyValue(PHProperty.getInstance(), 7D);
+                .get(PHProperty.getInstance(), 7D);
     }
 
     public double getPHChange() {
         return this.recipePropertyStorage == null ? 0D : this.recipePropertyStorage
-                .getRecipePropertyValue(PHChangeProperty.getInstance(), 0D);
+                .get(PHChangeProperty.getInstance(), 0D);
     }
 
     public double getPHErrorRange() {
         return this.recipePropertyStorage == null ? 0D : this.recipePropertyStorage
-                .getRecipePropertyValue(PHErrorRangeProperty.getInstance(), 0D);
+                .get(PHErrorRangeProperty.getInstance(), 0D);
     }
 
     public String toString() {

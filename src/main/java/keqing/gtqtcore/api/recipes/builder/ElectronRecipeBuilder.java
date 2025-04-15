@@ -5,13 +5,10 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.EnumValidationResult;
-import keqing.gtqtcore.api.capability.chemical_plant.ChemicalPlantProperties;
 import keqing.gtqtcore.api.recipes.properties.ElectronBathProperties;
 
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import javax.annotation.Nonnull;
 
 public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> {
 
@@ -26,12 +23,12 @@ public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> 
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(ElectronBathProperties.KEY)) {
             this.tier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class ElectronRecipeBuilder extends RecipeBuilder<ElectronRecipeBuilder> 
 
     public int getTire() {
         return (this.recipePropertyStorage == null) ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(ElectronBathProperties.getInstance(), 0);
+                this.recipePropertyStorage.get(ElectronBathProperties.getInstance(), 0);
     }
 
     public ElectronRecipeBuilder tier(int Tire) {

@@ -50,7 +50,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
             this.KI(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public KQComputationRecipeBuilder KI(int KI) {

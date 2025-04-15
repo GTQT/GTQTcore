@@ -3,7 +3,7 @@ package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.properties.BlastProperty;
-import gregtech.api.unification.material.properties.ToolProperty;
+import gregtech.api.unification.material.properties.MaterialToolProperty;
 import keqing.gtqtcore.api.unification.Elements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.init.Enchantments;
@@ -41,7 +41,7 @@ public class ElementMaterials {
                 .iconSet(SHINY)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROTOR, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_FRAME, GENERATE_DENSE)
                 .element(Elements.Draconium)
-                .toolStats(ToolProperty.Builder.of(7.0F, 25.0F, 1700000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 25.0F, 1700000, 8)
                         .magnetic()
                         .enchantment(Enchantments.EFFICIENCY, 5)
                         .enchantment(Enchantments.FORTUNE, 5)
@@ -58,7 +58,7 @@ public class ElementMaterials {
                         GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROUND, GENERATE_SMALL_GEAR
                         , GENERATE_SPRING, GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 10.0f, 20000)
-                .toolStats(ToolProperty.Builder.of(10.0F, 30.0F, 2800000, 9)
+                .toolStats(MaterialToolProperty.Builder.of(10.0F, 30.0F, 2800000, 9)
                         .attackSpeed(0.1F).enchantability(21)
                         .unbreakable()
                         .enchantability(33)
@@ -122,7 +122,7 @@ public class ElementMaterials {
                 .color(0x323232)
                 .iconSet(BRIGHT)
                 .flags(NO_SMELTING, NO_SMASHING, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 2560000, 7)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 2560000, 7)
                         .attackSpeed(0.1F).enchantability(21)
                         .unbreakable()
                         .enchantability(33)
@@ -153,7 +153,7 @@ public class ElementMaterials {
                 .element(Elements.Infinity)
                 .blast(12600, BlastProperty.GasTier.HIGHER)
                 .rotorStats(18.0f, 10.0f, 128000)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 51200000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 51200000, 8)
                         .attackSpeed(0.1F).enchantability(21)
                         .unbreakable()
                         .enchantability(33)
@@ -173,7 +173,7 @@ public class ElementMaterials {
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .flags(GENERATE_PLATE)
                 .rotorStats(18.0f, 10.0f, 64000)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 2560000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 2560000, 8)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .build();
@@ -185,7 +185,7 @@ public class ElementMaterials {
                 .color(0xDC784B)
                 .iconSet(CUSTOM_HYPOGEN)
                 .cableProperties(V[UXV], 32, 16, false)
-                .toolStats(ToolProperty.Builder.of(20.0F, 200.0F, 200000000, 200)
+                .toolStats(MaterialToolProperty.Builder.of(20.0F, 200.0F, 200000000, 200)
                         .unbreakable()
                         .enchantability(33)
                         .magnetic()
@@ -226,7 +226,7 @@ public class ElementMaterials {
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(Elements.CelestialTungsten)
                 .rotorStats(18.0f, 10.0f, 64000)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
 
@@ -239,7 +239,7 @@ public class ElementMaterials {
                 .iconSet(SHINY)
                 .element(Elements.Ytterbium178)
                 .rotorStats(18.0f, 10.0f, 64000)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
 
@@ -253,7 +253,7 @@ public class ElementMaterials {
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(Elements.Ichorium)
                 .rotorStats(18.0f, 10.0f, 64000)
-                .toolStats(ToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
+                .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
 
@@ -399,7 +399,7 @@ public class ElementMaterials {
                 .color(0x72A0C1).iconSet(METALLIC)
                 .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .element(Elements.Or)
-                .toolStats(ToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
+                .toolStats(MaterialToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
                         .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
                 .rotorStats(22.0f, 12.0f, 600000)
                 .fluidPipeProperties(100_000, 4800, true, true, true, true)
@@ -411,7 +411,7 @@ public class ElementMaterials {
                 .color(0xC880FF).iconSet(SHINY)
                 .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .element(Elements.Vb)
-                .toolStats(ToolProperty.Builder.of(140.0F, 90.0F, 60000, 6)
+                .toolStats(MaterialToolProperty.Builder.of(140.0F, 90.0F, 60000, 6)
                         .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
                 .rotorStats(22.0f, 12.0f, 580000)
                 .fluidPipeProperties(100_000, 4200, true, true, true, true)
@@ -423,7 +423,7 @@ public class ElementMaterials {
                 .color(0xFF0040).iconSet(METALLIC)
                 .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .element(Elements.Ad)
-                .toolStats(ToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
+                .toolStats(MaterialToolProperty.Builder.of(160.0F, 100.0F, 62000, 6)
                         .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
                 .rotorStats(22.0f, 12.0f, 600000)
                 .fluidPipeProperties(100_000, 4800, true, true, true, true)
@@ -458,7 +458,7 @@ public class ElementMaterials {
                 .color(0xCD00CD).iconSet(METALLIC)
                 .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .element(Elements.Iu)
-                .toolStats(ToolProperty.Builder.of(200.0F, 120.0F, 76384, 7)
+                .toolStats(MaterialToolProperty.Builder.of(200.0F, 120.0F, 76384, 7)
                         .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
                 .rotorStats(28.0f, 14.0f, 786432)
                 .fluidPipeProperties(120_000, 6400, true, true, true, true)

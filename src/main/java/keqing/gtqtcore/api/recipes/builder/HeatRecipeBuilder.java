@@ -3,7 +3,7 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.PrimitiveProperty;
+import gregtech.api.recipes.properties.impl.PrimitiveProperty;
 import gregtech.api.util.ValidationResult;
 import keqing.gtqtcore.api.recipes.properties.HeatProperty;
 
@@ -24,12 +24,12 @@ public class HeatRecipeBuilder extends RecipeBuilder<HeatRecipeBuilder> {
     }
 
     @Override
-    public boolean applyProperty(String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(HeatProperty.KEY)) {
             this.Heat(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public HeatRecipeBuilder Heat(int Heat) {

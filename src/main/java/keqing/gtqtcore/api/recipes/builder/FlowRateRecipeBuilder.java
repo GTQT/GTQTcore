@@ -3,7 +3,7 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.PrimitiveProperty;
+import gregtech.api.recipes.properties.impl.PrimitiveProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.api.util.ValidationResult;
@@ -11,8 +11,6 @@ import keqing.gtqtcore.api.recipes.properties.FlowRateProperty;
 import keqing.gtqtcore.api.recipes.properties.MaxRateProperty;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import javax.annotation.Nonnull;
 
 public class FlowRateRecipeBuilder extends RecipeBuilder<FlowRateRecipeBuilder> {
     public FlowRateRecipeBuilder() {/**/}
@@ -29,7 +27,7 @@ public class FlowRateRecipeBuilder extends RecipeBuilder<FlowRateRecipeBuilder> 
         return new FlowRateRecipeBuilder(this);
     }
 
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals("max_rate")) {
             // 检查 max_rate 是否已经赋值
             if (getMaxRate() == 0) { // 如果 max_rate 未赋值
@@ -44,7 +42,7 @@ public class FlowRateRecipeBuilder extends RecipeBuilder<FlowRateRecipeBuilder> 
             }
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public FlowRateRecipeBuilder maxRate(int heat_max_rate) {
@@ -67,12 +65,12 @@ public class FlowRateRecipeBuilder extends RecipeBuilder<FlowRateRecipeBuilder> 
 
     public int getMaxRate() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(MaxRateProperty.getInstance(), 0);
+                .get(MaxRateProperty.getInstance(), 0);
     }
 
     public int getFlowRate() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(FlowRateProperty.getInstance(), 0);
+                .get(FlowRateProperty.getInstance(), 0);
     }
 
     public ValidationResult<Recipe> build() {

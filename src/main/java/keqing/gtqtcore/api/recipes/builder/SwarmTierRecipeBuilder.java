@@ -36,7 +36,7 @@ public class SwarmTierRecipeBuilder extends RecipeBuilder<SwarmTierRecipeBuilder
             this.tier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public SwarmTierRecipeBuilder tier(int tier) {

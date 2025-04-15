@@ -1,13 +1,10 @@
 package keqing.gtqtcore.api.recipes.properties;
 
-import gregtech.api.recipes.recipeproperties.RecipeProperty;
+import gregtech.api.recipes.properties.RecipeProperty;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import org.apache.commons.lang3.Validate;
-
-import javax.annotation.Nonnull;
-import java.util.Map;
-import java.util.TreeMap;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagInt;
 
 public class PCBFactoryProperty extends RecipeProperty<Integer> {
 
@@ -29,5 +26,14 @@ public class PCBFactoryProperty extends RecipeProperty<Integer> {
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
         minecraft.fontRenderer.drawString(I18n.format("结构等级：%s",
                 castValue(value)), x, y, color);
+    }
+    @Override
+    public NBTBase serialize(Object value) {
+        return new NBTTagInt(castValue(value));
+    }
+
+    @Override
+    public Object deserialize( NBTBase nbt) {
+        return ((NBTTagInt) nbt).getInt();
     }
 }

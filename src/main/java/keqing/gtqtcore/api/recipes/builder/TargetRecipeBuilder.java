@@ -35,7 +35,7 @@ public class TargetRecipeBuilder extends RecipeBuilder<TargetRecipeBuilder> {
             this.Scattering(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
 
     }
 

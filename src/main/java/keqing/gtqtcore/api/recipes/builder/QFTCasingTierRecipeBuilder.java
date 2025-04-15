@@ -29,16 +29,16 @@ public class QFTCasingTierRecipeBuilder extends RecipeBuilder<QFTCasingTierRecip
 
     public int getTier() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(QFTCasingTierProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(QFTCasingTierProperty.getInstance(), 0);
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(QFTCasingTierProperty.KEY)) {
             this.CasingTier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public QFTCasingTierRecipeBuilder CasingTier(int Tier) {

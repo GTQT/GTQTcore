@@ -29,15 +29,15 @@ public class MiningDrillRecipeBuilder extends RecipeBuilder<MiningDrillRecipeBui
 
     public int getTire() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(MiningDrillProperties.getInstance(), 0);
+                this.recipePropertyStorage.get(MiningDrillProperties.getInstance(), 0);
     }
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(MiningDrillProperties.KEY)) {
             this.tier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
     public MiningDrillRecipeBuilder tier(int Tire) {
         this.applyProperty(MiningDrillProperties.getInstance(), Tire);

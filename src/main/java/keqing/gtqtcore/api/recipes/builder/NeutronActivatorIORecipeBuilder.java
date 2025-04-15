@@ -31,7 +31,7 @@ public class NeutronActivatorIORecipeBuilder extends RecipeBuilder<NeutronActiva
 
     public int getPart() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(NeutronActivatorIOPartProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(NeutronActivatorIOPartProperty.getInstance(), 0);
     }
 
     public NeutronActivatorIORecipeBuilder part(int Tier) {
@@ -44,12 +44,12 @@ public class NeutronActivatorIORecipeBuilder extends RecipeBuilder<NeutronActiva
         return this;
     }
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(NeutronActivatorIOPartProperty.KEY)) {
             this.part(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     @Override

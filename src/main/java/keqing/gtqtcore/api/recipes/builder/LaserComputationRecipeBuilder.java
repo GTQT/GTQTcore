@@ -2,7 +2,7 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.ComputationProperty;
+import gregtech.api.recipes.properties.impl.ComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import keqing.gtqtcore.api.recipes.properties.LaserNetProperty;
@@ -27,7 +27,7 @@ public class LaserComputationRecipeBuilder extends RecipeBuilder<LaserComputatio
     }
 
     @Override
-    public boolean applyProperty(String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(ComputationProperty.KEY)) {
             this.CWUt(((Number) value).intValue());
             return true;
@@ -36,7 +36,7 @@ public class LaserComputationRecipeBuilder extends RecipeBuilder<LaserComputatio
             this.Laser(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public LaserComputationRecipeBuilder Laser(int Laser) {

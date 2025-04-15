@@ -30,16 +30,16 @@ public class ComponentAssemblyLineRecipesTierRecipeBuilder extends RecipeBuilder
 
     public int getCATier() {
         return this.recipePropertyStorage == null ? 0 :
-                this.recipePropertyStorage.getRecipePropertyValue(ComponentAssemblyLineRecipesTierProperty.getInstance(), 0);
+                this.recipePropertyStorage.get(ComponentAssemblyLineRecipesTierProperty.getInstance(), 0);
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(CasingTierProperty.KEY)) {
             this.CasingTier(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public ComponentAssemblyLineRecipesTierRecipeBuilder CasingTier(int Tier) {

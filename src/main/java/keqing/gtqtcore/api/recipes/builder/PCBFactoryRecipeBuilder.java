@@ -32,7 +32,7 @@ public class PCBFactoryRecipeBuilder extends RecipeBuilder<PCBFactoryRecipeBuild
     }
 
     @Override
-    public boolean applyProperty(@Nonnull String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(PCBFactoryProperty.KEY)) {
             tier(((Number) value).intValue());
             return true;
@@ -42,7 +42,7 @@ public class PCBFactoryRecipeBuilder extends RecipeBuilder<PCBFactoryRecipeBuild
             isBioUpgrade(((Number) value).intValue());
             return true;
         }
-        return super.applyProperty(key, value);
+        return super.applyPropertyCT(key, value);
     }
 
     public PCBFactoryRecipeBuilder tier(int tier) {
@@ -61,12 +61,12 @@ public class PCBFactoryRecipeBuilder extends RecipeBuilder<PCBFactoryRecipeBuild
 
     public int getPCBFactoryTier() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(PCBFactoryProperty.getInstance(), 0);
+                .get(PCBFactoryProperty.getInstance(), 0);
     }
 
     public int getPCBFactoryBioUpgradeTier() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(PCBFactoryBioUpgradeProperty.getInstance(), 0);
+                .get(PCBFactoryBioUpgradeProperty.getInstance(), 0);
     }
 
     @Override

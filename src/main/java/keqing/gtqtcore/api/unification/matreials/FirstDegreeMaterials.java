@@ -8,7 +8,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
-import gregtech.api.unification.material.properties.ToolProperty;
+import gregtech.api.unification.material.properties.MaterialToolProperty;
 import keqing.gtqtcore.api.unification.Elements;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
@@ -461,7 +461,7 @@ public class FirstDegreeMaterials {
                 .components(Steel, 1, Coal, 1, Silicon, 1)
                 .blast(2700, LOW)
                 .rotorStats(9.0f, 5.0f, 3000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 28000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 28000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(128, 2, 2)
                 .build();
@@ -473,7 +473,7 @@ public class FirstDegreeMaterials {
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
                 .components(ElectricalSteel, 1, Coal, 1, Obsidian, 1)
                 .rotorStats(12.0f, 6.0f, 4500)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(3600, MID)
                 .build();
@@ -485,7 +485,7 @@ public class FirstDegreeMaterials {
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROD, GENERATE_FRAME, GENERATE_BOLT_SCREW, GENERATE_FOIL, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROUND, GENERATE_SPRING)
                 .components(DarkSteel, 1, Endstone, 1, TungstenSteel, 1)
                 .rotorStats(15.0f, 7.0f, 6000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 36000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 36000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .blast(4500, MID)
                 .build();
@@ -515,7 +515,7 @@ public class FirstDegreeMaterials {
                 .fluidPipeProperties(500, 4500, true, true, true, false)
                 .blast(7200, MID)
                 .rotorStats(15.0f, 7.0f, 6000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 32000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(32768, 6, 8)
                 .build();
@@ -528,7 +528,7 @@ public class FirstDegreeMaterials {
                 .blast(5000, MID)
                 .fluidPipeProperties(500, 6000, true, true, true, false)
                 .rotorStats(15.0f, 7.0f, 4000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 6000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(2048, 6, 2)
                 .build();
@@ -540,7 +540,7 @@ public class FirstDegreeMaterials {
                 .components(Silver, 1, ConductiveIron, 1, BlackSteel, 1)
                 .blast(2700, MID)
                 .rotorStats(15.0f, 7.0f, 2000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 8000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 8000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(512, 4, 2)
                 .build();
@@ -552,7 +552,7 @@ public class FirstDegreeMaterials {
                 .components(Chromite, 1, EnergeticSilver, 1, EnderEye, 1)
                 .blast(3000, MID)
                 .rotorStats(15.0f, 7.0f, 4000)
-                .toolStats(ToolProperty.Builder.of(7.0F, 6.0F, 12000, 5)
+                .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 12000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .cableProperties(2048, 4, 2)
                 .build();
@@ -5659,7 +5659,7 @@ public class FirstDegreeMaterials {
                 .iconSet(MaterialIconSet.DIAMOND)
                 .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION, CRYSTALLIZABLE, FLAMMABLE, EXPLOSIVE, DISABLE_CRYSTALLIZATION) // to disable implosion recipes
                 .components(Boron, 1, Nitrogen, 1)
-                .toolStats(ToolProperty.Builder.of(14.0F, 9.0F, 12400, 15).build())
+                .toolStats(MaterialToolProperty.Builder.of(14.0F, 9.0F, 12400, 15).build())
                 .build()
                 .setFormula("c-BN", true);
 
