@@ -74,27 +74,6 @@ metaitem.shape.exotic_extruder.rod_long.tooltip=用来制作长杆的超强模�
 metaitem.shape.exotic_extruder.rotor.name= 无尽 模头（转子）
 metaitem.shape.exotic_extruder.rotor.tooltip=用来制作转子的超强模头
 
-metaitem.shape.mold.rod.name=模具（杆）
-metaitem.shape.mold.rod.tooltip=用来制作杆的模具
-metaitem.shape.mold.bolt.name=模具（螺栓）
-metaitem.shape.mold.bolt.tooltip=用来制作螺栓的模具
-metaitem.shape.mold.round.name=模具（滚珠）
-metaitem.shape.mold.round.tooltip=用来制作滚珠的模具
-metaitem.shape.mold.screw.name=模具（螺丝）
-metaitem.shape.mold.screw.tooltip=用来制作螺丝的模具
-metaitem.shape.mold.ring.name=模具（环）
-metaitem.shape.mold.ring.tooltip=用来制作环的模具
-metaitem.shape.mold.rod_long.name=模具（长杆）
-metaitem.shape.mold.rod_long.tooltip=用来制作长杆的模具
-metaitem.shape.mold.turbine_blade.name=模具（涡轮扇叶）
-metaitem.shape.mold.turbine_blade.tooltip=用来制作涡轮扇叶的模具
-metaitem.shape.mold.drill_head.name=模具（钻头）
-metaitem.shape.mold.drill_head.tooltip=用来制作钻头的模具
-metaitem.shape.extruder.turbine_blade.name=模头（涡轮扇叶）
-metaitem.shape.extruder.turbine_blade.tooltip=用来制作涡轮扇叶的模头
-metaitem.shape.extruder.drill_head.name=模头（钻头）
-metaitem.shape.extruder.drill_head.tooltip=用来制作钻头的模头
-
 #  Boards
 metaitem.board.gooware.name=Kapton™电路基板
 metaitem.board.gooware.tooltip=杜邦™ Pyralux® TK层压薄膜

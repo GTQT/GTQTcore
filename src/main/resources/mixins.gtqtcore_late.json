@@ -11,7 +11,6 @@
     "architecturecraft.MixinBlockShape",
     "architecturecraft.MixinEnumShape",
     "architecturecraft.MixinTileSawbench",
-    "gregtech.MixinAssemblyLineManager",
     "gregtech.MixinBlockMachine",
     "gregtech.MixinBlockPipe",
     "gregtech.MixinGlassCasingType",
@@ -22,9 +21,7 @@
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",
-    "gregtech.MetaTileEntityDrumAccessor",
-    "gregtech.MetaTileEntityMufflerHatchMixin",
-    "gregtech.MultiblockRecipeLogicMixin"
+    "gregtech.MetaTileEntityDrumAccessor"
   ],
   "server": [],
   "client": [

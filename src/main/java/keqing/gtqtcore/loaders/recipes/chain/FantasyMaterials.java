@@ -45,6 +45,7 @@ public class FantasyMaterials {
                 new ItemStack[]{SHAPE_MOLD_PLATE.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(144)});
 
+        /*
         GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
                 new ItemStack[]{SHAPE_MOLD_ROD_LONG.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(144)});
@@ -68,6 +69,8 @@ public class FantasyMaterials {
         GTRecipeHandler.removeRecipesByInputs(TD_PRINT_RECIPES,
                 new ItemStack[]{SHAPE_MOLD_ROUND.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+         */
         /////////////////////////////////////////////////////////////////////
 
         GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
@@ -86,6 +89,7 @@ public class FantasyMaterials {
                 new ItemStack[]{SHAPE_MOLD_PLATE.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(144)});
 
+        /*
         GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
                 new ItemStack[]{SHAPE_MOLD_ROD_LONG.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(144)});
@@ -109,6 +113,8 @@ public class FantasyMaterials {
         GTRecipeHandler.removeRecipesByInputs(FLUID_SOLIDFICATION_RECIPES,
                 new ItemStack[]{SHAPE_MOLD_ROUND.getStackForm()},
                 new FluidStack[]{MetastableOganesson.getFluid(18)});
+
+         */
 
         //  Metastable Oganesson liquid -> Metastable Oganesson hot ingot
         VACUUM_RECIPES.recipeBuilder()

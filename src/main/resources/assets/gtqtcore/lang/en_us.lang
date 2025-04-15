@@ -73,26 +73,6 @@ metaitem.shape.exotic_extruder.rod_long.tooltip=Superior extruder for crafting l
 metaitem.shape.exotic_extruder.rotor.name= Endless Extruder (Rotor)
 metaitem.shape.exotic_extruder.rotor.tooltip=Superior extruder for crafting rotors
 
-metaitem.shape.mold.rod.name=Mold (Rod)
-metaitem.shape.mold.rod.tooltip=Mold for making Rods
-metaitem.shape.mold.bolt.name=Mold (Bolt)
-metaitem.shape.mold.bolt.tooltip=Mold for making Bolts
-metaitem.shape.mold.round.name=Mold (Round)
-metaitem.shape.mold.round.tooltip=Mold for making Rounds
-metaitem.shape.mold.screw.name=Mold (Screw)
-metaitem.shape.mold.screw.tooltip=Mold for making Screws
-metaitem.shape.mold.ring.name=Mold (Ring)
-metaitem.shape.mold.ring.tooltip=Mold for making Rings
-metaitem.shape.mold.rod_long.name=Mold (Long Rod)
-metaitem.shape.mold.rod_long.tooltip=Mold for making Long Rods
-metaitem.shape.mold.turbine_blade.name=Mold (Turbine Blade)
-metaitem.shape.mold.turbine_blade.tooltip=Mold for making Turbine Blades
-metaitem.shape.mold.drill_head.name=Mold (Drill Head)
-metaitem.shape.mold.drill_head.tooltip=Mold for making Drill Heads
-metaitem.shape.extruder.turbine_blade.name=模头（涡轮扇叶）
-metaitem.shape.extruder.turbine_blade.tooltip=用来制作涡轮扇叶的模头
-metaitem.shape.extruder.drill_head.name=模头（钻头）
-metaitem.shape.extruder.drill_head.tooltip=用来制作钻头的模头
 #  Boards
 metaitem.board.gooware.name=Kapton™ Circuit Board
 metaitem.board.gooware.tooltip=DuPont™ Pyralux® TK Laminate Film

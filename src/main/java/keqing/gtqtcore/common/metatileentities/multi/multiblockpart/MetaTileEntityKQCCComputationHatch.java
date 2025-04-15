@@ -54,7 +54,6 @@ public class MetaTileEntityKQCCComputationHatch extends MetaTileEntityMultiblock
         return VA[this.tier]/3;
     }
 
-
     @Override
     public int requestCWUt(int cwut, boolean simulate,  Collection<IOpticalComputationProvider> seen) {
         seen.add(this);

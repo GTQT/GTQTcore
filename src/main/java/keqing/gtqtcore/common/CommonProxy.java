@@ -70,12 +70,6 @@ public class CommonProxy {
             return GTQTMetaItems.SUPRACAUSAL_MAINFRAME.getStackForm();
         }
     };
-    public static final CreativeTabs GTQTCore_PC = new CreativeTabs("gtqtpc") {
-        @Override
-        public ItemStack createIcon() {
-            return GTQTMetaItems.PROGRAMMABLE_CIRCUIT_0.getStackForm();
-        }
-    };
     public static final CreativeTabs GTQTCore_CO = new CreativeTabs("gtqtco") {
         @Override
         public ItemStack createIcon() {
@@ -148,7 +142,6 @@ public class CommonProxy {
         MaterialRecipeHandler.register();
         PipeRecipeHandler.register();
         PartRecipeHandler.register();
-        PartRecipeHandler1.register();
         WireCombinationHandler.init();
         WireRecipeHandler.init();
         GemHandler.init();

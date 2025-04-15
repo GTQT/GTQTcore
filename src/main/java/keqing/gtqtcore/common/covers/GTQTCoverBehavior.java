@@ -93,9 +93,6 @@ public class GTQTCoverBehavior {
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "me_machine_controller"), GTQTMetaItems.COVER_ITEM_MACHINE_CONTROLLER,
                 MEMachineController::new);
 
-        registerBehavior(new ResourceLocation(GTQTCore.MODID, "programmable_circuit_cover"), GTQTMetaItems.COVER_PROGRAMMABLE_CIRCUIT,
-                CoverProgrammableHatch::new);
-
         registerBehavior(new ResourceLocation(GTQTCore.MODID, "one_stack_filter"), GTQTMetaItems.COVER_ONE_STACK_FILTER,
                 CoverOneStackFilter::new);
         

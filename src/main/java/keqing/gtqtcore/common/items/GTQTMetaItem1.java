@@ -558,28 +558,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        //Shape Molds and Extruders addition.
-        SHAPE_MOLD_ROD = this.addItem(480, "shape.mold.rod").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_BOLT = this.addItem(481, "shape.mold.bolt").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_ROUND = this.addItem(482, "shape.mold.round").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_SCREW = this.addItem(483, "shape.mold.screw").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_RING = this.addItem(484, "shape.mold.ring").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_ROD_LONG = this.addItem(485, "shape.mold.rod_long").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_TURBINE_BLADE = this.addItem(486, "shape.mold.turbine_blade").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_MOLD_DRILL_HEAD = this.addItem(487, "shape.mold.drill_head").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_EXTRUDER_TURBINE_BLADE = this.addItem(488, "shape.extruder.turbine_blade").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-        SHAPE_EXTRUDER_DRILL_HEAD = this.addItem(489, "shape.extruder.drill_head").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 4)));
-
-
         //  Magneto Resonatic Board
         MAGNETO_RESONATIC_BOARD = this.addItem(498, "board.magneto_resonatic").setCreativeTabs(CommonProxy.GTQTCore_GD);
         MAGNETO_RESONATIC_CIRCUIT_BOARD = this.addItem(499, "circuit_board.magneto_resonatic").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -1094,43 +1072,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DISK_39 = this.addItem(2039, "disk.39").setCreativeTabs(CommonProxy.GTQTCore_DISK);
         DISK_40 = this.addItem(2040, "disk.40").setCreativeTabs(CommonProxy.GTQTCore_DISK);
 
-
-        //可变成 2400
-        PROGRAMMABLE_CIRCUIT_0 = this.addItem(2400, "programmable_circuit_0").addComponents(new ProgrammableCircuit(0, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_1 = this.addItem(2401, "programmable_circuit_1").addComponents(new ProgrammableCircuit(1, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_2 = this.addItem(2402, "programmable_circuit_2").addComponents(new ProgrammableCircuit(2, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_3 = this.addItem(2403, "programmable_circuit_3").addComponents(new ProgrammableCircuit(3, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_4 = this.addItem(2404, "programmable_circuit_4").addComponents(new ProgrammableCircuit(4, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_5 = this.addItem(2405, "programmable_circuit_5").addComponents(new ProgrammableCircuit(5, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_6 = this.addItem(2406, "programmable_circuit_6").addComponents(new ProgrammableCircuit(6, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_7 = this.addItem(2407, "programmable_circuit_7").addComponents(new ProgrammableCircuit(7, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_8 = this.addItem(2408, "programmable_circuit_8").addComponents(new ProgrammableCircuit(8, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_9 = this.addItem(2409, "programmable_circuit_9").addComponents(new ProgrammableCircuit(9, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_10 = this.addItem(2410, "programmable_circuit_10").addComponents(new ProgrammableCircuit(10, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_11 = this.addItem(2411, "programmable_circuit_11").addComponents(new ProgrammableCircuit(11, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_12 = this.addItem(2412, "programmable_circuit_12").addComponents(new ProgrammableCircuit(12, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_13 = this.addItem(2413, "programmable_circuit_13").addComponents(new ProgrammableCircuit(13, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_14 = this.addItem(2414, "programmable_circuit_14").addComponents(new ProgrammableCircuit(14, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_15 = this.addItem(2415, "programmable_circuit_15").addComponents(new ProgrammableCircuit(15, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_16 = this.addItem(2416, "programmable_circuit_16").addComponents(new ProgrammableCircuit(16, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_17 = this.addItem(2417, "programmable_circuit_17").addComponents(new ProgrammableCircuit(17, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_18 = this.addItem(2418, "programmable_circuit_18").addComponents(new ProgrammableCircuit(18, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_19 = this.addItem(2419, "programmable_circuit_19").addComponents(new ProgrammableCircuit(19, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_20 = this.addItem(2420, "programmable_circuit_20").addComponents(new ProgrammableCircuit(20, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_21 = this.addItem(2421, "programmable_circuit_21").addComponents(new ProgrammableCircuit(21, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_22 = this.addItem(2422, "programmable_circuit_22").addComponents(new ProgrammableCircuit(22, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_23 = this.addItem(2423, "programmable_circuit_23").addComponents(new ProgrammableCircuit(23, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_24 = this.addItem(2424, "programmable_circuit_24").addComponents(new ProgrammableCircuit(24, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_25 = this.addItem(2425, "programmable_circuit_25").addComponents(new ProgrammableCircuit(25, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_26 = this.addItem(2426, "programmable_circuit_26").addComponents(new ProgrammableCircuit(26, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_27 = this.addItem(2427, "programmable_circuit_27").addComponents(new ProgrammableCircuit(27, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_28 = this.addItem(2428, "programmable_circuit_28").addComponents(new ProgrammableCircuit(28, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_29 = this.addItem(2429, "programmable_circuit_29").addComponents(new ProgrammableCircuit(29, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_30 = this.addItem(2430, "programmable_circuit_30").addComponents(new ProgrammableCircuit(30, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_31 = this.addItem(2431, "programmable_circuit_31").addComponents(new ProgrammableCircuit(31, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-        PROGRAMMABLE_CIRCUIT_32 = this.addItem(2432, "programmable_circuit_32").addComponents(new ProgrammableCircuit(32, "programmable_circuit")).setCreativeTabs(CommonProxy.GTQTCore_PC);
-
-
         // 注册所有粒子项
         ALPHA = this.addItem(2500, "alpha");
         ANTIALPHA = this.addItem(2501, "antialpha");
@@ -1422,8 +1363,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         MICROWAVE_ENERGY_RECEIVER_UXV = addItem(4037, "cover.microwave_cover.uxv");
         MICROWAVE_ENERGY_RECEIVER_OpV = addItem(4038, "cover.microwave_cover.opv");
         COVER_ITEM_MACHINE_CONTROLLER = addItem(4039, "cover.me_machine_controller");
-        COVER_PROGRAMMABLE_CIRCUIT = addItem(4040, "cover.programmable_circuit").setCreativeTabs(CommonProxy.GTQTCore_PC);
-        COVER_ONE_STACK_FILTER = addItem(4041, "cover.one_stack_filter");
+        COVER_ONE_STACK_FILTER = addItem(4040, "cover.one_stack_filter");
     }
 
 }
