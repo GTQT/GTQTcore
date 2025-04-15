@@ -10,10 +10,10 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.CubicBoronNitride;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CubicBoronNitride;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.REINFORCED_ROTOR_HOLDER;
 
 public class ReinforcedRotorHolder {

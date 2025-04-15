@@ -1,9 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -19,11 +19,11 @@ public class BZChain {
         malonicAcid();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust, PotassiumBromate, 4)
-                .input(dust, MalonicAcid, 3)
+                .input(dust, GTQTMaterials.PotassiumBromate, 4)
+                .input(dust, GTQTMaterials.MalonicAcid, 3)
                 .input(dust, Cerium)
                 .fluidInputs(DistilledWater.getFluid(1000))
-                .fluidOutputs(BZMedium.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.BZMedium.getFluid(1000))
                 .duration(100).EUt(VA[ZPM]).buildAndRegister();
     }
 
@@ -34,7 +34,7 @@ public class BZChain {
                 .fluidInputs(SulfurDioxide.getFluid(1000))
                 .fluidInputs(Water.getFluid(2000))
                 .fluidOutputs(SulfuricAcid.getFluid(1000))
-                .fluidOutputs(HydrobromicAcid.getFluid(2000))
+                .fluidOutputs(GTQTMaterials.HydrobromicAcid.getFluid(2000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         // KCl + H2O -> KOH + Cl + H
@@ -42,7 +42,7 @@ public class BZChain {
                 .input(dust, RockSalt, 2)
                 .notConsumable(new IntCircuitIngredient(2))
                 .fluidInputs(Water.getFluid(1000))
-                .output(dust, PotassiumHydroxide, 3)
+                .output(dust, GTQTMaterials.PotassiumHydroxide, 3)
                 .fluidOutputs(Chlorine.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .duration(720).EUt(VA[LV]).buildAndRegister();
@@ -50,8 +50,8 @@ public class BZChain {
         // 3HBr + 3KOH -> KBrO3 + 3H2O
         CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bromine.getFluid(3000))
-                .input(dust, PotassiumHydroxide, 1)
-                .output(dust, PotassiumBromate, 5)
+                .input(dust, GTQTMaterials.PotassiumHydroxide, 1)
+                .output(dust, GTQTMaterials.PotassiumBromate, 5)
                 .fluidOutputs(Ice.getFluid(3000))
                 .temperature(273)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
@@ -60,29 +60,29 @@ public class BZChain {
     private static void malonicAcid() {
         // C2H4Cl2 + Cl -> C2HCl3 + 3H
         BURNER_REACTOR_RECIPES.recipeBuilder()
-                .fluidInputs(Dichloroethane.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Dichloroethane.getFluid(1000))
                 .fluidInputs(Chlorine.getFluid(1000))
-                .fluidOutputs(Trichloroethylene.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Trichloroethylene.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(3000))
                 .blastFurnaceTemp(4500)
                 .duration(100).EUt(VA[EV]).buildAndRegister();
 
         // C2HCl3 + 2H2O -> C2H3ClO2 + 2HCl
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Trichloroethylene.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Trichloroethylene.getFluid(1000))
                 .fluidInputs(Water.getFluid(2000))
                 .notConsumable(SulfuricAcid.getFluid(250))
-                .fluidOutputs(ChloroaceticAcid.getFluid(8000))
+                .fluidOutputs(GTQTMaterials.ChloroaceticAcid.getFluid(8000))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .duration(100).EUt(VA[EV]).buildAndRegister();
 
         // C2H3ClO2 + Na2CO3 + 2H2O -> C3H4O4 + 2NaOH + HClO
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, SodaAsh, 6)
-                .fluidInputs(ChloroaceticAcid.getFluid(8000))
+                .fluidInputs(GTQTMaterials.ChloroaceticAcid.getFluid(8000))
                 .fluidInputs(Water.getFluid(2000))
                 .output(dust, SodiumHydroxide, 6)
-                .output(dust, MalonicAcid, 11)
+                .output(dust, GTQTMaterials.MalonicAcid, 11)
                 .fluidOutputs(HypochlorousAcid.getFluid(1000))
                 .duration(400).EUt(VA[IV]).buildAndRegister();
     }

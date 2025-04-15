@@ -1,6 +1,5 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -16,7 +15,6 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.unification.material.internal.MaterialRegistryManager;
 import gregtech.loaders.recipe.CraftingComponent;
@@ -45,9 +43,8 @@ import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING;

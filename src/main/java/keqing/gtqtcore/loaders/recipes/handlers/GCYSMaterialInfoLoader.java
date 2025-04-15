@@ -11,8 +11,8 @@ import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import static gregtech.api.GTValues.M;
 import static gregtech.api.unification.material.Materials.Europium;
 import static gregtech.api.unification.material.Materials.Rubber;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.PMMA;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.PMMA;
 
 public class GCYSMaterialInfoLoader {
 

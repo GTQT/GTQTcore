@@ -1,14 +1,12 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static supercritical.api.unification.material.SCMaterials.Plutonium244;
 
 public class QTF {

@@ -9,7 +9,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static gregtechfoodoption.GTFOMaterialHandler.Vanillin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static net.minecraft.init.Items.STRING;
 

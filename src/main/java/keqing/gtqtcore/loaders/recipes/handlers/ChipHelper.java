@@ -15,7 +15,6 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.NEUTRONIUM_BOULE;
 import static gregtech.common.items.MetaItems.NEUTRONIUM_WAFER;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 

@@ -23,7 +23,6 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.CarbonDioxide;
 import static gregtech.api.unification.material.Materials.Water;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CalciumCarbonate;
 
 public class BiologyRecipe {
@@ -301,7 +300,7 @@ public class BiologyRecipe {
                 .notConsumable(getBiologyCircuitData(5))
                 .EUt(32)
                 .duration(2000)
-                .fluidOutputs(Butanol.getFluid(18000))
+                .fluidOutputs(GTQTMaterials.Butanol.getFluid(18000))
                 .fluidOutputs(Materials.Acetone.getFluid(9000))
                 .fluidOutputs(Materials.Ethanol.getFluid(3000))
                 .buildAndRegister();
@@ -333,7 +332,7 @@ public class BiologyRecipe {
 
         BLAST_RECIPES.recipeBuilder()
                 .input(dust,CalciumCarbonate, 5)
-                .output(dust,CalciumCarbide, 2)
+                .output(dust, GTQTMaterials.CalciumCarbide, 2)
                 .fluidOutputs(CarbonDioxide.getFluid(3000))
                 .EUt(240).duration(90)
                 .blastFurnaceTemp(1000)
@@ -553,7 +552,7 @@ public class BiologyRecipe {
         GTQTcoreRecipeMaps.CHEMICAL_PLANT.recipeBuilder()
                 .recipeLevel(1)
                 .fluidInputs(GTQTMaterials.UreaMix.getFluid(200))
-                .fluidInputs(Formaldehyde.getFluid(200))
+                .fluidInputs(GTQTMaterials.Formaldehyde.getFluid(200))
                 .notConsumable(getBiologyCircuitData(9))
                 .EUt(30)
                 .duration(100)

@@ -7,12 +7,10 @@ import static gregtech.api.unification.material.Materials.NaquadahAlloy;
 import static gregtech.api.unification.material.Materials.Polybenzimidazole;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static gregtech.loaders.recipe.CraftingComponent.EMITTER;
-import static gregtech.loaders.recipe.CraftingComponent.ROBOT_ARM;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonK;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Plate;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -20,13 +18,11 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import gregtech.api.GTValues;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.unification.material.MarkerMaterial;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.loaders.recipes.chain.SuperconductorRecipes;
 
 public class CoverRecipes {
 

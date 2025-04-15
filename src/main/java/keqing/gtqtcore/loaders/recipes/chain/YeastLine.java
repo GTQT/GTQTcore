@@ -11,9 +11,9 @@ import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static gregtechfoodoption.GTFOMaterialHandler.SodiumCarbonateSolution;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Butanol;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Butanol;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.OnePropanol;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.OnePropanol;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class YeastLine {

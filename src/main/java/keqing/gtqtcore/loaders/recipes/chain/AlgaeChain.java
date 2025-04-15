@@ -10,7 +10,7 @@ import static gregtech.api.recipes.RecipeMaps.GAS_TURBINE_FUELS;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Tiberium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Tiberium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 

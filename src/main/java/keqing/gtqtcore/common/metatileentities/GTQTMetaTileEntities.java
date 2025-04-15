@@ -1,8 +1,6 @@
 package keqing.gtqtcore.common.metatileentities;
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
-import gregtech.api.capability.impl.PropertyFluidFilter;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
@@ -14,18 +12,12 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMachineHatch;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityRotorHolder;
-import gregtech.common.metatileentities.storage.MetaTileEntityBuffer;
-import gregtech.common.metatileentities.storage.MetaTileEntityCrate;
-import gregtech.common.metatileentities.storage.MetaTileEntityDrum;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -74,8 +66,6 @@ import java.util.function.IntPredicate;
 import java.util.function.IntSupplier;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.HV;
-import static gregtech.api.GTValues.LV;
 import static gregtech.api.GTValues.MV;
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.unification.material.Materials.*;
@@ -85,7 +75,7 @@ import static keqing.gtqtcore.api.GCYSValues.*;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Kevlar;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Kevlar;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.genericGeneratorTankSizeFunctionPlus;
 import static keqing.gtqtcore.api.utils.MultiblockRegistryHelper.registerSimpleSteamMetaTileEntity;
@@ -100,28 +90,7 @@ public class GTQTMetaTileEntities {
 
     ////////////////////////////io
     /* ---------------------------------------------------------------- Multiblock Parts ---------------------------------------------------------------- */
-    public static final MetaTileEntityAdvancedEnergyHatch[] INPUT_ENERGY_HATCH_4A = new MetaTileEntityAdvancedEnergyHatch[4];
-    public static final MetaTileEntityAdvancedEnergyHatch[] INPUT_ENERGY_HATCH_16A = new MetaTileEntityAdvancedEnergyHatch[4];
-    public static final MetaTileEntityAdvancedEnergyHatch[] OUTPUT_ENERGY_HATCH_4A = new MetaTileEntityAdvancedEnergyHatch[7];
-    public static final MetaTileEntityAdvancedEnergyHatch[] OUTPUT_ENERGY_HATCH_16A = new MetaTileEntityAdvancedEnergyHatch[8];
-    public static final MetaTileEntityAdvancedSubstationEnergyHatch[] SUBSTATION_INPUT_ENERGY_HATCH = new MetaTileEntityAdvancedSubstationEnergyHatch[4];
-    public static final MetaTileEntityAdvancedSubstationEnergyHatch[] SUBSTATION_OUTPUT_ENERGY_HATCH = new MetaTileEntityAdvancedSubstationEnergyHatch[8];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_INPUT_HATCH_16384A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_INPUT_HATCH_65536A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_INPUT_HATCH_262144A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_INPUT_HATCH_1048576A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_OUTPUT_HATCH_16384A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_OUTPUT_HATCH_65536A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_OUTPUT_HATCH_262144A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedLaserHatch[] LASER_OUTPUT_HATCH_1048576A = new MetaTileEntityAdvancedLaserHatch[14];
-    public static final MetaTileEntityAdvancedFluidHatch[] IMPORT_FLUID_HATCH = new MetaTileEntityAdvancedFluidHatch[4];
-    public static final MetaTileEntityAdvancedFluidHatch[] EXPORT_FLUID_HATCH = new MetaTileEntityAdvancedFluidHatch[4];
-    public static final MetaTileEntityAdvancedItemBus[] IMPORT_ITEM_HATCH = new MetaTileEntityAdvancedItemBus[4];
-    public static final MetaTileEntityAdvancedItemBus[] EXPORT_ITEM_HATCH = new MetaTileEntityAdvancedItemBus[4];
-    public static final MetaTileEntityAdvancedMultiFluidHatch[] QUADRUPLE_IMPORT_FLUID_HATCH = new MetaTileEntityAdvancedMultiFluidHatch[4];
-    public static final MetaTileEntityAdvancedMultiFluidHatch[] QUADRUPLE_EXPORT_FLUID_HATCH = new MetaTileEntityAdvancedMultiFluidHatch[4];
-    public static final MetaTileEntityAdvancedMultiFluidHatch[] NONUPLE_IMPORT_FLUID_HATCH = new MetaTileEntityAdvancedMultiFluidHatch[4];
-    public static final MetaTileEntityAdvancedMultiFluidHatch[] NONUPLE_EXPORT_FLUID_HATCH = new MetaTileEntityAdvancedMultiFluidHatch[4];
+
     public static final MetaTileEntityCreativeEnergyHatch[] CREATIVE_ENERGY_HATCHES = new MetaTileEntityCreativeEnergyHatch[GTValues.V.length];
     public static final SimpleGeneratorMetaTileEntity[] NAQUADAH_REACTOR = new SimpleGeneratorMetaTileEntity[3];
     public static final SimpleGeneratorMetaTileEntity[] ROCKET_ENGINE = new SimpleGeneratorMetaTileEntity[3];
@@ -130,7 +99,6 @@ public class GTQTMetaTileEntities {
     public static final SimpleGeneratorMetaTileEntity[] STEAM_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] GAS_TURBINE = new SimpleGeneratorMetaTileEntity[4];
     public static final SimpleGeneratorMetaTileEntity[] FUEL_CELL_TURBINE = new SimpleGeneratorMetaTileEntity[5];
-    public static final MetaTileEntityRotorHolder[] ROTOR_HOLDER = new MetaTileEntityRotorHolder[12]; //HV, EV, IV, LuV, ZPM, UV
     public static final SimpleMachineMetaTileEntity[] FLUID_CANNER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static final SimpleMachineMetaTileEntity[] LAMINATOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static final SimpleMachineMetaTileEntity[] FLUID_EXTRACTOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
@@ -322,7 +290,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityDimensionalMixer DIMENSIONAL_MIXER;
     public static MetaTileEntityDimensionallyPlasmFurnace DIMENSIONAL_PLASMA_FURNACE;
     public static SimpleMachineMetaTileEntity[] AUTO_CHISEL = new SimpleMachineMetaTileEntity[3];
-    public static MetaTileEntityBuffer[] BUFFER = new MetaTileEntityBuffer[2];
     public static MetaTileEntityThreeDimPrinter THREE_DIM_PRINT;
     public static MetaTileEntityElectronOil ELE_OIL;
     public static MetaTileEntityAdvancedArcFurnace ADV_ARC_FURNACE;
@@ -394,16 +361,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPowerSupplyHatch POWER_SUPPLY_HATCH_BASIC;
     public static MetaTileEntityPowerSupplyHatch[] POWER_SUPPLY_HATCH_BATTLE = new MetaTileEntityPowerSupplyHatch[5];
     public static MetaTileEntityPowerSupplyHatch[] POWER_SUPPLY_HATCH_SUPPLY = new MetaTileEntityPowerSupplyHatch[10];
-
-    // Miscs
-    public static MetaTileEntityDrum RHODIUM_PLATED_PALLADIUM_DRUM;
-    public static MetaTileEntityDrum NAQUADAH_ALLOY_DRUM;
-    public static MetaTileEntityDrum DARMSTADTIUM_DRUM;
-    public static MetaTileEntityDrum NEUTRONIUM_DRUM;
-    public static MetaTileEntityCrate RHODIUM_PLATED_PALLADIUM_CRATE;
-    public static MetaTileEntityCrate NAQUADAH_ALLOY_CRATE;
-    public static MetaTileEntityCrate DARMSTADTIUM_CRATE;
-    public static MetaTileEntityCrate NEUTRONIUM_CRATE;
 
     public static MetaTileEntityLargeOreWasher LARGE_ORE_WASHER;
     public static MetaTileEntityLargeThermalCentrifuge LARGE_THERMAL_CENTRIFUGE;
@@ -588,7 +545,6 @@ public class GTQTMetaTileEntities {
         LASER_FBT =registerMetaTileEntity(3085, new MetaTileEntityLaserBooster(gtqtcoreId("laser_fbt")));
         LASER_FBC = registerMetaTileEntity(3086, new MetaTileEntityLaserFusionCore(gtqtcoreId("laser_fbc")));
 
-
         LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
         LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
         LASER_SWITCH = registerMetaTileEntity(3092, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
@@ -770,8 +726,8 @@ public class GTQTMetaTileEntities {
         INDUSTRY_WATER_PUMP = registerMetaTileEntity(3407, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
 
         EXTREME_LARGE_MINER = registerMetaTileEntity(3420, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.zpm"), 7, 1, 9, 7, Materials.Naquadah, 64));
-        ULTIMATE_LARGE_MINER = registerMetaTileEntity(3421, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uv"), 8, 1, 18, 8, GCYSMaterials.Orichalcum, 128));
-        INFINITY_LARGE_MINER = registerMetaTileEntity(3422, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uhv"), 9, 1, 36, 9, GCYSMaterials.Adamantium, 256));
+        ULTIMATE_LARGE_MINER = registerMetaTileEntity(3421, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uv"), 8, 1, 18, 8, Orichalcum, 128));
+        INFINITY_LARGE_MINER = registerMetaTileEntity(3422, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uhv"), 9, 1, 36, 9, Adamantium, 256));
 
         ADVANCED_FLUID_DRILL_RIG = registerMetaTileEntity(3423, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.iv"), 5));
         EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(3424, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
@@ -868,16 +824,6 @@ public class GTQTMetaTileEntities {
         PBI_CAN = registerMetaTileEntity(14473, new MetaTileEntityPlasticCan(gtqtcoreId("drum.pbi"), Materials.Polybenzimidazole, 1024_000));
         KEVLAR_CAN= registerMetaTileEntity(14474, new MetaTileEntityPlasticCan(gtqtcoreId("drum.kevlar"), Kevlar, 2048_000));
 
-        RHODIUM_PLATED_PALLADIUM_DRUM = MetaTileEntities.registerMetaTileEntity(14480, new MetaTileEntityDrum(gtqtcoreId("drum.rhodium_plated_palladium"), Materials.RhodiumPlatedPalladium, 2_048_000));
-        NAQUADAH_ALLOY_DRUM = MetaTileEntities.registerMetaTileEntity(14481, new MetaTileEntityDrum(gtqtcoreId("drum.naquadah_alloy"), Materials.NaquadahAlloy, 4_096_000));
-        DARMSTADTIUM_DRUM = MetaTileEntities.registerMetaTileEntity(14482, new MetaTileEntityDrum(gtqtcoreId("drum.darmstadtium"), Materials.Darmstadtium, 8_192_000));
-        NEUTRONIUM_DRUM = MetaTileEntities.registerMetaTileEntity(14483, new MetaTileEntityDrum(gtqtcoreId("drum.neutronium"), Materials.Neutronium, 16_384_000));
-        // ID 14011-14020: Crates
-        RHODIUM_PLATED_PALLADIUM_CRATE = MetaTileEntities.registerMetaTileEntity(14490, new MetaTileEntityCrate(gtqtcoreId("crate.rhodium_plated_palladium"), Materials.RhodiumPlatedPalladium, 162));
-        NAQUADAH_ALLOY_CRATE = MetaTileEntities.registerMetaTileEntity(14491, new MetaTileEntityCrate(gtqtcoreId("crate.naquadah_alloy"), Materials.NaquadahAlloy, 180));
-        DARMSTADTIUM_CRATE = MetaTileEntities.registerMetaTileEntity(14492, new MetaTileEntityCrate(gtqtcoreId("crate.darmstadtium"), Materials.Darmstadtium, 198));
-        NEUTRONIUM_CRATE = MetaTileEntities.registerMetaTileEntity(14493, new MetaTileEntityCrate(gtqtcoreId("crate.neutronium"), Materials.Neutronium, 216));
-
         //小机器
         STEAM_VACUUM_CHAMBER[0] = registerMetaTileEntity(14500, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.bronze"), false));
         STEAM_VACUUM_CHAMBER[1] = registerMetaTileEntity(14501, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.steel"),true));
@@ -942,8 +888,6 @@ public class GTQTMetaTileEntities {
         FLUID_RUBBISH_BIN = registerMetaTileEntity(15105, new MetaTileEntityFluidRubbishBin(gtqtcoreId("fluid_rubbish_bin")));
         COMMON_RUBBISH_BIN = registerMetaTileEntity(15106, new MetaTileEntityCommonRubbishBin(gtqtcoreId("common_rubbish_bin")));
 
-        BUFFER[0] = MetaTileEntities.registerMetaTileEntity(15061, new MetaTileEntityBuffer(gtqtcoreId("buffer.ev"), GTValues.EV));
-        BUFFER[1] = MetaTileEntities.registerMetaTileEntity(15062, new MetaTileEntityBuffer(gtqtcoreId("buffer.iv"), GTValues.IV));
         //仓口
         for (int i = 1; i <= GTValues.V.length - 2; i++) {
             String tierName = GTValues.VN[i].toLowerCase();
@@ -1095,134 +1039,6 @@ public class GTQTMetaTileEntities {
         }
 
         PARTICLE_HATCH = registerMetaTileEntity(15620, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
-
-        //13000
-        //原版转子拓展
-        ROTOR_HOLDER[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uhv"), UHV));
-        ROTOR_HOLDER[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uev"), GTValues.UEV));
-        ROTOR_HOLDER[8] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uiv"), GTValues.UIV));
-        ROTOR_HOLDER[9] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.uxv"), GTValues.UXV));
-        ROTOR_HOLDER[10] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.opv"), GTValues.OpV));
-        ROTOR_HOLDER[11] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityRotorHolder(gtqtcoreId("rotor_holder.max"), GTValues.MAX));
-
-        /////////////////////////////////////////
-        //  ID 14000-14003: UEV-OpV 4A Energy Hatches.
-        INPUT_ENERGY_HATCH_4A[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uev"), UEV, 4, false));
-        INPUT_ENERGY_HATCH_4A[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uiv"), UIV, 4, false));
-        INPUT_ENERGY_HATCH_4A[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_4a.uxv"), UXV, 4, false));
-        INPUT_ENERGY_HATCH_4A[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_4a.opv"), OpV, 4, false));
-
-        //  ID 14004-14007: UEV-OpV 16A Energy Hatches.
-        INPUT_ENERGY_HATCH_16A[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uev"), UEV, 16, false));
-        INPUT_ENERGY_HATCH_16A[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uiv"), UIV, 16, false));
-        INPUT_ENERGY_HATCH_16A[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_16a.uxv"), UXV, 16, false));
-        INPUT_ENERGY_HATCH_16A[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.input_16a.opv"), OpV, 16, false));
-
-
-        //  ID 14008-14014: LV-HV and UEV-OpV 4A Dynamo Hatches.
-        OUTPUT_ENERGY_HATCH_4A[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.lv"), LV, 4, true));
-        OUTPUT_ENERGY_HATCH_4A[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.mv"), MV, 4, true));
-        OUTPUT_ENERGY_HATCH_4A[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.hv"), HV, 4, true));
-
-        OUTPUT_ENERGY_HATCH_4A[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uev"), UEV, 4, true));
-        OUTPUT_ENERGY_HATCH_4A[4] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uiv"), UIV, 4, true));
-        OUTPUT_ENERGY_HATCH_4A[5] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.uxv"), UXV, 4, true));
-        OUTPUT_ENERGY_HATCH_4A[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_4a.opv"), OpV, 4, true));
-
-
-        //  ID 14015-14022: LV-EV and UEV-OpV 16A Dynamo Hatches.
-        OUTPUT_ENERGY_HATCH_16A[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.lv"), LV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.mv"), MV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.hv"), HV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.ev"), EV, 16, true));
-
-        OUTPUT_ENERGY_HATCH_16A[4] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uev"), UEV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[5] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uiv"), UIV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.uxv"), UXV, 16, true));
-        OUTPUT_ENERGY_HATCH_16A[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedEnergyHatch(gtqtcoreId("energy_hatch.output_16a.opv"), OpV, 16, true));
-
-        SUBSTATION_INPUT_ENERGY_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.input_64a.uev"), UEV, 64, false));
-        SUBSTATION_INPUT_ENERGY_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.input_64a.uiv"), UIV, 64, false));
-        SUBSTATION_INPUT_ENERGY_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.input_64a.uxv"), UXV, 64, false));
-        SUBSTATION_INPUT_ENERGY_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.input_64a.opv"), OpV, 64, false));
-
-        SUBSTATION_OUTPUT_ENERGY_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.lv"), LV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.mv"), MV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.hv"), HV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.ev"), EV, 64, true));
-
-        SUBSTATION_OUTPUT_ENERGY_HATCH[4] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.uev"), UEV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[5] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.uiv"), UIV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[6] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.uxv"), UXV, 64, true));
-        SUBSTATION_OUTPUT_ENERGY_HATCH[7] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedSubstationEnergyHatch(gtqtcoreId("substation_hatch.output_64a.opv"), OpV, 64, true));
-
-
-        //  ID 14035-14111: IV-OpV 16384A, 65536A, 262144A, 1048576A Laser Target/Source Hatches.
-        for (int i = 0; i < (GregTechAPI.isHighTier() ? LASER_INPUT_HATCH_256.length - 1 : Math.min(LASER_INPUT_HATCH_256.length - 1, 4)); ++i) {
-            String voltageName = VN[i + 5].toLowerCase();
-            LASER_INPUT_HATCH_16384A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.target_16384a." + voltageName), i + 5, 16384, false));
-            LASER_INPUT_HATCH_65536A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.target_65536a." + voltageName), i + 5, 65536, false));
-            LASER_INPUT_HATCH_262144A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.target_262144a." + voltageName), i + 5, 262144, false));
-            LASER_INPUT_HATCH_1048576A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.target_1048576a." + voltageName), i + 5, 1048576, false));
-            LASER_OUTPUT_HATCH_16384A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.source_16384a." + voltageName), i + 5, 16384, true));
-            LASER_OUTPUT_HATCH_65536A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.source_65536a." + voltageName), i + 5, 65536, true));
-            LASER_OUTPUT_HATCH_262144A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.source_262144a." + voltageName), i + 5, 262144, true));
-            LASER_OUTPUT_HATCH_1048576A[i] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedLaserHatch(gtqtcoreId("laser_hatch.source_1048576a." + voltageName), i + 5, 1048576, true));
-        }
-
-        //  ID 14443-14446: UEV-OpV Item Import Hatches.
-        IMPORT_ITEM_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.import.uev"), UEV, false));
-        IMPORT_ITEM_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.import.uiv"), UIV, false));
-        IMPORT_ITEM_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.import.uxv"), UXV, false));
-        IMPORT_ITEM_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.import.opv"), OpV, false));
-
-
-        //  ID 14447-14450: UEV-OpV Item Export Hatches.
-        EXPORT_ITEM_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.export.uev"), UEV, true));
-        EXPORT_ITEM_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.export.uiv"), UIV, true));
-        EXPORT_ITEM_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.export.uxv"), UXV, true));
-        EXPORT_ITEM_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedItemBus(gtqtcoreId("item_hatch.export.opv"), OpV, true));
-
-
-        //  ID 14451-14454: UEV-OpV Fluid Import Hatches.
-        IMPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.import.uev"), UEV, false));
-        IMPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.import.uiv"), UIV, false));
-        IMPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.import.uxv"), UXV, false));
-        IMPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.import.opv"), OpV, false));
-
-
-        //  ID 14455-14458: UEV-OpV Fluid Export Hatches.
-        EXPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.export.uev"), UEV, true));
-        EXPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.export.uiv"), UIV, true));
-        EXPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.export.uxv"), UXV, true));
-        EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedFluidHatch(gtqtcoreId("fluid_hatch.export.opv"), OpV, true));
-
-        //  ID 14459-14462: UEV-OpV Quadruple Fluid Import Hatches.
-        QUADRUPLE_IMPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_4x.uev"), UEV, 4, false));
-        QUADRUPLE_IMPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_4x.uiv"), UIV, 4, false));
-        QUADRUPLE_IMPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_4x.uxv"), UXV, 4, false));
-        QUADRUPLE_IMPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_4x.opv"), OpV, 4, false));
-
-
-        //  ID 14463-14466: UEV-OpV Nonuple Fluid Import Hatches.
-        NONUPLE_IMPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_9x.uev"), UEV, 9, false));
-        NONUPLE_IMPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_9x.uiv"), UIV, 9, false));
-        NONUPLE_IMPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_9x.uxv"), UXV, 9, false));
-        NONUPLE_IMPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.import_9x.opv"), OpV, 9, false));
-
-
-        //  ID 14467-14470: UEV-OpV Quadruple Fluid Export Hatches.
-        QUADRUPLE_EXPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_4x.uev"), UEV, 4, true));
-        QUADRUPLE_EXPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_4x.uiv"), UIV, 4, true));
-        QUADRUPLE_EXPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_4x.uxv"), UXV, 4, true));
-        QUADRUPLE_EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_4x.opv"), OpV, 4, true));
-
-
-        //  ID 14471-14474: UEV-OpV Nonuple Fluid Export Hatches.
-        NONUPLE_EXPORT_FLUID_HATCH[0] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.uev"), UEV, 9, true));
-        NONUPLE_EXPORT_FLUID_HATCH[1] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.uiv"), UIV, 9, true));
-        NONUPLE_EXPORT_FLUID_HATCH[2] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.uxv"), UXV, 9, true));
-        NONUPLE_EXPORT_FLUID_HATCH[3] = registerMetaTileEntity(getMaterialsId(), new MetaTileEntityAdvancedMultiFluidHatch(gtqtcoreId("fluid_hatch.export_9x.opv"), OpV, 9, true));
 
         simpleTiredInit(CREATIVE_ENERGY_HATCHES, (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + GTValues.VN[i].toLowerCase()), i), GTQTMetaTileEntities::getMaterialsId);
     }

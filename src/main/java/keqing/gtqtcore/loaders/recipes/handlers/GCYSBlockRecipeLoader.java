@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.stack.UnificationEntry;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing2;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasingActive;
@@ -12,7 +13,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 
 public class GCYSBlockRecipeLoader {
 
@@ -21,7 +21,7 @@ public class GCYSBlockRecipeLoader {
         ModHandler.addShapedRecipe(true, "industrial_drill_head", GTQTMetaBlocks.blockMultiblockCasing2.getItemVariant(BlockMultiblockCasing2.CasingType.DRILL_HEAD),
                 "PGP", "MHM", "SSS",
                 'P', ELECTRIC_PISTON_UV.getStackForm(),
-                'G', new UnificationEntry(gear, Orichalcum),
+                'G', new UnificationEntry(gear, GTQTMaterials.Orichalcum),
                 'M', ELECTRIC_MOTOR_UV.getStackForm(),
                 'H', HULL[UV].getStackForm(),
                 'S', COMPONENT_GRINDER_TUNGSTEN.getStackForm()

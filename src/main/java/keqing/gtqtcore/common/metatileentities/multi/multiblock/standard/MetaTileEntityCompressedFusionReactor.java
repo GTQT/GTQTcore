@@ -195,7 +195,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                                 .stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getInputVoltage() == V[tier];
+                                    return container != null && container.getInputVoltage() <= V[tier];
                                 })
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(32)
@@ -205,17 +205,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                                 .stream()
                                 .filter(mte -> {
                                     if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
-
-                                        // 使用反射获取 tier 字段的值
-                                        Field tierField = null;
-                                        try {
-                                            tierField = MetaTileEntityLaserHatch.class.getDeclaredField("tier");
-                                        } catch (NoSuchFieldException ignored) {}
-                                        tierField.setAccessible(true); // 设置字段可访问
-                                        try {
-                                            int level = (int) tierField.get(laserHatch);
-                                            return level==tier;
-                                        } catch (IllegalAccessException ignored) {}
+                                        return laserHatch.getTier()<=tier;
                                     }
                                     return false;
                                 })

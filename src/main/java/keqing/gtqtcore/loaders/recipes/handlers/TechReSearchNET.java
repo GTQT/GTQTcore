@@ -41,10 +41,9 @@ import static gregtech.common.metatileentities.MetaTileEntities.LARGE_CHEMICAL_R
 import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtechfoodoption.machines.GTFOTileEntities.GREENHOUSE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;

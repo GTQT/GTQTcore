@@ -63,8 +63,8 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import java.util.Collections;
 import java.util.List;
 
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Orichalcum;
 
 public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase implements IMiner, IControllable, IDataInfoProvider {
 

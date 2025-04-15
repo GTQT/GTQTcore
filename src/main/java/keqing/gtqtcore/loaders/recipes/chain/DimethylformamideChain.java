@@ -5,7 +5,7 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.CarbonMonoxide;
 import static gregtech.api.unification.material.Materials.Dimethylamine;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Dimethylformamide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Dimethylformamide;
 
 public class DimethylformamideChain {
 

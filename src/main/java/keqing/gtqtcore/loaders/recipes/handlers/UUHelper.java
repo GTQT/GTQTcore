@@ -1,8 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import com.google.common.collect.ImmutableList;
 import gregtech.api.GregTechAPI;
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
@@ -13,7 +11,6 @@ import gregtech.common.blocks.BlockFusionCasing;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.loaders.recipe.CraftingComponent;
-import gregtech.loaders.recipe.MetaTileEntityLoader;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
@@ -21,9 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
 import static gregtech.api.GTValues.*;
@@ -37,10 +31,9 @@ import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.KaptonK;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Stellite;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockMultiblockCasing;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockMultiblockGlass;

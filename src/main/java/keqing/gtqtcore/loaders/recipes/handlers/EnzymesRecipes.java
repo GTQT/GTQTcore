@@ -14,7 +14,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Enzymesca;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;

@@ -14,7 +14,6 @@ import gregtech.api.unification.stack.MaterialStack;
 import gregtech.common.items.behaviors.ColorSprayBehaviour;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtech.common.items.behaviors.TooltipBehavior;
-import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.CommonProxy;
@@ -26,8 +25,8 @@ import net.minecraft.item.EnumDyeColor;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Orichalcum;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_BIO;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TO;
@@ -452,14 +451,14 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         // Simple Machine Crafting Components: ID 480-499
-        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(393, "component.grinder.boron_nitride").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.CubicBoronNitride, M * 4), new MaterialStack(GCYSMaterials.Vibranium, M * 8), new MaterialStack(GCYSMaterials.CubicHeterodiamond, M))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(393, "component.grinder.boron_nitride").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(CubicBoronNitride, M * 4), new MaterialStack(Vibranium, M * 8), new MaterialStack(CubicHeterodiamond, M))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         // Voltage Coils: ID 350-355
-        VOLTAGE_COIL_UHV = this.addItem(394, "voltage_coil.uhv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UEV = this.addItem(395, "voltage_coil.uev").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UIV = this.addItem(396, "voltage_coil.uiv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_UXV = this.addItem(397, "voltage_coil.uxv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_OpV = this.addItem(398, "voltage_coil.opv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
-        VOLTAGE_COIL_MAX = this.addItem(399, "voltage_coil.max").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GCYSMaterials.MercuryCadmiumTelluride, M * 2), new MaterialStack(GCYSMaterials.ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UHV = this.addItem(394, "voltage_coil.uhv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UEV = this.addItem(395, "voltage_coil.uev").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UIV = this.addItem(396, "voltage_coil.uiv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_UXV = this.addItem(397, "voltage_coil.uxv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_OpV = this.addItem(398, "voltage_coil.opv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
+        VOLTAGE_COIL_MAX = this.addItem(399, "voltage_coil.max").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(CommonProxy.GTQTCore_TAB);
         //封装电路板
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv").setCreativeTabs(CommonProxy.GTQTCore_TAB);
         WRAP_CIRCUIT_LV = this.addItem(401, "wrap.circuit.lv").setCreativeTabs(CommonProxy.GTQTCore_TAB);

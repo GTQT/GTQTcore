@@ -65,7 +65,7 @@ import static gregtech.api.unification.material.Materials.Gold;
 import static gregtech.api.unification.material.Materials.Silver;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SiliconCarbide;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;

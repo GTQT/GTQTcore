@@ -7,12 +7,11 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import static gregtech.api.unification.material.Materials.Hafnium;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.SodiumFluoride;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumFluoride;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 

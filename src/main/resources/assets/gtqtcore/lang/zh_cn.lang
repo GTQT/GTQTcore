@@ -6563,7 +6563,7 @@ gui.multiblock_distinct_disabled=关闭隔离
 gui.auto_parallel_mode=自动并行模式
 gui.manual_parallel_mode=手动并行模式
 gui.max_sustain=最大自持: %s（tick）
-gui.overclock_first_mode=超频模式:
+gui.overclock_first_mode=超频模式:%s
 gui.parallel_first_mode=并行模式
 # Advancements
 gtqtcore.advancement.lv.1_electrobath.name=工业电解槽

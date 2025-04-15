@@ -17,7 +17,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.SodiumSulfate;
 import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class OilChains {

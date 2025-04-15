@@ -2,7 +2,6 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 
 
-import gregtech.api.recipes.ModHandler;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 
@@ -15,7 +14,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static java.util.Calendar.SECOND;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.boule;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.seedCrystal;

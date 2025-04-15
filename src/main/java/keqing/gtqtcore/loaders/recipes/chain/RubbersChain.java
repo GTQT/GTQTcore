@@ -9,9 +9,7 @@ import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 
 public class RubbersChain {

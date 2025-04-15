@@ -6584,7 +6584,7 @@ gui.multiblock_distinct_disabled=Distinct disabled
 gui.auto_parallel_mode=Auto Parallel Mode
 gui.manual_parallel_mode=Manual Parallel Mode
 gui.max_sustain=Max Sustain: %s (ticks)
-gui.overclock_first_mode=Overclock Mode:
+gui.overclock_first_mode=Overclock Mode:%s
 gui.parallel_first_mode=Parallel Mode
 # Advancements
 gtqtcore.advancement.lv.1_electrobath.name=Industrial electrolyzers

@@ -72,10 +72,6 @@ public class GTQTRecipesManager {
         SuperconductorRecipes.init();
         CaliforniumChain.init();
         TitanateChain.init();
-        EnergyHatches.init();
-        FluidHatches.init();
-        MultiFluidHatches.init();
-        ItemBuses.init();
         NuclearLine.init();
         OceanChain.init();
         MagnetoResonaticCircuits.init();
@@ -154,8 +150,6 @@ public class GTQTRecipesManager {
         SwarmRecipeHandler.runRecipeBreeding();
         CircuitryMaterialChains.init();
         OilChains.init();
-        DrumRecipes.init();
-        CrateRecipes.init();
         PCBline.init();
         NanotubesChain.init();
         initCircuits();

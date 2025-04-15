@@ -10,7 +10,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;

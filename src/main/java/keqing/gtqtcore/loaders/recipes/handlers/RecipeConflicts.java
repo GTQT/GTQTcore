@@ -9,7 +9,6 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Hematite;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CopperCl;
 
 public class RecipeConflicts {

@@ -9,9 +9,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.PETRI_DISH;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.VZ;
 

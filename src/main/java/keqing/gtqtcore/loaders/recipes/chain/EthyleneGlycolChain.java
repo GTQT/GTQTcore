@@ -7,8 +7,8 @@ import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.EthyleneGlycol;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.EthyleneOxide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.EthyleneGlycol;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.EthyleneOxide;
 
 public class EthyleneGlycolChain {
 

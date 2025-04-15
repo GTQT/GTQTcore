@@ -8,7 +8,7 @@ import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.Graphite;
 import static gregtech.api.unification.material.Materials.Silicon;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.SiliconCarbide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SiliconCarbide;
 
 /**
  * Adds recipes for simple materials with few steps

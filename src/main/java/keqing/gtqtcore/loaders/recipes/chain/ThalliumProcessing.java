@@ -1,7 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import keqing.gtqtcore.api.unification.GTQTMaterials;
+
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.HV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.ELECTROLYZER_RECIPES;
@@ -29,7 +30,7 @@ public class ThalliumProcessing {
                 .input(dust, Pyrite, 3)
                 .fluidInputs(Oxygen.getFluid(6000))
                 .output(ingot, Iron)
-                .output(dust, ThalliumSulfate, 7)
+                .output(dust, GTQTMaterials.ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
                 .temperature(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
@@ -39,14 +40,14 @@ public class ThalliumProcessing {
                 .input(dust, Galena, 4)
                 .fluidInputs(Oxygen.getFluid(6000))
                 .output(ingot, Lead, 2)
-                .output(dust, ThalliumSulfate, 7)
+                .output(dust, GTQTMaterials.ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
                 .temperature(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // Tl2SO4 + H2O -> 2Th + H2SO4 + O
         ELECTROLYZER_RECIPES.recipeBuilder()
-                .input(dust, ThalliumSulfate, 7)
+                .input(dust, GTQTMaterials.ThalliumSulfate, 7)
                 .fluidInputs(Water.getFluid(1000))
                 .circuitMeta(2)
                 .output(dust, Thallium, 2)

@@ -12,16 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.LARGE_CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISION_SPINNING;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class NanoCoatingRecipes {

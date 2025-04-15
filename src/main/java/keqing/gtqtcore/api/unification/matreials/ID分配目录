@@ -1,22 +1,20 @@
+ElementMaterials 元素 注册200位
+0-200
 
-GCYSElementMaterials 3100-3499
+FirstDegreeMaterials 第一类化合物 注册1800位
+200-2000
 
-GCYSFirstDegreeMaterials 3500-5999
+SecondDegreeMaterials 第二类化合物 注册2000位
+2000-4000
 
-GCYSOrganicChemistryMaterials 15000-17999
+HigherDegreeMaterials 第三类复合化合物/混合物 注册2000位
+4000-6000
 
-GCYSSecondDegreeMaterials 6000-8999
+MachineCasingMaterials 机器外壳材料/复杂合金 注册2000位
+6000-8000
 
-GCYSUnknownCompositionMaterials  18000-19999
+UnknownCompositionMaterials 无组分材料 注册2000位
+8000-10000
+【8000-8100 艾萨浮选泡沫】
 
-FirstDegreeMaterials 20000+1000;
-
-GTQTElementMaterials 28000+100;
-
-GTQTMachineCasingMaterials 24501-25000
-
-SecondDegreeMaterials 21000+1000;
-
-HigherDegreeMaterials 20600+300;
-
-TJFirstDegreeMaterials 25000
+当然不按照这么写也行，只要不冲突

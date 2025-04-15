@@ -8,8 +8,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ELECTROBATH;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Alumina;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.AluminiumHydroxide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Alumina;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.AluminiumHydroxide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class AluminiumLine {

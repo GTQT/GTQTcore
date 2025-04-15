@@ -6,13 +6,11 @@ import gregtech.api.unification.stack.UnificationEntry;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class ComponentRecipes {

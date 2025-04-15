@@ -322,7 +322,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     }
 
     protected void addOC(List<ITextComponent> textList) {
-        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode",Overclocking));
+        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode",+Overclocking));
         else textList.add(new TextComponentTranslation("gui.parallel_first_mode"));
     }
 

@@ -7,7 +7,6 @@ import gregtech.api.unification.OreDictUnifier;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SFM;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;

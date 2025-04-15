@@ -57,8 +57,8 @@ import static gregtech.api.unification.material.Materials.DistilledWater;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_PAF_CASING;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.HydrogenSilsesquioxane;
-import static keqing.gtqtcore.api.unification.TJMaterials.SU8_Photoresist;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.HydrogenSilsesquioxane;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SU8_Photoresist;
 
 public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWithControl {
 

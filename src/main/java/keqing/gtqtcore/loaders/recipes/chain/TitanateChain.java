@@ -2,7 +2,6 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
-import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -12,10 +11,9 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.BariumOxide;
-import static keqing.gtqtcore.api.unification.TJMaterials.SodiumAcetate;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.BariumOxide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumAcetate;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_I;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_II;
 
 public class TitanateChain {
     public static void init() {

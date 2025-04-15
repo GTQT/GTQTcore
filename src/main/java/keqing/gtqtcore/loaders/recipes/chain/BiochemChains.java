@@ -1,8 +1,8 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import keqing.gtqtcore.api.unification.GTQTMaterials;
+
 import static gregtechfoodoption.GTFOMaterialHandler.PerchloricAcid;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -11,7 +11,6 @@ import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static gregtech.common.items.MetaItems.STICKY_RESIN;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PR_MIX;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Latex;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
 public class BiochemChains {
 
@@ -169,77 +168,77 @@ public class BiochemChains {
                 .EUt(VA[EV])
                 .input(dust, Potassium)
                 .fluidInputs(Hydrogen.getFluid(1000))
-                .output(dust, PotassiumHydride, 2)
+                .output(dust, GTQTMaterials.PotassiumHydride, 2)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .fluidInputs(Acrylonitrile.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Acrylonitrile.getFluid(1000))
                 .fluidInputs(Ammonia.getFluid(1000))
-                .fluidOutputs(Aminopropionitrile.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Aminopropionitrile.getFluid(1000))
                 .buildAndRegister();
 
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
                 .circuitMeta(1)
-                .fluidInputs(Aminopropionitrile.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Aminopropionitrile.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(4000))
                 .notConsumable(dust, Nickel)
                 .notConsumable(dust, Aluminium)
-                .fluidOutputs(Aminopropylamine.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Aminopropylamine.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, PotassiumHydride, 2)
-                .fluidInputs(Aminopropylamine.getFluid(1000))
-                .fluidOutputs(KAPA.getFluid(1000))
+                .input(dust, GTQTMaterials.PotassiumHydride, 2)
+                .fluidInputs(GTQTMaterials.Aminopropylamine.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.KAPA.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, BetaPinene, 26)
-                .notConsumable(KAPA.getFluid(1))
-                .output(dust, AlphaPinene, 26)
+                .input(dust, GTQTMaterials.BetaPinene, 26)
+                .notConsumable(GTQTMaterials.KAPA.getFluid(1))
+                .output(dust, GTQTMaterials.AlphaPinene, 26)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, AlphaPinene, 26)
+                .input(dust, GTQTMaterials.AlphaPinene, 26)
                 .notConsumable(SulfuricAcid.getFluid(1))
-                .output(dust, Camphene, 26)
+                .output(dust, GTQTMaterials.Camphene, 26)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, Camphene, 26)
+                .input(dust, GTQTMaterials.Camphene, 26)
                 .fluidInputs(AceticAcid.getFluid(1000))
                 .notConsumable(HydrochloricAcid.getFluid(1))
-                .output(dust, IsobornylAcetate, 34)
+                .output(dust, GTQTMaterials.IsobornylAcetate, 34)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, IsobornylAcetate, 34)
+                .input(dust, GTQTMaterials.IsobornylAcetate, 34)
                 .input(dust, SodiumHydroxide, 3)
-                .output(dust, Isoborneol, 29)
-                .fluidOutputs(SodiumAcetate.getFluid(1000))
+                .output(dust, GTQTMaterials.Isoborneol, 29)
+                .fluidOutputs(GTQTMaterials.SodiumAcetate.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, Isoborneol, 29)
-                .notConsumable(dust, DehydrogenationCatalyst)
-                .output(dust, Isoborneol, 26)
+                .input(dust, GTQTMaterials.Isoborneol, 29)
+                .notConsumable(dust, GTQTMaterials.DehydrogenationCatalyst)
+                .output(dust, GTQTMaterials.Isoborneol, 26)
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
     }
@@ -248,16 +247,16 @@ public class BiochemChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, SodiumChlorate)
+                .input(dust, GTQTMaterials.SodiumChlorate)
                 .fluidInputs(Water.getFluid(1000))
-                .output(dust, SodiumPerchlorate)
+                .output(dust, GTQTMaterials.SodiumPerchlorate)
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, SodiumPerchlorate, 6)
+                .input(dust, GTQTMaterials.SodiumPerchlorate, 6)
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .output(dust, Salt, 2)
                 .fluidOutputs(PerchloricAcid.getFluid(1000))
@@ -266,35 +265,35 @@ public class BiochemChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, SodiumNitrate, 4)
-                .fluidInputs(Aniline.getFluid(1000))
+                .input(dust, GTQTMaterials.SodiumNitrate, 4)
+                .fluidInputs(GTQTMaterials.Aniline.getFluid(1000))
                 .fluidInputs(HydrochloricAcid.getFluid(1000))
                 .notConsumable(dust, SodiumSulfide)
                 .output(dust, Salt, 2)
-                .fluidOutputs(Phenylhydrazine.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Phenylhydrazine.getFluid(1000))
                 .fluidOutputs(Oxygen.getFluid(1000))
                 .buildAndRegister();
 
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(265)
                 .EUt(VA[LuV])
-                .fluidInputs(FormicAcid.getFluid(1000))
+                .fluidInputs(GTQTMaterials.FormicAcid.getFluid(1000))
                 .fluidInputs(PerchloricAcid.getFluid(1000)) //TODO: RECIPE
-                .fluidInputs(BenzoylChloride.getFluid(1000)) //TODO: RECIPE
-                .fluidInputs(Aniline.getFluid(1000))
-                .fluidInputs(Phenylhydrazine.getFluid(1000))
+                .fluidInputs(GTQTMaterials.BenzoylChloride.getFluid(1000)) //TODO: RECIPE
+                .fluidInputs(GTQTMaterials.Aniline.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Phenylhydrazine.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
                 .fluidOutputs(Water.getFluid(1000))
-                .output(dust, TriphenylMethoxytriazoylPerchlorate, 44)
+                .output(dust, GTQTMaterials.TriphenylMethoxytriazoylPerchlorate, 44)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, TriphenylMethoxytriazoylPerchlorate, 44)
-                .input(dust, SodiumMethoxide, 6)
-                .output(dust, TriphenylMethoxytriazole, 44)
-                .output(dust, SodiumPerchlorate, 6)
+                .input(dust, GTQTMaterials.TriphenylMethoxytriazoylPerchlorate, 44)
+                .input(dust, GTQTMaterials.SodiumMethoxide, 6)
+                .output(dust, GTQTMaterials.TriphenylMethoxytriazole, 44)
+                .output(dust, GTQTMaterials.SodiumPerchlorate, 6)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
@@ -302,7 +301,7 @@ public class BiochemChains {
                 .EUt(VA[EV])
                 .input(dust, Sodium)
                 .fluidInputs(Methanol.getFluid(1000))
-                .output(dust, SodiumMethoxide, 6)
+                .output(dust, GTQTMaterials.SodiumMethoxide, 6)
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .buildAndRegister();
     }
@@ -313,28 +312,28 @@ public class BiochemChains {
                 .EUt(VA[EV])
                 .fluidInputs(Nitrobenzene.getFluid(1000))
                 .fluidInputs(Chlorine.getFluid(2000))
-                .fluidOutputs(MetaNitrochlorobenzine.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.MetaNitrochlorobenzine.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, SodiumMethoxide, 6)
-                .fluidInputs(MetaNitrochlorobenzine.getFluid(1000))
+                .input(dust, GTQTMaterials.SodiumMethoxide, 6)
+                .fluidInputs(GTQTMaterials.MetaNitrochlorobenzine.getFluid(1000))
                 .output(dust, Salt, 2)
-                .fluidOutputs(Nitroanisole.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Nitroanisole.getFluid(1000))
                 .buildAndRegister();
 
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
                 .circuitMeta(2)
-                .fluidInputs(Nitroanisole.getFluid(1000))
+                .fluidInputs(GTQTMaterials.Nitroanisole.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .notConsumable(dust, Nickel)
                 .notConsumable(dust, Aluminium)
-                .fluidOutputs(Aniline.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Aniline.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
                 .buildAndRegister();
 
@@ -343,7 +342,7 @@ public class BiochemChains {
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .fluidInputs(Nitrobenzene.getFluid(1000))
                 .notConsumable(dust, Zinc)
-                .fluidOutputs(Aniline.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Aniline.getFluid(1000))
                 .fluidOutputs(Water.getFluid(2000))
                 .EUt(30)
                 .duration(100)

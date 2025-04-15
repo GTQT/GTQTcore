@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Hematite;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Hematite;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static supercritical.api.unification.material.SCMaterials.*;
 

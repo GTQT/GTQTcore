@@ -2,11 +2,11 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -45,9 +45,9 @@ public class MolybdenumProcessing {
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, Molybdenite, 3)
                 .fluidInputs(Oxygen.getFluid(8000))
-                .output(dust, MolybdenumTrioxide, 4)
+                .output(dust, GTQTMaterials.MolybdenumTrioxide, 4)
                 .fluidOutputs(SulfurDioxide.getFluid(2000))
-                .fluidOutputs(MolybdenumFlue.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.MolybdenumFlue.getFluid(1000))
                 .duration(200)
                 .EUt(VA[MV])
                 .temperature(2700)
@@ -55,7 +55,7 @@ public class MolybdenumProcessing {
 
         // MoO3 + 6H -> Mo + 3H2O
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, MolybdenumTrioxide, 4)
+                .input(dust, GTQTMaterials.MolybdenumTrioxide, 4)
                 .fluidInputs(Hydrogen.getFluid(6000))
                 .output(dust, Molybdenum)
                 .fluidOutputs(Water.getFluid(3000))
@@ -67,7 +67,7 @@ public class MolybdenumProcessing {
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(dust, Powellite, 6)
                 .fluidInputs(HydrochloricAcid.getFluid(2000))
-                .output(dust, MolybdenumTrioxide, 4)
+                .output(dust, GTQTMaterials.MolybdenumTrioxide, 4)
                 .output(dust, CalciumChloride, 3)
                 .fluidOutputs(Water.getFluid(1000))
                 .duration(200)
@@ -78,8 +78,8 @@ public class MolybdenumProcessing {
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(dust, Wulfenite, 6)
                 .fluidInputs(HydrochloricAcid.getFluid(2000))
-                .output(dust, MolybdenumTrioxide, 4)
-                .output(dust, LeadChloride, 3)
+                .output(dust, GTQTMaterials.MolybdenumTrioxide, 4)
+                .output(dust, GTQTMaterials.LeadChloride, 3)
                 .fluidOutputs(Water.getFluid(1000))
                 .duration(200)
                 .EUt(VA[HV])
@@ -88,32 +88,32 @@ public class MolybdenumProcessing {
 
     private static void rhenium() {
         CENTRIFUGE_RECIPES.recipeBuilder()
-                .fluidInputs(MolybdenumFlue.getFluid(1000))
-                .output(dust, MolybdenumTrioxide)
-                .fluidOutputs(TraceRheniumFlue.getFluid(500))
+                .fluidInputs(GTQTMaterials.MolybdenumFlue.getFluid(1000))
+                .output(dust, GTQTMaterials.MolybdenumTrioxide)
+                .fluidOutputs(GTQTMaterials.TraceRheniumFlue.getFluid(500))
                 .duration(200).EUt(60).buildAndRegister();
 
         // ReO2 + Na2CO3 + NaOH + 3Cl -> HReO4 + 3NaCl + CO2
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, SodaAsh, 6)
                 .input(dust, SodiumHydroxide, 3)
-                .fluidInputs(TraceRheniumFlue.getFluid(1000))
+                .fluidInputs(GTQTMaterials.TraceRheniumFlue.getFluid(1000))
                 .fluidInputs(Chlorine.getFluid(3000))
-                .output(dust, PerrhenicAcid, 6)
+                .output(dust, GTQTMaterials.PerrhenicAcid, 6)
                 .output(dust, Salt, 6)
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .duration(100).EUt(VA[IV]).buildAndRegister();
 
         // HReO4 + NH3 -> NH4ReO4
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, PerrhenicAcid, 6)
+                .input(dust, GTQTMaterials.PerrhenicAcid, 6)
                 .fluidInputs(Ammonia.getFluid(1000))
-                .output(dust, AmmoniumPerrhenate, 10)
+                .output(dust, GTQTMaterials.AmmoniumPerrhenate, 10)
                 .duration(100).EUt(VA[EV]).buildAndRegister();
 
         // NH4ReO4 + H2S + Cl -> Re + NH4Cl + H2SO4 +
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, AmmoniumPerrhenate, 10)
+                .input(dust, GTQTMaterials.AmmoniumPerrhenate, 10)
                 .fluidInputs(HydrogenSulfide.getFluid(1000))
                 .fluidInputs(Chlorine.getFluid(1000))
                 .output(dust, Rhenium)

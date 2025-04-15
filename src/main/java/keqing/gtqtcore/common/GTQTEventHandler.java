@@ -2,10 +2,8 @@ package keqing.gtqtcore.common;
 
 import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.unification.material.event.MaterialEvent;
-import keqing.gtqtcore.api.unification.GCYSMaterials;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
-import keqing.gtqtcore.api.unification.TJMaterials;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.loaders.recipes.handlers.OreRecipeHandler;
 import net.minecraft.block.SoundType;
@@ -51,8 +49,6 @@ public class GTQTEventHandler {
             priority = EventPriority.HIGH
     )
     public static void registerMaterials(MaterialEvent event) {
-        TJMaterials.register();
-        GCYSMaterials.init();
         GTQTMaterials.register();
         OrePrefixAdditions.init();
     }

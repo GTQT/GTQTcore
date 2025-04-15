@@ -2,22 +2,19 @@ package keqing.gtqtcore.loaders.recipes.circuits;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
-import gregtech.common.items.MetaItems;
-import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.SHAPE_EXTRUDER_WIRE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.ElectrolyteReflectorMixture;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 public class OpticalCircuits {

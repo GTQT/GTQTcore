@@ -22,6 +22,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -119,7 +120,20 @@ public class MetaTileEntityHyperReactorMkIII extends FuelMultiblockController im
                                     return container != null && container.getOutputVoltage() == GTValues.V[UXV];})
                                 .toArray(MetaTileEntity[]::new))
                                 .setExactLimit(1)
-                                .setPreviewCount(1)))
+                                .setPreviewCount(1))
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_LASER)
+                                .stream()
+                                .filter(mte -> {
+                                    if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
+                                        return laserHatch.getTier()== GTValues.V[UXV];
+                                    }
+                                    return false;
+                                })
+                                .toArray(MetaTileEntity[]::new))
+                                .setMaxGlobalLimited(1)
+                                .setPreviewCount(1)
+                        )
+                )
                 .where('F', states(getFrameState()))
                 .where('H', states(getUniqueCasingState()))
                 .where('G', states(getGlassState()))

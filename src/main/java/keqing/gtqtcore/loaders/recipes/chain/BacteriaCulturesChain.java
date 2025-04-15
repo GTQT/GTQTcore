@@ -16,11 +16,9 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.PETRI_DISH;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_CYLINDER;
 import static gregtechfoodoption.GTFOMaterialHandler.Blood;
-import static keqing.gtqtcore.api.GCYSValues.HV;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class BacteriaCulturesChain {

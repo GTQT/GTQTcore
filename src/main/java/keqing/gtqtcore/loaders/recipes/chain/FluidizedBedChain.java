@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.ZincOxide;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.ZincOxide;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;

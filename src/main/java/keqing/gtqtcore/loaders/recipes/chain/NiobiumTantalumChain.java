@@ -5,12 +5,11 @@ import gregtech.api.unification.ore.OrePrefix;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.PotassiumFluorideRefractoryMixture;
-import static keqing.gtqtcore.api.unification.TJMaterials.SodiumFluoride;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.PotassiumFluorideRefractoryMixture;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumFluoride;
 
 /**
  * The Niobium-Tantalum Process

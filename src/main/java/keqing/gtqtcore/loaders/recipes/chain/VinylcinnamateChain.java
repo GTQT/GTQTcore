@@ -8,10 +8,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_I;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_III;
 
 public class VinylcinnamateChain {
     public static void init() {

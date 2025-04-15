@@ -17,8 +17,8 @@ import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Adamantium;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Vibranium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Adamantium;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Vibranium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 

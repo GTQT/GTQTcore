@@ -1,6 +1,7 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
+
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.DISTILLATION_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.MIXER_RECIPES;
@@ -14,27 +15,27 @@ public class MethylamineChain {
                 .input(dust, Kyanite)
                 .fluidInputs(Methanol.getFluid(2000))
                 .fluidInputs(Ammonia.getFluid(1000))
-                .fluidOutputs(MethylamineMixture.getFluid(3000))
+                .fluidOutputs(GTQTMaterials.MethylamineMixture.getFluid(3000))
                 .duration(1000)
                 .EUt(VA[HV])
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
-                .input(dust, Alumina)
+                .input(dust, GTQTMaterials.Alumina)
                 .input(dust, SiliconDioxide)
                 .fluidInputs(Methanol.getFluid(2000))
                 .fluidInputs(Ammonia.getFluid(1000))
-                .fluidOutputs(MethylamineMixture.getFluid(3000))
+                .fluidOutputs(GTQTMaterials.MethylamineMixture.getFluid(3000))
                 .duration(1000)
                 .EUt(VA[HV])
                 .buildAndRegister();
 
         // 6CH3OH + 3NH3 -> CH3NH2 + (CH3)2NH2 + (CH3)3NH2 + 3H2O
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(MethylamineMixture.getFluid(9000))
-                .fluidOutputs(Methylamine.getFluid(1000))
+                .fluidInputs(GTQTMaterials.MethylamineMixture.getFluid(9000))
+                .fluidOutputs(GTQTMaterials.Methylamine.getFluid(1000))
                 .fluidOutputs(Dimethylamine.getFluid(1000))
-                .fluidOutputs(Trimethylamine.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.Trimethylamine.getFluid(1000))
                 .fluidOutputs(Water.getFluid(3000))
                 .duration(1000)
                 .EUt(VA[LuV])

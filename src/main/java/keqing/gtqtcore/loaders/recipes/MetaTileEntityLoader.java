@@ -63,7 +63,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUA
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.BUFFER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MACHINE_HATCH;
@@ -76,13 +75,7 @@ import static supercritical.common.metatileentities.SCMetaTileEntities.DECAY_CHA
 
 
 public class MetaTileEntityLoader {
-    public static CraftingComponent.Component SXA_HULL;
-
     public static void init() {
-
-        SXA_HULL = new CraftingComponent.Component(Stream.of(new Object[]{0, HULL[0].getStackForm()}, new Object[]{1, OUTPUT_ENERGY_HATCH_16A[0].getStackForm()}, new Object[]{2, OUTPUT_ENERGY_HATCH_16A[1].getStackForm()}, new Object[]{3, OUTPUT_ENERGY_HATCH_16A[2].getStackForm()}, new Object[]{4, OUTPUT_ENERGY_HATCH_16A[3].getStackForm()}, new Object[]{5, ENERGY_OUTPUT_HATCH_16A[0].getStackForm()}, new Object[]{6, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[1].getStackForm()}, new Object[]{7, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[2].getStackForm()}, new Object[]{8, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[3].getStackForm()}, new Object[]{9, MetaTileEntities.ENERGY_OUTPUT_HATCH_16A[4].getStackForm()}, new Object[]{10, OUTPUT_ENERGY_HATCH_16A[4].getStackForm()}, new Object[]{11, OUTPUT_ENERGY_HATCH_16A[5].getStackForm()}, new Object[]{12, OUTPUT_ENERGY_HATCH_16A[6].getStackForm()}, new Object[]{13, OUTPUT_ENERGY_HATCH_16A[7].getStackForm()}).collect(Collectors.toMap((data) -> (Integer) data[0], (data) -> data[1])));
-
-
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(plate_big, Steel, 32)
                 .input(stick, Steel, 16)
@@ -481,22 +474,6 @@ public class MetaTileEntityLoader {
                 .circuitMeta(11)
                 .output(COMMON_RUBBISH_BIN)
                 .duration(20).EUt(30).buildAndRegister();
-
-        // EV Buffer
-        ModHandler.addShapedRecipe(true, "buffer_ev", BUFFER[0].getStackForm(),
-                "HP ", "XC ", "   ",
-                'H', HULL[EV].getStackForm(),
-                'P', ELECTRIC_PUMP_EV,
-                'C', CONVEYOR_MODULE_EV,
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
-
-        // IV Buffer
-        ModHandler.addShapedRecipe(true, "buffer_iv", BUFFER[1].getStackForm(),
-                "HP ", "XC ", "   ",
-                'H', HULL[IV].getStackForm(),
-                'P', ELECTRIC_PUMP_IV,
-                'C', CONVEYOR_MODULE_IV,
-                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
 
         //海藻方块
         ASSEMBLER_RECIPES.recipeBuilder()
@@ -1245,7 +1222,7 @@ public class MetaTileEntityLoader {
         gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe(true, MICROWAVE_ENERGY_RECEIVER,
                 "PCP", "EHE", "PCP",
                 'E', CraftingComponent.EMITTER,
-                'H', SXA_HULL,
+                'H', CraftingComponent.HULL,
                 'P', CraftingComponent.SENSOR,
                 'C', CraftingComponent.CIRCUIT);
 

@@ -1,15 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
 
-import gregtech.api.metatileentity.multiblock.CleanroomType;
-
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.UEV;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Titanium;
-import static gregtechfoodoption.GTFOMaterialHandler.Blood;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class FusionLoader {

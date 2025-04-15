@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -12,7 +13,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.SodiumChlorate;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.HexachloroplatinicAcid;
 
 /**
@@ -112,17 +112,17 @@ public class PlatinumGroupProcessing {
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(dust, PlatinumGroupSludge, 3)
                 .fluidInputs(AquaRegia.getFluid(9000))
-                .output(dust, PlatinumGroupResidue)
-                .fluidOutputs(PlatinumGroupConcentrate.getFluid(1000))
+                .output(dust, GTQTMaterials.PlatinumGroupResidue)
+                .fluidOutputs(GTQTMaterials.PlatinumGroupConcentrate.getFluid(1000))
                 .duration(100)
                 .EUt(60)
                 .buildAndRegister();
 
         //  AuPtPd(HCl)6 -> H2PtPdCl6 + Au + 4H (H lost)
         CENTRIFUGE_RECIPES.recipeBuilder()
-                .fluidInputs(PlatinumGroupConcentrate.getFluid(1000))
+                .fluidInputs(GTQTMaterials.PlatinumGroupConcentrate.getFluid(1000))
                 .output(dust, PlatinumSludgeResidue)
-                .fluidOutputs(PurifiedPlatinumGroupConcentrate.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.PurifiedPlatinumGroupConcentrate.getFluid(1000))
                 .duration(100)
                 .EUt(VA[LV])
                 .buildAndRegister();
@@ -139,9 +139,9 @@ public class PlatinumGroupProcessing {
         //  H2PtPdCl6 + 2NH4Cl -> 0.625 (NH4)2PtCl6 + 0.375 (NH4)2PdCl6 + 2HCl
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, AmmoniumChloride, 4)
-                .fluidInputs(PurifiedPlatinumGroupConcentrate.getFluid(1000))
-                .fluidOutputs(AmmoniumHexachloroplatinate.getFluid(625))
-                .fluidOutputs(AmmoniumHexachloropalladate.getFluid(375))
+                .fluidInputs(GTQTMaterials.PurifiedPlatinumGroupConcentrate.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.AmmoniumHexachloroplatinate.getFluid(625))
+                .fluidOutputs(GTQTMaterials.AmmoniumHexachloropalladate.getFluid(375))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .duration(100)
                 .EUt(VA[HV])
@@ -149,11 +149,11 @@ public class PlatinumGroupProcessing {
 
         //  RuRhIr2Os(HNO3)3 + 3NaHSO4 -> RhRu + Ir2Os + 3NaNO3 + 3H2SO4
         CHEMICAL_BATH_RECIPES.recipeBuilder()
-                .input(dust, PlatinumGroupResidue)
+                .input(dust, GTQTMaterials.PlatinumGroupResidue)
                 .fluidInputs(SodiumBisulfate.getFluid(L * 21))
                 .output(dust, InertMetalMixture)
                 .output(dust, RarestMetalMixture)
-                .output(dust, SodiumNitrate, 5)
+                .output(dust, GTQTMaterials.SodiumNitrate, 5)
                 .fluidOutputs(SulfuricAcid.getFluid(3000))
                 .duration(200)
                 .EUt(240)
@@ -164,7 +164,7 @@ public class PlatinumGroupProcessing {
 
         //  (NH4)2PtCl6 -> H2PtCl6 + 2NH3
         ELECTROLYZER_RECIPES.recipeBuilder()
-                .fluidInputs(AmmoniumHexachloroplatinate.getFluid(1000))
+                .fluidInputs(GTQTMaterials.AmmoniumHexachloroplatinate.getFluid(1000))
                 .fluidOutputs(HexachloroplatinicAcid.getFluid(1000))
                 .fluidOutputs(Ammonia.getFluid(2000))
                 .duration(120)
@@ -178,7 +178,7 @@ public class PlatinumGroupProcessing {
 
         //  (NH4)2PdCl6 + 2H -> PdCl2 + 2NH3 + 4HCl
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(AmmoniumHexachloropalladate.getFluid(1000))
+                .fluidInputs(GTQTMaterials.AmmoniumHexachloropalladate.getFluid(1000))
                 .fluidInputs(Hydrogen.getFluid(2000))
                 .output(dust, PalladiumRaw, 3)
                 .fluidOutputs(Ammonia.getFluid(2000))
@@ -192,16 +192,16 @@ public class PlatinumGroupProcessing {
                 .notConsumable(dust, SodiumHydroxide)
                 .fluidInputs(Methanol.getFluid(1000))
                 .fluidInputs(CarbonMonoxide.getFluid(1000))
-                .fluidOutputs(MethylFormate.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.MethylFormate.getFluid(1000))
                 .duration(16)
                 .EUt(VA[LV])
                 .buildAndRegister();
 
         //  HCO2CH3 + H2O -> HCOOH + CH3OH
         BURNER_REACTOR_RECIPES.recipeBuilder()
-                .fluidInputs(MethylFormate.getFluid(1000))
+                .fluidInputs(GTQTMaterials.MethylFormate.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
-                .fluidOutputs(FormicAcid.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.FormicAcid.getFluid(1000))
                 .fluidOutputs(Methanol.getFluid(1000))
                 .duration(50)
                 .EUt(VA[LV])
@@ -210,7 +210,7 @@ public class PlatinumGroupProcessing {
         //  PdCl2 + HCOOH -> Pd + 2HCl + CO2
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, PalladiumRaw, 3)
-                .fluidInputs(FormicAcid.getFluid(1000))
+                .fluidInputs(GTQTMaterials.FormicAcid.getFluid(1000))
                 .output(dust, Palladium)
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
@@ -221,7 +221,7 @@ public class PlatinumGroupProcessing {
         //  PtCl2 + HCOOH -> Pt + 2HCl + CO2
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, PlatinumRaw, 3)
-                .fluidInputs(FormicAcid.getFluid(1000))
+                .fluidInputs(GTQTMaterials.FormicAcid.getFluid(1000))
                 .output(dust, Platinum)
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
@@ -238,7 +238,7 @@ public class PlatinumGroupProcessing {
                 .fluidInputs(Methane.getFluid(1000))
                 .fluidInputs(Chlorine.getFluid(8000))
                 .circuitMeta(2)
-                .fluidOutputs(CarbonTetrachloride.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.CarbonTetrachloride.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(4000))
                 .duration(80)
                 .EUt(VA[LV])
@@ -247,9 +247,9 @@ public class PlatinumGroupProcessing {
         //  2RhRu + 2CCl4 + 3H2SO4 -> 2RuCl3 + Rh2(SO4)3 + 2HCl + CH4 + C (C lost)
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, InertMetalMixture, 6)
-                .fluidInputs(CarbonTetrachloride.getFluid(2000))
+                .fluidInputs(GTQTMaterials.CarbonTetrachloride.getFluid(2000))
                 .fluidInputs(SulfuricAcid.getFluid(3000))
-                .output(dust, RutheniumChloride, 8)
+                .output(dust, GTQTMaterials.RutheniumChloride, 8)
                 .fluidOutputs(RhodiumSulfate.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(2000))
                 .fluidOutputs(Methane.getFluid(1000))
@@ -261,7 +261,7 @@ public class PlatinumGroupProcessing {
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, Sodium)
                 .fluidInputs(Oxygen.getFluid(1000))
-                .output(dust, SodiumPeroxide, 2)
+                .output(dust, GTQTMaterials.SodiumPeroxide, 2)
                 .temperature(403)
                 .duration(40)
                 .EUt(VA[LV])
@@ -269,8 +269,8 @@ public class PlatinumGroupProcessing {
 
         //  RuCl3 + 2Na2O2 + Cl -> RuO4 + 4NaCl
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, RutheniumChloride, 4)
-                .input(dust, SodiumPeroxide, 8)
+                .input(dust, GTQTMaterials.RutheniumChloride, 4)
+                .input(dust, GTQTMaterials.SodiumPeroxide, 8)
                 .fluidInputs(Chlorine.getFluid(1000))
                 .output(dust, RutheniumTetroxide, 5)
                 .output(dust, Salt, 8)
@@ -287,7 +287,7 @@ public class PlatinumGroupProcessing {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(RhodiumSulfate.getFluid(1000))
                 .fluidInputs(Water.getFluid(3000))
-                .output(dust, RhodiumOxide, 5)
+                .output(dust, GTQTMaterials.RhodiumOxide, 5)
                 .fluidOutputs(SulfuricAcid.getFluid(3000))
                 .duration(200)
                 .EUt(VA[HV])
@@ -349,7 +349,7 @@ public class PlatinumGroupProcessing {
         CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Sulfur)
                 .fluidInputs(Chlorine.getFluid(2000))
-                .fluidOutputs(SulfurDichloride.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.SulfurDichloride.getFluid(1000))
                 .temperature(242)
                 .duration(80)
                 .EUt(120)
@@ -358,8 +358,8 @@ public class PlatinumGroupProcessing {
         //  SO3 + SCl2 -> SOCl2 + SO2
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(SulfurTrioxide.getFluid(1000))
-                .fluidInputs(SulfurDichloride.getFluid(1000))
-                .fluidOutputs(ThionylChloride.getFluid(1000))
+                .fluidInputs(GTQTMaterials.SulfurDichloride.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.ThionylChloride.getFluid(1000))
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
                 .duration(100)
                 .EUt(VA[LV])
@@ -368,8 +368,8 @@ public class PlatinumGroupProcessing {
         //  OsO4 + 2SOCl2 -> OsCl4 + 2SO3
         CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, OsmiumTetroxide, 5)
-                .fluidInputs(ThionylChloride.getFluid(2000))
-                .output(dust, OsmiumTetrachloride, 5)
+                .fluidInputs(GTQTMaterials.ThionylChloride.getFluid(2000))
+                .output(dust, GTQTMaterials.OsmiumTetrachloride, 5)
                 .fluidOutputs(SulfurTrioxide.getFluid(2000))
                 .duration(100)
                 .EUt(240)

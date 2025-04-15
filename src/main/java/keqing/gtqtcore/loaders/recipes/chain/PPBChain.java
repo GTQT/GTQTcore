@@ -5,10 +5,8 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.SodiumAcetate;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.CATALYST_FRAMEWORK_IV;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumAcetate;
 
 public class PPBChain {
     //乙酸铋ok、十六烷基三甲基溴化铵ok、坏血酸酸ok，得到混合溶液

@@ -10,7 +10,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtech.common.items.MetaItems.FLUID_CELL;
 import static gregtech.common.items.MetaItems.SHAPE_EXTRUDER_CELL;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Kevlar;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Kevlar;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Zylon;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;

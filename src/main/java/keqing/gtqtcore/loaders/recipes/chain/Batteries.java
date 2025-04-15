@@ -8,9 +8,7 @@ import static gregtech.common.items.MetaItems.NEUTRON_REFLECTOR;
 import static gregtechfoodoption.GTFOMaterialHandler.*;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class Batteries {

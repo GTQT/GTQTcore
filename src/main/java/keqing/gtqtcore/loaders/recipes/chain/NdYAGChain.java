@@ -9,7 +9,6 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.gem;
 import static gregtechfoodoption.GTFOMaterialHandler.HydrogenCyanide;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class NdYAGChain {

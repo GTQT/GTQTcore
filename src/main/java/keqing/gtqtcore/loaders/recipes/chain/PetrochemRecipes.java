@@ -2,15 +2,14 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.DimethylCarbonate;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 
 import gregtech.api.recipes.GTRecipeHandler;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregtech.common.items.MetaItems.*;
 
@@ -115,9 +114,9 @@ public class PetrochemRecipes {
         CVD_RECIPES.recipeBuilder()
                 .duration(550)
                 .EUt(VA[EV])
-                .input(dust, CubicZirconia)
+                .input(dust, GTQTMaterials.CubicZirconia)
                 .input(dust, Iridium)
-                .output(dust, IridiumOnCubicZirconia)
+                .output(dust, GTQTMaterials.IridiumOnCubicZirconia)
                 .buildAndRegister();
 
         MIXER_RECIPES.recipeBuilder()
@@ -126,25 +125,25 @@ public class PetrochemRecipes {
                 .input(dust, SodiumHydroxide)
                 .input(dust, SiliconDioxide)
                 .fluidInputs(DistilledWater.getFluid(1000))
-                .fluidOutputs(SodiumHydroxideSilica.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.SodiumHydroxideSilica.getFluid(1000))
                 .buildAndRegister();
 
         BLAST_RECIPES.recipeBuilder()
                 .duration(85)
                 .EUt(VA[MV])
                 .input(dust, SodiumHydroxide, 2)
-                .input(dust, Alumina)
+                .input(dust, GTQTMaterials.Alumina)
                 .notConsumable(plate, Nickel)
-                .output(dust, SodiumAluminate, 2)
+                .output(dust, GTQTMaterials.SodiumAluminate, 2)
                 .fluidOutputs(Water.getFluid(1000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(70)
                 .EUt(VA[MV])
-                .input(dust, SodiumAluminate)
-                .fluidInputs(SodiumHydroxideSilica.getFluid(1000))
-                .fluidOutputs(SodiumAluminumSilicaSolution.getFluid(1000))
+                .input(dust, GTQTMaterials.SodiumAluminate)
+                .fluidInputs(GTQTMaterials.SodiumHydroxideSilica.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.SodiumAluminumSilicaSolution.getFluid(1000))
                 .fluidOutputs(Oxygen.getFluid(2000))
                 .output(dust, SodiumHydroxide)
                 .buildAndRegister();
@@ -165,25 +164,25 @@ public class PetrochemRecipes {
                 .fluidInputs(Ethylene.getFluid(1000))
                 .fluidInputs(DimethylCarbonate.getFluid(2000))
                 .input(dust, AmmoniumChloride, 2)
-                .output(dust, TetramethylammoniumChloride, 2)
+                .output(dust, GTQTMaterials.TetramethylammoniumChloride, 2)
                 .fluidOutputs(Oxygen.getFluid(6000))
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[HV])
-                .fluidInputs(TetramethylammoniumHydroxide.getFluid(1000))
-                .fluidInputs(HydrobromicAcid.getFluid(1000))
-                .output(dust, TetramethylammoniumBromide)
+                .fluidInputs(GTQTMaterials.TetramethylammoniumHydroxide.getFluid(1000))
+                .fluidInputs(GTQTMaterials.HydrobromicAcid.getFluid(1000))
+                .output(dust, GTQTMaterials.TetramethylammoniumBromide)
                 .fluidOutputs(Water.getFluid(1000))
                 .buildAndRegister();
 
         AUTOCLAVE_RECIPES.recipeBuilder()
                 .duration(120)
                 .EUt(VA[EV])
-                .fluidInputs(SodiumAluminumSilicaSolution.getFluid(1000))
-                .notConsumable(dust, TetramethylammoniumBromide)
-                .output(dust, ZSM_5_ZEOLITE)
+                .fluidInputs(GTQTMaterials.SodiumAluminumSilicaSolution.getFluid(1000))
+                .notConsumable(dust, GTQTMaterials.TetramethylammoniumBromide)
+                .output(dust, GTQTMaterials.ZSM_5_ZEOLITE)
                 .buildAndRegister();
     }
 
@@ -191,16 +190,16 @@ public class PetrochemRecipes {
         BLAST_RECIPES.recipeBuilder()
                 .duration(185)
                 .EUt(VA[HV])
-                .notConsumable(dust, IridiumOnCubicZirconia)
+                .notConsumable(dust, GTQTMaterials.IridiumOnCubicZirconia)
                 .fluidInputs(Glycerol.getFluid(1000))
-                .fluidOutputs(OnePropanol.getFluid(1000))
+                .fluidOutputs(GTQTMaterials.OnePropanol.getFluid(1000))
                 .buildAndRegister();
 
         DRYER_RECIPES.recipeBuilder()
                 .duration(120)
                 .EUt(VA[HV])
-                .notConsumable(dust, ZSM_5_ZEOLITE)
-                .fluidInputs(OnePropanol.getFluid(1000))
+                .notConsumable(dust, GTQTMaterials.ZSM_5_ZEOLITE)
+                .fluidInputs(GTQTMaterials.OnePropanol.getFluid(1000))
                 .fluidOutputs(Propene.getFluid(1000))
                 .buildAndRegister();
     }

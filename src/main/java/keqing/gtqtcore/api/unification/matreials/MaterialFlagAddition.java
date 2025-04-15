@@ -8,16 +8,14 @@ import gregtech.api.unification.material.properties.*;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialFlags.*;
 
-public class GTQTMaterialFlagAddition {
+public class MaterialFlagAddition {
 
     public static void init() {
         Material[] material = {
-                Polyethylene, Carbon, Graphite, Invar, Osmium, Naquadah, Dubnium, Tritium, Rutherfordium,Rhodium,Rubidium,
+                Polyethylene, Carbon, Graphite, Invar, Osmium, Naquadah, Dubnium, Tritium, Rutherfordium, Rhodium, Rubidium,
                 Lanthanum, Praseodymium, Neodymium, Cerium, Scandium, Europium, Gadolinium, Yttrium, Terbium, Dysprosium, Holmium, Erbium, Thulium, Ytterbium, Lutetium, Niobium, Palladium, Ruthenium, Naquadria, Samarium,
                 Tritanium, Duranium, Technetium, Meitnerium, Roentgenium, Nobelium, Lawrencium, Moscovium, Lutetium, NaquadahEnriched, Trinium,
                 Stellite100, WatertightSteel, MaragingSteel300, HastelloyC276, HastelloyX, Trinaquadalloy, Zeron100, TitaniumCarbide,
@@ -238,7 +236,7 @@ public class GTQTMaterialFlagAddition {
         oreProp.setOreByProducts(Neodymium, Lanthanum, Sulfur);
         oreProp.setWashedIn(Water);
         oreProp.setDirectSmeltResult(Promethium);
-/*
+        /*
          */
         //  Coils
         //  Motor coils

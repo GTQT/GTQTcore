@@ -6,7 +6,7 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CATALYTIC_REFORMER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.ParaXylene;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.ParaXylene;
 
 public class OilProcessing {
 

@@ -1,29 +1,17 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.material.Material;
-import net.minecraftforge.fluids.FluidStack;
 
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumCarbide;
-import static gregicality.multiblocks.api.unification.GCYMMaterials.TitaniumTungstenCarbide;
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.MAX;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.UUMatter;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.api.unification.ore.OrePrefix.lens;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.items.MetaItems.CARBON_MESH;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
-import static keqing.gtqtcore.api.utils.GTQTUtil.VZ;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.NEUTRAL_NETWORK_NEXUS;
 

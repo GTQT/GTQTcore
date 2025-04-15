@@ -1,15 +1,13 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
-import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraftforge.fluids.FluidStack;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;

@@ -6,6 +6,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 
 import static gregtech.api.GTValues.*;
@@ -15,7 +16,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CeLAG;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CeriumOxide;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
@@ -41,7 +41,7 @@ public class CrystalCircuits {
 
     private static void crystalInterface() {
         GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES.recipeBuilder()
-                .input(dust, CubicZirconia, 64)
+                .input(dust, GTQTMaterials.CubicZirconia, 64)
                 .input(dust, Europium, 8)
                 .blastFurnaceTemp(3000)
                 .output(EU_DOPED_CUBIC_ZIRCONIA_BOULE)
@@ -139,8 +139,8 @@ public class CrystalCircuits {
         //  this recipe just has some tweak, e.g. half consume of materials (because recipe should be more chip).
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, CeriumOxide)
-                .input(dust, LutetiumOxide)
-                .input(dust, Alumina, 5)
+                .input(dust, GTQTMaterials.LutetiumOxide)
+                .input(dust, GTQTMaterials.Alumina, 5)
                 .circuitMeta(3)
                 .output(dust, CeLAG, 7)
                 .EUt(VA[ZPM])

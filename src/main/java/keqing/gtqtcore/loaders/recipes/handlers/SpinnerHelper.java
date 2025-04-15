@@ -1,7 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import gregtech.api.recipes.GTRecipeHandler;
-import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import net.minecraft.init.Blocks;
@@ -9,14 +7,12 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Polybenzimidazole;
 import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;

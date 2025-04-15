@@ -4,7 +4,10 @@ import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -29,6 +32,7 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.items.behaviors.TurbineRotorBehavior;
+import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
@@ -52,10 +56,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static gregtech.api.util.RelativeDirection.*;
 import static gregtech.api.util.TextFormattingUtil.formatNumbers;
 
 public class MetaTileEntityMegaTurbine extends FuelMultiblockController implements ITieredMetaTileEntity, ITurbineMode, IProgressBarMultiblock {
@@ -99,6 +105,17 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         super.formStructure(context);
         this.exportFluidHandler = new FluidTankList(true, getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         ((MegaTurbineWorkableHandler) this.recipeMapWorkable).updateTanks();
+    }
+
+    @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
 
     @Override
@@ -216,8 +233,11 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
                         .setPreviewCount(8))
                 .where('A', states(getCasingState())
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY)
-                                .setMinGlobalLimited(1)
-                                .setMaxGlobalLimited(2))
+                                .setPreviewCount(1)
+                                .setMaxGlobalLimited(4))
+                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
+                                .setPreviewCount(1)
+                                .setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
                                 .setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS)

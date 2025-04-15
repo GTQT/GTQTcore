@@ -6,7 +6,6 @@ import gregtech.api.unification.material.MarkerMaterials.Color;
 import gregtech.api.unification.material.Material;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.GCYSValues;
-import keqing.gtqtcore.api.unification.TJMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 
@@ -19,9 +18,7 @@ import static gregtech.common.blocks.MetaBlocks.OPTICAL_PIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1.CasingType.*;

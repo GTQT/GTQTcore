@@ -8,10 +8,9 @@ import gregtech.api.unification.material.properties.*;
 import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Ozone;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.TitanSteel;
 
-public class GTQTMaterialPropertyAddition {
+public class MaterialPropertyAddition {
     public static void init() {
         //  Setter
         RarestMetalMixture.setFormula("Ir2O2(SiO2)2Au3?");

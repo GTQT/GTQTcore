@@ -6,9 +6,8 @@ import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.Resorcinol;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Resorcinol;
 
 public class DeltamethrinChain {
     public static void init() {

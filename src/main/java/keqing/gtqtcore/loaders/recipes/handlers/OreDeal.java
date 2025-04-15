@@ -1,7 +1,5 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
-import static gregtech.api.unification.ore.OrePrefix.dustTiny;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;

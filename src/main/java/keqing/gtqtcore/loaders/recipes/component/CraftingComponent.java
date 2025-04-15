@@ -3,11 +3,10 @@ package keqing.gtqtcore.loaders.recipes.component;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockTransparentCasing;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
-
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -28,7 +27,7 @@ public class CraftingComponent {
 
         WIRE_QUAD.appendIngredients(Stream.of(new Object[][]{
                 {9, new UnificationEntry(OrePrefix.wireGtQuadruple, Europium)},
-                {10, new UnificationEntry(OrePrefix.wireGtQuadruple, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.wireGtQuadruple, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.wireGtQuadruple, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.wireGtQuadruple, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.wireGtQuadruple, Trinium)},
@@ -36,7 +35,7 @@ public class CraftingComponent {
 
         WIRE_OCT.appendIngredients(Stream.of(new Object[][]{
                 {9, new UnificationEntry(OrePrefix.wireGtOctal, Europium)},
-                {10, new UnificationEntry(OrePrefix.wireGtOctal, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.wireGtOctal, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
@@ -44,42 +43,42 @@ public class CraftingComponent {
 
         WIRE_HEX.appendIngredients(Stream.of(new Object[][]{
                 {9, new UnificationEntry(OrePrefix.wireGtHex, Europium)},
-                {10, new UnificationEntry(OrePrefix.wireGtHex, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.wireGtHex, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.wireGtHex, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.wireGtHex, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.wireGtHex, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         CABLE.appendIngredients(Stream.of(new Object[][]{
-                {10, new UnificationEntry(OrePrefix.cableGtSingle, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.cableGtSingle, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         CABLE_QUAD.appendIngredients(Stream.of(new Object[][]{
-                {10, new UnificationEntry(OrePrefix.cableGtQuadruple, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.cableGtQuadruple, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.cableGtQuadruple, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.cableGtQuadruple, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.cableGtQuadruple, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         CABLE_OCT.appendIngredients(Stream.of(new Object[][]{
-                {10, new UnificationEntry(OrePrefix.cableGtOctal, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.cableGtOctal, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.cableGtOctal, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.cableGtOctal, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.cableGtOctal, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         CABLE_HEX.appendIngredients(Stream.of(new Object[][]{
-                {10, new UnificationEntry(OrePrefix.cableGtHex, PedotTMA)},
+                {10, new UnificationEntry(OrePrefix.cableGtHex, GTQTMaterials.PedotTMA)},
 //                {11, new UnificationEntry(OrePrefix.cableGtHex, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.cableGtHex, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.cableGtHex, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         CABLE_TIER_UP.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.cableGtSingle, PedotTMA)},
+                {9, new UnificationEntry(OrePrefix.cableGtSingle, GTQTMaterials.PedotTMA)},
 //                {10, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
 //                {11, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.cableGtSingle, Trinium)},
@@ -111,8 +110,8 @@ public class CraftingComponent {
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         PLATE.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.plate, Orichalcum)},
-                {10, new UnificationEntry(OrePrefix.plate, Adamantium)},
+                {9, new UnificationEntry(OrePrefix.plate, GTQTMaterials.Orichalcum)},
+                {10, new UnificationEntry(OrePrefix.plate, GTQTMaterials.Adamantium)},
 //                {11, new UnificationEntry(OrePrefix.plate, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.plate, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.plate, Trinium)},
@@ -120,15 +119,15 @@ public class CraftingComponent {
 
         HULL_PLATE.appendIngredients(Stream.of(new Object[][]{
                 {9, new UnificationEntry(OrePrefix.plate, Polybenzimidazole)},
-                {10, new UnificationEntry(OrePrefix.plate, Kevlar)},
+                {10, new UnificationEntry(OrePrefix.plate, GTQTMaterials.Kevlar)},
 //                {11, new UnificationEntry(OrePrefix.plate, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.plate, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.plate, Trinium)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         ROTOR.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.rotor, Orichalcum)},
-                {10, new UnificationEntry(OrePrefix.rotor, Adamantium)},
+                {9, new UnificationEntry(OrePrefix.rotor, GTQTMaterials.Orichalcum)},
+                {10, new UnificationEntry(OrePrefix.rotor, GTQTMaterials.Adamantium)},
 //                {11, new UnificationEntry(OrePrefix.rotor, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.rotor, Trinium)},
 //                {13, new UnificationEntry(OrePrefix.rotor, Trinium)},
@@ -146,7 +145,7 @@ public class CraftingComponent {
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         SAWBLADE.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.toolHeadBuzzSaw, CubicBoronNitride)},
+                {9, new UnificationEntry(OrePrefix.toolHeadBuzzSaw, GTQTMaterials.CubicBoronNitride)},
 //                {10, new UnificationEntry(OrePrefix.toolHeadBuzzSaw, Trinium)},
 //                {11, new UnificationEntry(OrePrefix.toolHeadBuzzSaw, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.toolHeadBuzzSaw, Trinium)},
@@ -170,7 +169,7 @@ public class CraftingComponent {
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         COIL_ELECTRIC.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.wireGtOctal, MercuryCadmiumTelluride)},
+                {9, new UnificationEntry(OrePrefix.wireGtOctal, GTQTMaterials.MercuryCadmiumTelluride)},
 //                {10, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
 //                {11, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
 //                {12, new UnificationEntry(OrePrefix.wireGtOctal, Trinium)},
@@ -199,10 +198,10 @@ public class CraftingComponent {
                 {7, new UnificationEntry(OrePrefix.stick, VanadiumGallium)},
                 {8, new UnificationEntry(OrePrefix.stick, VanadiumGallium)},
                 {9, new UnificationEntry(OrePrefix.stickLong, VanadiumGallium)},
-                {10, new UnificationEntry(OrePrefix.stick, CarbonNanotube)},
-                {11, new UnificationEntry(OrePrefix.stick, CarbonNanotube)},
-                {12, new UnificationEntry(OrePrefix.stickLong, CarbonNanotube)},
-                {13, new UnificationEntry(OrePrefix.stick, CarbonNanotube)},
+                {10, new UnificationEntry(OrePrefix.stick, GTQTMaterials.CarbonNanotube)},
+                {11, new UnificationEntry(OrePrefix.stick, GTQTMaterials.CarbonNanotube)},
+                {12, new UnificationEntry(OrePrefix.stickLong, GTQTMaterials.CarbonNanotube)},
+                {13, new UnificationEntry(OrePrefix.stick, GTQTMaterials.CarbonNanotube)},
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         STICK_RADIOACTIVE.appendIngredients(Stream.of(new Object[][]{

@@ -49,7 +49,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static keqing.gtqtcore.api.unification.GCYSMaterials.FracturingFluid;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.FracturingFluid;
 
 public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements IWorkable, ITieredMetaTileEntity {
 

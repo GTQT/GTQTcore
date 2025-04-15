@@ -1,14 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.circuits;
 
-import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.OreDictUnifier;
-import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -17,7 +13,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.GCYSValues.decreaseRecipesPressure;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Kovar;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Kovar;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.VACUUM_TUBE_COMPONENTS;
 
 public class PrimitiveCircuits {

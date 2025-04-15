@@ -13,9 +13,9 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Polybenzimidazole;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.Kevlar;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Kevlar;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
-import static keqing.gtqtcore.api.unification.TJMaterials.Polyetheretherketone;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 
 public class GTRecipeHelper {
     static int SECOND=20;

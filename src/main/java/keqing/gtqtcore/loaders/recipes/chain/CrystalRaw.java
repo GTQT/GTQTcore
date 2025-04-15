@@ -1,20 +1,13 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.common.items.MetaItems;
-
 import static gregtech.api.GTValues.*;
 import static gregtech.api.metatileentity.multiblock.CleanroomType.STERILE_CLEANROOM;
 import static gregtech.api.recipes.RecipeMaps.*;
-import static gregtech.api.recipes.RecipeMaps.IMPLOSION_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.Materials.Carbon;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GCYSMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.TJMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 
 public class CrystalRaw {
