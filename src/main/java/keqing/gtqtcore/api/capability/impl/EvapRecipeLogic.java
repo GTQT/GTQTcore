@@ -3,7 +3,6 @@ package keqing.gtqtcore.api.capability.impl;
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import keqing.gtqtcore.api.recipes.properties.EvaporationEnergyProperty;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityEvaporationPool;
 
@@ -119,36 +118,13 @@ public class EvapRecipeLogic extends MultiblockRecipeLogic {
     }
 
     @Override
-    protected boolean drawEnergy(int recipeEUt, boolean simulate) {
+    protected boolean drawEnergy(long recipeEUt, boolean simulate) {
         return true;
-    }
-
-    // stops multi from "filling" with energy due to -1 EuT required (?) for custom power logic
-    @Override
-    protected boolean hasEnoughPower(@Nonnull int[] resultOverclock) {
-        int totalEUt = resultOverclock[0] * resultOverclock[1];
-        int capacity;
-        if (totalEUt >= 0) {
-            if ((long) totalEUt > this.getEnergyCapacity() / 2L) {
-                capacity = resultOverclock[0];
-            } else {
-                capacity = totalEUt;
-            }
-
-            return this.getEnergyStored() >= (long) capacity;
-        } else {
-            return true;
-        }
     }
 
     @Override
     public long getMaxVoltage() {
         return Math.max(1L, super.getMaxVoltage());
-    }
-
-    @Override
-    protected int[] runOverclockingLogic(@Nonnull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int recipeDuration, int amountOC) {
-        return new int[]{recipeEUt, recipeDuration}; // change nothing with overclocking
     }
 
     @Override

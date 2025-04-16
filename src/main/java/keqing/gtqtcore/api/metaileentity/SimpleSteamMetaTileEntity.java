@@ -16,10 +16,12 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
@@ -149,12 +151,10 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity {
 
     @SideOnly(Side.CLIENT)
     @Override
-    protected void randomDisplayTick(float x, float y, float z,
-                                     EnumParticleTypes flame,
-                                     EnumParticleTypes smoke) {
-        super.randomDisplayTick(x, y, z, flame, smoke);
+    public void randomDisplayTick() {
+        super.randomDisplayTick();
         if (GTValues.RNG.nextBoolean())
-            this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y + 0.5F, z, 0.0, 0.0, 0.0, new int[0]);
+            this.getWorld().spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.getPos().getX(), this.getPos().getY() + 0.5F, this.getPos().getZ(), 0.0, 0.0, 0.0, new int[0]);
     }
 
     @Override

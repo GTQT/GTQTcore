@@ -27,14 +27,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import supercritical.common.metatileentities.SCMetaTileEntities;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static gregicality.multiblocks.api.unification.GCYMMaterials.MolybdenumDisilicide;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Stellite100;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_ASSEMBLER;
 import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.LARGE_DISTILLERY;
-import static gregtech.api.GTValues.EV;
 import static gregtech.api.GTValues.IV;
 import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.UV;
@@ -57,7 +53,6 @@ import static gregtech.loaders.recipe.CraftingComponent.PIPE_NORMAL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING;
@@ -70,7 +65,6 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROL
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static net.minecraft.init.Blocks.FURNACE;
 import static net.minecraft.init.Blocks.IRON_BARS;
-import static supercritical.api.unification.material.SCMaterials.Plutonium;
 import static supercritical.common.metatileentities.SCMetaTileEntities.DECAY_CHAMBER;
 
 
@@ -908,13 +902,6 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(plate, TreatedWood),
                 'Q', new UnificationEntry(stick, Iron),
                 'F', new UnificationEntry(frameGt, Steel));
-
-        ModHandler.addShapedRecipe(true, "bronze_industrial_blast_furnace",
-                GTQTMetaTileEntities.INDUSTRIAL_PRIMITIVE_BLAST_FURNACE.getStackForm(),
-                "BPB", "PCP", "BPB",
-                'C', new UnificationEntry(circuit, LV),
-                'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
-                'B', PRIMITIVE_BLAST_FURNACE.getStackForm());
 
         ModHandler.addShapedRecipe(true, "heat_furnace",
                 GTQTMetaTileEntities.HEAT_FURNACE.getStackForm(),

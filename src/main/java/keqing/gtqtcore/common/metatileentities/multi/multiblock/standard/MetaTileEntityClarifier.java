@@ -1,10 +1,13 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import gregtech.api.capability.impl.PrimitiveRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -14,8 +17,6 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.StoneVariantBlock;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -31,17 +32,12 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityClarifier extends NoEnergyMultiblockController {
+public class MetaTileEntityClarifier extends RecipeMapPrimitiveMultiblockController {
     int heat;
 
     public MetaTileEntityClarifier(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CLARIFIER);
-        this.recipeMapWorkable = new ClarifierLogic(this);
-    }
-
-    @Override
-    public boolean canBeDistinct() {
-        return true;
+        this.recipeMapWorkable = new ClarifierLogic(this,GTQTcoreRecipeMaps.CLARIFIER);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -119,10 +115,10 @@ public class MetaTileEntityClarifier extends NoEnergyMultiblockController {
         return true;
     }
 
-    protected class ClarifierLogic extends NoEnergyMultiblockRecipeLogic {
+    protected class ClarifierLogic extends PrimitiveRecipeLogic {
 
-        public ClarifierLogic(NoEnergyMultiblockController tileEntity) {
-            super(tileEntity, tileEntity.recipeMap);
+        public ClarifierLogic(RecipeMapPrimitiveMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+            super(tileEntity, recipeMap);
         }
 
         @Override

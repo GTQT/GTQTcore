@@ -18,7 +18,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.recipes.properties.impl.FusionEUToStartProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -729,6 +729,10 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         }
     }
 
+    protected long getEnergyStored() {
+        return energyContainer.getEnergyStored();
+    }
+
     private class CompressedFusionReactorRecipeLogic extends MultiblockRecipeLogic {
 
         public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
@@ -736,15 +740,16 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         }
 
         @Override
-        protected double getOverclockingDurationDivisor() {
-            if(tier<=9)return OCFirst ? 3.0 : 2.0;
-            return OCFirst ? 4.0 : 2.0;
+        protected double getOverclockingDurationFactor() {
+            if(tier<=9)return OCFirst ? 0.33 : 0.25;
+            return OCFirst ? 0.25 : 0.5;
         }
 
         @Override
-        protected double getOverclockingVoltageMultiplier() {
+        protected double getOverclockingVoltageFactor() {
             if(tier<=9)return OCFirst ? 3.0 : 2.0;
             return OCFirst ? 4.0 : 2.0;
+
         }
 
         @Override

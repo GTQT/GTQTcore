@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -10,7 +11,11 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
@@ -50,6 +55,8 @@ import org.lwjgl.opengl.GL11;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
     private static final boolean init = false;
@@ -380,13 +387,20 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
             return getMaxParallel(manioulatorTier);
         }
 
-        protected void modifyOverclockPost(int[] resultOverclock, @Nonnull IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
-            int glassTier = ((MetaTileEntityQuantumForceTransformer) this.metaTileEntity).getGlassTire();
-            if (glassTier > 0) {
-                resultOverclock[0] = (int) ((double) resultOverclock[0] * (100 - (double) glassTier * 3) / 100);
-                resultOverclock[0] = Math.max(1, resultOverclock[0]);
-            }
+        @Override
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    storage.get(TemperatureProperty.getInstance(), 0)));
+        }
+
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
         }
     }
 }

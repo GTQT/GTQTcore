@@ -3,7 +3,7 @@ package keqing.gtqtcore.common;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.VariantItemBlock;
 import gregtech.api.cover.CoverDefinition;
-import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
+import gregtech.api.recipes.properties.impl.FusionEUToStartProperty;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;

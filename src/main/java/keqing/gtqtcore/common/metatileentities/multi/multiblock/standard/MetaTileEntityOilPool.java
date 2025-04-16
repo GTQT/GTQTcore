@@ -10,6 +10,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
@@ -24,7 +25,6 @@ import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -46,7 +46,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Steel;
 
-public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
+public class MetaTileEntityOilPool extends RecipeMapPrimitiveMultiblockController {
 
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));

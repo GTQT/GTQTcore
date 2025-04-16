@@ -6,10 +6,12 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.impl.PrimitiveRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -23,8 +25,6 @@ import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
-import keqing.gtqtcore.api.capability.impl.NoEnergyMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -43,7 +43,7 @@ import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController {
+public class MetaTileEntityPrimitiveReactor extends RecipeMapPrimitiveMultiblockController {
 
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));
@@ -51,7 +51,7 @@ public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController
 
     public MetaTileEntityPrimitiveReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PR_MIX);
-        this.recipeMapWorkable = new PrimitiveReactorRecipeLogic(this, recipeMap);
+        this.recipeMapWorkable = new PrimitiveReactorRecipeLogic(this, GTQTcoreRecipeMaps.PR_MIX);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -138,9 +138,9 @@ public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController
         return false;
     }
 
-    public class PrimitiveReactorRecipeLogic extends NoEnergyMultiblockRecipeLogic {
+    public class PrimitiveReactorRecipeLogic extends PrimitiveRecipeLogic {
 
-        public PrimitiveReactorRecipeLogic(NoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+        public PrimitiveReactorRecipeLogic(RecipeMapPrimitiveMultiblockController tileEntity, RecipeMap<?> recipeMap) {
             super(tileEntity, recipeMap);
         }
 

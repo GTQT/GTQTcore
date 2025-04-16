@@ -8,6 +8,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.capability.impl.PseudoMultiRecipeLogic;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -53,8 +54,8 @@ public class PseudoMultiMachineMetaTileEntity extends SimpleMachineMetaTileEntit
     }
 
     @Override
-    public void onPlacement() {
-        super.onPlacement();
+    public void onPlacement(EntityLivingBase placer) {
+        super.onPlacement(placer);
         this.checkAdjacentBlocks();
     }
 

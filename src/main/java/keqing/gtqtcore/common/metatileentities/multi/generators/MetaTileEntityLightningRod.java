@@ -11,7 +11,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.TieredMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.XSTR;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer;
 import gregtech.client.utils.PipelineUtil;
@@ -35,6 +34,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
 import static gregtech.api.capability.GregtechDataCodes.IS_WORKING;
 
@@ -60,7 +60,7 @@ public class MetaTileEntityLightningRod extends TieredMetaTileEntity {
         super.update();
         if (this.getWorld().isRemote) return;
         World aWorld = this.getWorld();
-        XSTR aXSTR = new XSTR();
+        Random aXSTR = new Random(); // 替换为Random
         if (!aWorld.isRemote) {
             if (this.energyContainer.getEnergyStored() > 0) {
                 this.setActive(true);

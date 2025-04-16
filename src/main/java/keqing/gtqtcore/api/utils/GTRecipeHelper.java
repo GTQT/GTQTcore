@@ -18,7 +18,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Infinity;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 
 public class GTRecipeHelper {
-    static int SECOND=20;
     private static GTRecipeInput getGtRecipeInput(Object extraInput) {
         GTRecipeInput extra; //  Used to check {@code extraInput} type.
         if (extraInput instanceof ItemStack stack) { //  If {@code extraInput} is Item Stack, then create a {@code GTRecipeItemInput}.

@@ -136,7 +136,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLightningRod[] LIGHTNING_ROD = new MetaTileEntityLightningRod[3];
     public static MetaTileEntityDangoteDistillery DANGOTE_DISTILLERY;
     public static MetaTileEntityResearchSystemNetWork RESEARCH_SYSTEM_NETWORK;
-    public static MetaTileEntityHolographicDisplay HOLOGRAPHIC_DISPLAY;
     public static MetaTileEntityGeneratorArray LV_GENERATOR_ARRAY;
     public static MetaTileEntityGeneratorArray MV_GENERATOR_ARRAY;
     public static MetaTileEntityGeneratorArray HV_GENERATOR_ARRAY;
@@ -197,7 +196,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeProcessingFactory LARGE_PROCESSING_FACTORY;
     public static MetaTileEntityVacuumDryingFurnace VACUUM_DRYING_FURNACE;
     public static MetaTileEntityMiningDrill MINING_DRILL;
-    public static MetaTileEntityIndustrialPrimitiveBlastFurnace INDUSTRIAL_PRIMITIVE_BLAST_FURNACE;
     public static MetaTileEntityHeatFurnace HEAT_FURNACE;
     public static MetaTileEntityPrimitiveTreeFarmer PRIMITIVE_TREE_FARMER;
     public static MetaTileEntitySawMill SAW_MILL;
@@ -557,7 +555,6 @@ public class GTQTMetaTileEntities {
         SAW_MILL = registerMetaTileEntity(3101, new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));
         PRIMITIVE_ROASTER = registerMetaTileEntity(3102, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
 
-        INDUSTRIAL_PRIMITIVE_BLAST_FURNACE = registerMetaTileEntity(3106, new MetaTileEntityIndustrialPrimitiveBlastFurnace(gtqtcoreId("industrial_primitive_blast_furnace")));
         HEAT_FURNACE = registerMetaTileEntity(3107, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
 
         PRIMITIVE_REACTOR = registerMetaTileEntity(3108, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
@@ -752,7 +749,6 @@ public class GTQTMetaTileEntities {
         HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3463, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"), false, true));
 
         RESEARCH_SYSTEM_NETWORK = registerMetaTileEntity(3470, new MetaTileEntityResearchSystemNetWork(gtqtcoreId("research_system_network")));
-        HOLOGRAPHIC_DISPLAY = registerMetaTileEntity(3471, new MetaTileEntityHolographicDisplay(gtqtcoreId("holographic_display")));
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
         LARGE_CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));

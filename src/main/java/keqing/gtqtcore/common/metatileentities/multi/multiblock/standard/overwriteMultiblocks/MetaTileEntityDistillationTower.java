@@ -1,8 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.overwriteMultiblocks;
 
 import com.cleanroommc.modularui.utils.FluidTankHandler;
+import gregtech.api.capability.IDistillationTower;
 import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.capability.impl.DistillationTowerLogicHandler;
 import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
@@ -50,9 +53,9 @@ import java.util.stream.Collectors;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockController {
-    protected int layerCount;
-    protected List<IFluidHandler> orderedFluidOutputs;
+public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockController implements IDistillationTower {
+
+    protected DistillationTowerLogicHandler handler;
     private int casingTier;
     private int tubeTier;
 
@@ -60,7 +63,11 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.DISTILLATION_RECIPES
         });
+
+
         this.recipeMapWorkable = new DistillationTowerRecipeLogic(this);
+        this.handler = new DistillationTowerLogicHandler(this);
+
 
         setTierFlag(true);
         //setTier(auto);
@@ -160,9 +167,10 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
     }
 
     @Override
-    protected boolean allowSameFluidFillForOutputs() {
+    public boolean allowSameFluidFillForOutputs() {
         return false;
     }
+
 
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -200,66 +208,19 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
         }
     }
 
-    protected int determineLayerCount(BlockPattern structurePattern) {
-        return structurePattern.formedRepetitionCount[1] + 1;
-    }
-
-    /**
-     * Needs to be overriden for multiblocks that have different assemblies than the standard distillation tower.
-     *
-     * @return the fluid hatches of the multiblock, in order, with null entries for layers that do not have hatches.
-     */
-    protected List<IFluidHandler> determineOrderedFluidOutputs() {
-        List<MetaTileEntityMultiblockPart> fluidExportParts = this.getMultiblockParts().stream()
-                .filter(iMultiblockPart -> iMultiblockPart instanceof IMultiblockAbilityPart<?> abilityPart &&
-                        abilityPart.getAbility() == MultiblockAbility.EXPORT_FLUIDS &&
-                        abilityPart instanceof MetaTileEntityMultiblockPart)
-                .map(iMultiblockPart -> (MetaTileEntityMultiblockPart) iMultiblockPart)
-                .collect(Collectors.toList());
-        // the fluidExportParts should come sorted in smallest Y first, largest Y last.
-        List<IFluidHandler> orderedHandlerList = new ObjectArrayList<>();
-        int firstY = this.getPos().getY() + 1;
-        int exportIndex = 0;
-        for (int y = firstY; y < firstY + this.layerCount; y++) {
-            if (fluidExportParts.size() <= exportIndex) {
-                orderedHandlerList.add(null);
-                continue;
-            }
-            MetaTileEntityMultiblockPart part = fluidExportParts.get(exportIndex);
-            if (part.getPos().getY() == y) {
-                List<IFluidTank> hatchTanks = new ObjectArrayList<>();
-                // noinspection unchecked
-                ((IMultiblockAbilityPart<IFluidTank>) part).registerAbilities(hatchTanks);
-                if (hatchTanks.size() == 1)
-                    orderedHandlerList.add(FluidTankHandler.getTankFluidHandler(hatchTanks.get(0)));
-                else orderedHandlerList.add(new FluidTankList(false, hatchTanks));
-                exportIndex++;
-            } else if (part.getPos().getY() > y) {
-                orderedHandlerList.add(null);
-            } else {
-                GTLog.logger.error("The Distillation Tower at " + this.getPos() +
-                        " had a fluid export hatch with an unexpected Y position.");
-                this.invalidateStructure();
-                return new ObjectArrayList<>();
-            }
-        }
-        return orderedHandlerList;
-    }
-
     @Override
     public void invalidateStructure() {
         super.invalidateStructure();
-        this.layerCount = 0;
-        this.orderedFluidOutputs = null;
+        if (this.handler != null) handler.invalidate();
     }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
 
-        if (this.structurePattern == null) return;
-        this.layerCount = determineLayerCount(this.structurePattern);
-        this.orderedFluidOutputs = determineOrderedFluidOutputs();
+        if (this.handler == null || this.structurePattern == null) return;
+        handler.determineLayerCount(this.structurePattern);
+        handler.determineOrderedFluidOutputs();
 
         Object casingTier = context.get("ChemicalPlantCasingTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
@@ -294,70 +255,36 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
 
     @Override
     public int getFluidOutputLimit() {
-        return this.layerCount;
+        if (this.handler != null) return this.handler.getLayerCount();
+        else return super.getFluidOutputLimit();
     }
 
-    protected class DistillationTowerRecipeLogic extends GTQTMultiblockLogic {
+    protected class DistillationTowerRecipeLogic extends MultiblockRecipeLogic {
 
         public DistillationTowerRecipeLogic(MetaTileEntityDistillationTower tileEntity) {
             super(tileEntity);
         }
 
-        protected boolean applyFluidToOutputs(List<FluidStack> fluids, boolean doFill) {
-            boolean valid = true;
-            for (int i = 0; i < fluids.size(); i++) {
-                IFluidHandler handler = orderedFluidOutputs.get(i);
-                // void if no hatch is found on that fluid's layer
-                // this is considered trimming and thus ignores canVoid
-                if (handler == null) continue;
-                int accepted = handler.fill(fluids.get(i), doFill);
-                if (accepted != fluids.get(i).amount) valid = false;
-                if (!doFill && !valid) break;
-            }
-            return valid;
-        }
-
         @Override
         protected void outputRecipeOutputs() {
             GTTransferUtils.addItemsToItemHandler(getOutputInventory(), false, itemOutputs);
-            this.applyFluidToOutputs(fluidOutputs, true);
+            handler.applyFluidToOutputs(fluidOutputs, true);
         }
 
         @Override
-        protected boolean setupAndConsumeRecipeInputs(Recipe recipe,
-                                                      IItemHandlerModifiable importInventory,
-                                                      IMultipleTankHandler importFluids) {
-            this.overclockResults = calculateOverclock(recipe);
-
-            modifyOverclockPost(overclockResults, recipe.getRecipePropertyStorage());
-
-            if (!hasEnoughPower(overclockResults)) {
-                return false;
-            }
-
-            IItemHandlerModifiable exportInventory = getOutputInventory();
-
-            // We have already trimmed outputs and chanced outputs at this time
-            // Attempt to merge all outputs + chanced outputs into the output bus, to prevent voiding chanced outputs
-            if (!metaTileEntity.canVoidRecipeItemOutputs() &&
-                    !GTTransferUtils.addItemsToItemHandler(exportInventory, true, recipe.getAllItemOutputs())) {
-                this.isOutputsFull = true;
-                return false;
-            }
-
-            // Perform layerwise fluid checks
+        protected boolean checkOutputSpaceFluids( Recipe recipe,  IMultipleTankHandler exportFluids) {
+            // We have already trimmed fluid outputs at this time
             if (!metaTileEntity.canVoidRecipeFluidOutputs() &&
-                    !this.applyFluidToOutputs(recipe.getAllFluidOutputs(), false)) {
+                    !handler.applyFluidToOutputs(recipe.getAllFluidOutputs(), false)) {
                 this.isOutputsFull = true;
                 return false;
             }
+            return true;
+        }
 
-            this.isOutputsFull = false;
-            if (recipe.matches(true, importInventory, importFluids)) {
-                this.metaTileEntity.addNotifiedInput(importInventory);
-                return true;
-            }
-            return false;
+        @Override
+        protected IMultipleTankHandler getOutputTank() {
+            return handler.getFluidTanks();
         }
     }
 }

@@ -8,9 +8,6 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECI
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class PETChain {
-    static int SECOND=20;
-    static int MINUTE=1200;
-
     public static void init() {
 
         //  C6H4(CH3)2 + 2O -> C8H8O2 + 2H

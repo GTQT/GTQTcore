@@ -285,15 +285,14 @@ public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockC
         }
 
         @Override
-        protected double getOverclockingDurationDivisor() {
-            return OCFirst ? Overclocking : 2.0;
+        protected double getOverclockingDurationFactor() {
+            return OCFirst ? 1/Overclocking : 0.5;
         }
 
         @Override
-        protected double getOverclockingVoltageMultiplier() {
+        protected double getOverclockingVoltageFactor() {
             return OCFirst ? Overclocking : 2.0;
         }
-
 
         @Override
         public void update() {

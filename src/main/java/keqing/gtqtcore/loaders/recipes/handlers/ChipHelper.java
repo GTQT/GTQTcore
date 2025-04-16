@@ -19,8 +19,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class ChipHelper {
-    static int SECOND=20;
-    static int MINUTE=1200;
     public static void init() {
         soc();
         pic();

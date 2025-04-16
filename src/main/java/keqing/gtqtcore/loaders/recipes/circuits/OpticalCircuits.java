@@ -18,9 +18,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone
 import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 public class OpticalCircuits {
-
-    static int SECOND=20;
-    static int MINUTE=1200;
     public static void init() {
         board();
         smd();

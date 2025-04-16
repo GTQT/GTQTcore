@@ -61,6 +61,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.LuV;
+import static gregtech.api.GTValues.ZPM;
+import static gregtech.api.recipes.logic.OverclockingLogic.PERFECT_DURATION_FACTOR;
+import static gregtech.api.recipes.logic.OverclockingLogic.STD_DURATION_FACTOR;
 import static gregtech.api.unification.material.Materials.Gold;
 import static gregtech.api.unification.material.Materials.Silver;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
@@ -392,7 +395,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
                     .where('F', getFrameState("T1Frame")) // HSLA Steel frame
                     .where('G', getGlassState("T1StructureGlass")) // Laminated glass
                     .where('X', getThirdCasingState("T1Substrate")) // Substrate casing
-                    .where('w', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.EAST)
+                    .where('w', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[ZPM], EnumFacing.EAST)
                     .where('i', MetaTileEntities.ITEM_IMPORT_BUS[1], EnumFacing.SOUTH)
                     .where('j', MetaTileEntities.ITEM_EXPORT_BUS[1], EnumFacing.SOUTH)
                     .where('k', MetaTileEntities.FLUID_IMPORT_HATCH[1], EnumFacing.SOUTH)
@@ -541,14 +544,13 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
          * @return Duration Divisor of OC Duration.
          */
         @Override
-        protected double getOverclockingDurationDivisor() {
+        protected double getOverclockingDurationFactor() {
             return switch (coolingUpgradeNumber) {
-                case 1 -> 2.0;
-                case 2 -> 4.0;
+                case 1 -> 0.5;
+                case 2 -> 0.25;
                 default -> 1.0;
             };
         }
-
         @Override
         public int getParallelLimit() {
             return this.calculateParallelBySwarm();

@@ -28,19 +28,6 @@ import static net.minecraft.util.EnumFacing.*;
 import static net.minecraft.util.EnumFacing.SOUTH;
 
 public class GTQTUniversUtil {
-
-    public static final int TICK = 1;
-
-    public static final int SECOND = 20;
-
-    public static final int MINUTE = 60 * SECOND;
-
-    public static final int HOUR = 60 * MINUTE;
-
-    public static final int HALF_HOUR = HOUR / 2;
-
-    public static final int QUAT_HOUR = HOUR / 4;
-
     public static void removeChemicalRecipe(ItemStack... itemInputs) {
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, itemInputs);
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, itemInputs);

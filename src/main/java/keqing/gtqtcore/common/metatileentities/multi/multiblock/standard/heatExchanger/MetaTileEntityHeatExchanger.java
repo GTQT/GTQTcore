@@ -9,6 +9,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.*;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
@@ -21,7 +22,6 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
 import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -49,7 +49,7 @@ import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate
 import static gregtech.api.util.RelativeDirection.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
+public class MetaTileEntityHeatExchanger extends RecipeMapPrimitiveMultiblockController implements IHeatExchanger {
     private final int heatTime = 200;
     private int coilLevel;
     private int number;
@@ -61,7 +61,7 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
 
     public MetaTileEntityHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
     }
 
     @Override

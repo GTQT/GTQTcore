@@ -17,9 +17,6 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 
 public class SpintronicCircuits {
-
-    static int SECOND=20;
-    static int MINUTE=1200;
     public static void init() {
         CircuitBoard();
         CircuitComponent();

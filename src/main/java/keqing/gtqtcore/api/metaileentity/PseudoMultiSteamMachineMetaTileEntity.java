@@ -8,6 +8,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.capability.impl.PseudoMultiSteamRecipeLogic;
 import keqing.gtqtcore.common.metatileentities.single.steam.SimpleSteamMetaTileEntity;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -48,8 +49,8 @@ public class PseudoMultiSteamMachineMetaTileEntity extends SimpleSteamMetaTileEn
     }
 
     @Override
-    public void onPlacement() {
-        super.onPlacement();
+    public void onPlacement(EntityLivingBase placer) {
+        super.onPlacement(placer);
         this.checkAdjacentBlocks();
     }
 

@@ -3,8 +3,6 @@ package keqing.gtqtcore.api;
 import static net.minecraft.util.text.TextFormatting.*;
 
 public class GCYSValues {
-    static int SECOND=20;
-    static int MINUTE=1200;
     /**
      * Earth's Atmospheric Pressure at Sea Level
      * Anything smaller than this counts as a Vacuum

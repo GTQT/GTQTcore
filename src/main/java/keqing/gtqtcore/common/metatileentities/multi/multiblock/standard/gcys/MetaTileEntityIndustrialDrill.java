@@ -142,17 +142,16 @@ public class MetaTileEntityIndustrialDrill extends RecipeMapMultiblockController
         }
 
         @Override
-        protected boolean setupAndConsumeRecipeInputs(Recipe recipe, IItemHandlerModifiable importInventory) {
-            boolean result = super.setupAndConsumeRecipeInputs(recipe, importInventory);
-
+        protected Recipe setupAndConsumeRecipeInputs(Recipe recipe, IItemHandlerModifiable importInventory) {
+            Recipe result = super.setupAndConsumeRecipeInputs(recipe, importInventory);
             // break the block in world if it is consumable
-            if (result && !recipe.getInputs().get(0).isNonConsumable()) {
-                MetaTileEntityIndustrialDrill drill = getMetaTileEntity();
-                if (drill != null) {
+            recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
+            if (recipe != null) {
+                if (recipe.getInputs().get(0).isNonConsumable()) {
+                    MetaTileEntityIndustrialDrill drill = getMetaTileEntity();
                     drill.getWorld().destroyBlock(drill.targetBlock, false);
                 }
             }
-
             return result;
         }
     }

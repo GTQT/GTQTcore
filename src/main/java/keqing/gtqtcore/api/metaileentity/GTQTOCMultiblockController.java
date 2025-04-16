@@ -33,6 +33,7 @@ import java.util.function.BooleanSupplier;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
+import static gregtech.api.recipes.logic.OverclockingLogic.*;
 
 public abstract class GTQTOCMultiblockController extends MultiMapMultiblockController implements IOpticalComputationReceiver {
 
@@ -334,15 +335,14 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         }
 
         @Override
-        protected double getOverclockingDurationDivisor() {
-            return OCFirst ? Overclocking : 2.0;
+        protected double getOverclockingDurationFactor() {
+            return OCFirst ? 1/Overclocking : 0.5;
         }
 
         @Override
-        protected double getOverclockingVoltageMultiplier() {
+        protected double getOverclockingVoltageFactor() {
             return OCFirst ? Overclocking : 2.0;
         }
-
 
         @Override
         public long getMaxVoltage() {

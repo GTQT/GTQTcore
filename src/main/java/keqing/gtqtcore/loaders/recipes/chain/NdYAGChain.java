@@ -17,8 +17,6 @@ public class NdYAGChain {
         NdYOChain();
         NdYAGProcess();
     }
-    static int SECOND=20;
-    static int MINUTE=1200;
     private static void CarbamideChain() {
 
         //  MnO2 + 2KOH + O -> K2MnO4 + H2O

@@ -9,7 +9,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.properties.HeatProperty;
@@ -26,7 +25,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.LV;
 import static gregtech.api.GTValues.V;
-import static gregtech.api.recipes.logic.OverclockingLogic.standardOverclockingLogic;
+import static gregtech.api.recipes.logic.OverclockingLogic.standardOC;
 
 public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
 
@@ -56,7 +55,7 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
     }
 
     @Override
-    protected boolean drawEnergy(int recipeEUt, boolean simulate) {
+    protected boolean drawEnergy(long recipeEUt, boolean simulate) {
         return true; // spoof energy being drawn
     }
 
@@ -65,18 +64,10 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
         return V[LV];
     }
 
-    @Nonnull
     @Override
-    protected int[] runOverclockingLogic(@Nonnull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int recipeDuration, int amountOC) {
-        return standardOverclockingLogic(
-                Math.max(propertyStorage.getRecipePropertyValue(HeatProperty.getInstance(), 0),500),
-                getMaxVoltage(),
-                recipeDuration,
-                amountOC,
-                getOverclockingDurationDivisor(),
-                getOverclockingVoltageMultiplier()
-
-        );
+    public void setMaxProgress(int maxProgress) {
+        double speedBonus = Math.min(previousRecipe.getProperty(HeatProperty.getInstance(), 0)/tileEntity.getHeat(),1);
+        super.setMaxProgress((int) (maxProgress*speedBonus));
     }
 
     @Override
@@ -252,10 +243,6 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
         trySearchNewRecipeCombined();
     }
 
-    /**
-     * Put into place so multiblocks can override {@link AbstractRecipeLogic#trySearchNewRecipe()} without having to deal with
-     * the maintenance and distinct logic in {@link NoEnergyMultiblockRecipeLogic#trySearchNewRecipe()}
-     */
     protected void trySearchNewRecipeCombined() {
         long maxVoltage = this.getMaxVoltage();
         IItemHandlerModifiable importInventory = this.getInputInventory();
@@ -352,39 +339,17 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
         );
 
 
-        if (recipe != null && setupAndConsumeRecipeInputs(recipe, currentDistinctInputBus)) {
-            setupRecipe(recipe);
-            return true;
+        if (recipe != null) {
+            recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
+            if (recipe != null) {
+                setupRecipe(recipe);
+                return true;
+            }
         }
 
         return false;
     }
 
-    @Override
-    protected void modifyOverclockPre(@Nonnull int[] values, @Nonnull IRecipePropertyStorage storage) {
-        super.modifyOverclockPre(values, storage);
-
-        // apply maintenance bonuses
-        Tuple<Integer, Double> maintenanceValues = getMaintenanceValues();
-
-        // duration bonus
-        if (maintenanceValues.getSecond() != 1.0) {
-            values[1] = (int) Math.round(values[1] * maintenanceValues.getSecond());
-        }
-    }
-
-    @Override
-    protected void modifyOverclockPost(int[] overclockResults, @Nonnull IRecipePropertyStorage storage) {
-        super.modifyOverclockPost(overclockResults, storage);
-
-        // apply maintenance penalties
-        Tuple<Integer, Double> maintenanceValues = getMaintenanceValues();
-
-        // duration penalty
-        if (maintenanceValues.getFirst() > 0) {
-            overclockResults[1] = (int) (overclockResults[1] * (1 + 0.1 * maintenanceValues.getFirst()));
-        }
-    }
 
     @Nonnull
     protected Tuple<Integer, Double> getMaintenanceValues() {
@@ -436,7 +401,7 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
     }
 
     @Override
-    public int getInfoProviderEUt() {
+    public long getInfoProviderEUt() {
         return 0;
     }
 }

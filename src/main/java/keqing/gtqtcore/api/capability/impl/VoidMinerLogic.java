@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
-
 public class VoidMinerLogic {
     // Drilling Fluid amount which will be consumed, used to predicate working
     // when Drilling Fluid is satisfied some property and >= this amount.

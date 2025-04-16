@@ -11,8 +11,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 public class FusionLoader {
 
     public static void init() {
-
-        int SECOND=20;
         /* -------------------------------- MK1 -------------------------------- */
 
         //  Magnesium + Oxygen -> Calcium (plasma)

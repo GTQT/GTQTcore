@@ -8,6 +8,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
@@ -19,7 +20,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
 import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -42,13 +42,13 @@ import java.util.List;
 import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntityLargeHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
+public class MetaTileEntityLargeHeatExchanger extends RecipeMapPrimitiveMultiblockController implements IHeatExchanger {
     private final int heatTime = 300;
     private int thresholdPercentage = 100;
 
     public MetaTileEntityLargeHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
     }
 
     @Override

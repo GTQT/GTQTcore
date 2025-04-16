@@ -49,11 +49,11 @@ import java.time.Duration;
 import java.util.*;
 import java.util.function.Supplier;
 
+import static gregtech.api.GTValues.HOUR;
 import static gregtech.api.util.RelativeDirection.FRONT;
 import static gregtech.api.util.RelativeDirection.RIGHT;
 import static gregtech.api.util.RelativeDirection.UP;
 import static keqing.gtqtcore.api.utils.BigMath.summarizedValue;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.HOUR;
 
 //  TODO Wireless Mode (allowed this machine IO Wireless Energy Network if this mode is enabled).
 public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase implements IControllable, IProgressBarMultiblock {

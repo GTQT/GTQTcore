@@ -17,9 +17,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.Kovar;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.VACUUM_TUBE_COMPONENTS;
 
 public class PrimitiveCircuits {
-
-    private static final int MINUTE = 1200;
-    private static final int SECOND = 20;
     public static void init() {
         ModHandler.addShapelessRecipe("dust_kovar", OreDictUnifier.get(OrePrefix.dust, Kovar, 6),
                 OreDictUnifier.get(OrePrefix.dust, Iron),

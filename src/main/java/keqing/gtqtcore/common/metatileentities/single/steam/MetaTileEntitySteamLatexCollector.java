@@ -28,6 +28,7 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -190,8 +191,8 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
     }
 
     @Override
-    public void onPlacement() {
-        super.onPlacement();
+    public void onPlacement(EntityLivingBase placer) {
+        super.onPlacement(placer);
         this.checkAdjacentBlocks();
     }
 
@@ -214,7 +215,7 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
         }
     }
 
-    public <T> void addNotifiedInput(T input) {
+    public void addNotifiedInput(Object input) {
         super.addNotifiedInput(input);
         this.onNeighborChanged();
     }

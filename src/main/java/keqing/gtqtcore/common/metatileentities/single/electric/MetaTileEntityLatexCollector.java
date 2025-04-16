@@ -85,7 +85,7 @@ public class MetaTileEntityLatexCollector extends PseudoMultiMachineMetaTileEnti
         this.checkAdjacentBlocks();
     }
 
-    public <T> void addNotifiedInput(T input) {
+    public void addNotifiedInput(Object input) {
         super.addNotifiedInput(input);
         this.onNeighborChanged();
     }

@@ -15,7 +15,6 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.NitrousAcid;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumAcetate;
 
 public class HexanitrohexaaxaisowurtzitaneChain {
-    static int SECOND=20;
     public static void init() {
         //  Ammonium Carbonate
         ROASTER_RECIPES.recipeBuilder()

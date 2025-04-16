@@ -187,42 +187,6 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     }
 
     @Override
-    public TraceabilityPredicate autoAbilities() {
-        return autoAbilities(true, true, true, true, true, true);
-    }
-
-    public TraceabilityPredicate autoAbilities(boolean checkMaintenance,
-                                               boolean checkItemIn,
-                                               boolean checkItemOut,
-                                               boolean checkFluidIn,
-                                               boolean checkFluidOut,
-                                               boolean checkMuffler) {
-        TraceabilityPredicate predicate = super.autoAbilities(checkMaintenance, checkMuffler);
-
-        if (checkItemIn) {
-            if (recipeMap.getMaxInputs() > 0) {
-                predicate = predicate.or(abilities(MultiblockAbility.IMPORT_ITEMS).setPreviewCount(1));
-            }
-        }
-        if (checkItemOut) {
-            if (recipeMap.getMaxOutputs() > 0) {
-                predicate = predicate.or(abilities(MultiblockAbility.EXPORT_ITEMS).setPreviewCount(1));
-            }
-        }
-        if (checkFluidIn) {
-            if (recipeMap.getMaxFluidInputs() > 0) {
-                predicate = predicate.or(abilities(MultiblockAbility.IMPORT_FLUIDS).setPreviewCount(1));
-            }
-        }
-        if (checkFluidOut) {
-            if (recipeMap.getMaxFluidOutputs() > 0) {
-                predicate = predicate.or(abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1));
-            }
-        }
-        return predicate;
-    }
-
-    @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeBoolean(isDistinct);

@@ -12,8 +12,6 @@ import static gregtechfoodoption.GTFOMaterialHandler.BlueVitriol;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ROASTER_RECIPES;
 
 public class SeleniumTelluriumChain {
-    static int SECOND=20;
-    static int MINUTE=1200;
     public static void init() {
 
         //  CuSO4 + H2O -> H2SO4 + Cu + O

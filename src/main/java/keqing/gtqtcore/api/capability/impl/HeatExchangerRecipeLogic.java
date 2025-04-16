@@ -1,11 +1,13 @@
 package keqing.gtqtcore.api.capability.impl;
 
+import gregtech.api.capability.impl.PrimitiveRecipeLogic;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
-import keqing.gtqtcore.api.metaileentity.multiblock.NoEnergyMultiblockController;
 import keqing.gtqtcore.api.recipes.properties.FlowRateProperty;
 import keqing.gtqtcore.api.recipes.properties.MaxRateProperty;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,15 +22,15 @@ import static keqing.gtqtcore.api.capability.GTQTDataCode.*;
 import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 
 @SuppressWarnings("all")
-public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
+public class HeatExchangerRecipeLogic extends PrimitiveRecipeLogic {
 
     private int currentHeat;
     private final int maxHeat;
     private boolean isSuperheat;
     private int rate;
 
-    public HeatExchangerRecipeLogic(NoEnergyMultiblockController tileEntity) {
-        super(tileEntity, tileEntity.recipeMap);
+    public HeatExchangerRecipeLogic(RecipeMapPrimitiveMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+        super(tileEntity, recipeMap);
         this.maxHeat = ((IHeatExchanger) tileEntity).getHeatTime() * 20;
     }
 
@@ -65,7 +67,7 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    protected void trySearchNewRecipeCombined() {
+    protected void trySearchNewRecipe() {
         long maxVoltage = getMaxVoltage();
         List<FluidStack> fluidStackList = new ArrayList<>(GTUtility.fluidHandlerToList(getInputTank()));
         fluidStackList.add(Materials.DistilledWater.getFluid(Integer.MAX_VALUE));
@@ -123,10 +125,13 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
         recipeBuilder.append(tRecipe, amount, false);
         applyParallelBonus(recipeBuilder);
         recipe = recipeBuilder.build().getResult();
-        if (recipe != null && setupAndConsumeRecipeInputs(recipe, getInputInventory())) {
-            setupRecipe(recipe);
-            setRate(amount);
-            return true;
+        if (recipe != null) {
+            recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
+            if (recipe != null) {
+                setupRecipe(recipe);
+                return true;
+            }
+            return false;
         } else {
             metaTileEntity.doExplosion(6);
             return false;
@@ -189,16 +194,16 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    public void writeInitialData( PacketBuffer buf) {
-        super.writeInitialData(buf);
+    public void writeInitialSyncData( PacketBuffer buf) {
+        super.writeInitialSyncData(buf);
         buf.writeVarInt(currentHeat);
         buf.writeVarInt(rate);
         buf.writeBoolean(isSuperheat);
     }
 
     @Override
-    public void receiveInitialData( PacketBuffer buf) {
-        super.receiveInitialData(buf);
+    public void receiveInitialSyncData( PacketBuffer buf) {
+        super.receiveInitialSyncData(buf);
         this.currentHeat = buf.readVarInt();
         this.rate = buf.readVarInt();
         this.isSuperheat = buf.readBoolean();

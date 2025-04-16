@@ -6,8 +6,8 @@ import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.recipeproperties.ComputationProperty;
-import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
+import gregtech.api.recipes.properties.impl.ComputationProperty;
+import gregtech.api.recipes.properties.impl.TotalComputationProperty;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ComputationRecipeLogic extends MultiblockRecipeLogic {

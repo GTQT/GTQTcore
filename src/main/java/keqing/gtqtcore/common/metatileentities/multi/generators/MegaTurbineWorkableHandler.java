@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.metatileentities.multi.generators;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.capability.IRotorHolder;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.metatileentity.multiblock.FuelMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
@@ -10,6 +11,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTUtility;
+import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 import keqing.gtqtcore.api.metaileentity.multiblock.ITurbineMode;
 import net.minecraft.item.ItemStack;
@@ -83,10 +85,9 @@ public class MegaTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
         return 0;
     }
 
-    private int getParallel(Recipe recipe,
-                            double totalHolderEfficiencyCoefficient,
-                            int turbineMaxVoltage) {
-        return MathHelper.ceil((double) (turbineMaxVoltage - this.excessVoltage) / ((double) Math.abs(recipe.getEUt()) * totalHolderEfficiencyCoefficient));
+    private int getParallel(Recipe recipe, double totalHolderEfficiencyCoefficient, long turbineMaxVoltage) {
+        return MathHelper.ceil((turbineMaxVoltage - this.excessVoltage) /
+                (recipe.getEUt() * totalHolderEfficiencyCoefficient));
     }
 
     private boolean canDoRecipeWithParallel(Recipe recipe) {
@@ -135,21 +136,20 @@ public class MegaTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
 
     @Override
     public boolean prepareRecipe(Recipe recipe) {
-        List<IReinforcedRotorHolder> rotorHolders = ((ITurbineMode) metaTileEntity).getRotorHolders();
-        if (rotorHolders == null || !rotorHolders.get(0).hasRotor())
+        IRotorHolder rotorHolder = ((MetaTileEntityLargeTurbine) metaTileEntity).getRotorHolder();
+        if (rotorHolder == null || !rotorHolder.hasRotor())
             return false;
 
-        int turbineMaxVoltage = (int) getMaxVoltage();
+        long turbineMaxVoltage = getMaxVoltage();
         FluidStack recipeFluidStack = recipe.getFluidInputs().get(0).getInputFluidStack();
         int parallel = 0;
 
-        if (excessVoltage >= turbineMaxVoltage) {
-            excessVoltage -= turbineMaxVoltage;
+        if (this.excessVoltage >= turbineMaxVoltage) {
+            this.excessVoltage -= turbineMaxVoltage;
         } else {
-            double holderEfficiency = rotorHolders.get(0).getTotalEfficiency() / 100.0;
-            //  Get the amount of parallel required to match the desired output voltage
-            parallel = MathHelper.ceil((turbineMaxVoltage - excessVoltage) /
-                    (Math.abs(recipe.getEUt()) * holderEfficiency));
+            double holderEfficiency = rotorHolder.getTotalEfficiency() / 100.0;
+            // get the amount of parallel required to match the desired output voltage
+            parallel = getParallel(recipe, holderEfficiency, turbineMaxVoltage);
 
             // Null check fluid here, since it can return null on first join into world or first form
             FluidStack inputFluid = getInputFluidStack();
@@ -157,24 +157,27 @@ public class MegaTurbineWorkableHandler extends MultiblockFuelRecipeLogic {
                 return false;
             }
 
-            //  This is necessary to prevent over-consumption of fuel
-            excessVoltage += (int) (parallel * Math.abs(recipe.getEUt()) * holderEfficiency - turbineMaxVoltage);
+            // this is necessary to prevent over-consumption of fuel
+            this.excessVoltage += (long) (parallel * recipe.getEUt() * holderEfficiency - turbineMaxVoltage);
         }
 
-        //  Rebuild the recipe and adjust voltage to match the turbine
-        //  Thanks my friend to help me fix a little problem.
+        // rebuild the recipe and adjust voltage to match the turbine
         RecipeBuilder<?> recipeBuilder = getRecipeMap().recipeBuilder();
         recipeBuilder.append(recipe, parallel, false)
                 .EUt(turbineMaxVoltage);
         applyParallelBonus(recipeBuilder);
         recipe = recipeBuilder.build().getResult();
 
-        if (recipe != null && setupAndConsumeRecipeInputs(recipe, getInputInventory())) {
-            setupRecipe(recipe);
-            return true;
+        if (recipe != null) {
+            recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
+            if (recipe != null) {
+                setupRecipe(recipe);
+                return true;
+            }
         }
         return false;
     }
+
 
     @Override
     public void invalidate() {
