@@ -45,6 +45,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingTyp
 public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
     int requestCWUt;
     private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityLargeElementDuplicator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.COPY_RECIPES);
         this.recipeMapWorkable = new DuplicatorRecipeLogic(this, true);
@@ -54,6 +55,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeElementDuplicator(metaTileEntityId);
     }
+
     @Override
     public void updateFormedValid() {
         super.updateFormedValid();
@@ -61,21 +63,23 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         TraceabilityPredicate abilities = autoAbilities();
         return FactoryBlockPattern.start()
-                .aisle("###XXX###", "##XXXXX##", "#XXXXXXX#", "XXXXXXXXX","XXXXXXXXX","XXXXXXXXX","#XXXXXXX#", "##XXXXX##", "###XXX###")
-                .aisle("###XWX###", "##WQZQW##", "#WQZTZQW#", "XQZTYTZQX","WQZYYYZQW","XQZTYTZQX","#WQZTZQW#", "##WQZQW##", "###XWX###")
-                .aisle("###XGX###", "##G###G##", "#G#####G#", "X###Y###X","G##YYY##G","X###Y###X","#G#####G#", "##G###G##", "###XGX###")
-                .aisle("###XGX###", "##G###G##", "#G#####G#", "X###Y###X","G##YYY##G","X###Y###X","#G#####G#", "##G###G##", "###XGX###")
-                .aisle("###XWX###", "##WQZQW##", "#WQZTZQW#", "XQZTYTZQX","WQZYYYZQW","XQZTYTZQX","#WQZTZQW#", "##WQZQW##", "###XWX###")
-                .aisle("###XXX###", "##XXXXX##", "#XXXXXXX#", "XXXXXXXXX","XXXXSXXXX","XXXXXXXXX","#XXXXXXX#", "##XXXXX##", "###XXX###")
+                .aisle("###XXX###", "##XXXXX##", "#XXXXXXX#", "XXXXXXXXX", "XXXXXXXXX", "XXXXXXXXX", "#XXXXXXX#", "##XXXXX##", "###XXX###")
+                .aisle("###XWX###", "##WQZQW##", "#WQZTZQW#", "XQZTYTZQX", "WQZYYYZQW", "XQZTYTZQX", "#WQZTZQW#", "##WQZQW##", "###XWX###")
+                .aisle("###XGX###", "##G###G##", "#G#####G#", "X###Y###X", "G##YYY##G", "X###Y###X", "#G#####G#", "##G###G##", "###XGX###")
+                .aisle("###XGX###", "##G###G##", "#G#####G#", "X###Y###X", "G##YYY##G", "X###Y###X", "#G#####G#", "##G###G##", "###XGX###")
+                .aisle("###XWX###", "##WQZQW##", "#WQZTZQW#", "XQZTYTZQX", "WQZYYYZQW", "XQZTYTZQX", "#WQZTZQW#", "##WQZQW##", "###XWX###")
+                .aisle("###XXX###", "##XXXXX##", "#XXXXXXX#", "XXXXXXXXX", "XXXXSXXXX", "XXXXXXXXX", "#XXXXXXX#", "##XXXXX##", "###XXX###")
                 .where('S', selfPredicate())
                 .where('C', states(getCasingState3()))
                 .where('G', states(getGlassState()))
@@ -98,15 +102,19 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.ELEMENT_CONSTRAINS_MACHINE_CASING;
     }
+
     protected IBlockState getGlassState() {
         return GTQTMetaBlocks.blockMultiblockGlass.getState(COPY_GALSS);
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(ELEMENT_CONSTRAINS_MACHINE_CASING);
     }
+
     protected IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(MASS_GENERATION_CASING);
     }
+
     protected IBlockState getCasingState2() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(MASS_GENERATION_COIL_CASING);
     }
@@ -126,6 +134,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     protected IBlockState getCasingState6() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(HIGH_VOLTAGE_CAPACITOR_BLOCK_CASING);
     }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -136,16 +145,18 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("复制元素", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress *0.8"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress *0.8"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -155,18 +166,20 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
             this.computationProvider = providers.get(0);
         }
     }
+
     @SideOnly(Side.CLIENT)
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_UU_PRODUCTER;
     }
+
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
 
-    protected class DuplicatorRecipeLogic extends MultiblockRecipeLogic{
+    protected class DuplicatorRecipeLogic extends MultiblockRecipeLogic {
 
         public DuplicatorRecipeLogic(RecipeMapMultiblockController tileEntity, boolean hasPerfectOC) {
             super(tileEntity, hasPerfectOC);
@@ -174,17 +187,17 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
         @Override
         public int getParallelLimit() {
             int tire = 1;
             for (int i = 0; i < GTValues.V.length; i++) {
-                if(GTValues.V[i]==this.getMaxVoltage())
+                if (GTValues.V[i] == this.getMaxVoltage())
                     tire = i;
             }
-            return (int) Math.max(Math.pow(2, tire),256);
+            return (int) Math.max(Math.pow(2, tire), 256);
         }
     }
 }

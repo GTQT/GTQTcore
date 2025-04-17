@@ -15,7 +15,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Prismarine;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Purpur;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 
 public class VanillaRecipes {
     public static void register() {

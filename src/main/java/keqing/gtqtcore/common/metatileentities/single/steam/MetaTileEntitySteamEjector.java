@@ -49,17 +49,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static keqing.gtqtcore.api.GCYSValues.*;
+import static keqing.gtqtcore.api.GCYSValues.decreaseDetailP;
+import static keqing.gtqtcore.api.GCYSValues.getPressureChange;
 
 public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataInfoProvider, IActiveOutputSide {
 
-    private static final int PRESSURE_DECREASE = getPressureChange(0,false);
+    private static final int PRESSURE_DECREASE = getPressureChange(0, false);
     private static final int STEAM_CONSUMPTION = 160;
     protected EnumFacing outputFacing;
     private PressureContainer pressureContainer;
@@ -67,18 +67,18 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
     @SuppressWarnings("FieldMayBeFinal")
     private boolean isHighPressure;
 
-    public  PressureContainer getPressureContainer() {
-        return pressureContainer;
-    }
-
-    public MetaTileEntitySteamEjector(ResourceLocation metaTileEntityId,boolean isHighPressure) {
+    public MetaTileEntitySteamEjector(ResourceLocation metaTileEntityId, boolean isHighPressure) {
         super(metaTileEntityId);
         this.isHighPressure = isHighPressure;
     }
 
+    public PressureContainer getPressureContainer() {
+        return pressureContainer;
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity metaTileEntityHolder) {
-        return new MetaTileEntitySteamEjector(metaTileEntityId,isHighPressure);
+        return new MetaTileEntitySteamEjector(metaTileEntityId, isHighPressure);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         for (EnumFacing facing : EnumFacing.VALUES) {
-            if(isHighPressure)Textures.STEAM_CASING_STEEL.renderSided(facing, renderState, translation, pipeline);
+            if (isHighPressure) Textures.STEAM_CASING_STEEL.renderSided(facing, renderState, translation, pipeline);
             else Textures.STEAM_CASING_BRONZE.renderSided(facing, renderState, translation, pipeline);
         }
         Textures.AIR_VENT_OVERLAY.renderSided(getFrontFacing(), renderState, translation, pipeline);
@@ -107,7 +107,7 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
 
     @Override
     public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
-        if(isHighPressure)
+        if (isHighPressure)
             return Pair.of(Textures.STEAM_CASING_STEEL.getParticleSprite(), getPaintingColorForRendering());
         else return Pair.of(Textures.STEAM_CASING_BRONZE.getParticleSprite(), getPaintingColorForRendering());
     }
@@ -130,10 +130,12 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
                 .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT_STEAM.get(isHighPressure), 0)
                 .build(getHolder(), entityPlayer);
     }
+
     private String getTooltips() {
         return NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getPressure()) + "Pa / " +
                 NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()) + "Pa";
     }
+
     @Override
     public boolean onWrenchClick(@Nonnull EntityPlayer playerIn, EnumHand hand, EnumFacing facing, CuboidRayTraceResult hitResult) {
         if (!playerIn.isSneaking()) {
@@ -149,12 +151,12 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
         super.update();
         if (!getWorld().isRemote && getOffsetTimer() % 20 == 0) {
             if (pressureContainer.getPressure() > pressureContainer.getMinPressure()) {
-                FluidStack drained = fuelFluidTank.drain(STEAM_CONSUMPTION*(isHighPressure?2:1), false);
-                if (drained != null && drained.amount == STEAM_CONSUMPTION*(isHighPressure?2:1) && ventSteam(true)) {
-                    fuelFluidTank.drain(STEAM_CONSUMPTION*(isHighPressure?2:1), true);
+                FluidStack drained = fuelFluidTank.drain(STEAM_CONSUMPTION * (isHighPressure ? 2 : 1), false);
+                if (drained != null && drained.amount == STEAM_CONSUMPTION * (isHighPressure ? 2 : 1) && ventSteam(true)) {
+                    fuelFluidTank.drain(STEAM_CONSUMPTION * (isHighPressure ? 2 : 1), true);
 
-                    if (pressureContainer.changeParticles(PRESSURE_DECREASE*(isHighPressure?2:1), true)) {
-                        pressureContainer.changeParticles(PRESSURE_DECREASE*(isHighPressure?2:1), false);
+                    if (pressureContainer.changeParticles(PRESSURE_DECREASE * (isHighPressure ? 2 : 1), true)) {
+                        pressureContainer.changeParticles(PRESSURE_DECREASE * (isHighPressure ? 2 : 1), false);
                     } else if (pressureContainer.changeParticles(-pressureContainer.getParticles() / 2, true)) {
                         // divide pressure by 2 if the regular decrease is too much
                         pressureContainer.changeParticles(-pressureContainer.getParticles() / 2, false);
@@ -218,8 +220,8 @@ public class MetaTileEntitySteamEjector extends MetaTileEntity implements IDataI
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.steam_ejector.tooltip.1"));
-        tooltip.add(I18n.format("gtqtcore.steam_ejector.tooltip.2", NumberFormattingUtil.formatDoubleToCompactString(Math.abs(PRESSURE_DECREASE*(isHighPressure?2:1)))));
-        tooltip.add(I18n.format("gtqtcore.steam_ejector.tooltip.3", STEAM_CONSUMPTION*(isHighPressure?2:1)));
+        tooltip.add(I18n.format("gtqtcore.steam_ejector.tooltip.2", NumberFormattingUtil.formatDoubleToCompactString(Math.abs(PRESSURE_DECREASE * (isHighPressure ? 2 : 1)))));
+        tooltip.add(I18n.format("gtqtcore.steam_ejector.tooltip.3", STEAM_CONSUMPTION * (isHighPressure ? 2 : 1)));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMinPressure())]));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMaxPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMaxPressure())]));
     }

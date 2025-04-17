@@ -21,10 +21,10 @@ import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.capability.ILaser;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -282,8 +282,10 @@ public class MetaTileEntitySBPRI extends MetaTileEntityBaseWithControl {
     }
 
     public void setCurrentA(int parallelAmount) {
-        if (circuit < length)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
+        if (circuit < length)
+            this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp(this.getAbilities(LASER_INPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
     }
+
     protected void addTotal(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("输入激光能量:%s", Laser));

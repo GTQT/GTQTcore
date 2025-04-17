@@ -16,7 +16,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlocksResearchSystem;
@@ -29,8 +29,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,6 +45,18 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
 
     public MetaTileEntityAdvanceNetworkSwitch(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+    }
+
+    private static IBlockState getOuterState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_HEAT_VENT);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_CASING);
+    }
+
+    private static IBlockState getAdvancedState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ULTRA_COMPUTER_CASING);
     }
 
     @Override
@@ -81,31 +91,31 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
     }
 
     @Override
-    public int requestCWUt(int cwut, boolean simulate,  Collection<IOpticalComputationProvider> seen) {
+    public int requestCWUt(int cwut, boolean simulate, Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         return isActive() && !hasNotEnoughEnergy ? computationHandler.requestCWUt(cwut, simulate, seen) : 0;
     }
 
     @Override
-    public int getMaxCWUt( Collection<IOpticalComputationProvider> seen) {
+    public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         return isStructureFormed() ? computationHandler.getMaxCWUt(seen) : 0;
     }
 
     // allows chaining Network Switches together
     @Override
-    public boolean canBridge( Collection<IOpticalComputationProvider> seen) {
+    public boolean canBridge(Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
         return true;
     }
 
     @Override
-    protected  BlockPattern createStructurePattern() {
+    protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("PPP", "PPP", "PPP")
-                .aisle("XXX", "XXX", "XXX").setRepeatable(1,3)
+                .aisle("XXX", "XXX", "XXX").setRepeatable(1, 3)
                 .aisle("XXX", "SAX", "XXX")
-                .aisle("XXX", "XXX", "XXX").setRepeatable(1,3)
+                .aisle("XXX", "XXX", "XXX").setRepeatable(1, 3)
                 .aisle("PPP", "PPP", "PPP")
                 .where('S', selfPredicate())
                 .where('A', states(getAdvancedState()))
@@ -117,17 +127,6 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION).setMinGlobalLimited(1, 1)));
         return pattern.build();
     }
-    private static IBlockState getOuterState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_HEAT_VENT);
-    }
-
-    private static  IBlockState getCasingState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_CASING);
-    }
-
-    private static  IBlockState getAdvancedState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ULTRA_COMPUTER_CASING);
-    }
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -137,7 +136,7 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
 
     @SideOnly(Side.CLIENT)
     @Override
-    protected  ICubeRenderer getFrontOverlay() {
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.NETWORK_SWITCH_OVERLAY;
     }
 
@@ -174,7 +173,9 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
         }
     }
 
-    /** Handles computation load across multiple receivers and to multiple transmitters. */
+    /**
+     * Handles computation load across multiple receivers and to multiple transmitters.
+     */
     private static class MultipleComputationHandler implements IOpticalComputationProvider,
             IOpticalComputationReceiver {
 
@@ -254,12 +255,16 @@ public class MetaTileEntityAdvanceNetworkSwitch extends MetaTileEntityAdvanceDat
             return false;
         }
 
-        /** The EU/t cost of this Network Switch given the attached providers and transmitters. */
+        /**
+         * The EU/t cost of this Network Switch given the attached providers and transmitters.
+         */
         private int getEUt() {
             return EUt;
         }
 
-        /** Test if any of the provider hatches do not allow bridging */
+        /**
+         * Test if any of the provider hatches do not allow bridging
+         */
         private boolean hasNonBridgingConnections() {
             Collection<IOpticalComputationProvider> seen = new ArrayList<>();
             for (var provider : providers) {

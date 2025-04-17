@@ -52,9 +52,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implements IHeatingCoil , IPressureMachine {
+public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implements IHeatingCoil, IPressureMachine {
     private int czpullerTemperarure;
     private IPressureContainer container;
+
     public MetaTileEntityCZPuller(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CZPULLER_RECIPES);
         this.recipeMapWorkable = new CZPullerRecipeLogic(this);
@@ -64,6 +65,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityCZPuller(metaTileEntityId);
     }
+
     @Override
     public IPressureContainer getPressureContainer() {
         return this.container;
@@ -77,6 +79,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
         }
         super.addDisplayText(textList);
     }
+
     protected void initializeAbilities() {
         super.initializeAbilities();
         List<IPressureContainer> list = getAbilities(GTQTMultiblockAbility.PRESSURE_CONTAINER);
@@ -86,6 +89,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
             this.container = list.get(0);
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

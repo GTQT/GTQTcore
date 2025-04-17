@@ -12,7 +12,6 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.ProgressWidget;
-import gregtech.api.gui.widgets.TextFieldWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.unification.material.Material;
@@ -35,7 +34,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
@@ -43,7 +41,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static keqing.gtqtcore.api.GCYSValues.decreaseDetailP;
@@ -100,7 +97,7 @@ public class MetaTileEntityGasTank extends MetaTileEntity implements IActiveOutp
                 .label(6, 6, getMetaFullName())
 
                 // TODO add tooltip directly to ProgressWidget in CEu
-                .dynamicLabel(8, 12, () -> "耐压储罐 等级："+tier +" 容积："+size, 0xFFFFFF)
+                .dynamicLabel(8, 12, () -> "耐压储罐 等级：" + tier + " 容积：" + size, 0xFFFFFF)
                 .widget(new ImageWidget(70, 26, 10, 54, GuiTextures.SLOT)
                         .setTooltip(NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getPressure()) + "Pa / " +
                                 NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMaxPressure()) + "Pa"))
@@ -145,6 +142,7 @@ public class MetaTileEntityGasTank extends MetaTileEntity implements IActiveOutp
             }
         }
     }
+
     @Override
     public boolean isAutoOutputItems() {
         return false;
@@ -237,6 +235,7 @@ public class MetaTileEntityGasTank extends MetaTileEntity implements IActiveOutp
         }
         return super.getCapability(capability, side);
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

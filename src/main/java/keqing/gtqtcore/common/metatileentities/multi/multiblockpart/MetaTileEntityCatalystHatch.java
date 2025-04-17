@@ -11,6 +11,7 @@ import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
@@ -146,10 +147,10 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
-        clearInventory(itemBuffer, this.catalystHolder);
+    public void clearMachineInventory(List<ItemStack> itemBuffer) {
+        super.clearMachineInventory(itemBuffer);
+        clearInventory(itemBuffer, catalystHolder);
     }
-
     @Override
     protected boolean shouldSerializeInventories() {
         return false;
@@ -195,10 +196,9 @@ public class MetaTileEntityCatalystHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void registerAbilities(List<ICatalystHatch> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
-
     @Override
     public void setStackInSlot(int slot, ItemStack stack) {
         this.catalystHolder.setStackInSlot(slot, stack);

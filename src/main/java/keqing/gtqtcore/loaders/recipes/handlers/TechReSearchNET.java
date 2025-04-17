@@ -45,8 +45,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.ADVANCED_FORCE_FIELD_CONSTRAINT_COIL;
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.ActiveCasingType.FORCE_FIELD_CONSTRAINT_COIL;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.FLOTATION_CASING_GEARBOX;
@@ -57,7 +56,6 @@ import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMBU
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.STEAM_TURBINE;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
-import static keqing.gtqtcore.loaders.recipes.handlers.ChipHelper.SECOND;
 
 public class TechReSearchNET {
 
@@ -1289,29 +1287,6 @@ public class TechReSearchNET {
                 .duration(1000).EUt(120).buildAndRegister();
 
         //数据仓
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(ITEM_IMPORT_BUS[MV])
-                .input(DISK_0)
-                .input(circuit, Tier.MV, 4)
-                .input(plateDense, Aluminium, 4)
-                .output(EDATA_ACCESS_HATCH)
-                .fluidInputs(Polyethylene.getFluid(L * 2))
-                .duration(200).EUt(VA[HV]).buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(ITEM_IMPORT_BUS[UV])
-                .inputNBT(TOOL_DATA_ORB, 4, NBTMatcher.ANY, NBTCondition.ANY)
-                .input(circuit, Tier.UHV, 4)
-                .input(plateDense, Aluminium, 4)
-                .output(FDATA_ACCESS_HATCH)
-                .fluidInputs(SolderingAlloy.getFluid(L * 8))
-                .fluidInputs(Polybenzimidazole.getFluid(L * 8))
-                .stationResearch(b -> b
-                        .researchStack(ADVANCED_DATA_ACCESS_HATCH.getStackForm())
-                        .CWUt(CWT[UV])
-                        .EUt(VA[UV]))
-                .duration(4000000).EUt(6000).buildAndRegister();
-
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(GREENHOUSE, 4)
                 .input(circuit, Tier.HV, 4)
@@ -1890,7 +1865,7 @@ public class TechReSearchNET {
                 .fluidInputs(Lubricant.getFluid(500))
                 .output(MINI_DATE_BANK)
                 .scannerResearch(b -> b
-                        .researchStack(DATA_ACCESS_HATCH.getStackForm())
+                        .researchStack(DATA_ACCESS_HATCH[3].getStackForm())
                         .duration(1200)
                         .EUt(VA[EV]))
                 .duration(1200).EUt(4000).buildAndRegister();

@@ -293,8 +293,8 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements I
         @Override
         public void setMaxProgress(int maxProgress) {
             if (getStatue()) {
-                maxProgressTime = (int) (maxProgress *0.6);
-            } else this.maxProgressTime = (int) (maxProgress *0.8);
+                maxProgressTime = (int) (maxProgress * 0.6);
+            } else this.maxProgressTime = (int) (maxProgress * 0.8);
         }
 
         public boolean getStatue() {

@@ -27,12 +27,12 @@ public class MetaTileEntityPlasticCan extends MetaTileEntityDrum {
 
     private final MetaTileEntityDrumAccessor self;
 
-    public MetaTileEntityPlasticCan(ResourceLocation metaTileEntityId,  Material material, int tankSize) {
+    public MetaTileEntityPlasticCan(ResourceLocation metaTileEntityId, Material material, int tankSize) {
         super(metaTileEntityId, material, tankSize);
         this.self = (MetaTileEntityDrumAccessor) this;
     }
 
-    public MetaTileEntityPlasticCan(ResourceLocation metaTileEntityId,  IPropertyFluidFilter fluidFilter, int color, int tankSize) {
+    public MetaTileEntityPlasticCan(ResourceLocation metaTileEntityId, IPropertyFluidFilter fluidFilter, int color, int tankSize) {
         super(metaTileEntityId, fluidFilter, false, color, tankSize);
         this.self = (MetaTileEntityDrumAccessor) this;
     }

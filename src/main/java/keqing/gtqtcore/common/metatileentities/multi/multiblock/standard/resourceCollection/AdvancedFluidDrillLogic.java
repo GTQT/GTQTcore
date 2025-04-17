@@ -139,14 +139,6 @@ public class AdvancedFluidDrillLogic {
         return this.isActive;
     }
 
-    public int getChunkX() {
-        return Math.floorDiv(this.metaTileEntity.getPos().getX(), 16);
-    }
-
-    public int getChunkZ() {
-        return Math.floorDiv(this.metaTileEntity.getPos().getZ(), 16);
-    }
-
     public void setActive(boolean active) {
         if (this.isActive != active) {
             this.isActive = active;
@@ -158,6 +150,14 @@ public class AdvancedFluidDrillLogic {
             }
         }
 
+    }
+
+    public int getChunkX() {
+        return Math.floorDiv(this.metaTileEntity.getPos().getX(), 16);
+    }
+
+    public int getChunkZ() {
+        return Math.floorDiv(this.metaTileEntity.getPos().getZ(), 16);
     }
 
     public void setWorkingEnabled(boolean isWorkingEnabled) {
@@ -185,7 +185,7 @@ public class AdvancedFluidDrillLogic {
         return this.metaTileEntity.getEnergyTier() > this.metaTileEntity.getTier();
     }
 
-    public NBTTagCompound writeToNBT( NBTTagCompound data) {
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setBoolean("isActive", this.isActive);
         data.setBoolean("isWorkingEnabled", this.isWorkingEnabled);
         data.setBoolean("needUpdate", this.needUpdate);
@@ -195,7 +195,7 @@ public class AdvancedFluidDrillLogic {
         return data;
     }
 
-    public void readFromNBT( NBTTagCompound data) {
+    public void readFromNBT(NBTTagCompound data) {
         this.isActive = data.getBoolean("isActive");
         this.isWorkingEnabled = data.getBoolean("isWorkingEnabled");
         this.needUpdate = data.getBoolean("needUpdate");
@@ -204,7 +204,7 @@ public class AdvancedFluidDrillLogic {
         this.isInventoryFull = data.getBoolean("isInventoryFull");
     }
 
-    public void writeInitialSyncData( PacketBuffer buf) {
+    public void writeInitialSyncData(PacketBuffer buf) {
         buf.writeBoolean(this.isActive);
         buf.writeBoolean(this.isWorkingEnabled);
         buf.writeBoolean(this.needUpdate);
@@ -212,7 +212,7 @@ public class AdvancedFluidDrillLogic {
         buf.writeBoolean(this.isInventoryFull);
     }
 
-    public void receiveInitialSyncData( PacketBuffer buf) {
+    public void receiveInitialSyncData(PacketBuffer buf) {
         this.setActive(buf.readBoolean());
         this.setWorkingEnabled(buf.readBoolean());
         this.setNeedUpdate(buf.readBoolean());

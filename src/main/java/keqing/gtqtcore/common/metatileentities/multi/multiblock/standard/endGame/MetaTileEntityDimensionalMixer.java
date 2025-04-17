@@ -43,7 +43,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.GTValues.UHV;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.*;
+import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_DM_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.DIMENSIONAL_BRIDGE_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DIMENSIONAL_MIXER;
@@ -57,6 +57,18 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         this.recipeMapWorkable = new DimensionalMixerRecipeLogic(this);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDimensionalMixer(metaTileEntityId);
@@ -67,7 +79,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         super.formStructure(context);
         Object casingTier = context.get("FieldCasingTieredStats");
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
     }
 
@@ -85,9 +97,8 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -119,18 +130,6 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
                 .where('#', air())
                 .where(' ', any())
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
-    }
-
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
     }
 
     @SideOnly(Side.CLIENT)

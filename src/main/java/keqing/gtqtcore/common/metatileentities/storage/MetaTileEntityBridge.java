@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 
 import java.util.function.Predicate;
+
 /**
  * Copyright (C) SymmetricDevs 2025
  * 由 MeowmelMuku 于 2025 修改。

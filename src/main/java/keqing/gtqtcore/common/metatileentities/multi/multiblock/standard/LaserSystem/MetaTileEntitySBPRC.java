@@ -25,11 +25,11 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.GTQTCoreConfig;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
@@ -86,6 +86,7 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 3);
     }
+
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(NQ_TURBINE_CASING);
     }
@@ -137,10 +138,9 @@ public class MetaTileEntitySBPRC extends MetaTileEntityBaseWithControl implement
         super.onRemoval();
         for (int i = 0; i < containerInventory.getSlots(); i++) {
             var pos = getPos();
-            if(!containerInventory.getStackInSlot(i).isEmpty())
-            {
-                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
-                containerInventory.extractItem(i,1,false);
+            if (!containerInventory.getStackInSlot(i).isEmpty()) {
+                getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, containerInventory.getStackInSlot(i)));
+                containerInventory.extractItem(i, 1, false);
             }
 
         }

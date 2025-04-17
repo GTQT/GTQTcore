@@ -70,26 +70,8 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     private static final FluidStack ColdNeonStack = Materials.Neon.getFluid(FluidStorageKeys.LIQUID, 1000);
 
     int heat;
-
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
-
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("heat", heat);
-        return super.writeToNBT(data);
-    }
-
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        heat = data.getInteger("heat");
-    }
+    double euBooster;
+    double euBase;
 
     public MetaTileEntityAntimatterGenerator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, ANTIMATTER_GENERATOR);
@@ -120,6 +102,25 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
         return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.MAGNETIC_FLUX_CASING);
     }
 
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
+    }
+
+    public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("heat", heat);
+        return super.writeToNBT(data);
+    }
+
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        heat = data.getInteger("heat");
+    }
+
     public IParticle getParticleHatch(int index) {
         List<IParticle> abilities = getAbilities(GTQTMultiblockAbility.PARTICLE_MULTIBLOCK_ABILITY);
         if (abilities.isEmpty())
@@ -127,42 +128,38 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
         return abilities.get(index);
     }
 
-    double euBooster;
-    double euBase;
     @Override
     protected void updateFormedValid() {
         super.updateFormedValid();
 
-        if(isStructureFormed())
-        {
-            if(heat>300)heat--;
-            if(heat>2000)generateCold();
+        if (isStructureFormed()) {
+            if (heat > 300) heat--;
+            if (heat > 2000) generateCold();
 
             if (!recipeMapWorkable.isWorkingEnabled()) {
-                euBooster=0;
-                euBase=0;
+                euBooster = 0;
+                euBase = 0;
                 return;
             }
-            if(heat>200000)return;
-            if(getParticleHatch(0).isAvailable()&&getParticleHatch(1).isAvailable()) {
+            if (heat > 200000) return;
+            if (getParticleHatch(0).isAvailable() && getParticleHatch(1).isAvailable()) {
                 if (getParticleHatch(0).getAntiStaticParticle().isItemEqual(getParticleHatch(1).getParticle())
-                        && (getParticleHatch(0).getAntiStaticParticle().getMetadata()==getParticleHatch(1).getParticle().getMetadata())
-                &&  (getParticleHatch(0).getParticle().getMetadata()!=getParticleHatch(1).getParticle().getMetadata())) {
+                        && (getParticleHatch(0).getAntiStaticParticle().getMetadata() == getParticleHatch(1).getParticle().getMetadata())
+                        && (getParticleHatch(0).getParticle().getMetadata() != getParticleHatch(1).getParticle().getMetadata())) {
                     if (getParticleHatch(0).consumeParticle(true) && getParticleHatch(1).consumeParticle(true)) {
                         getParticleHatch(0).consumeParticle(false);
                         getParticleHatch(1).consumeParticle(false);
                         euBase = Math.min(getParticleHatch(0).getEUAdd(), getParticleHatch(1).getEUAdd());
                         euBooster = getBoosterByFluidStack();
 
-                        if(heat>100000)
-                        {
-                            euBase=euBase*(-heat+200000)/100000;
-                            euBooster=1;
+                        if (heat > 100000) {
+                            euBase = euBase * (-heat + 200000) / 100000;
+                            euBooster = 1;
                         }
 
                         this.energyContainer.addEnergy((long) (euBase * euBooster));
 
-                        heat+=5;
+                        heat += 5;
                     }
                 }
             }
@@ -173,63 +170,60 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         if (ColdNitrogenStack.isFluidStackIdentical(inputTank.drain(ColdNitrogenStack, false))) {
             inputTank.drain(ColdNitrogenStack, true);
-            heat-=20;
-        }
-        else if (ColdHeliumStack.isFluidStackIdentical(inputTank.drain(ColdHeliumStack, false))) {
+            heat -= 20;
+        } else if (ColdHeliumStack.isFluidStackIdentical(inputTank.drain(ColdHeliumStack, false))) {
             inputTank.drain(ColdHeliumStack, true);
-            heat-=40;
-        }
-        else if (ColdNeonStack.isFluidStackIdentical(inputTank.drain(ColdNeonStack, false))) {
+            heat -= 40;
+        } else if (ColdNeonStack.isFluidStackIdentical(inputTank.drain(ColdNeonStack, false))) {
             inputTank.drain(ColdNeonStack, true);
-            heat-=60;
+            heat -= 60;
         }
     }
 
-    public double getBoosterByFluidStack()
-    {
+    public double getBoosterByFluidStack() {
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         if (HydrogenStack.isFluidStackIdentical(inputTank.drain(HydrogenStack, false))) {
             inputTank.drain(HydrogenStack, true);
-            heat+=10;
+            heat += 10;
             return 1.25;
         }
         if (HeliumStack.isFluidStackIdentical(inputTank.drain(HeliumStack, false))) {
             inputTank.drain(HeliumStack, true);
-            heat+=15;
+            heat += 15;
             return 1.5;
         }
         if (NitrogenStack.isFluidStackIdentical(inputTank.drain(NitrogenStack, false))) {
             inputTank.drain(NitrogenStack, true);
-            heat+=20;
+            heat += 20;
             return 1.75;
         }
         if (OxygenStack.isFluidStackIdentical(inputTank.drain(OxygenStack, false))) {
             inputTank.drain(OxygenStack, true);
-            heat+=30;
+            heat += 30;
             return 2;
         }
         if (ArgonStack.isFluidStackIdentical(inputTank.drain(ArgonStack, false))) {
             inputTank.drain(ArgonStack, true);
-            heat+=40;
+            heat += 40;
             return 2.5;
         }
         if (KrStack.isFluidStackIdentical(inputTank.drain(KrStack, false))) {
             inputTank.drain(KrStack, true);
-            heat+=50;
+            heat += 50;
             return 3;
         }
 
         return 1;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        if (isStructureFormed())
-        {
+        if (isStructureFormed()) {
             textList.add(new TextComponentTranslation("正在湮灭: %s %s", getParticleHatch(0).getParticle().getDisplayName(), getParticleHatch(1).getParticle().getDisplayName()));
             textList.add(new TextComponentString("湮灭能量: " + euBase + " " + VN[GTUtility.getTierByVoltage((long) euBase)]));
             textList.add(new TextComponentTranslation("湮灭倍率: %s 倍", euBooster));
-            textList.add(new TextComponentString("总产生能量: " + euBase* euBooster + " " + VN[GTUtility.getTierByVoltage((long) (euBase* euBooster))]));
+            textList.add(new TextComponentString("总产生能量: " + euBase * euBooster + " " + VN[GTUtility.getTierByVoltage((long) (euBase * euBooster))]));
 
             textList.add(new TextComponentTranslation("反应温度 : %s K/200000 K", heat));
         }
@@ -351,7 +345,7 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
 
     @Override
     public double getFillPercentage(int index) {
-        return (double) heat /200000;
+        return (double) heat / 200000;
     }
 
     @Override
@@ -363,7 +357,7 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         ITextComponent info = TextComponentUtil.stringWithColor(
                 getColor(),
-                heat+ " / " + 200000 + " H");
+                heat + " / " + 200000 + " H");
 
         hoverList.add(TextComponentUtil.translationWithColor(
                 TextFormatting.GRAY,
@@ -372,7 +366,7 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     }
 
     private TextFormatting getColor() {
-        if (heat <100000) {
+        if (heat < 100000) {
             return TextFormatting.GREEN;
         } else {
             return heat < 150000 ? TextFormatting.YELLOW : TextFormatting.RED;

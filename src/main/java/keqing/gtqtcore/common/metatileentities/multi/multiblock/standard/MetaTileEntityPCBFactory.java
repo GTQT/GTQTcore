@@ -62,8 +62,6 @@ import java.util.List;
 
 import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.ZPM;
-import static gregtech.api.recipes.logic.OverclockingLogic.PERFECT_DURATION_FACTOR;
-import static gregtech.api.recipes.logic.OverclockingLogic.STD_DURATION_FACTOR;
 import static gregtech.api.unification.material.Materials.Gold;
 import static gregtech.api.unification.material.Materials.Silver;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
@@ -225,15 +223,16 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
         this.bioUpgradeNumber = 0;
         this.coolingUpgradeNumber = 0;
     }
+
     @Override
     public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
             if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
                 super.checkStructurePattern();
             }
-        }
-        else super.checkStructurePattern();
+        } else super.checkStructurePattern();
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe,
                                boolean consumeIfSuccess) {
@@ -551,6 +550,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
                 default -> 1.0;
             };
         }
+
         @Override
         public int getParallelLimit() {
             return this.calculateParallelBySwarm();

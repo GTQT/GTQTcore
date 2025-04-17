@@ -55,7 +55,8 @@ public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom impleme
                 if (block instanceof gregtech.common.blocks.BlockCleanroomCasing) {
                     gregtech.common.blocks.BlockCleanroomCasing.CasingType casingType = ((gregtech.common.blocks.BlockCleanroomCasing) blockState.getBlock())
                             .getState(blockState);
-                    if (casingType.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.PLASCRETE)) return false;
+                    if (casingType.equals(gregtech.common.blocks.BlockCleanroomCasing.CasingType.PLASCRETE))
+                        return false;
 
                     Object currentFilter = blockWorldState.getMatchContext().getOrPut("FilterType", casingType);
                     if (!currentFilter.toString().equals(casingType.getName())) {

@@ -42,14 +42,17 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
         this.recipeMapWorkable = new HeatRecipeLogic(this, GTQTcoreRecipeMaps.SALT_FLIED);
     }
+
     @Override
     public boolean hasMaintenanceMechanics() {
         return true;
     }
+
     @Override
     public boolean hasMufflerMechanics() {
         return true;
     }
+
     protected IBlockState getCasingState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID);
     }

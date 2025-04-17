@@ -21,7 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.black_steel;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.blue_steel;
 
 public class MetaTileEntityPressureFactory extends GCYMRecipeMapMultiblockController {
 
@@ -53,6 +52,7 @@ public class MetaTileEntityPressureFactory extends GCYMRecipeMapMultiblockContro
                 .where('#', air())
                 .build();
     }
+
     protected IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(black_steel);
     }

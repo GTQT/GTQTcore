@@ -10,7 +10,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_CIRCUIT_ASSEMBLY_LINE_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class LargeCircuitAssemblyLine {

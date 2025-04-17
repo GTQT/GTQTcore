@@ -9,7 +9,6 @@ import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
@@ -25,7 +24,6 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -63,6 +61,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
         textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
 
     }
+
     @Override
     public void updateFormedValid() {
         super.updateFormedValid();
@@ -97,8 +96,8 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("彼岸双生"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Electrode Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Electrode Tier",32));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock", "Electrode Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom", 2, "Electrode Tier", 32));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
@@ -141,12 +140,12 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
 
     private class AdvancedArcFurnaceWorkableHandler extends MultiblockRecipeLogic {
         public AdvancedArcFurnaceWorkableHandler(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity,true);
+            super(tileEntity, true);
         }
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, ElectrodeTier),32);
+            return Math.min((int) Math.pow(2, ElectrodeTier), 32);
         }
 
         @Override

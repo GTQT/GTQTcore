@@ -3,7 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantE
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
@@ -79,15 +78,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     int requestCWUt;
     private int blastFurnaceTemperature;
     private IOpticalComputationProvider computationProvider;
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
+
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GCYMRecipeMaps.ALLOY_BLAST_RECIPES,
@@ -115,6 +106,15 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
     private static IBlockState getUniqueCasingState() {
         return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
+    }
+
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
     }
 
     @Override
@@ -147,7 +147,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
         ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
         textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire,coilTier));
+        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire, coilTier));
     }
 
     @Override
@@ -325,7 +325,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {

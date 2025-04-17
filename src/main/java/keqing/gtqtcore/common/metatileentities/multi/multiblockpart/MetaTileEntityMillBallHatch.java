@@ -9,6 +9,7 @@ import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
@@ -138,10 +139,10 @@ public class MetaTileEntityMillBallHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
-        clearInventory(itemBuffer, this.ballHolder);
+    public void clearMachineInventory(List<ItemStack> itemBuffer) {
+        super.clearMachineInventory(itemBuffer);
+        clearInventory(itemBuffer, ballHolder);
     }
-
     @Override
     protected boolean shouldSerializeInventories() {
         return false;
@@ -175,7 +176,9 @@ public class MetaTileEntityMillBallHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void registerAbilities(List<IBall> list) {list.add(this);}
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
+    }
 
     private class ItemBallHolder extends ItemStackHandler {
         @Nullable

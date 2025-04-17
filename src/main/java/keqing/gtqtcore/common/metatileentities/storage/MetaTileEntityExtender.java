@@ -20,11 +20,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-
 import java.util.List;
 import java.util.function.Predicate;
 
 import static gregtech.api.capability.GregtechDataCodes.UPDATE_OUTPUT_FACING;
+
 /**
  * Copyright (C) SymmetricDevs 2025
  * 由 MeowmelMuku 于 2025 修改。
@@ -87,20 +87,20 @@ public class MetaTileEntityExtender extends MetaTileEntityDelegator {
     }
 
     @Override
-    public void writeInitialSyncData( PacketBuffer buf) {
+    public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeByte(getInputFacing().getIndex());
     }
 
     @Override
-    public void receiveInitialSyncData( PacketBuffer buf) {
+    public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         this.inputFacing = EnumFacing.VALUES[buf.readByte()];
     }
 
 
     @Override
-    public void receiveCustomData(int dataId,  PacketBuffer buf) {
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if (dataId == UPDATE_OUTPUT_FACING) {
             this.inputFacing = EnumFacing.VALUES[buf.readByte()];
@@ -141,7 +141,7 @@ public class MetaTileEntityExtender extends MetaTileEntityDelegator {
     }
 
     @Override
-    public void addToolUsages(ItemStack stack,  World world, List<String> tooltip, boolean advanced) {
+    public void addToolUsages(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
         super.addToolUsages(stack, world, tooltip, advanced);
     }

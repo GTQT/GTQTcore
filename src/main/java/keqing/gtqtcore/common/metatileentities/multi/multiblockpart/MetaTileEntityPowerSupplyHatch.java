@@ -14,6 +14,7 @@ import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.util.GTUtility;
@@ -244,10 +245,9 @@ public class MetaTileEntityPowerSupplyHatch extends MetaTileEntityMultiblockPart
 
 
     @Override
-    public void registerAbilities(List<IPowerSupply> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
-
     @Override
     public MultiblockAbility<IPowerSupply> getAbility() {
         return GTQTMultiblockAbility.POWER_SUPPLY_ABILITY;

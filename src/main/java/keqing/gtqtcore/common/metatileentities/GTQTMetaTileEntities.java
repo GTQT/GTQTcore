@@ -33,7 +33,6 @@ import keqing.gtqtcore.common.metatileentities.multi.generators.generatorRework.
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.primitive.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.LaserSystem.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.*;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.decoration.MetaTileEntityHolographicDisplay;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys.*;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.*;
@@ -167,8 +166,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityWindGenerator WIND_GENERATOR;
     public static MetaTileEntityHugeCrackingUnit HUGE_CRACKING_UNIT;
     public static MetaTileEntityExtremeIndustrialGreenhouse EXTREME_INDUSTRIAL_GREENHOUSE;
-    public static MetaTileEntityDataAccessHatch EDATA_ACCESS_HATCH;
-    public static MetaTileEntityDataAccessHatch FDATA_ACCESS_HATCH;
     public static MetaTileEntityDissolutionTank DISSOLUTION_TANK;
     public static MetaTileEntityGasCollector GAS_COLLECTOR;
     public static MetaTileEntityHyperReactorMkI HYPER_REACTOR_MKI;
@@ -256,13 +253,6 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] RECYCLE = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityLargeElementDuplicator LARGE_ELEMENT_DUPLICATOR;
     public static MetaTileEntityLargeUUProducter LARGE_UU_PRODUCTER;
-    public static MetaTileEntityBudgetCRIB BUDGET_CRIB;
-    public static MetaTileEntityBudgetCRIBProxy BUDGET_CRIB_PROXY;
-    public static MetaTileEntityBudgetCRIBA4 BUDGET_CRIB_4;
-    public static MetaTileEntityBudgetCRIBA8 BUDGET_CRIB_8;
-    public static MetaTileEntityBudgetCRIBA12 BUDGET_CRIB_12;
-    public static MetaTileEntityBudgetCRIBA16 BUDGET_CRIB_16;
-    public static MetaTileEntityBudgetCRIBA20 BUDGET_CRIB_20;
     public static MetaTileEntityMillBallHatch MULTIPART_BALL_HATCH;
     public static MetaTileEntityCatalystHatch[] CATALYST_HATCH = new MetaTileEntityCatalystHatch[4];
     public static MetaTileEntityResearchSystemNetworkSwitch KQNS;
@@ -325,10 +315,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityNanoCoating NANO_COATING;
     public static MetaTileEntityCryogenicFreezer CRYOGENIC_FREEZER;
     public static MetaTileEntityHeatExchanger HEAT_CHANGER;
-    public static MetaTileEntityHPCAAdvancedComputation HPCA_SUPER_COMPUTATION_COMPONENT;
-    public static MetaTileEntityHPCAAdvancedComputation HPCA_ULTIMATE_COMPUTATION_COMPONENT;
-    public static MetaTileEntityHPCAAdvancedCooler HPCA_SUPER_COOLER_COMPONENT;
-    public static MetaTileEntityHPCAAdvancedCooler HPCA_ULTIMATE_COOLER_COMPONENT;
     public static MetaTileEntityIntegratedOreProcessor INTEGRATED_ORE_PROCESSOR;
     public static MetaTileEntityCrystallizationCrucible LARGE_CRYSTALLIZATION_CRUCIBLE;
     public static MetaTileEntityIndustrialRoaster LARGE_ROASTER;
@@ -742,12 +728,6 @@ public class GTQTMetaTileEntities {
         MINI_DATE_BANK = registerMetaTileEntity(3453, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
         ADV_NETWORK_SWITCH = registerMetaTileEntity(3464, new MetaTileEntityAdvanceNetworkSwitch(gtqtcoreId("adv_network_switch")));
         ADV_DATE_BANK = registerMetaTileEntity(3455, new MetaTileEntityAdvanceDataBank(gtqtcoreId("adv_date_bank")));
-
-        HPCA_SUPER_COMPUTATION_COMPONENT = registerMetaTileEntity(3460, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.super_computation_component"), false));
-        HPCA_ULTIMATE_COMPUTATION_COMPONENT = registerMetaTileEntity(3461, new MetaTileEntityHPCAAdvancedComputation(gtqtcoreId("hpca.ultimate_computation_component"), true));
-        HPCA_SUPER_COOLER_COMPONENT = registerMetaTileEntity(3462, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.super_cooler_component"), true, false));
-        HPCA_ULTIMATE_COOLER_COMPONENT = registerMetaTileEntity(3463, new MetaTileEntityHPCAAdvancedCooler(gtqtcoreId("hpca.ultimate_cooler_component"), false, true));
-
         RESEARCH_SYSTEM_NETWORK = registerMetaTileEntity(3470, new MetaTileEntityResearchSystemNetWork(gtqtcoreId("research_system_network")));
         //GCYS
         INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
@@ -970,9 +950,6 @@ public class GTQTMetaTileEntities {
         CATALYST_HATCH[0] = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.0"), 1));
         MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
         MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
-        EDATA_ACCESS_HATCH = registerMetaTileEntity(15551, new MetaTileEntityDataAccessHatch(gtqtcoreId("edata_access_hatch"), MV, false));
-        FDATA_ACCESS_HATCH = registerMetaTileEntity(15552, new MetaTileEntityDataAccessHatch(gtqtcoreId("fdata_access_hatch"), GTValues.UV, false));
-
         //LV-OpV Reinforced Rotor Holders.
         for (int i = 0; i < 13; i++) {
             String voltageName = VN[i + 1].toLowerCase();
@@ -998,13 +975,6 @@ public class GTQTMetaTileEntities {
         CATALYST_HATCH[1] = registerMetaTileEntity(15572, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.1"), 2));
         CATALYST_HATCH[2] = registerMetaTileEntity(15573, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"), 3));
         CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"), 4));
-        BUDGET_CRIB = registerMetaTileEntity(15575, new MetaTileEntityBudgetCRIB(gtqtcoreId("budget_crib")));
-        BUDGET_CRIB_PROXY = registerMetaTileEntity(15576, new MetaTileEntityBudgetCRIBProxy(gtqtcoreId("budget_crib_proxy")));
-        BUDGET_CRIB_4 = registerMetaTileEntity(15577, new MetaTileEntityBudgetCRIBA4(gtqtcoreId("budget_crib_4")));
-        BUDGET_CRIB_8 = registerMetaTileEntity(15578, new MetaTileEntityBudgetCRIBA8(gtqtcoreId("budget_crib_8")));
-        BUDGET_CRIB_12 = registerMetaTileEntity(15579, new MetaTileEntityBudgetCRIBA12(gtqtcoreId("budget_crib_12")));
-        BUDGET_CRIB_16 = registerMetaTileEntity(15580, new MetaTileEntityBudgetCRIBA16(gtqtcoreId("budget_crib_16")));
-        BUDGET_CRIB_20 = registerMetaTileEntity(15581, new MetaTileEntityBudgetCRIBA20(gtqtcoreId("budget_crib_20")));
 
         GENERATOR_HATCH= registerMetaTileEntity(15584, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"),3));
         MACHINE_HATCH = registerMetaTileEntity(15585, new MetaTileEntityMachineHatch(gtqtcoreId("hv_machine_hatch"), 3));

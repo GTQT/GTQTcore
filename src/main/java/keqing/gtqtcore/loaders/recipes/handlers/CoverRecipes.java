@@ -11,7 +11,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Plate;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 

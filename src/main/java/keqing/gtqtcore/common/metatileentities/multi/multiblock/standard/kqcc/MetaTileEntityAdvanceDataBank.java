@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.kqcc;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -17,7 +20,6 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
 import gregtech.core.sound.GTSoundEvents;
-
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlocksResearchSystem;
@@ -35,10 +37,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,18 +46,27 @@ public class MetaTileEntityAdvanceDataBank extends MultiblockWithDisplayBase imp
 
     private static final int EUT_PER_HATCH = GTValues.VA[GTValues.IV];
     private static final int EUT_PER_HATCH_CHAINED = GTValues.VA[GTValues.ZPM];
-
+    protected boolean hasNotEnoughEnergy;
     private IEnergyContainer energyContainer;
-
     private boolean isActive = false;
     private boolean isWorkingEnabled = true;
-    protected boolean hasNotEnoughEnergy;
-
     private int energyUsage = 0;
 
     public MetaTileEntityAdvanceDataBank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.energyContainer = new EnergyContainerList(new ArrayList<>());
+    }
+
+    private static IBlockState getOuterState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_HEAT_VENT);
+    }
+
+    private static IBlockState getInnerState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_CASING);
+    }
+
+    private static IBlockState getFrontState() {
+        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ULTRA_POWER_CASING);
     }
 
     @Override
@@ -155,14 +162,13 @@ public class MetaTileEntityAdvanceDataBank extends MultiblockWithDisplayBase imp
         }
     }
 
-
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
                 .aisle("XXX", "XXX", "XXX")
-                .aisle("CDD", "CAD", "CDD").setRepeatable(1,3)
+                .aisle("CDD", "CAD", "CDD").setRepeatable(1, 3)
                 .aisle("CDD", "SAD", "CDD")
-                .aisle("CDD", "CAD", "CDD").setRepeatable(1,3)
+                .aisle("CDD", "CAD", "CDD").setRepeatable(1, 3)
                 .aisle("XXX", "XXX", "XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getOuterState()))
@@ -177,18 +183,6 @@ public class MetaTileEntityAdvanceDataBank extends MultiblockWithDisplayBase imp
                         .or(autoAbilities())
                         .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(1)));
         return pattern.build();
-    }
-
-    private static IBlockState getOuterState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_HEAT_VENT);
-    }
-
-    private static IBlockState getInnerState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ADV_COMPUTER_CASING);
-    }
-
-    private static IBlockState getFrontState() {
-        return GTQTMetaBlocks.blocksResearchSystem.getState(BlocksResearchSystem.CasingType.ULTRA_POWER_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -236,7 +230,7 @@ public class MetaTileEntityAdvanceDataBank extends MultiblockWithDisplayBase imp
     }
 
     @Override
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip,
+    public void addInformation(ItemStack stack, World world, List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.1"));
@@ -297,7 +291,7 @@ public class MetaTileEntityAdvanceDataBank extends MultiblockWithDisplayBase imp
     }
 
     @Override
-    public void receiveCustomData(int dataId,  PacketBuffer buf) {
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if (dataId == GregtechDataCodes.WORKABLE_ACTIVE) {
             this.isActive = buf.readBoolean();

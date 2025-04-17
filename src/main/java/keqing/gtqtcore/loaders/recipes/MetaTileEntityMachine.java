@@ -46,7 +46,7 @@ import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRODE_GRAPHITE;

@@ -17,7 +17,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer.RenderSide;
 import gregtech.common.blocks.MetaBlocks;
@@ -49,7 +48,6 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -58,7 +56,7 @@ import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.EXTRACTI
 public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMetaTileEntity {
     private final int energyPerTick = 16;
     private final int tankSize = 16000;
-    private long latexCollectionAmount;
+    private final long latexCollectionAmount;
     private boolean hasRubberLog;
     private EnumFacing outputFacingFluids;
 
@@ -78,7 +76,7 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
     }
 
     protected FluidTankList createExportFluidHandler() {
-        return new FluidTankList(false, new IFluidTank[]{new FluidTank(this.tankSize)});
+        return new FluidTankList(false, new FluidTank(this.tankSize));
     }
 
     protected IItemHandlerModifiable createImportItemHandler() {
@@ -106,6 +104,7 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
     public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
         return Pair.of(Textures.STEAM_CASING_BRONZE.getSpriteOnSide(RenderSide.TOP), this.getPaintingColorForRendering());
     }
+
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND_STEAM.get(false), 175, 176);
         builder.image(7, 16, 81, 55, GuiTextures.DISPLAY);
@@ -115,13 +114,13 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
         builder.dynamicLabel(11, 30, tankWidget::getFormattedFluidAmount, 16777215);
         builder.dynamicLabel(11, 40, tankWidget::getFluidLocalizedName, 16777215);
         builder.widget((new AdvancedTextWidget(11, 50, this::addDisplayText, 16777215)).setMaxWidthLimit(84));
-        return builder.label(6, 6, this.getMetaFullName()).widget((new FluidContainerSlotWidget(this.importItems, 0, 90, 17, false)).setBackgroundTexture(new IGuiTexture[]{GuiTextures.SLOT_STEAM.get(false), GuiTextures.IN_SLOT_OVERLAY})).widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON)).widget((new SlotWidget(this.exportItems, 0, 90, 54, true, false)).setBackgroundTexture(new IGuiTexture[]{GuiTextures.SLOT_STEAM.get(false), GuiTextures.OUT_SLOT_OVERLAY})).bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT_STEAM.get(false), 10).build(this.getHolder(), entityPlayer);
+        return builder.label(6, 6, this.getMetaFullName()).widget((new FluidContainerSlotWidget(this.importItems, 0, 90, 17, false)).setBackgroundTexture(GuiTextures.SLOT_STEAM.get(false), GuiTextures.IN_SLOT_OVERLAY)).widget(new ImageWidget(91, 36, 14, 15, GuiTextures.TANK_ICON)).widget((new SlotWidget(this.exportItems, 0, 90, 54, true, false)).setBackgroundTexture(GuiTextures.SLOT_STEAM.get(false), GuiTextures.OUT_SLOT_OVERLAY)).bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT_STEAM.get(false), 10).build(this.getHolder(), entityPlayer);
 
     }
 
     void addDisplayText(List<ITextComponent> textList) {
         if (!this.drainEnergy(true)) {
-            textList.add((new TextComponentTranslation("gregtech.machine.latex_collector.steam", new Object[0])).setStyle((new Style()).setColor(TextFormatting.RED)));
+            textList.add((new TextComponentTranslation("gregtech.machine.latex_collector.steam")).setStyle((new Style()).setColor(TextFormatting.RED)));
         }
     }
 
@@ -133,7 +132,7 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
 
     public boolean drainEnergy(boolean simulate) {
         int resultSteam = this.importFluids.getTankAt(0).getFluidAmount() - this.energyPerTick;
-        if ((long)resultSteam >= 0L && resultSteam <= this.importFluids.getTankAt(0).getCapacity()) {
+        if ((long) resultSteam >= 0L && resultSteam <= this.importFluids.getTankAt(0).getCapacity()) {
             if (!simulate) {
                 this.importFluids.getTankAt(0).drain(this.energyPerTick, true);
             }
@@ -177,8 +176,8 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
 
         //attempt pumping every 5 ticks
         if (this.getOffsetTimer() % 5L == 0L) {
-            if(this.getOutputFacingFluids() != null){
-                this.pushFluidsIntoNearbyHandlers(new EnumFacing[]{this.getOutputFacingFluids()});
+            if (this.getOutputFacingFluids() != null) {
+                this.pushFluidsIntoNearbyHandlers(this.getOutputFacingFluids());
             }
             this.fillContainerFromInternalTank();
         }
@@ -201,10 +200,10 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
         this.checkAdjacentBlocks();
     }
 
-    public void checkAdjacentBlocks(){
-        if(this.getWorld() != null){
+    public void checkAdjacentBlocks() {
+        if (this.getWorld() != null) {
             this.hasRubberLog = false;
-            if(!this.getWorld().isRemote) {
+            if (!this.getWorld().isRemote) {
                 EnumFacing back = this.getFrontFacing().getOpposite();
 
                 Block block = this.getWorld().getBlockState(this.getPos().offset(back)).getBlock();
@@ -269,10 +268,15 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
             }
         } else {
             boolean wrenchClickResult = false;
-            if (this.getOutputFacingFluids() != facing.getOpposite() && this.getOutputFacingFluids() != facing) wrenchClickResult = super.onWrenchClick(playerIn, hand, facing, hitResult);
+            if (this.getOutputFacingFluids() != facing.getOpposite() && this.getOutputFacingFluids() != facing)
+                wrenchClickResult = super.onWrenchClick(playerIn, hand, facing, hitResult);
             this.checkAdjacentBlocks();
             return wrenchClickResult;
         }
+    }
+
+    public EnumFacing getOutputFacingFluids() {
+        return this.outputFacingFluids == null ? EnumFacing.SOUTH : this.outputFacingFluids;
     }
 
     public void setOutputFacingFluids(EnumFacing outputFacing) {
@@ -287,13 +291,10 @@ public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMe
 
     }
 
-    public EnumFacing getOutputFacingFluids() {
-        return this.outputFacingFluids == null ? EnumFacing.SOUTH : this.outputFacingFluids;
-    }
-
     public boolean needsSneakToRotate() {
         return true;
     }
+
     public boolean getIsWeatherOrTerrainResistant() {
         return true;
     }

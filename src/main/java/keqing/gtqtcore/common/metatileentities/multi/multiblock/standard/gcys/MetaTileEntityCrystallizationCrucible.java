@@ -22,7 +22,6 @@ import gregtech.api.recipes.recipeproperties.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
@@ -52,9 +51,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.unification.material.Materials.Titanium;
 import static gregtech.api.unification.material.Materials.TungstenSteel;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
 public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
@@ -133,9 +130,11 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblo
                 .where('#', any())
                 .build();
     }
+
     protected IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(grisium);
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

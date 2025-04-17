@@ -5,17 +5,12 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockBoilerCasing;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -26,7 +21,6 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nonnull;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.blue_steel;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
 
 public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockController {
 
@@ -59,6 +53,7 @@ public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockCont
                 .where('#', air())
                 .build();
     }
+
     protected IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(blue_steel);
     }

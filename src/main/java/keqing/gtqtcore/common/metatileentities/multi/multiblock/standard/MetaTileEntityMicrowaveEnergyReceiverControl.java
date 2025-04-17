@@ -81,6 +81,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     int maxLength = 10;
     int[][] io = new int[64][5];
     int circuit;
+
     //分别为 启动？ 坐标（三位） 等级
     public MetaTileEntityMicrowaveEnergyReceiverControl(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);

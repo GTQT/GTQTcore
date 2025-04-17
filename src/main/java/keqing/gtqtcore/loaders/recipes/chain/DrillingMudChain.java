@@ -9,8 +9,8 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
+
+
 
 public class DrillingMudChain {
 

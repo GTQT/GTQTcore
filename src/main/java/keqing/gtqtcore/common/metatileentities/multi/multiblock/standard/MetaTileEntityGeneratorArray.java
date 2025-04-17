@@ -2,8 +2,8 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.*;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.metatileentity.IMachineHatchMultiblock;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -27,7 +27,6 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1;
@@ -42,13 +41,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.api.GTValues.ULV;
 import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityGeneratorArray extends FuelMultiblockController implements IMachineHatchMultiblock {
@@ -75,7 +71,7 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
 
     @Override
     public int getMachineLimit() {
-        return (int) Math.pow(2, tier+1);
+        return (int) Math.pow(2, tier + 1);
     }
 
     @Override
@@ -134,7 +130,7 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
                 return Textures.STABLE_TITANIUM_CASING;
             }
             case (4) -> {
-                return Textures.ROBUST_TUNGSTENSTEEL_CASING ;
+                return Textures.ROBUST_TUNGSTENSTEEL_CASING;
             }
             case (5) -> {
                 return Textures.STURDY_HSSE_CASING;
@@ -334,9 +330,9 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
         }
 
         protected boolean drawEnergy(int recipeEUt, boolean simulate) {
-            if (this.getEnergyStored()+recipeEUt <= this.getEnergyCapacity()) {
+            if (this.getEnergyStored() + recipeEUt <= this.getEnergyCapacity()) {
                 if (!simulate) {
-                    this.getEnergyContainer().addEnergy(machineVoltage*getParallelLimit());
+                    this.getEnergyContainer().addEnergy(machineVoltage * getParallelLimit());
                 }
                 return true;
             } else {

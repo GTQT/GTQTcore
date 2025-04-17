@@ -19,9 +19,9 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import keqing.gtqtcore.api.capability.ILaser;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -323,23 +323,23 @@ public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {
     }
 
     public void setCurrentA(int i) {
-        if(i>0)
-        {
-            if (circuit < inputNum)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
+        if (i > 0) {
+            if (circuit < inputNum)
+                this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp(this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
             else if (circuit < inputNum + outputNum) {
                 if (More >= this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()) {
-                    this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + i, 0, 1024));
+                    this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + i, 0, 1024));
                     this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Voltage()]);
                 }
             }
-        }
-        else
-        {
-            if (circuit < inputNum)this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
+        } else {
+            if (circuit < inputNum)
+                this.getAbilities(LASER_INPUT).get(circuit).setAmperage(MathHelper.clamp(this.getAbilities(LASER_INPUT).get(circuit).Amperage() + i, 0, 1024));
             else if (circuit < inputNum + outputNum)
-                this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() + i, 0, 1024));
+                this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).setAmperage(MathHelper.clamp(this.getAbilities(LASER_OUTPUT).get(circuit - inputNum).Amperage() + i, 0, 1024));
         }
     }
+
     protected void addTotal(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("输入激光能量:%s", Laser));

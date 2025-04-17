@@ -217,8 +217,8 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier",2,128));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock", "Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 128));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
@@ -281,12 +281,14 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int)Math.pow(2, tier-1),128);
+            return Math.min((int) Math.pow(2, tier - 1), 128);
         }
+
         @Override
         protected long getMaxParallelVoltage() {
             return super.getMaxVoltage();
         }
+
         public long getMaxVoltage() {
             return Math.min(super.getMaxVoltage(), V[tier]);
         }

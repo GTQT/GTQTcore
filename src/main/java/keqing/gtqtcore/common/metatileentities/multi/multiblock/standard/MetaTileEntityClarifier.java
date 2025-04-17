@@ -37,7 +37,7 @@ public class MetaTileEntityClarifier extends RecipeMapPrimitiveMultiblockControl
 
     public MetaTileEntityClarifier(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CLARIFIER);
-        this.recipeMapWorkable = new ClarifierLogic(this,GTQTcoreRecipeMaps.CLARIFIER);
+        this.recipeMapWorkable = new ClarifierLogic(this, GTQTcoreRecipeMaps.CLARIFIER);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {

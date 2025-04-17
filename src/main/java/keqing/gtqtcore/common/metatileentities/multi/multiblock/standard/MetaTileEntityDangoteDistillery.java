@@ -1,32 +1,30 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import com.cleanroommc.modularui.utils.FluidTankHandler;
+import gregtech.api.capability.IDistillationTower;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.DistillationTowerLogicHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.*;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.RelativeDirection;
+import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
-import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
-import gregtech.core.sound.GTSoundEvents;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
@@ -35,35 +33,32 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController {
+public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController implements IDistillationTower {
+    protected DistillationTowerLogicHandler handler;
+
     public MetaTileEntityDangoteDistillery(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.DISTILLERY_RECIPES,
                 RecipeMaps.DISTILLATION_RECIPES,
                 GTQTcoreRecipeMaps.MOLECULAR_DISTILLATION_RECIPES
         });
+
         this.recipeMapWorkable = new DangoteDistilleryRecipeLogic(this);
+        this.handler = new DistillationTowerLogicHandler(this);
 
     }
 
@@ -71,6 +66,27 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDangoteDistillery(metaTileEntityId);
     }
+
+    @Override
+    public boolean allowSameFluidFillForOutputs() {
+        return false;
+    }
+
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        if (this.handler != null) handler.invalidate();
+    }
+
+    @Override
+    protected void formStructure(PatternMatchContext context) {
+        super.formStructure(context);
+
+        if (this.handler == null || this.structurePattern == null) return;
+        handler.determineLayerCount(this.structurePattern);
+        handler.determineOrderedFluidOutputs();
+    }
+
 
     @Override
     public boolean canBeDistinct() {
@@ -171,6 +187,12 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
         tooltip.add(I18n.format("gtqtcore.machine.dangote_distillery.tooltip.7"));
     }
 
+    @Override
+    public int getFluidOutputLimit() {
+        if (this.handler != null) return this.handler.getLayerCount();
+        else return super.getFluidOutputLimit();
+    }
+
     protected class DangoteDistilleryRecipeLogic extends MultiblockRecipeLogic {
 
         public DangoteDistilleryRecipeLogic(RecipeMapMultiblockController tileEntity) {
@@ -211,5 +233,10 @@ public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockControlle
                 return 12 * (tier * 4);
             }
         }
+
+        protected IMultipleTankHandler getOutputTank() {
+            return handler.getFluidTanks();
+        }
+
     }
 }

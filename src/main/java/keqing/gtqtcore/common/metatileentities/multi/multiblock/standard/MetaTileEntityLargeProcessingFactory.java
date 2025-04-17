@@ -109,11 +109,8 @@ public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockCont
         }
 
         @Override
-        protected void modifyOverclockPre(@Nonnull int[] values,
-                                          @Nonnull IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] *= 0.8;
-            values[1] *= 0.4;
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress*0.4));
         }
 
         @Override

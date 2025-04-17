@@ -180,7 +180,7 @@ public class PipeRecipeHandler {
                     .buildAndRegister();
         }
     }
-    public static int getVoltageMultiplier(Material material) {
+    public static long getVoltageMultiplier(Material material) {
         return material.getBlastTemperature() > 2800 ? VA[LV] : VA[ULV];
     }
 }

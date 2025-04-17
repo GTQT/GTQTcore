@@ -9,6 +9,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
@@ -145,6 +146,11 @@ public class MetaTileEntityBioHatch extends MetaTileEntityMultiblockPart impleme
 
     public MultiblockAbility<IBio> getAbility() {
         return GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
+    }
+
+    @Override
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
 
     @Override

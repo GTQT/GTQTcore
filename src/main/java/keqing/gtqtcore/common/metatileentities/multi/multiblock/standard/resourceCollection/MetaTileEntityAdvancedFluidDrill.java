@@ -47,7 +47,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -81,8 +80,8 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
     }
 
     private void resetTileAbilities() {
-        this.inputFluidInventory = new FluidTankList(true, new IFluidTank[0]);
-        this.outputFluidInventory = new FluidTankList(true, new IFluidTank[0]);
+        this.inputFluidInventory = new FluidTankList(true);
+        this.outputFluidInventory = new FluidTankList(true);
         this.energyContainer = new EnergyContainerList(Lists.newArrayList());
     }
 
@@ -133,7 +132,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
         } else if (this.tier == 6) {
             return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.HSSE_STURDY);
         } else {
-            return  GTQTMetaBlocks.blockMultiblockCasing1.getState(this.tier == 7 ?IncoloyMA813:HastelloyX78);
+            return GTQTMetaBlocks.blockMultiblockCasing1.getState(this.tier == 7 ? IncoloyMA813 : HastelloyX78);
         }
     }
 
@@ -169,13 +168,14 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
                             Fluid drilledFluid = this.minerLogic.getDrilledFluid();
                             ITextComponent fluidInfo = TextComponentUtil.setColor(GTUtility.getFluidTranslation(drilledFluid), TextFormatting.GREEN);
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.fluid_rig.drilled_fluid", fluidInfo));
-                            ITextComponent amountInfo = TextComponentUtil.stringWithColor(TextFormatting.BLUE, TextFormattingUtil.formatNumbers((long)this.minerLogic.getFluidToProduce() * 20L / 20L) + " L/t");
+                            ITextComponent amountInfo = TextComponentUtil.stringWithColor(TextFormatting.BLUE, TextFormattingUtil.formatNumbers((long) this.minerLogic.getFluidToProduce() * 20L / 20L) + " L/t");
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.fluid_rig.fluid_amount", amountInfo));
                         } else {
                             ITextComponent noFluid = TextComponentUtil.translationWithColor(TextFormatting.RED, "gregtech.multiblock.fluid_rig.no_fluid_in_area");
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.fluid_rig.drilled_fluid", noFluid));
                         }
-                    }})
+                    }
+                })
                 .addWorkingStatusLine()
                 .addProgressLine(this.minerLogic.getProgressPercent());
     }
@@ -187,7 +187,8 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
                 .addCustom((tl) -> {
                     if (this.isStructureFormed() && this.minerLogic.isInventoryFull) {
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.YELLOW, "gregtech.machine.miner.invfull"));
-                    }});
+                    }
+                });
     }
 
     @Override
@@ -196,9 +197,9 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
                                List<String> tooltip,
                                boolean advanced) {
         tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.description"));
-        tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.depletion", TextFormattingUtil.formatNumbers(100.0 / (double)this.getDepletionChance())));
+        tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.depletion", TextFormattingUtil.formatNumbers(100.0 / (double) this.getDepletionChance())));
         tooltip.add(I18n.format("gregtech.universal.tooltip.energy_tier_range", GTValues.VNF[this.tier], GTValues.VNF[this.tier + 1]));
-        tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.production", this.getRigMultiplier(), TextFormattingUtil.formatNumbers((double)this.getRigMultiplier() * 1.5)));
+        tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.production", this.getRigMultiplier(), TextFormattingUtil.formatNumbers((double) this.getRigMultiplier() * 1.5)));
         if (this.tier > 2) {
             tooltip.add(I18n.format("gregtech.machine.fluid_drilling_rig.shows_depletion"));
         }
@@ -356,7 +357,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
     public double getFillPercentage(int index) {
         int numOperationsLeft = BedrockFluidVeinHandler.getOperationsRemaining(this.getWorld(), this.minerLogic.getChunkX(), this.minerLogic.getChunkZ());
         int maxOperations = 100000;
-        return 1.0 * (double)numOperationsLeft / (double)maxOperations;
+        return (double) numOperationsLeft / (double) maxOperations;
     }
 
     @Override
@@ -368,7 +369,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         int numOperationsLeft = BedrockFluidVeinHandler.getOperationsRemaining(this.getWorld(), this.minerLogic.getChunkX(), this.minerLogic.getChunkZ());
         int maxOperations = 100000;
-        int percentage = (int)Math.round(1.0 * (double)numOperationsLeft / (double)maxOperations * 100.0);
+        int percentage = (int) Math.round((double) numOperationsLeft / (double) maxOperations * 100.0);
         TextFormatting color = percentage > 40 ? TextFormatting.GREEN : (percentage > 10 ? TextFormatting.YELLOW : TextFormatting.RED);
         if (numOperationsLeft == 0) {
             hoverList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "gregtech.multiblock.fluid_rig.vein_depleted"));

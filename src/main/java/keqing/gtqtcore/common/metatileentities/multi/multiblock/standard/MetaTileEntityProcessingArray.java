@@ -296,7 +296,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
          * @return {@code true} if the provided recipeMap is valid for use
          */
         @Override
-        public boolean isRecipeMapValid( RecipeMap<?> recipeMap) {
+        public boolean isRecipeMapValid(RecipeMap<?> recipeMap) {
             if (ArrayUtils.contains(((IMachineHatchMultiblock) metaTileEntity).getBlacklist(),
                     recipeMap.getUnlocalizedName())) {
                 return false;
@@ -375,7 +375,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
         }
 
         @Override
-        public boolean checkRecipe( Recipe recipe) {
+        public boolean checkRecipe(Recipe recipe) {
             if (mte == null) return false;
 
             AbstractRecipeLogic arl = mte.getRecipeLogic();
@@ -425,8 +425,8 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
         }
 
         @Override
-        protected void runOverclockingLogic( OCParams ocParams,  OCResult ocResult,
-                                             RecipePropertyStorage propertyStorage, long maxVoltage) {
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
             subTickNonParallelOC(ocParams, ocResult, maxVoltage, getOverclockingDurationFactor(),
                     getOverclockingVoltageFactor());
         }

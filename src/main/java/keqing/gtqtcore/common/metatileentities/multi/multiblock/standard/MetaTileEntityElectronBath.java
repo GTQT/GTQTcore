@@ -128,7 +128,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        if(!isStructureFormed())return;
+        if (!isStructureFormed()) return;
         if (casingTier != tubeTier)
             textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
         textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
@@ -190,6 +190,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
             }
         }
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -205,7 +206,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
 
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
-        setTimeReduce((100-Math.min(Math.min(this.casingTier, this.tubeTier),10)*5.0)/100);
+        setTimeReduce((100 - Math.min(Math.min(this.casingTier, this.tubeTier), 10) * 5.0) / 100);
         this.writeCustomData(GTQTValue.UPDATE_TIER5, buf -> buf.writeInt(this.tier));
     }
 
@@ -247,6 +248,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
         public ElectronBathLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
@@ -263,6 +265,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
                 }
             }
         }
+
         @Override
         public boolean checkRecipe(@NotNull Recipe recipe) {
             return recipe.getProperty(ElectronBathProperties.getInstance(), 0) <= ElectrodeTier;

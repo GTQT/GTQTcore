@@ -13,7 +13,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumFluoride;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 
 
 public class RareEarthProcessing {

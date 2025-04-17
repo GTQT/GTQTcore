@@ -10,6 +10,7 @@ import gregtech.api.gui.widgets.ProgressWidget;
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.renderer.texture.Textures;
@@ -121,10 +122,9 @@ public class MetaTileEntityPressureHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void registerAbilities(@Nonnull List<IPressureContainer> list) {
-        list.add(this.pressureContainer);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this.pressureContainer);
     }
-
     @Override
     public void doExplosion(float explosionPower) {
         if (getController() != null)

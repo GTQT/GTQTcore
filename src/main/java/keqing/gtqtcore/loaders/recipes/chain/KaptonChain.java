@@ -8,8 +8,8 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
+
+
 
 public class KaptonChain {
 

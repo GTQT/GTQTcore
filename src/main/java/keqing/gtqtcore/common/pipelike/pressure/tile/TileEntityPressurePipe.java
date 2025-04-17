@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.pipelike.pressure.tile;
 
 
-
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.pipenet.tile.IPipeTile;
 import gregtech.api.pipenet.tile.TileEntityPipeBase;
@@ -41,6 +40,7 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
         }
         return GCYSValues.EARTH_PRESSURE;
     }
+
     public double getMinPressure() {
         PressurePipeNet net = getPipeNet();
         if (net != null) {
@@ -48,6 +48,7 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
         }
         return 0;
     }
+
     public double getMaxPressure() {
         PressurePipeNet net = getPipeNet();
         if (net != null) {
@@ -55,7 +56,6 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
         }
         return 0;
     }
-
 
 
     @Override
@@ -70,9 +70,9 @@ public class TileEntityPressurePipe extends TileEntityPipeBase<PressurePipeType,
     }
 
     public void checkPressure(double pressure) {
-        if (pressure > getNodeData().getMaxPressure()*1.25) {
+        if (pressure > getNodeData().getMaxPressure() * 1.25) {
             causePressureExplosion();
-        } else if (pressure < getNodeData().getMinPressure()*0.8) {
+        } else if (pressure < getNodeData().getMinPressure() * 0.8) {
             causePressureExplosion();
         }
     }

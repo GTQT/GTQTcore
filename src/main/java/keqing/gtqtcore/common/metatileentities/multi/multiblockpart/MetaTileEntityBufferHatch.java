@@ -11,6 +11,7 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.gui.widgets.TankWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
@@ -25,6 +26,7 @@ import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -278,10 +280,14 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> dropsList, @Nullable EntityPlayer harvester) {
-        dropsList.add(itemHandler.getStackInSlot(0));
+    public void onRemoval() {
+        super.onRemoval();
+        var pos = getPos();
+        if (!itemHandler.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, itemHandler.getStackInSlot(0)));
+            itemHandler.extractItem(0, 1, false);
+        }
     }
-
     @Override
     public boolean hasBuffer() {
         return !(itemHandler.getStackInSlot(0).isEmpty()) || !(fluidTank.getFluid() == null);
@@ -293,9 +299,10 @@ public class MetaTileEntityBufferHatch extends MetaTileEntityMultiblockPart impl
     }
 
     @Override
-    public void registerAbilities(List<IBuffer> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
+
 
     @Override
     public boolean canPartShare() {

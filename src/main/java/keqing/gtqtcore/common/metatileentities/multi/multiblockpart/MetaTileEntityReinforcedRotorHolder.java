@@ -13,6 +13,7 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.FuelMultiblockController;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
@@ -189,10 +190,9 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
     }
 
     @Override
-    public void registerAbilities(@Nonnull List<IReinforcedRotorHolder> abilityList) {
-        abilityList.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
-
     @Override
     public boolean canPartShare() {
         return false;
@@ -363,7 +363,7 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
     }
 
     @Override
-    public void clearMachineInventory(NonNullList<ItemStack> itemBuffer) {
+    public void clearMachineInventory(List<ItemStack> itemBuffer) {
         super.clearMachineInventory(itemBuffer);
         clearInventory(itemBuffer, inventory);
     }

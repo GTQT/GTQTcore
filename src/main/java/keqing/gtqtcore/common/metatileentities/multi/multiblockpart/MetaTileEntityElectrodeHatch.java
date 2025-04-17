@@ -12,6 +12,7 @@ import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
@@ -182,10 +183,9 @@ public class MetaTileEntityElectrodeHatch extends MetaTileEntityMultiblockPart i
     }
 
     @Override
-    public void registerAbilities(List<IElectrode> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
-
     @Override
     public int getElectrodeTier() {
         if (isAvailable()) return getElectrodeBehavior().getElectrodeTier();

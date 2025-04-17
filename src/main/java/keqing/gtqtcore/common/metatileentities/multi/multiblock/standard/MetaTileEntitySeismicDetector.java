@@ -42,7 +42,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
             checkTNT(false);
             checkCard(false);
             GTTransferUtils.insertItem(this.outputInventory, setCard(), false);
-            GTTransferUtils.insertItem(this.outputInventory, GTQTOreHelper.setOre(getWorld().provider.getDimension(),getKind()), false);
+            GTTransferUtils.insertItem(this.outputInventory, GTQTOreHelper.setOre(getWorld().provider.getDimension(), getKind()), false);
         }
     }
 
@@ -56,7 +56,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(getWorld().provider.getDimension(),getKind())));
+        textList.add(new TextComponentTranslation(GTQTOreHelper.getInfo(getWorld().provider.getDimension(), getKind())));
     }
 
     public int getKind() {
@@ -132,6 +132,7 @@ public class MetaTileEntitySeismicDetector extends MetaTileEntityBaseWithControl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySeismicDetector(metaTileEntityId);
     }
+
     @Override
     public List<ITextComponent> getDataInfo() {
         return Collections.emptyList();

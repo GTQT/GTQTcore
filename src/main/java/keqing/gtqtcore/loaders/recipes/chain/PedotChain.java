@@ -8,7 +8,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLYMERIZATION_RECIPES;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 
 public class PedotChain {
 

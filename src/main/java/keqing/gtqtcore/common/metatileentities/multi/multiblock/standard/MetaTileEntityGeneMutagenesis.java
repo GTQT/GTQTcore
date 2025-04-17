@@ -158,6 +158,8 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
 
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
+        boolean work = false;
+
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
         }
@@ -171,18 +173,18 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = (int) (maxProgress * (10 - glass_tier) / 10.0);
         }
-        boolean work=false;
+
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                 this.drawEnergy(this.recipeEUt, false);
-                if(!work) {
+                if (!work) {
                     getRadiationHatch().setWork(true);
-                    work=true;
+                    work = true;
                 }
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                     getRadiationHatch().setWork(false);
-                    work=false;
+                    work = false;
                 }
             }
         }

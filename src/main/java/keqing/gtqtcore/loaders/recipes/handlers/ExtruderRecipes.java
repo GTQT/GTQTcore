@@ -12,8 +12,8 @@ import static gregtech.common.items.MetaItems.FLUID_CELL;
 import static gregtech.common.items.MetaItems.SHAPE_EXTRUDER_CELL;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Kevlar;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Zylon;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
+
+
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class ExtruderRecipes {

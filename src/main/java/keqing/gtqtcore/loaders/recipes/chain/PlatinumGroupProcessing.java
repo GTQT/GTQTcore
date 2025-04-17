@@ -303,7 +303,7 @@ public class PlatinumGroupProcessing {
                 .input(dust, Salt, 2)
                 .fluidInputs(Water.getFluid(3000))
                 .circuitMeta(2)
-                .outputs(SodiumChlorate.getItemStack(5))
+                .output(dust,SodiumChlorate,5)
                 .fluidOutputs(Hydrogen.getFluid(6000))
                 .duration(100)
                 .EUt(VA[MV])
@@ -311,7 +311,7 @@ public class PlatinumGroupProcessing {
 
         //  NaClO3 -> NaCl + 3O
         DRYER_RECIPES.recipeBuilder()
-                .inputs(SodiumChlorate.getItemStack(5))
+                .input(dust,SodiumChlorate,5)
                 .output(dust, Salt, 2)
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .duration(100)
@@ -321,7 +321,7 @@ public class PlatinumGroupProcessing {
         //  Ir2Os + 2NaClO3 + O -> Ir2O3 + OsO4 + 2NaCl
         DRYER_RECIPES.recipeBuilder()
                 .input(dust, RarestMetalMixture, 12)
-                .inputs(SodiumChlorate.getItemStack(10))
+                .input(dust,SodiumChlorate,10)
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, IridiumMetalResidue, 5)
                 .output(dust, OsmiumTetroxide, 5)

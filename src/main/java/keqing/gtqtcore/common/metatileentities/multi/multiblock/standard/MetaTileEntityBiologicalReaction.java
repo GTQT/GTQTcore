@@ -305,7 +305,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
 
                 }
 
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;
                 }
             } else if (this.recipeEUt > 0) {

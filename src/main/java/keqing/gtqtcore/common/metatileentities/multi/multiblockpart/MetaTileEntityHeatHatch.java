@@ -9,6 +9,7 @@ import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.utils.TooltipHelper;
@@ -171,8 +172,8 @@ public class MetaTileEntityHeatHatch extends MetaTileEntityMultiblockPart implem
     }
 
     @Override
-    public void registerAbilities(List<IHeat> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
 
     @Override

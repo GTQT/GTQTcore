@@ -15,7 +15,6 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -67,22 +66,6 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         gasModel = data.getBoolean("gasModel");
     }
 
-    protected boolean checkRecipe(Recipe recipe) {
-        IntListIterator var2 = recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST).iterator();
-
-        int dimension;
-        do {
-            if (!var2.hasNext()) {
-                return false;
-            }
-
-            dimension = var2.next();
-            if (dimension == 0 && gasModel) return true;
-        }
-        while (dimension != this.getWorld().provider.getDimension());
-
-        return true;
-    }
 
     @Override
     @Nonnull
@@ -197,11 +180,6 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         @Override
         public int getParallelLimit() {
             return clean_tier;
-        }
-
-        @Override
-        public boolean checkRecipe(Recipe recipe) {
-            return ((MetaTileEntityGasCollector) this.metaTileEntity).checkRecipe(recipe) && super.checkRecipe(recipe);
         }
     }
 }

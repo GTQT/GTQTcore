@@ -95,9 +95,11 @@ public class MetaTileEntityExtremeIndustrialGreenhouse extends RecipeMapMultiblo
                 .where('#', air())
                 .build();
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {

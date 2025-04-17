@@ -298,7 +298,7 @@ public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDat
             reset();
             this.providers.addAll(providers);
             this.transmitters.addAll(transmitters);
-            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH ;
+            this.EUt = (providers.size() + transmitters.size()) * EUT_PER_HATCH;
         }
 
         private void reset() {

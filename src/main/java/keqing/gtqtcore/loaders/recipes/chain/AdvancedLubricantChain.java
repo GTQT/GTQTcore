@@ -15,7 +15,7 @@ import static gregtech.api.unification.ore.OrePrefix.dustTiny;
 import static gregtechfoodoption.GTFOMaterialHandler.Guaiacol;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 
 public class AdvancedLubricantChain {
 

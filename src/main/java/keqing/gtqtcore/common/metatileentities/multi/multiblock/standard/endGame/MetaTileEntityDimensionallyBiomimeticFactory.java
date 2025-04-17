@@ -3,7 +3,9 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGam
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMaps;
@@ -40,10 +42,25 @@ import org.lwjgl.opengl.GL11;
 import static gregtech.api.util.RelativeDirection.*;
 import static net.minecraft.util.EnumFacing.Axis.*;
 
-public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMultiblockController  implements IBloomEffect, IFastRenderMetaTileEntity {
+public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMultiblockController implements IBloomEffect, IFastRenderMetaTileEntity {
+
+    protected static final int NO_COLOR = 0;
+    boolean backA;
+    int RadomTime;
+    private int fusionRingColor = NO_COLOR;
+    private boolean registeredBloomRenderTicket;
 
     public MetaTileEntityDimensionallyBiomimeticFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
+    }
+
+    private static IBlockState getCommonState() {
+        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
+    }
+
+    private static BloomType getBloomType() {
+        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
+        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
     }
 
     @Override
@@ -105,9 +122,7 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
                 .where(' ', any());
         return pattern.build();
     }
-    private static IBlockState getCommonState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
-    }
+
     private IBlockState getCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.HIGH_ENERGY_CASING);
     }
@@ -115,7 +130,6 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
     private IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING);
     }
-
 
     private IBlockState getCasingState2() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.FIELD_GENERATOR_CASING);
@@ -154,9 +168,6 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
     public boolean hasMufflerMechanics() {
         return false;
     }
-    protected static final int NO_COLOR = 0;
-    private int fusionRingColor = NO_COLOR;
-    private boolean registeredBloomRenderTicket;
 
     @Override
     protected boolean shouldShowVoidingModeButton() {
@@ -167,14 +178,14 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
         return this.fusionRingColor;
     }
 
-    protected boolean hasFusionRingColor() {
-        return true;
-    }
-
     protected void setFusionRingColor(int fusionRingColor) {
         if (this.fusionRingColor != fusionRingColor) {
             this.fusionRingColor = fusionRingColor;
         }
+    }
+
+    protected boolean hasFusionRingColor() {
+        return true;
     }
 
     @Override
@@ -185,14 +196,6 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
             BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
         }
     }
-
-    private static BloomType getBloomType() {
-        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
-        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
-    }
-
-    boolean backA;
-    int RadomTime;
 
     @Override
     public void update() {
@@ -222,8 +225,7 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
                 isFlipped());
 
 
-
-        if(isStructureFormed()) {
+        if (isStructureFormed()) {
             RenderBufferHelper.renderRing(buffer,
                     getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 16 + 0.5,
                     getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,

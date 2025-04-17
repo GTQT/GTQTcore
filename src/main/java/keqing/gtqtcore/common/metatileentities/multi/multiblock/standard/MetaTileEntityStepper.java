@@ -48,8 +48,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.HydrogenSilsesquioxane;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.SU8_Photoresist;
 
 public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     int LaserKind;
@@ -324,7 +322,7 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
                         }
                     }
 
-                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                    if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                         this.hasNotEnoughEnergy = false;
                     }
                 } else if (this.recipeEUt > 0) {

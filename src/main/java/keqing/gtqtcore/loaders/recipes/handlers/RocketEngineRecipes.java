@@ -10,7 +10,6 @@ import static gregtech.api.unification.ore.OrePrefix.dust;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Hydrazine;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 
 public class RocketEngineRecipes {
     public static void init() {

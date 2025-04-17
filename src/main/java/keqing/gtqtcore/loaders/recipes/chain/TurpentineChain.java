@@ -41,7 +41,7 @@ public class TurpentineChain {
     @Nonnull
     private static List<ItemStack> getWoodLogs() {
         List<ItemStack> list = new ArrayList<>();
-        if (Loader.isModLoaded(MODID_FR)) {
+        if (Loader.isModLoaded("forestry")) {
             // real woods
             ItemStack stack = GameRegistry.makeItemStack("forestry:pine_wood", 0, 4, null);
             if (!stack.isEmpty())

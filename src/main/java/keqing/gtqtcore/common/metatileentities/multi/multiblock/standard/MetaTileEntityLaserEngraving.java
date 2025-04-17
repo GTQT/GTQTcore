@@ -1,15 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
-import gregtech.api.capability.IOpticalComputationReceiver;
-import gregtech.api.capability.impl.ComputationRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -42,9 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-
-public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController{
+public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController {
     private int glass_tier;
     private int laser_tier;
     private int tier;

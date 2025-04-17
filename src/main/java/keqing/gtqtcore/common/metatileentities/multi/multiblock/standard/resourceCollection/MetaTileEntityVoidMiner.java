@@ -50,7 +50,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import java.util.List;
 
 import static gregtech.api.util.TextFormattingUtil.formatNumbers;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
+
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6.CasingType.*;
 
 public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implements IWorkable, IVoidMinerProvider {

@@ -2,10 +2,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -18,10 +14,7 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockMetalCasing;
-import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -31,9 +24,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -41,7 +32,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 
@@ -102,9 +92,11 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH).setExactLimit(1).setPreviewCount(1)))
                 .build();
     }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(tumbaga);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -135,13 +127,15 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.tumbaga;
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("爱的魔力转圈圈", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 64));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress /coilLevel"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress /coilLevel"));
     }
+
     @Nonnull
     @Override
     protected ICubeRenderer getFrontOverlay() {
@@ -158,6 +152,7 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
         public int getParallelLimit() {
             return Math.min((int) Math.pow(2, tier), 64);
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
             this.maxProgressTime = maxProgress / (10 - clean_tier) / 10;

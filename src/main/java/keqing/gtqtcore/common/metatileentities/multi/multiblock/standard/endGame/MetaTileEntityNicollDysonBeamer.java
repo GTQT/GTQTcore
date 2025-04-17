@@ -49,18 +49,48 @@ import java.util.Comparator;
 import java.util.List;
 
 import static keqing.gtqtcore.api.GTQTAPI.MAP_ND_CASING;
-import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.*;
+import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_ND_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.NICOLL_DYSON_BEAMER;
 import static net.minecraft.util.EnumFacing.Axis.*;
 
 public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockController implements IBloomEffect, IFastRenderMetaTileEntity {
 
+    protected static final int NO_COLOR = 0;
+    boolean backA;
+    int RadomTime;
     private int casingTier;
+    private int fusionRingColor = NO_COLOR;
+    private boolean registeredBloomRenderTicket;
 
     public MetaTileEntityNicollDysonBeamer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BLAST_RECIPES});
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
+    }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(CELESTIAL_MATTER_GUIDANCE_CASING);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING);
+    }
+
+    private static IBlockState getFourthCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING);
+    }
+
+    private static IBlockState getGlassState() {
+        return GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.ADV_MACHINE_GLASS_P);
+    }
+
+    private static BloomType getBloomType() {
+        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
+        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
     }
 
     @Override
@@ -73,7 +103,7 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
         super.formStructure(context);
         Object casingTier = context.get("NDTieredStats");
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired)casingTier).getIntTier(),
+                () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
     }
 
@@ -82,7 +112,6 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
         super.invalidateStructure();
         this.casingTier = 0;
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -293,26 +322,6 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
                 .where('K', CP_ND_CASING.get())
                 .where(' ', any())
                 .build();
-    }
-
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(CELESTIAL_MATTER_GUIDANCE_CASING);
-    }
-
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING);
-    }
-
-    private static IBlockState getFourthCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING);
-    }
-
-    private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.ADV_MACHINE_GLASS_P);
     }
 
     @SideOnly(Side.CLIENT)
@@ -553,9 +562,6 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
                         .build()));
         return shapeInfo;
     }
-    protected static final int NO_COLOR = 0;
-    private int fusionRingColor = NO_COLOR;
-    private boolean registeredBloomRenderTicket;
 
     @Override
     protected boolean shouldShowVoidingModeButton() {
@@ -566,14 +572,14 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
         return this.fusionRingColor;
     }
 
-    protected boolean hasFusionRingColor() {
-        return true;
-    }
-
     protected void setFusionRingColor(int fusionRingColor) {
         if (this.fusionRingColor != fusionRingColor) {
             this.fusionRingColor = fusionRingColor;
         }
+    }
+
+    protected boolean hasFusionRingColor() {
+        return true;
     }
 
     @Override
@@ -584,14 +590,6 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
             BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
         }
     }
-
-    private static BloomType getBloomType() {
-        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
-        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
-    }
-
-    boolean backA;
-    int RadomTime;
 
     @Override
     public void update() {
@@ -621,10 +619,9 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
                 isFlipped());
 
 
-        if(isStructureFormed())
-        {
+        if (isStructureFormed()) {
             //外环
-            for(int i=0;i<4;i++) {
+            for (int i = 0; i < 4; i++) {
                 RenderBufferHelper.renderRing(buffer,
                         getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 12 * i) + 0.5,
                         getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
@@ -633,7 +630,7 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
                         r, g, b, a, getFrontFacing().getAxis());
             }
 
-            for(int i=0;i<60;i++) {
+            for (int i = 0; i < 60; i++) {
                 RenderBufferHelper.renderRing(buffer,
                         getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 2 * i) + 0.5,
                         getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
@@ -651,30 +648,30 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
 
 
             RenderBufferHelper.renderRing(buffer,
-                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() *( 13 + 12 * 4+62) + 0.5,
+                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 12 * 4 + 62) + 0.5,
                     getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
-                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4+62) + 0.5,
+                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4 + 62) + 0.5,
                     58, 2, 10, 20,
                     r, g, b, a, Y);
 
             RenderBufferHelper.renderRing(buffer,
-                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() *( 13 + 12 * 4+62) + 0.5,
+                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 12 * 4 + 62) + 0.5,
                     getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
-                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4+62) + 0.5,
+                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4 + 62) + 0.5,
                     6, 6, 10, 20,
                     r, g, b, a, X);
 
             RenderBufferHelper.renderRing(buffer,
-                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() *( 13 + 12 * 4+62) + 0.5,
+                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 12 * 4 + 62) + 0.5,
                     getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
-                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4+62) + 0.5,
+                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4 + 62) + 0.5,
                     6, 6, 10, 20,
                     r, g, b, a, Y);
 
             RenderBufferHelper.renderRing(buffer,
-                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() *( 13 + 12 * 4+62) + 0.5,
+                    getPos().getX() - context.cameraX() + relativeBack.getXOffset() * (13 + 12 * 4 + 62) + 0.5,
                     getPos().getY() - context.cameraY() + relativeBack.getYOffset() + 0.5,
-                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4+62) + 0.5,
+                    getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * (13 + 12 * 4 + 62) + 0.5,
                     6, 6, 10, 20,
                     r, g, b, a, Z);
         }

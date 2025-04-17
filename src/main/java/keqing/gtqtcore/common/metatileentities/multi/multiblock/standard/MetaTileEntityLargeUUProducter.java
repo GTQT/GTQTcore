@@ -1,7 +1,10 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
-import gregtech.api.capability.*;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IOpticalComputationHatch;
+import gregtech.api.capability.IOpticalComputationProvider;
+import gregtech.api.capability.IOpticalComputationReceiver;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
@@ -15,7 +18,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
@@ -28,7 +30,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,6 +46,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingTyp
 public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
     int requestCWUt;
     private IOpticalComputationProvider computationProvider;
+
     public MetaTileEntityLargeUUProducter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.UU_RECIPES);
         this.recipeMapWorkable = new UUProducterRecipeLogic(this, true);
@@ -54,6 +56,7 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeUUProducter(metaTileEntityId);
     }
+
     @Override
     public void updateFormedValid() {
         super.updateFormedValid();
@@ -61,11 +64,13 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         TraceabilityPredicate abilities = autoAbilities();
@@ -97,12 +102,15 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(MASS_GENERATION_CASING);
     }
+
     protected IBlockState getCasingState1() {
         return GTQTMetaBlocks.blockMultiblockCasing.getState(MASS_GENERATION_COIL_CASING);
     }
+
     protected IBlockState getGlassState1() {
         return GTQTMetaBlocks.blockMultiblockGlass.getState(UU_GALSS);
     }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -113,16 +121,18 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("奇妙物质", new Object[0]));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress *0.8"));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress *0.8"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -132,18 +142,20 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
             this.computationProvider = providers.get(0);
         }
     }
+
     @SideOnly(Side.CLIENT)
     @NotNull
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.LARGE_UU_PRODUCTER;
     }
+
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
 
-    protected class UUProducterRecipeLogic extends MultiblockRecipeLogic{
+    protected class UUProducterRecipeLogic extends MultiblockRecipeLogic {
 
 
         public UUProducterRecipeLogic(RecipeMapMultiblockController tileEntity) {
@@ -153,19 +165,20 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
         public UUProducterRecipeLogic(RecipeMapMultiblockController tileEntity, boolean hasPerfectOC) {
             super(tileEntity, hasPerfectOC);
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
         @Override
         public int getParallelLimit() {
             int tire = 1;
             for (int i = 0; i < GTValues.V.length; i++) {
-                if(GTValues.V[i]==this.getMaxVoltage())
+                if (GTValues.V[i] == this.getMaxVoltage())
                     tire = i;
             }
-            return (int) Math.max(Math.pow(2, tire),256);
+            return (int) Math.max(Math.pow(2, tire), 256);
         }
     }
 }

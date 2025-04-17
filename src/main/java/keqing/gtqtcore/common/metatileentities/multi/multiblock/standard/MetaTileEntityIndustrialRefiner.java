@@ -66,11 +66,13 @@ public class MetaTileEntityIndustrialRefiner extends GTQTNoTierMultiblockControl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityIndustrialRefiner(metaTileEntityId);
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("粉碎再粉碎", new Object[0]));
         super.addInformation(stack, player, tooltip, advanced);
     }
+
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {

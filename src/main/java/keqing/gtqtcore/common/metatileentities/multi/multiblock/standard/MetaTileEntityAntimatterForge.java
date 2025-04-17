@@ -43,16 +43,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingTyp
 
 public class MetaTileEntityAntimatterForge extends RecipeMapLaserMultiblockController implements IFastRenderMetaTileEntity {
 
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
-
     public MetaTileEntityAntimatterForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ANTIMATTER_FORGE);
         //反物质锻炉
@@ -69,6 +59,10 @@ public class MetaTileEntityAntimatterForge extends RecipeMapLaserMultiblockContr
 
     private static IBlockState getWhiteState() {
         return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.GRAVITY_STABILIZATION_CASING);
+    }
+
+    private static IBlockState getContainmentCoilState() {
+        return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.PROTOMATTER_ACTIVATION_COIL);
     }
 
 
@@ -103,12 +97,17 @@ public class MetaTileEntityAntimatterForge extends RecipeMapLaserMultiblockContr
     //        }
     //    };
 
-    private static IBlockState getContainmentCoilState() {
-        return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.PROTOMATTER_ACTIVATION_COIL);
-    }
-
     private static IBlockState getBlackCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing7.getState(BlockMultiblockCasing7.CasingType.MAGNETIC_FLUX_CASING);
+    }
+
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import gregtech.api.capability.IGhostSlotConfigurable;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import keqing.gtqtcore.api.capability.impl.LargeSlotItemStackHandler;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -202,10 +203,9 @@ public class MetaTileEntitySuperInputBus extends MetaTileEntityMultiblockNotifia
     }
 
     @Override
-    public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        abilityList.add(this.actualImportItems);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this.actualImportItems);
     }
-
     @Override
     public void addToMultiBlock(MultiblockControllerBase controllerBase) {
         super.addToMultiBlock(controllerBase);

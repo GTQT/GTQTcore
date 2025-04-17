@@ -100,8 +100,8 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
             heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
         }
         this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
-        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel),16));
-        setTimeReduce( (100 - (Math.min(heatingCoilLevel,10) * 5.0)) /100);
+        setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel), 16));
+        setTimeReduce((100 - (Math.min(heatingCoilLevel, 10) * 5.0)) / 100);
     }
 
     @Override
@@ -208,6 +208,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
             super(tileEntity);
             this.metaTileEntityBlazingBlastFurnace = (MetaTileEntityBlazingBlastFurnace) tileEntity;
         }
+
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {

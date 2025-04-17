@@ -17,7 +17,6 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureContainer;
@@ -37,7 +36,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityPressureTank extends MultiblockWithDisplayBase {
@@ -66,7 +64,7 @@ public class MetaTileEntityPressureTank extends MultiblockWithDisplayBase {
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240);
-        builder.dynamicLabel(8, 12, () -> "大型耐压储罐 等级"+tier, 0xFFFFFF);
+        builder.dynamicLabel(8, 12, () -> "大型耐压储罐 等级" + tier, 0xFFFFFF);
         builder.image(4, 28, 172, 128, GuiTextures.DISPLAY);
         builder.widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180).setClickHandler(this::handleDisplayClick));
         builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
@@ -146,7 +144,7 @@ public class MetaTileEntityPressureTank extends MultiblockWithDisplayBase {
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("用于高低压气体缓存，最多接受4个仓的气体交互"));
-        tooltip.add(I18n.format("多方块容积：%s", 20*tier));
+        tooltip.add(I18n.format("多方块容积：%s", 20 * tier));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.minimum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMinPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMinPressure())]));
         tooltip.add(I18n.format("gtqtcore.universal.tooltip.pressure.maximum", NumberFormattingUtil.formatDoubleToCompactString(pressureContainer.getMaxPressure()), GCYSValues.PNF[GTQTUtil.getTierByPressure(pressureContainer.getMaxPressure())]));
     }

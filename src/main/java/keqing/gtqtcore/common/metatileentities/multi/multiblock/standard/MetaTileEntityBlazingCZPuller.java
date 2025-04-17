@@ -259,7 +259,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
                 }
 
                 if (this.hasNotEnoughEnergy) {
-                    if (this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                    if (this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                         this.hasNotEnoughEnergy = false;
                     }
                 }

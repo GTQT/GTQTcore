@@ -42,11 +42,11 @@ public class MetaTileEntityDistillationKettle extends RecipeMapHeatMultiblockCon
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(" F F ", " F F ", " COC ", " COC ", " COC "," COC ", " COC "," COC ", " COC ", " COC ", " COC ", " FCF ")
-                .aisle("F   F", "F   F", "CCCCC", "CPPPC", "C   C","C   C", "CPPPC","C   C", "C   C", "CPPPC", "CCCCC", "FCCCF")
-                .aisle("     ", "     ", "CCCCC", "CPPPC", "C E C","C E C", "CPEPC","C E C", "C E C", "CPPPC", "CCECC", "CCMCC")
-                .aisle("F   F", "F   F", "CCCCC", "CPPPC", "C   C","C   C", "CPPPC","C   C", "C   C", "CPPPC", "CCCCC", "FCCCF")
-                .aisle(" F F ", " F F ", " CCC ", " CSC ", " CCC "," CCC ", " CCC "," CCC ", " CCC ", " CCC ", " CCC ", " FCF ")
+                .aisle(" F F ", " F F ", " COC ", " COC ", " COC ", " COC ", " COC ", " COC ", " COC ", " COC ", " COC ", " FCF ")
+                .aisle("F   F", "F   F", "CCCCC", "CPPPC", "C   C", "C   C", "CPPPC", "C   C", "C   C", "CPPPC", "CCCCC", "FCCCF")
+                .aisle("     ", "     ", "CCCCC", "CPPPC", "C E C", "C E C", "CPEPC", "C E C", "C E C", "CPPPC", "CCECC", "CCMCC")
+                .aisle("F   F", "F   F", "CCCCC", "CPPPC", "C   C", "C   C", "CPPPC", "C   C", "C   C", "CPPPC", "CCCCC", "FCCCF")
+                .aisle(" F F ", " F F ", " CCC ", " CSC ", " CCC ", " CCC ", " CCC ", " CCC ", " CCC ", " CCC ", " CCC ", " FCF ")
                 .where('S', selfPredicate())
                 .where('C', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.STEEL_SOLID)).setMinGlobalLimited(96)
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setExactLimit(1))
@@ -100,6 +100,7 @@ public class MetaTileEntityDistillationKettle extends RecipeMapHeatMultiblockCon
             return null;
         return abilities.get(0);
     }
+
     protected ICubeRenderer getFrontOverlay() {
         return Textures.BLAST_FURNACE_OVERLAY;
     }

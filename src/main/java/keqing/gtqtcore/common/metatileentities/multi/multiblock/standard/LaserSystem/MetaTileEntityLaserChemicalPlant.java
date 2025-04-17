@@ -13,12 +13,12 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
-import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
-import keqing.gtqtcore.api.recipes.properties.ChemicalPlantProperties;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
+import keqing.gtqtcore.api.recipes.properties.ChemicalPlantProperties;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -153,12 +153,14 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
             return null;
         return abilities.get(0);
     }
+
     protected class ChemicalPlantLogic extends MultiblockLaserRecipeLogic {
 
         public ChemicalPlantLogic(RecipeMapLaserMultiblockController tileEntity) {
             super(tileEntity);
 
         }
+
         @Override
         public boolean checkRecipe(@Nonnull Recipe recipe) {
             if (!super.checkRecipe(recipe)) {

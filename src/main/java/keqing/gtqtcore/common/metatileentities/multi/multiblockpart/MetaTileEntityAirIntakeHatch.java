@@ -12,16 +12,18 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.GasCollectorDimensionProperty;
+import gregtech.api.recipes.properties.impl.DimensionProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import it.unimi.dsi.fastutil.ints.IntLists;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.MetaTileEntityGasCollector;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -48,7 +50,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
 
 public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<IFluidTank> {
 
@@ -82,23 +83,23 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
 
             // 过滤出具有GasCollectorDimensionProperty属性的配方
             List<Recipe> filteredRecipes = recipes.stream()
-                    .filter(recipe -> recipe.hasProperty(GasCollectorDimensionProperty.getInstance()))
+                    .filter(recipe -> recipe.hasProperty(DimensionProperty.getInstance()))
                     .collect(Collectors.toList()); // 先收集为普通列表
 
             // 将普通列表转换为不可修改列表
             filteredRecipes = Collections.unmodifiableList(filteredRecipes);
 
              // 将配方映射为Pair<Recipe, DimensionID>
-            List<Pair<Recipe, Integer>> recipeDimensionPairs = filteredRecipes.stream()
+            List<Pair<Recipe, DimensionProperty.DimensionPropertyList>> recipeDimensionPairs = filteredRecipes.stream()
                     .map(recipe -> Pair.of(recipe,
-                            recipe.getProperty(GasCollectorDimensionProperty.getInstance(), IntLists.EMPTY_LIST).get(0)))
+                            recipe.getProperty(DimensionProperty.getInstance(), DimensionProperty.DimensionPropertyList.EMPTY_LIST)))
                     .collect(Collectors.toList()); // 同样先收集为普通列表
 
              // 将普通列表转换为不可修改列表
             recipeDimensionPairs = Collections.unmodifiableList(recipeDimensionPairs);
 
             // 过滤出维度ID与当前世界维度ID匹配的配方
-            Optional<Pair<Recipe, Integer>> matchingRecipe = recipeDimensionPairs.stream()
+            Optional<Pair<Recipe, DimensionProperty.DimensionPropertyList>> matchingRecipe = recipeDimensionPairs.stream()
                     .filter(pair -> pair.getRight().equals(this.getWorld().provider.getDimension())) // 使用 getRight() 方法
                     .findFirst();
 
@@ -264,8 +265,8 @@ public class MetaTileEntityAirIntakeHatch extends MetaTileEntityMultiblockNotifi
     }
 
     @Override
-    public void registerAbilities(List<IFluidTank> list) {
-        list.add(this.fluidTank);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this.fluidTank);
     }
 
     @Override

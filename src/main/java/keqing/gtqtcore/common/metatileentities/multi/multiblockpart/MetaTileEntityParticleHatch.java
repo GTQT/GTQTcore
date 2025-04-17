@@ -13,6 +13,7 @@ import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
@@ -146,8 +147,8 @@ public class MetaTileEntityParticleHatch extends MetaTileEntityMultiblockPart im
     }
 
     @Override
-    public void registerAbilities(List<IParticle> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
 
 

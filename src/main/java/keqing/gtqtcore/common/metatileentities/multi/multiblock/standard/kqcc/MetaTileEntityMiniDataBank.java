@@ -25,9 +25,6 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockCleanroomCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.core.sound.GTSoundEvents;
-import java.util.ArrayList;
-import java.util.List;
-
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -45,17 +42,38 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implements IControllable {
     private static final int EUT_PER_HATCH;
     private static final int EUT_PER_HATCH_CHAINED;
+
+    static {
+        EUT_PER_HATCH = GTValues.VA[2];
+        EUT_PER_HATCH_CHAINED = GTValues.VA[4];
+    }
+
+    protected boolean hasNotEnoughEnergy;
     private IEnergyContainer energyContainer = new EnergyContainerList(new ArrayList());
     private boolean isActive = false;
     private boolean isWorkingEnabled = true;
-    protected boolean hasNotEnoughEnergy;
     private int energyUsage = 0;
 
     public MetaTileEntityMiniDataBank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+    }
+
+    private static IBlockState getOuterState() {
+        return MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.FILTER_CASING);
+    }
+
+    private static IBlockState getInnerState() {
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
+    }
+
+    private static IBlockState getFrontState() {
+        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
@@ -90,14 +108,14 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
             energyToConsume += this.getNumMaintenanceProblems() * energyToConsume / 10;
         }
 
-        if (this.hasNotEnoughEnergy && this.energyContainer.getInputPerSec() > 19L * (long)energyToConsume) {
+        if (this.hasNotEnoughEnergy && this.energyContainer.getInputPerSec() > 19L * (long) energyToConsume) {
             this.hasNotEnoughEnergy = false;
         }
 
-        if (this.energyContainer.getEnergyStored() >= (long)energyToConsume) {
+        if (this.energyContainer.getEnergyStored() >= (long) energyToConsume) {
             if (!this.hasNotEnoughEnergy) {
-                long consumed = this.energyContainer.removeEnergy((long)energyToConsume);
-                if (consumed == (long)(-energyToConsume)) {
+                long consumed = this.energyContainer.removeEnergy(energyToConsume);
+                if (consumed == (long) (-energyToConsume)) {
                     this.setActive(true);
                 } else {
                     this.hasNotEnoughEnergy = true;
@@ -149,7 +167,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
 
     }
 
-    protected  BlockPattern createStructurePattern() {
+    protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
                 .aisle("XDDDX", "XDDDX", "XDDDX")
                 .aisle("XCCCX", "XAAAX", "XCCCX")
@@ -166,18 +184,6 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
                 .build();
     }
 
-    private static  IBlockState getOuterState() {
-        return MetaBlocks.CLEANROOM_CASING.getState(BlockCleanroomCasing.CasingType.FILTER_CASING);
-    }
-
-    private static  IBlockState getInnerState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
-    }
-
-    private static IBlockState getFrontState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.IRIDIUM_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return GTQTTextures.IRIDIUM_CASING;
@@ -189,7 +195,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
     }
 
     @SideOnly(Side.CLIENT)
-    protected  ICubeRenderer getFrontOverlay() {
+    protected ICubeRenderer getFrontOverlay() {
         return Textures.DATA_BANK_OVERLAY;
     }
 
@@ -202,17 +208,17 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
         return GTSoundEvents.COMPUTATION;
     }
 
-    public void addInformation(ItemStack stack,  World world,  List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.1", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.2", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.3", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.4", new Object[]{TextFormattingUtil.formatNumbers((long)EUT_PER_HATCH)}));
-        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.5", new Object[]{TextFormattingUtil.formatNumbers((long)EUT_PER_HATCH_CHAINED)}));
+        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.3"));
+        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.4", TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
+        tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.5", TextFormattingUtil.formatNumbers(EUT_PER_HATCH_CHAINED)));
     }
 
     protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed()).setWorkingStatus(true, this.isActive() && this.isWorkingEnabled()).setWorkingStatusKeys("gregtech.multiblock.idling", "gregtech.multiblock.idling", "gregtech.multiblock.data_bank.providing").addEnergyUsageExactLine((long)this.getEnergyUsage()).addWorkingStatusLine();
+        MultiblockDisplayText.builder(textList, this.isStructureFormed()).setWorkingStatus(true, this.isActive() && this.isWorkingEnabled()).setWorkingStatusKeys("gregtech.multiblock.idling", "gregtech.multiblock.idling", "gregtech.multiblock.data_bank.providing").addEnergyUsageExactLine(this.getEnergyUsage()).addWorkingStatusLine();
     }
 
     protected void addWarningText(List<ITextComponent> textList) {
@@ -244,7 +250,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
         this.isWorkingEnabled = buf.readBoolean();
     }
 
-    public void receiveCustomData(int dataId,  PacketBuffer buf) {
+    public void receiveCustomData(int dataId, PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
         if (dataId == GregtechDataCodes.WORKABLE_ACTIVE) {
             this.isActive = buf.readBoolean();
@@ -258,10 +264,5 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
 
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
         return capability == GregtechTileCapabilities.CAPABILITY_CONTROLLABLE ? GregtechTileCapabilities.CAPABILITY_CONTROLLABLE.cast(this) : super.getCapability(capability, side);
-    }
-
-    static {
-        EUT_PER_HATCH = GTValues.VA[2];
-        EUT_PER_HATCH_CHAINED = GTValues.VA[4];
     }
 }

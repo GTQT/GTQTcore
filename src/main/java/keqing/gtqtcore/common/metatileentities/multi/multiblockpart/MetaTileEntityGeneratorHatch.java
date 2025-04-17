@@ -9,10 +9,7 @@ import gregtech.api.metatileentity.IMachineHatchMultiblock;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.ItemStackHashStrategy;
 import gregtech.client.renderer.texture.Textures;
@@ -56,10 +53,10 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
         return MultiblockAbility.MACHINE_HATCH;
     }
 
-    public void registerAbilities(List<IItemHandlerModifiable> abilityList) {
-        abilityList.add(this.machineHandler);
+    @Override
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(machineHandler);
     }
-
 
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {

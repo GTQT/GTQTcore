@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.SiliconeRubber;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LAMINATOR_RECIPES;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
 
 public class WireRecipeHandler {
 

@@ -12,24 +12,25 @@ public class MetaTileEntityParticleAcceleratorIO extends SimpleMachineMetaTileEn
     public int tier;
     public int time;
     public boolean output;
+
     public MetaTileEntityParticleAcceleratorIO(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer, int tier, boolean hasFrontFacing) {
         super(metaTileEntityId, recipeMap, renderer, tier, hasFrontFacing);
-        this.tier=tier;
+        this.tier = tier;
     }
+
     public void update() {
         super.update();
-        circuit=circuitInventory.getCircuitValue();
+        circuit = circuitInventory.getCircuitValue();
         time++;
-        if(isActive()&&time == 1200) {
+        if (isActive() && time == 1200) {
             output = true;
             time = 0;
-        }
-        else output=false;
+        } else output = false;
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityParticleAcceleratorIO(this.metaTileEntityId, this.workable.getRecipeMap(), this.renderer, this.getTier(),this.hasFrontFacing());
+        return new MetaTileEntityParticleAcceleratorIO(this.metaTileEntityId, this.workable.getRecipeMap(), this.renderer, this.getTier(), this.hasFrontFacing());
     }
 
 }

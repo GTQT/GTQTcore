@@ -93,8 +93,8 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
                 () -> ((WrappedIntTired) CoilLevel).getIntTier(),
                 0);
 
-        setMaxParallel((int) Math.pow(2,Math.min(10,this.CoilLevel)));
-        setTimeReduce((double) (100 - (Math.min(10, this.CoilLevel)) * 5) /100);
+        setMaxParallel((int) Math.pow(2, Math.min(10, this.CoilLevel)));
+        setTimeReduce((double) (100 - (Math.min(10, this.CoilLevel)) * 5) / 100);
     }
 
     @Override

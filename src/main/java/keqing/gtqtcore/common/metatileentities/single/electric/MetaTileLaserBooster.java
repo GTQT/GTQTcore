@@ -35,13 +35,20 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
 
-public class MetaTileLaserBooster extends MetaTileEntity{
+public class MetaTileLaserBooster extends MetaTileEntity {
     private final int tier;
+    protected ICubeRenderer hatchTexture = null;
     private boolean outputLaser;
     private boolean findMachine;
     private long LaserStoreMax;
     private long LaserStore;
-    protected ICubeRenderer hatchTexture = null;
+
+    public MetaTileLaserBooster(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId);
+        this.tier = tier;
+        this.LaserStoreMax = V[tier] * 32 * 10;
+    }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setLong("LaserStoreMax", LaserStoreMax);
         data.setLong("LaserStore", LaserStore);
@@ -58,11 +65,6 @@ public class MetaTileLaserBooster extends MetaTileEntity{
         findMachine = data.getBoolean("findMachine");
     }
 
-    public MetaTileLaserBooster(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId);
-        this.tier=tier;
-        this.LaserStoreMax=V[tier]*32*10;
-    }
     @Override
     public void update() {
         super.update();
@@ -106,9 +108,10 @@ public class MetaTileLaserBooster extends MetaTileEntity{
         }
         return null;
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileLaserBooster(metaTileEntityId,tier);
+        return new MetaTileLaserBooster(metaTileEntityId, tier);
     }
 
     @Override
@@ -118,11 +121,12 @@ public class MetaTileLaserBooster extends MetaTileEntity{
 
         builder.widget((new AdvancedTextWidget(7, 30, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
 
-        builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=ON", data -> outputLaser=true));
-        builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=OFF", data -> outputLaser=false));
+        builder.widget(new ClickButtonWidget(7, 90, 80, 20, "=ON", data -> outputLaser = true));
+        builder.widget(new ClickButtonWidget(90, 90, 80, 20, "=OFF", data -> outputLaser = false));
 
         return builder.build(getHolder(), entityPlayer);
     }
+
     protected void addDisplayText(List<ITextComponent> textList) {
         textList.add(new TextComponentString("缓存激光: " + LaserStore + " " + VN[GTUtility.getTierByVoltage(LaserStore)]));
         textList.add(new TextComponentString("最大缓存: " + LaserStoreMax + " " + VN[GTUtility.getTierByVoltage(LaserStoreMax)]));
@@ -130,10 +134,10 @@ public class MetaTileLaserBooster extends MetaTileEntity{
         textList.add(new TextComponentString("聚变对象: " + findMachine));
 
     }
-    public void addLaser(long amount)
-    {
-        if(LaserStore+amount<LaserStoreMax)LaserStore+=Math.min(amount,V[tier]*16);
-        else LaserStore=LaserStoreMax;
+
+    public void addLaser(long amount) {
+        if (LaserStore + amount < LaserStoreMax) LaserStore += Math.min(amount, V[tier] * 16);
+        else LaserStore = LaserStoreMax;
     }
 
     public Pair<TextureAtlasSprite, Integer> getParticleTexture() {
@@ -151,9 +155,11 @@ public class MetaTileLaserBooster extends MetaTileEntity{
         Textures.LASER_TARGET.renderSided(this.getFrontFacing(), renderState, translation, pipeline);
 
     }
+
     public ICubeRenderer getBaseTexture() {
         return Textures.VOLTAGE_CASINGS[this.tier];
     }
+
     public boolean shouldRenderOverlay() {
         return true;
     }
@@ -165,6 +171,7 @@ public class MetaTileLaserBooster extends MetaTileEntity{
     public int getTier() {
         return this.tier;
     }
+
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);

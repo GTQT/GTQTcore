@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.GTValues.CWT;
 import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -52,7 +53,7 @@ public class CopyRecipesHandlers {
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
-            int EUt = recipe.getEUt();
+            long EUt = recipe.getEUt();
             int baseDuration= Math.max((int) (recipe.getDuration()*0.8),1);
 
             TD_PRINT_RECIPES.recipeBuilder()
@@ -68,7 +69,7 @@ public class CopyRecipesHandlers {
         //蒸馏塔
         Collection<Recipe> DistillationRecipes = RecipeMaps.DISTILLATION_RECIPES.getRecipeList();
         for (Recipe recipe : DistillationRecipes) {
-            int EUt = recipe.getEUt();
+            long EUt = recipe.getEUt();
             if(EUt>=512)continue;
 
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
@@ -81,7 +82,7 @@ public class CopyRecipesHandlers {
 
             builder = DISTILLATION_KETTLE.recipeBuilder()
                     .duration(baseDuration)
-                    .Heat(300+EUt);
+                    .Heat((int) (300+EUt));
 
             if(fluidInputs!=null)builder.fluidInputs(fluidInputs);
             if(fluidOutputs!=null) {
@@ -99,7 +100,7 @@ public class CopyRecipesHandlers {
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
 
-            int EUt = recipe.getEUt() * 4;
+            long EUt = recipe.getEUt() * 4;
             int baseDuration= recipe.getDuration()/2;
             int tier=Math.min(5, GTUtility.getTierByVoltage(recipe.getEUt())+1);
 
@@ -173,7 +174,7 @@ public class CopyRecipesHandlers {
             List<GTRecipeInput> itemInputs = recipe.getInputs();
             List<ItemStack> itemOutputs = recipe.getOutputs();
 
-            int EUt = recipe.getEUt() * 4;
+            long EUt = recipe.getEUt() * 4;
             int baseDuration;
 
             if (EUt <= V[IV]) baseDuration = recipe.getDuration() * 4;
@@ -196,7 +197,7 @@ public class CopyRecipesHandlers {
 
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
             int EUt = (int) GTValues.V[GTValues.LV];
-            int baseDuration = 4 * recipe.getDuration() * recipe.getEUt() / EUt;
+            int baseDuration = (int) (4 * recipe.getDuration() * recipe.getEUt() / EUt);
 
             if(baseDuration>4000)continue;
 
@@ -233,7 +234,7 @@ public class CopyRecipesHandlers {
 
             List<GTRecipeInput> fluidInputs = recipe.getFluidInputs();
             int EUt = (int) GTValues.V[GTValues.LV];
-            int baseDuration = 4 * recipe.getDuration() * recipe.getEUt() / EUt;
+            int baseDuration = (int) (4 * recipe.getDuration() * recipe.getEUt() / EUt);
 
             if(baseDuration>4000)continue;
 

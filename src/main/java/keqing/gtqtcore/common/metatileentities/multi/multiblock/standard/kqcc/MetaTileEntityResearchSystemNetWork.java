@@ -29,8 +29,8 @@ import gregtech.common.metatileentities.multi.electric.MetaTileEntityHPCA;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.MachineTierProperty;
-import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
 import keqing.gtqtcore.api.recipes.properties.ResearchSystemKindProperty;
+import keqing.gtqtcore.api.recipes.properties.ResearchSystemMachineProperty;
 import keqing.gtqtcore.api.utils.GTQTKQnetHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -73,6 +73,7 @@ import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingTyp
 
 
 public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
+    private final HologramConfig hologramConfig = new HologramConfig();
     double tier;
     int page = 0;
     int x;
@@ -108,6 +109,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityResearchSystemNetWork(this.metaTileEntityId);
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -278,7 +280,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         });
     }
 
-
     protected void addInfo5(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed()).addCustom(tl -> {
             if (isStructureFormed() && thresholdPercentage + 2 < 100) {
@@ -294,7 +295,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
             }
         });
     }
-
 
     @Override
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
@@ -581,48 +581,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         return (int) Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
-    private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
-        public ResearchStationRecipeLogic(MetaTileEntityResearchSystemNetWork metaTileEntity) {
-            super(metaTileEntity, ComputationType.SPORADIC);
-        }
-
-        @Nonnull
-        public MetaTileEntityResearchSystemNetWork getMetaTileEntity() {
-            return (MetaTileEntityResearchSystemNetWork) super.getMetaTileEntity();
-        }
-    }
-
-    public static class HologramConfig {
-        // 位置偏移（以方块中心为原点）
-        public float posX = 0.0f;
-        public float posY = 4.5f;
-        public float posZ = 0.0f;
-
-        // 缩放比例
-        public float scale = 1.0f;
-
-        // 旋转参数（角度制）
-        public float rotationYaw = 0.0f;   // Y轴旋转
-        public float rotationPitch = 0.0f; // X轴旋转
-        public float rotationRoll = 0.0f;   // Z轴旋转
-
-        // 背景尺寸
-        public float width = 4.0f;
-        public float height = 3.0f;
-
-        // 背景颜色
-        public float bgRed = 0.0f;
-        public float bgGreen = 0.0f;
-        public float bgBlue = 1.0f;
-        public float bgAlpha = 0.5f;
-
-        // 文本配置
-        public float textScale = 0.02f;
-        public int maxLineWidth = 200; // 像素单位
-    }
-
-    private final HologramConfig hologramConfig = new HologramConfig();
-
     // 渲染方法实现
     @Override
     @SideOnly(Side.CLIENT)
@@ -706,7 +664,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         GlStateManager.enableTexture2D();
     }
 
-
     private void renderText() {
         GlStateManager.translate(0, 0, 0.1);
         GlStateManager.scale(hologramConfig.textScale, hologramConfig.textScale, hologramConfig.textScale);
@@ -716,22 +673,22 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         GlStateManager.enableBlend();
 
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-        float scaleFactor = 1/hologramConfig.textScale; // 计算实际缩放系数
+        float scaleFactor = 1 / hologramConfig.textScale; // 计算实际缩放系数
 
-        int x=0;
+        int x = 0;
         // 渲染标题
-        List<String> titleLines = wrapText(fontRenderer,(String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)),
-                (int)(hologramConfig.maxLineWidth * scaleFactor));
+        List<String> titleLines = wrapText(fontRenderer, (String.format("gtqtcore.multiblock.kqn.nb%s", thresholdPercentage)),
+                (int) (hologramConfig.maxLineWidth * scaleFactor));
         for (int i = 0; i < titleLines.size(); i++) {
-            renderTextLine(fontRenderer, titleLines.get(i),  hologramConfig.width*25-5, hologramConfig.height*25-5 -i*15, 0xFFFFFF, false);
+            renderTextLine(fontRenderer, titleLines.get(i), hologramConfig.width * 25 - 5, hologramConfig.height * 25 - 5 - i * 15, 0xFFFFFF, false);
             x++;
         }
 
         // 渲染正文
         List<String> wrappedLines = wrapText(fontRenderer, (String.format("gtqtcore.multiblock.kqn.nx%s", thresholdPercentage)),
-                (int)(hologramConfig.maxLineWidth * scaleFactor));
+                (int) (hologramConfig.maxLineWidth * scaleFactor));
         for (int i = 0; i < wrappedLines.size(); i++) {
-            renderTextLine(fontRenderer, wrappedLines.get(i), hologramConfig.width*25-5, hologramConfig.height*25-5 -(i+x)*15, 0xFFFFFF, false);
+            renderTextLine(fontRenderer, wrappedLines.get(i), hologramConfig.width * 25 - 5, hologramConfig.height * 25 - 5 - (i + x) * 15, 0xFFFFFF, false);
         }
 
         GlStateManager.enableDepth();
@@ -747,9 +704,9 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
                 continue;
             }
 
-            String last = lines.get(lines.size()-1);
+            String last = lines.get(lines.size() - 1);
             if (fr.getStringWidth(last + " " + s) <= maxWidth) {
-                lines.set(lines.size()-1, last + " " + s);
+                lines.set(lines.size() - 1, last + " " + s);
             } else {
                 lines.add(s);
             }
@@ -762,7 +719,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         try {
             if (center) {
                 int textWidth = fr.getStringWidth(text);
-                GlStateManager.translate(-textWidth/2.0, 0, 0);
+                GlStateManager.translate(-textWidth / 2.0, 0, 0);
             }
 
             GlStateManager.translate(x, y, 0);
@@ -774,9 +731,50 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
             GlStateManager.popMatrix();
         }
     }
+
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         //这个影响模型的可视范围，正常方块都是 1 1 1，长宽高各为1，当这个方块离线玩家视线后，obj模型渲染会停止，所以可以适当放大这个大小能让模型有更多角度的可视
         return new AxisAlignedBB(getPos(), getPos().add(5, 5, 5));
+    }
+
+    private static class ResearchStationRecipeLogic extends ComputationRecipeLogic {
+        public ResearchStationRecipeLogic(MetaTileEntityResearchSystemNetWork metaTileEntity) {
+            super(metaTileEntity, ComputationType.SPORADIC);
+        }
+
+        @Nonnull
+        public MetaTileEntityResearchSystemNetWork getMetaTileEntity() {
+            return (MetaTileEntityResearchSystemNetWork) super.getMetaTileEntity();
+        }
+    }
+
+    public static class HologramConfig {
+        // 位置偏移（以方块中心为原点）
+        public float posX = 0.0f;
+        public float posY = 4.5f;
+        public float posZ = 0.0f;
+
+        // 缩放比例
+        public float scale = 1.0f;
+
+        // 旋转参数（角度制）
+        public float rotationYaw = 0.0f;   // Y轴旋转
+        public float rotationPitch = 0.0f; // X轴旋转
+        public float rotationRoll = 0.0f;   // Z轴旋转
+
+        // 背景尺寸
+        public float width = 4.0f;
+        public float height = 3.0f;
+
+        // 背景颜色
+        public float bgRed = 0.0f;
+        public float bgGreen = 0.0f;
+        public float bgBlue = 1.0f;
+        public float bgAlpha = 0.5f;
+
+        // 文本配置
+        public float textScale = 0.02f;
+        public int maxLineWidth = 200; // 像素单位
     }
 }

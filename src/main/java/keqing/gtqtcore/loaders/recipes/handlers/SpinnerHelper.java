@@ -14,8 +14,6 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
 
 public class SpinnerHelper {
     public static void init() {

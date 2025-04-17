@@ -1,8 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
 import gregicality.multiblocks.api.render.GCYMTextures;
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -10,7 +8,6 @@ import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -94,17 +91,18 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
 
         setOverclocking(3.0);
     }
+
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.ALLOY_MELTING);
+    }
+
     @Override
     public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
             if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
                 super.checkStructurePattern();
             }
-        }
-        else super.checkStructurePattern();
-    }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.ALLOY_MELTING);
+        } else super.checkStructurePattern();
     }
 
     @Override
@@ -312,7 +310,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
         protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {

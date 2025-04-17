@@ -15,7 +15,6 @@ import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.PressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureSteamRecipeLogic;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.NumberFormattingUtil;
 import net.minecraft.client.resources.I18n;
@@ -26,13 +25,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static keqing.gtqtcore.api.GCYSValues.*;
+import static keqing.gtqtcore.api.GCYSValues.decreaseDetailP;
 import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
 
 public class MetaTileEntitySteamVacuumChamber extends SimpleSteamMetaTileEntity implements IPressureMachine {

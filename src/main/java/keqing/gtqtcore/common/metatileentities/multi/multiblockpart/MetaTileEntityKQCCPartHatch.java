@@ -10,6 +10,7 @@ import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.multiblock.AbilityInstances;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.util.GTUtility;
@@ -96,12 +97,10 @@ public class MetaTileEntityKQCCPartHatch extends MetaTileEntityMultiblockPart im
         return new MetaTileEntityKQCCPartHatch(metaTileEntityId, type, level);
     }
 
-
     @Override
-    public void registerAbilities(List<IKQCC> list) {
-        list.add(this);
+    public void registerAbilities(AbilityInstances abilityInstances) {
+        abilityInstances.add(this);
     }
-
     @Override
     public MultiblockAbility<IKQCC> getAbility() {
         return GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;

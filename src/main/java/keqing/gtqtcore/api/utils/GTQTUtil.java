@@ -1,5 +1,5 @@
 package keqing.gtqtcore.api.utils;
-import java.net.URI;
+
 import gregtech.api.GTValues;
 import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
@@ -10,26 +10,20 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.unification.material.Material;
-import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.GCYSValues;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -39,14 +33,12 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static gregtech.api.GregTechAPI.materialManager;
 import static net.minecraft.util.EnumFacing.*;
-import static net.minecraftforge.common.DimensionManager.getWorlds;
 
 public class GTQTUtil {
 
     public static final Function<Integer, Integer> genericGeneratorTankSizeFunctionPlus = (tier) -> Math.min(16000 * (1 << tier - 1), 128000);
-    public static final int[] CWT = new int[]{0, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072};
+
     public static final int[] VZ = new int[]{1, 30, 100, 500, 2000, 8000, 30000, 100000, 500000, 2000000, 8000000, 30000000, 100000000, 500000000, 2000000000};
     public static final Function<Integer, Integer> collectorTankSizeFunction = tier -> {
         if (tier <= GTValues.LV)
@@ -58,29 +50,30 @@ public class GTQTUtil {
         // EV+
         return 64000;
     };
-    public static double getAccelerateByCWU(int requestCWUt)
-    {
-        if(requestCWUt>=2048) return 0.6;
-        else if(requestCWUt>=1972) return 0.65;
-        else if(requestCWUt>=1536) return 0.7;
-        else if(requestCWUt>=1280) return 0.78;
-        else if(requestCWUt>=1024) return 0.8;
-        else if(requestCWUt>=768) return 0.85;
-        else if(requestCWUt>=512) return 0.9;
-        else if(requestCWUt>=256) return 0.95;
+    public static Integer baseTime = 100;
+
+    public static double getAccelerateByCWU(int requestCWUt) {
+        if (requestCWUt >= 2048) return 0.6;
+        else if (requestCWUt >= 1972) return 0.65;
+        else if (requestCWUt >= 1536) return 0.7;
+        else if (requestCWUt >= 1280) return 0.78;
+        else if (requestCWUt >= 1024) return 0.8;
+        else if (requestCWUt >= 768) return 0.85;
+        else if (requestCWUt >= 512) return 0.9;
+        else if (requestCWUt >= 256) return 0.95;
         return 1.0;
     }
+
     @Nonnull
     public static ResourceLocation gtqtId(@Nonnull String path) {
         return new ResourceLocation("gtqtcore", path);
     }
-    public static  Integer baseTime = 100;
 
     public static String getName(MetaItem.MetaValueItem is) {
         return is.getStackForm().getDisplayName();
     }
-    public static String getName(Material mater)
-    {
+
+    public static String getName(Material mater) {
         return mater.getLocalizedName();
     }
 
@@ -377,6 +370,7 @@ public class GTQTUtil {
                                                MultiblockControllerBase controllerBase) {
         notifiableHandler.removeNotifiableMetaTileEntity(controllerBase);
     }
+
     public static String getOreNameByStack(ItemStack stackInSlot) {
         if (stackInSlot.isEmpty()) return "null";
 

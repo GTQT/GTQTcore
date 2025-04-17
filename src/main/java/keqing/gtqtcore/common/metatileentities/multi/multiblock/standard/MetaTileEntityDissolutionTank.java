@@ -48,16 +48,18 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         this.recipeMapWorkable = new DissolutionTankWorkableHandler(this);
     }
 
+    private static IBlockState getCasingBState() {
+        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
+    }
+
     protected IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.Talonite);
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return GTQTTextures.Talonite;
-    }
-    private static IBlockState getCasingBState() {
-        return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF);
     }
 
     @Override
@@ -161,9 +163,9 @@ public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("自动化噩梦", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.dissolution_tank.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        tooltip.add(I18n.format("gtqtcore.machine.progress_time","maxProgress * (100 - glass_tier) / 100"));
-        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock","Coil Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom",2,"Glass Tier",256));
+        tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress * (100 - glass_tier) / 100"));
+        tooltip.add(I18n.format("gtqtcore.machine.modify_overclock", "Coil Tier"));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom", 2, "Glass Tier", 256));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
 
     }

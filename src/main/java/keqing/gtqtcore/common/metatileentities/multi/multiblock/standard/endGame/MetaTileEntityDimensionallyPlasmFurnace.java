@@ -46,21 +46,50 @@ import java.util.List;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionallyPlasmFurnace extends MultiMapMultiblockController implements IHeatingCoil {
-    private int blastFurnaceTemperature;
+    private static final boolean init = false;
+    private static List<IBlockState> finalListCoil;
     protected int heatingCoilLevel;
     protected int coilTier;
-    private static boolean init = false;
-    private static List<IBlockState> finalListCoil;
+    private int blastFurnaceTemperature;
 
     public MetaTileEntityDimensionallyPlasmFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.FURNACE_RECIPES});
         this.recipeMapWorkable = new PlasmFurnaceLogic(this);
     }
 
+    private static IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
+    }
+
+    private static IBlockState getCommonState() {
+        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
+    }
+
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_PRESERVE_CASING);
+    }
+
+    private static IBlockState getThirdCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
+    }
+
+    private static IBlockState getExtraCasingState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(QUANTUM_COMPUTER_CASING);
+    }
+
+    private static IBlockState getExtraCasingState1() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(FIELD_GENERATOR_CASING);
+    }
+
+    private static IBlockState getExtraCasingState2() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(MOLECULAR_COIL);
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDimensionallyPlasmFurnace(metaTileEntityId);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -93,15 +122,14 @@ public class MetaTileEntityDimensionallyPlasmFurnace extends MultiMapMultiblockC
         this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
-        this.energyContainer=new EnergyContainerList(energyContainer);
+        this.energyContainer = new EnergyContainerList(energyContainer);
     }
 
     @Override
-    public boolean checkRecipe( Recipe recipe,
+    public boolean checkRecipe(Recipe recipe,
                                boolean consumeIfSuccess) {
         return this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0);
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {
@@ -177,27 +205,7 @@ public class MetaTileEntityDimensionallyPlasmFurnace extends MultiMapMultiblockC
                 .where(' ', any())
                 .build();
     }
-    private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
-    }
-    private static IBlockState getCommonState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
-    }
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_PRESERVE_CASING);
-    }
-    private static IBlockState getThirdCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
-    }
-    private static IBlockState getExtraCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(QUANTUM_COMPUTER_CASING);
-    }
-    private static IBlockState getExtraCasingState1() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(FIELD_GENERATOR_CASING);
-    }
-    private static IBlockState getExtraCasingState2() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(MOLECULAR_COIL);
-    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -222,8 +230,8 @@ public class MetaTileEntityDimensionallyPlasmFurnace extends MultiMapMultiblockC
 
     @Override
     public void addInformation(ItemStack stack,
-                                World player,
-                                List<String> tooltip,
+                               World player,
+                               List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
     }

@@ -55,7 +55,6 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -71,14 +70,14 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
     private static final int CHUNK_LENGTH = 16;
     private final Material material;
     private final int tier;
-    private IEnergyContainer energyContainer;
+    private final int drillingFluidConsumePerTick;
+    private final MultiblockMinerLogic minerLogic;
     protected IMultipleTankHandler inputFluidInventory;
     protected IItemHandlerModifiable outputInventory;
+    private IEnergyContainer energyContainer;
     private boolean silkTouch = false;
     private boolean chunkMode = false;
     private boolean isInventoryFull = false;
-    private final int drillingFluidConsumePerTick;
-    private final MultiblockMinerLogic minerLogic;
 
     public MetaTileEntityAdvancedLargeMiner(ResourceLocation metaTileEntityId,
                                             int tier,
@@ -124,7 +123,7 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
     }
 
     private void resetTileAbilities() {
-        this.inputFluidInventory = new FluidTankList(true, new IFluidTank[0]);
+        this.inputFluidInventory = new FluidTankList(true);
         this.outputInventory = new GTItemStackHandler(this, 0);
         this.energyContainer = new EnergyContainerList(Lists.newArrayList());
     }
@@ -179,6 +178,7 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
             this.minerLogic.setActive(false);
         }
     }
+
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -289,7 +289,8 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
                 .addCustom((tl) -> {
                     if (this.isStructureFormed() && this.isInventoryFull) {
                         tl.add(TextComponentUtil.translationWithColor(TextFormatting.YELLOW, "gregtech.machine.miner.invfull"));
-                    }});
+                    }
+                });
     }
 
     @Override
@@ -376,7 +377,9 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
         ModularUI.Builder builder = super.createUITemplate(entityPlayer);
         builder.widget((new AdvancedTextWidget(63, 31, this::addDisplayText2, 16777215))
                 .setMaxWidthLimit(68)
-                .setClickHandler((x$0, x$1) -> {this.handleDisplayClick(x$0, x$1);}));
+                .setClickHandler((x$0, x$1) -> {
+                    this.handleDisplayClick(x$0, x$1);
+                }));
         return builder;
     }
 

@@ -21,9 +21,9 @@ import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityHeatHatch;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
@@ -55,29 +55,27 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
     // 定义流体栈
     private final FluidStack WATER = Water.getFluid(1);
     private final FluidStack STEAM = Steam.getFluid(500);
-    
-    @Override
-    public void onRemoval() {
-        super.onRemoval();
-        for (int i = 0; i < containerInventory.getSlots(); i++) {
-            var pos = getPos();
-            if(!containerInventory.getStackInSlot(i).isEmpty())
-            {
-                getWorld().spawnEntity(new EntityItem(getWorld(),pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,containerInventory.getStackInSlot(i)));
-                containerInventory.extractItem(i,1,false);
-            }
-
-        }
-    }
     int select;
     int[] tempList = new int[]{300, 300, 300, 300, 300, 300, 300, 300};
     int[] exchangeRate = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
     boolean modelHeat;
     MetaTileEntityHeatHatch targetMte = null;
-
     public MetaTileEntityHeatHatchExchange(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.containerInventory = new GTItemStackHandler(this, 8);
+    }
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (int i = 0; i < containerInventory.getSlots(); i++) {
+            var pos = getPos();
+            if (!containerInventory.getStackInSlot(i).isEmpty()) {
+                getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, containerInventory.getStackInSlot(i)));
+                containerInventory.extractItem(i, 1, false);
+            }
+
+        }
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {

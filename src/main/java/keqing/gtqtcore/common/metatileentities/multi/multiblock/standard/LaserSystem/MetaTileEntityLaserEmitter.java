@@ -19,9 +19,9 @@ import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -50,6 +50,7 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     long MaxLaser;
     long SetLaser;// 设定 的 最大激光强度
     int tier;
+
     public MetaTileEntityLaserEmitter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
@@ -120,7 +121,7 @@ public class MetaTileEntityLaserEmitter extends MetaTileEntityBaseWithControl {
     }
 
     public void setCurrentA(int i) {
-        this.getAbilities(LASER_INPUT).get(0).setAmperage(MathHelper.clamp( this.getAbilities(LASER_INPUT).get(0).Amperage() + i, 0, 1024));
+        this.getAbilities(LASER_INPUT).get(0).setAmperage(MathHelper.clamp(this.getAbilities(LASER_INPUT).get(0).Amperage() + i, 0, 1024));
     }
 
     protected void addDisplayText(List<ITextComponent> textList) {

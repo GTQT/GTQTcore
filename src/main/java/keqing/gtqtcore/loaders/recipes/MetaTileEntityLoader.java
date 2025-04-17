@@ -53,7 +53,6 @@ import static gregtech.loaders.recipe.CraftingComponent.PIPE_NORMAL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.ASEPTIC_FARM_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.ADVANCED_FILTER_CASING;
@@ -617,66 +616,6 @@ public class MetaTileEntityLoader {
                 .fluidInputs(SolderingAlloy.getFluid(L * 8))
                 .output(SUPER_INPUT_BUS)
                 .EUt(VA[GTValues.HV])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(ITEM_IMPORT_BUS[IV])
-                .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_IV, 8)
-                .input(FIELD_GENERATOR_IV, 8)
-                .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
-                .output(BUDGET_CRIB_4)
-                .EUt(VA[IV])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(ITEM_IMPORT_BUS[LuV])
-                .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_LuV, 8)
-                .input(FIELD_GENERATOR_LuV, 8)
-                .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
-                .output(BUDGET_CRIB_8)
-                .EUt(VA[LuV])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(ITEM_IMPORT_BUS[GTValues.ZPM])
-                .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_ZPM, 8)
-                .input(FIELD_GENERATOR_ZPM, 8)
-                .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
-                .output(BUDGET_CRIB_12)
-                .EUt(VA[GTValues.ZPM])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(ITEM_IMPORT_BUS[GTValues.UV])
-                .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_UV, 8)
-                .input(FIELD_GENERATOR_UV, 8)
-                .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
-                .output(BUDGET_CRIB_16)
-                .EUt(VA[GTValues.UV])
-                .duration(15 * SECOND)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(ITEM_IMPORT_BUS[GTValues.UHV])
-                .inputs(Mods.AppliedEnergistics2.getItem("interface"))
-                .input(ROBOT_ARM_UHV, 8)
-                .input(FIELD_GENERATOR_UHV, 8)
-                .inputs(Mods.AppliedEnergistics2.getItem("material", 30, 4))
-                .output(BUDGET_CRIB_20)
-                .EUt(VA[GTValues.UHV])
                 .duration(15 * SECOND)
                 .buildAndRegister();
 

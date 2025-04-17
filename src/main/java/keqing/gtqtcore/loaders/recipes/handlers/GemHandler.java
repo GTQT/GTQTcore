@@ -7,8 +7,10 @@ import gregtech.api.unification.material.properties.GemProperty;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
+
+import static gregtech.api.GTValues.MINUTE;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.POLISHER_RECIPES;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
+
 
 public class GemHandler {
     public static void init() {

@@ -6,6 +6,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.Stearin;
 import static gregtechfoodoption.GTFOMaterialHandler.Vanillin;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -23,8 +24,8 @@ public class CTABChain {
 
     private static void DNA() {
         CHEMICAL_PLANT.recipeBuilder()
-                .input(OrePrefix.dust,Meat,16)
-                .input(OrePrefix.dust,Salt,16)
+                .input(dust,Meat,16)
+                .input(dust,Salt,16)
                 .fluidInputs(TRIS.getFluid(1000))
                 .fluidInputs(Hydroxyethanethiol.getFluid(1000))
                 .fluidInputs(CTAB.getFluid(1000))
@@ -37,12 +38,12 @@ public class CTABChain {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DNAorigin.getFluid(100))
                 .fluidInputs(Biomass.getFluid(200))
-                .input(OrePrefix.dust,Agar)
+                .input(dust,Agar)
                 .fluidOutputs(DNAdeal.getFluid(100))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
         COMPRESSOR_RECIPES.recipeBuilder()
-                .input(OrePrefix.dust,Wool,9)
+                .input(dust,Wool,9)
                 .output(STRING,4)
                 .duration(80).EUt(VA[LV]).buildAndRegister();
         //定向培养
@@ -61,7 +62,7 @@ public class CTABChain {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(DNAdeal.getFluid(1000))
                 .fluidInputs(Mutagen.getFluid(1000))
-                .input(OrePrefix.dust,material2,64)
+                .input(dust,material2,64)
                 .fluidOutputs(material1.getFluid(200))
                 .circuitMeta(1)
                 .rate(rate)
@@ -78,9 +79,9 @@ public class CTABChain {
         //生产
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(material1.getFluid(100))
-                .output(OrePrefix.dust,material2,16)
-                .output(OrePrefix.dust,Bone,16)
-                .output(OrePrefix.dust,Meat,16)
+                .output(dust,material2,16)
+                .output(dust,Bone,16)
+                .output(dust,Meat,16)
                 .circuitMeta(3)
                 .rate(rate)
                 .duration(4000).EUt(VA[n]).buildAndRegister();
@@ -95,16 +96,16 @@ public class CTABChain {
 
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(material.getFluid(100))
-                .output(OrePrefix.dust,Bone,16)
-                .output(OrePrefix.dust,Meat,16)
+                .output(dust,Bone,16)
+                .output(dust,Meat,16)
                 .circuitMeta(3)
                 .duration(4000).EUt(VA[HV]).buildAndRegister();
     }
     private static void Isoamylalcohol() {
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
-                .notConsumable(OrePrefix.dust,PotassiumDichromate)
+                .notConsumable(dust,PotassiumDichromate)
                 .fluidInputs(SulfuricAcid.getFluid(1000))
-                .inputs(Vanillin.getItemStack())
+                .input(dust,Vanillin)
                 .fluidOutputs(Isovaleraldehyde.getFluid(1000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();
 
@@ -147,7 +148,7 @@ public class CTABChain {
     private static void Hydroxyethanethiol() {
         //以二硫化钠和氯乙醇为主要原料，合成二硫代二甘醇，经电解还原可制得2-巯基乙醇
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(OrePrefix.dust,SodiumSulfide)
+                .input(dust,SodiumSulfide)
                 .fluidInputs(EthyleneChlorohydrin.getFluid(1000))
                 .fluidOutputs(Erliudaierganchun.getFluid(2000))
                 .duration(400).EUt(VA[HV]).buildAndRegister();

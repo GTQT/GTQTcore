@@ -16,8 +16,6 @@
     "gregtech.MixinGlassCasingType",
     "gregtech.MixinMetaItem",
     "gregtech.MixinMetaPrefixItem",
-    "gregtech.MixinMetaTileEntityFluidHatch",
-    "gregtech.MixinMetaTileEntityItemBus",
     "gregtech.MixinMetaValueItem",
     "gregtech.MixinSolarBoilerServer",
     "gregtech.MixinSteamBoilerAccess",

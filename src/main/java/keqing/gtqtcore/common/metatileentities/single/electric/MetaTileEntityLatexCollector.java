@@ -13,7 +13,6 @@ import keqing.gtqtcore.api.metaileentity.PseudoMultiMachineMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtqtcore.loaders.recipes.GTQTRecipes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -28,7 +27,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
-
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -73,7 +71,7 @@ public class MetaTileEntityLatexCollector extends PseudoMultiMachineMetaTileEnti
         super.update();
 
         if (!this.getWorld().isRemote && this.getOffsetTimer() % 5L == 0L) {
-            if(this.getOutputFacingFluids() != null){
+            if (this.getOutputFacingFluids() != null) {
                 this.pushFluidsIntoNearbyHandlers(this.getOutputFacingFluids());
             }
             this.fillContainerFromInternalTank();
@@ -138,6 +136,10 @@ public class MetaTileEntityLatexCollector extends PseudoMultiMachineMetaTileEnti
         }
     }
 
+    public EnumFacing getOutputFacingFluids() {
+        return this.outputFacingFluids == null ? EnumFacing.SOUTH : this.outputFacingFluids;
+    }
+
     public void setOutputFacingFluids(EnumFacing outputFacing) {
         this.outputFacingFluids = outputFacing;
         if (!this.getWorld().isRemote) {
@@ -149,14 +151,11 @@ public class MetaTileEntityLatexCollector extends PseudoMultiMachineMetaTileEnti
         }
     }
 
-    public EnumFacing getOutputFacingFluids() {
-        return this.outputFacingFluids == null ? EnumFacing.SOUTH : this.outputFacingFluids;
-    }
-
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.set(1, I18n.format("gregtech.machine.latex_collector.tooltip"));
     }
+
     public boolean getIsWeatherOrTerrainResistant() {
         return true;
     }

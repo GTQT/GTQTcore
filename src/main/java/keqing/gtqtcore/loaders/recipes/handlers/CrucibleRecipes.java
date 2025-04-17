@@ -6,15 +6,14 @@ import keqing.gtqtcore.common.block.blocks.BlockCrucible;
 import net.minecraft.item.ItemStack;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.Zeron100;
-import static gregtech.api.GTValues.L;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.plate;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.HexagonalBoronNitride;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.IncoloyMA813;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Inconel792;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.MINUTE;
+
 
 public class CrucibleRecipes {
 

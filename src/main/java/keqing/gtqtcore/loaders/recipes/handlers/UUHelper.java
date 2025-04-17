@@ -34,7 +34,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_R
 import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Stellite;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockMultiblockCasing;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockMultiblockGlass;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingType.*;

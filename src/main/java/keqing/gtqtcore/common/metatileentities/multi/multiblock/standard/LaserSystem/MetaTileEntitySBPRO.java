@@ -21,10 +21,10 @@ import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.capability.ILaser;
+import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +49,6 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
@@ -68,6 +67,7 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
     private long Cost;
     private int length;
     private int circuit;
+
     public MetaTileEntitySBPRO(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
@@ -311,13 +311,12 @@ public class MetaTileEntitySBPRO extends MetaTileEntityBaseWithControl {
     }
 
     public void setCurrentA(int parallelAmount) {
-        if (circuit < length)
-        {
-            if(parallelAmount<0)
-                this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
+        if (circuit < length) {
+            if (parallelAmount < 0)
+                this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
             else {
                 if (More >= this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()) {
-                    this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp( this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
+                    this.getAbilities(LASER_OUTPUT).get(circuit).setAmperage(MathHelper.clamp(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() + parallelAmount, 0, 1024));
                     this.getAbilities(LASER_OUTPUT).get(circuit).setLaser(this.getAbilities(LASER_OUTPUT).get(circuit).Amperage() * V[this.getAbilities(LASER_OUTPUT).get(circuit).Voltage()]);
                 }
             }

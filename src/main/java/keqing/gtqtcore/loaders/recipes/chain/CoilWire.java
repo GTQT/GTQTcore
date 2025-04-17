@@ -15,7 +15,7 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PRECISE_ASSEMBLER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.SilicaCeramic;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.block.blocks.BlockCoolingCoil.CoolingCoilType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.INSULATINGMICA;
 

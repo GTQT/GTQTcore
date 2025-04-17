@@ -71,24 +71,13 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     //  Used for Special Progress Bar in Modular UI.
     //  TODO Add new Modular UI form of CFR (different with Fusion Reactor)?
     private final FusionProgressSupplier progressBarSupplier;
+    int requestCWUt;
     //  Internal Energy Container, just like common Fusion Reactors.
     private EnergyContainerList inputEnergyContainers;
-
     //  Heat, like common Fusion Reactors.
     //  TODO Delete Heat system of CFR?
     private long heat = 0;
-
-    int requestCWUt;
     private IOpticalComputationProvider computationProvider;
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
 
     public MetaTileEntityCompressedFusionReactor(ResourceLocation metaTileEntityId,
                                                  int tier,
@@ -117,6 +106,16 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         //setTimeReduce(none);
         setTimeReduceFlag(false);
     }
+
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
+    }
+
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -204,8 +203,8 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.INPUT_LASER)
                                 .stream()
                                 .filter(mte -> {
-                                    if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
-                                        return laserHatch.getTier()<=tier;
+                                    if (mte instanceof MetaTileEntityLaserHatch laserHatch) {
+                                        return laserHatch.getTier() <= tier;
                                     }
                                     return false;
                                 })
@@ -312,7 +311,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
 
         //  EU Capacity = Energy Hatch amount * Energy Stored (half of original Fusion Reactor).
         long euCapacity = calculateEnergyStorageFactor(energyInputs.size());
-        this.energyContainer = new EnergyContainerHandler(this, euCapacity, V[tier], 2L *energyInputs.size(), 0, 0) {
+        this.energyContainer = new EnergyContainerHandler(this, euCapacity, V[tier], 2L * energyInputs.size(), 0, 0) {
             @Override
             public String getName() {
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
@@ -328,7 +327,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     @Override
     protected void updateFormedValid() {
         super.updateFormedValid();
-        if(!isStructureFormed())return;
+        if (!isStructureFormed()) return;
         if (this.inputEnergyContainers.getEnergyStored() > 0) {
             long energyAdded = this.energyContainer.addEnergy(this.inputEnergyContainers.getEnergyStored());
             if (energyAdded > 0)
@@ -458,6 +457,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         builder.bindPlayerInventory(entityPlayer.inventory, 153);
         return builder;
     }
+
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
@@ -484,8 +484,8 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         textList.add(new TextComponentTranslation("能量缓存上限： %s", this.energyContainer.getEnergyStored()));
 
 
-
     }
+
     private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
         ITextComponent energyInfo = TextComponentUtil.stringWithColor(
                 TextFormatting.AQUA,
@@ -609,6 +609,10 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         return heat;
     }
 
+    protected long getEnergyStored() {
+        return energyContainer.getEnergyStored();
+    }
+
     private static class FusionProgressSupplier {
 
         private final AtomicDouble tracker = new AtomicDouble(0.0);
@@ -729,10 +733,6 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         }
     }
 
-    protected long getEnergyStored() {
-        return energyContainer.getEnergyStored();
-    }
-
     private class CompressedFusionReactorRecipeLogic extends MultiblockRecipeLogic {
 
         public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
@@ -741,13 +741,13 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
 
         @Override
         protected double getOverclockingDurationFactor() {
-            if(tier<=9)return OCFirst ? 0.33 : 0.25;
+            if (tier <= 9) return OCFirst ? 0.375 : 0.25;
             return OCFirst ? 0.25 : 0.5;
         }
 
         @Override
         protected double getOverclockingVoltageFactor() {
-            if(tier<=9)return OCFirst ? 3.0 : 2.0;
+            if (tier <= 9) return OCFirst ? 3.0 : 2.0;
             return OCFirst ? 4.0 : 2.0;
 
         }
@@ -760,18 +760,24 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         @Override
         public long getMaxParallelVoltage() {
             if (OCFirst) return super.getMaxParallelVoltage();
-            return super.getMaxVoltage()* getParallelLimit();
+            return super.getMaxVoltage() * getParallelLimit();
         }
 
         @Override
         public long getMaximumOverclockVoltage() {
-            if (OCFirst)return inputEnergyContainers.getInputVoltage();
+            if (OCFirst) return inputEnergyContainers.getInputVoltage();
             return super.getMaximumOverclockVoltage();
         }
 
         @Override
         public int getParallelLimit() {
-            return Math.min(autoParallelModel ? autoParallel : customParallel ,super.getParallelLimit());
+            return Math.min(autoParallelModel ? autoParallel : customParallel, super.getParallelLimit());
+        }
+
+        @Override
+        public void setParallelLimit(int amount) {
+            setMaxParallel(amount);
+            super.setParallelLimit(amount);
         }
 
         @Override
@@ -785,12 +791,6 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                     heat = heat <= 10000 ? 0 : (heat - 10000);
                 }
             }
-        }
-
-        @Override
-        public void setParallelLimit(int amount) {
-            setMaxParallel(amount);
-            super.setParallelLimit(amount);
         }
 
         @Override
@@ -909,7 +909,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
     }
 }

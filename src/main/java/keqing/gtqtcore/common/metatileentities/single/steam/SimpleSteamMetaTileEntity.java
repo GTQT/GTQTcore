@@ -28,7 +28,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
-
 import javax.annotation.Nullable;
 import java.util.Arrays;
 
@@ -54,6 +53,13 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
         this.workableHandler = new RecipeLogicSteam(this,
                 recipeMap, isHighPressure, steamFluidTank, 1.0);
 
+    }
+
+    protected static int[] determineSlotsGrid(int itemInputsCounts) {
+        if (itemInputsCounts == 3) return new int[]{3, 1};
+        int slotsLeft = (int) Math.ceil(Math.sqrt(itemInputsCounts));
+        int slotsDown = (int) Math.ceil(itemInputsCounts / (double) slotsLeft);
+        return new int[]{slotsLeft, slotsDown};
     }
 
     @Override
@@ -87,7 +93,8 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
 
     @Override
     public IItemHandlerModifiable getImportItems() {
-        if (actualImportItems == null) this.actualImportItems = circuitInventory == null ? super.getImportItems() : new ItemHandlerList(Arrays.asList(super.getImportItems(), this.circuitInventory));
+        if (actualImportItems == null)
+            this.actualImportItems = circuitInventory == null ? super.getImportItems() : new ItemHandlerList(Arrays.asList(super.getImportItems(), this.circuitInventory));
         return this.actualImportItems;
     }
 
@@ -106,7 +113,7 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
     @Override
     public FluidTankList createImportFluidHandler() {
         super.createImportFluidHandler();
-        if (workableHandler == null) return new FluidTankList(false, new IFluidTank[]{this.steamFluidTank});
+        if (workableHandler == null) return new FluidTankList(false, this.steamFluidTank);
         IFluidTank[] fluidImports = new IFluidTank[workableHandler.getRecipeMap().getMaxFluidInputs() + 1];
         fluidImports[0] = this.steamFluidTank;
         for (int i = 1; i < fluidImports.length; i++) fluidImports[i] = new NotifiableFluidTank(8000, this, false);
@@ -142,7 +149,7 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
         if (circuitInventory != null) {
             if (data.hasKey("CircuitInventory", Constants.NBT.TAG_COMPOUND)) {
                 ItemStackHandler legacyCircuitInventory = new ItemStackHandler();
-                for (int i =0; i < legacyCircuitInventory.getSlots(); i++) {
+                for (int i = 0; i < legacyCircuitInventory.getSlots(); i++) {
                     ItemStack stack = legacyCircuitInventory.getStackInSlot(i);
                     if (stack.isEmpty()) continue;
                     stack = GTTransferUtils.insertItem(this.importItems, stack, false);
@@ -193,13 +200,13 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
 
     protected void addRecipeProgressBar(ModularUI.Builder builder, RecipeMap<?> map, int yOffset) {
         int x = 89 - progressIndicator.width / 2;
-        int y = yOffset + 42 - progressIndicator.height/ 2;
+        int y = yOffset + 42 - progressIndicator.height / 2;
         builder.widget(new RecipeProgressWidget(workableHandler::getProgressPercent, x, y, progressIndicator.width, progressIndicator.height, progressIndicator.progressBarTexture.get(isHighPressure), progressIndicator.progressMoveType, map));
     }
 
     protected void addInventorySlotGroup(ModularUI.Builder builder, IItemHandlerModifiable itemHandler, FluidTankList fluidHandler, boolean isOutputs, int yOffset) {
         int itemsSlotsCount = itemHandler.getSlots();
-        int fluidSlotsCount = fluidHandler.getTanks() - ((isOutputs) ? 0 : 1) ; // Remove input steam tank
+        int fluidSlotsCount = fluidHandler.getTanks() - ((isOutputs) ? 0 : 1); // Remove input steam tank
 
         //redundant to store item slots count if you know it's going to be 0
         boolean invertFluids = false;
@@ -242,7 +249,8 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
         if (fluidSlotsCount > 0 || invertFluids) {
             if (isVerticalFluid) {
                 int startSpecX = isOutputs ? startInputsX + itemsSlotsLeft * 18 : startInputsX - 18;
-                for (int i = 0; i < fluidSlotsCount; i++) addSlot(builder, startSpecX, startInputsY + 18 * i, i, itemHandler, fluidHandler, !invertFluids, isOutputs);
+                for (int i = 0; i < fluidSlotsCount; i++)
+                    addSlot(builder, startSpecX, startInputsY + 18 * i, i, itemHandler, fluidHandler, !invertFluids, isOutputs);
             } else {
                 int startSpecY = startInputsY + itemsSlotsDown * 18;
                 for (int i = 0; i < fluidSlotsCount; i++) {
@@ -264,13 +272,6 @@ public class SimpleSteamMetaTileEntity extends SteamMetaTileEntity implements IG
     }
 
     protected TextureArea[] getOverlaysForSlot(boolean isOutputs, boolean isFluid) {
-        return new TextureArea[] {isFluid ? GuiTextures.FLUID_SLOT : GuiTextures.SLOT_STEAM.get(isHighPressure)};
-    }
-
-    protected static int[] determineSlotsGrid(int itemInputsCounts) {
-        if (itemInputsCounts == 3) return new int[] {3, 1};
-        int slotsLeft = (int) Math.ceil(Math.sqrt(itemInputsCounts));
-        int slotsDown = (int) Math.ceil(itemInputsCounts / (double) slotsLeft);
-        return new int[] {slotsLeft, slotsDown};
+        return new TextureArea[]{isFluid ? GuiTextures.FLUID_SLOT : GuiTextures.SLOT_STEAM.get(isHighPressure)};
     }
 }

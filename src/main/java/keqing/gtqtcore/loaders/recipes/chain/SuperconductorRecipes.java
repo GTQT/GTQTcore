@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.OreDictUnifier;
 
+import static gregtech.api.GTValues.CWT;
 import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
@@ -10,7 +11,7 @@ import static gregtech.api.unification.ore.OrePrefix.pipeTinyFluid;
 import static gregtech.api.unification.ore.OrePrefix.wireGtSingle;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.utils.GTQTUtil.CWT;
+
 import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_5;
 
 public class SuperconductorRecipes {

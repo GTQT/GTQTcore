@@ -20,12 +20,12 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
-import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
-import keqing.gtqtcore.api.recipes.properties.ChemicalPlantProperties;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
+import keqing.gtqtcore.api.recipes.properties.ChemicalPlantProperties;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -75,11 +75,11 @@ public class MetaTileEntityLargeFluidizedBed extends GTQTRecipeMapMultiblockCont
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("CCCCC","CCCCC", "CCCCC", "CCCCC", "CCCCC")
-                .aisle("CCCCC","UUFUU", "UPFPU", "UUFUU", "CCCCC")
-                .aisle("CCCCC","CPFPC", "CPFPC", "CPFPC", "CCCCC")
-                .aisle("CCCCC","UUFUU", "UPFPU", "UUFUU", "CCCCC")
-                .aisle("CCCCC","CCCCC", "CCSCC", "CCCCC", "CCCCC")
+                .aisle("CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC")
+                .aisle("CCCCC", "UUFUU", "UPFPU", "UUFUU", "CCCCC")
+                .aisle("CCCCC", "CPFPC", "CPFPC", "CPFPC", "CCCCC")
+                .aisle("CCCCC", "UUFUU", "UPFPU", "UUFUU", "CCCCC")
+                .aisle("CCCCC", "CCCCC", "CCSCC", "CCCCC", "CCCCC")
                 .where('S', selfPredicate())
                 .where('C', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
@@ -215,6 +215,7 @@ public class MetaTileEntityLargeFluidizedBed extends GTQTRecipeMapMultiblockCont
         public FluidizedBedLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
+
         @Override
         public boolean checkRecipe(@Nonnull Recipe recipe) {
             if (!super.checkRecipe(recipe)) {

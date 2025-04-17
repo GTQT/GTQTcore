@@ -13,10 +13,9 @@ import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import org.apache.commons.lang3.ArrayUtils;
 
+import static gregtech.api.GTValues.SECOND;
+import static gregtech.api.GTValues.TICK;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.SECOND;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.TICK;
-
 public class WireCombinationHandler {
 
     private static final OrePrefix[] WIRE_DOUBLING_ORDER = {

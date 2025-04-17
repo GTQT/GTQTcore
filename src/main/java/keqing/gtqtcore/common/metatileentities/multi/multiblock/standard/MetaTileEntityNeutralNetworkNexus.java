@@ -72,15 +72,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
         });
         this.recipeMapWorkable = new MetaTileEntityNeutralNetworkNexusWorkable(this);
     }
-    @Override
-    public void checkStructurePattern() {
-        if(MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        }
-        else super.checkStructurePattern();
-    }
+
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(NAQUADAH_ALLOY_CASING);
     }
@@ -103,6 +95,15 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
 
     private static IBlockState getSecondFrameState() {
         return MetaBlocks.FRAMES.get(Materials.Neutronium).getBlock(Materials.Neutronium);
+    }
+
+    @Override
+    public void checkStructurePattern() {
+        if (MachineSwitch.DelayStructureCheckSwitch) {
+            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
+                super.checkStructurePattern();
+            }
+        } else super.checkStructurePattern();
     }
 
     @Override
@@ -156,6 +157,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
             requestCWUt = computationProvider.requestCWUt(2048, false);
         }
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -300,7 +302,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getAccelerateByCWU(requestCWUt)));
+            super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
     }
 }

@@ -175,7 +175,7 @@ public class MetaTileEntityLaserFusionCore extends RecipeMapLaserMultiblockContr
         EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
                 isFlipped());
 
-        if (isStructureFormed()&&this.getRecipeMapWorkable().isActive()) {
+        if (isStructureFormed() && this.getRecipeMapWorkable().isActive()) {
 
             RenderBufferHelper.renderRing(buffer,
                     getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 3 + 0.5,
