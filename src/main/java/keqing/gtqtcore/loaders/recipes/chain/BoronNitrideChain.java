@@ -163,14 +163,14 @@ public class BoronNitrideChain {
                 .output(gem, GTQTMaterials.Heterodiamond, 2)
                 .EUt(VA[LV])
                 .duration(SECOND)
-                .explosivesAmount(32)
+                .explosives(32)
                 .buildAndRegister();
 
         IMPLOSION_RECIPES.recipeBuilder()
                 .input(dust, GTQTMaterials.CubicBoronNitride)
                 .input(dust, Carbon)
                 .output(gem, GTQTMaterials.Heterodiamond, 2)
-                .explosivesType(MetaItems.DYNAMITE.getStackForm(16))
+                .explosives(MetaItems.DYNAMITE.getStackForm(16))
                 .EUt(VA[LV])
                 .duration(SECOND)
                 .buildAndRegister();

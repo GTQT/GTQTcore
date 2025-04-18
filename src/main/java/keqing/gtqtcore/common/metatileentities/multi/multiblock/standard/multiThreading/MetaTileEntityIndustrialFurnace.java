@@ -12,7 +12,7 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockCore;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;

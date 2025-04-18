@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.multiblocks.api.capability.IParallelMultiblock;
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -11,7 +12,11 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -32,6 +37,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 
 
 public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockController implements IParallelMultiblock {
@@ -149,16 +156,19 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
         }
 
         @Override
-        protected void modifyOverclockPost(int[] resultOverclock, IRecipePropertyStorage storage) {
-            super.modifyOverclockPost(resultOverclock, storage);
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ElectrodeTier,
+                    1));
+        }
 
-            int coilTier = ElectrodeTier;
-            if (coilTier <= 0)
-                return;
-
-            resultOverclock[0] *= 1.0f - coilTier * 0.1; // each coil above cupronickel (coilTier = 0) uses 10% less
-            // energy
-            resultOverclock[0] = Math.max(1, resultOverclock[0]);
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ElectrodeTier,
+                    1);
         }
     }
 }

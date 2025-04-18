@@ -19,9 +19,11 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -56,6 +58,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CRACKING_UNIT;
 
@@ -244,7 +247,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
                 .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
                 .where('K', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                 .where('H', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
-                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
                 .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
                 .where('A', Blocks.AIR.getDefaultState())
                 .where('J', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
@@ -275,13 +278,20 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
             super.setMaxProgress((int) (maxProgress * getAccelerateByCWU(requestCWUt)));
         }
 
-        protected void modifyOverclockPre(int[] values, IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        @Override
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    storage.get(TemperatureProperty.getInstance(), 0)));
         }
 
-        protected int[] runOverclockingLogic(IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
         }
     }
 }

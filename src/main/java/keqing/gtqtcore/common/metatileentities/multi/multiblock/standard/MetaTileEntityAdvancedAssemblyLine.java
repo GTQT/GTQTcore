@@ -23,7 +23,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
-import gregtech.api.recipes.recipeproperties.ResearchProperty;
+import gregtech.api.recipes.properties.impl.ResearchProperty;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.particle.GTLaserBeamParticle;
 import gregtech.client.particle.GTParticleManager;

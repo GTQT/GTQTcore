@@ -16,7 +16,6 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingotHot;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static supercritical.api.unification.material.SCMaterials.Zircon;
 
 public class FantasyMaterials {
 

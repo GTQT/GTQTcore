@@ -315,7 +315,7 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
                     .where('C', getFrameState())
                     .where('D', getGlassState())
                     .where('G', getCasingState1())
-                    .where('T', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                    .where('T', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
                     .where('X', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.SOUTH)
                     .where('Y', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.ULV], EnumFacing.SOUTH)
                     .where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.ULV], EnumFacing.SOUTH)

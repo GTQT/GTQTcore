@@ -20,6 +20,7 @@ import gregtech.api.items.gui.PlayerInventoryHolder;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.registry.MTERegistry;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityEnergyHatch;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
@@ -37,12 +38,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Objects;
 
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
@@ -81,7 +84,9 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
             TileEntity holder = player.world.getTileEntity(pos);
             if (holder instanceof IGregTechTileEntity) {
-                MetaTileEntity sampleMetaTileEntity = GregTechAPI.MTE_REGISTRY.getObjectById(found.getItemDamage());
+
+                MTERegistry registry = GregTechAPI.mteManager.getRegistry(Objects.requireNonNull(found.getItem().getRegistryName()).getNamespace());
+                MetaTileEntity sampleMetaTileEntity = registry.getObjectById(found.getItemDamage());
                 if (sampleMetaTileEntity != null) {
                     MetaTileEntity metaTileEntity = ((IGregTechTileEntity) holder).setMetaTileEntity(sampleMetaTileEntity);
                     metaTileEntity.onPlacement();

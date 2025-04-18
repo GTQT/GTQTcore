@@ -77,14 +77,15 @@ public class PressureMultiblockRecipeLogic extends MultiblockRecipeLogic {
     @Override
     protected void setupRecipe(Recipe recipe) {
         super.setupRecipe(recipe);
-        if (recipe.getRecipePropertyStorage() != null && recipe.hasProperty(PressureProperty.getInstance())) {
+        recipe.propertyStorage();
+        if (recipe.hasProperty(PressureProperty.getInstance())) {
             this.recipePressure = recipe.getProperty(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
         }
     }
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe) {
-        if (recipe.getRecipePropertyStorage() != null && recipe.hasProperty(PressureProperty.getInstance())) {
+        if (recipe.hasProperty(PressureProperty.getInstance())) {
             double pressure = recipe.getProperty(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
 
             IPressureContainer container = this.getPressureContainer();

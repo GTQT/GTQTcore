@@ -27,11 +27,11 @@ public class SwarmTierRecipeBuilder extends RecipeBuilder<SwarmTierRecipeBuilder
     }
 
     public int getSwarmTier() {
-        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage.getRecipePropertyValue(SwarmTierProperty.getInstance(), 0);
+        return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage.get(SwarmTierProperty.getInstance(), 0);
     }
 
     @Override
-    public boolean applyProperty( String key, Object value) {
+    public boolean applyPropertyCT( String key, Object value) {
         if (key.equals(SwarmTierProperty.KEY)) {
             this.tier(((Number) value).intValue());
             return true;

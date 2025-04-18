@@ -223,7 +223,7 @@ public abstract class GTQTMultiblockCore extends MultiMapMultiblockController im
 
                         //线程置入工作
                         timeHelper[i][1] = coreRecipe.getDuration();
-                        timeHelper[i][2] = coreRecipe.getEUt();
+                        timeHelper[i][2] = (int) coreRecipe.getEUt();
                         ListWork[i] = true;
                     }
                 }

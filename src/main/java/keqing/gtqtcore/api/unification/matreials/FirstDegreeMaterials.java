@@ -4200,7 +4200,7 @@ public class FirstDegreeMaterials {
                 .color(0x8fb7c4).iconSet(MaterialIconSet.SHINY)
                 .build();
 
-        //TODO: CARBON make the formula for ladder poly-p-phenylene
+        // TODO: CARBON make the formula for ladder poly-p-phenylene
         GTQTMaterials.Ladder_Poly_P_Phenylene = new Material.Builder(25011, gtqtcoreId("polypphenylene"))
                 .fluid()
                 .ingot()
@@ -4974,12 +4974,6 @@ public class FirstDegreeMaterials {
                 .components(Sodium, 1, Fluorine, 1)
                 .build();
 
-        GTQTMaterials.BauxiteSlurry = new Material.Builder(25148, gtqtcoreId("bauxite_slurry"))
-                .fluid()
-                .flags(DISABLE_DECOMPOSITION)
-                .color(0x51040A)
-                .build();
-
         GTQTMaterials.IlmeniteSlurry = new Material.Builder(25149, gtqtcoreId("ilmenite_slurry"))
                 .fluid()
                 .color(0x0A0212)
@@ -5005,18 +4999,6 @@ public class FirstDegreeMaterials {
                 .gem()
                 .colorAverage()
                 .components(Potassium, 2, Zirconium, 1, Fluorine, 6)
-                .build();
-
-        GTQTMaterials.HafniumTetrachloride = new Material.Builder(25155, gtqtcoreId("hafnium_tetrachloride"))
-                .fluid()
-                .colorAverage()
-                .components(Hafnium, 1, Chlorine, 4)
-                .build();
-
-        GTQTMaterials.ZirconiumTetrachloride = new Material.Builder(25156, gtqtcoreId("zirconium_tetrachloride"))
-                .fluid()
-                .colorAverage()
-                .components(Zirconium, 1, Chlorine, 4)
                 .build();
 
         GTQTMaterials.PotassiumFluorideRefractoryMixture = new Material.Builder(25157, gtqtcoreId("potassium_fluoride_refractory_mixture"))
@@ -6726,5 +6708,7 @@ public class FirstDegreeMaterials {
                 .components(GTQTMaterials.Edot, 1, GTQTMaterials.PMMA, 2)
                 .cableProperties(V[UEV], 8, 6)
                 .build();
+
+
     }
 }

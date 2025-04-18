@@ -264,7 +264,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
                     .where('C', getCasingState())
                     .where('D', getCasingState())
                     .where('F', getFrameState())
-                    .where('H', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                    .where('H', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
                     .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[ZPM], EnumFacing.NORTH)
                     .where('I', MetaTileEntities.ITEM_IMPORT_BUS[ZPM], EnumFacing.SOUTH)
                     .where('J', MetaTileEntities.ITEM_EXPORT_BUS[ZPM], EnumFacing.SOUTH)

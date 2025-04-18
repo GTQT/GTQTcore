@@ -108,7 +108,6 @@ public class GTQTMetaTileEntities {
     public static final MetaTileEntityLargeBasicGenerator[] LBG = new MetaTileEntityLargeBasicGenerator[6];
     public static final MetaTileEntityReinforcedRotorHolder[] REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[14];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
-    public static MetaTileEntity[] MULTI_QUANTUM_TANK = new MetaTileEntity[10];
     public static MetaTileEntityWrapSwarmHatch[] SWARM_HATCH = new MetaTileEntityWrapSwarmHatch[5];
     public static MetaTileEntityPressureHatch[] PRESSURE_HATCH = new MetaTileEntityPressureHatch[14];
     //////////////////////////
@@ -984,11 +983,6 @@ public class GTQTMetaTileEntities {
         ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15588, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
         ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15589, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
 
-        for (int i = 0; i < 10; i++) {
-            int id = 15590 + i;
-            MULTI_QUANTUM_TANK[i] = registerMetaTileEntity(id, new MetaTileEntityMultiQuantumTank(gtqtcoreId("multi_quantum_tank." + GTValues.VN[i].toLowerCase()), i, 1000000 * (int) Math.pow(2, i)
-            ));
-        }
 
         for (int i = 0; i < 5; i++) {
             int id = 15600 + i;

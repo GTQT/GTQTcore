@@ -6,7 +6,9 @@ import codechicken.lib.texture.TextureUtils.IIconRegister;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
+import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
+import gregtech.client.texture.IconRegistrar;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.BlockRenderLayer;
@@ -15,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class IsaMillRenderer implements IIconRegister {
+public class IsaMillRenderer implements IIconRegister, IconRegistrar {
     @SideOnly(Side.CLIENT)
     private TextureAtlasSprite baseBackgroundSprite;
     @SideOnly(Side.CLIENT)

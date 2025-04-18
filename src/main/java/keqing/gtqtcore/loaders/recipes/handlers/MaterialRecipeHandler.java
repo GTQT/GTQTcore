@@ -37,7 +37,7 @@ public class MaterialRecipeHandler {
                         .inputs(GTUtility.copy(4, dustStack))
                         .outputs(GTUtility.copy(3, gemStack))
                         .chancedOutput(OrePrefix.dust, Materials.DarkAsh, 2500, 0)
-                        .explosivesAmount(1)
+                        .explosives(1)
                         .EUt(VA[LV])
                         .duration(20)
                         .buildAndRegister();

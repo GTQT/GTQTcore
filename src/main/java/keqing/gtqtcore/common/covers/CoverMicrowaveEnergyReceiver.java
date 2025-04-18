@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.covers;
-import gregtech.common.terminal.app.console.ConsoleApp;
-import gregtech.api.terminal.os.TerminalOSWidget;
+
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;

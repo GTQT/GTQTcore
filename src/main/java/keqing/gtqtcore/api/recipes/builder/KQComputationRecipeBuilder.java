@@ -2,8 +2,8 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.ComputationProperty;
-import gregtech.api.recipes.recipeproperties.TotalComputationProperty;
+import gregtech.api.recipes.properties.impl.ComputationProperty;
+import gregtech.api.recipes.properties.impl.TotalComputationProperty;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import keqing.gtqtcore.api.recipes.properties.*;
@@ -29,7 +29,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
     }
 
     @Override
-    public boolean applyProperty(String key, Object value) {
+    public boolean applyPropertyCT(String key,Object value) {
         if (key.equals(ComputationProperty.KEY)) {
             this.CWUt(((Number) value).intValue());
             return true;
@@ -103,20 +103,20 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
 
     public int getKI() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(ResearchSystemMachineProperty.getInstance(), 0);
+                .get(ResearchSystemMachineProperty.getInstance(), 0);
     }
 
     public int getTier() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(MachineTierProperty.getInstance(), 0);
+                .get(MachineTierProperty.getInstance(), 0);
     }
     public int getCWUt() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(ComputationProperty.getInstance(), 0);
+                .get(ComputationProperty.getInstance(), 0);
     }
     public int gettotalCWU() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
-                .getRecipePropertyValue(TotalComputationProperty.getInstance(), 0);
+                .get(TotalComputationProperty.getInstance(), 0);
     }
     public String toString() {
         return (new ToStringBuilder(this))

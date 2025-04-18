@@ -6,10 +6,12 @@ import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 
+import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TAB;
+
 public class GTQTMetaArmor  extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValueItem> {
     public GTQTMetaArmor() {
         this.setRegistryName("gtqt_armor");
-        setCreativeTab(GregTechAPI.TAB_GREGTECH_TOOLS);
+        setCreativeTab(GTQTCore_TAB);
     }
     @Override
     public void registerSubItems() {

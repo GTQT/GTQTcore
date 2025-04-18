@@ -38,7 +38,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, ICleanroomReceiver, IDistinctBusController {
+public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController {
 
     public final RecipeMap<?> recipeMap;
     protected HeatRecipeLogic recipeMapWorkable;
@@ -244,17 +244,6 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         }
 
         return list;
-    }
-
-    @Nullable
-    @Override
-    public ICleanroomProvider getCleanroom() {
-        return this.cleanroom;
-    }
-
-    @Override
-    public void setCleanroom(ICleanroomProvider provider) {
-        this.cleanroom = provider;
     }
 
     protected class HeatRecipeLogic extends BaseHeatRecipeLogic {

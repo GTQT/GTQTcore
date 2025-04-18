@@ -313,7 +313,7 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
                 .where('D', getFrameState())
                 .where('G', getPipeCasingState())
                 .where('E', getThirdCasingState())
-                .where('O', MetaTileEntities.COMPUTATION_HATCH_RECEIVER, EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                 .where('X', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
                 .where('N', MetaBlocks.FRAMES.get(Materials.TungstenSteel).getBlock(Materials.TungstenSteel))

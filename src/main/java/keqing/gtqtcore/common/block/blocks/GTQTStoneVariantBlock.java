@@ -7,6 +7,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import java.util.Random;
 import javax.annotation.Nonnull;
 
+import gregtech.common.creativetab.GTCreativeTabs;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.Block;
@@ -37,7 +38,7 @@ public class GTQTStoneVariantBlock extends VariantBlock<GTQTStoneVariantBlock.St
         this.setSoundType(SoundType.STONE);
         this.setHarvestLevel("pickaxe", 0);
         this.setDefaultState(this.getState(StoneType.GABBRO));
-        this.setCreativeTab(GregTechAPI.TAB_GREGTECH_DECORATIONS);
+        this.setCreativeTab(GTCreativeTabs.TAB_GREGTECH_DECORATIONS);
     }
 
     @Nonnull

@@ -20,7 +20,7 @@ import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -275,17 +275,15 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
             }
         }
 
-
         @Override
-        protected double getOverclockingDurationDivisor() {
-            return OCFirst ? Overclocking : 2.0;
+        protected double getOverclockingDurationFactor() {
+            return OCFirst ? 1/Overclocking : 0.5;
         }
 
         @Override
-        protected double getOverclockingVoltageMultiplier() {
+        protected double getOverclockingVoltageFactor() {
             return OCFirst ? Overclocking : 2.0;
         }
-
 
         @Override
         public void update() {

@@ -1371,15 +1371,12 @@ public class GTQTMaterials {
     public static Material AluminiumTrifluoride;
     public static Material SodiumFluoride;
     //
-    public static Material BauxiteSlurry;
     public static Material IlmeniteSlurry;
     public static Material HeavyRedMudResidue;
     public static Material RefractoryMetalResidue;
     public static Material PotassiumFluorideRefractoryMixture;
     public static Material PotassiumHexafluorozirconate;
     public static Material PotassiumHexafluorohafnate;
-    public static Material HafniumTetrachloride;
-    public static Material ZirconiumTetrachloride;
     public static Material Trichlorosilane;
     // Polymers
     public static Material Polyacrylonitrile;

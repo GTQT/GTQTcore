@@ -877,7 +877,7 @@ public class TaraniumProcessing {
         CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, CaesiumHydroxide, 3)
                 .input(dust, Decaborane, 24)
-                .inputs(SodiumCyanide.getItemStack(3))
+                .input(dust,SodiumCyanide,3)
                 .notConsumable(SulfuricAcid.getFluid(1))
                 .fluidInputs(HydrochloricAcid.getFluid(2000))
                 .fluidInputs(Methanol.getFluid(3000))

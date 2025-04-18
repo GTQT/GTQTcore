@@ -26,12 +26,13 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
+import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TAB;
 import static keqing.gtqtcore.common.CommonProxy.GTQTCore_TO;
 
 public class GTQTBattery extends StandardMetaItem {
     public GTQTBattery() {
         this.setRegistryName("gtqt_battery");
-        setCreativeTab(GregTechAPI.TAB_GREGTECH);
+        setCreativeTab(GTQTCore_TAB);
     }
 
     @Override

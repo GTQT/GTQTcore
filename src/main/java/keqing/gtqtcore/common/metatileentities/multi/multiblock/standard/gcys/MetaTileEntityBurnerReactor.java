@@ -16,9 +16,11 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.recipeproperties.IRecipePropertyStorage;
-import gregtech.api.recipes.recipeproperties.TemperatureProperty;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
@@ -50,6 +52,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
 
 public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil, IPressureMachine {
@@ -211,13 +214,20 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
             super(tileEntity);
         }
 
-        protected void modifyOverclockPre(@NotNull int[] values, @NotNull IRecipePropertyStorage storage) {
-            super.modifyOverclockPre(values, storage);
-            values[0] = OverclockingLogic.applyCoilEUtDiscount(values[0], ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), storage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        @Override
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    storage.get(TemperatureProperty.getInstance(), 0)));
         }
 
-        protected @NotNull int[] runOverclockingLogic(@NotNull IRecipePropertyStorage propertyStorage, int recipeEUt, long maxVoltage, int duration, int amountOC) {
-            return OverclockingLogic.heatingCoilOverclockingLogic(Math.abs(recipeEUt), maxVoltage, duration, amountOC, ((IHeatingCoil) this.metaTileEntity).getCurrentTemperature(), propertyStorage.getRecipePropertyValue(TemperatureProperty.getInstance(), 0));
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
         }
 
         public int getParallelLimit() {

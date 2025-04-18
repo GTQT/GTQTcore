@@ -49,6 +49,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.List;
 
+import static gregtech.api.GTValues.SECOND;
 import static gregtech.api.util.TextFormattingUtil.formatNumbers;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6.CasingType.*;

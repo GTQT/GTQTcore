@@ -44,7 +44,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .output(HIGH_DENSITY_THORIUM)
                 .EUt(VA[IV])
                 .duration(5 * SECOND)
-                .explosivesAmount(32)
+                .explosives(32)
                 .buildAndRegister();
 
         //  High Density Thorium + 4Li + 2Ba + Hg -> Th64Li4Ba2Hg
@@ -100,7 +100,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .output(HIGH_DENSITY_URANIUM)
                 .EUt(VA[LuV])
                 .duration(10 * SECOND)
-                .explosivesAmount(32)
+                .explosives(32)
                 .buildAndRegister();
 
         //  High Density Uranium + 8K + 4Nq + Rn -> U36K8Nq4Rn
@@ -158,7 +158,7 @@ private static void ThoriumBasedLiquidFuelChain() {
                 .output(HIGH_DENSITY_PLUTONIUM)
                 .EUt(VA[ZPM])
                 .duration(10 * SECOND)
-                .explosivesAmount(32)
+                .explosives(32)
                 .buildAndRegister();
 
         //  High Density Plutonium + 8Rb + 16Cs + 2Nq+ -> Pu64Rb8Cs16Nq+2

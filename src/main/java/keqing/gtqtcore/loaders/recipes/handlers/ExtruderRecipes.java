@@ -3,8 +3,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.unification.OreDictUnifier;
 
-import static gregtech.api.GTValues.LV;
-import static gregtech.api.GTValues.VA;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.EXTRUDER_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
