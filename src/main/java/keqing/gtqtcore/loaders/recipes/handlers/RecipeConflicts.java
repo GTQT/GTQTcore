@@ -9,7 +9,7 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.CopperCl;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.CopperChloride;
 
 public class RecipeConflicts {
 
@@ -34,7 +34,7 @@ public class RecipeConflicts {
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, Ethylbenzene.getFluid(1000));
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ethylbenzene.getFluid(1000))
-                .notConsumable(dust, CopperCl)
+                .notConsumable(dust, CopperChloride)
                 .fluidOutputs(Styrene.getFluid(1000))
                 .fluidOutputs(Hydrogen.getFluid(2000))
                 .duration(30).EUt(VA[LV]).buildAndRegister();

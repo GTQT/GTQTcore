@@ -15,7 +15,6 @@ import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.wrap;
-import static keqing.gtqtcore.api.utils.GTQTUniversUtil.*;
 
 public class KevlarChain {
 
@@ -326,7 +325,7 @@ public class KevlarChain {
         // CuCl2 Catalyst Reaction is from EDTAChain.
         CHEMICAL_RECIPES.recipeBuilder()
                 .circuitMeta(1)
-                .notConsumable(dust, CopperCl, 1) // CuCl2 Catalyst
+                .notConsumable(dust, CopperChloride, 1) // CuCl2 Catalyst
                 .fluidInputs(Ethylene.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(1000))
                 .fluidOutputs(Acetaldehyde.getFluid(1000))

@@ -280,6 +280,7 @@ public class MetaTileEntityMachine {
                 .output(dust, Soularium, 2)
                 .duration(800).EUt(VA[MV]).buildAndRegister();
 
+        /*
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Steel)
                 .input(dust, Coal)
@@ -287,6 +288,8 @@ public class MetaTileEntityMachine {
                 .circuitMeta(3)
                 .output(dust, ElectricalSteel, 3)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
+
+         */
 
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, ElectricalSteel)

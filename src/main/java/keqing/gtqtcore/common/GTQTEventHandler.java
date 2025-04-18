@@ -1,7 +1,11 @@
 package keqing.gtqtcore.common;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.items.armor.ArmorMetaItem;
+import gregtech.api.metatileentity.registry.MTEManager;
 import gregtech.api.unification.material.event.MaterialEvent;
+import gregtech.api.unification.material.event.MaterialRegistryEvent;
+import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -45,9 +49,16 @@ public class GTQTEventHandler {
     public GTQTEventHandler() {
     }
 
-    @SubscribeEvent(
-            priority = EventPriority.HIGH
-    )
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void registerMTERegistry(MTEManager.MTERegistryEvent event) {
+        GregTechAPI.mteManager.createRegistry(GTQTCore.MODID);
+    }
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void createMaterialRegistry(MaterialRegistryEvent event) {
+        GregTechAPI.materialManager.createRegistry(GTQTCore.MODID);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void registerMaterials(MaterialEvent event) {
         GTQTMaterials.register();
         OrePrefixAdditions.init();

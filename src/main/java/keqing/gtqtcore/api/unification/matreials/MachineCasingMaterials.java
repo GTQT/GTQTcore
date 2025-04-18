@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.unification.matreials;
 import gregtech.api.GTValues;
 import gregtech.api.fluids.FluidBuilder;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.BlastProperty.GasTier;
 import gregtech.api.unification.material.properties.MaterialToolProperty;
@@ -671,7 +672,37 @@ public class MachineCasingMaterials {
                         .vacuumStats(VA[HV], 13 * SECOND))
                 .build();
 
+        GTQTMaterials.HDCS_1 = new Material.Builder(getMaterialsId(), gtqtcoreId("high_durability_compound_steel_1"))
+                .ingot()
+                .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR, GENERATE_ROUND)
+                .color(0x2e216e)
+                .build();
 
+        GTQTMaterials.HDCS_2 = new Material.Builder(getMaterialsId(), gtqtcoreId("high_durability_compound_steel_2"))
+                .ingot()
+                .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR, GENERATE_ROUND)
+                .color(0x3d0b0e)
+                .build();
+
+        GTQTMaterials.HDCS_3 = new Material.Builder(getMaterialsId(), gtqtcoreId("high_durability_compound_steel_3"))
+                .ingot()
+                .iconSet(MaterialIconSet.SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR, GENERATE_ROUND)
+                .color(0x1f0126)
+                .build();
+
+        GTQTMaterials.Pikyonium = new Material.Builder(getMaterialsId(), gtqtcoreId("pikyonium"))
+                .ingot()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x3770bf)
+                .blast(b -> b
+                        .temp(6000, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[IV]))
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR, GENERATE_ROUND)
+                .components(HSSE, 12, Seaborgium, 7, Lead, 5, Molybdenum, 5, Beryllium, 3, Gallium, 3, Mercury, 2)
+                .build();
     }
 
 }

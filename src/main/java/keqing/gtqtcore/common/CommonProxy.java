@@ -7,7 +7,10 @@ import gregtech.api.recipes.properties.impl.FusionEUToStartProperty;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
+import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.ItemMaterialInfo;
+import gregtech.common.crafting.ToolHeadReplaceRecipe;
+import gregtech.common.items.ToolItems;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
 import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.GTQTCoreConfig;
@@ -419,6 +422,10 @@ public class CommonProxy {
     public void preInit() {
         GTQTMetaToolItems.init();
         GTQTRecipes.registerTool();
+
+        ToolHeadReplaceRecipe.setToolHeadForTool(OrePrefix.toolHeadDrill, GTQTMetaToolItems.SOLDERING_IRON_LV);
+        ToolHeadReplaceRecipe.setToolHeadForTool(OrePrefix.toolHeadDrill, GTQTMetaToolItems.SOLDERING_IRON_HV);
+        ToolHeadReplaceRecipe.setToolHeadForTool(OrePrefix.toolHeadDrill, GTQTMetaToolItems.SOLDERING_IRON_IV);
     }
 
     public void preLoad() {

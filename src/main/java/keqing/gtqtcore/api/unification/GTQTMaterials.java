@@ -102,7 +102,6 @@ public class GTQTMaterials {
     public static Material RP1RocketFuel;
     public static Material Methylhydrazine;
     public static Material MethylhydrazineNitrateRocketFuel;
-    public static Material Alumite;
     public static Material Alubrass;
     public static Material UreaMix;
     public static Material FermentationBase;
@@ -201,7 +200,7 @@ public class GTQTMaterials {
     public static Material Phenolic;
     public static Material Latex;
     public static Material Polysilicon;
-    public static Material CopperCl;
+    public static Material CopperChloride;
     public static Material Vinylcinnamate;
     public static Material Xmt;
     public static Material Zrbtmst;
@@ -266,13 +265,8 @@ public class GTQTMaterials {
     public static Material SodiumSilicofluoride;
     public static Material HexafluorosilicicAcid;
     public static Material MonaziteRareEarthTurbid;
-    public static Material HafniumOxideZirconiumOxideMixture;
     public static Material Thorianite;
     public static Material DiluteMonaziteRareEarthMud;
-    public static Material HafniumOxide;
-    public static Material HafniumZirconiumTetrachloride;
-    public static Material LowPurityHafniumZirconiumResidue;
-    public static Material LowPurityHafniumZirconiumIodideMixture;
     public static Material SulfuricAcidMonazite;
     public static Material MonaziteRareEarthFilterResidue;
     public static Material ThoriumPhosphateFilterCake;
@@ -436,16 +430,6 @@ public class GTQTMaterials {
     public static Material Oligoclase;
     public static Material Albite;
     public static Material Anorthite;
-    public static Material Dfeltamethrin;
-    public static Material Deltamethrin;
-    public static Material Dfeltamethrina;
-    public static Material Dfeltamethrinb;
-    public static Material Dfeltamethrinc;
-    public static Material Dfeltamethrind;
-    public static Material Dfeltamethrine;
-    public static Material Dfeltamethrinf;
-    public static Material Dfeltamethring;
-    public static Material Dfeltamethrinh;
     public static Material NanometerBariumTitanate;
     public static Material Htitanate;
     public static Material BromoHexadecane;
@@ -590,14 +574,6 @@ public class GTQTMaterials {
     public static Material CelluloseExposureSolution;
     public static Material CelluloseFermentationResidue;
     public static Material FluxedElectrum;
-    public static Material CleanWater_1;
-    public static Material CleanWater_2;
-    public static Material CleanWater_3;
-    public static Material CleanWater_4;
-    public static Material CleanWater_5;
-    public static Material CleanWater_6;
-    public static Material CleanWater_7;
-    public static Material CleanWater_8;
     public static Material BismuthVanadate;
     public static Material MaleicAnhydride;
     public static Material NickelOxideHydroxide;
@@ -1271,7 +1247,6 @@ public class GTQTMaterials {
     //Alloys
     public static Material BT6;
     public static Material Birmabright;
-    public static Material NickelPlatedTin;
     public static Material NihoniumTriiodide;
     public static Material EnrichedNaqAlloy;
     public static Material TriniumSteel;
@@ -1286,7 +1261,6 @@ public class GTQTMaterials {
     public static Material HDCS_2;
     public static Material HDCS_3;
     public static Material Pikyonium;
-    //public static Material TantalumCarbide;
     public static Material HafniumCarbide;
     public static Material SeaborgiumCarbide;
     public static Material TantalumHafniumSeaborgiumCarbide;
@@ -1302,9 +1276,6 @@ public class GTQTMaterials {
     public static Material Bromobenzene;
     public static Material HydrogenSilsesquioxane;
     public static Material SU8_Photoresist;
-    public static Material MolybdenumSulfide;
-    public static Material PalladiumChloride; // PdCl2
-    public static Material SilverLeadOxide;
     public static Material Difluorobenzophenone;
     public static Material Fluorobenzene;
     public static Material Hydroquinone;
@@ -1321,10 +1292,6 @@ public class GTQTMaterials {
     public static Material GraphenePQD;
     public static Material BismuthIridiumOxide;
     public static Material IndiumFluoride;
-    public static Material XenonDioxide;
-    public static Material XenonTetraFluoride;
-    public static Material XenonOxyTetraFluoride;
-    public static Material XenonHexaFluoride;
     public static Material NeonFluoride;
     public static Material ExcitedNeonFluoride;
     public static Material ArgonFluorine;
@@ -1387,7 +1354,6 @@ public class GTQTMaterials {
     public static Material SuspendedPGQD;
     public static Material ArgonSilane;
     public static Material DiamondSonicationSolution;
-    public static Material XenonFluorideSupercondiveMix;
     public static Material P1Solution;
     public static Material TetrakisPDCatalyst;
     public static Material CFCoatingSolution;

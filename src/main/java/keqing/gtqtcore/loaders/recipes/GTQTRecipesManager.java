@@ -35,7 +35,6 @@ public class GTQTRecipesManager {
     public static void init() {
         FakeToolRecipes.register();
         VanillaRecipes.register();
-        DeltamethrinChain.init();
         RubbersChain.init();
         PlasticChain.init();
         CrystalRaw.init();
@@ -110,7 +109,6 @@ public class GTQTRecipesManager {
         EtchingMaterialsChain.init();
         OilProcessing.init();
         DimethylformamideChain.init();
-        CleanWaterChain.init();
         KaptonChain.init();
         PowerSupply.init();
         AmmoniaChain.init();

@@ -48,6 +48,7 @@ public class ElementMaterials {
                         .build())
                 .blast(10800, BlastProperty.GasTier.HIGHER)
                 .build();
+
         //  26002 Awakened Draconium
         GTQTMaterials.AwakenedDraconium = new Material.Builder(getMaterialsId(), gtqtcoreId("awakened_draconium"))
                 .ingot()

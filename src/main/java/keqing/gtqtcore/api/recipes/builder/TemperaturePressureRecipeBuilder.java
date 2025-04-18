@@ -76,7 +76,7 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
                 this.recipePropertyStorage.store(TemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
             }
         } else {
-            this.recipePropertyStorage.store(TemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
+            this.temperature(GCYSValues.EARTH_TEMPERATURE);
         }
 
         if (this.recipePropertyStorage.contains(PressureProperty.getInstance())) {
@@ -84,7 +84,7 @@ public class TemperaturePressureRecipeBuilder extends RecipeBuilder<TemperatureP
                 this.recipePropertyStorage.store(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
             }
         } else {
-            this.recipePropertyStorage.store(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
+            this.pressure(GCYSValues.EARTH_PRESSURE);
         }
 
         return super.build();

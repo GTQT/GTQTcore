@@ -56,16 +56,6 @@ public class GTQTCore {
     public static IModuleManager moduleManager;
     // Will be available at the Pre-Initialization stage.
     public static IAdvancementManager advancementManager;
-
-    @SubscribeEvent
-    public static void registerMTERegistry(MTEManager.MTERegistryEvent event) {
-        GregTechAPI.mteManager.createRegistry(GTQTCore.MODID);
-    }
-    @SubscribeEvent
-    public static void createMaterialRegistry(MaterialRegistryEvent event) {
-        GregTechAPI.materialManager.createRegistry(GTQTCore.MODID);
-    }
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         // Loading Advancement Manager and Advancement Triggers.

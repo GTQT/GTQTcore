@@ -3,7 +3,6 @@ package keqing.gtqtcore.api.recipes.builder;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.util.EnumValidationResult;
 import gregtech.api.util.GTLog;
 import gregtech.api.util.TextFormattingUtil;
@@ -57,15 +56,13 @@ public class PressureRecipeBuilder extends RecipeBuilder<PressureRecipeBuilder> 
 
     @Override
     public ValidationResult<Recipe> build() {
-        if (this.recipePropertyStorage == null) this.recipePropertyStorage = RecipePropertyStorage.EMPTY;
         if (this.recipePropertyStorage.contains(PressureProperty.getInstance())) {
             if (this.recipePropertyStorage.get(PressureProperty.getInstance(), -1.0D) <= 0) {
                 this.recipePropertyStorage.store(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
             }
         } else {
-            this.recipePropertyStorage.store(PressureProperty.getInstance(), GCYSValues.EARTH_PRESSURE);
+            this.pressure(GCYSValues.EARTH_PRESSURE);
         }
-
         return super.build();
     }
 

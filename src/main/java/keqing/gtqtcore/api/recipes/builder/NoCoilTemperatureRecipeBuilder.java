@@ -54,13 +54,12 @@ public class NoCoilTemperatureRecipeBuilder extends RecipeBuilder<NoCoilTemperat
 
     @Override
     public ValidationResult<Recipe> build() {
-        if (this.recipePropertyStorage == null) this.recipePropertyStorage = RecipePropertyStorage.EMPTY;
         if (this.recipePropertyStorage.contains(NoCoilTemperatureProperty.getInstance())) {
             if (this.recipePropertyStorage.get(NoCoilTemperatureProperty.getInstance(), -1) <= 0) {
                 this.recipePropertyStorage.store(NoCoilTemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
             }
         } else {
-            this.recipePropertyStorage.store(NoCoilTemperatureProperty.getInstance(), GCYSValues.EARTH_TEMPERATURE);
+            this.temperature(GCYSValues.EARTH_TEMPERATURE);
         }
 
         return super.build();

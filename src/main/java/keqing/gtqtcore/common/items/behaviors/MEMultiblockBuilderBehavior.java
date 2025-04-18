@@ -23,6 +23,7 @@ import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
+import gregtech.api.metatileentity.registry.MBPattern;
 import gregtech.api.pattern.PatternError;
 import gregtech.api.util.GTUtility;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -94,209 +95,185 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     int tick = 0;
     private AENetworkProxy networkProxy;
 
-    private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock) throws NoSuchFieldException, IllegalAccessException {
-        // 获取第 i 项
-        Object pattern = getObjects(tier, multiblock);
-        // 获取 MBPattern 类
-        Class<?> mbPatternClass = pattern.getClass();
-        // 获取 parts 字段
-        Field partsField = mbPatternClass.getDeclaredField("parts");
-        partsField.setAccessible(true);
-        // 获取 parts 字段值
-        return (List<ItemStack>) partsField.get(pattern);
-    }
-
-    private static Object getObjects(int tier, MultiblockControllerBase multiblock) throws NoSuchFieldException, IllegalAccessException {
-        MultiblockInfoRecipeWrapper wrapper = new MultiblockInfoRecipeWrapper(multiblock);
-        // 获取 patterns 字段
-        Field patternsField = wrapper.getClass().getDeclaredField("patterns");
-        patternsField.setAccessible(true);
-        // 获取 patterns 数组值
-        Object[] patterns = (Object[]) patternsField.get(wrapper);
-        // 检查索引是否有效
-        if (tier < 0 || tier >= patterns.length) {
-            tier = patterns.length - 1;
-        }
-        return patterns[tier];
+    private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock){
+        MBPattern[] patternList =GregTechAPI.MULTIBLOCK_INFO_CACHE.get(multiblock);
+        MBPattern pattern=patternList[tier];
+        return pattern.getParts();
     }
 
     public List<ItemStack> dealWithMultiblock(MultiblockControllerBase multiblock) {
         List<ItemStack> itemStackList = new ArrayList<>();
-        try {
-            List<ItemStack> original = getItemStacks(multiblockTier, multiblock);
+        List<ItemStack> original = getItemStacks(multiblockTier, multiblock);
 
-            for (ItemStack itemStack : original) {
+        for (ItemStack itemStack : original) {
 
-                out = false;
+            out = false;
 
-                if (itemStack == ItemStack.EMPTY) continue;
+            if (itemStack == ItemStack.EMPTY) continue;
 
-                //忽视控制器
-                if (multiblock.getStackForm().isItemEqual(itemStack)) continue;
+            //忽视控制器
+            if (multiblock.getStackForm().isItemEqual(itemStack)) continue;
 
-                if (!setHatch) {
-                    Block block = Block.getBlockFromItem(itemStack.getItem());
-                    if (block instanceof BlockMachine) {
-                        continue;
-                    }
+            if (!setHatch) {
+                Block block = Block.getBlockFromItem(itemStack.getItem());
+                if (block instanceof BlockMachine) {
+                    continue;
                 }
-
-                ItemStack hatchStack = itemStack.copy();
-                hatchStack.setCount(1);
-
-                if (perMaintenanceHatchTier >= 0) {
-                    for (MetaTileEntity hatchType : hatchTypes) {
-                        if (hatchType.getStackForm(1).getItem() == hatchStack.getItem() &&
-                                hatchType.getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredMaintenanceHatch) {
-                                switch (perMaintenanceHatchTier) {
-                                    case 0:
-                                        itemStackList.add(MetaTileEntities.MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
-                                        break;
-                                    case 1:
-                                        itemStackList.add(MetaTileEntities.CONFIGURABLE_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
-                                        break;
-                                    case 2:
-                                        itemStackList.add(MetaTileEntities.AUTO_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
-                                        break;
-                                    case 3:
-                                        itemStackList.add(MetaTileEntities.CLEANING_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
-                                        break;
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-
-
-                if (perMufflerHatchTier >= 1) {
-                    for (int i = 1; i < MetaTileEntities.MUFFLER_HATCH.length; i++) {
-
-                        if (MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredMufflerHatch)
-                                itemStackList.add(MetaTileEntities.MUFFLER_HATCH[perMufflerHatchTier].getStackForm(itemStack.getCount()));
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                if (perItemInputHatchTier >= 0 || MEPlace) {
-                    for (int i = 0; i < MetaTileEntities.ITEM_IMPORT_BUS.length; i++) {
-
-                        if (MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredItemInputHatch) {
-                                if (MEPlace)
-                                    itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS_ME.getStackForm(itemStack.getCount()));
-                                else
-                                    itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                if (perItemOutputHatchTier >= 0 || MEPlace) {
-                    for (int i = 0; i < MetaTileEntities.ITEM_EXPORT_BUS.length; i++) {
-                        if (MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredItemOutputHatch) {
-                                if (MEPlace)
-                                    itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS_ME.getStackForm(itemStack.getCount()));
-                                else
-                                    itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                if (perFluidInputHatchTier >= 0 || MEPlace) {
-                    for (int i = 0; i < MetaTileEntities.FLUID_IMPORT_HATCH.length; i++) {
-                        if (MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredFluidInputHatch) {
-                                if (MEPlace)
-                                    itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH_ME.getStackForm(itemStack.getCount()));
-                                else
-                                    itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                if (perFluidOutputHatchTier >= 0 || MEPlace) {
-                    for (int i = 0; i < MetaTileEntities.FLUID_EXPORT_HATCH.length; i++) {
-                        if (MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredFluidOutputHatch) {
-                                if (MEPlace)
-                                    itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH_ME.getStackForm(itemStack.getCount()));
-                                else
-                                    itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-
-                if (perEnergyInputHatchTier >= 1) {
-                    for (int i = 1; i < endPos; i++) {
-                        if (ENERGY_INPUT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && ENERGY_INPUT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredEnergyInputHatch) {
-                                if (amperage == 1) {
-                                    itemStackList.add(ENERGY_INPUT_HATCH[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
-                                }
-                                if (amperage == 4) {
-                                    itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_4A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
-                                }
-                                if (amperage == 16) {
-                                    itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                if (perEnergyOutputHatchTier >= 1) {
-                    for (int i = 1; i < endPos; i++) {
-                        if (MetaTileEntities.ENERGY_OUTPUT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ENERGY_OUTPUT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
-                            out = true;
-                            if (!ignoredEnergyOutputHatch) {
-
-                                if (amperage == 1) {
-                                    itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
-                                }
-                                if (amperage == 4) {
-                                    itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_OUTPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
-                                }
-                                if (amperage == 16) {
-                                    itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                if (out) continue;
-
-                itemStackList.add(itemStack);
             }
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+
+            ItemStack hatchStack = itemStack.copy();
+            hatchStack.setCount(1);
+
+            if (perMaintenanceHatchTier >= 0) {
+                for (MetaTileEntity hatchType : hatchTypes) {
+                    if (hatchType.getStackForm(1).getItem() == hatchStack.getItem() &&
+                            hatchType.getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredMaintenanceHatch) {
+                            switch (perMaintenanceHatchTier) {
+                                case 0:
+                                    itemStackList.add(MetaTileEntities.MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
+                                    break;
+                                case 1:
+                                    itemStackList.add(MetaTileEntities.CONFIGURABLE_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
+                                    break;
+                                case 2:
+                                    itemStackList.add(MetaTileEntities.AUTO_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
+                                    break;
+                                case 3:
+                                    itemStackList.add(MetaTileEntities.CLEANING_MAINTENANCE_HATCH.getStackForm(itemStack.getCount()));
+                                    break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+            if (perMufflerHatchTier >= 1) {
+                for (int i = 1; i < MetaTileEntities.MUFFLER_HATCH.length; i++) {
+
+                    if (MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredMufflerHatch)
+                            itemStackList.add(MetaTileEntities.MUFFLER_HATCH[perMufflerHatchTier].getStackForm(itemStack.getCount()));
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if (perItemInputHatchTier >= 0 || MEPlace) {
+                for (int i = 0; i < MetaTileEntities.ITEM_IMPORT_BUS.length; i++) {
+
+                    if (MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredItemInputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if (perItemOutputHatchTier >= 0 || MEPlace) {
+                for (int i = 0; i < MetaTileEntities.ITEM_EXPORT_BUS.length; i++) {
+                    if (MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredItemOutputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if (perFluidInputHatchTier >= 0 || MEPlace) {
+                for (int i = 0; i < MetaTileEntities.FLUID_IMPORT_HATCH.length; i++) {
+                    if (MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredFluidInputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH_ME.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if (perFluidOutputHatchTier >= 0 || MEPlace) {
+                for (int i = 0; i < MetaTileEntities.FLUID_EXPORT_HATCH.length; i++) {
+                    if (MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredFluidOutputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH_ME.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+
+            if (perEnergyInputHatchTier >= 1) {
+                for (int i = 1; i < endPos; i++) {
+                    if (ENERGY_INPUT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && ENERGY_INPUT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredEnergyInputHatch) {
+                            if (amperage == 1) {
+                                itemStackList.add(ENERGY_INPUT_HATCH[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            }
+                            if (amperage == 4) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_4A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
+                            }
+                            if (amperage == 16) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if (perEnergyOutputHatchTier >= 1) {
+                for (int i = 1; i < endPos; i++) {
+                    if (MetaTileEntities.ENERGY_OUTPUT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ENERGY_OUTPUT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredEnergyOutputHatch) {
+
+                            if (amperage == 1) {
+                                itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            }
+                            if (amperage == 4) {
+                                itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_OUTPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
+                            }
+                            if (amperage == 16) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            itemStackList.add(itemStack);
         }
         return itemStackList;
     }

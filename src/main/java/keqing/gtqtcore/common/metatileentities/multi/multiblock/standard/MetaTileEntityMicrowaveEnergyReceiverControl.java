@@ -566,7 +566,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     private MetaTileEntityPowerSubstation.PowerStationEnergyBank getEnergyBankFromPowerSubstation(MetaTileEntityPowerSubstation powerSubstation) {
-        return ReflectionHelper.getPrivateFieldValue(powerSubstation, "energyBank", MetaTileEntityPowerSubstation.PowerStationEnergyBank.class);
+        return powerSubstation.getEnergyBank();
     }
 
     //1为+1 -1为-1

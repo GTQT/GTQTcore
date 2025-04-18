@@ -1,13 +1,18 @@
 package keqing.gtqtcore.api.unification.matreials;
 
 import gregtech.api.fluids.FluidBuilder;
+import gregtech.api.fluids.attribute.FluidAttributes;
 import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.properties.BlastProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import net.minecraft.util.text.TextFormatting;
 
+import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.material.info.GTQTMaterialIconSet.CUSTOM_MHCSM;
 
 public class UnknownCompositionMaterials {
@@ -75,12 +80,645 @@ public class UnknownCompositionMaterials {
         //
         startId = 8100;
         //
+        //快乐细菌
+        //原始杂质
+        GTQTMaterials.Enzymesaz = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesaz"))
+                .fluid()
+                .color(0xCDAA7D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesbz = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesbz"))
+                .fluid()
+                .color(0xCD8162)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymescz = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymescz"))
+                .fluid()
+                .color(0xD2691E)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesdz = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesdz"))
+                .fluid()
+                .color(0x68228B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Enzymesez = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesez"))
+                .fluid()
+                .color(0x0000EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //这里注册线性方程组的几个基础解系
+        GTQTMaterials.Enzymesa = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesa"))
+                .fluid()
+                .color(0xEE00EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 0 0 0", true);
+
+        GTQTMaterials.Enzymesb = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesb"))
+                .fluid()
+                .color(0xCD3333)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 1 0 0 0", true);
+
+        GTQTMaterials.Enzymesc = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesc"))
+                .fluid()
+                .color(0xB03060)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 1 0 0", true);
+
+        GTQTMaterials.Enzymesd = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymesd"))
+                .fluid()
+                .color(0xB4EEB4)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 0 1 0", true);
+
+        GTQTMaterials.Enzymese = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：0 0 0 0 1", true);
+
+        //富集生物培养基
+        GTQTMaterials.Rnzymes = new Material.Builder(getMaterialsId(), gtqtcoreId("rnzymes"))
+                .fluid()
+                .color(0xFA8072)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //普适矿处菌种 101
+        GTQTMaterials.Enzymesaa = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_101"))
+                .fluid()
+                .color(0x00E5EE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 0 0", true);
+        //定向铂系菌种 102
+        GTQTMaterials.Enzymesab = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_102"))
+                .fluid()
+                .color(0x54FF9F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 0 1 1 0", true);
+        //普适魔性菌种 103
+        GTQTMaterials.Enzymesac = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_103"))
+                .fluid()
+                .color(0x6B8E23)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 0", true);
+        //普适副产菌种 104
+        GTQTMaterials.Enzymesad = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_104"))
+                .fluid()
+                .color(0x76EE00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 1 0 1 1", true);
+        //
+        //工业合成菌种I 201
+        GTQTMaterials.Enzymesba = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_201"))
+                .fluid()
+                .color(0xA0522D)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //工业还原菌种 202
+        GTQTMaterials.Enzymesbb = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_202"))
+                .fluid()
+                .color(0x9932CC)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 2 3 1 1", true);
+        //工业氧化菌种 203
+        GTQTMaterials.Enzymesbc = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_203"))
+                .fluid()
+                .color(0x8FBC8F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：1 3 2 1 1", true);
+        //工业催化菌种 204
+        GTQTMaterials.Enzymesbd = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_204"))
+                .fluid()
+                .color(0x8B7D7B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 1 1 3 1", true);
+        //
+        //定向脂肪酶 301
+        GTQTMaterials.Enzymesca = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_301"))
+                .fluid()
+                .color(0x838B8B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：4 1 1 3 2", true);
+        //普适发酵酶 302
+        GTQTMaterials.Enzymescb = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_302"))
+                .fluid()
+                .color(0x8B008B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 4 2 3 1", true);
+        //定向发酵酶 303
+        GTQTMaterials.Enzymescc = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_303"))
+                .fluid()
+                .color(0x8A2BE2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 3 2 4 1", true);
+        //
+        //活性诱变酶 401
+        GTQTMaterials.Enzymesda = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_401"))
+                .fluid()
+                .color(0x8B0000)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：2 5 2 4 3", true);
+
+        //定向镧系菌种
+        GTQTMaterials.Enzymesea = new Material.Builder(getMaterialsId(), gtqtcoreId("enzymese_501"))
+                .fluid()
+                .color(0x54FF9F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("性状：* * * * *", true);
+
+        //
+        startId = 8200;
+        //
+
+        //破乳剂
+        GTQTMaterials.Demulsifier = new Material.Builder(getMaterialsId(), gtqtcoreId("demulsifier"))
+                .fluid()
+                .color(0xC6E2FF)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        GTQTMaterials.Pyrotheum = new Material.Builder(getMaterialsId(), gtqtcoreId("pyrotheum"))
+                .fluid()
+                .color(14601000)
+                .build()
+                .setFormula("Pyrotheum");
+
+
+        //盐水
+        GTQTMaterials.SeaWater = new Material.Builder(getMaterialsId(), gtqtcoreId("sea_water"))
+                .fluid()
+                .color(0xB2DFEE)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //含杂预处理原油
+        GTQTMaterials.PreTreatedCrudeOilContainingImpurities = new Material.Builder(getMaterialsId(), gtqtcoreId("pre_treated_crude_oil_containing_impurities"))
+                .fluid()
+                .color(0x262626)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //预处理原油
+        GTQTMaterials.PreTreatedCrudeOil = new Material.Builder(getMaterialsId(), gtqtcoreId("pre_treated_crude_oil"))
+                .fluid()
+                .color(0x2F4F4F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //环氧丙烷
+        GTQTMaterials.PropyleneOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("propylene_oxide"))
+                .fluid()
+                .color(0xBDB76B)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //沥青
+        GTQTMaterials.Asphalt = new Material.Builder(getMaterialsId(), gtqtcoreId("asphalt"))
+                .fluid()
+                .color(0x282828)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //蜡油
+        GTQTMaterials.WaxOil = new Material.Builder(getMaterialsId(), gtqtcoreId("wax_oil"))
+                .fluid()
+                .color(0x8B8B00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //水煤气
+        GTQTMaterials.WaterGas = new Material.Builder(getMaterialsId(), gtqtcoreId("water_gas"))
+                .fluid()
+                .color(0xA9A9A9)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //常压渣油
+        GTQTMaterials.AtmosphericResidue = new Material.Builder(getMaterialsId(), gtqtcoreId("atmospheric_residue"))
+                .fluid()
+                .color(0x8B1A1A)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //减压渣油
+        GTQTMaterials.VacuumResidue = new Material.Builder(getMaterialsId(), gtqtcoreId("vacuum_residue"))
+                .fluid()
+                .color(0xCD4F39)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //防爆剂
+        GTQTMaterials.MTBE = new Material.Builder(getMaterialsId(), gtqtcoreId("mtbe"))
+                .fluid()
+                .color(0xC0FF3E)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻柴油
+        GTQTMaterials.DieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("diesel_light"))
+                .fluid()
+                .color(0x8B5A00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //重柴油
+        GTQTMaterials.DieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("diesel_heavy"))
+                .fluid()
+                .color(0x8B5742)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //含硫轻柴油
+        GTQTMaterials.SDieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("sdiesel_light"))
+                .fluid()
+                .color(0x8B4C39)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //含硫重柴油
+        GTQTMaterials.SDieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("sdiesel_heavy"))
+                .fluid()
+                .color(0x8B4513)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //粗柴油
+        GTQTMaterials.GasOil = new Material.Builder(getMaterialsId(), gtqtcoreId("gas_oil"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //直馏汽油
+        GTQTMaterials.Distilledgasoline = new Material.Builder(getMaterialsId(), gtqtcoreId("distilledgasoline"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //油浆
+        GTQTMaterials.OilSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("oil_slurry"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //油气
+        GTQTMaterials.OilGas = new Material.Builder(getMaterialsId(), gtqtcoreId("oil_gas"))
+                .fluid()
+                .color(0x8B7355)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度加氢裂解轻柴油
+        GTQTMaterials.LightlyHydroCrackedDieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlyHydroCrackedDieselLight"))
+                .fluid()
+                .color(0xFFC125)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度蒸汽裂解轻柴油
+        GTQTMaterials.LightlySteamCrackedDieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlySteamCrackedDieselLight"))
+                .fluid()
+                .color(0xFFB90F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度加氢裂解轻柴油
+        GTQTMaterials.SeverelyHydroCrackedDieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelyHydroCrackedDieselLight"))
+                .fluid()
+                .color(0xFFA54F)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度蒸汽裂解轻柴油
+        GTQTMaterials.SeverelySteamCrackedDieselLight = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelySteamCrackedDieselLight"))
+                .fluid()
+                .color(0xFF8C00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度加氢裂解重柴油
+        GTQTMaterials.LightlyHydroCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlyHydroCrackedDieselHeavy"))
+                .fluid()
+                .color(0xFF7F50)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度蒸汽裂解重柴油
+        GTQTMaterials.LightlySteamCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlySteamCrackedDieselHeavy"))
+                .fluid()
+                .color(0xFF7F24)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度加氢裂解重柴油
+        GTQTMaterials.SeverelyHydroCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelyHydroCrackedDieselHeavy"))
+                .fluid()
+                .color(0xFF7F00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度蒸汽裂解重柴油
+        GTQTMaterials.SeverelySteamCrackedDieselHeavy = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelySteamCrackedDieselHeavy"))
+                .fluid()
+                .color(0xFF7256)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //酚醛
+        GTQTMaterials.Phenolic = new Material.Builder(getMaterialsId(), gtqtcoreId("phenolic"))
+                .fluid()
+                .color(0xFF7256)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("(C6H6O·CH2O)x");
+
+        //乳胶
+        GTQTMaterials.Latex = new Material.Builder(getMaterialsId(), gtqtcoreId("latex"))
+                .fluid()
+                .color(0xFFFADA)
+                .build();
+
+
+        //独居石稀土浊溶液
+        GTQTMaterials.MonaziteRareEarthTurbid = new Material.Builder(getMaterialsId(), gtqtcoreId("monazite_rare_earth_turbid"))
+                .fluid()
+                .color(0xd89045).iconSet(SHINY)
+                .build();
+
+        //稀释独居石稀土泥浆
+        GTQTMaterials.DiluteMonaziteRareEarthMud = new Material.Builder(getMaterialsId(), gtqtcoreId("dilute_monazite_rare_earth_mud"))
+                .fluid()
+                .color(0xFFB6C1).iconSet(SHINY)
+                .build();
+
+        //硫酸独居石
+        GTQTMaterials.SulfuricAcidMonazite = new Material.Builder(getMaterialsId(), gtqtcoreId("sulfuric_acid_monazite"))
+                .fluid()
+                .color(0xFF82AB).iconSet(SHINY)
+                .build();
+
+        //独居石稀土滤渣粉
+        GTQTMaterials.MonaziteRareEarthFilterResidue = new Material.Builder(getMaterialsId(), gtqtcoreId("monazite_rare_earth_filter_residue"))
+                .dust()
+                .color(0xFF8247).iconSet(SHINY)
+                .build();
+
+        //磷酸钍滤饼
+        GTQTMaterials.ThoriumPhosphateFilterCake = new Material.Builder(getMaterialsId(), gtqtcoreId("thorium_phosphate_filter_cake"))
+                .dust()
+                .color(0xFF6EB4).iconSet(SHINY)
+                .build();
+
+        //磷酸钍精粉
+        GTQTMaterials.ThoriumPhosphateConcentrate = new Material.Builder(getMaterialsId(), gtqtcoreId("thorium_phosphate_concentrate"))
+                .dust()
+                .color(0xFF6A6A).iconSet(SHINY)
+                .build();
+
+        //中和独居石稀土滤渣粉
+        GTQTMaterials.NeutralizationMonaziteRareEarthFilterResidue = new Material.Builder(getMaterialsId(), gtqtcoreId("neutralization_monazite_rare_earth_filter_residue"))
+                .dust()
+                .color(0xFF69B4).iconSet(SHINY)
+                .build();
+
+        //浓缩独居石稀土氢氧化物粉
+        GTQTMaterials.ConcentratedMonaziteRareEarthHydroxide = new Material.Builder(getMaterialsId(), gtqtcoreId("concentrated_monazite_rare_earth_hydroxide"))
+                .dust()
+                .color(0xFF6347).iconSet(SHINY)
+                .build();
+
+        //铀滤渣粉
+        GTQTMaterials.UraniumFilterResidue = new Material.Builder(getMaterialsId(), gtqtcoreId("uranium_filter_residue"))
+                .dust()
+                .color(0xFF3030).iconSet(SHINY)
+                .build();
+
+        //干燥浓缩硝酸独居石稀土
+        GTQTMaterials.DryConcentratedNitrateMonaziteRareEarth = new Material.Builder(getMaterialsId(), gtqtcoreId("dry_concentrated_nitrate_monazite_rare_earth"))
+                .dust()
+                .color(0xFF1493).iconSet(SHINY)
+                .build();
+
+        //独居石罕土沉淀粉
+        GTQTMaterials.SolitaryStoneRareSoilSedimentation = new Material.Builder(getMaterialsId(), gtqtcoreId("solitary_stone_rare_soil_sedimentation"))
+                .dust()
+                .color(0xFF00FF).iconSet(SHINY)
+                .build();
+
+        //异质卤化独居石稀土混合物
+        GTQTMaterials.HeterogeneousHalogenatedMonaziteRareEarthMixture = new Material.Builder(getMaterialsId(), gtqtcoreId("heterogeneous_halogenated_monazite_rare_earth_mixture"))
+                .dust()
+                .color(0xFF0000).iconSet(SHINY)
+                .build();
+
+        //饱和独居石稀土
+        GTQTMaterials.SaturatedMonaziteDopedWithRareEarth = new Material.Builder(getMaterialsId(), gtqtcoreId("saturated_monazite_doped_with_rare_earth"))
+                .dust()
+                .color(0xd89045).iconSet(SHINY)
+                .build();
+
+        //钐精
+        GTQTMaterials.SamariumEssence = new Material.Builder(getMaterialsId(), gtqtcoreId("samarium_essence"))
+                .dust()
+                .color(0xF5DEB3).iconSet(SHINY)
+                .build();
+
+
+        //氟碳镧铈稀土浊
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareEarthTurbidity = new Material.Builder(getMaterialsId(), gtqtcoreId("fluorocarbon_lanthanum_cerium_rare_earth_turbidity"))
+                .fluid()
+                .color(0x8B7500).iconSet(SHINY)
+                .build();
+
+        //蒸汽裂化氟碳镧铈泥浆
+        GTQTMaterials.SteamCrackingFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("steam_cracking_fluorocarbon_lanthanum_cerium_slurry"))
+                .fluid()
+                .color(0x8B7355).iconSet(SHINY)
+                .build();
+
+        //调制氟碳镧铈泥浆
+        GTQTMaterials.ModulationFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("modulation_fluorocarbon_lanthanum_cerium_slurry"))
+                .fluid()
+                .color(0x8B6969).iconSet(SHINY)
+                .build();
+
+        //过滤氟碳镧铈泥浆
+        GTQTMaterials.FilterFluorocarbonLanthanumCeriumSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("filter_fluorocarbon_lanthanum_cerium_slurry"))
+                .dust()
+                .color(0x8B6914).iconSet(SHINY)
+                .build();
+
+        //氟碳镧铈稀土氧化物粉
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareEarthOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("fluorocarbon_lanthanum_cerium_rare_earth_oxide"))
+                .dust()
+                .color(0x8B668B).iconSet(SHINY)
+                .build();
+
+        //酸浸氟碳镧铈稀土氧化物粉
+        GTQTMaterials.AcidFluorocarbonLanthanumCeriumRareEarthOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("acid_fluorocarbon_lanthanum_cerium_rare_earth_oxide"))
+                .fluid()
+                .color(0x8B6508).iconSet(SHINY)
+                .build();
+
+        //焙烧稀土氧化物粉
+        GTQTMaterials.RoastedRareEarthOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("roasted_rare_earth_oxide"))
+                .dust()
+                .color(0x8B636C).iconSet(SHINY)
+                .build();
+
+        //氧化铈稀土氧化物粉
+        GTQTMaterials.CeriumOxideRareEarthOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("cerium_oxide_rare_earth_oxide"))
+                .fluid()
+                .color(0x8B5F65).iconSet(SHINY)
+                .build();
+
+        //氟碳镧铈罕土氧化物粉
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareSoilOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("fluorocarbon_lanthanum_cerium_rare_soil_oxide"))
+                .dust()
+                .color(0x8B5A2B).iconSet(SHINY)
+                .build();
+
+        //氟碳镧铈罕土氧化物悬浊液
+        GTQTMaterials.FluorocarbonLanthanumCeriumRareSoilOxideSuspension = new Material.Builder(getMaterialsId(), gtqtcoreId("fluorocarbon_lanthanum_cerium_rare_soil_oxide_suspension"))
+                .fluid()
+                .color(0x8B5A00).iconSet(SHINY)
+                .build();
+
+        //钐稀土精粉
+        GTQTMaterials.SamariumRareEarth = new Material.Builder(getMaterialsId(), gtqtcoreId("samarium_rare_earth"))
+                .dust()
+                .color(0x8B5742).iconSet(SHINY)
+                .build();
+
+        //氟化钐稀土精粉
+        GTQTMaterials.SamariumFluorideRareEarthRefined = new Material.Builder(getMaterialsId(), gtqtcoreId("samarium_fluoride_rare_earth_refined"))
+                .fluid()
+                .color(0x8B4C39).iconSet(SHINY)
+                .build();
+
+        //钐-铽混合物粉
+        GTQTMaterials.SamariumTerbiumMixture = new Material.Builder(getMaterialsId(), gtqtcoreId("samarium_terbium_mixture"))
+                .fluid()
+                .color(0x8B4789).iconSet(SHINY)
+                .build();
+
+        GTQTMaterials.CrudeRareEarthTurbidSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("crude_rare_earth_turbid_solution"))
+                .fluid()
+                .color(0x9C5C6B)
+                .iconSet(DULL)
+                .build();
+
+        GTQTMaterials.NitratedRareEarthTurbidSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("nitrated_rare_earth_turbid_solution"))
+                .fluid()
+                .color(0x754550)
+                .iconSet(DULL)
+                .build();
+        //  25254 Rare Earth Hydroxides Solution
+        GTQTMaterials.RareEarthHydroxidesSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_hydroxides_solution"))
+                .fluid()
+                .color(0x434327)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(RareEarth, 1, Oxygen, 1, Hydrogen, 1, Water, 1)
+                .build();
+        //  25255 Rare Earth Chlorides Slurry
+        GTQTMaterials.RareEarthChloridesSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_slurry"))
+                .dust()
+                .color(0x838367)
+                .iconSet(ROUGH)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(RareEarth, 1, Chlorine, 1, Water, 1)
+                .build();
+        //  25256 Low-purity Rare Earth Chlorides Solution
+        GTQTMaterials.LowPurityRareEarthChloridesSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("low_purity_rare_earth_chlorides_solution"))
+                .fluid()
+                .color(0x838333)
+                .iconSet(DULL)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(RareEarth, 1, Chlorine, 1, Water, 2)
+                .build();
+        //  25257 Roughly Purified Rare Earth Chlorides Solution
+        GTQTMaterials.RoughlyPurifiedRareEarthChloridesSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("roughly_purified_rare_earth_chlorides_solution"))
+                .fluid()
+                .color(0xA2A27F)
+                .iconSet(DULL)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(LowPurityRareEarthChloridesSolution, 4, AquaRegia, 2)
+                .build();
+        //  25258 High Purity Rare Earth Chlorides Slurry
+        GTQTMaterials.HighPurityRareEarthChloridesSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("high_purity_rare_earth_chlorides_slurry"))
+                .dust()
+                .color(0x838367)
+                .iconSet(ROUGH)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(RareEarth, 1, Chlorine, 1, Water, 1)
+                .build();
+        //  25259 High Purity Rare Earth Chlorides Solution
+        GTQTMaterials.HighPurityRareEarthChloridesSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("high_purity_rare_earth_chlorides_solution"))
+                .fluid()
+                .color(0x838367)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(RareEarth, 1, Chlorine, 1, Water, 1)
+                .build();
+        //  25260 Low Purity Rare Earth Chlorides Slag
+        GTQTMaterials.LowPurityRareEarthChloridesSlag = new Material.Builder(getMaterialsId(), gtqtcoreId("low_purity_rare_earth_chlorides_slag"))
+                .dust()
+                .color(0x62624D)
+                .iconSet(DULL)
+                .build();
 
         GTQTMaterials.RareEarthChloridesSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_solution"))
                 .fluid()
                 .color(0x838367)
                 .flags(DISABLE_DECOMPOSITION)
                 .components(RareEarth, 1, Chlorine, 1, Water, 1)
+                .build();
+
+        //  24164 Rare Earth Chlorides Enriched Solution
+        RareEarthChloridesEnrichedSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_enriched_solution"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 20)
+                .iconSet(DULL)
+                .build();
+
+        //  24165 Rare Earth Chlorides Diluted Solution
+        RareEarthChloridesDilutedSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_diluted_solution"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 40)
+                .iconSet(DULL)
+                .build();
+
+        //  24163 Rare Earth Chlorides Concentrate
+        RareEarthChloridesConcentrate = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_concentrate"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 10)
+                .iconSet(DULL)
+                .build();
+
+        //  24166 Chlorinated Rare Earth Waste Fluid
+        ChlorinatedRareEarthWasteFluid = new Material.Builder(getMaterialsId(), gtqtcoreId("chlorinated_rare_earth_waste_fluid"))
+                .liquid()
+                .color(RareEarthChloridesSolution.getMaterialRGB() - 80)
+                .iconSet(DULL)
                 .build();
 
         GTQTMaterials.LeachedTurpentine = new Material.Builder(getMaterialsId(), gtqtcoreId("leached_turpentine"))
@@ -210,5 +848,122 @@ public class UnknownCompositionMaterials {
                 .iconSet(CUSTOM_MHCSM)
                 .flags(NO_SMELTING, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR)
                 .build();
+
+
+        GTQTMaterials.DragonBreath = new Material.Builder(getMaterialsId(), gtqtcoreId("dragon_breath"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0x9400D3)
+                .build()
+                .setFormula("Dc?", false);
+
+        GTQTMaterials.ConcentrateDragonBreath = new Material.Builder(getMaterialsId(), gtqtcoreId("concentrate_dragon_breath"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0x9400D3)
+                .build()
+                .setFormula("Dc2?", true);
+
+
+        GTQTMaterials.DragonBlood = new Material.Builder(getMaterialsId(), gtqtcoreId("dragon_blood"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0xDC2814)
+                .iconSet(DULL)
+                .build()
+                .setFormula("*Dc*Rn?", true);
+
+        //
+        GTQTMaterials.SuperGlue = new Material.Builder(getMaterialsId(), gtqtcoreId("super_glue"))
+                .fluid()
+                .color(0xFAFAD2)
+                .build();
+
+        GTQTMaterials.UltraGlue = new Material.Builder(getMaterialsId(), gtqtcoreId("ultra_glue"))
+                .fluid()
+                .color(0xB2DFEE)
+                .build();
+
+        GTQTMaterials.BacterialGrowthMedium = new Material.Builder(getMaterialsId(), gtqtcoreId("bacterial_growth_medium"))
+                .liquid()
+                .color(0x0b2e12)
+                .build()
+                .setFormula("For Bacteria", true);
+
+        GTQTMaterials.DepletedGrowthMedium = new Material.Builder(getMaterialsId(), gtqtcoreId("depleted_growth_medium"))
+                .liquid()
+                .color(0x071209)
+                .build()
+                .setFormula("Depleted", true);
+
+        GTQTMaterials.Shewanella = new Material.Builder(getMaterialsId(), gtqtcoreId("shewanella"))
+                .dust()
+                .color(0x8752ab)
+                .iconSet(METALLIC)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.BrevibacteriumFlavium = new Material.Builder(getMaterialsId(), gtqtcoreId("brevibacterium_flavium"))
+                .dust()
+                .color(0x2c4d24)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.BifidobacteriumBreve = new Material.Builder(getMaterialsId(), gtqtcoreId("bifidobacterium_breve"))
+                .dust()
+                .color(0x377528)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.EschericiaColi = new Material.Builder(getMaterialsId(), gtqtcoreId("eschericia_coli"))
+                .dust()
+                .color(0x2d4228)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.CupriavidusNecator = new Material.Builder(getMaterialsId(), gtqtcoreId("cupriavidus_necator"))
+                .dust()
+                .color(0x22704f)
+                .iconSet(ROUGH)
+                .build()
+                .setFormula("Bacteria", true);
+
+        GTQTMaterials.SelectivelyMutatedCupriavidiusNecator = new Material.Builder(getMaterialsId(), gtqtcoreId("selectively_mutated_cupriavidius_necator"))
+                .dust()
+                .iconSet(SHINY)
+                .color(0xe04800)
+                .build()
+                .setFormula("Bacteria", true);
+
+
+        GTQTMaterials.Gluons = new Material.Builder(getMaterialsId(), gtqtcoreId("gluons"))
+                .fluid()
+                .color(0xffffff)
+                .build();
+
+        GTQTMaterials.LightQuarks = new Material.Builder(getMaterialsId(), gtqtcoreId("light_quarks"))
+                .fluid()
+                .color(0x59ff7d)
+                .build();
+
+        GTQTMaterials.HeavyQuarks = new Material.Builder(getMaterialsId(), gtqtcoreId("heavy_quarks"))
+                .fluid()
+                .color(0x4a080b)
+                .build();
+
+        //  15012 Heavy Quark Degenerate Matter
+        GTQTMaterials.HeavyQuarkDegenerateMatter = new Material.Builder(getMaterialsId(), gtqtcoreId("heavy_quark_degenerate_matter"))
+                .ingot()
+                .liquid(new FluidBuilder().temperature((int) (V[UV] + V[HV] * V[HV])))
+                .plasma(new FluidBuilder().temperature((int) (V[UV] * V[HV])))
+                .color(0x5DBD3A)
+                .iconSet(BRIGHT)
+                .blast(b -> b
+                        .temp(14960, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UIV]))
+                .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_BOLT_SCREW)
+                .cableProperties(V[UXV], 576, 1024, false)
+                .build()
+                .setFormula(TextFormatting.OBFUSCATED + "aaaaaa", false);
     }
 }

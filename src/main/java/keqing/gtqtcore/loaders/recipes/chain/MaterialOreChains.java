@@ -380,42 +380,5 @@ public class MaterialOreChains {
                 .output(gemExquisite, PotassiumHexafluorohafnate)
                 .output(gemExquisite, PotassiumHexafluorozirconate)
                 .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(140)
-                .EUt(VA[MV])
-                .input(dust, Zirconium)
-                .fluidInputs(Chlorine.getFluid(4000))
-                .fluidOutputs(ZirconiumTetrachloride.getFluid(1000))
-                .buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(140)
-                .EUt(VA[MV])
-                .input(dust, Hafnium)
-                .fluidInputs(Chlorine.getFluid(4000))
-                .fluidOutputs(HafniumTetrachloride.getFluid(1000))
-                .buildAndRegister();
-
-        BLAST_RECIPES.recipeBuilder()
-                .duration(1840)
-                .EUt(VA[MV])
-                .blastFurnaceTemp(3200)
-                .input(dust, Magnesium, 2)
-                .fluidInputs(ZirconiumTetrachloride.getFluid(1000))
-                .output(ingotHot, Zirconium)
-                .output(dust, MagnesiumChloride, 6)
-                .buildAndRegister();
-
-        BLAST_RECIPES.recipeBuilder()
-                .duration(1840)
-                .EUt(VA[MV])
-                .blastFurnaceTemp(3200)
-                .input(dust, Magnesium, 2)
-                .fluidInputs(HafniumTetrachloride.getFluid(1000))
-                .output(dust, Hafnium)
-                .output(dust, MagnesiumChloride, 6)
-                .buildAndRegister();
-
     }
 }

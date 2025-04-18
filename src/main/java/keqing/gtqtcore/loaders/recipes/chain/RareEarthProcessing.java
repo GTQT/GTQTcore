@@ -22,7 +22,6 @@ public class RareEarthProcessing {
         EP();
         bastnasite();
         monazite();
-        HafniumZirconium();
         Cerium();
         Oxalate();
         SodiumFluorosilicate();
@@ -531,7 +530,7 @@ public class RareEarthProcessing {
                 .fluidInputs(Water.getFluid(90000))
                 .input(dust,Saltpeter,9)
                 .fluidOutputs(DiluteMonaziteRareEarthMud.getFluid(99000))
-                .output(dust, HafniumOxideZirconiumOxideMixture,4)
+                .output(dust, Zircon,4)
                 .output(dust,Thorianite,9)
                 .output(dust,Monazite,2)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
@@ -626,41 +625,6 @@ public class RareEarthProcessing {
                 .input(dust, SamariumEssence)
                 .output(dust,SamariumOxide)
                 .output(dust,GadoliniumOxide)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-    }
-    private static void HafniumZirconium() {
-        CENTRIFUGE_RECIPES.recipeBuilder()
-                .input(dust, HafniumOxideZirconiumOxideMixture,1)
-                .output(dust, HafniumOxide,3)
-                .output(dust,CubicZirconia,1)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(HydrofluoricAcid.getFluid(4000))
-                .input(dust, HafniumOxide,3)
-                .fluidOutputs(HafniumZirconiumTetrachloride.getFluid(4000))
-                .fluidOutputs(Water.getFluid(2000))
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        BLAST_RECIPES.recipeBuilder()
-                .fluidInputs(HafniumZirconiumTetrachloride.getFluid(1000))
-                .input(dust,Magnesium,4)
-                .output(dust, LowPurityHafniumZirconiumResidue,1)
-                .output(dust,MagnesiumChloride,12)
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(Iodine.getFluid(5000))
-                .input(dust, LowPurityHafniumZirconiumResidue,1)
-                .fluidOutputs(LowPurityHafniumZirconiumIodideMixture.getFluid(5000))
-                .duration(600).EUt(VA[EV]).buildAndRegister();
-
-        BLAST_RECIPES.recipeBuilder()
-                .fluidInputs(LowPurityHafniumZirconiumIodideMixture.getFluid(10000))
-                .output(dust,Hafnium,1)
-                .output(dust,Zirconium,1)
-                .fluidOutputs(Iodine.getFluid(10000))
-                .blastFurnaceTemp(3500)
                 .duration(600).EUt(VA[EV]).buildAndRegister();
     }
     private static void Cerium() {

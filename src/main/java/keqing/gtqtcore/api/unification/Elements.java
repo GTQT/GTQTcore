@@ -42,8 +42,8 @@ public class Elements {
     public static final Element Magic = gregtech.api.unification.Elements.add(999, 999, -1, null, "Magic", "Kq", false);
     public static final Element So = gregtech.api.unification.Elements.add(159, 278, -1, null, "Solarium", "So", false);
     public static final Element En = gregtech.api.unification.Elements.add(100000, 100000, -1, null, "Eternity", "En⦼", false);
-    public static final Element St = gregtech.api.unification.Elements.add(10000, 10000, -1, null, "Spacetime", "-*St*-", false);
-    public static final Element p = gregtech.api.unification.Elements.add(1, 0, -1, null, "protons", "-*p*-", false);
-    public static final Element n = gregtech.api.unification.Elements.add(0, 1, -1, null, "neutrons", "-*n*-", false);
+    public static final Element St = gregtech.api.unification.Elements.add(10000, 10000, -1, null, "Spacetime", "*St*", false);
+    public static final Element p = gregtech.api.unification.Elements.add(1, 0, -1, null, "Protons", "*p*", false);
+    public static final Element n = gregtech.api.unification.Elements.add(0, 1, -1, null, "Neutrons", "*n*", false);
 
 }

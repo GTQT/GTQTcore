@@ -216,17 +216,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ACRYLIC_YARN = addItem(156, "acrylic_yarn").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
 
         FIND_ORE_STICK = addItem(159, "find_ore_stick").addComponents(new FindOreStickBehavior()).setMaxStackSize(1).setCreativeTabs(GTQTCore_TO);
-
-        // Spray Cans: ID 60-77
-        ENDLESS_SPRAY_EMPTY = addItem(161, "endless_spray.empty");
-
-        // out of registry order so it can reference the Empty Spray Can
-        ENDLESS_SPRAY_SOLVENT = addItem(160, "endless_spray.solvent").setMaxStackSize(1).addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, -1)).setCreativeTabs(GTQTCore_TO);
-
-        for (int i = 0; i < EnumDyeColor.values().length; i++) {
-            ENDLESS_SPRAY_CAN_DYES[i] = addItem(162 + i, "endless_spray.can.dyes." + EnumDyeColor.values()[i].getName()).setMaxStackSize(1).addComponents(new ColorSprayBehaviour(ENDLESS_SPRAY_EMPTY.getStackForm(), Integer.MAX_VALUE, i)).setCreativeTabs(GTQTCore_TO);
-        }
-
         //ROCK
         POS_ORE_CARD = this.addItem(180, "pos_ore_card").setMaxStackSize(1).addComponents(new OreCheckerBehavior()).setCreativeTabs(GTQTCore_TAB);
         BLANK = addItem(181, "rock.blank").setMaxStackSize(64).setCreativeTabs(GTQTCore_TAB);

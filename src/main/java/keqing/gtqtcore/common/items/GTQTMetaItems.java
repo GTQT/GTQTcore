@@ -14,8 +14,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem 你物品的名字，记得全大写;
      */
     public static final List<MetaItem<?>> ITEMS = GTQTMetaItem1.getMetaItems();
-    public static final MetaItem<?>.MetaValueItem[] ENDLESS_SPRAY_CAN_DYES = new MetaItem.MetaValueItem[EnumDyeColor
-            .values().length];
     //  Extruders
     public static final MetaItem<?>.MetaValueItem[] EXOTIC_SHAPE_EXTRUDERS = new MetaItem.MetaValueItem[27];
     public static MetaItem<?>.MetaValueItem JIAO_XIAN_REN_ZHANG;
@@ -217,8 +215,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem SODIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem POTASSIUM_ETHYLXANTHATE;
     public static MetaItem<?>.MetaValueItem FIND_ORE_STICK;
-    public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_SOLVENT;
-    public static MetaItem<?>.MetaValueItem ENDLESS_SPRAY_EMPTY;
     public static MetaItem<?>.MetaValueItem ACRYLIC_YARN;
     public static MetaItem<?>.MetaValueItem HEAVY_METAL_ABSORBING_YARN;
     public static MetaItem<?>.MetaValueItem URANIUM_SATURATED_YARN;

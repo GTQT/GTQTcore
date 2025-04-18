@@ -8,7 +8,7 @@ import gregtech.api.unification.material.properties.BlastProperty;
 import gregtech.api.unification.material.properties.MaterialToolProperty;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
-import static gregtech.api.GTValues.UV;
+import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
@@ -322,11 +322,6 @@ public class HigherDegreeMaterials {
                 .build();
 */
 
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
-        getMaterialsId();
         //高级矿物
         Prismarine = new Material.Builder(getMaterialsId(), gtqtcoreId("prismarine"))
                 .gem(1)
@@ -552,34 +547,6 @@ public class HigherDegreeMaterials {
                 .color(LutetiumOxide.getMaterialRGB())
                 .build();
 
-        //  24163 Rare Earth Chlorides Concentrate
-        RareEarthChloridesConcentrate = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_concentrate"))
-                .liquid()
-                .color(RareEarthChloridesSolution.getMaterialRGB() - 10)
-                .iconSet(DULL)
-                .build();
-
-        //  24164 Rare Earth Chlorides Enriched Solution
-        RareEarthChloridesEnrichedSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_enriched_solution"))
-                .liquid()
-                .color(RareEarthChloridesSolution.getMaterialRGB() - 20)
-                .iconSet(DULL)
-                .build();
-
-        //  24165 Rare Earth Chlorides Diluted Solution
-        RareEarthChloridesDilutedSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("rare_earth_chlorides_diluted_solution"))
-                .liquid()
-                .color(RareEarthChloridesSolution.getMaterialRGB() - 40)
-                .iconSet(DULL)
-                .build();
-
-        //  24166 Chlorinated Rare Earth Waste Fluid
-        ChlorinatedRareEarthWasteFluid = new Material.Builder(getMaterialsId(), gtqtcoreId("chlorinated_rare_earth_waste_fluid"))
-                .liquid()
-                .color(RareEarthChloridesSolution.getMaterialRGB() - 80)
-                .iconSet(DULL)
-                .build();
-
         MysteriousCrystal = new Material.Builder(getMaterialsId(), gtqtcoreId("mysterious_crystal"))
                 .gem()
                 .ore(2, 2)
@@ -617,7 +584,7 @@ public class HigherDegreeMaterials {
                 .iconSet(DULL)
                 .build();
 
-        GTQTMaterials.ZincRichSphalerite = new Material.Builder(9001, gtqtcoreId("zinc_rich_sphalerite"))
+        GTQTMaterials.ZincRichSphalerite = new Material.Builder(getMaterialsId(), gtqtcoreId("zinc_rich_sphalerite"))
                 .dust()
                 .color(0xC3AC8F)
                 .iconSet(MaterialIconSet.METALLIC)
@@ -625,5 +592,32 @@ public class HigherDegreeMaterials {
                 .components(Zinc, 2, RoastedSphalerite, 3)
                 .build()
                 .setFormula("Zn2(GaGeO2)", true);
+
+
+        GTQTMaterials.PedotPSS = new Material.Builder(getMaterialsId(), gtqtcoreId("pedot_pss"))
+                .ingot().fluid()
+                .color(0xE165A7)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_FINE_WIRE)
+                .components(GTQTMaterials.Edot, 1, GTQTMaterials.PolystyreneSulfonate, 1)
+                .cableProperties(V[UHV], 24, 0, true)
+                .build();
+
+        GTQTMaterials.PedotTMA = new Material.Builder(getMaterialsId(), gtqtcoreId("pedot_tma"))
+                .ingot().fluid()
+                .color(0x5E9EE1)
+                .flags(DISABLE_DECOMPOSITION, GENERATE_ROUND, GENERATE_FINE_WIRE, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
+                .components(GTQTMaterials.Edot, 1, GTQTMaterials.PMMA, 2)
+                .cableProperties(V[UEV], 8, 6)
+                .build();
+
+        GTQTMaterials.CarbonNanotube = new Material.Builder(getMaterialsId(), gtqtcoreId("carbon_nanotube"))
+                .ingot().fluid()
+                .color(0x05090C)
+                .iconSet(MaterialIconSet.BRIGHT)
+                .cableProperties(V[UEV], 8, 6, false)
+                .flags(DISABLE_DECOMPOSITION, NO_WORKING, NO_SMASHING, NO_SMELTING, GENERATE_ROUND, GENERATE_FINE_WIRE, GENERATE_FRAME, GENERATE_ROTOR, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_PLATE, GENERATE_SPRING_SMALL, GENERATE_SPRING, GENERATE_RING)
+                .components(Carbon, 48)
+                .build()
+                .setFormula("CNT", false);
     }
 }

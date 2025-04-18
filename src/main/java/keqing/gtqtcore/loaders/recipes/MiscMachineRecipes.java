@@ -170,22 +170,5 @@ public class MiscMachineRecipes {
                 .EUt(120)
                 .duration(900)
                 .buildAndRegister();
-
-        for (int i = 0; i < Materials.CHEMICAL_DYES.length; i++) {
-            CANNER_RECIPES.recipeBuilder()
-                    .inputs(ENDLESS_SPRAY_EMPTY.getStackForm())
-                    .fluidInputs(Materials.CHEMICAL_DYES[i].getFluid(GTValues.L * 4))
-                    .outputs(ENDLESS_SPRAY_CAN_DYES[i].getStackForm())
-                    .EUt(VA[ULV]).duration(200)
-                    .buildAndRegister();
-
-        }
-        CANNER_RECIPES.recipeBuilder()
-                .input(ENDLESS_SPRAY_EMPTY)
-                .fluidInputs(Acetone.getFluid(1000))
-                .output(ENDLESS_SPRAY_SOLVENT)
-                .EUt(VA[ULV]).duration(200)
-                .buildAndRegister();
-
     }
 }
