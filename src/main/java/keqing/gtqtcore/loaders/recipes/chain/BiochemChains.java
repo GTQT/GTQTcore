@@ -1,6 +1,11 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
+import gregtech.api.unification.material.Material;
+import gregtech.api.unification.material.Materials;
+import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
 import static gregtechfoodoption.GTFOMaterialHandler.PerchloricAcid;
 import static gregtech.api.GTValues.*;
@@ -91,22 +96,48 @@ public class BiochemChains {
                 .circuitMeta(3)
                 .buildAndRegister();
 
-        PR_MIX.recipeBuilder()
-                .duration(1200)
-                .input(STICKY_RESIN,20)
-                .input(dust,Salt,10)
-                .fluidInputs(Water.getFluid(4000))
-                .fluidOutputs(Latex.getFluid(2000))
-                .buildAndRegister();
+        for(int i=0;i<=1;i++) {
+            Material salt;
+            if(i==0) salt=Materials.Salt;
+            else salt=Materials.RockSalt;
 
-        PR_MIX.recipeBuilder()
-                .duration(1200)
-                .input(STICKY_RESIN,20)
-                .input(dust,RockSalt,10)
-                .fluidInputs(Water.getFluid(4000))
-                .fluidOutputs(Latex.getFluid(2000))
-                .buildAndRegister();
+            PR_MIX.recipeBuilder()
+                    .input(dust,salt,10)
+                    .inputs(STICKY_RESIN.getStackForm(20))
+                    .fluidInputs(Water.getFluid(4000))
+                    .fluidOutputs(Latex.getFluid(2000))
+                    .duration(150).EUt(2)
+                    .buildAndRegister();
 
+            PR_MIX.recipeBuilder().duration(300)
+                    .input(dust,salt,2)
+                    .inputs(new ItemStack(MetaBlocks.RUBBER_LEAVES, 8))
+                    .fluidInputs(Water.getFluid(1600))
+                    .fluidOutputs(Latex.getFluid(400))
+                    .buildAndRegister();
+
+            PR_MIX.recipeBuilder().duration(300)
+                    .input(dust,salt,5)
+                    .inputs(new ItemStack(MetaBlocks.RUBBER_LOG))
+                    .fluidInputs(Water.getFluid(2000))
+                    .fluidOutputs(Latex.getFluid(1000))
+                    .buildAndRegister();
+
+            PR_MIX.recipeBuilder().duration(300)
+                    .input(dust,salt,5)
+                    .inputs(new ItemStack(MetaBlocks.RUBBER_SAPLING))
+                    .fluidInputs(Water.getFluid(2000))
+                    .fluidOutputs(Latex.getFluid(1000))
+                    .output(dust, RawRubber)
+                    .buildAndRegister();
+
+            PR_MIX.recipeBuilder().duration(150)
+                    .input(dust,salt,20)
+                    .inputs(new ItemStack(Items.SLIME_BALL))
+                    .fluidInputs(Water.getFluid(4000))
+                    .fluidOutputs(Latex.getFluid(2000))
+                    .buildAndRegister();
+        }
 
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Mercury.getFluid(1000))

@@ -33,22 +33,6 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, OreDictUnifier.get(stick, Steel, 1), OreDictUnifier.get(ring, Steel, 2));
         // 铁矿车车轮 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, OreDictUnifier.get(stick, Iron, 1), OreDictUnifier.get(ring, Iron, 2));
-        // 白铜线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Cupronickel, 8), OreDictUnifier.get(foil, Bronze, 8)}, new FluidStack[]{TinAlloy.getFluid(144)});
-        // 坎塔尔合金线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Kanthal, 8), OreDictUnifier.get(foil, Aluminium, 8)}, new FluidStack[]{Copper.getFluid(144)});
-        // 镍铬合金线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Nichrome, 8), OreDictUnifier.get(foil, StainlessSteel, 8)}, new FluidStack[]{Aluminium.getFluid(144)});
-        // 钌钨钼合金线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, RTMAlloy, 8), OreDictUnifier.get(foil, VanadiumSteel, 8)}, new FluidStack[]{Nichrome.getFluid(144)});
-        // 高速钢-G线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, HSSG, 8), OreDictUnifier.get(foil, TungstenCarbide, 8)}, new FluidStack[]{Tungsten.getFluid(144)});
-        // 硅岩线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Naquadah, 8), OreDictUnifier.get(foil, Osmium, 8)}, new FluidStack[]{TungstenSteel.getFluid(144)});
-        // 凯金线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Trinium, 8), OreDictUnifier.get(foil, NaquadahEnriched, 8)}, new FluidStack[]{Naquadah.getFluid(144)});
-        // 三钛合金线圈方块 * 1
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(wireGtDouble, Tritanium, 8), OreDictUnifier.get(foil, Naquadria, 8)}, new FluidStack[]{Trinium.getFluid(144)});
 
         // 酚醛树脂电路基板 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{OreDictUnifier.get(dust, Wood), IntCircuitIngredient.getIntegratedCircuit(1)}, new FluidStack[]{Glue.getFluid(50)});
@@ -72,16 +56,6 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.FIBER_BOARD.getStackForm(2), OreDictUnifier.get(foil, Palladium, 8)}, new FluidStack[]{SulfuricAcid.getFluid(500)});
         // 硫酸 * 1000
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{OreDictUnifier.get(dust, Sulfur, 4), IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Water.getFluid(4000)});
-
-
-        // HPIC晶圆 * 1
-        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 2)}, new FluidStack[]{VanadiumGallium.getFluid(288)});
-        // UHPIC晶圆 * 1
-        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 8)}, new FluidStack[]{Naquadah.getFluid(576)});
-        // HPIC晶圆 * 1
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 2)}, new FluidStack[]{VanadiumGallium.getFluid(288)});
-        // UHPIC晶圆 * 1
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.HIGH_POWER_INTEGRATED_CIRCUIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 8)}, new FluidStack[]{Naquadah.getFluid(576)});
 
         // 聚变线圈方块 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaItems.FIELD_GENERATOR_IV.getStackForm(2), MetaItems.ELECTRIC_PUMP_IV.getStackForm(), MetaItems.NEUTRON_REFLECTOR.getStackForm(2), OreDictUnifier.get(circuit, LuV, 4), OreDictUnifier.get(pipeSmallFluid, Naquadah, 4), OreDictUnifier.get(plate, Europium, 4)}, new FluidStack[]{VanadiumGallium.getFluid(576)});
@@ -109,21 +83,8 @@ public class removeRecipes {
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL), OreDictUnifier.get(circuit, UV, 4), OreDictUnifier.get(plateDouble, Naquadria), OreDictUnifier.get(plateDouble, Europium), MetaItems.FIELD_GENERATOR_LuV.getStackForm(2), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(32), OreDictUnifier.get(wireGtSingle, UraniumRhodiumDinaquadide, 32)}, new FluidStack[]{SolderingAlloy.getFluid(1152), VanadiumGallium.getFluid(1152)});
         // 核聚变反应堆控制电脑MK-III * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_COIL), OreDictUnifier.get(circuit, UHV, 4), MetaItems.QUANTUM_STAR.getStackForm(), OreDictUnifier.get(plateDouble, Americium), MetaItems.FIELD_GENERATOR_ZPM.getStackForm(2), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64), MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(64), OreDictUnifier.get(wireGtSingle, EnrichedNaquadahTriniumEuropiumDuranide, 32)}, new FluidStack[]{SolderingAlloy.getFluid(1152), YttriumBariumCuprate.getFluid(1152)});
-
-
         // 数据库 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLY_LINE_RECIPES, new ItemStack[]{MetaBlocks.COMPUTER_CASING.getItemVariant(BlockComputerCasing.CasingType.COMPUTER_CASING), OreDictUnifier.get(circuit, LuV, 8), MetaItems.TOOL_DATA_ORB.getStackForm(), OreDictUnifier.get(wireFine, Cobalt, 64), OreDictUnifier.get(wireFine, Copper, 64), new ItemStack(OPTICAL_PIPES[0], 4), OreDictUnifier.get(wireGtDouble, IndiumTinBariumTitaniumCuprate, 16)}, new FluidStack[]{SolderingAlloy.getFluid(288), Lubricant.getFluid(500)});
-
-        // 纳米CPU晶圆 * 1
-        // 量子位CPU晶圆 * 1
-        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), MetaItems.CARBON_FIBERS.getStackForm(16)}, new FluidStack[]{Glowstone.getFluid(576)});
-        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), MetaItems.QUANTUM_EYE.getStackForm(2)}, new FluidStack[]{GalliumArsenide.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 1)}, new FluidStack[]{Radon.getFluid(50)});
-
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), MetaItems.CARBON_FIBERS.getStackForm(16)}, new FluidStack[]{Glowstone.getFluid(576)});
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), MetaItems.QUANTUM_EYE.getStackForm(2)}, new FluidStack[]{GalliumArsenide.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(1), OreDictUnifier.get(dust, IndiumGalliumPhosphide, 1)}, new FluidStack[]{Radon.getFluid(50)});
-
         //晶体芯片原料
         GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite, Olivine, 1)}, new FluidStack[]{Europium.getFluid(16)});
         GTRecipeHandler.removeRecipesByInputs(AUTOCLAVE_RECIPES, new ItemStack[]{OreDictUnifier.get(gemExquisite, Emerald, 1)}, new FluidStack[]{Europium.getFluid(16)});
@@ -143,36 +104,11 @@ public class removeRecipes {
         // 晶体CPU * 1
         GTRecipeHandler.removeRecipesByInputs(LASER_ENGRAVER_RECIPES, MetaItems.ENGRAVED_CRYSTAL_CHIP.getStackForm(), OreDictUnifier.get(craftingLens, MarkerMaterials.Color.Lime, 1));
 
-
-        MetaItem.MetaValueItem[] wafer = {SILICON_WAFER, PHOSPHORUS_WAFER, NAQUADAH_WAFER, NEUTRONIUM_WAFER};
-
-        for (MetaItem.MetaValueItem item : wafer)
-            for (MarkerMaterial color : VALUES)
-                GTRecipeHandler.removeRecipesByInputs(LASER_ENGRAVER_RECIPES, item.getStackForm(), OreDictUnifier.get(craftingLens, color, 1));
-
-
         // 有源变压器 * 1
         GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{POWER_TRANSFORMER[6].getStackForm(), OreDictUnifier.get(circuit, LuV, 2), OreDictUnifier.get(wireGtSingle, IndiumTinBariumTitaniumCuprate, 8), ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT.getStackForm(2)}, new FluidStack[]{PCBCoolant.getFluid(1000)});
 
         // 四氯化硅 * 1000
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{OreDictUnifier.get(dust, Silicon, 1), IntCircuitIngredient.getIntegratedCircuit(1)}, new FluidStack[]{Chlorine.getFluid(4000)});
-
-
-        //机器外壳 * 1
-        // §bMV§r机器外壳 * 1
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV), OreDictUnifier.get(cableGtSingle, RedAlloy, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV), OreDictUnifier.get(cableGtSingle, Tin, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV), OreDictUnifier.get(cableGtSingle, AnnealedCopper, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV), OreDictUnifier.get(cableGtSingle, Copper, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV), OreDictUnifier.get(cableGtSingle, Gold, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV), OreDictUnifier.get(cableGtSingle, Aluminium, 2)}, new FluidStack[]{Polyethylene.getFluid(288)});
-
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.IV), OreDictUnifier.get(cableGtSingle, Platinum, 2)}, new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LuV), OreDictUnifier.get(cableGtSingle, NiobiumTitanium, 2)}, new FluidStack[]{Polytetrafluoroethylene.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ZPM), OreDictUnifier.get(cableGtSingle, VanadiumGallium, 2)}, new FluidStack[]{Polybenzimidazole.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UV), OreDictUnifier.get(cableGtSingle, YttriumBariumCuprate, 2)}, new FluidStack[]{Polybenzimidazole.getFluid(288)});
-        GTRecipeHandler.removeRecipesByInputs(ASSEMBLER_RECIPES, new ItemStack[]{MetaBlocks.MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.UHV), OreDictUnifier.get(cableGtSingle, Europium, 2)}, new FluidStack[]{Polybenzimidazole.getFluid(288)});
 
         ModHandler.removeRecipeByName("gregtech:vacuum_tube");
 

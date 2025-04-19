@@ -23,7 +23,6 @@ import keqing.gtqtcore.loaders.recipes.chain.MethylamineChain;
 import keqing.gtqtcore.loaders.recipes.chain.NanotubesChain;
 import keqing.gtqtcore.loaders.recipes.circuits.*;
 import keqing.gtqtcore.loaders.recipes.component.ComponentRecipes;
-import keqing.gtqtcore.loaders.recipes.component.GTComponentsRemove;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 
 public class GTQTRecipesManager {
@@ -54,6 +53,7 @@ public class GTQTRecipesManager {
         StrontiumRadiumChain.init();
         AlgaeChain.init();
         FluidizedBedChain.init();
+        FuelChain.init();
         AcidReactorRecipes.init();
         AntimatterGenerator.init();
         PPBChain.init();
@@ -142,7 +142,6 @@ public class GTQTRecipesManager {
         PEEKChain.init();
         Electrolyzer.init();
         CPULine.init();
-        GTComponentsRemove.init();
         SwarmRecipeHandler.runRecipeGeneration();
         SwarmRecipeHandler.runRecipeBreeding();
         CircuitryMaterialChains.init();

@@ -30,19 +30,6 @@ public class ChipHelper {
         cutter(96,EUROPIUM_BOULE,EUROPIUM_WAFER,5,CleanroomType.CLEANROOM);
         cutter(128,AMERICIUM_BOULE,AMERICIUM_WAFER,6,CleanroomType.CLEANROOM);
         cutter(160,DUBNIUM_BOULE,DUBNIUM_WAFER,7,CleanroomType.CLEANROOM);
-        //接中子素
-        //  Delete Neutronium Boule -> Wafer recipes
-        GTRecipeHandler.removeRecipesByInputs(CUTTER_RECIPES,
-                new ItemStack[]{NEUTRONIUM_BOULE.getStackForm()},
-                new FluidStack[]{Water.getFluid(1000)});
-
-        GTRecipeHandler.removeRecipesByInputs(CUTTER_RECIPES,
-                new ItemStack[]{NEUTRONIUM_BOULE.getStackForm()},
-                new FluidStack[]{DistilledWater.getFluid(750)});
-
-        GTRecipeHandler.removeRecipesByInputs(CUTTER_RECIPES,
-                new ItemStack[]{NEUTRONIUM_BOULE.getStackForm()},
-                new FluidStack[]{Lubricant.getFluid(250)});
         cutter(192,NEUTRONIUM_BOULE,NEUTRONIUM_WAFER,8,CleanroomType.STERILE_CLEANROOM);
     }
 

@@ -20,6 +20,9 @@ import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
 import keqing.gtqtcore.core.advancement.AdvancementManager;
 import keqing.gtqtcore.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.integration.GTQTIntegration;
+import keqing.gtqtcore.loaders.MaterialInfoLoader;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
@@ -86,7 +89,10 @@ public class GTQTCore {
     public void init(FMLInitializationEvent event) {
         proxy.init();
     }
-
+    @SubscribeEvent
+    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+        MaterialInfoLoader.loader();
+    }
     @Mod.EventHandler
     public void construction(FMLConstructionEvent event) {
         proxy.construction();

@@ -54,7 +54,7 @@ public class MetaTileEntityHeatHatchExchange extends MetaTileEntityBaseWithContr
     private final ItemStackHandler containerInventory;
     // 定义流体栈
     private final FluidStack WATER = Water.getFluid(1);
-    private final FluidStack STEAM = Steam.getFluid(500);
+    private final FluidStack STEAM = Steam.getFluid(160);
     int select;
     int[] tempList = new int[]{300, 300, 300, 300, 300, 300, 300, 300};
     int[] exchangeRate = new int[]{1, 1, 1, 1, 1, 1, 1, 1};

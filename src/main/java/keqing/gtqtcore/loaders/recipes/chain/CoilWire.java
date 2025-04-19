@@ -51,36 +51,75 @@ public class CoilWire {
                 .fluidInputs(Materials.Tungsten.getFluid(GTValues.L))
                 .outputs(GTQTMetaBlocks.blockCoolingCoil.getItemVariant(GADOLINIUM_SILICON_GERMANIUM)).duration(600).buildAndRegister();
         //
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LV])
+                .input(OrePrefix.wireGtDouble, Materials.Cupronickel, 8)
+                .input(OrePrefix.foil, Materials.Bronze, 8).fluidInputs(Materials.TinAlloy.getFluid(GTValues.L))
+                .input(INSULATINGMICA,1)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.CUPRONICKEL))
+                .duration(200)
+                .buildAndRegister();
 
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LV]).input(OrePrefix.wireGtDouble, Materials.Cupronickel, 8)
-                .input(OrePrefix.foil, Materials.Bronze, 8).fluidInputs(Materials.TinAlloy.getFluid(GTValues.L)).input(INSULATINGMICA,1)
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.CUPRONICKEL)).duration(200).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[MV]).input(OrePrefix.wireGtDouble, Materials.Kanthal, 8)
-                .input(OrePrefix.foil, Materials.Aluminium, 8).fluidInputs(Materials.Copper.getFluid(GTValues.L)).input(INSULATINGMICA,2)
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.KANTHAL)).duration(300).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[HV]).input(OrePrefix.wireGtDouble, Materials.Nichrome, 8)
-                .input(OrePrefix.foil, Materials.StainlessSteel, 8).input(INSULATINGMICA,4)
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[MV])
+                .input(OrePrefix.wireGtDouble, Materials.Kanthal, 8)
+                .input(OrePrefix.foil, Materials.Aluminium, 8)
+                .fluidInputs(Materials.Copper.getFluid(GTValues.L))
+                .input(INSULATINGMICA,2)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.KANTHAL))
+                .duration(300)
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[HV])
+                .input(OrePrefix.wireGtDouble, Materials.Nichrome, 8)
+                .input(OrePrefix.foil, Materials.StainlessSteel, 8)
                 .fluidInputs(Materials.Aluminium.getFluid(GTValues.L))
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.NICHROME)).duration(400).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[EV]).input(OrePrefix.wireGtDouble, Materials.RTMAlloy, 8)
-                .input(OrePrefix.foil, Materials.VanadiumSteel, 8).fluidInputs(Materials.Nichrome.getFluid(GTValues.L)).input(INSULATINGMICA,6)
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.RTM_ALLOY)).duration(500).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[IV]).input(OrePrefix.wireGtDouble, Materials.HSSG, 8)
-                .input(OrePrefix.foil, Materials.TungstenCarbide, 8).input(INSULATINGMICA,8)
+                .input(INSULATINGMICA,4)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.NICHROME))
+                .duration(400)
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[EV])
+                .input(OrePrefix.wireGtDouble, Materials.RTMAlloy, 8)
+                .input(OrePrefix.foil, Materials.VanadiumSteel, 8)
+                .fluidInputs(Materials.Nichrome.getFluid(GTValues.L))
+                .input(INSULATINGMICA,8)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.RTM_ALLOY))
+                .duration(500)
+                .buildAndRegister();
+
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[IV])
+                .input(OrePrefix.wireGtDouble, Materials.HSSG, 8)
+                .input(OrePrefix.foil, Materials.TungstenCarbide, 8)
                 .fluidInputs(Materials.Tungsten.getFluid(GTValues.L))
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.HSS_G)).duration(600).buildAndRegister();
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV]).input(OrePrefix.wireGtDouble, Materials.Naquadah, 8)
-                .Tier(1).CWUt(CWT[LuV])
-                .input(OrePrefix.foil, Materials.Osmium, 8).fluidInputs(Materials.TungstenSteel.getFluid(GTValues.L)).input(INSULATINGMICA,16)
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.NAQUADAH)).duration(700).buildAndRegister();
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM]).input(OrePrefix.wireGtDouble, Materials.Trinium, 8)
-                .Tier(2).CWUt(CWT[ZPM])
-                .input(OrePrefix.foil, Materials.NaquadahEnriched, 8).input(INSULATINGMICA,32)
+                .input(INSULATINGMICA,16)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.HSS_G))
+                .duration(600)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV]).Tier(1).CWUt(CWT[IV])
+                .input(OrePrefix.wireGtDouble, Materials.Naquadah, 8)
+                .input(OrePrefix.foil, Materials.Osmium, 8)
+                .fluidInputs(Materials.TungstenSteel.getFluid(GTValues.L))
+                .input(INSULATINGMICA,32)
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.NAQUADAH))
+                .duration(700)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM]).Tier(2).CWUt(CWT[LuV])
+                .input(OrePrefix.wireGtDouble, Materials.Trinium, 8)
+                .input(OrePrefix.foil, Materials.NaquadahEnriched, 8)
+                .input(INSULATINGMICA,48)
                 .fluidInputs(Materials.Naquadah.getFluid(GTValues.L))
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRINIUM)).duration(800).buildAndRegister();
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV]).input(OrePrefix.wireGtDouble, Materials.Tritanium, 8)
-                .Tier(3).CWUt(CWT[UV])
-                .input(OrePrefix.foil, Materials.Naquadria, 8).fluidInputs(Materials.Trinium.getFluid(GTValues.L)).input(INSULATINGMICA,64)
-                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRITANIUM)).duration(900).buildAndRegister();
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRINIUM))
+                .duration(800)
+                .buildAndRegister();
+
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV]).Tier(3).CWUt(CWT[ZPM])
+                .input(OrePrefix.wireGtDouble, Materials.Tritanium, 8)
+                .input(OrePrefix.foil, Materials.Naquadria, 8)
+                .input(INSULATINGMICA,64)
+                .fluidInputs(Materials.Trinium.getFluid(GTValues.L))
+                .outputs(MetaBlocks.WIRE_COIL.getItemVariant(CoilType.TRITANIUM))
+                .duration(900)
+                .buildAndRegister();
     }
 }
