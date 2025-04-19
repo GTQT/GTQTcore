@@ -109,6 +109,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
 
     @Override
     protected void initializeAbilities() {
+        super.initializeAbilities();
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
         this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
         this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
