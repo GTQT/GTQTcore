@@ -26,9 +26,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,45 +41,50 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implements EnergyContainerHandler.IEnergyChangeListener, ITieredMetaTileEntity {
-    int tier;
     public IEnergyContainer energyContainer;
     public int Amperage;
     public int Voltage;
-    int[][] pos = {
-            {0, 0, 1} ,
-            {0, 0, -1} ,
-            {0, 1, 0} ,
-            {0, -1, 0} ,
-            {1, 0, 0} ,
-            {-1, 0, 0}
-    };
     public boolean active = false;
     public boolean source = true;
+    int tier;
+    int[][] pos = {
+            {0, 0, 1},
+            {0, 0, -1},
+            {0, 1, 0},
+            {0, -1, 0},
+            {1, 0, 0},
+            {-1, 0, 0}
+    };
+
+    public MetaTileEntityMicrowaveEnergyReceiver(ResourceLocation metaTileEntityId, int tier) {
+        super(metaTileEntityId);
+        this.tier = tier;
+        this.energyContainer = EnergyContainerHandler.receiverContainer(this, V[tier] * 16 * 20L, tier, 16);
+    }
+
     //接口暴露
-    public void setAmperageVoltage(int x,int y)
-    {
-        if (Voltage <tier&&x==1) {
+    public void setAmperageVoltage(int x, int y) {
+        if (Voltage < tier && x == 1) {
             Voltage++;
         }
 
-        if (Amperage < 16&&y==1) {
+        if (Amperage < 16 && y == 1) {
             Amperage++;
         }
 
-        if (Voltage >0&&x==-1) {
+        if (Voltage > 0 && x == -1) {
             Voltage--;
         }
 
-        if (Amperage >0&&y==-1) {
+        if (Amperage > 0 && y == -1) {
             Amperage--;
         }
     }
 
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("Amperage", Amperage);
         data.setInteger("Voltage", Voltage);
-        data.setBoolean("active",active);
+        data.setBoolean("active", active);
         return super.writeToNBT(data);
     }
 
@@ -89,25 +94,17 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
         Voltage = data.getInteger("Voltage");
         active = data.getBoolean("active");
     }
-    public MetaTileEntityMicrowaveEnergyReceiver(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId);
-        this.tier = tier;
-        this.energyContainer = EnergyContainerHandler.receiverContainer(this, V[tier]*16*20L ,tier, 16);
-    }
 
     public void update() {
         super.update();
         if (!active || Voltage <= 0 || Amperage <= 0) return;
 
-        int[][] pos = { {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1} };
-
-        for (int i = 0; i < 6; i++) {
-            BlockPos poss = this.getPos().add(pos[i][0], pos[i][1], pos[i][2]);
-            MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), poss);
-            if (mte != null) {
+        for (EnumFacing opposite : EnumFacing.values()) {
+            TileEntity tile = getNeighbor(opposite);
+            if (tile != null) {
                 for (EnumFacing facing : EnumFacing.VALUES) {
-                    if (mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
-                        IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
+                    if (tile.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
+                        IEnergyContainer container = tile.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
                         assert container != null;
                         transferEnergy(container);
                     }
@@ -126,9 +123,10 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             energyContainer.removeEnergy(transferAmount);
         }
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityMicrowaveEnergyReceiver(metaTileEntityId,tier);
+        return new MetaTileEntityMicrowaveEnergyReceiver(metaTileEntityId, tier);
     }
 
     @Override
@@ -147,7 +145,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             }
         }).setMaxLength(10).setNumbersOnly(0, tier));
         builder.widget(new ClickButtonWidget(149, 45, 20, 20, "+", data -> {
-            if (Voltage <tier) {
+            if (Voltage < tier) {
                 Voltage++;
             }
         }));
@@ -166,7 +164,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
             }
         }));
 
-        builder.dynamicLabel(7, 110, () -> "能量传输量: " + Amperage*V[Voltage]+" EU/tick", 0x232323);
+        builder.dynamicLabel(7, 110, () -> "能量传输量: " + Amperage * V[Voltage] + " EU/tick", 0x232323);
 
         builder.widget(new CycleButtonWidget(7, 139, 77, 20, () -> active, this::setActive,
                 "gregtech.creative.activity.off", "gregtech.creative.activity.on"));
@@ -176,12 +174,14 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
 
         return builder.build(getHolder(), entityPlayer);
     }
+
     public void setActive(boolean active) {
         this.active = active;
         if (!getWorld().isRemote) {
             writeCustomData(GregtechDataCodes.UPDATE_ACTIVE, buf -> buf.writeBoolean(active));
         }
     }
+
     public void setSource(boolean source) {
         this.source = source;
         if (source) {
@@ -205,6 +205,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
         Textures.ENERGY_OUT.renderSided(this.getFrontFacing(), renderState, translation, pipeline);
 
     }
+
     public ICubeRenderer getBaseTexture() {
         return Textures.VOLTAGE_CASINGS[this.tier];
     }
@@ -217,6 +218,7 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
     public int getTier() {
         return this.tier;
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {

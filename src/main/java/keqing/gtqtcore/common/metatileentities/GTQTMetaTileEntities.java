@@ -143,7 +143,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityProcessingArray LV_PROCESSING_ARRAY;
     public static MetaTileEntityProcessingArray MV_PROCESSING_ARRAY;
     public static MetaTileEntityProcessingArray HV_PROCESSING_ARRAY;
-    public static MetaTileEntityMachineHatch MACHINE_HATCH;
     public static MetaTileEntityDistillationTower DISTILLATION_TOWER;
     public static MetaTileEntityLargeRocketEngine LARGE_ROCKET_ENGIN;
     public static MetaTileEntityLargeRocketEngine EXTREME_LARGE_ROCKET_ENGIN;
@@ -976,7 +975,6 @@ public class GTQTMetaTileEntities {
         CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"), 4));
 
         GENERATOR_HATCH= registerMetaTileEntity(15584, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"),3));
-        MACHINE_HATCH = registerMetaTileEntity(15585, new MetaTileEntityMachineHatch(gtqtcoreId("hv_machine_hatch"), 3));
 
         STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15586, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
         ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15587, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));

@@ -2,6 +2,7 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
 import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.metatileentity.IMachineHatchMultiblock;
@@ -16,6 +17,9 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -35,17 +39,21 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.Tuple;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
+import static gregtech.api.recipes.logic.OverclockingLogic.standardOC;
+import static gregtech.api.recipes.logic.OverclockingLogic.subTickParallelOC;
 
 public class MetaTileEntityGeneratorArray extends FuelMultiblockController implements IMachineHatchMultiblock {
 
@@ -285,6 +293,10 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
             super(tileEntity);
         }
 
+        public long getMaximumOverclockVoltage() {
+            return machineVoltage*getParallelLimit();
+        }
+
         @Override
         public void invalidate() {
             super.invalidate();
@@ -302,11 +314,13 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
             machineVoltage = 0L;
             activeRecipeMap = null;
         }
-
         @Override
         protected boolean shouldSearchForRecipes() {
-
             return canWorkWithMachines() && super.shouldSearchForRecipes();
+        }
+        @Override
+        public boolean isAllowOverclocking() {
+            return true;
         }
 
         public boolean canWorkWithMachines() {
@@ -329,22 +343,18 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
                     Math.min(currentMachineStack.getCount(), getMachineLimit());
         }
 
-        protected boolean drawEnergy(int recipeEUt, boolean simulate) {
-            if (this.getEnergyStored() + recipeEUt <= this.getEnergyCapacity()) {
-                if (!simulate) {
-                    this.getEnergyContainer().addEnergy(machineVoltage * getParallelLimit());
-                }
-                return true;
-            } else {
-                return false;
-            }
+        protected long getMaxParallelVoltage() {
+            return machineVoltage*getParallelLimit();
         }
 
         @Override
         public RecipeMap<?> getRecipeMap() {
             return activeRecipeMap;
         }
-
+        @Override
+        protected Recipe findRecipe(long maxVoltage, IItemHandlerModifiable inputs, IMultipleTankHandler fluidInputs) {
+            return super.findRecipe(Math.min(super.getMaxVoltage(), this.machineVoltage), inputs, fluidInputs);
+        }
         public void findMachineStack() {
             RecipeMapMultiblockController controller = (RecipeMapMultiblockController) this.metaTileEntity;
 

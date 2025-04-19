@@ -157,7 +157,14 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         List<IReinforcedRotorHolder> abilities = getAbilities(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY);
         return abilities;
     }
-
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        for (IReinforcedRotorHolder holder : getRotorHolders())
+        {
+            holder.setCurrentSpeed(0);
+        }
+    }
     protected void setupRotors() {
         if (checkRotors()) return;
         for (int index = 0; index < inputInventory.getSlots(); index++) {

@@ -68,7 +68,11 @@ public abstract class MetaTileEntityLargeTurbine extends FuelMultiblockControlle
             return isStructureFormed() && getRotorHolder().isFrontFaceFree();
         return false;
     }
-
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        if(getRotorHolder()!=null)getRotorHolder().setCurrentSpeed(0);
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

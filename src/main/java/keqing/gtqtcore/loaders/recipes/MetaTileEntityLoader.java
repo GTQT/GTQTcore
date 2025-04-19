@@ -59,7 +59,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DISTILLATION_TOWER;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.GAS_COLLECTOR;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.MACHINE_HATCH;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PYROLYSE_OVEN;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
 import static net.minecraft.init.Blocks.FURNACE;
@@ -411,13 +410,6 @@ public class MetaTileEntityLoader {
                 'S', MetaItems.EMITTER_LuV,
                 'H', new UnificationEntry(OrePrefix.plate, Materials.HSSE),
                 'N', new UnificationEntry(OrePrefix.pipeLargeFluid, Materials.Naquadah));
-
-
-        ModHandler.addShapedRecipe(true, "_machine_access_interface", MACHINE_HATCH.getStackForm(),
-                "CHS",
-                'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.MV),
-                'H', MetaTileEntities.HULL[GTValues.MV].getStackForm(),
-                'S', MetaItems.SENSOR_MV.getStackForm());
 
         ModHandler.addShapedRecipe(true, "generator_access_interface", GENERATOR_HATCH.getStackForm(),
                 "CHS",
