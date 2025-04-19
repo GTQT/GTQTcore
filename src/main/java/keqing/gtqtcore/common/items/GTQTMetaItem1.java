@@ -958,17 +958,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HEAT_SHIELD_MKIV = this.addItem(1103, "heat_shield_mkiv").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKV = this.addItem(1104, "heat_shield_mkv").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
-        //流体单元1150
-        WOODEN_BUCKET = this.addItem(1150, "wooden_bucket").addComponents(new FilteredFluidStats(1000, Wood.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, false, false, false, true), new ItemFluidContainer());
-
-        FLUID_CELL_CHROME = this.addItem(1151, "large_fluid_cell.chrome").addComponents(new FilteredFluidStats(2_048_000, Chrome.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, false, false, true), new ItemFluidContainer()).setMaxStackSize(8);
-
-        FLUID_CELL_IRIDIUM = this.addItem(1152, "large_fluid_cell.iridium").addComponents(new FilteredFluidStats(8_192_000, Iridium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, false, true), new ItemFluidContainer()).setMaxStackSize(4);
-
-        FLUID_CELL_NAQUADAH_ALLOY = this.addItem(1153, "large_fluid_cell.naquadah_alloy").addComponents(new FilteredFluidStats(32_768_000, NaquadahAlloy.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, true, true), new ItemFluidContainer()).setMaxStackSize(2);
-
-        FLUID_CELL_NEUTRONIUM = this.addItem(1154, "large_fluid_cell.neutronium").addComponents(new FilteredFluidStats(131_072_000, Neutronium.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature(), true, true, true, true, true), new ItemFluidContainer()).setMaxStackSize(1);
-
         //纳米封装机器人 1200
         WRAP_NANO_SWARM_CARBON = this.addItem(1200, "wrap_nano_swarm.carbon").addComponents(new WrapSwarmBehavior(120, 1, Carbon)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         WRAP_NANO_SWARM_GOLD = this.addItem(1201, "wrap_nano_swarm.gold").addComponents(new WrapSwarmBehavior(240, 1, Gold)).setCreativeTabs(CommonProxy.GTQTCore_BIO);

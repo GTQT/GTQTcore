@@ -4613,12 +4613,6 @@ metaitem.model_location_mkiv.name=Local Distillation Model 256b
 metaitem.model_location_mkv.name=Local Distillation Model 512b
 metaitem.model_location_mkvi.name=Local Distillation Model 1024b
 
-metaitem.wooden_bucket.name=Wooden Bucket
-metaitem.large_fluid_cell.chrome.name=%s Chrome Cell
-metaitem.large_fluid_cell.iridium.name=%s Iridium Cell
-metaitem.large_fluid_cell.naquadah_alloy.name=%s Naquadah Alloy Cell
-metaitem.large_fluid_cell.neutronium.name=%s Neutronium Cell
-
 metaitem.sterilized.petri.dish.name=Sterilized Petri Dish
 metaitem.contaminated.petri.dish.name=Contaminated Petri Dish
 metaitem.electrically.wired.petri.dish.name=Electrically Wired Petri Dish
@@ -6020,10 +6014,8 @@ tile.multiblock_glass.uu_glass_block.name=Suppresses glass blocks
 tile.multiblock_glass.copy_glass_block.name=Particle suppression glass blocks
 tile.multiblock_glass.antimatter_containment_casing.name=Antimatter Containment Casing
 gtqtcore.material.polysilicon=Solar Grade Polycrystalline Silicon
-gtqtcore.material.copper_chloride=Copper Chloride
 gtqtcore.material.fluix=Fruicks
 gtqtcore.material.ealuminium=Aluminum Nitrate
-
 gtqtcore.material.len_gold_bs=Roasted Low-grade Gold Containing Impurities
 gtqtcore.material.len_gold_js=Immersed Sulfide Gold Solution
 gtqtcore.material.len_copper_js=Immersed Low-grade Copper Mixture

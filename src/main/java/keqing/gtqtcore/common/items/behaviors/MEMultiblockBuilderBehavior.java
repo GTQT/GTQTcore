@@ -27,7 +27,6 @@ import gregtech.api.metatileentity.registry.MBPattern;
 import gregtech.api.pattern.PatternError;
 import gregtech.api.util.GTUtility;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.integration.jei.multiblock.MultiblockInfoRecipeWrapper;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
