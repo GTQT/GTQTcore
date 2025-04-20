@@ -107,6 +107,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         ((MegaTurbineWorkableHandler) this.recipeMapWorkable).updateTanks();
     }
 
+    @Override
     public void invalidateStructure() {
         super.invalidateStructure();
         this.exportFluidHandler = null;
