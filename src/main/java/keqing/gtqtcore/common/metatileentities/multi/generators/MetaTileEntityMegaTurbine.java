@@ -1,4 +1,4 @@
-package keqing.gtqtcore.common.metatileentities.multi.generators;
+package keqing.gregtech.common.metatileentities.multi.generators;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -33,11 +33,11 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.items.behaviors.TurbineRotorBehavior;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
-import keqing.gtqtcore.api.capability.GTQTDataCode;
-import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.metaileentity.multiblock.ITurbineMode;
-import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
+import keqing.gregtech.api.capability.GTQTDataCode;
+import keqing.gregtech.api.capability.IReinforcedRotorHolder;
+import keqing.gregtech.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gregtech.api.metaileentity.multiblock.ITurbineMode;
+import keqing.gregtech.api.pattern.GTQTTraceabilityPredicate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -328,7 +328,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
 
     @Override
     public String[] getDescription() {
-        return new String[]{I18n.format("gtqtcore.machine.mega_turbine.description")};
+        return new String[]{I18n.format("gregtech.machine.mega_turbine.description")};
     }
 
     @Nonnull
@@ -337,7 +337,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         return new ImageCycleButtonWidget(x, y, width, height, GuiTextures.BUTTON_THROTTLE_PLUS,
                 2, this::getMode, this::setMode)
                 .shouldUseBaseBackground().singleTexture()
-                .setTooltipHoverString(i -> LocalizationUtils.format("gtqtcore.machine.mega_turbine.mode." + getMode()));
+                .setTooltipHoverString(i -> LocalizationUtils.format("gregtech.machine.mega_turbine.mode." + getMode()));
     }
 
     @Override

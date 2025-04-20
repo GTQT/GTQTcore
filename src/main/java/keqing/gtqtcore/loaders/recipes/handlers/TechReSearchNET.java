@@ -1758,7 +1758,7 @@ public class TechReSearchNET {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.blocksResearchSystem.getItemVariant(ADV_COMPUTER_CASING))
-                .input(GENERAL_CIRCUIT_UV, 16)
+                .input(CIRCUIT_GOOD_III, 16)
                 .input(circuit, Tier.UHV, 8)
                 .inputNBT(PHOTONIC_LATTICE_MEMORY, NBTMatcher.ANY, NBTCondition.ANY)
                 .input(frameGt, Tritanium, 16)

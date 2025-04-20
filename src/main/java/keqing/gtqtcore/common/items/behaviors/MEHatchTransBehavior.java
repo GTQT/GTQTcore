@@ -22,10 +22,8 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.registry.MTERegistry;
 import gregtech.common.metatileentities.MetaTileEntities;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityEnergyHatch;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityFluidHatch;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityItemBus;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
+import gregtech.common.metatileentities.multi.multiblockpart.*;
+import gtqt.common.metatileentities.multi.multiblockpart.MetaTileEntityDualHatch;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -38,7 +36,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.*;
@@ -49,6 +46,7 @@ import java.util.Objects;
 
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gtqt.common.metatileentities.GTQTMetaTileEntities.*;
 
 public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
     BlockPos AEpos;
@@ -56,19 +54,18 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
     boolean meModel;
     int targetTier;
     BlockPos targetPos;
-    private AENetworkProxy networkProxy;
-
     MetaTileEntity[] hatchTypes = {
             MetaTileEntities.MAINTENANCE_HATCH,
             MetaTileEntities.CONFIGURABLE_MAINTENANCE_HATCH,
             MetaTileEntities.AUTO_MAINTENANCE_HATCH,
             MetaTileEntities.CLEANING_MAINTENANCE_HATCH
     };
+    private AENetworkProxy networkProxy;
 
     public static void setTier(MetaTileEntity trans, EntityPlayer player, BlockPos pos) {
         int facing = 0;
 
-        player.sendMessage(new TextComponentString("正在尝试替换"+pos+"的目标为："+trans.getStackForm().getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
+        player.sendMessage(new TextComponentString("正在尝试替换" + pos + "的目标为：" + trans.getStackForm().getDisplayName()).setStyle(new Style().setColor(TextFormatting.GREEN)));
 
         TileEntity tileEntity = player.world.getTileEntity(pos);
         if (tileEntity instanceof IGregTechTileEntity igtte) {
@@ -142,9 +139,8 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
         iTextComponents.add(new TextComponentTranslation("仓室替换器"));
         iTextComponents.add(new TextComponentTranslation("目标等级" + targetTier));
         iTextComponents.add(new TextComponentTranslation("网络模式" + aeModel));
-        if(aeModel)
-        {
-            if(networkProxy!=null)iTextComponents.add(new TextComponentTranslation("网络："+ networkProxy));
+        if (aeModel) {
+            if (networkProxy != null) iTextComponents.add(new TextComponentTranslation("网络：" + networkProxy));
             else iTextComponents.add(new TextComponentTranslation("网络：未连接"));
         }
     }
@@ -169,7 +165,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
             if (securityTerminal.getProxy() != null) {
                 AEpos = pos;
                 networkProxy = securityTerminal.getProxy();
-                if (world.isRemote)player.sendMessage(new TextComponentString("成功绑定AE网络!"));
+                if (world.isRemote) player.sendMessage(new TextComponentString("成功绑定AE网络!"));
                 ItemStack stack = player.getHeldItem(hand);
                 NBTTagCompound compound;
 
@@ -188,7 +184,7 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
                 return EnumActionResult.SUCCESS;
             } else {
-                if (world.isRemote)player.sendMessage(new TextComponentString("未绑定AE网络!"));
+                if (world.isRemote) player.sendMessage(new TextComponentString("未绑定AE网络!"));
                 return EnumActionResult.FAIL;
             }
         }
@@ -220,26 +216,71 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
         if (mte instanceof MetaTileEntityMultiblockPart part) {
             int tier = part.getTier();
-
-
             if (mte instanceof MetaTileEntityItemBus hatch) {
                 if (hatch.getAbility() == EXPORT_ITEMS) {
-                    if(meModel)trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS_ME, player, targetPos);
+                    if (meModel) trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS_ME, player, targetPos);
                     else trans(ITEM_EXPORT_BUS[tier], ITEM_EXPORT_BUS[targetTier], player, targetPos);
                 }
                 if (hatch.getAbility() == IMPORT_ITEMS) {
-                    if(meModel)trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS_ME, player, targetPos);
+                    if (meModel) trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS_ME, player, targetPos);
                     else trans(ITEM_IMPORT_BUS[tier], ITEM_IMPORT_BUS[targetTier], player, targetPos);
                 }
             }
             if (mte instanceof MetaTileEntityFluidHatch hatch) {
                 if (hatch.getAbility() == EXPORT_FLUIDS) {
-                    if(meModel)trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH_ME, player, targetPos);
+                    if (meModel) trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH_ME, player, targetPos);
                     else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
                 }
                 if (hatch.getAbility() == IMPORT_FLUIDS) {
-                    if(meModel)trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH_ME, player, targetPos);
+                    if (meModel) trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH_ME, player, targetPos);
                     else trans(FLUID_IMPORT_HATCH[tier], FLUID_IMPORT_HATCH[targetTier], player, targetPos);
+                }
+            }
+            if (mte instanceof MetaTileEntityMultiFluidHatch hatch) {
+                ItemStack hatchStack = hatch.getStackForm(1);
+                if (hatch.getAbility() == EXPORT_FLUIDS) {
+                    if (MetaTileEntities.QUADRUPLE_EXPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.QUADRUPLE_EXPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(QUADRUPLE_EXPORT_HATCH[tier], QUADRUPLE_EXPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+
+                    if (MetaTileEntities.NONUPLE_EXPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.NONUPLE_EXPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(NONUPLE_EXPORT_HATCH[tier], NONUPLE_EXPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+                    if (MetaTileEntities.SIXTEEN_EXPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.SIXTEEN_EXPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(QUADRUPLE_EXPORT_HATCH[tier], SIXTEEN_EXPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+                }
+                if (hatch.getAbility() == IMPORT_FLUIDS) {
+                    if (MetaTileEntities.QUADRUPLE_IMPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.QUADRUPLE_IMPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(QUADRUPLE_IMPORT_HATCH[tier], QUADRUPLE_IMPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+                    if (MetaTileEntities.NONUPLE_IMPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.NONUPLE_IMPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(NONUPLE_IMPORT_HATCH[tier], NONUPLE_IMPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+                    if (MetaTileEntities.SIXTEEN_IMPORT_HATCH[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.SIXTEEN_IMPORT_HATCH[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        if (meModel)
+                            trans(SIXTEEN_IMPORT_HATCH[tier], SIXTEEN_IMPORT_HATCH[targetTier], player, targetPos);
+                        else trans(FLUID_EXPORT_HATCH[tier], FLUID_EXPORT_HATCH[targetTier], player, targetPos);
+                    }
+                }
+            }
+            if (mte instanceof MetaTileEntityDualHatch hatch) {
+                if (hatch.hasGhostCircuitInventory()) {
+                    if (meModel) trans(DUAL_IMPORT_HATCH[tier], ME_DUAL_IMPORT_HATCH, player, targetPos);
+                    else trans(DUAL_IMPORT_HATCH[tier], DUAL_IMPORT_HATCH[targetTier], player, targetPos);
+                } else {
+                    if (meModel) trans(DUAL_EXPORT_HATCH[tier], ME_DUAL_EXPORT_HATCH, player, targetPos);
+                    else trans(DUAL_EXPORT_HATCH[tier], DUAL_EXPORT_HATCH[targetTier], player, targetPos);
                 }
             }
             if (mte instanceof MetaTileEntityEnergyHatch hatch) {
@@ -265,6 +306,29 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
                         trans(ENERGY_INPUT_HATCH_16A[tier], ENERGY_INPUT_HATCH_16A[targetTier], player, targetPos);
                 }
             }
+            if (mte instanceof MetaTileEntityLaserHatch hatch) {
+                ItemStack hatchStack = hatch.getStackForm(1);
+                if (hatch.getAbility() == OUTPUT_LASER) {
+                    if (MetaTileEntities.LASER_OUTPUT_HATCH_256[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_OUTPUT_HATCH_256[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_OUTPUT_HATCH_256[tier], LASER_OUTPUT_HATCH_256[targetTier], player, targetPos);
+
+                    if (MetaTileEntities.LASER_OUTPUT_HATCH_1024[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_OUTPUT_HATCH_1024[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_OUTPUT_HATCH_1024[tier], LASER_OUTPUT_HATCH_1024[targetTier], player, targetPos);
+
+                    if (MetaTileEntities.LASER_OUTPUT_HATCH_4096[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_OUTPUT_HATCH_4096[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_OUTPUT_HATCH_4096[tier], LASER_OUTPUT_HATCH_4096[targetTier], player, targetPos);
+                }
+                if (hatch.getAbility() == INPUT_LASER) {
+                    if (MetaTileEntities.LASER_INPUT_HATCH_256[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_INPUT_HATCH_256[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_INPUT_HATCH_256[tier], LASER_INPUT_HATCH_256[targetTier], player, targetPos);
+
+                    if (MetaTileEntities.LASER_INPUT_HATCH_1024[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_INPUT_HATCH_1024[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_INPUT_HATCH_1024[tier], LASER_INPUT_HATCH_1024[targetTier], player, targetPos);
+
+                    if (MetaTileEntities.LASER_INPUT_HATCH_4096[tier].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.LASER_INPUT_HATCH_4096[tier].getStackForm(1).getMetadata() == hatchStack.getMetadata())
+                        trans(LASER_INPUT_HATCH_4096[tier], LASER_INPUT_HATCH_4096[targetTier], player, targetPos);
+                }
+            }
         }
     }
 
@@ -276,25 +340,23 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
                 if (extractItemsFromNetwork(monitor, mte.getStackForm(1), trans.getStackForm(1), player)) {
                     setTier(trans, player, pos);
-                }else
-                {
-                    player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：网络数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
+                } else {
+                    player.sendMessage(new TextComponentString("正在尝试替换" + pos + "失败！：网络数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             } catch (GridAccessException e) {
                 // 网络不可用，记录日志
                 GTQTLog.logger.warn("Grid access failed", e);
-                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：网络不可用").setStyle(new Style().setColor(TextFormatting.RED)));
+                player.sendMessage(new TextComponentString("正在尝试替换" + pos + "失败！：网络不可用").setStyle(new Style().setColor(TextFormatting.RED)));
             } catch (Exception e) {
                 // 其他异常，记录日志
                 GTQTLog.logger.warn("Unexpected error occurred", e);
-                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：未知错误").setStyle(new Style().setColor(TextFormatting.RED)));
+                player.sendMessage(new TextComponentString("正在尝试替换" + pos + "失败！：未知错误").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         } else {
             if (extractItemsFromPlayer(mte.getStackForm(1), trans.getStackForm(1), player)) {
                 setTier(trans, player, pos);
-            }else
-            {
-                player.sendMessage(new TextComponentString("正在尝试替换"+pos+"失败！：背包数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
+            } else {
+                player.sendMessage(new TextComponentString("正在尝试替换" + pos + "失败！：背包数量不可用").setStyle(new Style().setColor(TextFormatting.RED)));
             }
         }
     }
@@ -347,8 +409,9 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
 
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
-        lines.add(I18n.format("替换仓室,支持输入仓，输出仓，输入总线，输出总线，1-16A能源仓，动力仓，维护仓，ME仓"));
-        lines.add(I18n.format("ME模式下会将输入仓，输出仓，输入总线，输出总线替换为对应的ME仓"));
+        lines.add(I18n.format("替换仓室,支持输入仓，输出仓，多重输入输出仓（4-16X），输入总线，输出总线，输入总成，输入总成，1-16A（能源/动力）仓，256-4096A激光（源/靶）仓，维护仓，ME仓"));
+        lines.add(I18n.format("ME模式下会将输入仓，输出仓，输入总线，输出总线，多重输入输出仓替换为对应的ME仓"));
+        lines.add(I18n.format("ME模式下会将输入总成，输出总成替换为对应的ME总成仓"));
         lines.add(I18n.format("维护仓列表为维护仓，可配置，无菌，全自动维护仓"));
         lines.add(I18n.format("支持从网络拉取需求材料，并将替换结构返回网络"));
         if (networkProxy != null) {

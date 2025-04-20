@@ -622,23 +622,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ASUPRACHRONAL_OpV = this.addItem(563, "circuit_suprachronal_opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_GD);
         ASUPRACHRONAL_MAX = this.addItem(564, "circuit_suprachronal_max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_GD);
 
-        //  General Circuits
-        GENERAL_CIRCUIT_ULV = this.addItem(565, "general_circuit.ulv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ULV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_LV = this.addItem(566, "general_circuit.lv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_MV = this.addItem(567, "general_circuit.mv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_HV = this.addItem(568, "general_circuit.hv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.HV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_EV = this.addItem(569, "general_circuit.ev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.EV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_IV = this.addItem(570, "general_circuit.iv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.IV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_LuV = this.addItem(571, "general_circuit.luv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.LuV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_ZPM = this.addItem(572, "general_circuit.zpm").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.ZPM).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_UV = this.addItem(573, "general_circuit.uv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_UHV = this.addItem(574, "general_circuit.uhv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UHV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_UEV = this.addItem(575, "general_circuit.uev").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UEV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_UIV = this.addItem(576, "general_circuit.uiv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UIV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_UXV = this.addItem(577, "general_circuit.uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_OpV = this.addItem(578, "general_circuit.opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(GTQTCore_TAB);
-        GENERAL_CIRCUIT_MAX = this.addItem(579, "general_circuit.max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(GTQTCore_TAB);
-
         //  ID 206-211: High Tier Boule and Wafers
         EUROPIUM_BOULE = this.addItem(610, "boule.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
         EUROPIUM_WAFER = this.addItem(611, "wafer.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);

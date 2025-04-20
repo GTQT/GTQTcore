@@ -31,6 +31,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,11 +45,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.common.metatileentities.MetaTileEntities.ENERGY_INPUT_HATCH;
+import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gtqt.common.metatileentities.GTQTMetaTileEntities.*;
 
 
 public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactory {
@@ -63,6 +64,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     int perEnergyOutputHatchTier = -1;
     int perMufflerHatchTier = -1;
     int perMaintenanceHatchTier = -1;
+    int size = 1;
 
     boolean ignoredItemInputHatch = false;
     boolean ignoredItemOutputHatch = false;
@@ -73,6 +75,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     boolean ignoredMufflerHatch = false;
     boolean ignoredMaintenanceHatch = false;
 
+    boolean drop;
     boolean setHatch = true;
     boolean MEPlace = false;
     int multiblockTier = 0;
@@ -81,6 +84,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     int amperage = 0;
     boolean out;
     int page;
+
+    private MBPattern[] patterns;
 
     List<ItemStack> itemStacks = new ArrayList<>();
     int endPos = GregTechAPI.isHighTier() ? ENERGY_INPUT_HATCH.length - 1 : Math.min(ENERGY_INPUT_HATCH.length - 1, 10);
@@ -94,9 +99,9 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     int tick = 0;
     private AENetworkProxy networkProxy;
 
-    private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock){
-        MBPattern[] patternList =GregTechAPI.MULTIBLOCK_INFO_CACHE.get(multiblock);
-        MBPattern pattern=patternList[tier];
+    private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock) {
+        MBPattern[] patternList = GregTechAPI.MULTIBLOCK_INFO_CACHE.get(multiblock.metaTileEntityId);
+        MBPattern pattern = patternList[tier];
         return pattern.getParts();
     }
 
@@ -151,12 +156,11 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
 
             if (perMufflerHatchTier >= 1) {
-                for (int i = 1; i < MetaTileEntities.MUFFLER_HATCH.length; i++) {
-
-                    if (MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.MUFFLER_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                for (int i = 1; i < MUFFLER_HATCH.length; i++) {
+                    if (MUFFLER_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MUFFLER_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                         out = true;
                         if (!ignoredMufflerHatch)
-                            itemStackList.add(MetaTileEntities.MUFFLER_HATCH[perMufflerHatchTier].getStackForm(itemStack.getCount()));
+                            itemStackList.add(MUFFLER_HATCH[perMufflerHatchTier].getStackForm(itemStack.getCount()));
                         break;
                     }
                 }
@@ -164,15 +168,14 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             if (out) continue;
 
             if (perItemInputHatchTier >= 0 || MEPlace) {
-                for (int i = 0; i < MetaTileEntities.ITEM_IMPORT_BUS.length; i++) {
-
-                    if (MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_IMPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                for (int i = 0; i < ITEM_IMPORT_BUS.length; i++) {
+                    if (ITEM_IMPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && ITEM_IMPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                         out = true;
                         if (!ignoredItemInputHatch) {
                             if (MEPlace)
-                                itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                                itemStackList.add(ITEM_IMPORT_BUS_ME.getStackForm(itemStack.getCount()));
                             else
-                                itemStackList.add(MetaTileEntities.ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
+                                itemStackList.add(ITEM_IMPORT_BUS[perItemInputHatchTier].getStackForm(itemStack.getCount()));
                         }
                         break;
                     }
@@ -181,14 +184,14 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             if (out) continue;
 
             if (perItemOutputHatchTier >= 0 || MEPlace) {
-                for (int i = 0; i < MetaTileEntities.ITEM_EXPORT_BUS.length; i++) {
-                    if (MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.ITEM_EXPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                for (int i = 0; i < ITEM_EXPORT_BUS.length; i++) {
+                    if (ITEM_EXPORT_BUS[i].getStackForm(1).getItem() == hatchStack.getItem() && ITEM_EXPORT_BUS[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                         out = true;
                         if (!ignoredItemOutputHatch) {
                             if (MEPlace)
-                                itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS_ME.getStackForm(itemStack.getCount()));
+                                itemStackList.add(ITEM_EXPORT_BUS_ME.getStackForm(itemStack.getCount()));
                             else
-                                itemStackList.add(MetaTileEntities.ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
+                                itemStackList.add(ITEM_EXPORT_BUS[perItemOutputHatchTier].getStackForm(itemStack.getCount()));
                         }
                         break;
                     }
@@ -197,14 +200,22 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             if (out) continue;
 
             if (perFluidInputHatchTier >= 0 || MEPlace) {
-                for (int i = 0; i < MetaTileEntities.FLUID_IMPORT_HATCH.length; i++) {
-                    if (MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                for (int i = 0; i < FLUID_IMPORT_HATCH.length; i++) {
+                    if (FLUID_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && FLUID_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                         out = true;
                         if (!ignoredFluidInputHatch) {
                             if (MEPlace)
                                 itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH_ME.getStackForm(itemStack.getCount()));
-                            else
-                                itemStackList.add(MetaTileEntities.FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                            else {
+                                if (size == 1)
+                                    itemStackList.add(FLUID_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 2)
+                                    itemStackList.add(QUADRUPLE_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 3)
+                                    itemStackList.add(NONUPLE_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 4)
+                                    itemStackList.add(SIXTEEN_IMPORT_HATCH[perFluidInputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                         }
                         break;
                     }
@@ -213,14 +224,22 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             if (out) continue;
 
             if (perFluidOutputHatchTier >= 0 || MEPlace) {
-                for (int i = 0; i < MetaTileEntities.FLUID_EXPORT_HATCH.length; i++) {
-                    if (MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && MetaTileEntities.FLUID_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                for (int i = 0; i < FLUID_EXPORT_HATCH.length; i++) {
+                    if (FLUID_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && FLUID_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
                         out = true;
                         if (!ignoredFluidOutputHatch) {
                             if (MEPlace)
                                 itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH_ME.getStackForm(itemStack.getCount()));
-                            else
-                                itemStackList.add(MetaTileEntities.FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                            else {
+                                if (size == 1)
+                                    itemStackList.add(FLUID_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 2)
+                                    itemStackList.add(QUADRUPLE_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 3)
+                                    itemStackList.add(NONUPLE_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                                if (size == 4)
+                                    itemStackList.add(SIXTEEN_EXPORT_HATCH[perFluidOutputHatchTier].getStackForm(itemStack.getCount()));
+                            }
                         }
                         break;
                     }
@@ -228,6 +247,37 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
             }
             if (out) continue;
 
+            if ((perItemInputHatchTier >= 0 || perFluidInputHatchTier >= 0) || MEPlace) {
+                for (int i = 0; i < DUAL_IMPORT_HATCH.length; i++) {
+                    if (DUAL_IMPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && DUAL_IMPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredItemInputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(ME_DUAL_IMPORT_HATCH.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(DUAL_IMPORT_HATCH[Math.min(perFluidInputHatchTier, perItemInputHatchTier)].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
+
+            if ((perItemOutputHatchTier >= 0 || perFluidOutputHatchTier >= 0) || MEPlace) {
+                for (int i = 0; i < DUAL_EXPORT_HATCH.length; i++) {
+                    if (DUAL_EXPORT_HATCH[i].getStackForm(1).getItem() == hatchStack.getItem() && DUAL_EXPORT_HATCH[i].getStackForm(1).getMetadata() == hatchStack.getMetadata()) {
+                        out = true;
+                        if (!ignoredItemInputHatch) {
+                            if (MEPlace)
+                                itemStackList.add(ME_DUAL_EXPORT_HATCH.getStackForm(itemStack.getCount()));
+                            else
+                                itemStackList.add(DUAL_EXPORT_HATCH[Math.min(perItemOutputHatchTier, perFluidOutputHatchTier)].getStackForm(itemStack.getCount()));
+                        }
+                        break;
+                    }
+                }
+            }
+            if (out) continue;
 
             if (perEnergyInputHatchTier >= 1) {
                 for (int i = 1; i < endPos; i++) {
@@ -236,12 +286,26 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                         if (!ignoredEnergyInputHatch) {
                             if (amperage == 1) {
                                 itemStackList.add(ENERGY_INPUT_HATCH[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            if (amperage == 4) {
-                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_4A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
-                            }
-                            if (amperage == 16) {
-                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyInputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 4) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_4A[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 16) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 64) {
+                                itemStackList.add(MetaTileEntities.SUBSTATION_ENERGY_INPUT_HATCH[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 256) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_256[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 1024) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_1024[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 4096) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_4096[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 16384) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_16384[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 65536) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_65536[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 262144) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_262144[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 1048576) {
+                                itemStackList.add(MetaTileEntities.LASER_INPUT_HATCH_1048576[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
                             }
                         }
                         break;
@@ -258,12 +322,26 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
                             if (amperage == 1) {
                                 itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
-                            }
-                            if (amperage == 4) {
-                                itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_OUTPUT_HATCH_4A.length)].getStackForm(itemStack.getCount()));
-                            }
-                            if (amperage == 16) {
-                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[Math.min(perEnergyOutputHatchTier, MetaTileEntities.ENERGY_INPUT_HATCH_16A.length)].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 4) {
+                                itemStackList.add(MetaTileEntities.ENERGY_OUTPUT_HATCH_4A[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 16) {
+                                itemStackList.add(MetaTileEntities.ENERGY_INPUT_HATCH_16A[perEnergyInputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 64) {
+                                itemStackList.add(MetaTileEntities.SUBSTATION_ENERGY_OUTPUT_HATCH[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 256) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_256[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 1024) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_1024[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 4096) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_4096[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 16384) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_16384[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 65536) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_65536[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 262144) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_262144[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
+                            } else if (amperage == 1048576) {
+                                itemStackList.add(MetaTileEntities.LASER_OUTPUT_HATCH_1048576[perEnergyOutputHatchTier].getStackForm(itemStack.getCount()));
                             }
                         }
                         break;
@@ -290,7 +368,9 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                 .widget(new ClickButtonWidget(90, 160, 38, 20, I18n.format("IO明细"), clickData -> this.page = MathHelper.clamp(page + 1, 0, 1)))
                 .widget(new ClickButtonWidget(128, 160, 38, 20, I18n.format("部件总览"), clickData -> this.page = MathHelper.clamp(page - 1, 0, 1)))
 
-                .widget(new ClickButtonWidget(10, 180, 76, 20, I18n.format("放置模式"), clickData -> placeMultiblock = !placeMultiblock).setTooltipText("确认放置模式，将真实放置多方块"))
+                .widget(new ClickButtonWidget(10, 180, 38, 20, I18n.format("放置"), clickData -> placeMultiblock = !placeMultiblock).setTooltipText("确认放置模式，将真实放置多方块"))
+                .widget(new ClickButtonWidget(48, 180, 38, 20, I18n.format("掉落"), clickData -> drop = !drop).setTooltipText("拉取的物品将不再填充玩家背包，而是掉落到玩家周边"))
+
 
                 .widget(new ClickButtonWidget(90, 180, 38, 20, I18n.format("IG"), clickData -> setHatch = !setHatch).setTooltipText("忽视仓室，只放置非仓室结构"))
                 .widget(new ClickButtonWidget(128, 180, 38, 20, I18n.format("ME"), clickData -> MEPlace = !MEPlace).setTooltipText("将输入/输出 总线/仓 替换为对应的ME仓"))
@@ -322,8 +402,14 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                 .widget(new ClickButtonWidget(220, 120, 38, 20, I18n.format("EO -1"), clickData -> this.perEnergyOutputHatchTier = MathHelper.clamp(perEnergyOutputHatchTier - 1, 0, endPos - 1)))
                 .widget(new ClickButtonWidget(260, 120, 48, 20, I18n.format("忽视本仓"), clickData -> ignoredEnergyOutputHatch = !ignoredEnergyOutputHatch))
 
-                .widget(new ClickButtonWidget(180, 140, 38, 20, I18n.format("AP *4"), clickData -> this.amperage = MathHelper.clamp(amperage * 4, 1, 16)))
-                .widget(new ClickButtonWidget(220, 140, 38, 20, I18n.format("AP /4"), clickData -> this.amperage = MathHelper.clamp(amperage / 4, 1, 16)))
+                .widget(new ClickButtonWidget(180, 140, 19, 20, I18n.format("*4"), clickData -> this.amperage = MathHelper.clamp(amperage * 4, 1, 1048576)).setTooltipText("能源仓电流设置"))
+                .widget(new ClickButtonWidget(199, 140, 19, 20, I18n.format("/4"), clickData -> this.amperage = MathHelper.clamp(amperage / 4, 1, 1048576)).setTooltipText("能源仓电流设置"))
+                .widget(new ClickButtonWidget(220, 140, 19, 20, I18n.format("->1"), clickData -> this.size = MathHelper.clamp(size + 1, 1, 4)).setTooltipText("多重仓偏好升级"))
+                .widget(new ClickButtonWidget(239, 140, 19, 20, I18n.format("<-1"), clickData -> this.size = MathHelper.clamp(size - 1, 1, 4)).setTooltipText("多重仓偏好降级"))
+                .widget(new ClickButtonWidget(260, 140, 48, 20, I18n.format("Res"), clickData -> {
+                    amperage = 1;
+                    size = 1;
+                }))
 
                 .widget(new ClickButtonWidget(180, 160, 38, 20, I18n.format("MF +1"), clickData -> this.perMufflerHatchTier = MathHelper.clamp(perMufflerHatchTier + 1, 0, 8)))
                 .widget(new ClickButtonWidget(220, 160, 38, 20, I18n.format("MF -1"), clickData -> this.perMufflerHatchTier = MathHelper.clamp(perMufflerHatchTier - 1, 0, 8)))
@@ -340,7 +426,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
         if (networkProxy != null) iTextComponents.add(new TextComponentTranslation("高级构建器 网络：" + networkProxy));
         else iTextComponents.add(new TextComponentTranslation("高级构建器 网络：未连接"));
 
-        iTextComponents.add(new TextComponentTranslation("放置模式："+placeMultiblock));
+        iTextComponents.add(new TextComponentTranslation("放置模式：" + placeMultiblock + "掉落模式：" + drop));
     }
 
     private void addDisplayText(List<ITextComponent> iTextComponents) {
@@ -442,8 +528,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
                 if (player.isSneaking()) {
                     if (!multiblock.isStructureFormed()) {
-                        if(player.isCreative())
-                        {
+                        if (player.isCreative()) {
                             player.sendMessage(new TextComponentTranslation("检测到玩家处于创造模式，自动忽视库存检测，正在直接构建！").setStyle(new Style().setColor(TextFormatting.GREEN)));
                             multiblock.structurePattern.autoBuild(player, multiblock);
                             return EnumActionResult.SUCCESS;
@@ -568,34 +653,51 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                 ItemStack physicalStack = extracted.createItemStack();
                 final int maxStackSize = physicalStack.getMaxStackSize();
 
-                // 持续尝试填充背包直到完成或背包满
-                boolean hasSpace;
-                do {
-                    hasSpace = false;
-                    for (int i = 0; i < player.inventory.getSizeInventory() && physicalStack.getCount() > 0; i++) {
-                        final ItemStack slotStack = player.inventory.getStackInSlot(i);
+                if (drop) {
+                    // 持续尝试掉落物品直到完成
+                    while (physicalStack.getCount() > 0) {
+                        // 计算每次掉落的物品数量
+                        int toDrop = Math.min(physicalStack.getCount(), maxStackSize);
+                        ItemStack dropStack = physicalStack.copy();
+                        dropStack.setCount(toDrop);
 
-                        // 处理空槽位
-                        if (slotStack.isEmpty()) {
-                            final int toTransfer = Math.min(physicalStack.getCount(), maxStackSize);
-                            final ItemStack newStack = physicalStack.copy();
-                            newStack.setCount(toTransfer);
-                            player.inventory.setInventorySlotContents(i, newStack);
-                            physicalStack.shrink(toTransfer);
-                            hasSpace = true;
-                        }
-                        // 处理可堆叠槽位
-                        else if (ItemStack.areItemsEqual(slotStack, physicalStack) &&
-                                ItemStack.areItemStackTagsEqual(slotStack, physicalStack) &&
-                                slotStack.getCount() < maxStackSize) {
-                            final int canAdd = maxStackSize - slotStack.getCount();
-                            final int toAdd = Math.min(canAdd, physicalStack.getCount());
-                            slotStack.setCount(slotStack.getCount() + toAdd);
-                            physicalStack.shrink(toAdd);
-                            hasSpace = true;
-                        }
+                        // 创建掉落物实体并放置在玩家附近
+                        EntityItem entityItem = new EntityItem(player.world, player.posX, player.posY, player.posZ, dropStack);
+                        player.world.spawnEntity(entityItem);
+
+                        // 减少剩余物品数量
+                        physicalStack.shrink(toDrop);
                     }
-                } while (physicalStack.getCount() > 0 && hasSpace);
+                } else {
+                    // 持续尝试填充背包直到完成或背包满
+                    boolean hasSpace;
+                    do {
+                        hasSpace = false;
+                        for (int i = 0; i < player.inventory.getSizeInventory() && physicalStack.getCount() > 0; i++) {
+                            final ItemStack slotStack = player.inventory.getStackInSlot(i);
+
+                            // 处理空槽位
+                            if (slotStack.isEmpty()) {
+                                final int toTransfer = Math.min(physicalStack.getCount(), maxStackSize);
+                                final ItemStack newStack = physicalStack.copy();
+                                newStack.setCount(toTransfer);
+                                player.inventory.setInventorySlotContents(i, newStack);
+                                physicalStack.shrink(toTransfer);
+                                hasSpace = true;
+                            }
+                            // 处理可堆叠槽位
+                            else if (ItemStack.areItemsEqual(slotStack, physicalStack) &&
+                                    ItemStack.areItemStackTagsEqual(slotStack, physicalStack) &&
+                                    slotStack.getCount() < maxStackSize) {
+                                final int canAdd = maxStackSize - slotStack.getCount();
+                                final int toAdd = Math.min(canAdd, physicalStack.getCount());
+                                slotStack.setCount(slotStack.getCount() + toAdd);
+                                physicalStack.shrink(toAdd);
+                                hasSpace = true;
+                            }
+                        }
+                    } while (physicalStack.getCount() > 0 && hasSpace);
+                }
             }
         }
     }
@@ -614,7 +716,11 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     public void addInformation(ItemStack itemStack, List<String> lines) {
         lines.add(I18n.format("metaitem.tool.multiblock_builder.tooltip2"));
         lines.add(I18n.format("可在UI内调整多方块的各项仓口参数配置，支持各仓开关，升级，调A，ME模式等功能"));
-        lines.add(I18n.format("如果多方块太大材料过多可能导致放置失败，请酌情使用"));
+        lines.add(I18n.format("通过调整电流数量可升级能源类型仓室（1-16A能源/动力仓,64A变电能源/动力仓,>=256A激光源/靶仓）"));
+        lines.add(I18n.format("多重仓的偏好（例如4x，9x，16x）由偏好等级决定,当设置偏好后将取代普通的输入/输出仓"));
+        lines.add(I18n.format("总成仓室的等级由对应的物品/流体等级决定，ME模式下将替换为对应的ME总成而非ME仓"));
+        lines.add(I18n.format("暂时不支持：特殊类型仓室（例如催化剂仓等）的升级设置"));
+        lines.add(I18n.format("如果多方块太大材料过多可能导致放置失败（如果多方块需求的物品数量大于玩家背包，在构建时只会构建其中一部分），请酌情使用"));
         lines.add(I18n.format("支持从网络拉取需求材料"));
         if (networkProxy != null) {
             lines.add(GuiText.Linked.getLocal());
