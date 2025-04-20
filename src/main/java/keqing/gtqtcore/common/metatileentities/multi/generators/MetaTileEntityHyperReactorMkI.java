@@ -61,14 +61,6 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
     }
 
     @Override
-    protected void initializeAbilities() {
-        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
-        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
-        energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
-        this.energyContainer = new EnergyContainerList(energyContainer);
-    }
-
-    @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         HyperReactorMark1WorkableHandler recipeLogic = (HyperReactorMark1WorkableHandler) this.recipeMapWorkable;
         MultiblockDisplayText.builder(textList, this.isStructureFormed())
