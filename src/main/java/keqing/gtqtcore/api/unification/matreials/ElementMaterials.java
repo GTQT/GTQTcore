@@ -286,8 +286,9 @@ public class ElementMaterials {
                 .build();
         //  26025 Mithril
         GTQTMaterials.Mithril = new Material.Builder(getMaterialsId(), gtqtcoreId("mithril"))
-                .ingot().plasma()
-                .liquid(new FluidBuilder().temperature(4450))
+                .ingot()
+                .plasma()
+                .fluid()
                 .color(0x428fdb)
                 .iconSet(DULL)
                 .blast(10800, BlastProperty.GasTier.HIGHER)

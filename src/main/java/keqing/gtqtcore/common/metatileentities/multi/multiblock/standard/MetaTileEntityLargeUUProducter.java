@@ -84,7 +84,7 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
                 .where('C', states(getCasingState1()))
                 .where('G', states(getGlassState1()))
                 .where('X', states(getCasingState()).setMinGlobalLimited(25)
-                        .or(abilities)
+                        .or(autoAbilities())
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))

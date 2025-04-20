@@ -21,6 +21,7 @@ import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.loaders.recipes.handlers.BouleRecipeHandler;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -204,19 +205,19 @@ public class GTQTRecipes {
                         OreDictUnifier.get(plate_big, material),
                         "SSh", "SSB",
                         'S', new UnificationEntry(plate, material),
-                        'B', SOLDERING_IRON_LV);
+                        'B',"toolSolderingIron");
 
-                ModHandler.addShapedRecipe(String.format("bplate_big_%s", material),
-                        OreDictUnifier.get(plate_big, material),
+                ModHandler.addShapedRecipe(String.format("bplate_big_%s", Steel),
+                        OreDictUnifier.get(plate_big, Steel),
                         "SSh", "SSB",
-                        'S', new UnificationEntry(plate, material),
-                        'B', SOLDERING_IRON_HV);
+                        'S', new UnificationEntry(plate, Steel),
+                        'B', Items.FLINT);
 
-                ModHandler.addShapedRecipe(String.format("cplate_big_%s", material),
-                        OreDictUnifier.get(plate_big, material),
+                ModHandler.addShapedRecipe(String.format("bplate_big_%s", Bronze),
+                        OreDictUnifier.get(plate_big, Bronze),
                         "SSh", "SSB",
-                        'S', new UnificationEntry(plate, material),
-                        'B', SOLDERING_IRON_IV);
+                        'S', new UnificationEntry(plate, Bronze),
+                        'B', Items.FLINT);
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(30).duration(1200)
@@ -280,27 +281,27 @@ public class GTQTRecipes {
                         'S', new UnificationEntry(plate_curved, material),
                         'A', new UnificationEntry(spring, material),
                         'C', new UnificationEntry(round_cover, material),
-                        'B', SOLDERING_IRON_LV);
+                        'B',"toolSolderingIron");
 
-                ModHandler.addShapedRecipe(String.format("bcylinder_%s", material),
-                        OreDictUnifier.get(cylinder, material),
+                ModHandler.addShapedRecipe(String.format("bcylinder_%s", Steel),
+                        OreDictUnifier.get(cylinder, Steel),
                         "hCT", "SAS", "LCB",
-                        'T', new UnificationEntry(gearSmall, material),
-                        'L', new UnificationEntry(stick, material),
-                        'S', new UnificationEntry(plate_curved, material),
-                        'A', new UnificationEntry(spring, material),
-                        'C', new UnificationEntry(round_cover, material),
-                        'B', SOLDERING_IRON_HV);
+                        'T', new UnificationEntry(gearSmall, Steel),
+                        'L', new UnificationEntry(stick, Steel),
+                        'S', new UnificationEntry(plate_curved, Steel),
+                        'A', new UnificationEntry(spring, Steel),
+                        'C', new UnificationEntry(round_cover, Steel),
+                        'B', Items.FLINT);
 
-                ModHandler.addShapedRecipe(String.format("ccylinder_%s", material),
-                        OreDictUnifier.get(cylinder, material),
+                ModHandler.addShapedRecipe(String.format("bcylinder_%s", Bronze),
+                        OreDictUnifier.get(cylinder, Bronze),
                         "hCT", "SAS", "LCB",
-                        'T', new UnificationEntry(gearSmall, material),
-                        'L', new UnificationEntry(stick, material),
-                        'S', new UnificationEntry(plate_curved, material),
-                        'A', new UnificationEntry(spring, material),
-                        'C', new UnificationEntry(round_cover, material),
-                        'B', SOLDERING_IRON_IV);
+                        'T', new UnificationEntry(gearSmall, Bronze),
+                        'L', new UnificationEntry(stick, Bronze),
+                        'S', new UnificationEntry(plate_curved, Bronze),
+                        'A', new UnificationEntry(spring, Bronze),
+                        'C', new UnificationEntry(round_cover, Bronze),
+                        'B', Items.FLINT);
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
@@ -325,21 +326,23 @@ public class GTQTRecipes {
                         'S', new UnificationEntry(stickLong, material),
                         'A', new UnificationEntry(gear, material),
                         'C', new UnificationEntry(springSmall, material),
-                        'B', SOLDERING_IRON_LV);
-                ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", material),
-                        OreDictUnifier.get(motor_stick, material),
+                        'B',"toolSolderingIron");
+
+                ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", Steel),
+                        OreDictUnifier.get(motor_stick, Steel),
                         "ACh", "SSS", "AfB",
-                        'S', new UnificationEntry(stickLong, material),
-                        'A', new UnificationEntry(gear, material),
-                        'C', new UnificationEntry(springSmall, material),
-                        'B', SOLDERING_IRON_HV);
-                ModHandler.addShapedRecipe(String.format("cmotor_stick_%s", material),
-                        OreDictUnifier.get(motor_stick, material),
+                        'S', new UnificationEntry(stickLong, Steel),
+                        'A', new UnificationEntry(gear, Steel),
+                        'C', new UnificationEntry(springSmall, Steel),
+                        'B', Items.FLINT);
+
+                ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", Bronze),
+                        OreDictUnifier.get(motor_stick, Bronze),
                         "ACh", "SSS", "AfB",
-                        'S', new UnificationEntry(stickLong, material),
-                        'A', new UnificationEntry(gear, material),
-                        'C', new UnificationEntry(springSmall, material),
-                        'B', SOLDERING_IRON_IV);
+                        'S', new UnificationEntry(stickLong, Bronze),
+                        'A', new UnificationEntry(gear, Bronze),
+                        'C', new UnificationEntry(springSmall, Bronze),
+                        'B', Items.FLINT);
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)
@@ -364,27 +367,27 @@ public class GTQTRecipes {
                         'A', new UnificationEntry(gearSmall, material),
                         'L', new UnificationEntry(stick, material),
                         'C', new UnificationEntry(ring, material),
-                        'B', SOLDERING_IRON_LV);
+                        'B',"toolSolderingIron");
 
-                ModHandler.addShapedRecipe(String.format("bvalve_%s", material),
+                ModHandler.addShapedRecipe(String.format("bvalve_%s", Steel),
                         OreDictUnifier.get(valve, material),
                         "SAL", "fCh", "STB",
-                        'S', new UnificationEntry(shell, material),
-                        'T', new UnificationEntry(cylinder, material),
-                        'A', new UnificationEntry(gearSmall, material),
-                        'L', new UnificationEntry(stick, material),
-                        'C', new UnificationEntry(ring, material),
-                        'B', SOLDERING_IRON_HV);
+                        'S', new UnificationEntry(shell, Steel),
+                        'T', new UnificationEntry(cylinder, Steel),
+                        'A', new UnificationEntry(gearSmall, Steel),
+                        'L', new UnificationEntry(stick, Steel),
+                        'C', new UnificationEntry(ring, Steel),
+                        'B', Items.FLINT);
 
-                ModHandler.addShapedRecipe(String.format("cvalve_%s", material),
-                        OreDictUnifier.get(valve, material),
+                ModHandler.addShapedRecipe(String.format("bvalve_%s", Bronze),
+                        OreDictUnifier.get(valve, Bronze),
                         "SAL", "fCh", "STB",
-                        'S', new UnificationEntry(shell, material),
-                        'T', new UnificationEntry(cylinder, material),
-                        'A', new UnificationEntry(gearSmall, material),
-                        'L', new UnificationEntry(stick, material),
-                        'C', new UnificationEntry(ring, material),
-                        'B', SOLDERING_IRON_IV);
+                        'S', new UnificationEntry(shell, Bronze),
+                        'T', new UnificationEntry(cylinder, Bronze),
+                        'A', new UnificationEntry(gearSmall, Bronze),
+                        'L', new UnificationEntry(stick, Bronze),
+                        'C', new UnificationEntry(ring, Bronze),
+                        'B', Items.FLINT);
 
                 RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
                         .EUt(32).duration(40)

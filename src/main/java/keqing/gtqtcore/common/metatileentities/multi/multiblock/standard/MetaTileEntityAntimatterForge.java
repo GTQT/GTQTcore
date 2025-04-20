@@ -179,14 +179,10 @@ public class MetaTileEntityAntimatterForge extends RecipeMapLaserMultiblockContr
                 .where('E', states(getFilterState()))
 
                 .where('H', states(getWhiteState())
-                        .or(abilities(GTQTMultiblockAbility.LASER_INPUT)))
-
+                        .or(abilities(GTQTMultiblockAbility.LASER_INPUT))
+                )
                 .where('I', states(getBlackCasingState())
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(4))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(4))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4))
-
+                        .or(autoAbilities(false,false,true,true,true,true,false))
                 )
                 .build();
     }

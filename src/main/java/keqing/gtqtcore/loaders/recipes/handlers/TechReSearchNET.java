@@ -1888,8 +1888,30 @@ public class TechReSearchNET {
                         .researchStack(DISK_25.getStackForm())
                         .duration(1200)
                         .EUt(VA[LuV]))
-                .duration(1200).EUt(6000).buildAndRegister();
+                .duration(1200).EUt(VA[LuV]).buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(DATA_BANK)
+                .input(SENSOR_LuV, 8)
+                .input(circuit, Tier.ZPM, 8)
+                .input(FIELD_GENERATOR_LuV, 2)
+                .input(ELECTRIC_MOTOR_ZPM, 2)
+                .input(frameGt, HSSS, 4)
+                .input(screw, PPB, 6)
+                .input(wireGtDouble, UraniumRhodiumDinaquadide, 32)
+                .input(foil, Trinium, 32)
+                .input(wireFine, YttriumBariumCuprate, 32)
+                .input(wireFine, Europium, 32)
+                .input(OPTICAL_PIPES[0], 16)
+                .input(wireGtDouble, IVSuperconductor, 16)
+                .fluidInputs(SolderingAlloy.getFluid(L * 8))
+                .fluidInputs(VanadiumGallium.getFluid(L * 8))
+                .output(RESEARCH_STATION)
+                .scannerResearch(b -> b
+                        .researchStack(DISK_25.getStackForm())
+                        .duration(1200)
+                        .EUt(VA[LuV]))
+                .duration(1200).EUt(VA[LuV]).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)

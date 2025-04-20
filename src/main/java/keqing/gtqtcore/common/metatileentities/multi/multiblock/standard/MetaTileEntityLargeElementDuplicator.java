@@ -84,7 +84,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
                 .where('C', states(getCasingState3()))
                 .where('G', states(getGlassState()))
                 .where('X', states(getCasingState()).setMinGlobalLimited(138)
-                        .or(abilities)
+                        .or(autoAbilities())
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1)))

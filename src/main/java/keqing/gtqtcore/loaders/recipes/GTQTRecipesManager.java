@@ -52,6 +52,7 @@ public class GTQTRecipesManager {
         MolecularTransformer.init();
         StrontiumRadiumChain.init();
         AlgaeChain.init();
+        GasTurbineRecipes.init();
         FluidizedBedChain.init();
         FuelChain.init();
         AcidReactorRecipes.init();

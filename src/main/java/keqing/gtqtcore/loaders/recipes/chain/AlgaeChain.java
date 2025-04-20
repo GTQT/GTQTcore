@@ -244,40 +244,45 @@ public class AlgaeChain {
                 .buildAndRegister();
 
         //  Exotic Gas
-
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(CrudeExoticGas.getFluid(1))
-                .EUt(1024)
+                .fluidOutputs(HighTemperatureGas.getFluid(240*50))
+                .EUt(V[EV])
                 .duration(240)
                 .buildAndRegister();
 
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(SuperheavyExoticGas.getFluid(1))
-                .EUt(1024)
+                .fluidOutputs(HighTemperatureGas.getFluid(480*50))
+                .EUt(V[EV])
                 .duration(480)
                 .buildAndRegister();
 
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(HeavyExoticGas.getFluid(2))
-                .EUt(1024)
+                .fluidOutputs(HighTemperatureGas.getFluid(360*50))
+                .EUt(V[EV])
                 .duration(360)
                 .buildAndRegister();
 
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(MediumExoticGas.getFluid(4))
-                .EUt(1024)
+                .fluidOutputs(HighTemperatureGas.getFluid(180*50))
+                .EUt(V[EV])
                 .duration(180)
                 .buildAndRegister();
 
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(LightExoticGas.getFluid(8))
-                .EUt(1024)
+                .fluidOutputs(HighTemperatureGas.getFluid(90*50))
+                .EUt(V[EV])
                 .duration(90)
                 .buildAndRegister();
 
         GAS_TURBINE_FUELS.recipeBuilder()
                 .fluidInputs(Hydrogen.getFluid(12))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(50))
+                .EUt(V[LV])
                 .duration(1)
                 .buildAndRegister();
     }

@@ -197,7 +197,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityAdvanceKQCC ADV_KQCC;
     public static MetaTileEntityGeneMutagenesis GENE_MUTAGENESIS;
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
-    public static MetaTileEntityParticleAggregator PARTICLE_AGGREGATOR;
     public static MetaTileEntityPressureMachine[] VACUUM_CHAMBER = new MetaTileEntityPressureMachine[V.length - 1];
     public static SimpleSteamMetaTileEntity[] STEAM_SPINNER = new SimpleSteamMetaTileEntity[2];
     public static MetaTileEntityParallelHatch[] PARALLEL_HATCH = new MetaTileEntityParallelHatch[V.length - 1];
@@ -625,7 +624,6 @@ public class GTQTMetaTileEntities {
         EVAPORATION_POOL = registerMetaTileEntity(3215, new MetaTileEntityEvaporationPool(gtqtcoreId("evaporation_pool")));
         ELECTRON_MICROSCOPE = registerMetaTileEntity(3216, new MetaTileEntityElectronMicroscope(gtqtcoreId("electron_microscope")));
         GENE_MUTAGENESIS = registerMetaTileEntity(3217, new MetaTileEntityGeneMutagenesis(gtqtcoreId("gene_mutagenesis")));
-        PARTICLE_AGGREGATOR = registerMetaTileEntity(3218, new MetaTileEntityParticleAggregator(gtqtcoreId("particle_aggregator")));
         INDUSTRIAL_INDUCTION_FURNACE = registerMetaTileEntity(3219, new MetaTileEntityIndustrialInductionFurnace(gtqtcoreId("industrial_induction_furnace")));
         ENERGY_SUBSTATION = registerMetaTileEntity(3220, new MetaTileEntityEnergySubstation(gtqtcoreId("energy_substation")));
         NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(3221, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));

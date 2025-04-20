@@ -366,6 +366,24 @@ public class FusionLoader {
                 .EUt((int) V[EV])
                 .duration((int) (7.6 * SECOND))
                 .buildAndRegister();
+
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Carbon.getFluid(L))
+                .fluidInputs(Americium.getFluid(L))
+                .fluidOutputs(Einsteinium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (3.6 * SECOND))
+                .EUToStart(300000000L) // MK2
+                .buildAndRegister();
+
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Einsteinium.getFluid(L))
+                .fluidInputs(Helium.getPlasma(L))
+                .fluidOutputs(Mendelevium.getFluid(L))
+                .EUt(VA[ZPM])
+                .duration((int) (3.6 * SECOND))
+                .EUToStart(300000000L) // MK2
+                .buildAndRegister();
         /* -------------------------------- MK3 -------------------------------- */
 
         //  Gold + Arsenic -> Silver (plasma)

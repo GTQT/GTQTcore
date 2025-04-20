@@ -60,6 +60,7 @@ public class GTQTMetaToolItems {
                 .secondaryOreDicts(ToolOreDict.toolCrowbar.toString(), ToolOreDict.toolSpade.toString(), ToolOreDict.toolSaw.toString(), "craftingToolSaw")
                 .toolClasses(ToolClasses.CROWBAR, ToolClasses.SHOVEL)
         );
+
         SOLDERING_IRON_LV = ToolItems.register(ItemGTTool.Builder.of(GTQTCore.MODID, "soldering_iron_lv")
                 .toolStats(b -> b.crafting().attacking()
                         .attackDamage(8.0F).attackSpeed(-2.4F)

@@ -106,12 +106,7 @@ public class MetaTileEntityDimensionallyBiomimeticFactory extends RecipeMapMulti
 
                 .where('M', this.selfPredicate())
                 .where('F', states(getCommonState())
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMaxGlobalLimited(4).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.EXPORT_FLUIDS).setMaxGlobalLimited(8).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(3)))
+                        .or(autoAbilities()))
                 .where('A', states(this.getCasingState()))
                 .where('B', states(this.getCasingState1()))
 

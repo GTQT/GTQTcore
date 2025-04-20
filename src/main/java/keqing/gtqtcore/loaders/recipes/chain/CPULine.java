@@ -659,13 +659,13 @@ public class CPULine {
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .duration(300) // 反应持续时间设为300个ticks
-                .EUt(VA[MV]) // 设定电力消耗等级为MV
-                .fluidInputs(Trichlorosilane.getFluid(1000)) // 输入1000mB的三氯硅烷
-                .fluidInputs(Hydrogen.getFluid(2000)) // 输入2000mB的氢气
-                .fluidOutputs(HydrochloricAcid.getFluid(3000)) // 输出3000mB的盐酸
-                .output(dust, Polysilicon, 1) // 输出1个多晶硅粉
-                .buildAndRegister(); // 构建并注册此化学反应
+                .duration(300)
+                .EUt(VA[MV])
+                .fluidInputs(Trichlorosilane.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(2000))
+                .fluidOutputs(HydrochloricAcid.getFluid(3000))
+                .output(dust, Polysilicon, 1)
+                .buildAndRegister();
 
         //长大
         czpuller(SILICON_BOULE, Boron, MV);

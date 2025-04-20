@@ -66,10 +66,7 @@ public class MetaTileEntityLargeGrind extends GTQTRecipeMapMultiblockController 
                 .aisle("XXX", "XSX", "XXX")
                 .where('S', selfPredicate())
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(18)
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
-                        .or(abilities(MultiblockAbility.EXPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.IMPORT_ITEMS).setMinGlobalLimited(1).setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMinGlobalLimited(1).setMaxGlobalLimited(2).setPreviewCount(2)))
+                        .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('#', any())
                 .build();

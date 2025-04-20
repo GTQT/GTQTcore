@@ -110,7 +110,17 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
 
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("XXX", "CCC", "CCC", "CCC", "XXX").aisle("XXX", "C#C", "C#C", "C#C", "XMX").aisle("XSX", "CCC", "CCC", "CCC", "XXX").where('S', selfPredicate()).where('X', states(getCasingState()).setMinGlobalLimited(9).or(autoAbilities(true, true, true, true, true, true, false))).where('M', abilities(MultiblockAbility.MUFFLER_HATCH)).where('C', heatingCoils()).where('#', air()).build();
+        return FactoryBlockPattern.start()
+                .aisle("XXX", "CCC", "CCC", "CCC", "XXX")
+                .aisle("XXX", "C#C", "C#C", "C#C", "XMX")
+                .aisle("XSX", "CCC", "CCC", "CCC", "XXX")
+                .where('S', selfPredicate())
+                .where('X', states(getCasingState()).setMinGlobalLimited(9)
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('C', heatingCoils())
+                .where('#', air())
+                .build();
     }
 
     @Override

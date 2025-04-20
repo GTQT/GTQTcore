@@ -1,7 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.component;
 
+import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.api.unification.stack.UnificationEntry;
 import net.minecraftforge.fluids.FluidStack;
+import scala.tools.asm.Handle;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.BLAST_RECIPES;
@@ -24,8 +27,40 @@ public class ComponentAssemblerRecipes {
         Emitter();
         Sensor();
         FieldGenerator();
+        Hand();
     }
+    private static void Hand() {
+        ModHandler.addShapedRecipe("electric_motor_lv_steel", ELECTRIC_MOTOR_LV.getStackForm(),
+                "CWR", "WMW", "RWC",
+                'C', new UnificationEntry(cableGtSingle, Tin),
+                'W', new UnificationEntry(wireGtSingle, Copper),
+                'R', new UnificationEntry(plate_curved, Steel),
+                'M', new UnificationEntry(stick, SteelMagnetic));
 
+        ModHandler.addShapedRecipe(true, "electric_motor_lv_iron", ELECTRIC_MOTOR_LV.getStackForm(),
+                "CWR", "WMW", "RWC",
+                'C', new UnificationEntry(cableGtSingle, Tin),
+                'W', new UnificationEntry(wireGtSingle, Copper),
+                'R', new UnificationEntry(plate_curved, Iron),
+                'M', new UnificationEntry(stick, IronMagnetic));
+
+        ModHandler.addShapedRecipe(true, "electric_piston_lv", ELECTRIC_PISTON_LV.getStackForm(),
+                "PPP", "CRR", "CMG",
+                'P', new UnificationEntry(plate, Steel),
+                'C', new UnificationEntry(cableGtSingle, Tin),
+                'R', new UnificationEntry(stick, Steel),
+                'G', new UnificationEntry(cylinder, Steel),
+                'M', ELECTRIC_MOTOR_LV.getStackForm());
+
+        ModHandler.addShapedRecipe(true, "robot_arm_lv", ROBOT_ARM_LV.getStackForm(),
+                "CCC", "MSM", "PXR",
+                'C', new UnificationEntry(cableGtSingle, Tin),
+                'R', new UnificationEntry(motor_stick, Steel),
+                'S', new UnificationEntry(stick, Steel),
+                'M', ELECTRIC_MOTOR_LV.getStackForm(),
+                'P', ELECTRIC_PISTON_LV.getStackForm(),
+                'X', new UnificationEntry(circuit, MarkerMaterials.Tier.LV));
+    }
     private static void Motor() {
         //  LV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()

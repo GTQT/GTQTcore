@@ -1,14 +1,10 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregtech.api.recipes.GTRecipeHandler;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.unification.material.Material;
 import gregtech.common.blocks.BlockAsphalt;
 import gregtech.common.blocks.MetaBlocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -193,13 +189,6 @@ public class OilChains {
     }
 
     private static void NewOil() {
-
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, Tetranitromethane.getFluid(20), Diesel.getFluid(1000));
-        GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, Tetranitromethane.getFluid(40), BioDiesel.getFluid(1000));
-
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(200), Diesel.getFluid(10000)});
-        GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(24)}, new FluidStack[]{Tetranitromethane.getFluid(400), BioDiesel.getFluid(10000)});
-
         CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(Diesel.getFluid(7500))
                 .fluidInputs(Tetranitromethane.getFluid(300))
@@ -220,131 +209,125 @@ public class OilChains {
                 .duration(200)
                 .EUt(480)
                 .buildAndRegister();
+
         //柴油燃烧
-        COMBUSTION_GENERATOR_FUELS.recipeBuilder()
+        RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(DieselLight.getFluid(1))
-                .duration(27)
-                .fluidOutputs(HighTemperatureGas.getFluid(1350))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1500))
+                .duration(30)
+                .EUt(V[LV])
                 .buildAndRegister();
 
         COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(DieselHeavy.getFluid(1))
+                .fluidOutputs(HighTemperatureGas.getFluid(1500))
                 .duration(27)
-                .fluidOutputs(HighTemperatureGas.getFluid(1350))
-                .EUt(32)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Naphtha.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Naphtha.getFluid(1))
-                .duration(45)
-                .fluidOutputs(HighTemperatureGas.getFluid(2250))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1000))
+                .duration(20)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, SulfuricLightFuel.getFluid(4));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(SulfuricLightFuel.getFluid(4))
-                .duration(15)
-                .fluidOutputs(HighTemperatureGas.getFluid(750))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(500))
+                .duration(10)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Methanol.getFluid(4));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Methanol.getFluid(4))
-                .duration(36)
-                .fluidOutputs(HighTemperatureGas.getFluid(1800))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(800))
+                .duration(16)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Ethanol.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Ethanol.getFluid(1))
-                .duration(18)
-                .fluidOutputs(HighTemperatureGas.getFluid(1900))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(600))
+                .duration(12)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Octane.getFluid(2));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Octane.getFluid(2))
-                .duration(15)
-                .fluidOutputs(HighTemperatureGas.getFluid(750))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(500))
+                .duration(10)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, BioDiesel.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(BioDiesel.getFluid(1))
-                .duration(18)
-                .fluidOutputs(HighTemperatureGas.getFluid(900))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(800))
+                .duration(16)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, LightFuel.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(LightFuel.getFluid(1))
-                .duration(30)
-                .fluidOutputs(HighTemperatureGas.getFluid(1500))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1000))
+                .duration(20)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Diesel.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Diesel.getFluid(1))
-                .duration(45)
-                .fluidOutputs(HighTemperatureGas.getFluid(2250))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1500))
+                .duration(30)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, CetaneBoostedDiesel.getFluid(2));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(CetaneBoostedDiesel.getFluid(2))
-                .duration(135)
-                .fluidOutputs(HighTemperatureGas.getFluid(6750))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(4500))
+                .duration(90)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Gasoline.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Gasoline.getFluid(1))
-                .duration(150)
-                .fluidOutputs(HighTemperatureGas.getFluid(7500))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(5000))
+                .duration(100)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, HighOctaneGasoline.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(HighOctaneGasoline.getFluid(1))
-                .duration(300)
-                .fluidOutputs(HighTemperatureGas.getFluid(15000))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(10000))
+                .duration(200)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, Toluene.getFluid(1));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(Toluene.getFluid(1))
-                .duration(90)
-                .fluidOutputs(HighTemperatureGas.getFluid(4500))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1000))
+                .duration(20)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, OilLight.getFluid(32));
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(32))
-                .duration(15)
-                .fluidOutputs(HighTemperatureGas.getFluid(750))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(500))
+                .duration(10)
+                .EUt(V[LV])
                 .buildAndRegister();
 
-        GTRecipeHandler.removeRecipesByInputs(COMBUSTION_GENERATOR_FUELS, RawOil.getFluid(64));
+        RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(OilHeavy.getFluid(32))
+                .fluidOutputs(HighTemperatureGas.getFluid(450))
+                .duration(9)
+                .EUt(V[LV])
+                .buildAndRegister();
+
         RecipeMaps.COMBUSTION_GENERATOR_FUELS.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(64))
-                .duration(45)
-                .fluidOutputs(HighTemperatureGas.getFluid(2250))
-                .EUt(32)
+                .fluidOutputs(HighTemperatureGas.getFluid(1500))
+                .duration(30)
+                .EUt(V[LV])
                 .buildAndRegister();
 
     }

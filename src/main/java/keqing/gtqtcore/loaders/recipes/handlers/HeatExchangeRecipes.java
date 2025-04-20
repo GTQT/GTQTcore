@@ -22,12 +22,6 @@ public class HeatExchangeRecipes {
     }
 
     private static void BasicHeatExchange() {
-        RecipeMaps.SEMI_FLUID_GENERATOR_FUELS.recipeBuilder()
-                .fluidInputs(Lava.getFluid(100))
-                .EUt(32)
-                .duration(20)
-                .buildAndRegister();
-
         //  尾气
         HEAT_EXCHANGE_RECIPES.recipeBuilder()
                 .fluidInputs(DistilledWater.getFluid(5))

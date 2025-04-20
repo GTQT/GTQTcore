@@ -319,16 +319,6 @@ public class WetwareCircuits {
                 .cleanroom(CleanroomType.STERILE_CLEANROOM)
                 .buildAndRegister();
 
-        //  Delete original recipe
-        removeRecipesByInputs(CIRCUIT_ASSEMBLER_RECIPES,
-                new ItemStack[]{MULTILAYER_FIBER_BOARD.getStackForm(16),
-                        PETRI_DISH.getStackForm(),
-                        ELECTRIC_PUMP_LuV.getStackForm(),
-                        SENSOR_IV.getStackForm(),
-                        OreDictUnifier.get(circuit, MarkerMaterials.Tier.IV),
-                        OreDictUnifier.get(foil, NiobiumTitanium, 16)},
-                new FluidStack[]{SterileGrowthMedium.getFluid(4000)});
-
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(VA[IV])
