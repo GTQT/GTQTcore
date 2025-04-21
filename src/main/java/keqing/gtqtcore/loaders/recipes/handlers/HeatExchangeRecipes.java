@@ -405,15 +405,15 @@ public class HeatExchangeRecipes {
         HIGH_PRESSURE_STEAM_TURBINE_RECIPES.recipeBuilder()
                 .fluidInputs(SuperheatedSteam.getFluid(320))
                 .fluidOutputs(DistilledWater.getFluid(64))
-                .EUt((int) V[MV])
+                .EUt(2048)
                 .duration(10)
                 .buildAndRegister();
 
         //  Supercritical Steam
         SUPERCRITICAL_STEAM_TURBINE_RECIPES.recipeBuilder()
-                .fluidInputs(SupercriticalSteam.getFluid(640))
-                .fluidOutputs(DistilledWater.getFluid(128))
-                .EUt((int) V[EV])
+                .fluidInputs(SupercriticalSteam.getFluid(320))
+                .fluidOutputs(DistilledWater.getFluid(64))
+                .EUt(32768)
                 .duration(10)
                 .buildAndRegister();
     }

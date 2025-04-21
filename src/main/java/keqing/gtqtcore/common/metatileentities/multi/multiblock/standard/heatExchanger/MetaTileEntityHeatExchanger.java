@@ -26,6 +26,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,7 @@ import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate
 import static gregtech.api.util.RelativeDirection.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntityHeatExchanger extends RecipeMapPrimitiveMultiblockController implements IHeatExchanger {
+public class MetaTileEntityHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
     private final int heatTime = 200;
     private int coilLevel;
     private int number;

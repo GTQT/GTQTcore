@@ -137,8 +137,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
 
     @Override
     public List<IReinforcedRotorHolder> getRotorHolders() {
-        List<IReinforcedRotorHolder> abilities = getAbilities(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY);
-        return abilities;
+        return getAbilities(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY);
     }
 
     @Override

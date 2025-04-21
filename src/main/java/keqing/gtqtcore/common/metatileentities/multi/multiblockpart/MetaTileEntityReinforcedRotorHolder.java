@@ -112,31 +112,6 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
     @Override
     public void update() {
         super.update();
-        /*if (getWorld().isRemote) return;
-
-        if (getOffsetTimer() % 20 == 0) {
-            boolean isFrontFree = checkTurbineFaceFree();
-            if (isFrontFree != this.frontFaceFree) {
-                this.frontFaceFree = isFrontFree;
-                writeCustomData(GregtechDataCodes.FRONT_FACE_FREE, buf -> buf.writeBoolean(this.frontFaceFree));
-            }
-        }
-
-        FuelMultiblockController controller = (FuelMultiblockController) getController();
-
-        if (controller != null && controller.isActive()) {
-            if (currentSpeed < maxSpeed) {
-                setCurrentSpeed(currentSpeed + SPEED_INCREMENT);
-            }
-            if (getOffsetTimer() % 20 == 0) {
-                damageRotor((int) ((1 + controller.getNumMaintenanceProblems()) * Math.pow(16, ((ITurbineMode) getController()).getMode())));
-            }
-        } else if (!hasRotor()) {
-            setCurrentSpeed(0);
-        } else if (currentSpeed > 0) {
-            setCurrentSpeed(Math.max(0, currentSpeed - SPEED_DECREMENT));
-        }*/
-
         if (!this.getWorld().isRemote) {
             if (this.getOffsetTimer() % 20L == 0L) {
                 boolean isFrontFree = this.checkTurbineFaceFree();
@@ -148,6 +123,10 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
         }
 
         FuelMultiblockController controller = (FuelMultiblockController) getController();
+        if(controller==null||!controller.isStructureFormed())
+        {
+            this.setCurrentSpeed(0);
+        }
         if (controller != null && controller.isActive()) {
             if (this.currentSpeed < this.maxSpeed) {
                 this.setCurrentSpeed(this.currentSpeed + 1);

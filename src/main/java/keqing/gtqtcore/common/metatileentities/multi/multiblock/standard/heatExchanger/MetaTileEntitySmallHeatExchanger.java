@@ -22,6 +22,7 @@ import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.SA_TURBINE_CASING;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntitySmallHeatExchanger extends RecipeMapPrimitiveMultiblockController implements IHeatExchanger {
+public class MetaTileEntitySmallHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
     private final int heatTime = 600;
     private int thresholdPercentage = 100;
 

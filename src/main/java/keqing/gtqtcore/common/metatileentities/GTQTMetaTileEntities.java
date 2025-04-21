@@ -324,8 +324,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityCreativePressurePump CREATIVE_PRESSURE;
     public static MetaTileEntityPressureTank[] PRESSURE_TANK=new MetaTileEntityPressureTank[3];
 
-    public static MetaTileEntityLargeHighPressueSteamTurbine HIGH_PRESSURE_STEAM_TURBINE;
-    public static MetaTileEntityLargeSupercriticalSteamTurbine SUPERCRITICAL_STEAM_TURBINE;
+    public static MetaTileEntityCombinedSteamTurbine HIGH_PRESSURE_STEAM_TURBINE;
+    public static MetaTileEntityCombinedSteamTurbine SUPERCRITICAL_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_HIGH_PRESSURE_STEAM_TURBINE;
     public static MetaTileEntityMegaTurbine MEGA_SUPERCRITICAL_STEAM_TURBINE;
 
@@ -499,8 +499,8 @@ public class GTQTMetaTileEntities {
         MEGA_PLASMA_TURBINE = registerMetaTileEntity(3069, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(HC_ALLOY_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(HG1223_GEARBOX), GTQTTextures.HC_ALLOY_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
         MEGA_FUEL_CELL_TURBINE = registerMetaTileEntity(3063, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.fuel_cell"), FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_MACHINE_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_GEARBOX), GTQTTextures.NITINOL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
-        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3070, new MetaTileEntityLargeHighPressueSteamTurbine(gtqtcoreId("high_pressure_steam_turbine")));
-        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3071, new MetaTileEntityLargeSupercriticalSteamTurbine(gtqtcoreId("supercritical_steam_turbine")));
+        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3070, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("high_pressure_steam_turbine"),false));
+        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3071, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("supercritical_steam_turbine"),true));
         MEGA_HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3072, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_high_pressure_steam_turbine"), GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES, EV, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX), Textures.STABLE_TITANIUM_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
         MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3073, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
