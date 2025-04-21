@@ -662,7 +662,14 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                         dropStack.setCount(toDrop);
 
                         // 创建掉落物实体并放置在玩家附近
-                        EntityItem entityItem = new EntityItem(player.world, player.posX, player.posY, player.posZ, dropStack);
+                        EntityItem entityItem = new EntityItem(
+                                player.world,
+                                player.posX,
+                                player.posY + 0.5,
+                                player.posZ,
+                                dropStack
+                        );
+                        entityItem.setNoPickupDelay();
                         player.world.spawnEntity(entityItem);
 
                         // 减少剩余物品数量

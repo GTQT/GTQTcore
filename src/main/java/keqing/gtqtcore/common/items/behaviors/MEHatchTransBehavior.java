@@ -28,6 +28,7 @@ import keqing.gtqtcore.api.utils.GTQTLog;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -376,8 +377,15 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
                     ItemStack injectStack = extract.copy();
                     injectStack.setCount(1);
                     if (!player.inventory.addItemStackToInventory(injectStack)) {
-                        // 如果背包已满，则直接掉落物品
-                        player.dropItem(injectStack, false);
+                        EntityItem entityItem = new EntityItem(
+                                player.world,
+                                player.posX,
+                                player.posY + 0.5,
+                                player.posZ,
+                                injectStack.copy()
+                        );
+                        entityItem.setNoPickupDelay();
+                        player.world.spawnEntity(entityItem);
                     }
 
                     return true;

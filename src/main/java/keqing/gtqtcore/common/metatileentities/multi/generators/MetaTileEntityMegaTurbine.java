@@ -1,13 +1,10 @@
-package keqing.gregtech.common.metatileentities.multi.generators;
+package keqing.gtqtcore.common.metatileentities.multi.generators;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
-import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
-import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -32,12 +29,11 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.items.behaviors.TurbineRotorBehavior;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
-import keqing.gregtech.api.capability.GTQTDataCode;
-import keqing.gregtech.api.capability.IReinforcedRotorHolder;
-import keqing.gregtech.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gregtech.api.metaileentity.multiblock.ITurbineMode;
-import keqing.gregtech.api.pattern.GTQTTraceabilityPredicate;
+import keqing.gtqtcore.api.capability.GTQTDataCode;
+import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metaileentity.multiblock.ITurbineMode;
+import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -56,25 +52,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static gregtech.api.util.RelativeDirection.*;
 import static gregtech.api.util.TextFormattingUtil.formatNumbers;
 
 public class MetaTileEntityMegaTurbine extends FuelMultiblockController implements ITieredMetaTileEntity, ITurbineMode, IProgressBarMultiblock {
 
-    private int mode = 0;
+    private static final int MIN_DURABILITY_TO_WARN = 10;
     public final int tier;
     public final IBlockState casingState;
     public final IBlockState gearboxState;
     public final ICubeRenderer casingRenderer;
     public final boolean hasMufflerHatch;
     public final ICubeRenderer frontOverlay;
-    private static final int MIN_DURABILITY_TO_WARN = 10;
     public IFluidHandler exportFluidHandler;
+    private int mode = 0;
 
     public MetaTileEntityMegaTurbine(ResourceLocation metaTileEntityId,
                                      RecipeMap<?> recipeMap,
@@ -146,14 +140,15 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         List<IReinforcedRotorHolder> abilities = getAbilities(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY);
         return abilities;
     }
+
     @Override
     public void onRemoval() {
         super.onRemoval();
-        for (IReinforcedRotorHolder holder : getRotorHolders())
-        {
+        for (IReinforcedRotorHolder holder : getRotorHolders()) {
             holder.setCurrentSpeed(0);
         }
     }
+
     protected void setupRotors() {
         if (checkRotors()) return;
         for (int index = 0; index < inputInventory.getSlots(); index++) {
@@ -260,12 +255,14 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         return casingRenderer;
     }
+
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(),
                 true);
     }
+
     @SideOnly(Side.CLIENT)
     @Nonnull
     @Override
@@ -366,6 +363,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     public int getNumProgressBars() {
         return 3;
     }
+
     @Override
     public double getFillPercentage(int index) {
         IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
@@ -384,11 +382,12 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             }
             return fuelAmount[1] != 0 ? 1.0 * fuelAmount[0] / fuelAmount[1] : 0;
         } else if (index == 1) {
-            return   1.0 *  rotorHolder.getRotorSpeed()/ rotorHolder.getMaxRotorHolderSpeed();
+            return 1.0 * rotorHolder.getRotorSpeed() / rotorHolder.getMaxRotorHolderSpeed();
         } else {
-            return 1.0* getRotorDurabilityPercent()/100;
+            return 1.0 * getRotorDurabilityPercent() / 100;
         }
     }
+
     public TextureArea getProgressBarTexture(int index) {
         if (index == 0) {
             return GuiTextures.PROGRESS_BAR_LCE_FUEL;
@@ -398,6 +397,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             return GuiTextures.PROGRESS_BAR_TURBINE_ROTOR_DURABILITY;
         }
     }
+
     public void addBarHoverText(List<ITextComponent> hoverList, int index) {
         IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
         if (index == 0) {
@@ -436,11 +436,12 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             }
         }
     }
-    int getRotorDurabilityPercent()
-    {
+
+    int getRotorDurabilityPercent() {
         IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
         return rotorHolder.getRotorDurabilityPercent();
     }
+
     private TextFormatting getRotorSpeedColor(int rotorSpeed, int maxRotorSpeed) {
         double speedRatio = 1.0 * rotorSpeed / maxRotorSpeed;
         if (speedRatio < 0.4) {
@@ -451,6 +452,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             return TextFormatting.GREEN;
         }
     }
+
     private TextFormatting getRotorDurabilityColor(int durability) {
         if (durability > 40) {
             return TextFormatting.GREEN;
@@ -460,6 +462,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             return TextFormatting.RED;
         }
     }
+
     @Override
     public int getTier() {
         return tier;

@@ -13,7 +13,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
-import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMachineHatch;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;

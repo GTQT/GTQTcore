@@ -20,7 +20,7 @@ public class RocketEngineRecipes {
         //  Rocket Fuel
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(RocketFuel.getFluid(16))
-                .fluidOutputs(SuperCriticalGas.getFluid(2 * 1000))
+                .fluidOutputs(OverheatedGas.getFluid(2 * 1000))
                 .EUt(512)
                 .duration(8 * SECOND)
                 .buildAndRegister();
@@ -36,7 +36,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(RP1RocketFuel.getFluid(12))
-                .fluidOutputs(SuperCriticalGas.getFluid(1000))
+                .fluidOutputs(OverheatedGas.getFluid(1000))
                 .EUt(512)
                 .duration(6 * SECOND)
                 .buildAndRegister();
@@ -52,7 +52,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(DenseHydrazineMixtureFuel.getFluid(9))
-                .fluidOutputs(SuperCriticalGas.getFluid(4 * 1000))
+                .fluidOutputs(OverheatedGas.getFluid(4 * 1000))
                 .EUt(2048)
                 .duration(4 * SECOND)
                 .buildAndRegister();
@@ -78,7 +78,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(MethylhydrazineNitrateRocketFuel.getFluid(6))
-                .fluidOutputs(SuperCriticalGas.getFluid(6 * 1000))
+                .fluidOutputs(OverheatedGas.getFluid(6 * 1000))
                 .EUt(2048)
                 .duration(8 * SECOND)
                 .buildAndRegister();
@@ -102,7 +102,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(HydrazineFluorideFuel.getFluid(8))
-                .fluidOutputs(SuperCriticalGas.getFluid(3 * 1000))
+                .fluidOutputs(OverheatedGas.getFluid(3 * 1000))
                 .EUt(8192)
                 .duration(4 * SECOND)
                 .buildAndRegister();
@@ -156,7 +156,7 @@ public class RocketEngineRecipes {
 
         ROCKET_RECIPES.recipeBuilder()
                 .fluidInputs(TrihydraziniumGel.getFluid(8))
-                .fluidOutputs(SuperCriticalGas.getFluid(5 * 1000))
+                .fluidOutputs(OverheatedGas.getFluid(5 * 1000))
                 .EUt(8192)
                 .duration(6 * SECOND)
                 .buildAndRegister();

@@ -260,6 +260,7 @@ public class PlatinumGroupProcessing {
         //  2Na + 2O -> Na2O2
         ROASTER_RECIPES.recipeBuilder()
                 .input(dust, Sodium)
+                .circuitMeta(2)
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, GTQTMaterials.SodiumPeroxide, 2)
                 .temperature(403)

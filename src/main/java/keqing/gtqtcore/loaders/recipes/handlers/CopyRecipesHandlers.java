@@ -205,7 +205,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Air.getFluid(recipe.getDuration()*8))
                     .duration(baseDuration)
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*50))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*50))
                     .EUt(EUt)
                     .buildAndRegister();
 
@@ -213,7 +213,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS, recipe.getDuration()*4))
                     .duration((int) Math.floor(baseDuration * 1.5))
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*75))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*75))
                     .EUt(EUt)
                     .buildAndRegister();
 
@@ -221,7 +221,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, recipe.getDuration()))
                     .duration(baseDuration * 2)
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*100))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*100))
                     .EUt(EUt)
                     .buildAndRegister();
         }
@@ -240,7 +240,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Air.getFluid(recipe.getDuration()*8))
                     .duration(baseDuration)
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*50))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*50))
                     .EUt(EUt)
                     .buildAndRegister();
 
@@ -248,7 +248,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.GAS,recipe.getDuration()*4))
                     .duration((int) Math.floor(baseDuration * 1.5))
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*75))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*75))
                     .EUt(EUt)
                     .buildAndRegister();
 
@@ -256,7 +256,7 @@ public class CopyRecipesHandlers {
                     .fluidInputs(fluidInputs)
                     .fluidInputs(Materials.Oxygen.getFluid(FluidStorageKeys.LIQUID, recipe.getDuration()))
                     .duration(baseDuration * 2)
-                    .fluidOutputs(OverheatedGas.getFluid(baseDuration*100))
+                    //.fluidOutputs(OverheatedGas.getFluid(baseDuration*100))
                     .EUt(EUt)
                     .buildAndRegister();
 

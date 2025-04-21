@@ -1045,7 +1045,7 @@ public class GTQTcoreRecipeMaps {
             .itemInputs(0)
             .itemOutputs(0)
             .fluidInputs(2)
-            .fluidOutputs(1)
+            .fluidOutputs(0)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW, HORIZONTAL)
             .sound(GTSoundEvents.COMBUSTION)
             .allowEmptyOutputs()

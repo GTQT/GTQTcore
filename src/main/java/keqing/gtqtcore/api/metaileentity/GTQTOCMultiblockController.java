@@ -239,7 +239,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
                 .setShouldClientCallback(false));
 
         builder.widget(
-                new SliderWidget("gui.auto_parallel_limit", 200, 100, 80, 20, 1, maxParallel, limitAutoParallel,
+                new SliderWidget("gui.auto_parallel_limit", 200, 100, 80, 20, 1, getMaxParallel(), limitAutoParallel,
                         this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
                         .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
 

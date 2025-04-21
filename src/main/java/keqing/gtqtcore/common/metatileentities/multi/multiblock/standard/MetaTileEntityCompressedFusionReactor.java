@@ -103,6 +103,9 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         setMaxParallelFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
+
+        if(tier<=9)setOverclocking(3.0);
+        else setOverclocking(4.0);
     }
 
     @Override
@@ -423,7 +426,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 .setShouldClientCallback(false));
 
         builder.widget(
-                new SliderWidget("gui.auto_parallel_limit", 200, 52, 160, 20, 1, maxParallel, limitAutoParallel,
+                new SliderWidget("gui.auto_parallel_limit", 200, 52, 160, 20, 1, getMaxParallel(), limitAutoParallel,
                         this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
                         .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
 
@@ -463,6 +466,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
+        if(!isStructureFormed())return;
         String energyFormatted = TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getMaximumOverclockVoltage());
         ITextComponent voltageName1 = new TextComponentString(GTValues.VNF[GTUtility.getFloorTierByVoltage(this.recipeMapWorkable.getMaximumOverclockVoltage())]);
         ITextComponent bodyText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", energyFormatted, voltageName1);
@@ -731,23 +735,10 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         }
     }
 
-    private class CompressedFusionReactorRecipeLogic extends MultiblockRecipeLogic {
+    private class CompressedFusionReactorRecipeLogic extends GTQTMultiblockLogic {
 
         public CompressedFusionReactorRecipeLogic(MetaTileEntityCompressedFusionReactor tileEntity) {
             super(tileEntity);
-        }
-
-        @Override
-        protected double getOverclockingDurationFactor() {
-            if (tier <= 9) return OCFirst ? 0.375 : 0.25;
-            return OCFirst ? 0.25 : 0.5;
-        }
-
-        @Override
-        protected double getOverclockingVoltageFactor() {
-            if (tier <= 9) return OCFirst ? 3.0 : 2.0;
-            return OCFirst ? 4.0 : 2.0;
-
         }
 
         @Override

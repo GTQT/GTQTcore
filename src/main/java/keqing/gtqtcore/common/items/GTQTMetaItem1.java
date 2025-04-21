@@ -493,8 +493,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         SCINTILLATOR_CRYSTAL = addItem(436, "scintillator_crystal").setCreativeTabs(CommonProxy.GTQTCore_GD);
 
         DEBUG_HATCH_TRANS = this.addItem(437, "debug.hatch_trans").addComponents(new MEHatchTransBehavior()).setCreativeTabs(GTQTCore_TO);
+        DEBUG_WIRE_TRANS = this.addItem(438, "debug.wire_trans").addComponents(new WireTransBehavior()).setCreativeTabs(GTQTCore_TO);
 
-        MTE_COPY_CARD = this.addItem(438, "mte_copy_card").setMaxStackSize(1).addComponents(new MTECopyCardBehaviors()).setCreativeTabs(GTQTCore_TAB);
+        MTE_COPY_CARD = this.addItem(439, "mte_copy_card").setMaxStackSize(1).addComponents(new MTECopyCardBehaviors()).setCreativeTabs(GTQTCore_TAB);
 
         //440
         CIRCUIT_GOOD_I = addItem(440, "circuit.good_i").setCreativeTabs(CommonProxy.GTQTCore_HP);

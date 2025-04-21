@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "gtqtcore:items/metaitems/pos_binding_card"
+    "layer0": "gtqtcore:items/metaitems/mte_copy_card"
   }
 }
