@@ -276,10 +276,11 @@ public class MEHatchTransBehavior implements IItemBehaviour, ItemUIFactory {
                 }
             }
             if (mte instanceof MetaTileEntityDualHatch hatch) {
-                if (hatch.hasGhostCircuitInventory()) {
+                if (hatch.getAbility() == DUAL_IMPORT) {
                     if (meModel) trans(DUAL_IMPORT_HATCH[tier], ME_DUAL_IMPORT_HATCH, player, targetPos);
                     else trans(DUAL_IMPORT_HATCH[tier], DUAL_IMPORT_HATCH[targetTier], player, targetPos);
-                } else {
+                }
+                if (hatch.getAbility() == DUAL_EXPORT) {
                     if (meModel) trans(DUAL_EXPORT_HATCH[tier], ME_DUAL_EXPORT_HATCH, player, targetPos);
                     else trans(DUAL_EXPORT_HATCH[tier], DUAL_EXPORT_HATCH[targetTier], player, targetPos);
                 }

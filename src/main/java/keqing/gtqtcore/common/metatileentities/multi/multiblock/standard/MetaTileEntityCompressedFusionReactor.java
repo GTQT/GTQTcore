@@ -765,7 +765,6 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
 
         @Override
         public void setParallelLimit(int amount) {
-            setMaxParallel(amount);
             super.setParallelLimit(amount);
         }
 

@@ -213,7 +213,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         BORON_SATURATED_YARN = addItem(153, "boron_saturated_yarn").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
         LITHIUM_SIEVE = addItem(154, "lithium_sieve").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
         LITHIUM_SATURATED_LITHIUM_SIEVE = addItem(155, "lithium_saturated_lithium_sieve").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
-        ACRYLIC_YARN = addItem(156, "acrylic_yarn").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
+        ACRYLIC_YARN = addItem(156, "acrylic_yarn").setCreativeTabs(GTQTCore_TAB);
 
         FIND_ORE_STICK = addItem(159, "find_ore_stick").addComponents(new FindOreStickBehavior()).setMaxStackSize(1).setCreativeTabs(GTQTCore_TO);
         //ROCK

@@ -4553,7 +4553,7 @@ public class FirstDegreeMaterials {
                 .gem().fluid()
                 .color(0x545572)
                 .iconSet(MaterialIconSet.DIAMOND)
-                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION, CRYSTALLIZABLE, FLAMMABLE, EXPLOSIVE, DISABLE_CRYSTALLIZATION) // to disable implosion recipes
+                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION, CRYSTALLIZABLE, FLAMMABLE, EXPLOSIVE, DISABLE_CRYSTALLIZATION,GENERATE_GEAR, GENERATE_ROD, GENERATE_SMALL_GEAR,GENERATE_FRAME,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_BOLT_SCREW,GENERATE_RING,GENERATE_ROUND,GENERATE_ROD,GENERATE_LONG_ROD)
                 .components(Boron, 1, Nitrogen, 1)
                 .toolStats(MaterialToolProperty.Builder.of(14.0F, 9.0F, 12400, 15).build())
                 .build()

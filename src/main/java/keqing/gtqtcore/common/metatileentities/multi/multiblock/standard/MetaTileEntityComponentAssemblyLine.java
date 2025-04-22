@@ -331,7 +331,6 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.component_assembly_line.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
     }
 
     protected class MetaTileEntityComponentAssemblyLineWorkable extends GTQTMultiblockLogic {
