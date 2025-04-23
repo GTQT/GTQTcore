@@ -190,7 +190,6 @@ public class GTQTcoreRecipeMaps {
             .fluidInputs(1)
             .itemSlotOverlay(GuiTextures.CIRCUIT_OVERLAY, false)
             .itemSlotOverlay(GuiTextures.DATA_ORB_OVERLAY, true)
-            .progressBar(GuiTextures.PROGRESS_BAR_CIRCUIT_ASSEMBLER, HORIZONTAL)
             .ui(LargeCircuitAssemblyLineUI::new)
             .sound(GTSoundEvents.ASSEMBLER)
             .build();
@@ -999,12 +998,12 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<SimpleRecipeBuilder> SFM = new RecipeMapBuilder<>("sfm", new SimpleRecipeBuilder())
             .itemInputs(1)
-            .itemOutputs(12)
+            .itemOutputs(1)
             .fluidInputs(1)
-            .fluidOutputs(1)
+            .fluidOutputs(12)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
             .sound(GTSoundEvents.CHEMICAL_REACTOR)
-            .ui(HeatExchangerUI::new)
+            .ui(SFMDistillationTowerUI::new)
             .build();
 
     public static final RecipeMap<PrimitiveRecipeBuilder> COAGULATION_RECIPES = new RecipeMapBuilder<>("coagulation_tank", new PrimitiveRecipeBuilder())

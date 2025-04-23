@@ -465,7 +465,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.13"));
         tooltip.add(I18n.format("gtqtcore.machine.pcb_factory.tooltip.14"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

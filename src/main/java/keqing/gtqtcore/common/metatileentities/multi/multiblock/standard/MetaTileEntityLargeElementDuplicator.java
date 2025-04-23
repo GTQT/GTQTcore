@@ -154,7 +154,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
         tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, 256));
         tooltip.add(I18n.format("gtqtcore.machine.progress_time", "maxProgress *0.8"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

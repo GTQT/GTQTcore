@@ -232,7 +232,7 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
         tooltip.add(I18n.format("gtqtcore.machine.neutral_network_nexus.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.neutral_network_nexus.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

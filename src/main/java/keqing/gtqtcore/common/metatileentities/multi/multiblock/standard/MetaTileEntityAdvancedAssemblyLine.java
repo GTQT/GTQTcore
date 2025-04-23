@@ -416,7 +416,7 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.advanced_assembly_line.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
         if (ConfigHolder.machines.orderedAssembly && ConfigHolder.machines.orderedFluidAssembly) {
             tooltip.add(I18n.format("gregtech.machine.assembly_line.tooltip_ordered_both"));
         } else if (ConfigHolder.machines.orderedAssembly) {

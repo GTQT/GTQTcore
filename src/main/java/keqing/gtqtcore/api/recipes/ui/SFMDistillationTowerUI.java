@@ -74,8 +74,6 @@ public class SFMDistillationTowerUI<R extends RecipeMap<?>> extends RecipeMapUI<
             invertFluids = true;
         }
 
-        addSlot(builder, 68, 55, 0, itemHandler, fluidHandler, false, false);
-
         int[] inputSlotGrid = RecipeMapUI.determineSlotsGrid(itemInputsCount);
         int itemSlotsToLeft = inputSlotGrid[0];
         int itemSlotsToDown = inputSlotGrid[1];
@@ -86,7 +84,7 @@ public class SFMDistillationTowerUI<R extends RecipeMap<?>> extends RecipeMapUI<
         if (itemHandler.getSlots() == 6 && fluidHandler.getTanks() == 2 && !isOutputs) startInputsY -= 9;
         if (!isOutputs) {
             addSlot(builder, 40, startInputsY + (itemSlotsToDown - 1) * 18 - 18, 0, itemHandler, fluidHandler,
-                    invertFluids, false);
+                    true, false);
         } else {
             addSlot(builder, 94, startInputsY + (itemSlotsToDown - 1) * 18, 0, itemHandler, fluidHandler, invertFluids,
                     true);
@@ -94,7 +92,11 @@ public class SFMDistillationTowerUI<R extends RecipeMap<?>> extends RecipeMapUI<
 
         if (wasGroupOutput) startInputsY += 2;
 
-        if (!isOutputs) return;
+        if (!isOutputs)
+        {
+            addSlot(builder, 68, 55, 0, itemHandler, fluidHandler, false, false);
+            return;
+        }
 
         if (!invertFluids) {
             startInputsY -= 18;

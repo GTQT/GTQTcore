@@ -53,12 +53,56 @@ public class FluidizedBedChain {
                 .buildAndRegister();
 
         GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                .fluidInputs(AtmosphericResidue.getFluid(1000))
+                .fluidInputs(WaxOil.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(7000))
+                .fluidOutputs(OilGas.getFluid(1000))
+                .duration(600)
+                .EUt(480)
+                .recipeLevel(2)
+                .Catalyst(CATALYST_CO.getStackForm())
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                .fluidInputs(VacuumResidue.getFluid(1000))
+                .fluidInputs(WaxOil.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(7000))
+                .fluidOutputs(OilGas.getFluid(3000))
+                .duration(600)
+                .EUt(480)
+                .recipeLevel(2)
+                .Catalyst(CATALYST_CO.getStackForm())
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
                 .fluidInputs(Materials.CarbonMonoxide.getFluid(4000))
                 .fluidInputs(Materials.Hydrogen.getFluid(4000))
                 .circuitMeta(1)
                 .fluidOutputs(DieselLight.getFluid(1200))
                 .fluidOutputs(Lubricant.getFluid(400))
                 .recipeLevel(3)
+                .Catalyst(CATALYST_CU.getStackForm())
+                .EUt(180)
+                .duration(120)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                .fluidInputs(WaxOil.getFluid(2000))
+                .circuitMeta(1)
+                .fluidOutputs(DieselLight.getFluid(1200))
+                .fluidOutputs(Lubricant.getFluid(800))
+                .recipeLevel(2)
+                .Catalyst(CATALYST_CU.getStackForm())
+                .EUt(180)
+                .duration(120)
+                .buildAndRegister();
+
+        GTQTcoreRecipeMaps.FLUIDIZED_BED.recipeBuilder()
+                .fluidInputs(CoalTar.getFluid(2000))
+                .circuitMeta(1)
+                .fluidOutputs(DieselLight.getFluid(1200))
+                .fluidOutputs(Lubricant.getFluid(800))
+                .recipeLevel(2)
                 .Catalyst(CATALYST_CU.getStackForm())
                 .EUt(180)
                 .duration(120)
@@ -74,6 +118,7 @@ public class FluidizedBedChain {
                 .EUt(180)
                 .duration(120)
                 .buildAndRegister();
+
 
         GTRecipeHandler.removeRecipesByInputs(CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(1)}, new FluidStack[]{Nitrogen.getFluid(1000), Hydrogen.getFluid(3000)});
         GTRecipeHandler.removeRecipesByInputs(LARGE_CHEMICAL_RECIPES, new ItemStack[]{IntCircuitIngredient.getIntegratedCircuit(1)}, new FluidStack[]{Nitrogen.getFluid(1000), Hydrogen.getFluid(3000)});

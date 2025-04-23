@@ -38,13 +38,6 @@ public class OreDeal {
                 .EUt(30)
                 .buildAndRegister();
 
-        CLARIFIER.recipeBuilder()
-                .input(dust,LeanGoldBs,24)
-                .fluidOutputs(LeanGoldJc.getFluid(16000))
-                .output(dust,LeanCopperJc,8)
-                .duration(1200)
-                .buildAndRegister();
-
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust,LeanGoldBs,12)
                 .fluidOutputs(LeanGoldJc.getFluid(6000))
@@ -121,13 +114,6 @@ public class OreDeal {
                 .fluidInputs(Oxygen.getFluid(1000))
                 .duration(100)
                 .EUt(30)
-                .buildAndRegister();
-
-        CLARIFIER.recipeBuilder()
-                .input(dust,RichGoldBs,24)
-                .fluidOutputs(LeanGoldJc.getFluid(16000))
-                .output(dust,RichCopperJc,8)
-                .duration(1200)
                 .buildAndRegister();
 
         CENTRIFUGE_RECIPES.recipeBuilder()

@@ -37,6 +37,7 @@ import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -113,14 +114,13 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("超级化学反应", new Object[0]));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override
@@ -207,6 +207,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
+                        .or(abilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY).setMaxGlobalLimited(1))
                 )
                 .where('X', heatingCoils())
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))

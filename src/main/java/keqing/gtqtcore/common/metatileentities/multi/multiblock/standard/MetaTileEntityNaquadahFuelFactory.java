@@ -112,13 +112,14 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
     public void addInformation(ItemStack stack, World player, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("硅岩快乐之家", new Object[0]));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.4"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.6"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

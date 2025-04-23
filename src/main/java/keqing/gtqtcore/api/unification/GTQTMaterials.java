@@ -197,6 +197,14 @@ public class GTQTMaterials {
     public static Material LightlySteamCrackedDieselHeavy;
     public static Material SeverelyHydroCrackedDieselHeavy;
     public static Material SeverelySteamCrackedDieselHeavy;
+    public static Material LightlyHydroCrackedCoalOil;
+    public static Material LightlySteamCrackedCoalOil;
+    public static Material SeverelyHydroCrackedCoalOil;
+    public static Material SeverelySteamCrackedCoalOil;
+    public static Material LightlyHydroCrackedOil;
+    public static Material LightlySteamCrackedOil;
+    public static Material SeverelyHydroCrackedOil;
+    public static Material SeverelySteamCrackedOil;
     public static Material Phenolic;
     public static Material Latex;
     public static Material Polysilicon;

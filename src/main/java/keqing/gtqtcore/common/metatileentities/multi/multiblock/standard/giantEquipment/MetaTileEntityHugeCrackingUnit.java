@@ -220,7 +220,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
-        tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

@@ -444,6 +444,59 @@ public class UnknownCompositionMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .build();
 
+        //轻度加氢裂解煤油
+        GTQTMaterials.LightlyHydroCrackedCoalOil = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlyHydroCrackedCoalOil"))
+                .fluid()
+                .color(0xFF7F50)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度蒸汽裂解煤油
+        GTQTMaterials.LightlySteamCrackedCoalOil = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlySteamCrackedCoalOil"))
+                .fluid()
+                .color(0xFF7F24)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度加氢裂解煤油
+        GTQTMaterials.SeverelyHydroCrackedCoalOil = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelyHydroCrackedCoalOil"))
+                .fluid()
+                .color(0xFF7F00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //中度蒸汽裂解煤油
+        GTQTMaterials.SeverelySteamCrackedCoalOil = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelySteamCrackedCoalOil"))
+                .fluid()
+                .color(0xFF7256)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
+        //轻度加氢裂解渣油
+        GTQTMaterials.LightlyHydroCrackedOil = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlyHydroCrackedOil"))
+                .fluid()
+                .color(0xFF7F50)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //轻度蒸汽裂解渣油
+        GTQTMaterials.LightlySteamCrackedOil = new Material.Builder(getMaterialsId(), gtqtcoreId("LightlySteamCrackedOil"))
+                .fluid()
+                .color(0xFF7F24)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //重度加氢裂解渣油
+        GTQTMaterials.SeverelyHydroCrackedOil = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelyHydroCrackedOil"))
+                .fluid()
+                .color(0xFF7F00)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+        //重度蒸汽裂解渣油
+        GTQTMaterials.SeverelySteamCrackedOil = new Material.Builder(getMaterialsId(), gtqtcoreId("SeverelySteamCrackedOil"))
+                .fluid()
+                .color(0xFF7256)
+                .flags(DISABLE_DECOMPOSITION)
+                .build();
+
         //酚醛
         GTQTMaterials.Phenolic = new Material.Builder(getMaterialsId(), gtqtcoreId("phenolic"))
                 .fluid()

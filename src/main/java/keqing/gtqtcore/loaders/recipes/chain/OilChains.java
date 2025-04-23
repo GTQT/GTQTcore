@@ -100,58 +100,55 @@ public class OilChains {
     }
 
     private static void exquisiteRecycling() {
-        //常压渣油 减压渣油产线
-        /*
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(200)
-                .EUt(30)
-                .circuitMeta(1)
+        //蜡油/煤油 WaxOil 后续
+        //1.均加氢裂解为 XXX裂解煤油 处理见下
+        //2.制润滑油
+        //3.催化到柴油 见流化床
+
+        //常压渣油 AtmosphericResidue 后续
+        //1.焦化：变为油气与焦炭
+        PYROLYSE_RECIPES.recipeBuilder()
                 .fluidInputs(AtmosphericResidue.getFluid(2000))
-                .fluidInputs(WaxOil.getFluid(1000))
-                .fluidOutputs(OilGas.getFluid(3000))
+                .output(gem,Coal,16)
+                .fluidOutputs(OilGas.getFluid(8000))
+                .EUt(VA[IV])
+                .duration(10)
                 .buildAndRegister();
-        */
-        //VacuumResidue 减压渣油
-
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(600)
-                .EUt(480)
+        //2.制备油气 见流化床
+        //3.制备合成气
+        CATALYTIC_REFORMER_RECIPES.recipeBuilder()
+                .notConsumable(plate, Gold) // 铂催化剂
                 .fluidInputs(AtmosphericResidue.getFluid(1000))
-                .fluidInputs(WaxOil.getFluid(1000))
-                .fluidInputs(Hydrogen.getFluid(7000))
-                .fluidOutputs(OilGas.getFluid(1000))
+                .fluidOutputs(CarbonMonoxide.getFluid(6400))
+                .fluidOutputs(Hydrogen.getFluid(1600))
+                .duration(120).EUt(VA[MV]).buildAndRegister();
+
+        //4.裂化 处理见下
+
+        //减压渣油 VacuumResidue 后续
+        //1.焦化：变为油气与焦炭
+        PYROLYSE_RECIPES.recipeBuilder()
+                .fluidInputs(VacuumResidue.getFluid(4000))
+                .output(gem,Coal,16)
+                .fluidOutputs(OilGas.getFluid(8000))
+                .EUt(VA[IV])
+                .duration(10)
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
-                .duration(600)
-                .EUt(480)
+        //2.制备油气 见流化床
+        //3.制备合成气
+        CATALYTIC_REFORMER_RECIPES.recipeBuilder()
+                .notConsumable(plate, Gold) // 铂催化剂
                 .fluidInputs(VacuumResidue.getFluid(1000))
-                .fluidInputs(WaxOil.getFluid(1000))
-                .fluidInputs(Hydrogen.getFluid(7000))
-                .fluidOutputs(OilGas.getFluid(3000))
-                .buildAndRegister();
-        //用减压渣油和未转化催化裂化蜡油(FGO)的混合原料，在液时体积空速0.20 h-1、反应器入口氢分压16.5 MPa、氢油比700的工艺条件下，
-        // 开展了固定床渣油加氢试验。加氢常压渣油主要性质满足缓和催化裂化原料要求，利用加氢常压渣油开展了缓和催化裂化试验。
-        // 通过渣油加氢与缓和催化裂化工艺组合，使固定床渣油加氢可以加工100%减压渣油。以减压渣油进料计，多产FGO、兼顾FGO和汽油、多产汽油3种方案
-        // 汽油+柴油质量收率分别为67.77%，66.38%，61.99%，高附加值的液化石油气质量收率分别为15.69%，16.76%，19.22%，
+                .fluidOutputs(CarbonMonoxide.getFluid(3200))
+                .fluidOutputs(Hydrogen.getFluid(800))
+                .duration(120).EUt(VA[MV]).buildAndRegister();
 
-        CRACKING_RECIPES.recipeBuilder()
-                .circuitMeta(1)
-                .fluidInputs(OilGas.getFluid(1000))
-                .fluidInputs(Hydrogen.getFluid(2000))
-                .fluidOutputs(LightlyHydroCrackedDieselLight.getFluid(500))
-                .fluidOutputs(LightlyHydroCrackedDieselHeavy.getFluid(500))
-                .duration(300).EUt(120).buildAndRegister();
+        //4.裂化 处理见下
 
-        CRACKING_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .fluidInputs(OilGas.getFluid(1000))
-                .fluidInputs(Hydrogen.getFluid(6000))
-                .fluidOutputs(SeverelyHydroCrackedDieselLight.getFluid(500))
-                .fluidOutputs(SeverelyHydroCrackedDieselHeavy.getFluid(500))
-                .duration(600).EUt(240).buildAndRegister();
-
-        SFM.recipeBuilder()
+        //油气 OilGas 后续
+        //1.蒸馏 见下：
+        DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(OilGas.getFluid(2000))
                 .circuitMeta(1)
                 .chancedOutput(dust, Carbon, 1111, 0)
@@ -167,9 +164,9 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(50))
                 .fluidOutputs(Acetylene.getFluid(50))
                 .fluidOutputs(Dimethylbenzene.getFluid(50))
-                .duration(120).EUt(120).buildAndRegister();
+                .duration(120).EUt(240).buildAndRegister();
 
-        SFM.recipeBuilder()
+        DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(OilGas.getFluid(2000))
                 .circuitMeta(2)
                 .chancedOutput(dust, Carbon, 1111, 0)
@@ -185,7 +182,7 @@ public class OilChains {
                 .fluidOutputs(Ethylene.getFluid(50))
                 .fluidOutputs(Acetylene.getFluid(50))
                 .fluidOutputs(Dimethylbenzene.getFluid(50))
-                .duration(120).EUt(120).buildAndRegister();
+                .duration(120).EUt(240).buildAndRegister();
     }
 
     private static void NewOil() {
@@ -509,6 +506,7 @@ public class OilChains {
                 .EUt(120)
                 .buildAndRegister();
 
+        /*
         CLARIFIER.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(16000))
                 .fluidInputs(Demulsifier.getFluid(400))
@@ -576,6 +574,8 @@ public class OilChains {
                 .circuitMeta(2)
                 .duration(3200)
                 .buildAndRegister();
+
+         */
     }
 
     private static void Kettle() {
@@ -693,18 +693,6 @@ public class OilChains {
                 .fluidOutputs(Phenol.getFluid(100))
                 .duration(400).Heat(425)
                 .buildAndRegister();
-
-        //煤油
-        SFM.recipeBuilder()
-                .fluidInputs(CoalTar.getFluid(2000))
-                .fluidOutputs(Naphthalene.getFluid(600))
-                .fluidOutputs(HydrogenSulfide.getFluid(500))
-                .fluidOutputs(HighlyPurifiedCoalTar.getFluid(400))
-                .fluidOutputs(Creosote.getFluid(300))
-                .fluidOutputs(Phenol.getFluid(200))
-                .duration(80).EUt(120)
-                .buildAndRegister();
-
     }
 
     private static void atmosphericAndVacuumPressure() {
@@ -802,14 +790,6 @@ public class OilChains {
                 .EUt(30)
                 .duration(200)
                 .buildAndRegister();
-
-        //油气处理
-        CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(OilGas.getFluid(1000))
-                .fluidOutputs(RefineryGas.getFluid(4000))
-                .EUt(30)
-                .duration(200)
-                .buildAndRegister();
     }
 
     private static void catalyticCracking() {
@@ -818,6 +798,15 @@ public class OilChains {
 
         lightlyCrack(DieselHeavy, LightlyHydroCrackedDieselHeavy, LightlySteamCrackedDieselHeavy);
         severelyCrack(DieselHeavy, SeverelyHydroCrackedDieselHeavy, SeverelySteamCrackedDieselHeavy);
+
+        lightlyCrack(WaxOil, LightlyHydroCrackedCoalOil, LightlySteamCrackedCoalOil);
+        severelyCrack(WaxOil, SeverelyHydroCrackedCoalOil, SeverelySteamCrackedCoalOil);
+
+        lightlyCrack(CoalTar, LightlyHydroCrackedCoalOil, LightlySteamCrackedCoalOil);
+        severelyCrack(CoalTar, SeverelyHydroCrackedCoalOil, SeverelySteamCrackedCoalOil);
+
+        lightlyCrack(VacuumResidue, LightlyHydroCrackedOil, LightlySteamCrackedOil);
+        severelyCrack(AtmosphericResidue, SeverelyHydroCrackedOil, SeverelySteamCrackedOil);
 
         //蒸汽
         DISTILLATION_RECIPES.recipeBuilder()
@@ -888,6 +877,63 @@ public class OilChains {
                 .fluidOutputs(Dimethylbenzene.getFluid(150))
                 .duration(120).EUt(120).buildAndRegister();
 
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(LightlySteamCrackedCoalOil.getFluid(800))
+                .chancedOutput(dust, Carbon, 1111, 0)
+                .fluidOutputs(CoalTar.getFluid(200))
+                .fluidOutputs(Benzene.getFluid(100))
+                .fluidOutputs(Naphthalene.getFluid(60))
+                .fluidOutputs(Toluene.getFluid(40))
+                .fluidOutputs(Phenol.getFluid(30))
+                .fluidOutputs(Creosote.getFluid(30))
+                .fluidOutputs(Naphtha.getFluid(50))
+                .fluidOutputs(Ethylene.getFluid(50))
+                .fluidOutputs(Propene.getFluid(30))
+                .fluidOutputs(Butadiene.getFluid(15))
+                .fluidOutputs(Acetylene.getFluid(40))
+                .fluidOutputs(Dimethylbenzene.getFluid(35))
+                .duration(120).EUt(120).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(SeverelySteamCrackedCoalOil.getFluid(800))
+                .chancedOutput(dust, Carbon, 3333, 0)
+                .fluidOutputs(CoalTar.getFluid(80))
+                .fluidOutputs(Benzene.getFluid(200))
+                .fluidOutputs(Ethylene.getFluid(120))
+                .fluidOutputs(Naphthalene.getFluid(80))
+                .fluidOutputs(Propene.getFluid(80))
+                .fluidOutputs(Toluene.getFluid(60))
+                .fluidOutputs(Acetylene.getFluid(100))
+                .fluidOutputs(Butadiene.getFluid(40))
+                .fluidOutputs(Naphtha.getFluid(80))
+                .fluidOutputs(Dimethylbenzene.getFluid(50))
+                .fluidOutputs(Phenol.getFluid(40))
+                .fluidOutputs(Creosote.getFluid(40))
+                .duration(120).EUt(120).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(LightlySteamCrackedOil.getFluid(1000))
+                .chancedOutput(dust, Carbon, 1500, 0)
+                .fluidOutputs(Ethylene.getFluid(250))
+                .fluidOutputs(Propene.getFluid(200))
+                .fluidOutputs(Naphtha.getFluid(150))
+                .fluidOutputs(Benzene.getFluid(80))
+                .fluidOutputs(Butadiene.getFluid(50))
+                .fluidOutputs(Steam.getFluid(200))
+                .fluidOutputs(HydrogenSulfide.getFluid(20))
+                .duration(120).EUt(120).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(SeverelySteamCrackedOil.getFluid(1000))
+                .chancedOutput(dust, Carbon, 3000, 0)
+                .fluidOutputs(Ethylene.getFluid(350))
+                .fluidOutputs(Acetylene.getFluid(150))
+                .fluidOutputs(Propene.getFluid(100))
+                .fluidOutputs(Naphthalene.getFluid(80))
+                .fluidOutputs(Benzene.getFluid(50))
+                .fluidOutputs(Steam.getFluid(300))
+                .fluidOutputs(Hydrogen.getFluid(50))
+                .duration(120).EUt(120).buildAndRegister();
 
         //氢气
         DISTILLATION_RECIPES.recipeBuilder()
@@ -929,6 +975,46 @@ public class OilChains {
                 .fluidOutputs(Ethane.getFluid(175))
                 .fluidOutputs(Methane.getFluid(175))
                 .duration(120).EUt(120).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(LightlyHydroCrackedCoalOil.getFluid(800))
+                .fluidOutputs(Naphthalene.getFluid(200))           // Naphthalene
+                .fluidOutputs(HydrogenSulfide.getFluid(150))       // Hydrogen Sulfide
+                .fluidOutputs(HighlyPurifiedCoalTar.getFluid(600)) // Highly Purified Coal Tar
+                .fluidOutputs(Creosote.getFluid(200))              // Creosote
+                .fluidOutputs(Phenol.getFluid(100))                // Phenol
+                .duration(100).EUt(120).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(SeverelyHydroCrackedCoalOil.getFluid(800))
+                .fluidOutputs(CoalTar.getFluid(160))  // 煤油
+                .fluidOutputs(Naphthalene.getFluid(600))            // Naphthalene
+                .fluidOutputs(HydrogenSulfide.getFluid(500))        // Hydrogen Sulfide
+                .fluidOutputs(HighlyPurifiedCoalTar.getFluid(400))  // Highly Purified Coal Tar
+                .fluidOutputs(Creosote.getFluid(300))               // Creosote
+                .fluidOutputs(Phenol.getFluid(200))                 // Phenol
+                .duration(120).EUt(240).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(LightlyHydroCrackedOil.getFluid(1000))
+                .chancedOutput(dust, Carbon, 500, 0)
+                .fluidOutputs(Naphtha.getFluid(400))
+                .fluidOutputs(CoalTar.getFluid(300))
+                .fluidOutputs(Diesel.getFluid(200))
+                .fluidOutputs(LightFuel.getFluid(100))
+                .fluidOutputs(Propane.getFluid(50))
+                .fluidOutputs(Butane.getFluid(30))
+                .fluidOutputs(Hydrogen.getFluid(100))
+                .duration(150).EUt(240).buildAndRegister();
+
+        DISTILLATION_RECIPES.recipeBuilder()
+                .fluidInputs(SeverelyHydroCrackedOil.getFluid(1000))
+                .chancedOutput(dust, Carbon, 200, 0)
+                .fluidOutputs(LPG.getFluid(500))
+                .fluidOutputs(Naphtha.getFluid(300))
+                .fluidOutputs(Hydrogen.getFluid(300))
+                .fluidOutputs(Methane.getFluid(100))
+                .duration(200).EUt(320).buildAndRegister();
 
         //燃油裂化补充配方
         CHEMICAL_RECIPES.recipeBuilder()
