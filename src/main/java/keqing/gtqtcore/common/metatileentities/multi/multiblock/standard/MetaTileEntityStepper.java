@@ -310,9 +310,10 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
                         }
                         if (this.progressTime > this.maxProgressTime) {
 
-                            if (LaserAmount - 1000 > 0) LaserAmount -= 1000;
-
-                            this.completeRecipe();
+                            if (LaserAmount >=1000) {
+                                LaserAmount -= 1000;
+                                this.completeRecipe();
+                            }
                         }
                     } else {
                         this.currentDrawnCWUt = 0;

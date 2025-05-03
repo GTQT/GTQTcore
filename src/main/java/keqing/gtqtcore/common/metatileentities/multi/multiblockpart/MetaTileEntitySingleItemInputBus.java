@@ -33,7 +33,6 @@ public class MetaTileEntitySingleItemInputBus extends MetaTileEntityItemBus {
     @Override
     protected IItemHandlerModifiable createImportItemHandler() {
         return new NotifiableItemStackHandler(this, slotSize, getController(), false) {
-
             @Override
             public int getSlotLimit(int slot) {
                 return stackSizeLimit;
