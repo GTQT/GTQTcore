@@ -676,33 +676,6 @@ public class MetaTileEntityMachine {
                 'W', new UnificationEntry(pipeTinyFluid, TinAlloy),
                 'X', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV));
 
-        // Steam Roaster
-        ModHandler.addShapedRecipe(true, "steam_roaster.bronze", STEAM_ROASTER[0].getStackForm(),
-                "KSK", "CHC", "PPP",
-                'K', new UnificationEntry(pipeLargeFluid, Bronze),
-                'S', new UnificationEntry(spring, WroughtIron),
-                'C', new UnificationEntry(gem, Diamond),
-                'P', new UnificationEntry(plate, Brass),
-                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.BRONZE_HULL));
-
-        ModHandler.addShapedRecipe(true, "steam_roaster.steel", STEAM_ROASTER[1].getStackForm(),
-                "KSK", "CHC", "PPP",
-                'K', new UnificationEntry(pipeLargeFluid, TinAlloy),
-                'S', new UnificationEntry(spring, Steel),
-                'C', new UnificationEntry(circuit, MarkerMaterials.Tier.ULV),
-                'P', new UnificationEntry(plate, Potin),
-                'H', MetaBlocks.STEAM_CASING.getItemVariant(BlockSteamCasing.SteamCasingType.STEEL_HULL));
-
-        // Roaster
-        MetaTileEntityLoader.registerMachineRecipe(true, ROASTER,
-                "KSK", "CHC", "PPP",
-                'K', CraftingComponent.CABLE_QUAD,
-                'S', CraftingComponent.SPRING,
-                'C', CraftingComponent.CIRCUIT,
-                'P', CraftingComponent.PLATE,
-                'H', CraftingComponent.HULL);
-
-
         // Catalytic Reformer
         MetaTileEntityLoader.registerMachineRecipe(true, CATALYTIC_REFORMER,
                 "MCM", "PHP", "MKM",

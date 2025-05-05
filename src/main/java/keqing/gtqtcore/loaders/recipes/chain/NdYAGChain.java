@@ -68,13 +68,13 @@ public class NdYAGChain {
     private static void NdYOChain() {
 
         //  YO + NdO -> Nd:YO?
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, YttriumOxide, 45)
                 .input(dust, NeodymiumOxide, 5)
                 .output(dust, NeodymiumDopedYttriumOxide, 5)
                 .EUt(VA[IV])
                 .duration(11 * SECOND)
-                .temperature(1880)
+                .blastFurnaceTemp(1880)
                 .buildAndRegister();
     }
 

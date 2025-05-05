@@ -215,27 +215,26 @@ public class StrontiumRadiumChain {
                 .buildAndRegister();
 
         //  Step5
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, ThoriumOxide, 2)
                 .input(dust, CalciumChloride, 3)
                 .output(dust, Thorium)
                 .output(dust, Quicklime, 2)
                 .fluidOutputs(Chlorine.getFluid(2000))
                 .EUt(VA[HV])
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .duration(150)
-                .temperature(1000)
                 .buildAndRegister();
 
         //  Celestite + Soda Ash + Carbon -> Strontium Carbonate + Sodium Sulfide + Carbon Dioxide
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Celestite, 6)
                 .input(dust, SodaAsh, 6)
                 .input(dust, Carbon, 2)
                 .output(dust, StrontiumCarbonate, 5)
                 .output(dust, SodiumSulfide, 3)
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .EUt(VA[HV])
                 .duration(360)
                 .buildAndRegister();

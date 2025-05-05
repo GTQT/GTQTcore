@@ -42,7 +42,7 @@ public class MolybdenumProcessing {
 
     private static void molybdenum() {
         // MoS2 + 9O -> MoO3 + 2SO2 + ReO2
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Molybdenite, 3)
                 .fluidInputs(Oxygen.getFluid(8000))
                 .output(dust, GTQTMaterials.MolybdenumTrioxide, 4)
@@ -50,7 +50,7 @@ public class MolybdenumProcessing {
                 .fluidOutputs(GTQTMaterials.MolybdenumFlue.getFluid(1000))
                 .duration(200)
                 .EUt(VA[MV])
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         // MoO3 + 6H -> Mo + 3H2O

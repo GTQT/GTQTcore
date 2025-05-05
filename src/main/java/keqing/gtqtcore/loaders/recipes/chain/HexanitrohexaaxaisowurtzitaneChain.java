@@ -17,14 +17,14 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.SodiumAcetate;
 public class HexanitrohexaaxaisowurtzitaneChain {
     public static void init() {
         //  Ammonium Carbonate
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Calcite, 5)
                 .fluidInputs(AmmoniumSulfate.getFluid(1000))
                 .output(dust, Gypsum, 6)
                 .output(dust, AmmoniumCarbonate, 14)
                 .EUt(VA[MV])
                 .duration(270)
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         //  Ammonium Acetate
@@ -133,14 +133,14 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .buildAndRegister();
 
         //  Potassium Nitrite
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Saltpeter, 5)
                 .input(dust, Galena)
                 .output(dust, PotassiumNitrite, 4)
                 .output(dust, Lead)
                 .EUt(VA[HV])
                 .duration(3600)
-                .temperature(1300)
+                .blastFurnaceTemp(1300)
                 .buildAndRegister();
 
         //  Nitrous Acid

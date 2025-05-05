@@ -731,7 +731,6 @@ recipemap.dryer_recipes.name=Drying
 recipemap.pressure_chamber_recipes.name=Pressure Chamber
 recipemap.catalytic_reformer_recipes.name=Catalytic Reformation
 recipemap.crystallization_recipes.name=Crystallization
-recipemap.roaster_recipes.name=Roasting
 recipemap.burner_reactor_recipes.name=High Temperature Reactions
 recipemap.cryogenic_reactor_recipes.name=Cryogenic Reactions
 recipemap.molecular_beam_recipes.name=Molecular Beam Epitaxy

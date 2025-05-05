@@ -85,7 +85,6 @@ public class GCYMMultiblockRecipesOverwrite {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
-                .input(ROASTER[IV], 4)
                 .input(VOLTAGE_COIL_IV, 8)
                 .input(ELECTRIC_MOTOR_IV, 8)
                 .input(pipeNormalFluid, StainlessSteel, 4)
@@ -242,30 +241,6 @@ public class GCYMMultiblockRecipesOverwrite {
                 .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
                 .fluidInputs(UltraGlue.getFluid(L * 64))
                 .output(GTQTMetaTileEntities.LARGE_MIX)
-                .EUt(VA[EV])
-                .duration(1200)
-                .scannerResearch(b -> b
-                        .researchStack(DISK_21.getStackForm())
-                        .duration(1200)
-                        .EUt(VA[EV]))
-                .buildAndRegister();
-
-        ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_I, 8)
-                .input(BURNER_REACTOR[IV], 4)
-                .input(ROASTER[IV], 8)
-                .input(ELECTRIC_PISTON_IV, 8)
-                .input(ELECTRIC_PUMP_IV, 8)
-                .input(plateDense, EglinSteel, 4)
-                .input(gear, Stellite, 4)
-                .input(plate, TitaniumCarbide, 16)
-                .input(wireFine, Osmium, 32)
-                .input(cableGtSingle, Platinum, 64)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 32))
-                .fluidInputs(Zylon.getFluid(L * 64))
-                .fluidInputs(TitaniumTungstenCarbide.getFluid(L * 64))
-                .fluidInputs(UltraGlue.getFluid(L * 64))
-                .output(GTQTMetaTileEntities.LARGE_BURNER_REACTOR)
                 .EUt(VA[EV])
                 .duration(1200)
                 .scannerResearch(b -> b

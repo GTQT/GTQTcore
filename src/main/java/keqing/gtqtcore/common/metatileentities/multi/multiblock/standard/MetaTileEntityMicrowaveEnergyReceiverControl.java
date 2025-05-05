@@ -30,7 +30,6 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
-import keqing.gtqtcore.api.utils.ReflectionHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -121,11 +120,12 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("本多方块允许使用能源仓，激光仓；最多可放置4个能源仓与一个激光仓。"));
-        tooltip.add(I18n.format("本多方块允许使用坐标绑定卡绑定蓄能变电站（PSS）"));
+        tooltip.add(I18n.format("本多方块允许使用数据卡绑定蓄能变电站（PSS）"));
         tooltip.add(I18n.format("在输入总线放置绑定微波仓（覆盖板）的数据卡来将其存入系统对其供能，绑定的微波仓需要在多方块的供能范围内，否则不会存入系统"));
         tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*16*coilHeight EU"));
         tooltip.add(I18n.format("最多管理：%s 个设备,升级线圈获得更多的管理容量", 64));
         tooltip.add(I18n.format("使用操作按钮配合加减按钮完成不同功能操作"));
+        tooltip.add(I18n.format("不要共用！"));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -161,7 +161,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
-                        if (pssModel) {
+                        if (pssModel&&PSSmte!=null) {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "缓存电量：%s", PSSmte.getStoredLong()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储上限：%s", PSSmte.getCapacityLong()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s 范围半径：%s", maxLength, range));
@@ -697,10 +697,10 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     private MetaTileEntity getMetaTileEntity(int point) {
         try {
             return GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(io[point][1], io[point][2], io[point][3]));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        } catch (Exception ignored) {
+
         }
+        return null;
     }
 
     //距离计算

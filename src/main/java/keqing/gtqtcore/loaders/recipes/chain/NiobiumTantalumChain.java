@@ -103,7 +103,7 @@ public class NiobiumTantalumChain {
                 .fluidOutputs(PotassiumHeptafluorotanate.getFluid(1000))
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(PotassiumHeptafluorooniobate.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(5000))
                 .input(dust,Sodium,1)
@@ -111,10 +111,10 @@ public class NiobiumTantalumChain {
                 .output(dust,SodiumFluoride,2)
                 .output(dust,NiobiumPentoxide,7)
                 .fluidOutputs(PotassiumFluorideRefractoryMixture.getFluid(1000))
-                .temperature(3600)
+                .blastFurnaceTemp(3600)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
 
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .fluidInputs(PotassiumHeptafluorotanate.getFluid(1000))
                 .fluidInputs(Oxygen.getFluid(5000))
                 .input(dust,Sodium,1)
@@ -122,7 +122,7 @@ public class NiobiumTantalumChain {
                 .output(dust,SodiumFluoride,2)
                 .output(dust,TantalumPentoxide,7)
                 .fluidOutputs(PotassiumFluorideRefractoryMixture.getFluid(1000))
-                .temperature(3600)
+                .blastFurnaceTemp(3600)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
     }
 

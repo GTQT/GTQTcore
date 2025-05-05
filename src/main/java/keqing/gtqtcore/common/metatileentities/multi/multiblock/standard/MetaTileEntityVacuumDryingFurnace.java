@@ -53,7 +53,6 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockContr
     private int temperature;
 
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
-
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.DRYER_RECIPES,
                 GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES

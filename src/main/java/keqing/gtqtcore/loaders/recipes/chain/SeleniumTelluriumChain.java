@@ -9,7 +9,7 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.api.unification.ore.OrePrefix.ingot;
 import static gregtechfoodoption.GTFOMaterialHandler.BlueVitriol;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ROASTER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 
 public class SeleniumTelluriumChain {
     public static void init() {
@@ -44,7 +44,7 @@ public class SeleniumTelluriumChain {
     private static void TelluriumProcess() {
 
         //  Ag2TeSe + 4O + Na2CO3 -> Na2TeO3 + SeO2 + 2Ag + CO2
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, GTQTMaterials.ChalcogenAnodeMud)
                 .input(dust, SodaAsh, 6)
                 .fluidInputs(Oxygen.getFluid(4000))
@@ -54,7 +54,7 @@ public class SeleniumTelluriumChain {
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(MINUTE / 2)
-                .temperature(1900)
+                .blastFurnaceTemp(1900)
                 .buildAndRegister();
 
         //  Na2TeO3 + H2O -> TeO2 + 2NaOH

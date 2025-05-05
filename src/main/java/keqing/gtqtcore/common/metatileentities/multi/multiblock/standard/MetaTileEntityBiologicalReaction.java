@@ -152,8 +152,13 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
         super.formStructure(context);
         Object glass_tier = context.get("LGLTieredStats");
         Object clean_tier = context.get("ZJTieredStats");
-        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) glass_tier).getIntTier(), 0);
-        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired, () -> ((WrappedIntTired) clean_tier).getIntTier(), 0);
+
+        this.glass_tier = GTQTUtil.getOrDefault(() -> glass_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) glass_tier).getIntTier(),
+                0);
+        this.clean_tier = GTQTUtil.getOrDefault(() -> clean_tier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) clean_tier).getIntTier(),
+                0);
 
         setMaxParallel((int) Math.min(Math.pow(2, this.clean_tier + this.glass_tier), 64));
         setTimeReduce((100 - this.glass_tier * 5.0) / 100);
@@ -204,8 +209,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("微生物动物园", new Object[0]));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
         tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
@@ -279,10 +284,10 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
         else return recipe.getProperty(BioReactorProperty.getInstance(), 0) <= rate * 100;
     }
 
-    protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
+    protected class BiologicalReactionLogic extends GTQTMultiblockLogic {
 
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity, true);
+            super(tileEntity);
         }
 
         private boolean isBioRecipes() {

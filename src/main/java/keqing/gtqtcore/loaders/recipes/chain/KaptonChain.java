@@ -139,7 +139,7 @@ public class KaptonChain {
                 .buildAndRegister();
 
         //  Dimethylformamide (EV): Potassium Formate + Dimethylamine Hydrochloride -> Rock Salt + Dimethylformamide + Hydrogen
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, PotassiumFormate, 1)
                 .fluidInputs(DimethylamineHydrochloride.getFluid(1000))
                 .output(dust, RockSalt, 2)
@@ -147,18 +147,18 @@ public class KaptonChain {
                 .fluidOutputs(Hydrogen.getFluid(1000))
                 .EUt(VA[EV])
                 .duration(120)
-                .temperature(4500)
+                .blastFurnaceTemp(4500)
                 .buildAndRegister();
 
         //  Rock Salt + Methanol -> Potassium Formate + Chlorine
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, RockSalt, 2)
                 .fluidInputs(Methanol.getFluid(1000))
                 .output(dust, PotassiumFormate)
                 .fluidOutputs(DilutedHydrochloricAcid.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(240)
-                .temperature(4500)
+                .blastFurnaceTemp(4500)
                 .buildAndRegister();
     }
 }

@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -15,6 +16,8 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.properties.impl.ComputationProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -30,6 +33,8 @@ import keqing.gtqtcore.api.capability.IDrillHead;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.LaserNetProperty;
+import keqing.gtqtcore.api.recipes.properties.MiningDrillProperties;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -329,6 +334,14 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
+        if (recipe.getProperty(MiningDrillProperties.getInstance(), 0) <= drillTier && super.checkRecipe(recipe, consumeIfSuccess)) {
+            return importItems.getStackInSlot(0)==GTQTOreHelper.setOre(dimension,type);
         }
         return false;
     }

@@ -10,7 +10,7 @@ public class SodiumChain {
     public static void init() {
 
         //  Sodium Tungstate
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Scheelite, 7)
                 .input(dust, SodiumHydroxide, 6)
                 .fluidInputs(HydrogenPeroxide.getFluid(1000))
@@ -18,18 +18,18 @@ public class SodiumChain {
                 .fluidOutputs(SodiumTungstate.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(110)
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         //  Sodium Molybdate
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, SodiumHydroxide, 6)
                 .input(dust, MolybdenumTrioxide, 4)
                 .output(dust, SodiumMolybdate, 7)
                 .fluidOutputs(Steam.getFluid(1000))
                 .EUt(VA[HV])
                 .duration(110)
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         //  Sodium Tungstate + Phosphoric Acid -> Sodium Phosphotungstate + Sodium Hydroxide + Sodium Oxide

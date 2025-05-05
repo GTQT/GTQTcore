@@ -1134,7 +1134,6 @@ gtqtcore.multiblock.roaster.tooltip.1=Bronze Combustion Chamber: §c1000K
 gtqtcore.multiblock.roaster.tooltip.2=Steel Combustion Chamber: §c1500K
 gtqtcore.multiblock.roaster.tooltip.3=Titanium Combustion Chamber: §c2000K
 gtqtcore.multiblock.roaster.tooltip.4=Tungsten-Steel Combustion Chamber: §c2500K
-recipemap.roaster_recipes.name=High-Temperature Roasting
 gtqtcore.multiblock.pattern.error.fire_boxes=Must use the same type of combustion chamber blocks
 
 gtqtcore.machine.industrial_fishing_pond.name=Zhuhai Fishery
@@ -1255,38 +1254,6 @@ gtqtcore.machine.catalytic_reformer.uxv.name=Epic Catalytic Reformer IV
 gtqtcore.machine.catalytic_reformer.uxv.tooltip=Coking Treatment Array D20
 gtqtcore.machine.catalytic_reformer.opv.name=Legendary Catalytic Reformer
 gtqtcore.machine.catalytic_reformer.opv.tooltip=Coking Treatment Array D20
-
-## Roasters
-gtqtcore.machine.roaster.bronze.name=Steam Roaster
-gtqtcore.machine.roaster.bronze.tooltip=Not for baking bread
-gtqtcore.machine.roaster.steel.name=High-Pressure Steam Roaster
-gtqtcore.machine.roaster.steel.tooltip=Mineral Processing from Scratch
-gtqtcore.machine.roaster.lv.name=Basic Roaster
-gtqtcore.machine.roaster.lv.tooltip=Tailings Refining
-gtqtcore.machine.roaster.mv.name=Advanced Roaster
-gtqtcore.machine.roaster.mv.tooltip=Tailings Refining
-gtqtcore.machine.roaster.hv.name=Advanced Roaster II
-gtqtcore.machine.roaster.hv.tooltip=Tailings Refining
-gtqtcore.machine.roaster.ev.name=Advanced Roaster III
-gtqtcore.machine.roaster.ev.tooltip=Tailings Refining
-gtqtcore.machine.roaster.iv.name=Elite Roaster
-gtqtcore.machine.roaster.iv.tooltip=Essence Extractor
-gtqtcore.machine.roaster.luv.name=Elite Roaster II
-gtqtcore.machine.roaster.luv.tooltip=Essence Extractor
-gtqtcore.machine.roaster.zpm.name=Elite Roaster III
-gtqtcore.machine.roaster.zpm.tooltip=Essence Extractor
-gtqtcore.machine.roaster.uv.name=Ultimate Roaster
-gtqtcore.machine.roaster.uv.tooltip=Ore Disintegrator
-gtqtcore.machine.roaster.uhv.name=Epic Roaster
-gtqtcore.machine.roaster.uhv.tooltip=Ore Disintegrator
-gtqtcore.machine.roaster.uev.name=Epic Roaster II
-gtqtcore.machine.roaster.uev.tooltip=Ore Disintegrator
-gtqtcore.machine.roaster.uiv.name=Epic Roaster III
-gtqtcore.machine.roaster.uiv.tooltip=Ore Disintegrator
-gtqtcore.machine.roaster.uxv.name=Epic Roaster IV
-gtqtcore.machine.roaster.uxv.tooltip=Ore Disintegrator
-gtqtcore.machine.roaster.opv.name=Legendary Roaster
-gtqtcore.machine.roaster.opv.tooltip=Ore Disintegrator
 
 # Spinner Machines
 gtqtcore.machine.spinner.bronze.name=Steam Spinning Machine
@@ -2681,6 +2648,7 @@ gtqtcore.machine.laser_fbt.name=Strong and high-energy laser reflection injectio
 gtqtcore.machine.laser_fbc.name=Powerful high-energy laser polymerization transmutation core
 gtqtcore.machine.antimatter_forge.name=Semi-stable antimatter pulse sequencer
 gtqtcore.machine.antimatter_generator.name=Shielding the Lagrange Annihilation Supercore Matrix
+recipemap.antimatter_generator.name=Antimatter power generation
 gtqtcore.machine.blazing_blast_furnace.name=Blazing Blast Furnace
 gtqtcore.machine.huge_turbine.plasma.name=Large Supercritical Plasma Turbine
 gtqtcore.machine.huge_turbine.gas.name=Large Supercritical Gas Turbine
@@ -3372,6 +3340,11 @@ gregtech.machine.biorea.gtqtupdate.1=Upgrade Filter Glass Pipe Level for perform
 gregtech.machine.biorea.gtqtupdate.2=Inject Raw Growth Medium, Enriched Bacterial Sludge, Fermented Biomass, and water to provide the basic water level and reaction substrate concentration for the multiblock.
 gregtech.machine.biorea.gtqtupdate.3=Different recipes require different reaction concentrations (the minimum concentration is marked on the recipe). The higher the concentration, the greater the multiblock enhancement multiplier.
 gregtech.machine.biorea.gtqtupdate.4=Enjoy benefits such as reduced time and parallel processing. After work is completed, a portion of the reaction substrate will be consumed, so please replenish it.
+
+gregtech.machine.gene_mutagenesis.gtqtupdate.1=每升级一次玻璃级获得10%%耗时减免
+gregtech.machine.gene_mutagenesis.gtqtupdate.2=请往多方块的辐射仓里置入辐射源
+gregtech.machine.gene_mutagenesis.gtqtupdate.3=运行其他配方（除了基因诱变）无视反应条件，但是依旧会消耗辐射源的耐久
+gregtech.machine.gene_mutagenesis.gtqtupdate.4=获得等同于Pow(2,辐射源等级)的并行
 
 gregtech.machine.bioreb.gtqtupdate.2=Use five basic microbial strains for linear combination, not supporting multiple combinations. Refer to JEI for the required pH and trait factors for the target strain. When the GUI shows a recipe found, click the start button. After processing, all original strain parameters will be reset.
 gregtech.machine.bioreb.gtqtupdate.3=Provide enriched microbial culture medium to increase the number of parallel processes (parallel does not consume additional original strains).

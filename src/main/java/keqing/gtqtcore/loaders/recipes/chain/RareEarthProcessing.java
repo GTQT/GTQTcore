@@ -287,27 +287,27 @@ public class RareEarthProcessing {
                 .buildAndRegister();
 
         //  Rare Earth Chorides Slurry (EV)
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, RareEarthChloridesSlurry, 4)
                 .input(dust, SodiumBicarbonate, 8)
                 .fluidInputs(DistilledWater.getFluid(1000))
                 .output(dust, Sodium, 4)
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(1000))
                 .fluidOutputs(CarbonDioxide.getFluid(2000))
-                .temperature(4500)
+                .blastFurnaceTemp(4500)
                 .EUt(VA[EV])
                 .duration(1200)
                 .buildAndRegister();
 
         //  Rare Earth Chorides Slurry (EV)
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, RareEarthChloridesSlurry, 2)
                 .input(dust, BariumCarbonate, 4)
                 .fluidInputs(DistilledWater.getFluid(500))
                 .output(dust, Barium, 2)
                 .fluidOutputs(LowPurityRareEarthChloridesSolution.getFluid(2000))
                 .fluidOutputs(CarbonDioxide.getFluid(1000))
-                .temperature(4500)
+                .blastFurnaceTemp(4500)
                 .EUt(VA[EV])
                 .duration(600)
                 .buildAndRegister();

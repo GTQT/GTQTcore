@@ -150,10 +150,10 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("轰击基因与DNA", new Object[0]));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.1"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.2"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.3"));
-        tooltip.add(I18n.format("gregtech.machine.biorea.gtqtupdate.4"));
+        tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.1"));
+        tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.2"));
+        tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.3"));
+        tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.4"));
     }
 
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {

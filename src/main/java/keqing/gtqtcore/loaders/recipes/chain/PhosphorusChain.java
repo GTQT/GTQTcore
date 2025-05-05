@@ -35,11 +35,11 @@ public class PhosphorusChain {
                 .output(gem, GTQTMaterials.WhitePhosphorus)
                 .duration(800).EUt(VA[HV]).buildAndRegister();
 
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, GTQTMaterials.WhitePhosphorus)
                 .fluidInputs(Argon.getFluid(50))
                 .output(gem, GTQTMaterials.RedPhosphorus)
-                .temperature(573)
+                .blastFurnaceTemp(2700)
                 .duration(200).EUt(VA[MV]).buildAndRegister();
 
         CHEMICAL_BATH_RECIPES.recipeBuilder()

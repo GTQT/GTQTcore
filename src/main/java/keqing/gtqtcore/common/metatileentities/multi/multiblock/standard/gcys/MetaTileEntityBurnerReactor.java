@@ -1,18 +1,16 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
-import gregtech.api.GTValues;
-import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -21,163 +19,133 @@ import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
-import gregtech.api.unification.material.Materials;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.common.blocks.BlockTurbineCasing;
-import gregtech.common.blocks.BlockWireCoil;
+import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
-import keqing.gtqtcore.api.capability.IPressureContainer;
-import keqing.gtqtcore.api.capability.IPressureMachine;
-import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
-import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import gregtech.common.metatileentities.MetaTileEntities;
+import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
+import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.NoCoilTemperatureProperty;
+import keqing.gtqtcore.api.unification.GTQTMaterials;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import static gregtech.api.GTValues.EV;
+import static gregtech.api.GTValues.LV;
 import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
-import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.eglin_steel;
+import static keqing.gtqtcore.api.GTQTAPI.MAP_FIREBOX_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.MaragingSteel250;
 
-public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil, IPressureMachine {
+public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
 
-    int blastFurnaceTemperature;
-    private IPressureContainer container;
+    int FireBoxTier;
+    private int temperature;
 
     public MetaTileEntityBurnerReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
-                GTQTcoreRecipeMaps.ROASTER_RECIPES});
-        this.recipeMapWorkable = new BurnerReactorRecipeLogic(this);
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
+        });
+        this.recipeMapWorkable = new IndustrialRoasterRecipeLogic(this);
+    }
+
+    private static IBlockState getBoilerCasingState() {
+        return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
+    }
+
+    private static IBlockState getFrameState() {
+        return MetaBlocks.FRAMES.get(GTQTMaterials.Talonite).getBlock(GTQTMaterials.Talonite);
     }
 
     @Override
-    public IPressureContainer getPressureContainer() {
-        return this.container;
-    }
-
-    @Override
-    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityBurnerReactor(metaTileEntityId);
-    }
-
-    @Override
-    protected void initializeAbilities() {
-        super.initializeAbilities();
-        List<IPressureContainer> list = getAbilities(GTQTMultiblockAbility.PRESSURE_CONTAINER);
-        if (list.isEmpty()) {
-            this.container = new AtmosphericPressureContainer(this, 1.0);
-        } else {
-            this.container = list.get(0);
-        }
-    }
-
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
-                .addEnergyUsageLine(getEnergyContainer())
-                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(tl -> {
-                    // Coil heat capacity line
-                    if (isStructureFormed()) {
-                        ITextComponent heatString = TextComponentUtil.stringWithColor(
-                                TextFormatting.RED,
-                                TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K");
-
-                        tl.add(TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.blast_furnace.max_temperature",
-                                heatString));
-                    }
-                })
-                .addParallelsLine(recipeMapWorkable.getParallelLimit())
-                .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent());
     }
 
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object type = context.get("CoilType");
-        if (type instanceof IHeatingCoilBlockStats) {
-            this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) type).getCoilTemperature();
-        } else {
-            this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
-        }
-        // the subtracted tier gives the starting level (exclusive) of the +100K heat bonus
-        this.blastFurnaceTemperature += 100 *
-                Math.max(0, GTUtility.getFloorTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+        Object FireBoxTier = context.get("FireboxCasingTieredStats");
+        this.FireBoxTier = GTQTUtil.getOrDefault(() -> FireBoxTier instanceof WrappedIntTired,
+                () -> ((WrappedIntTired) FireBoxTier).getIntTier(),
+                0);
+
+        this.temperature = this.FireBoxTier * 900 + 900;
     }
 
     @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        this.blastFurnaceTemperature = 0;
-    }
-
-    @Override
-    public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
-        if (this.blastFurnaceTemperature >= recipe.getProperty(TemperatureProperty.getInstance(), 0))
-            return super.checkRecipe(recipe, consumeIfSuccess);
-        return false;
-    }
-
-    @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("F   F", "F X F", "FXXXF", "F X F", "F   F", "     ")
-                .aisle("  X  ", " XCX ", "XCKCX", " XKX ", "  X  ", "  X  ")
-                .aisle(" XXX ", "XCKCX", "XK#KX", "XK#KX", " XKX ", " XMX ")
-                .aisle("  X  ", " XCX ", "XCKCX", " XKX ", "  X  ", "  X  ")
-                .aisle("F   F", "F X F", "FXSXF", "F X F", "F   F", "     ")
-                .where('S', selfPredicate())
-                .where('X', states(getCasingState1()).setMinGlobalLimited(25)
-                        .or(autoAbilities(true, true, true, true, true, true, false))
-                        .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
-                )
-                .where('F', states(MetaBlocks.FRAMES.get(Materials.RedSteel).getBlock(Materials.RedSteel)))
-                .where('C', states(getCasingState2()))
-                .where('K', heatingCoils())
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where(' ', any())
-                .where('#', air())
-                .build();
-    }
-
-    protected IBlockState getCasingState1() {
-        return GTQTMetaBlocks.blockMultiblockCasing3.getState(eglin_steel);
-    }
-
-    protected IBlockState getCasingState2() {
-        return MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX);
-    }
-
-    @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.eglin_steel;
+    public boolean checkRecipe(@Nonnull Recipe recipe,
+                               boolean consumeIfSuccess) {
+        return this.temperature >= recipe.getProperty(NoCoilTemperatureProperty.getInstance(), 0);
     }
 
     @Nonnull
     @Override
+    protected BlockPattern createStructurePattern() {
+        return FactoryBlockPattern.start()
+                .aisle("     ", "     ", " P P ", " P P ", " P P ")
+                .aisle("F   F", "FBBBF", "XPXPX", "XXXXX", " P P ")
+                .aisle("     ", "XBBBX", "XP#PX", "XPMPX", " P P ")
+                .aisle("F   F", "FBBBF", "XXSXX", "XXXXX", "     ")
+                .where('S', this.selfPredicate())
+                .where('X', states(getCasingState())
+                        .setMinGlobalLimited(14)
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                .where('P', states(getBoilerCasingState()))
+                .where('F', states(getFrameState()))
+                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('B', TiredTraceabilityPredicate.FIREBOX_CASING.get())
+                .where('#', air())
+                .where(' ', any())
+                .build();
+    }
+
+    protected IBlockState getCasingState() {
+        return GTQTMetaBlocks.blockMultiblockCasing1.getState(MaragingSteel250);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
+        return GTQTTextures.MaragingSteel250;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Nonnull
+    @Override
     protected ICubeRenderer getFrontOverlay() {
-        return GTQTTextures.LARGE_BURNER_REACTOR_OVERLAY;
+        return GTQTTextures.FRACKER_OVERLAY;
+    }
+
+    @Override
+    protected void addDisplayText(List<ITextComponent> textList) {
+        if (isStructureFormed()) {
+            textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
+                    TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
+        }
+        super.addDisplayText(textList);
     }
 
     @Override
@@ -190,12 +158,13 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
     }
 
     @Override
-    public List<ITextComponent> getDataInfo() {
-        List<ITextComponent> list = super.getDataInfo();
-        list.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
-                new TextComponentTranslation(TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K")
-                        .setStyle(new Style().setColor(TextFormatting.RED))));
-        return list;
+    public int getCurrentTemperature() {
+        return this.temperature;
+    }
+
+    @Override
+    public boolean canBeDistinct() {
+        return true;
     }
 
     @Override
@@ -203,14 +172,46 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
         return true;
     }
 
+    @Nonnull
     @Override
-    public int getCurrentTemperature() {
-        return this.blastFurnaceTemperature;
+    public List<ITextComponent> getDataInfo() {
+        List<ITextComponent> list = super.getDataInfo();
+        list.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
+                TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
+        return list;
     }
 
-    public static class BurnerReactorRecipeLogic extends PressureMultiblockRecipeLogic {
+    @Override
+    public List<MultiblockShapeInfo> getMatchingShapes() {
+        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
+        MultiblockShapeInfo.Builder builder;
+        builder = MultiblockShapeInfo.builder()
+                .aisle("     ", "     ", " P P ", " P P ", " P P ")
+                .aisle("F   F", "FBBBF", "XPEPX", "XXXXX", " P P ")
+                .aisle("     ", "XBBBX", "XP PX", "XPHPX", " P P ")
+                .aisle("F   F", "FBBBF", "XISOX", "XLMDX", "     ")
+                .where('S', GTQTMetaTileEntities.LARGE_ROASTER, EnumFacing.SOUTH)
+                .where('X', getCasingState())
+                .where('P', getBoilerCasingState())
+                .where('F', getFrameState())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[EV], EnumFacing.NORTH)
+                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[LV], EnumFacing.SOUTH)
+                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[LV], EnumFacing.SOUTH)
+                .where('L', MetaTileEntities.FLUID_IMPORT_HATCH[LV], EnumFacing.WEST)
+                .where('D', MetaTileEntities.FLUID_EXPORT_HATCH[LV], EnumFacing.EAST)
+                .where('H', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP)
+                .where(' ', Blocks.AIR.getDefaultState())
+                .where('M', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.NORTH);
+        MultiblockShapeInfo.Builder finalBuilder = builder;
+        MAP_FIREBOX_CASING.entrySet().stream()
+                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
+                .forEach(entry -> shapeInfo.add(finalBuilder.where('B', entry.getKey()).build()));
+        return shapeInfo;
+    }
 
-        public BurnerReactorRecipeLogic(RecipeMapMultiblockController tileEntity) {
+    public static class IndustrialRoasterRecipeLogic extends GCYMMultiblockRecipeLogic {
+
+        public IndustrialRoasterRecipeLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
 
@@ -228,10 +229,6 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
                                             RecipePropertyStorage propertyStorage, long maxVoltage) {
             heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
                     propertyStorage.get(TemperatureProperty.getInstance(), 0));
-        }
-
-        public int getParallelLimit() {
-            return this.metaTileEntity instanceof IParallelMultiblock && ((IParallelMultiblock) this.metaTileEntity).isParallel() ? ((IParallelMultiblock) this.metaTileEntity).getMaxParallel() : 1;
         }
     }
 }

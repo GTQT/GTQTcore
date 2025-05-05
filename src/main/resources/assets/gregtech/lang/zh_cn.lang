@@ -651,7 +651,6 @@ recipemap.dryer_recipes.name=干燥
 recipemap.pressure_chamber_recipes.name=压力室
 recipemap.catalytic_reformer_recipes.name=催化重整
 recipemap.crystallization_recipes.name=结晶
-recipemap.roaster_recipes.name=焙烧
 recipemap.burner_reactor_recipes.name=高温反应
 recipemap.cryogenic_reactor_recipes.name=低温反应
 recipemap.molecular_beam_recipes.name=分子束外延

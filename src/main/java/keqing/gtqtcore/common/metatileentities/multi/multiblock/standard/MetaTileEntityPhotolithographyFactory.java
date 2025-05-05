@@ -299,6 +299,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
             if (this.wafer[j] > 0)
                 GTTransferUtils.insertItem(this.outputInventory, new ItemStack(GTQTCPUHelper.wafer[j].getMetaItem(), wafer[j], GTQTCPUHelper.wafer[j].getMetaValue()), false);
         }
+        wafer = new int[]{0, 0, 0, 0, 0, 0, 0};
     }
 
     private void check(Widget.ClickData clickData) {

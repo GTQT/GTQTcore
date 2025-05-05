@@ -231,7 +231,14 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         heatingCoilLevel = 0;
         pyrotheumFluid = null;
     }
-
+    public boolean drainPyrotheum(boolean sim)
+    {
+        if (pyrotheumFluid.isFluidStackIdentical(getInputFluidInventory().drain(pyrotheumFluid, false))) {
+            getInputFluidInventory().drain(pyrotheumFluid, sim);
+            return true;
+        }
+        return false;
+    }
     protected class BlazingBlastFurnaceWorkable extends PressureMultiblockRecipeLogic {
 
         private final MetaTileEntityBlazingCZPuller combustionEngine;
@@ -243,10 +250,10 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
 
         @Override
         protected void updateRecipeProgress() {
-            IMultipleTankHandler inputTank = combustionEngine.getInputFluidInventory();
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit() && pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
+
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit() && drainPyrotheum(false)) {
                 drawEnergy(recipeEUt, false);
-                pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, true));
+                drainPyrotheum(true);
                 if (++this.progressTime > this.maxProgressTime) {
                     if (drawPressure(this.recipePressure, true)) {
                         drawPressure(this.recipePressure, false);

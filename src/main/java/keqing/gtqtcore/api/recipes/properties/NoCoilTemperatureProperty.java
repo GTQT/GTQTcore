@@ -27,7 +27,7 @@ public class NoCoilTemperatureProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(@Nonnull Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("gcys.recipe.temperature", castValue(value)), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("gtqtcore.recipe.temperature", castValue(value)), x, y, color);
     }
     @Override
     public NBTBase serialize(Object value) {

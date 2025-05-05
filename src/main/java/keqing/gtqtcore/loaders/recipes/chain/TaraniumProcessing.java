@@ -969,14 +969,14 @@ public class TaraniumProcessing {
                 .buildAndRegister();
 
         //  2AgI + O -> Ag2O + 2I
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, SilverIodide, 4)
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, SilverOxide, 3)
                 .output(dust, Iodine, 2)
                 .EUt(VA[MV])
                 .duration((int) (10.5 * SECOND))
-                .temperature(1100)
+                .blastFurnaceTemp(1100)
                 .buildAndRegister();
 
         //  LiH + (CH3)3SiCl -> LiCl + (CH3)3SiH

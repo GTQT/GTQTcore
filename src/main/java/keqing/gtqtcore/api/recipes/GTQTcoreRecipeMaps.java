@@ -364,15 +364,6 @@ public class GTQTcoreRecipeMaps {
             .sound(GTSoundEvents.FURNACE)
             .build();
 
-    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> ROASTER_RECIPES = new RecipeMapBuilder<>("roaster_recipes", new NoCoilTemperatureRecipeBuilder())
-            .itemInputs(3)
-            .itemOutputs(3)
-            .fluidInputs(3)
-            .fluidOutputs(3)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, HORIZONTAL)
-            .sound(GTSoundEvents.FURNACE)
-            .build();
-
     public static final RecipeMap<PCBFactoryRecipeBuilder> PCB_FACTORY_RECIPES = new RecipeMapBuilder<>("pcb_factory", new PCBFactoryRecipeBuilder())
             .itemInputs(6)
             .itemOutputs(9)

@@ -345,12 +345,13 @@ public class KevlarChain {
                 .buildAndRegister();
 
         // 2Ag + O -> Ag2O
-        GTQTcoreRecipeMaps.ROASTER_RECIPES.recipeBuilder()
+        GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Silver, 2)
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, SilverOxide, 3)
                 .EUt(VA[LV])
                 .duration(5 * SECOND)
+                .blastFurnaceTemp(1800)
                 .buildAndRegister();
 
         // CH3CH2OH -> 2O -> CH3CHO + 2H2O

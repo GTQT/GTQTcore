@@ -64,7 +64,6 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
     public MetaTileEntityBlazingBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.BLAST_RECIPES,
-                GTQTcoreRecipeMaps.ROASTER_RECIPES,
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new BlazingBlastFurnaceWorkable(this);
@@ -208,26 +207,31 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
         pyrotheumFluid = null;
     }
 
-    protected class BlazingBlastFurnaceWorkable extends GTQTMultiblockLogic {
+    public boolean drainPyrotheum(boolean sim)
+    {
+        if (pyrotheumFluid.isFluidStackIdentical(getInputFluidInventory().drain(pyrotheumFluid, false))) {
+            getInputFluidInventory().drain(pyrotheumFluid, sim);
+            return true;
+        }
+        return false;
+    }
 
-        private final MetaTileEntityBlazingBlastFurnace metaTileEntityBlazingBlastFurnace;
+    protected class BlazingBlastFurnaceWorkable extends GTQTMultiblockLogic {
 
         public BlazingBlastFurnaceWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
-            this.metaTileEntityBlazingBlastFurnace = (MetaTileEntityBlazingBlastFurnace) tileEntity;
         }
 
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                IMultipleTankHandler inputTank = metaTileEntityBlazingBlastFurnace.getInputFluidInventory();
-                if (pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
-                    inputTank.drain(pyrotheumFluid, true);
+                if (drainPyrotheum(false)) {
+                    drainPyrotheum(true);
                     if (++this.progressTime > this.maxProgressTime) {
                         this.completeRecipe();
                     }
                 } else {
-                    return;
+                    decreaseProgress();
                 }
                 this.drawEnergy(this.recipeEUt, false);
             }

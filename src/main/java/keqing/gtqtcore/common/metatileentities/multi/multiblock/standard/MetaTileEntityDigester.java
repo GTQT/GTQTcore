@@ -7,13 +7,20 @@ import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
+import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.logic.OCParams;
+import gregtech.api.recipes.logic.OCResult;
+import gregtech.api.recipes.logic.OverclockingLogic;
+import gregtech.api.recipes.properties.RecipePropertyStorage;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
@@ -47,20 +54,52 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MetaTileEntityDigester extends GTQTNoTierMultiblockController {
+import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
+
+public class MetaTileEntityDigester extends GTQTNoTierMultiblockController implements IHeatingCoil {
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
     private int coilTier;
+    private int blastFurnaceTemperature;
 
     public MetaTileEntityDigester(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.DIGESTER_RECIPES
         });
+        this.recipeMapWorkable = new DigesterWorkable(this);
         //setMaxParallel(auto);
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
         setOverclocking(3.0);
+    }
+
+    public int getCurrentTemperature() {
+        return this.blastFurnaceTemperature;
+    }
+
+    protected class DigesterWorkable extends GTQTMultiblockLogic {
+
+        public DigesterWorkable(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    storage.get(TemperatureProperty.getInstance(), 0)));
+        }
+
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
+        }
     }
 
     private static IBlockState getCasingAState() {
@@ -109,6 +148,9 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController {
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("这是什么，塞进去煮煮", new Object[0]));
         super.addInformation(stack, player, tooltip, advanced);
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
     }
 
     @Nonnull
@@ -189,17 +231,20 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController {
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object type = context.get("CoilType");
+
         Object coilType = context.get("CoilType");
         if (coilType instanceof IHeatingCoilBlockStats) {
-            this.coilTier = ((IHeatingCoilBlockStats) type).getTier();
+            this.blastFurnaceTemperature = ((IHeatingCoilBlockStats) coilType).getCoilTemperature();
             this.heatingCoilLevel = ((IHeatingCoilBlockStats) coilType).getLevel();
-            this.heatingCoilDiscount = ((IHeatingCoilBlockStats) coilType).getEnergyDiscount();
+            this.coilTier = ((IHeatingCoilBlockStats) coilType).getTier();
         } else {
-            this.coilTier = 0;
+            this.blastFurnaceTemperature = BlockWireCoil.CoilType.CUPRONICKEL.getCoilTemperature();
             this.heatingCoilLevel = BlockWireCoil.CoilType.CUPRONICKEL.getLevel();
-            this.heatingCoilDiscount = BlockWireCoil.CoilType.CUPRONICKEL.getEnergyDiscount();
+            this.coilTier = BlockWireCoil.CoilType.CUPRONICKEL.getTier();
         }
+
+        this.blastFurnaceTemperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+
         setMaxParallel(Math.min((int) Math.pow(2, heatingCoilLevel), 32));
         setTimeReduce((100 - (Math.min(heatingCoilLevel, 15) * 5.0)) / 100);
     }

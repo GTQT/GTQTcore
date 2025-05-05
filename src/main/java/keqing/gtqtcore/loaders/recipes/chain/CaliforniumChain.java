@@ -4,7 +4,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ROASTER_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class CaliforniumChain {
@@ -31,14 +31,14 @@ public class CaliforniumChain {
                 .buildAndRegister();
 
         //  Californium Dioxide -> Californium Hexachloride
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, CaliforniumDioxide)
                 .fluidInputs(Chlorine.getFluid(6000))
                 .fluidOutputs(CaliforniumHexachloride.getFluid(1000))
                 .fluidOutputs(Oxygen.getFluid(2000))
                 .EUt(VA[MV])
                 .duration(960)
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .buildAndRegister();
 
         //  Californium Hexachloride -> Californium Hexafluoride

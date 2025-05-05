@@ -81,7 +81,6 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     public MetaTileEntityHugeBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.BLAST_RECIPES,
-                GTQTcoreRecipeMaps.ROASTER_RECIPES,
                 GTQTcoreRecipeMaps.DRYER_RECIPES
         });
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnacerWorkable(this);

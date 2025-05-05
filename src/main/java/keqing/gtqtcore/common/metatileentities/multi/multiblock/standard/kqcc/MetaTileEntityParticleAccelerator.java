@@ -143,9 +143,12 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
         if (shuliu && this.getRecipeMap() == BEAM_COLLECTION) return super.checkRecipe(recipe, consumeIfSuccess);
 
         if (this.getRecipeMap() == TARGET_CHAMBER || this.getRecipeMap() == NUCLEOSYNTHESIS) {
-            if (recipe.getProperty(ScatteringProperty.getInstance(), 0) == angle)
-                if (recipe.getProperty(ParticleVelocityProperty.getInstance(), 0) <= speed)
+            if (recipe.getProperty(ScatteringProperty.getInstance(), 0) == angle) {
+                if (recipe.getProperty(ParticleVelocityProperty.getInstance(), 0) <= speed) {
                     return super.checkRecipe(recipe, consumeIfSuccess);
+                }
+            }
+            return false;
         }
 
         return super.checkRecipe(recipe, consumeIfSuccess);
@@ -471,8 +474,8 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
         builder.widget((new ImageCycleButtonWidget(98, 100, 18, 18, GuiTextures.BUTTON_MULTI_MAP, this.getAvailableRecipeMaps().length, this::getRecipeMapIndex, this::setRecipeMapIndex)).shouldUseBaseBackground().singleTexture().setTooltipHoverString((i) -> LocalizationUtils.format("gregtech.multiblock.multiple_recipemaps.header") + " " + LocalizationUtils.format("recipemap." + this.getAvailableRecipeMaps()[i].getUnlocalizedName() + ".name"))
         );
 
-        builder.widget(new ClickButtonWidget(132, 120, 48, 18, "核子合成", data -> this.setRecipeMapIndex(1)));
-        builder.widget(new ClickButtonWidget(180, 120, 48, 18, "靶室轰击", data -> this.setRecipeMapIndex(2)));
+        builder.widget(new ClickButtonWidget(132, 120, 48, 18, "靶室轰击", data -> this.setRecipeMapIndex(1)));
+        builder.widget(new ClickButtonWidget(180, 120, 48, 18, "核子合成", data -> this.setRecipeMapIndex(2)));
         builder.widget(new ClickButtonWidget(228, 120, 48, 18, "束流收集", data -> this.setRecipeMapIndex(3)));
 
         builder.widget(new ClickButtonWidget(132, 140, 24, 18, "V+", data -> this.Mode = MathHelper.clamp(Mode + 1, 1, 3)));

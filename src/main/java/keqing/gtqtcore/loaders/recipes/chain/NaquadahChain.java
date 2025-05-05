@@ -40,13 +40,13 @@ public class NaquadahChain {
                 .buildAndRegister();
 
         // Ke2O3 + 2H2S -> 2KeS + 2H2O + O (drop) (1495K)
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, TriniumTrioxide, 5)
                 .fluidInputs(HydrogenSulfide.getFluid(2000))
                 .output(dust, TriniumSulfide, 4)
                 .fluidOutputs(Steam.getFluid(2000))
                 .EUt(VA[HV])
-                .temperature(3600)
+                .blastFurnaceTemp(3600)
                 .duration(2 * SECOND + 16 * TICK)
                 .buildAndRegister();
     }

@@ -147,10 +147,8 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
 
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if (recipe.getProperty(LaserNetProperty.getInstance(), 0) <= laser_tier && super.checkRecipe(recipe, consumeIfSuccess)) {
-            IOpticalComputationProvider provider = this.getComputationProvider();
-            int recipeCWUt = recipe.getProperty(ComputationProperty.getInstance(), 0);
-            return provider.requestCWUt(recipeCWUt, true) >= recipeCWUt;
+        if (recipe.getProperty(LaserNetProperty.getInstance(), 0) <= laser_tier) {
+            return super.checkRecipe(recipe, consumeIfSuccess);
         }
         return false;
     }

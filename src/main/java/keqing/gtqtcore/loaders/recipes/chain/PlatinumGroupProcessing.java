@@ -258,12 +258,12 @@ public class PlatinumGroupProcessing {
                 .buildAndRegister();
 
         //  2Na + 2O -> Na2O2
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Sodium)
                 .circuitMeta(2)
                 .fluidInputs(Oxygen.getFluid(1000))
                 .output(dust, GTQTMaterials.SodiumPeroxide, 2)
-                .temperature(403)
+                .blastFurnaceTemp(2700)
                 .duration(40)
                 .EUt(VA[LV])
                 .buildAndRegister();

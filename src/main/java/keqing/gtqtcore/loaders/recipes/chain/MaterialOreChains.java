@@ -35,10 +35,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(345)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Sphalerite, 1)
                     .output(ingot, Zinc)
                     .chancedOutput(ingot, SulfuricZincSlag,9000, 0)
@@ -56,10 +56,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(315)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Chalcopyrite, 1)
                     .output(ingot, Copper)
                     .chancedOutput(ingot, SulfuricCopperSlag,  5000, 0)
@@ -76,10 +76,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(380)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Pyrite, 1)
                     .output(ingot, Iron)
                     .chancedOutput(ingot, SulfuricIronSlag,9000, 0)
@@ -96,10 +96,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(335)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Bornite, 1)
                     .output(ingot, Copper)
                     .chancedOutput(ingot, SulfuricCopperSlag, 5000, 0)
@@ -116,10 +116,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(310)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Chalcocite)
                     .output(ingot, Copper)
                     .chancedOutput(ingot, SulfuricCopperSlag,9000, 0)
@@ -135,10 +135,10 @@ public class MaterialOreChains {
                     .fluidOutputs(SulfuricFlueGas.getFluid(100))
                     .buildAndRegister();
 
-            ROASTER_RECIPES.recipeBuilder()
+            BURNER_REACTOR_RECIPES.recipeBuilder()
                     .duration(345)
                     .EUt(VA[MV])
-                    .temperature(2700)
+                    .blastFurnaceTemp(2700)
                     .input(crushed, Pentlandite)
                     .output(ingot, Nickel)
                     .chancedOutput(ingot, SulfuricNickelSlag, 9000, 0)

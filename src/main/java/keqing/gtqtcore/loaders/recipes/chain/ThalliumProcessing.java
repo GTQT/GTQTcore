@@ -26,23 +26,23 @@ public class ThalliumProcessing {
 
     public static void init() {
         // FeS2 + 6O -> Fe + Tl2SO4 + SO2
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Pyrite, 3)
                 .fluidInputs(Oxygen.getFluid(6000))
                 .output(ingot, Iron)
                 .output(dust, GTQTMaterials.ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // 2PbS + 6O -> 2Pb + Tl2SO4 + SO2
-        ROASTER_RECIPES.recipeBuilder()
+        BURNER_REACTOR_RECIPES.recipeBuilder()
                 .input(dust, Galena, 4)
                 .fluidInputs(Oxygen.getFluid(6000))
                 .output(ingot, Lead, 2)
                 .output(dust, GTQTMaterials.ThalliumSulfate, 7)
                 .fluidOutputs(SulfurDioxide.getFluid(1000))
-                .temperature(2700)
+                .blastFurnaceTemp(2700)
                 .duration(100).EUt(VA[HV]).buildAndRegister();
 
         // Tl2SO4 + H2O -> 2Th + H2SO4 + O
