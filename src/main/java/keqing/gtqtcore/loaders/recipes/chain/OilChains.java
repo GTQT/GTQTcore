@@ -441,33 +441,33 @@ public class OilChains {
 
         //含杂预处理
         OIL_POOL.recipeBuilder()
-                .fluidInputs(RawOil.getFluid(1000))
+                .fluidInputs(RawOil.getFluid(4000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
-                .fluidInputs(OilHeavy.getFluid(1000))
+                .fluidInputs(OilHeavy.getFluid(4000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
-                .fluidInputs(OilLight.getFluid(1000))
+                .fluidInputs(OilLight.getFluid(4000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
                 .buildAndRegister();
 
         OIL_POOL.recipeBuilder()
-                .fluidInputs(Oil.getFluid(1000))
+                .fluidInputs(Oil.getFluid(4000))
                 .fluidInputs(Demulsifier.getFluid(20))
-                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(1000))
+                .fluidOutputs(PreTreatedCrudeOilContainingImpurities.getFluid(4000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(100)
                 .buildAndRegister();
@@ -475,107 +475,80 @@ public class OilChains {
 
         //预处理
         ELEOIL.recipeBuilder()
-                .fluidInputs(RawOil.getFluid(1000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidInputs(RawOil.getFluid(4000))
+                .fluidInputs(Demulsifier.getFluid(20))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
-                .fluidInputs(OilHeavy.getFluid(1000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidInputs(OilHeavy.getFluid(4000))
+                .fluidInputs(Demulsifier.getFluid(20))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
-                .fluidInputs(OilLight.getFluid(1000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidInputs(OilLight.getFluid(4000))
+                .fluidInputs(Demulsifier.getFluid(20))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
         ELEOIL.recipeBuilder()
-                .fluidInputs(Oil.getFluid(1000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(1500))
+                .fluidInputs(Oil.getFluid(4000))
+                .fluidInputs(Demulsifier.getFluid(20))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
                 .EUt(120)
                 .buildAndRegister();
 
-        /*
+        //
         CLARIFIER.recipeBuilder()
-                .fluidInputs(RawOil.getFluid(16000))
-                .fluidInputs(Demulsifier.getFluid(400))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(1)
-                .duration(1600)
+                .input(dust,Alunite)
+                .fluidInputs(RawOil.getFluid(8000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(8000))
+                .fluidOutputs(SaltWater.getFluid(400))
+                .duration(6400)
                 .buildAndRegister();
 
         CLARIFIER.recipeBuilder()
-                .fluidInputs(OilHeavy.getFluid(16000))
-                .fluidInputs(Demulsifier.getFluid(400))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(1)
-                .duration(1600)
+                .input(dust,Alunite)
+                .fluidInputs(OilHeavy.getFluid(8000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(8000))
+                .fluidOutputs(SaltWater.getFluid(400))
+                .duration(6400)
                 .buildAndRegister();
 
         CLARIFIER.recipeBuilder()
-                .fluidInputs(OilLight.getFluid(16000))
-                .fluidInputs(Demulsifier.getFluid(400))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(1)
-                .duration(1600)
+                .input(dust,Alunite)
+                .fluidInputs(OilLight.getFluid(8000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(8000))
+                .fluidOutputs(SaltWater.getFluid(400))
+                .duration(6400)
                 .buildAndRegister();
 
         CLARIFIER.recipeBuilder()
-                .fluidInputs(Oil.getFluid(16000))
-                .fluidInputs(Demulsifier.getFluid(400))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(1)
-                .duration(1600)
+                .input(dust,Alunite)
+                .fluidInputs(Oil.getFluid(8000))
+                .fluidOutputs(PreTreatedCrudeOil.getFluid(8000))
+                .fluidOutputs(SaltWater.getFluid(400))
+                .duration(6400)
                 .buildAndRegister();
 
         CLARIFIER.recipeBuilder()
-                .fluidInputs(RawOil.getFluid(16000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(2)
-                .duration(3200)
+                .fluidInputs(Sewage.getFluid(8000))
+                .fluidOutputs(Water.getFluid(8000))
+                .output(dust,Stone,3)
+                .duration(6400)
                 .buildAndRegister();
-
-        CLARIFIER.recipeBuilder()
-                .fluidInputs(OilHeavy.getFluid(16000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(2)
-                .duration(3200)
-                .buildAndRegister();
-
-        CLARIFIER.recipeBuilder()
-                .fluidInputs(OilLight.getFluid(16000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(2)
-                .duration(3200)
-                .buildAndRegister();
-
-        CLARIFIER.recipeBuilder()
-                .fluidInputs(Oil.getFluid(16000))
-                .fluidOutputs(PreTreatedCrudeOil.getFluid(16000))
-                .fluidOutputs(SaltWater.getFluid(3200))
-                .circuitMeta(2)
-                .duration(3200)
-                .buildAndRegister();
-
-         */
     }
 
     private static void Kettle() {
@@ -710,7 +683,7 @@ public class OilChains {
 
         //预处理
         DISTILLATION_RECIPES.recipeBuilder()
-                .fluidInputs(PreTreatedCrudeOil.getFluid(3000))
+                .fluidInputs(PreTreatedCrudeOil.getFluid(4000))
                 .chancedOutput(dust, Ash, 2500, 0)
                 .fluidOutputs(Distilledgasoline.getFluid(1200))
                 .fluidOutputs(HighlyPurifiedCoalTar.getFluid(1000))

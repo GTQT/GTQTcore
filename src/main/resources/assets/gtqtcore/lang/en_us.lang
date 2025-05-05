@@ -1120,8 +1120,9 @@ gtqtcore.machine.catalytic_reformer.name=Catalytic Reformer
 recipemap.catalytic_reformer_recipes.name=Catalytic Reforming
 
 gtqtcore.machine.fracker.name=Fracker
-gtqtcore.multiblock.fracker.tooltip.1=Refills fluid under bedrock in chunks using fracturing fluid, consuming 1000L per operation.
+gtqtcore.multiblock.fracker.tooltip.1=Refills fluid under bedrock in chunks using fracturing fluid, consuming 100L per operation.
 gtqtcore.multiblock.fracker.tooltip.2=Consumes §a%sEU/t§7 per operation.
+gtqtcore.multiblock.fracker.tooltip.3=Each replenishment is equivalent to 10 fluid veins mined*10.
 
 gtqtcore.machine.industrial_drill.name=Industrial Drill
 gtqtcore.multiblock.industrial_drill.tooltip.1=Drills the block placed under the drill bit.

@@ -1102,8 +1102,9 @@ gtqtcore.machine.catalytic_reformer.name=催化重整炉
 recipemap.catalytic_reformer_recipes.name=催化重整
 
 gtqtcore.machine.fracker.name=压裂机
-gtqtcore.multiblock.fracker.tooltip.1=使用压裂液补充基岩下的区块流体，每次消耗1000L。
+gtqtcore.multiblock.fracker.tooltip.1=使用压裂液补充基岩下的区块流体，每次消耗100L。
 gtqtcore.multiblock.fracker.tooltip.2=每次工作消耗§a%sEU/t§7。
+gtqtcore.multiblock.fracker.tooltip.3=每次补充相当于开采量*10的流体矿脉
 
 gtqtcore.machine.industrial_drill.name=工业钻机
 gtqtcore.multiblock.industrial_drill.tooltip.1=钻取放置在钻头下方的方块。

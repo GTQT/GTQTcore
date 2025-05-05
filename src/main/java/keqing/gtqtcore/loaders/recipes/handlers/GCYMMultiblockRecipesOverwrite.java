@@ -276,7 +276,7 @@ public class GCYMMultiblockRecipesOverwrite {
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
-                .input(CRYOGENIC_REACTOR[IV], 4)
+                .input(MetaTileEntities.VACUUM_FREEZER, 2)
                 .input(LOW_TEMP_ACTIVATOR[IV], 8)
                 .input(ELECTRIC_PISTON_IV, 8)
                 .input(ELECTRIC_PUMP_IV, 8)
@@ -987,17 +987,5 @@ public class GCYMMultiblockRecipesOverwrite {
                 .duration(1200)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
-        ModHandler.removeRecipeByName("gcym:parallel_hatch_iv");
-        ModHandler.removeRecipeByName("gcym:parallel_hatch_luv");
-        ModHandler.removeRecipeByName("gcym:parallel_hatch_zpm");
-        ModHandler.removeRecipeByName("gcym:parallel_hatch_uv");
-
-        registerMachineRecipe(GTQTMetaTileEntities.PARALLEL_HATCH,
-                "SCE", "CHC", "WCW",
-                'C', CIRCUIT,
-                'H', HULL,
-                'S', SENSOR,
-                'E', EMITTER,
-                'W', WIRE_QUAD);
     }
 }

@@ -7,10 +7,9 @@ import static gregtech.api.unification.material.Materials.NaquadahAlloy;
 import static gregtech.api.unification.material.Materials.Polybenzimidazole;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Plate;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Superconductor;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
 
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -50,12 +49,12 @@ public class CoverRecipes {
             {
                 ASSEMBLY_LINE_RECIPES.recipeBuilder()
                         .input(HULL[i],4)
-                        .input(KQCC_COMPUTATION_HATCH_TRANSMITTER[i])
+                        .input(MetaTileEntities.COMPUTATION_HATCH_TRANSMITTER[i])
                         .input(MetaTileEntities.ENERGY_INPUT_HATCH[i])
                         .input(OrePrefix.frameGt,Plate[i],16)
                         .input(OrePrefix.circuit, MarkerMaterial.create(GTValues.VN[i].toLowerCase()),16)
-                        .input(OrePrefix.wireGtSingle,Superconductor[i],64)
-                        .fluidInputs(KaptonK.getFluid(L * 32))
+                        .input(OrePrefix.wireGtSingle,Superconductor[i],32)
+                        .fluidInputs(Kevlar.getFluid(L * 16))
                         .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                         .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                         .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -69,12 +68,12 @@ public class CoverRecipes {
 
                 ASSEMBLY_LINE_RECIPES.recipeBuilder()
                         .input(HULL[i],4)
-                        .input(KQCC_COMPUTATION_HATCH_RECEIVER[i])
+                        .input(MetaTileEntities.COMPUTATION_HATCH_RECEIVER[i])
                         .input(MetaTileEntities.ENERGY_OUTPUT_HATCH[i])
                         .input(OrePrefix.frameGt,Plate[i],16)
                         .input(OrePrefix.circuit, MarkerMaterial.create(GTValues.VN[i].toLowerCase()),16)
-                        .input(OrePrefix.wireGtSingle,Superconductor[i],64)
-                        .fluidInputs(KaptonK.getFluid(L * 32))
+                        .input(OrePrefix.wireGtSingle,Superconductor[i],32)
+                        .fluidInputs(Kevlar.getFluid(L * 16))
                         .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                         .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                         .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -89,12 +88,12 @@ public class CoverRecipes {
             else {
                 ASSEMBLY_LINE_RECIPES.recipeBuilder()
                         .input(HULL[i],4)
-                        .input(KQCC_COMPUTATION_HATCH_TRANSMITTER[i])
+                        .input(MetaTileEntities.COMPUTATION_HATCH_TRANSMITTER[i])
                         .input(MetaTileEntities.LASER_INPUT_HATCH_256[i-5])
                         .input(OrePrefix.frameGt,Plate[i],16)
                         .input(OrePrefix.circuit, MarkerMaterial.create(GTValues.VN[i].toLowerCase()), 16)
-                        .input(OrePrefix.wireGtSingle, Superconductor[i], 64)
-                        .fluidInputs(KaptonK.getFluid(L * 32))
+                        .input(OrePrefix.wireGtSingle, Superconductor[i], 32)
+                        .fluidInputs(Kevlar.getFluid(L * 16))
                         .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                         .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                         .fluidInputs(NaquadahAlloy.getFluid(L * 4))
@@ -108,12 +107,12 @@ public class CoverRecipes {
 
                 ASSEMBLY_LINE_RECIPES.recipeBuilder()
                         .input(HULL[i],4)
-                        .input(KQCC_COMPUTATION_HATCH_RECEIVER[i])
+                        .input(MetaTileEntities.COMPUTATION_HATCH_RECEIVER[i])
                         .input(MetaTileEntities.LASER_OUTPUT_HATCH_256[i-5])
                         .input(OrePrefix.frameGt,Plate[i],16)
                         .input(OrePrefix.circuit, MarkerMaterial.create(GTValues.VN[i].toLowerCase()), 16)
-                        .input(OrePrefix.wireGtSingle, Superconductor[i], 64)
-                        .fluidInputs(KaptonK.getFluid(L * 32))
+                        .input(OrePrefix.wireGtSingle, Superconductor[i], 32)
+                        .fluidInputs(Kevlar.getFluid(L * 16))
                         .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                         .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                         .fluidInputs(NaquadahAlloy.getFluid(L * 4))

@@ -354,14 +354,13 @@ public class NaquadahChain {
                 .buildAndRegister();
 
         //  Naquadria Caesium Xenonnonfluoride + Nitryl Fluoride -> Naquadria Caesiumfluoride + Nitrosonium Octafluoroxenate
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .fluidInputs(NaquadriaCaesiumXenonnonfluoride.getFluid(1000))
                 .fluidInputs(NitrylFluoride.getFluid(2000))
                 .fluidOutputs(NaquadriaCaesiumfluoride.getFluid(1000))
                 .fluidOutputs(NitrosoniumOctafluoroxenate.getFluid(1000))
                 .EUt(VA[EV])
                 .duration(400)
-                .temperature(75)
                 .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 

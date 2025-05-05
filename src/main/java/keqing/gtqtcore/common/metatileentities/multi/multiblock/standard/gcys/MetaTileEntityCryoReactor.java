@@ -22,13 +22,15 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
+import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.black_steel;
 
 public class MetaTileEntityCryoReactor extends GCYMRecipeMapMultiblockController {
 
     public MetaTileEntityCryoReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.CRYOGENIC_REACTOR_RECIPES,
-                GTQTcoreRecipeMaps.LOW_TEMP_ACTIVATOR_RECIPES});
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.LOW_TEMP_ACTIVATOR_RECIPES
+        });
     }
 
     @Override

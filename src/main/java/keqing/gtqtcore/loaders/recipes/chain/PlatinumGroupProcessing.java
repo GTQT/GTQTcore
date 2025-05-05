@@ -347,11 +347,10 @@ public class PlatinumGroupProcessing {
     private static void OsmiumProcess() {
 
         //  S + 2Cl -> SCl2
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .input(dust, Sulfur)
                 .fluidInputs(Chlorine.getFluid(2000))
                 .fluidOutputs(GTQTMaterials.SulfurDichloride.getFluid(1000))
-                .temperature(242)
                 .duration(80)
                 .EUt(120)
                 .buildAndRegister();

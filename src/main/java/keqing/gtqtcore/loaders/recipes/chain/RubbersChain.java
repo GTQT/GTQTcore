@@ -52,14 +52,13 @@ public class RubbersChain {
                 .buildAndRegister();
 
         //  Butadiene + Acrylonitrile -> Nitrile Butadiene Rubber
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .notConsumable(dust, FerricCatalyst)
                 .fluidInputs(Butadiene.getFluid(1000))
                 .fluidInputs(Acrylonitrile.getFluid(1000))
                 .fluidOutputs(NitrileButadieneRubber.getFluid(1000))
                 .EUt(VA[LuV])
                 .duration(200)
-                .temperature(286)
                 .buildAndRegister();
 
         //  Carbon + Phosphoryl Chloride + Ammonium Chloride -> Phosphonitrilic Chloride Trimer + Steam + Diluted Hydrochloric Acid
@@ -76,13 +75,12 @@ public class RubbersChain {
                 .buildAndRegister();
 
         //  Sodium Fluoride + Ethanol + Fluorine -> Sodium Trifluoroethanolate + Hydrogen
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .input(dust, SodiumFluoride, 6)
                 .fluidInputs(Ethanol.getFluid(3000))
                 .fluidInputs(Fluorine.getFluid(3000))
                 .output(dust, SodiumTrifluoroethanolate, 3)
                 .fluidOutputs(Hydrogen.getFluid(2000))
-                .temperature(344)
                 .EUt(VA[EV])
                 .duration(140)
                 .buildAndRegister();

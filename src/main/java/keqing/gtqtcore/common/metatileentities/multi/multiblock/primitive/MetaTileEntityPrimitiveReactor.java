@@ -51,7 +51,6 @@ public class MetaTileEntityPrimitiveReactor extends RecipeMapPrimitiveMultiblock
 
     public MetaTileEntityPrimitiveReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PR_MIX);
-        this.recipeMapWorkable = new PrimitiveReactorRecipeLogic(this, GTQTcoreRecipeMaps.PR_MIX);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -72,8 +71,8 @@ public class MetaTileEntityPrimitiveReactor extends RecipeMapPrimitiveMultiblock
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-
-        this.size = context.getOrDefault("length", 1);
+        size= structurePattern.formedRepetitionCount[1];
+        this.recipeMapWorkable.setParallelLimit(size);
     }
 
     @Override
@@ -136,17 +135,5 @@ public class MetaTileEntityPrimitiveReactor extends RecipeMapPrimitiveMultiblock
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
-    }
-
-    public class PrimitiveReactorRecipeLogic extends PrimitiveRecipeLogic {
-
-        public PrimitiveReactorRecipeLogic(RecipeMapPrimitiveMultiblockController tileEntity, RecipeMap<?> recipeMap) {
-            super(tileEntity, recipeMap);
-        }
-
-        @Override
-        public int getParallelLimit() {
-            return size;
-        }
     }
 }

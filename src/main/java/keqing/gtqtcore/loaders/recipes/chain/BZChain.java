@@ -48,12 +48,11 @@ public class BZChain {
                 .duration(720).EUt(VA[LV]).buildAndRegister();
 
         // 3HBr + 3KOH -> KBrO3 + 3H2O
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .fluidInputs(Bromine.getFluid(3000))
                 .input(dust, GTQTMaterials.PotassiumHydroxide, 1)
                 .output(dust, GTQTMaterials.PotassiumBromate, 5)
                 .fluidOutputs(Ice.getFluid(3000))
-                .temperature(273)
                 .duration(200).EUt(VA[HV]).buildAndRegister();
     }
 

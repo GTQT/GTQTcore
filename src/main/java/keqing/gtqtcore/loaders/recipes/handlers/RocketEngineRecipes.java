@@ -136,7 +136,7 @@ public class RocketEngineRecipes {
                 .buildAndRegister();
 
         //硝化反应（需低温逐滴添加）
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .fluidInputs(HydraziniumChloride.getFluid(4000))
                 .fluidInputs(SodiumNitrateSulfuricAcid.getFluid(1000))
                 .output(dust, HydraziniumDinitramide, 6) // N₂H₅N(NO₂)₂

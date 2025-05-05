@@ -759,17 +759,6 @@ public class MetaTileEntityMachine {
                 'X', CraftingComponent.CIRCUIT,
                 'W', CraftingComponent.CABLE,
                 'M', CraftingComponent.MOTOR);
-
-        // Cryogenic Reactor
-        MetaTileEntityLoader.registerMachineRecipe(true, CRYOGENIC_REACTOR,
-                "CMC", "IHI", "KRK",
-                'K', CraftingComponent.CABLE_QUAD,
-                'R', CraftingComponent.SPRING,
-                'I', CraftingComponent.PIPE_NORMAL,
-                'H', CraftingComponent.HULL,
-                'C', CraftingComponent.CIRCUIT,
-                'M', CraftingComponent.PUMP);
-
         // Burner Reactor
         MetaTileEntityLoader.registerMachineRecipe(true, BURNER_REACTOR,
                 "KRK", "IHI", "CMC",

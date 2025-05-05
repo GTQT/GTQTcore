@@ -89,10 +89,10 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> LOW_TEMP_ACTIVATOR_RECIPES = new RecipeMapBuilder<>("low_temperature_activator", new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .itemOutputs(4)
-            .fluidInputs(2)
-            .fluidOutputs(1)
+            .itemInputs(3)
+            .itemOutputs(3)
+            .fluidInputs(3)
+            .fluidOutputs(3)
             .itemSlotOverlay(GuiTextures.DUST_OVERLAY, false)
             .itemSlotOverlay(GuiTextures.DUST_OVERLAY, true)
             .fluidSlotOverlay(GuiTextures.VIAL_OVERLAY_2, false)
@@ -273,15 +273,6 @@ public class GTQTcoreRecipeMaps {
             .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.ARC)
-            .build();
-
-    public static final RecipeMap<NoCoilTemperatureRecipeBuilder> CRYOGENIC_REACTOR_RECIPES = new RecipeMapBuilder<>("cryogenic_reactor_recipes", new NoCoilTemperatureRecipeBuilder())
-            .itemInputs(3)
-            .itemOutputs(2)
-            .fluidInputs(2)
-            .fluidOutputs(2)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, HORIZONTAL)
-            .sound(GTSoundEvents.COOLING)
             .build();
 
     public static final RecipeMap<PressureRecipeBuilder> CVD_RECIPES = new RecipeMapBuilder<>("cvd_recipes", new PressureRecipeBuilder())
@@ -977,6 +968,7 @@ public class GTQTcoreRecipeMaps {
             .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_MACERATE, HORIZONTAL)
             .sound(GTSoundEvents.MACERATOR)
+            .disableJeiOverclockButton()
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> ELEOIL = new RecipeMapBuilder<>("ele_oil", new SimpleRecipeBuilder())

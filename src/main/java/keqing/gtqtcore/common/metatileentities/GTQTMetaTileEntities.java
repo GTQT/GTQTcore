@@ -198,7 +198,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
     public static MetaTileEntityPressureMachine[] VACUUM_CHAMBER = new MetaTileEntityPressureMachine[V.length - 1];
     public static SimpleSteamMetaTileEntity[] STEAM_SPINNER = new SimpleSteamMetaTileEntity[2];
-    public static MetaTileEntityParallelHatch[] PARALLEL_HATCH = new MetaTileEntityParallelHatch[V.length - 1];
     public static MetaTileEntityRadiationHatch[] RADIATION_HATCH = new MetaTileEntityRadiationHatch[5];
     public static MetaTileEntityElectrodeHatch[] ELECTRODE_HATCH = new MetaTileEntityElectrodeHatch[5];
     public static MetaTileEntityDrillHeadHatch[] DRILL_HEAD_HATCH = new MetaTileEntityDrillHeadHatch[5];
@@ -232,7 +231,6 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] POLYMERIZATION_TANK = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] SPINNER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] BURNER_REACTOR = new SimpleMachineMetaTileEntity[V.length - 1];
-    public static SimpleMachineMetaTileEntity[] CRYOGENIC_REACTOR = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleSteamMetaTileEntity[] STEAM_ROASTER = new SimpleSteamMetaTileEntity[2];
     public static SimpleMachineMetaTileEntity[] ROASTER = new SimpleMachineMetaTileEntity[V.length - 1];
 
@@ -287,8 +285,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityKineticEnergyBattery KINETIC_ENERGY_BATTERY;
     //public static MetaTileEntityGrayElectricPowerBank GRAY_ELECTRIC_POWER_BANK;
     public static MetaTileEntityAssemblyLine ASSEMBLY_LINE;
-    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_RECEIVER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
-    public static MetaTileEntityKQCCComputationHatch[] KQCC_COMPUTATION_HATCH_TRANSMITTER = new MetaTileEntityKQCCComputationHatch[GTValues.V.length - 1];
     public static MetaTileHighEnergyLaserHatch[] LASER_INPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileHighEnergyLaserHatch[] LASER_OUTPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileEntityMSF MSF;
@@ -367,6 +363,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityPlasmaCondenser PLASMA_CONDENSER;
     public static MetaTileEntityHeatHatchExchange HEAT_HATCH_EXCHANGE;
     public static MetaTileEntityDimensionallyTranscendentPlasmaForge DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE;
+
+    /*
     public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
     public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
     public static MetaTileEntityIndustrialMix INDUSTRIAL_MIX;
@@ -384,6 +382,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityIndustrialBender INDUSTRIAL_BENDER;
     public static MetaTileEntityIndustrialWireMill INDUSTRIAL_WIREMILL;
     public static MetaTileEntityIndustrialExtruder INDUSTRIAL_EXTRUDER;
+    */
+
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static MetaTileEntitySterileCleaningMaintenanceHatch STERILE_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO3CleaningMaintenanceHatch ISO3_CLEANING_MAINTENANCE_HATCH;
@@ -409,139 +409,114 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityExtender INV_TANK_EXTENDER;
     public static MetaTileEntityExtender UNIVERSAL_EXTENDER;
 
-    private static int startId = 13000;
-    private static final int END_ID = startId + 1000;
-
-    public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier, IntPredicate canAdd) {
-        for (int i = 0; i < GTValues.V.length; i++) {
-            if (canAdd.test(i)) {
-                tileEntities[i] = registerMetaTileEntity(idSupplier.getAsInt(), function.apply(i));
-            }
-        }
-    }
-
-
-
-    public static void simpleTiredInit(MetaTileEntity[] tileEntities, IntFunction<MetaTileEntity> function, IntSupplier idSupplier) {
-        simpleTiredInit(tileEntities, function, idSupplier, (i) -> true);
-    }
-
-    private static int getMaterialsId() {
-        if (startId < END_ID) {
-            return startId++;
-        }
-        throw new ArrayIndexOutOfBoundsException();
-    }
-
     public static void initialization() {
         GTQTLog.logger.info("Registering MetaTileEntities");
         //发电设备 单方块
-        LIGHTNING_ROD[0] = registerMetaTileEntity(3000, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.iv"), GTValues.IV));
-        LIGHTNING_ROD[1] = registerMetaTileEntity(3001, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), LuV));
-        LIGHTNING_ROD[2] = registerMetaTileEntity(3002, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.zpm"), GTValues.ZPM));
-        NAQUADAH_REACTOR[0] = registerMetaTileEntity(3003, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.iv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
-        NAQUADAH_REACTOR[1] = registerMetaTileEntity(3004, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.luv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 6, genericGeneratorTankSizeFunctionPlus));
-        NAQUADAH_REACTOR[2] = registerMetaTileEntity(3005, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.zpm"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 7, genericGeneratorTankSizeFunctionPlus));
-        ROCKET_ENGINE[0] = registerMetaTileEntity(3006, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.hv"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 3, genericGeneratorTankSizeFunctionPlus));
-        ROCKET_ENGINE[1] = registerMetaTileEntity(3007, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.ev"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
-        ROCKET_ENGINE[2] = registerMetaTileEntity(3008, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.iv"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        LIGHTNING_ROD[0] = registerMetaTileEntity(0, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.iv"), GTValues.IV));
+        LIGHTNING_ROD[1] = registerMetaTileEntity(1, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.luv"), LuV));
+        LIGHTNING_ROD[2] = registerMetaTileEntity(2, new MetaTileEntityLightningRod(gtqtcoreId("lightning_rod.zpm"), GTValues.ZPM));
+        NAQUADAH_REACTOR[0] = registerMetaTileEntity(3, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.iv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        NAQUADAH_REACTOR[1] = registerMetaTileEntity(4, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.luv"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 6, genericGeneratorTankSizeFunctionPlus));
+        NAQUADAH_REACTOR[2] = registerMetaTileEntity(5, new SimpleGeneratorMetaTileEntity(gtqtcoreId("naquadah_reactor.zpm"), GTQTcoreRecipeMaps.NAQUADAH_REACTOR, GTQTTextures.NAQUADAH_REACTOR_OVERLAY, 7, genericGeneratorTankSizeFunctionPlus));
+        ROCKET_ENGINE[0] = registerMetaTileEntity(6, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.hv"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 3, genericGeneratorTankSizeFunctionPlus));
+        ROCKET_ENGINE[1] = registerMetaTileEntity(7, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.ev"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
+        ROCKET_ENGINE[2] = registerMetaTileEntity(8, new SimpleGeneratorMetaTileEntity(gtqtcoreId("rocket_engine.iv"), GTQTcoreRecipeMaps.ROCKET_RECIPES, GTQTTextures.ROCKET_ENGINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
 
-        COMBUSTION_GENERATOR[0] = registerMetaTileEntity(3009, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
-        COMBUSTION_GENERATOR[1] = registerMetaTileEntity(3010, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.iv"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
-        STEAM_TURBINE[0] = registerMetaTileEntity(3011, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.ev"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
-        STEAM_TURBINE[1] = registerMetaTileEntity(3012, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.iv"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
-        GAS_TURBINE[0] = registerMetaTileEntity(3013, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.ev"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
-        GAS_TURBINE[1] = registerMetaTileEntity(3014, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        COMBUSTION_GENERATOR[0] = registerMetaTileEntity(9, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.ev"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
+        COMBUSTION_GENERATOR[1] = registerMetaTileEntity(10, new SimpleGeneratorMetaTileEntity(gtqtcoreId("combustion_generator.iv"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        STEAM_TURBINE[0] = registerMetaTileEntity(11, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.ev"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
+        STEAM_TURBINE[1] = registerMetaTileEntity(12, new SimpleGeneratorMetaTileEntity(gtqtcoreId("steam_turbine.iv"), RecipeMaps.STEAM_TURBINE_FUELS, Textures.STEAM_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        GAS_TURBINE[0] = registerMetaTileEntity(13, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.ev"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
+        GAS_TURBINE[1] = registerMetaTileEntity(14, new SimpleGeneratorMetaTileEntity(gtqtcoreId("gas_turbine.iv"), RecipeMaps.GAS_TURBINE_FUELS, Textures.GAS_TURBINE_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
 
-        FUEL_CELL_TURBINE[0] = registerMetaTileEntity(3015, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.lv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 1, genericGeneratorTankSizeFunctionPlus));
-        FUEL_CELL_TURBINE[1] = registerMetaTileEntity(3016, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.mv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 2, genericGeneratorTankSizeFunctionPlus));
-        FUEL_CELL_TURBINE[2] = registerMetaTileEntity(3017, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.hv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 3, genericGeneratorTankSizeFunctionPlus));
-        FUEL_CELL_TURBINE[3] = registerMetaTileEntity(3018, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.ev"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
-        FUEL_CELL_TURBINE[4] = registerMetaTileEntity(3019, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.iv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
+        FUEL_CELL_TURBINE[0] = registerMetaTileEntity(15, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.lv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 1, genericGeneratorTankSizeFunctionPlus));
+        FUEL_CELL_TURBINE[1] = registerMetaTileEntity(16, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.mv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 2, genericGeneratorTankSizeFunctionPlus));
+        FUEL_CELL_TURBINE[2] = registerMetaTileEntity(17, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.hv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 3, genericGeneratorTankSizeFunctionPlus));
+        FUEL_CELL_TURBINE[3] = registerMetaTileEntity(18, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.ev"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 4, genericGeneratorTankSizeFunctionPlus));
+        FUEL_CELL_TURBINE[4] = registerMetaTileEntity(19, new SimpleGeneratorMetaTileEntity(gtqtcoreId("fuel_cell_turbine.iv"), GTQTcoreRecipeMaps.FUEL_CELL, Textures.COMBUSTION_GENERATOR_OVERLAY, 5, genericGeneratorTankSizeFunctionPlus));
 
-        BIOMASS_GENERATOR[0] = registerMetaTileEntity(3023, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.ev"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
-        BIOMASS_GENERATOR[1] = registerMetaTileEntity(3024, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.iv"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
-        BIOMASS_GENERATOR[2] = registerMetaTileEntity(3025, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.luv"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
+        BIOMASS_GENERATOR[0] = registerMetaTileEntity(20, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.ev"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+        BIOMASS_GENERATOR[1] = registerMetaTileEntity(21, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.iv"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
+        BIOMASS_GENERATOR[2] = registerMetaTileEntity(22, new SimpleGeneratorMetaTileEntity(gtqtcoreId("biomass_generator.luv"), GTQTcoreRecipeMaps.BIOMASS_GENERATOR_RECIPES, GTQTTextures.BIOMASS_GENERATOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
 
-        ACID_GENERATOR[0] = registerMetaTileEntity(3026, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.mv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 2, GTUtility.genericGeneratorTankSizeFunction));
-        ACID_GENERATOR[1] = registerMetaTileEntity(3027, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.hv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 3, GTUtility.genericGeneratorTankSizeFunction));
-        ACID_GENERATOR[2] = registerMetaTileEntity(3028, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.ev"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+        ACID_GENERATOR[0] = registerMetaTileEntity(23, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.mv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 2, GTUtility.genericGeneratorTankSizeFunction));
+        ACID_GENERATOR[1] = registerMetaTileEntity(24, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.hv"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 3, GTUtility.genericGeneratorTankSizeFunction));
+        ACID_GENERATOR[2] = registerMetaTileEntity(25, new SimpleGeneratorMetaTileEntity(gtqtcoreId("acid_generator.ev"), GTQTcoreRecipeMaps.ACID_GENERATOR_RECIPES, Textures.CHEMICAL_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
 
-        PLASMA_GENERATOR[0] = registerMetaTileEntity(3029, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.ev"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[1] = registerMetaTileEntity(3030, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.iv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[2] = registerMetaTileEntity(3031, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.luv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[3] = registerMetaTileEntity(3032, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.zpm"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 7, GTUtility.genericGeneratorTankSizeFunction));
-        PLASMA_GENERATOR[4] = registerMetaTileEntity(3033, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.uv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 8, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[0] = registerMetaTileEntity(26, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.ev"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 4, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[1] = registerMetaTileEntity(27, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.iv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 5, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[2] = registerMetaTileEntity(28, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.luv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 6, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[3] = registerMetaTileEntity(29, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.zpm"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 7, GTUtility.genericGeneratorTankSizeFunction));
+        PLASMA_GENERATOR[4] = registerMetaTileEntity(30, new SimpleGeneratorMetaTileEntity(gtqtcoreId("plasma_generator.uv"), RecipeMaps.PLASMA_GENERATOR_FUELS, Textures.FUSION_REACTOR_OVERLAY, 8, GTUtility.genericGeneratorTankSizeFunction));
 
         //发电设备 多方块
-        LBG[0] = registerMetaTileEntity(3050, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.steam.1"), RecipeMaps.STEAM_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
-        LBG[1] = registerMetaTileEntity(3051, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.1"), RecipeMaps.GAS_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
-        LBG[2] = registerMetaTileEntity(3052, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.2"), RecipeMaps.GAS_TURBINE_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
-        LBG[3] = registerMetaTileEntity(3053, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.1"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
-        LBG[4] = registerMetaTileEntity(3054, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.2"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
-        LBG[5] = registerMetaTileEntity(3055, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.3"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 3, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.SA_TURBINE_CASING), StainlessSteel));
-        HYPER_REACTOR_MKI = registerMetaTileEntity(3056, new MetaTileEntityHyperReactorMkI(gtqtcoreId("hyper_reactor_mk1")));
-        HYPER_REACTOR_MKII = registerMetaTileEntity(3057, new MetaTileEntityHyperReactorMkII(gtqtcoreId("hyper_reactor_mk2")));
-        HYPER_REACTOR_MKIII = registerMetaTileEntity(3058, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
+        LBG[0] = registerMetaTileEntity(50, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.steam.1"), RecipeMaps.STEAM_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
+        LBG[1] = registerMetaTileEntity(51, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.1"), RecipeMaps.GAS_TURBINE_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
+        LBG[2] = registerMetaTileEntity(52, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.gas.2"), RecipeMaps.GAS_TURBINE_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
+        LBG[3] = registerMetaTileEntity(53, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.1"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 1, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID), MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE), Steel));
+        LBG[4] = registerMetaTileEntity(54, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.2"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 2, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.ALUMINIUM_FROSTPROOF), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AL_TURBINE_CASING), Aluminium));
+        LBG[5] = registerMetaTileEntity(55, new MetaTileEntityLargeBasicGenerator(gtqtcoreId("lbg.combustion.3"), RecipeMaps.COMBUSTION_GENERATOR_FUELS, 3, MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STAINLESS_CLEAN), GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.SA_TURBINE_CASING), StainlessSteel));
 
-        LARGE_NAQUADAH_REACTOR = registerMetaTileEntity(3059, new MetaTileEntityLargeNaquadahReactor(gtqtcoreId("large_naquadah_reactor")));
-        LARGE_ROCKET_ENGIN = registerMetaTileEntity(3060, new MetaTileEntityLargeRocketEngine(gtqtcoreId("large_rocket_engin"), LuV));
-        EXTREME_LARGE_ROCKET_ENGIN = registerMetaTileEntity(3061, new MetaTileEntityLargeRocketEngine(gtqtcoreId("extreme_large_rocket_engin"), ZPM));
-        SOLAR_PLATE = registerMetaTileEntity(3062, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
+        HYPER_REACTOR_MKI = registerMetaTileEntity(56, new MetaTileEntityHyperReactorMkI(gtqtcoreId("hyper_reactor_mk1")));
+        HYPER_REACTOR_MKII = registerMetaTileEntity(57, new MetaTileEntityHyperReactorMkII(gtqtcoreId("hyper_reactor_mk2")));
+        HYPER_REACTOR_MKIII = registerMetaTileEntity(58, new MetaTileEntityHyperReactorMkIII(gtqtcoreId("hyper_reactor_mk3")));
+
+        LARGE_NAQUADAH_REACTOR = registerMetaTileEntity(59, new MetaTileEntityLargeNaquadahReactor(gtqtcoreId("large_naquadah_reactor")));
+        LARGE_ROCKET_ENGIN = registerMetaTileEntity(60, new MetaTileEntityLargeRocketEngine(gtqtcoreId("large_rocket_engin"), LuV));
+        EXTREME_LARGE_ROCKET_ENGIN = registerMetaTileEntity(61, new MetaTileEntityLargeRocketEngine(gtqtcoreId("extreme_large_rocket_engin"), ZPM));
+        SOLAR_PLATE = registerMetaTileEntity(62, new MetaTileEntitySolarPlate(gtqtcoreId("solar_plate")));
 
         //
-        WATER_POWER_STATION[0] = registerMetaTileEntity(3064, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"), 1));
-        WATER_POWER_STATION[1] = registerMetaTileEntity(3065, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk2"), 2));
-        WATER_POWER_STATION[2] = registerMetaTileEntity(3066, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk3"), 3));
+        WATER_POWER_STATION[0] = registerMetaTileEntity(64, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk1"), 1));
+        WATER_POWER_STATION[1] = registerMetaTileEntity(65, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk2"), 2));
+        WATER_POWER_STATION[2] = registerMetaTileEntity(66, new MetaTileEntityWaterPowerStation(gtqtcoreId("water_power_station_mk3"), 3));
 
-        MEGA_STEAM_TURBINE = registerMetaTileEntity(3067, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 3, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
-        MEGA_GAS_TURBINE = registerMetaTileEntity(3068, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 4, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
-        MEGA_PLASMA_TURBINE = registerMetaTileEntity(3069, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(HC_ALLOY_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(HG1223_GEARBOX), GTQTTextures.HC_ALLOY_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
-        MEGA_FUEL_CELL_TURBINE = registerMetaTileEntity(3063, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.fuel_cell"), FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_MACHINE_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_GEARBOX), GTQTTextures.NITINOL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_STEAM_TURBINE = registerMetaTileEntity(67, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.steam"), RecipeMaps.STEAM_TURBINE_FUELS, 3, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STEEL_GEARBOX), Textures.SOLID_STEEL_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_GAS_TURBINE = registerMetaTileEntity(68, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.gas"), RecipeMaps.GAS_TURBINE_FUELS, 4, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.STAINLESS_STEEL_GEARBOX), Textures.CLEAN_STAINLESS_STEEL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_PLASMA_TURBINE = registerMetaTileEntity(69, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.plasma"), RecipeMaps.PLASMA_GENERATOR_FUELS, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(HC_ALLOY_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(HG1223_GEARBOX), GTQTTextures.HC_ALLOY_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_FUEL_CELL_TURBINE = registerMetaTileEntity(70, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.fuel_cell"), FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_MACHINE_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_GEARBOX), GTQTTextures.NITINOL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
-        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3070, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("high_pressure_steam_turbine"),false));
-        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3071, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("supercritical_steam_turbine"),true));
-        MEGA_HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(3072, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_high_pressure_steam_turbine"), GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES, EV, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX), Textures.STABLE_TITANIUM_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
-        MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(3073, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(71, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("high_pressure_steam_turbine"),false));
+        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(72, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("supercritical_steam_turbine"),true));
+        MEGA_HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(73, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_high_pressure_steam_turbine"), GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES, EV, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX), Textures.STABLE_TITANIUM_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
+        MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(74, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
+        LARGE_FUEL_TURBINE = registerMetaTileEntity(76, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 4, GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyX78), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.HastelloyX78, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
+        LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(77, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
 
-        KINETIC_ENERGY_BATTERY = registerMetaTileEntity(3074, new MetaTileEntityKineticEnergyBattery(gtqtcoreId("kinetic_energy_battery")));
-        //GRAY_ELECTRIC_POWER_BANK = registerMetaTileEntity(3071, new MetaTileEntityGrayElectricPowerBank(gtqtcoreId("gray_electric_power_bank")));
-        LARGE_FUEL_TURBINE = registerMetaTileEntity(3075, new MetaTileEntityLargeTurbine(gtqtcoreId("large_turbine.fuel_cell"), GTQTcoreRecipeMaps.FUEL_CELL, 4, GTQTMetaBlocks.blockMultiblockCasing1.getState(HastelloyX78), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.HastelloyX78, true, Textures.LARGE_GAS_TURBINE_OVERLAY));
+        TIDE_CONTROL = registerMetaTileEntity(90, new MetaTileEntityTideControl(gtqtcoreId("tide_control")));
+        TIDE_UNIT = registerMetaTileEntity(91, new MetaTileEntityTideUnit(gtqtcoreId("tide_unit")));
 
-        LARGE_BIOMASS_GENERATOR = registerMetaTileEntity(3076, new MetaTileEntityLargeBiomassGenerator(gtqtcoreId("large_biomass_generator")));
+        WIND_GENERATOR = registerMetaTileEntity(95, new MetaTileEntityWindGenerator(gtqtcoreId("wind_generator")));
 
-        TIDE_CONTROL = registerMetaTileEntity(3077, new MetaTileEntityTideControl(gtqtcoreId("tide_control")));
-        TIDE_UNIT = registerMetaTileEntity(3078, new MetaTileEntityTideUnit(gtqtcoreId("tide_unit")));
-
-        WIND_GENERATOR = registerMetaTileEntity(3079, new MetaTileEntityWindGenerator(gtqtcoreId("wind_generator")));
+        KINETIC_ENERGY_BATTERY = registerMetaTileEntity(99, new MetaTileEntityKineticEnergyBattery(gtqtcoreId("kinetic_energy_battery")));
         //激光
-        LASER_BLAST_FURNACE = registerMetaTileEntity(3080, new MetaTileEntityLaserBlastFurnace(gtqtcoreId("laser_blast_furnace")));
-        LASER_ALLOY_FURNACE = registerMetaTileEntity(3081, new MetaTileEntityLaserAlloyFurnace(gtqtcoreId("laser_alloy_furnace")));
-        LASER_CUTTER = registerMetaTileEntity(3082, new MetaTileEntityLaserCutter(gtqtcoreId("laser_cutter")));
-        LASER_ENV = registerMetaTileEntity(3083, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
-        LASER_CHEMICAL_PLANT = registerMetaTileEntity(3084, new MetaTileEntityLaserChemicalPlant(gtqtcoreId("laser_chemical_plant")));
+        LASER_BLAST_FURNACE = registerMetaTileEntity(100, new MetaTileEntityLaserBlastFurnace(gtqtcoreId("laser_blast_furnace")));
+        LASER_ALLOY_FURNACE = registerMetaTileEntity(101, new MetaTileEntityLaserAlloyFurnace(gtqtcoreId("laser_alloy_furnace")));
+        LASER_CUTTER = registerMetaTileEntity(102, new MetaTileEntityLaserCutter(gtqtcoreId("laser_cutter")));
+        LASER_ENV = registerMetaTileEntity(103, new MetaTileEntityLaserENV(gtqtcoreId("laser_env")));
+        LASER_CHEMICAL_PLANT = registerMetaTileEntity(104, new MetaTileEntityLaserChemicalPlant(gtqtcoreId("laser_chemical_plant")));
 
-        LASER_FBT =registerMetaTileEntity(3085, new MetaTileEntityLaserBooster(gtqtcoreId("laser_fbt")));
-        LASER_FBC = registerMetaTileEntity(3086, new MetaTileEntityLaserFusionCore(gtqtcoreId("laser_fbc")));
+        LASER_FBT =registerMetaTileEntity(110, new MetaTileEntityLaserBooster(gtqtcoreId("laser_fbt")));
+        LASER_FBC = registerMetaTileEntity(111, new MetaTileEntityLaserFusionCore(gtqtcoreId("laser_fbc")));
 
-        LASER_EMITTER = registerMetaTileEntity(3090, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
-        LASER_TRANSLATION = registerMetaTileEntity(3091, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
-        LASER_SWITCH = registerMetaTileEntity(3092, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
+        LASER_EMITTER = registerMetaTileEntity(115, new MetaTileEntityLaserEmitter(gtqtcoreId("laser_emitter")));
+        LASER_TRANSLATION = registerMetaTileEntity(116, new MetaTileEntityLaserTranslation(gtqtcoreId("laser_translation")));
+        LASER_SWITCH = registerMetaTileEntity(117, new MetaTileEntitySwitch(gtqtcoreId("laser_switch")));
 
-        SBPRC = registerMetaTileEntity(3097, new MetaTileEntitySBPRC(gtqtcoreId("sbprc")));
-        SBPRI = registerMetaTileEntity(3098, new MetaTileEntitySBPRI(gtqtcoreId("sbpri")));
-        SBPRO = registerMetaTileEntity(3099, new MetaTileEntitySBPRO(gtqtcoreId("sbpro")));
+        SBPRC = registerMetaTileEntity(120, new MetaTileEntitySBPRC(gtqtcoreId("sbprc")));
+        SBPRI = registerMetaTileEntity(121, new MetaTileEntitySBPRI(gtqtcoreId("sbpri")));
+        SBPRO = registerMetaTileEntity(122, new MetaTileEntitySBPRO(gtqtcoreId("sbpro")));
+
         //早期设备
-        PRIMITIVE_TREE_FARMER = registerMetaTileEntity(3100, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
-        SAW_MILL = registerMetaTileEntity(3101, new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));
-        PRIMITIVE_ROASTER = registerMetaTileEntity(3102, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
+        PRIMITIVE_TREE_FARMER = registerMetaTileEntity(150, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
+        SAW_MILL = registerMetaTileEntity(151,new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));
+        PRIMITIVE_ROASTER = registerMetaTileEntity(152, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
+        HEAT_FURNACE = registerMetaTileEntity(153, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
+        PRIMITIVE_REACTOR = registerMetaTileEntity(154, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
 
-        HEAT_FURNACE = registerMetaTileEntity(3107, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
-
-        PRIMITIVE_REACTOR = registerMetaTileEntity(3108, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
-
-        //多核心
+        //多核心 160-200
+        /*
         INDUSTRIAL_MACERATOR = registerMetaTileEntity(3120, new MetaTileEntityIndustrialMacerator(gtqtcoreId("industrial_crusher")));
         INDUSTRIAL_CENTRIFUGE = registerMetaTileEntity(3121, new MetaTileEntityIndustrialCentrifuge(gtqtcoreId("industrial_centrifuge")));
         INDUSTRIAL_MIX = registerMetaTileEntity(3122, new MetaTileEntityIndustrialMix(gtqtcoreId("industrial_mix")));
@@ -561,440 +536,432 @@ public class GTQTMetaTileEntities {
         INDUSTRIAL_EXTRUDER = registerMetaTileEntity(3134, new MetaTileEntityIndustrialExtruder(gtqtcoreId("industrial_extruder")));
         INDUSTRIAL_ASSEMBLY_LINE = registerMetaTileEntity(3135, new MetaTileEntityIndustrialAssemblyLine(gtqtcoreId("industrial_assembly_line")));
         INDUSTRIAL_CHEMICAL_REACTOR = registerMetaTileEntity(3136, new MetaTileEntityIndustrialChemicalReactor(gtqtcoreId("industrial_chemical_reactor")));
+
+         */
         //正常设备
-        DISSOLUTION_TANK = registerMetaTileEntity(3150, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
-        BLAZING_BLAST_FURNACE = registerMetaTileEntity(3151, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
-        CHEMICAL_PLANT = registerMetaTileEntity(3152, new MetaTileEntityChemicalPlant(gtqtcoreId("chemical_plant")));
-        INTEGRATED_MINING_DIVISION = registerMetaTileEntity(3153, new MetaTileEntityIntegratedMiningDivision(gtqtcoreId("integrated_mining_division")));
-        QUANTUM_FORCE_TRANSFORMER = registerMetaTileEntity(3154, new MetaTileEntityQuantumForceTransformer(gtqtcoreId("quantum_force_transform")));
-        SMALL_HEAT_EXCHANGER = registerMetaTileEntity(3155, new MetaTileEntitySmallHeatExchanger(gtqtcoreId("small_heat_exchanger")));
-        LARGE_HEAT_EXCHANGER = registerMetaTileEntity(3156, new MetaTileEntityLargeHeatExchanger(gtqtcoreId("large_heat_exchanger")));
-        FUEL_REFINE_FACTORY = registerMetaTileEntity(3157, new MetaTileEntityFuelRefineFactory(gtqtcoreId("fuel_refine_factory")));
-        FERMENTATION_TANK = registerMetaTileEntity(3158, new MetaTileEntityFermentationTank(gtqtcoreId("fermentation_tank")));
-        DIGESTER = registerMetaTileEntity(3159, new MetaTileEntityDigester(gtqtcoreId("digester")));
-        SEPTIC_TANK = registerMetaTileEntity(3160, new MetaTileEntitySepticTank(gtqtcoreId("septic_tank")));
-        PCB_FACTORY = registerMetaTileEntity(3161, new MetaTileEntityPCBFactory(gtqtcoreId("pcb_factory")));
-        INDUSTRIAL_FISHING_POND = registerMetaTileEntity(3162, new MetaTileEntityIndustrialFishingPond(gtqtcoreId("IndustrialFishingPond")));
-        ISA_MILL = registerMetaTileEntity(3163, new MetaTileEntityIsaMill(gtqtcoreId("isa_mill")));
-        FLOTATION_FACTORY = registerMetaTileEntity(3164, new MetaTileEntityFlotationFactory(gtqtcoreId("flotation_factory")));
-        VACUUM_DRYING_FURNACE = registerMetaTileEntity(3165, new MetaTileEntityVacuumDryingFurnace(gtqtcoreId("vacuum_drying_furnace")));
-        ALGAE_FARM = registerMetaTileEntity(3166, new MetaTileEntityAlgaeFarm(gtqtcoreId("algae_farm")));
-        ELECTROBATH = registerMetaTileEntity(3167, new MetaTileEntityElectronBath(gtqtcoreId("electrobath")));
-        SALT_FLIED = registerMetaTileEntity(3168, new MetaTileEntitySaltField(gtqtcoreId("salt_flied")));
-        PYROLYSIS_TOWER = registerMetaTileEntity(3169, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
-        PRECISE_ASSEMBLER = registerMetaTileEntity(3170, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
-        PARTICLE_ACCELERATOR = registerMetaTileEntity(3171, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
-        LARGE_CHEMICAL_REACTOR = registerMetaTileEntity(3172, new MetaTileEntityLargeChemicalReactor(gtqtcoreId("large_chemical_reactor")));
-        BIOLOGICAL_REACTION = registerMetaTileEntity(3173, new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
-        OIL_POOL = registerMetaTileEntity(3174, new MetaTileEntityOilPool(gtqtcoreId(("oil_pool"))));
-        MINING_DRILL = registerMetaTileEntity(3175, new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
-        DISTILLATION_KETTLE = registerMetaTileEntity(3176, new MetaTileEntityDistillationKettle(gtqtcoreId(("distillation_kettle"))));
-        OCEAN_PUMPER = registerMetaTileEntity(3177, new MetaTileEntityOceanPumper(gtqtcoreId("ocean_pumper")));
-        HEAT_CHANGER = registerMetaTileEntity(3178, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
-        LASER_ENGRAVING = registerMetaTileEntity(3179, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
-        STEPPER = registerMetaTileEntity(3180, new MetaTileEntityStepper(gtqtcoreId("stepper")));
-        INDUSTRIAL_REFINER = registerMetaTileEntity(3181, new MetaTileEntityIndustrialRefiner(gtqtcoreId("industrial_refiner")));
-        CLARIFIER = registerMetaTileEntity(3182, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
-        ELE_OIL = registerMetaTileEntity(3183, new MetaTileEntityElectronOil(gtqtcoreId("ele_oil")));
-        //
-        THREE_DIM_PRINT = registerMetaTileEntity(3186, new MetaTileEntityThreeDimPrinter(gtqtcoreId("three_dim_print")));
-        NEUTRON_ACTIVATOR = registerMetaTileEntity(3187, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
-        MSF = registerMetaTileEntity(3188, new MetaTileEntityMSF(gtqtcoreId("msf")));
-        INTEGRATED_ORE_PROCESSOR = registerMetaTileEntity(3189, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
-        EXTREME_INDUSTRIAL_GREENHOUSE = registerMetaTileEntity(3192, new MetaTileEntityExtremeIndustrialGreenhouse(gtqtcoreId("extreme_industrial_greenhouse")));
-        ENZYMES_REACTOR = registerMetaTileEntity(3193, new MetaTileEntityEnzymesReaction(gtqtcoreId("enzymes_reactor")));
-        BIO_CENTRIFUGE = registerMetaTileEntity(3194, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
-        CRYOGENIC_FREEZER = registerMetaTileEntity(3195, new MetaTileEntityCryogenicFreezer(gtqtcoreId("cryogenic_freezer")));
-        NANO_COATING = registerMetaTileEntity(3196, new MetaTileEntityNanoCoating(gtqtcoreId("nano_coating")));
-        POWER_SUPPLY = registerMetaTileEntity(3197, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
-        FROTH_FLOTATION_TANK = registerMetaTileEntity(3198, new MetaTileEntityFrothFlotationTank(gtqtcoreId("froth_flotation_tank")));
-        MICROWAVE_ENERGY_RECEIVER_CONTROL = registerMetaTileEntity(3202, new MetaTileEntityMicrowaveEnergyReceiverControl(gtqtcoreId("microwave_energy_receiver_control")));
-        //MEGA_CLEANROOM = registerMetaTileEntity(3203, new MetaTileEntityMegaCleanroom(gtqtcoreId("mega_cleanroom")));
-        SEISMIC_DETECTOR = registerMetaTileEntity(3204, new MetaTileEntitySeismicDetector(gtqtcoreId("seismic_detector")));
-        GRAVITY_SEPARATOR = registerMetaTileEntity(3205, new MetaTileEntityGravitySeparator(gtqtcoreId("gravity_separator")));
-        // COKING_TOWER = registerMetaTileEntity(3206, new MetaTileEntityCokingTower(gtqtcoreId("coking_tower")));
-        SMSF = registerMetaTileEntity(3207, new MetaTileEntitySMSF(gtqtcoreId("smsf")));
-        ADV_ARC_FURNACE = registerMetaTileEntity(3209, new MetaTileEntityAdvancedArcFurnace(gtqtcoreId("adv_arc_furnace")));
-        NEUTRAL_NETWORK_NEXUS = registerMetaTileEntity(3210, new MetaTileEntityNeutralNetworkNexus(gtqtcoreId("neutral_network_nexus")));
-        BLAZING_CZ_PULLER = registerMetaTileEntity(3211, new MetaTileEntityBlazingCZPuller(gtqtcoreId("blazing_cz_puller")));
-        LARGE_CIRCUIT_ASSEMBLY_LINE = registerMetaTileEntity(3212, new MetaTileEntityLargeCircuitAssemblyLine(gtqtcoreId("large_circuit_assembly_line")));
-        PHOTOLITHOGRAPHY_FACTORY = registerMetaTileEntity(3213, new MetaTileEntityPhotolithographyFactory(gtqtcoreId("photolithography_factory")));
-        DANGOTE_DISTILLERY = registerMetaTileEntity(3214, new MetaTileEntityDangoteDistillery(gtqtcoreId("dangote_distillery")));
-        EVAPORATION_POOL = registerMetaTileEntity(3215, new MetaTileEntityEvaporationPool(gtqtcoreId("evaporation_pool")));
-        ELECTRON_MICROSCOPE = registerMetaTileEntity(3216, new MetaTileEntityElectronMicroscope(gtqtcoreId("electron_microscope")));
-        GENE_MUTAGENESIS = registerMetaTileEntity(3217, new MetaTileEntityGeneMutagenesis(gtqtcoreId("gene_mutagenesis")));
-        INDUSTRIAL_INDUCTION_FURNACE = registerMetaTileEntity(3219, new MetaTileEntityIndustrialInductionFurnace(gtqtcoreId("industrial_induction_furnace")));
-        ENERGY_SUBSTATION = registerMetaTileEntity(3220, new MetaTileEntityEnergySubstation(gtqtcoreId("energy_substation")));
-        NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(3221, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));
-        PLASMA_CONDENSER = registerMetaTileEntity(3222, new MetaTileEntityPlasmaCondenser(gtqtcoreId("plasma_condenser")));
-        HEAT_HATCH_EXCHANGE = registerMetaTileEntity(3223, new MetaTileEntityHeatHatchExchange(gtqtcoreId("heat_hatch_exchange")));
-        LARGE_ELEMENT_DUPLICATOR = registerMetaTileEntity(3224, new MetaTileEntityLargeElementDuplicator(gtqtcoreId("large_element_duplicator")));
-        LARGE_UU_PRODUCTER = registerMetaTileEntity(3225, new MetaTileEntityLargeUUProducter(gtqtcoreId("large_uu_producter")));
+        DISSOLUTION_TANK = registerMetaTileEntity(201, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
+        BLAZING_BLAST_FURNACE = registerMetaTileEntity(202, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
+        CHEMICAL_PLANT = registerMetaTileEntity(203, new MetaTileEntityChemicalPlant(gtqtcoreId("chemical_plant")));
+        INTEGRATED_MINING_DIVISION = registerMetaTileEntity(204, new MetaTileEntityIntegratedMiningDivision(gtqtcoreId("integrated_mining_division")));
+        QUANTUM_FORCE_TRANSFORMER = registerMetaTileEntity(205, new MetaTileEntityQuantumForceTransformer(gtqtcoreId("quantum_force_transform")));
+        SMALL_HEAT_EXCHANGER = registerMetaTileEntity(206, new MetaTileEntitySmallHeatExchanger(gtqtcoreId("small_heat_exchanger")));
+        LARGE_HEAT_EXCHANGER = registerMetaTileEntity(207, new MetaTileEntityLargeHeatExchanger(gtqtcoreId("large_heat_exchanger")));
+        FUEL_REFINE_FACTORY = registerMetaTileEntity(208, new MetaTileEntityFuelRefineFactory(gtqtcoreId("fuel_refine_factory")));
+        FERMENTATION_TANK = registerMetaTileEntity(209, new MetaTileEntityFermentationTank(gtqtcoreId("fermentation_tank")));
+        DIGESTER = registerMetaTileEntity(210, new MetaTileEntityDigester(gtqtcoreId("digester")));
+        SEPTIC_TANK = registerMetaTileEntity(211, new MetaTileEntitySepticTank(gtqtcoreId("septic_tank")));
+        PCB_FACTORY = registerMetaTileEntity(212, new MetaTileEntityPCBFactory(gtqtcoreId("pcb_factory")));
+        INDUSTRIAL_FISHING_POND = registerMetaTileEntity(213, new MetaTileEntityIndustrialFishingPond(gtqtcoreId("IndustrialFishingPond")));
+        ISA_MILL = registerMetaTileEntity(214, new MetaTileEntityIsaMill(gtqtcoreId("isa_mill")));
+        FLOTATION_FACTORY = registerMetaTileEntity(215, new MetaTileEntityFlotationFactory(gtqtcoreId("flotation_factory")));
+        VACUUM_DRYING_FURNACE = registerMetaTileEntity(216, new MetaTileEntityVacuumDryingFurnace(gtqtcoreId("vacuum_drying_furnace")));
+        ALGAE_FARM = registerMetaTileEntity(217, new MetaTileEntityAlgaeFarm(gtqtcoreId("algae_farm")));
+        ELECTROBATH = registerMetaTileEntity(218, new MetaTileEntityElectronBath(gtqtcoreId("electrobath")));
+        SALT_FLIED = registerMetaTileEntity(219, new MetaTileEntitySaltField(gtqtcoreId("salt_flied")));
+        PYROLYSIS_TOWER = registerMetaTileEntity(220, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
+        PRECISE_ASSEMBLER = registerMetaTileEntity(221, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
+        PARTICLE_ACCELERATOR = registerMetaTileEntity(222, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
+        LARGE_CHEMICAL_REACTOR = registerMetaTileEntity(223, new MetaTileEntityLargeChemicalReactor(gtqtcoreId("large_chemical_reactor")));
+        BIOLOGICAL_REACTION = registerMetaTileEntity(224, new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
+        OIL_POOL = registerMetaTileEntity(225, new MetaTileEntityOilPool(gtqtcoreId(("oil_pool"))));
+        MINING_DRILL = registerMetaTileEntity(226, new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
+        DISTILLATION_KETTLE = registerMetaTileEntity(227, new MetaTileEntityDistillationKettle(gtqtcoreId(("distillation_kettle"))));
+        OCEAN_PUMPER = registerMetaTileEntity(228, new MetaTileEntityOceanPumper(gtqtcoreId("ocean_pumper")));
+        HEAT_CHANGER = registerMetaTileEntity(229, new MetaTileEntityHeatExchanger(gtqtcoreId("heat_exchanger")));
+        LASER_ENGRAVING = registerMetaTileEntity(230, new MetaTileEntityLaserEngraving(gtqtcoreId("laser_engraving")));
+        STEPPER = registerMetaTileEntity(231, new MetaTileEntityStepper(gtqtcoreId("stepper")));
+        INDUSTRIAL_REFINER = registerMetaTileEntity(232, new MetaTileEntityIndustrialRefiner(gtqtcoreId("industrial_refiner")));
+        CLARIFIER = registerMetaTileEntity(233, new MetaTileEntityClarifier(gtqtcoreId("clarifier")));
+        ELE_OIL = registerMetaTileEntity(234, new MetaTileEntityElectronOil(gtqtcoreId("ele_oil")));
+        THREE_DIM_PRINT = registerMetaTileEntity(235, new MetaTileEntityThreeDimPrinter(gtqtcoreId("three_dim_print")));
+        NEUTRON_ACTIVATOR = registerMetaTileEntity(236, new MetaTileEntityNeutronActivator(gtqtcoreId("neutron_activator")));
+        MSF = registerMetaTileEntity(237, new MetaTileEntityMSF(gtqtcoreId("msf")));
+        INTEGRATED_ORE_PROCESSOR = registerMetaTileEntity(238, new MetaTileEntityIntegratedOreProcessor(gtqtcoreId("integrated_ore_processor")));
+        EXTREME_INDUSTRIAL_GREENHOUSE = registerMetaTileEntity(239, new MetaTileEntityExtremeIndustrialGreenhouse(gtqtcoreId("extreme_industrial_greenhouse")));
+        ENZYMES_REACTOR = registerMetaTileEntity(240, new MetaTileEntityEnzymesReaction(gtqtcoreId("enzymes_reactor")));
+        BIO_CENTRIFUGE = registerMetaTileEntity(241, new MetaTileEntityBioCentrifuge(gtqtcoreId("bio_centrifuge")));
+        CRYOGENIC_FREEZER = registerMetaTileEntity(242, new MetaTileEntityCryogenicFreezer(gtqtcoreId("cryogenic_freezer")));
+        NANO_COATING = registerMetaTileEntity(243, new MetaTileEntityNanoCoating(gtqtcoreId("nano_coating")));
+        POWER_SUPPLY = registerMetaTileEntity(244, new MetaTileEntityPowerSupply(gtqtcoreId("power_supply")));
+        FROTH_FLOTATION_TANK = registerMetaTileEntity(245, new MetaTileEntityFrothFlotationTank(gtqtcoreId("froth_flotation_tank")));
+        MICROWAVE_ENERGY_RECEIVER_CONTROL = registerMetaTileEntity(246, new MetaTileEntityMicrowaveEnergyReceiverControl(gtqtcoreId("microwave_energy_receiver_control")));
+        //MEGA_CLEANROOM = registerMetaTileEntity(247, new MetaTileEntityMegaCleanroom(gtqtcoreId("mega_cleanroom")));
+        SEISMIC_DETECTOR = registerMetaTileEntity(248, new MetaTileEntitySeismicDetector(gtqtcoreId("seismic_detector")));
+        GRAVITY_SEPARATOR = registerMetaTileEntity(249, new MetaTileEntityGravitySeparator(gtqtcoreId("gravity_separator")));
+        SMSF = registerMetaTileEntity(250, new MetaTileEntitySMSF(gtqtcoreId("smsf")));
+        ADV_ARC_FURNACE = registerMetaTileEntity(251, new MetaTileEntityAdvancedArcFurnace(gtqtcoreId("adv_arc_furnace")));
+        NEUTRAL_NETWORK_NEXUS = registerMetaTileEntity(252, new MetaTileEntityNeutralNetworkNexus(gtqtcoreId("neutral_network_nexus")));
+        BLAZING_CZ_PULLER = registerMetaTileEntity(253, new MetaTileEntityBlazingCZPuller(gtqtcoreId("blazing_cz_puller")));
+        LARGE_CIRCUIT_ASSEMBLY_LINE = registerMetaTileEntity(254, new MetaTileEntityLargeCircuitAssemblyLine(gtqtcoreId("large_circuit_assembly_line")));
+        PHOTOLITHOGRAPHY_FACTORY = registerMetaTileEntity(255, new MetaTileEntityPhotolithographyFactory(gtqtcoreId("photolithography_factory")));
+        DANGOTE_DISTILLERY = registerMetaTileEntity(256, new MetaTileEntityDangoteDistillery(gtqtcoreId("dangote_distillery")));
+        EVAPORATION_POOL = registerMetaTileEntity(257, new MetaTileEntityEvaporationPool(gtqtcoreId("evaporation_pool")));
+        ELECTRON_MICROSCOPE = registerMetaTileEntity(258, new MetaTileEntityElectronMicroscope(gtqtcoreId("electron_microscope")));
+        GENE_MUTAGENESIS = registerMetaTileEntity(259, new MetaTileEntityGeneMutagenesis(gtqtcoreId("gene_mutagenesis")));
+        INDUSTRIAL_INDUCTION_FURNACE = registerMetaTileEntity(260, new MetaTileEntityIndustrialInductionFurnace(gtqtcoreId("industrial_induction_furnace")));
+        ENERGY_SUBSTATION = registerMetaTileEntity(261, new MetaTileEntityEnergySubstation(gtqtcoreId("energy_substation")));
+        NAQUADAH_FUEL_FACTORY = registerMetaTileEntity(262, new MetaTileEntityNaquadahFuelFactory(gtqtcoreId("naquadah_fuel_factory")));
+        PLASMA_CONDENSER = registerMetaTileEntity(263, new MetaTileEntityPlasmaCondenser(gtqtcoreId("plasma_condenser")));
+        HEAT_HATCH_EXCHANGE = registerMetaTileEntity(264, new MetaTileEntityHeatHatchExchange(gtqtcoreId("heat_hatch_exchange")));
+        LARGE_ELEMENT_DUPLICATOR = registerMetaTileEntity(265, new MetaTileEntityLargeElementDuplicator(gtqtcoreId("large_element_duplicator")));
+        LARGE_UU_PRODUCTER = registerMetaTileEntity(266, new MetaTileEntityLargeUUProducter(gtqtcoreId("large_uu_producter")));
+        INDUSTRIAL_DRILL = registerMetaTileEntity(267, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
+        LARGE_CATALYTIC_REFORMER = registerMetaTileEntity(268, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));
+        LARGE_SONICATOR = registerMetaTileEntity(269, new MetaTileEntitySonicator(gtqtcoreId("sonicator")));
+        LARGE_HYDRAULIC_FRACKER = registerMetaTileEntity(270, new MetaTileEntityFracker(gtqtcoreId("fracker"), GTValues.ZPM));
+        LARGE_NANOSCALE_FABRICATOR = registerMetaTileEntity(271, new MetaTileEntityNanoscaleFabricator(gtqtcoreId("nanoscale_fabricator")));
+        LARGE_ROASTER = registerMetaTileEntity(272, new MetaTileEntityIndustrialRoaster(gtqtcoreId("roaster")));
+        LARGE_CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(273, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
+        LARGE_CVD_UNIT = registerMetaTileEntity(274, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
+        LARGE_BURNER_REACTOR = registerMetaTileEntity(275, new MetaTileEntityBurnerReactor(gtqtcoreId("burner_reactor")));
+        LARGE_CRYOGENIC_REACTOR = registerMetaTileEntity(276, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
+        LARGE_ION_IMPLANTATOR = registerMetaTileEntity(277, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
+        LARGE_CZ_PULLER = registerMetaTileEntity(278, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
+        LARGE_EX_CVD = registerMetaTileEntity(279, new MetaTileEntityExtremesCVD(gtqtcoreId("ex_cvd")));
+        LARGE_CHEMICAL_FACTORY = registerMetaTileEntity(280, new MetaTileEntityChemicalReactor(gtqtcoreId("chemical_factory")));
+        LARGE_ULTRAVIOLET_LAMP = registerMetaTileEntity(281, new MetaTileEntityUltravioletLamp(gtqtcoreId("ultraviolet_lamp")));
+        LARGE_MIX = registerMetaTileEntity(282, new MetaTileEntityMixer(gtqtcoreId("large_mix")));
+        LARGE_PRESSURE_FACTORY = registerMetaTileEntity(283, new MetaTileEntityPressureFactory(gtqtcoreId("large_pressure_factory")));
+
         //重写设备
-        DISTILLATION_TOWER = registerMetaTileEntity(3250, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
-        CRACKER = registerMetaTileEntity(3251, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
-        PYROLYSE_OVEN = registerMetaTileEntity(3252, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
-        VACUUM_FREEZER = registerMetaTileEntity(3253, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
+        DISTILLATION_TOWER = registerMetaTileEntity(400, new MetaTileEntityDistillationTower(gtqtcoreId("distillation_tower")));
+        CRACKER = registerMetaTileEntity(401, new MetaTileEntityCrackingUnit(gtqtcoreId("cracker")));
+        PYROLYSE_OVEN = registerMetaTileEntity(402, new MetaTileEntityPyrolyseOven(gtqtcoreId("pyrolyse_oven")));
+        VACUUM_FREEZER = registerMetaTileEntity(403, new MetaTileEntityVacuumFreezer(gtqtcoreId("vacuum_freezer")));
 
-        ASSEMBLY_LINE = registerMetaTileEntity(3254, new MetaTileEntityAssemblyLine(gtqtcoreId("assembly_line")));
-        LARGE_ORE_WASHER = registerMetaTileEntity(3255, new MetaTileEntityLargeOreWasher(gtqtcoreId("large_ore_washer")));
-        LARGE_THERMAL_CENTRIFUGE = registerMetaTileEntity(3256, new MetaTileEntityLargeThermalCentrifuge(gtqtcoreId("large_thermal_centrifuge")));
-        LARGE_GRIND = registerMetaTileEntity(3257, new MetaTileEntityLargeGrind(gtqtcoreId("large_grind")));
-        LARGE_FORGING = registerMetaTileEntity(3258, new MetaTileEntityLargeForging(gtqtcoreId("large_forging")));
-        LARGE_EXTRACTOR = registerMetaTileEntity(3259, new MetaTileEntityLargeExtractor(gtqtcoreId("large_extractor")));
-        LARGE_MIXER = registerMetaTileEntity(3260, new MetaTileEntityLargeMixer(gtqtcoreId("large_mixer")));
-        LARGE_DESULPHURIZATION = registerMetaTileEntity(3261, new MetaTileEntityLargeDesulphurization(gtqtcoreId("large_desulphurization")));
-        LARGE_FLUIDIZED_BED = registerMetaTileEntity(3262, new MetaTileEntityLargeFluidizedBed(gtqtcoreId("large_fluidized_bed")));
+        ASSEMBLY_LINE = registerMetaTileEntity(404, new MetaTileEntityAssemblyLine(gtqtcoreId("assembly_line")));
+        LARGE_ORE_WASHER = registerMetaTileEntity(405, new MetaTileEntityLargeOreWasher(gtqtcoreId("large_ore_washer")));
+        LARGE_THERMAL_CENTRIFUGE = registerMetaTileEntity(406, new MetaTileEntityLargeThermalCentrifuge(gtqtcoreId("large_thermal_centrifuge")));
+        LARGE_GRIND = registerMetaTileEntity(407, new MetaTileEntityLargeGrind(gtqtcoreId("large_grind")));
+        LARGE_FORGING = registerMetaTileEntity(408, new MetaTileEntityLargeForging(gtqtcoreId("large_forging")));
+        LARGE_EXTRACTOR = registerMetaTileEntity(409, new MetaTileEntityLargeExtractor(gtqtcoreId("large_extractor")));
+        LARGE_MIXER = registerMetaTileEntity(410, new MetaTileEntityLargeMixer(gtqtcoreId("large_mixer")));
+        LARGE_DESULPHURIZATION = registerMetaTileEntity(411, new MetaTileEntityLargeDesulphurization(gtqtcoreId("large_desulphurization")));
+        LARGE_FLUIDIZED_BED = registerMetaTileEntity(412, new MetaTileEntityLargeFluidizedBed(gtqtcoreId("large_fluidized_bed")));
 
-        LV_GENERATOR_ARRAY= registerMetaTileEntity(3280, new MetaTileEntityGeneratorArray(gtqtcoreId("lv_generator_array"),1));
-        MV_GENERATOR_ARRAY= registerMetaTileEntity(3281, new MetaTileEntityGeneratorArray(gtqtcoreId("mv_generator_array"),2));
-        HV_GENERATOR_ARRAY= registerMetaTileEntity(3282, new MetaTileEntityGeneratorArray(gtqtcoreId("hv_generator_array"),3));
-        EV_GENERATOR_ARRAY= registerMetaTileEntity(3283, new MetaTileEntityGeneratorArray(gtqtcoreId("ev_generator_array"),4));
-        IV_GENERATOR_ARRAY= registerMetaTileEntity(3284, new MetaTileEntityGeneratorArray(gtqtcoreId("iv_generator_array"),5));
+        LV_GENERATOR_ARRAY= registerMetaTileEntity(420, new MetaTileEntityGeneratorArray(gtqtcoreId("lv_generator_array"),1));
+        MV_GENERATOR_ARRAY= registerMetaTileEntity(421, new MetaTileEntityGeneratorArray(gtqtcoreId("mv_generator_array"),2));
+        HV_GENERATOR_ARRAY= registerMetaTileEntity(422, new MetaTileEntityGeneratorArray(gtqtcoreId("hv_generator_array"),3));
+        EV_GENERATOR_ARRAY= registerMetaTileEntity(423, new MetaTileEntityGeneratorArray(gtqtcoreId("ev_generator_array"),4));
+        IV_GENERATOR_ARRAY= registerMetaTileEntity(424, new MetaTileEntityGeneratorArray(gtqtcoreId("iv_generator_array"),5));
 
-        LV_PROCESSING_ARRAY = registerMetaTileEntity(3287, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
-        MV_PROCESSING_ARRAY = registerMetaTileEntity(3288, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
-        HV_PROCESSING_ARRAY = registerMetaTileEntity(3289, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
+        LV_PROCESSING_ARRAY = registerMetaTileEntity(425, new MetaTileEntityProcessingArray(gtqtcoreId("lv_processing_array"), 1));
+        MV_PROCESSING_ARRAY = registerMetaTileEntity(426, new MetaTileEntityProcessingArray(gtqtcoreId("mv_processing_array"), 2));
+        HV_PROCESSING_ARRAY = registerMetaTileEntity(427, new MetaTileEntityProcessingArray(gtqtcoreId("hv_processing_array"), 3));
+
         //巨型设备
-        HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(3290, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), UHV));
-        HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(3291, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), UEV));
-        HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(3292, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), UIV));
+        HUGE_FUSION_REACTOR[0] = registerMetaTileEntity(500, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uhv"), UHV));
+        HUGE_FUSION_REACTOR[1] = registerMetaTileEntity(501, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uev"), UEV));
+        HUGE_FUSION_REACTOR[2] = registerMetaTileEntity(502, new MetaTileEntityHugeFusionReactor(gtqtcoreId("fusion_reactor.uiv"), UIV));
 
-        COMPRESSED_FUSION_REACTOR[0] = registerMetaTileEntity(3293, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.luv"), LuV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria)));
-        COMPRESSED_FUSION_REACTOR[1] = registerMetaTileEntity(3294, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.zpm"), ZPM, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK2), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Materials.Tritanium).getBlock(Materials.Tritanium)));
-        COMPRESSED_FUSION_REACTOR[2] = registerMetaTileEntity(3295, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uv"), UV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK3), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Neutronium).getBlock(Neutronium)));
+        COMPRESSED_FUSION_REACTOR[0] = registerMetaTileEntity(503, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.luv"), LuV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL), MetaBlocks.FRAMES.get(Materials.Naquadria).getBlock(Materials.Naquadria)));
+        COMPRESSED_FUSION_REACTOR[1] = registerMetaTileEntity(504, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.zpm"), ZPM, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK2), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Materials.Tritanium).getBlock(Materials.Tritanium)));
+        COMPRESSED_FUSION_REACTOR[2] = registerMetaTileEntity(505, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uv"), UV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK3), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Neutronium).getBlock(Neutronium)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[3] = registerMetaTileEntity(3296, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uhv"), UHV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKIV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKII), MetaBlocks.FRAMES.get(Infinity).getBlock(Infinity)));
+            COMPRESSED_FUSION_REACTOR[3] = registerMetaTileEntity(506, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uhv"), UHV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKIV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKII), MetaBlocks.FRAMES.get(Infinity).getBlock(Infinity)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(3297, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(MagnetoHydrodynamicallyConstrainedStarMatter).getBlock(MagnetoHydrodynamicallyConstrainedStarMatter)));
+            COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(507, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(MagnetoHydrodynamicallyConstrainedStarMatter).getBlock(MagnetoHydrodynamicallyConstrainedStarMatter)));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(3298, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Eternity).getBlock(Eternity)));
+            COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(508, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Eternity).getBlock(Eternity)));
 
-        ADVANCED_ASSEMBLY_LINE = registerMetaTileEntity(3305, new MetaTileEntityAdvancedAssemblyLine(gtqtcoreId("advanced_assembly_line")));
-        COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(3306, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
+        ADVANCED_ASSEMBLY_LINE = registerMetaTileEntity(510, new MetaTileEntityAdvancedAssemblyLine(gtqtcoreId("advanced_assembly_line")));
+        COMPONENT_ASSEMBLY_LINE = registerMetaTileEntity(511, new MetaTileEntityComponentAssemblyLine(gtqtcoreId("component_assembly_line")));
 
-        LARGE_PROCESSING_FACTORY = registerMetaTileEntity(3307, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));
+        LARGE_PROCESSING_FACTORY = registerMetaTileEntity(512, new MetaTileEntityLargeProcessingFactory(gtqtcoreId("large_processing_factory")));
 
-        HUGE_ALLOY_BLAST_FURANCE = registerMetaTileEntity(3312, new MetaTileEntityHugeAlloyBlastSmelter(gtqtcoreId("huge_alloy_blast_smelter")));
-        HUGE_BLAST_FURANCE = registerMetaTileEntity(3313, new MetaTileEntityHugeBlastFurnace(gtqtcoreId("huge_blast_furnace")));
-        HUGE_CRACKING_UNIT = registerMetaTileEntity(3314, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
-        HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(3315, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
+        HUGE_ALLOY_BLAST_FURANCE = registerMetaTileEntity(513, new MetaTileEntityHugeAlloyBlastSmelter(gtqtcoreId("huge_alloy_blast_smelter")));
+        HUGE_BLAST_FURANCE = registerMetaTileEntity(514, new MetaTileEntityHugeBlastFurnace(gtqtcoreId("huge_blast_furnace")));
+        HUGE_CRACKING_UNIT = registerMetaTileEntity(515, new MetaTileEntityHugeCrackingUnit(gtqtcoreId("huge_cracking_unit")));
+        HUGE_CHEMICAL_REACTOR = registerMetaTileEntity(516, new MetaTileEntityHugeChemicalReactor(gtqtcoreId("huge_chemical_reactor")));
 
-        ANTIMATTER_FORGE = registerMetaTileEntity(3330, new MetaTileEntityAntimatterForge(gtqtcoreId("antimatter_forge")));
-        ANTIMATTER_GENERATOR = registerMetaTileEntity(3331, new MetaTileEntityAntimatterGenerator(gtqtcoreId("antimatter_generator")));
+        ANTIMATTER_FORGE = registerMetaTileEntity(520, new MetaTileEntityAntimatterForge(gtqtcoreId("antimatter_forge")));
+        ANTIMATTER_GENERATOR = registerMetaTileEntity(521, new MetaTileEntityAntimatterGenerator(gtqtcoreId("antimatter_generator")));
 
 
         //star
-
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(3350, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
+            DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(600, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONAL_MIXER = registerMetaTileEntity(3351, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
+            DIMENSIONAL_MIXER = registerMetaTileEntity(601, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONAL_PLASMA_FURNACE = registerMetaTileEntity(3352, new MetaTileEntityDimensionallyPlasmFurnace(gtqtcoreId("dimensional_plasma_furnace")));
+            DIMENSIONAL_PLASMA_FURNACE = registerMetaTileEntity(602, new MetaTileEntityDimensionallyPlasmFurnace(gtqtcoreId("dimensional_plasma_furnace")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONAL_BIOMIMETIC_FACTORY = registerMetaTileEntity(3353, new MetaTileEntityDimensionallyBiomimeticFactory(gtqtcoreId("dimensional_biomimetic_factory")));
+            DIMENSIONAL_BIOMIMETIC_FACTORY = registerMetaTileEntity(603, new MetaTileEntityDimensionallyBiomimeticFactory(gtqtcoreId("dimensional_biomimetic_factory")));
         if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
-            NICOLL_DYSON_BEAMER = registerMetaTileEntity(3354, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
+            NICOLL_DYSON_BEAMER = registerMetaTileEntity(604, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
         if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
-            SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(3355, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
+            SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(605, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
 
         //资源产出
-        GAS_COLLECTOR = registerMetaTileEntity(3406, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
-        INDUSTRY_WATER_PUMP = registerMetaTileEntity(3407, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
+        GAS_COLLECTOR = registerMetaTileEntity(700, new MetaTileEntityGasCollector(gtqtcoreId("gas_collector")));
+        INDUSTRY_WATER_PUMP = registerMetaTileEntity(701, new MetaTileEntityIndustryWaterPump(gtqtcoreId("industry_water_pump")));
 
-        EXTREME_LARGE_MINER = registerMetaTileEntity(3420, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.zpm"), 7, 1, 9, 7, Materials.Naquadah, 64));
-        ULTIMATE_LARGE_MINER = registerMetaTileEntity(3421, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uv"), 8, 1, 18, 8, Orichalcum, 128));
-        INFINITY_LARGE_MINER = registerMetaTileEntity(3422, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uhv"), 9, 1, 36, 9, Adamantium, 256));
+        EXTREME_LARGE_MINER = registerMetaTileEntity(702, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.zpm"), 7, 1, 9, 7, Materials.Naquadah, 64));
+        ULTIMATE_LARGE_MINER = registerMetaTileEntity(703, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uv"), 8, 1, 18, 8, Orichalcum, 128));
+        INFINITY_LARGE_MINER = registerMetaTileEntity(704, new MetaTileEntityAdvancedLargeMiner(gtqtcoreId("large_miner.uhv"), 9, 1, 36, 9, Adamantium, 256));
 
-        ADVANCED_FLUID_DRILL_RIG = registerMetaTileEntity(3423, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.iv"), 5));
-        EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(3424, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
-        ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(3425, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
-        INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(3426, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
+        ADVANCED_FLUID_DRILL_RIG = registerMetaTileEntity(705, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.iv"), 5));
+        EXTREME_FLUID_DRILL_RIG = registerMetaTileEntity(706, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.luv"), 6));
+        ULTIMATE_FLUID_DRILL_RIG = registerMetaTileEntity(707, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.zpm"), 7));
+        INFINITY_FLUID_DRILL_RIG = registerMetaTileEntity(708, new MetaTileEntityAdvancedFluidDrill(gtqtcoreId("fluid_drill_rig.uv"), 8));
 
-        VOID_MINER[0] = registerMetaTileEntity(3427, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, 9000));
-        VOID_MINER[1] = registerMetaTileEntity(3428, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, 16000));
-        VOID_MINER[2] = registerMetaTileEntity(3429, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, 40000));
+        VOID_MINER[0] = registerMetaTileEntity(710, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.luv"), LuV, 9000));
+        VOID_MINER[1] = registerMetaTileEntity(711, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.zpm"), ZPM, 16000));
+        VOID_MINER[2] = registerMetaTileEntity(712, new MetaTileEntityVoidMiner(gtqtcoreId("void_miner.uv"), UV, 40000));
 
         //blocksResearchSystem
-        KQCC = registerMetaTileEntity(3450, new MetaTileEntityResearchSystemControlCenter(gtqtcoreId("kqcc")));
-        KQNS = registerMetaTileEntity(3451, new MetaTileEntityResearchSystemNetworkSwitch(gtqtcoreId("kqns")));
-        ADV_KQCC = registerMetaTileEntity(3452, new MetaTileEntityAdvanceKQCC(gtqtcoreId("adv_kqcc")));
-        MINI_DATE_BANK = registerMetaTileEntity(3453, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
-        ADV_NETWORK_SWITCH = registerMetaTileEntity(3464, new MetaTileEntityAdvanceNetworkSwitch(gtqtcoreId("adv_network_switch")));
-        ADV_DATE_BANK = registerMetaTileEntity(3455, new MetaTileEntityAdvanceDataBank(gtqtcoreId("adv_date_bank")));
-        RESEARCH_SYSTEM_NETWORK = registerMetaTileEntity(3470, new MetaTileEntityResearchSystemNetWork(gtqtcoreId("research_system_network")));
+        KQCC = registerMetaTileEntity(800, new MetaTileEntityResearchSystemControlCenter(gtqtcoreId("kqcc")));
+        KQNS = registerMetaTileEntity(801, new MetaTileEntityResearchSystemNetworkSwitch(gtqtcoreId("kqns")));
+        ADV_KQCC = registerMetaTileEntity(802, new MetaTileEntityAdvanceKQCC(gtqtcoreId("adv_kqcc")));
+        MINI_DATE_BANK = registerMetaTileEntity(803, new MetaTileEntityMiniDataBank(gtqtcoreId("mini_date_bank")));
+        ADV_NETWORK_SWITCH = registerMetaTileEntity(804, new MetaTileEntityAdvanceNetworkSwitch(gtqtcoreId("adv_network_switch")));
+        ADV_DATE_BANK = registerMetaTileEntity(805, new MetaTileEntityAdvanceDataBank(gtqtcoreId("adv_date_bank")));
+        RESEARCH_SYSTEM_NETWORK = registerMetaTileEntity(806, new MetaTileEntityResearchSystemNetWork(gtqtcoreId("research_system_network")));
+
         //GCYS
-        INDUSTRIAL_DRILL = registerMetaTileEntity(3500, new MetaTileEntityIndustrialDrill(gtqtcoreId("industrial_drill")));
-        LARGE_CATALYTIC_REFORMER = registerMetaTileEntity(3501, new MetaTileEntityCatalyticReformer(gtqtcoreId("catalytic_reformer")));
-        LARGE_SONICATOR = registerMetaTileEntity(3502, new MetaTileEntitySonicator(gtqtcoreId("sonicator")));
-        LARGE_HYDRAULIC_FRACKER = registerMetaTileEntity(3503, new MetaTileEntityFracker(gtqtcoreId("fracker"), GTValues.ZPM));
-        LARGE_NANOSCALE_FABRICATOR = registerMetaTileEntity(3504, new MetaTileEntityNanoscaleFabricator(gtqtcoreId("nanoscale_fabricator")));
-        LARGE_ROASTER = registerMetaTileEntity(3505, new MetaTileEntityIndustrialRoaster(gtqtcoreId("roaster")));
-        LARGE_CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(3506, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
-        LARGE_CVD_UNIT = registerMetaTileEntity(3507, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
-        LARGE_BURNER_REACTOR = registerMetaTileEntity(3508, new MetaTileEntityBurnerReactor(gtqtcoreId("burner_reactor")));
-        LARGE_CRYOGENIC_REACTOR = registerMetaTileEntity(3509, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
-        LARGE_ION_IMPLANTATOR = registerMetaTileEntity(3510, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
-        LARGE_CZ_PULLER = registerMetaTileEntity(3511, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));
-        LARGE_EX_CVD = registerMetaTileEntity(3512, new MetaTileEntityExtremesCVD(gtqtcoreId("ex_cvd")));
-        LARGE_CHEMICAL_FACTORY = registerMetaTileEntity(3513, new MetaTileEntityChemicalReactor(gtqtcoreId("chemical_factory")));
-        LARGE_ULTRAVIOLET_LAMP = registerMetaTileEntity(3514, new MetaTileEntityUltravioletLamp(gtqtcoreId("ultraviolet_lamp")));
-        LARGE_MIX = registerMetaTileEntity(3516, new MetaTileEntityMixer(gtqtcoreId("large_mix")));
-        LARGE_PRESSURE_FACTORY = registerMetaTileEntity(3517, new MetaTileEntityPressureFactory(gtqtcoreId("large_pressure_factory")));
 
         //pressure
-        STEAM_EJECTOR[0] = registerMetaTileEntity(3600, new MetaTileEntitySteamEjector(gtqtcoreId("steam_ejector.bronze"),false));
-        STEAM_EJECTOR[1] = registerMetaTileEntity(3602, new MetaTileEntitySteamEjector(gtqtcoreId("steam_ejector.steel"),true));
-        CREATIVE_PRESSURE = registerMetaTileEntity(3603, new MetaTileEntityCreativePressurePump(gtqtcoreId("infinite_pressure_pump")));
-        PRESSURE_TANK[0]= registerMetaTileEntity(3604, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.i"),1));
-        PRESSURE_TANK[1]= registerMetaTileEntity(3605, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.ii"),2));
-        PRESSURE_TANK[2]= registerMetaTileEntity(3606, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.iii"),3));
+        STEAM_EJECTOR[0] = registerMetaTileEntity(850, new MetaTileEntitySteamEjector(gtqtcoreId("steam_ejector.bronze"),false));
+        STEAM_EJECTOR[1] = registerMetaTileEntity(851, new MetaTileEntitySteamEjector(gtqtcoreId("steam_ejector.steel"),true));
+        CREATIVE_PRESSURE = registerMetaTileEntity(852, new MetaTileEntityCreativePressurePump(gtqtcoreId("infinite_pressure_pump")));
+        PRESSURE_TANK[0]= registerMetaTileEntity(853, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.i"),1));
+        PRESSURE_TANK[1]= registerMetaTileEntity(854, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.ii"),2));
+        PRESSURE_TANK[2]= registerMetaTileEntity(855, new MetaTileEntityPressureTank(gtqtcoreId("pressure_tank.iii"),3));
 
-        SUBSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(3620, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.subsonic"), GTValues.EV, increaseDetailP[6], getPressureChange(4,true)));
-        SUPERSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(3621, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.supersonic"), GTValues.LuV, increaseDetailP[8], getPressureChange(6,true)));
-        LOW_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(3622, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.low_power"), GTValues.EV, decreaseDetailP[6], getPressureChange(4,true)));
-        HIGH_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(3623, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.high_power"), GTValues.LuV, decreaseDetailP[8], getPressureChange(6,true)));
+        SUBSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(860, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.subsonic"), GTValues.EV, increaseDetailP[6], getPressureChange(4,true)));
+        SUPERSONIC_AXIAL_COMPRESSOR = registerMetaTileEntity(861, new MetaTileEntityAxialCompressor(gtqtcoreId("axial_compressor.supersonic"), GTValues.LuV, increaseDetailP[8], getPressureChange(6,true)));
+        LOW_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(862, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.low_power"), GTValues.EV, decreaseDetailP[6], getPressureChange(4,true)));
+        HIGH_POWER_TURBOMOLECULAR_PUMP = registerMetaTileEntity(863, new MetaTileEntityTurbomolecularPump(gtqtcoreId("turbomolecular_pump.high_power"), GTValues.LuV, decreaseDetailP[8], getPressureChange(6,true)));
 
         for (int i = 0; i < 9; i++) {
-            int id = 3630 + i;
+            int id = 870 + i;
             String name = String.format("pressure_pump.%s", GTValues.VN[i + 1]);
             PRESSURE_PUMP[i] = registerMetaTileEntity(id, new MetaTileEntityPressureBooster(gtqtcoreId(name),i + 1,false));
         }
         for (int i = 0; i < 9; i++) {
-            int id = 3640 + i;
+            int id = 880 + i;
             String name = String.format("pressure_compressor.%s", GTValues.VN[i + 1]);
             PRESSURE_COMPRESSOR[i] = registerMetaTileEntity(id, new MetaTileEntityPressureBooster(gtqtcoreId(name),i + 1,true));
         }
-        GAS_TANK[0]= registerMetaTileEntity(3650, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.bronze"),Materials.Bronze,0,5));
-        GAS_TANK[1]= registerMetaTileEntity(3651, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.steel"),Materials.Steel,1,10));
-        GAS_TANK[2]= registerMetaTileEntity(3652, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.aluminium"),Materials.Aluminium,2,15));
-        GAS_TANK[3]= registerMetaTileEntity(3653, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.stainlesssteel"), StainlessSteel,3,20));
-        GAS_TANK[4]= registerMetaTileEntity(3654, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.titanium"), Titanium,4,25));
-        GAS_TANK[5]= registerMetaTileEntity(3655, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.tungstensteel"), TungstenSteel,5,30));
-        GAS_TANK[6]= registerMetaTileEntity(3656, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.hssg"), HSSG,6,35));
-        GAS_TANK[7]= registerMetaTileEntity(3657, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.naquadah"), Naquadah,7,40));
-        GAS_TANK[8]= registerMetaTileEntity(3658, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.duranium"), Duranium,8,45));
-        GAS_TANK[9]= registerMetaTileEntity(3659, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.neutronium"), Neutronium,9,50));
+
+        GAS_TANK[0]= registerMetaTileEntity(890, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.bronze"),Materials.Bronze,0,5));
+        GAS_TANK[1]= registerMetaTileEntity(891, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.steel"),Materials.Steel,1,10));
+        GAS_TANK[2]= registerMetaTileEntity(892, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.aluminium"),Materials.Aluminium,2,15));
+        GAS_TANK[3]= registerMetaTileEntity(893, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.stainlesssteel"), StainlessSteel,3,20));
+        GAS_TANK[4]= registerMetaTileEntity(894, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.titanium"), Titanium,4,25));
+        GAS_TANK[5]= registerMetaTileEntity(895, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.tungstensteel"), TungstenSteel,5,30));
+        GAS_TANK[6]= registerMetaTileEntity(896, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.hssg"), HSSG,6,35));
+        GAS_TANK[7]= registerMetaTileEntity(897, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.naquadah"), Naquadah,7,40));
+        GAS_TANK[8]= registerMetaTileEntity(898, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.duranium"), Duranium,8,45));
+        GAS_TANK[9]= registerMetaTileEntity(899, new MetaTileEntityGasTank(gtqtcoreId("gas_tank.neutronium"), Neutronium,9,50));
         //Appeng 4000
 
         // ID 14001-14010: Drums
-        INV_BRIDGE = registerMetaTileEntity(14460, new MetaTileEntityBridge(gtqtcoreId("bridge.inv"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, GTQTTextures.INV_BRIDGE, Materials.Steel));
-        TANK_BRIDGE = registerMetaTileEntity(14461, new MetaTileEntityBridge(gtqtcoreId("bridge.tank"), cap -> cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.TANK_BRIDGE, Materials.Steel));
-        INV_TANK_BRIDGE = registerMetaTileEntity(14462, new MetaTileEntityBridge(gtqtcoreId("bridge.inv_tank"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.INV_TANK_BRIDGE, Materials.Steel));
-        UNIVERSAL_BRIDGE = registerMetaTileEntity(14463, new MetaTileEntityBridge(gtqtcoreId("bridge.universal"), cap -> true, GTQTTextures.UNIVERSAL_BRIDGE, Materials.Aluminium));
+        INV_BRIDGE = registerMetaTileEntity(900, new MetaTileEntityBridge(gtqtcoreId("bridge.inv"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, GTQTTextures.INV_BRIDGE, Materials.Steel));
+        TANK_BRIDGE = registerMetaTileEntity(901, new MetaTileEntityBridge(gtqtcoreId("bridge.tank"), cap -> cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.TANK_BRIDGE, Materials.Steel));
+        INV_TANK_BRIDGE = registerMetaTileEntity(902, new MetaTileEntityBridge(gtqtcoreId("bridge.inv_tank"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.INV_TANK_BRIDGE, Materials.Steel));
+        UNIVERSAL_BRIDGE = registerMetaTileEntity(903, new MetaTileEntityBridge(gtqtcoreId("bridge.universal"), cap -> true, GTQTTextures.UNIVERSAL_BRIDGE, Materials.Aluminium));
 
-        INV_EXTENDER = registerMetaTileEntity(14465, new MetaTileEntityExtender(gtqtcoreId("extender.inv"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, GTQTTextures.INV_EXTENDER, Materials.Steel));
-        TANK_EXTENDER = registerMetaTileEntity(14466, new MetaTileEntityExtender(gtqtcoreId("extender.tank"), cap -> cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.TANK_EXTENDER, Materials.Steel));
-        INV_TANK_EXTENDER = registerMetaTileEntity(14467, new MetaTileEntityExtender(gtqtcoreId("extender.inv_tank"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.INV_TANK_EXTENDER, Materials.Steel));
-        UNIVERSAL_EXTENDER = registerMetaTileEntity(14468, new MetaTileEntityExtender(gtqtcoreId("extender.universal"), cap -> true, GTQTTextures.UNIVERSAL_EXTENDER, Materials.Aluminium));
+        INV_EXTENDER = registerMetaTileEntity(904, new MetaTileEntityExtender(gtqtcoreId("extender.inv"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, GTQTTextures.INV_EXTENDER, Materials.Steel));
+        TANK_EXTENDER = registerMetaTileEntity(905, new MetaTileEntityExtender(gtqtcoreId("extender.tank"), cap -> cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.TANK_EXTENDER, Materials.Steel));
+        INV_TANK_EXTENDER = registerMetaTileEntity(906, new MetaTileEntityExtender(gtqtcoreId("extender.inv_tank"), cap -> cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, GTQTTextures.INV_TANK_EXTENDER, Materials.Steel));
+        UNIVERSAL_EXTENDER = registerMetaTileEntity(907, new MetaTileEntityExtender(gtqtcoreId("extender.universal"), cap -> true, GTQTTextures.UNIVERSAL_EXTENDER, Materials.Aluminium));
 
-        PE_CAN = registerMetaTileEntity(14470, new MetaTileEntityPlasticCan(gtqtcoreId("drum.pe"), Materials.Polyethylene, 64_000));
-        PTFE_CAN = registerMetaTileEntity(14471, new MetaTileEntityPlasticCan(gtqtcoreId("drum.ptfe"), Materials.Polytetrafluoroethylene, 128_000));
-        ZYLON_CAN = registerMetaTileEntity(14472, new MetaTileEntityPlasticCan(gtqtcoreId("drum.zylon"), Zylon, 512_000));
-        PBI_CAN = registerMetaTileEntity(14473, new MetaTileEntityPlasticCan(gtqtcoreId("drum.pbi"), Materials.Polybenzimidazole, 1024_000));
-        KEVLAR_CAN= registerMetaTileEntity(14474, new MetaTileEntityPlasticCan(gtqtcoreId("drum.kevlar"), Kevlar, 2048_000));
+        PE_CAN = registerMetaTileEntity(910, new MetaTileEntityPlasticCan(gtqtcoreId("drum.pe"), Materials.Polyethylene, 64_000));
+        PTFE_CAN = registerMetaTileEntity(911, new MetaTileEntityPlasticCan(gtqtcoreId("drum.ptfe"), Materials.Polytetrafluoroethylene, 128_000));
+        ZYLON_CAN = registerMetaTileEntity(912, new MetaTileEntityPlasticCan(gtqtcoreId("drum.zylon"), Zylon, 512_000));
+        PBI_CAN = registerMetaTileEntity(913, new MetaTileEntityPlasticCan(gtqtcoreId("drum.pbi"), Materials.Polybenzimidazole, 1024_000));
+        KEVLAR_CAN= registerMetaTileEntity(914, new MetaTileEntityPlasticCan(gtqtcoreId("drum.kevlar"), Kevlar, 2048_000));
 
         //小机器
-        STEAM_VACUUM_CHAMBER[0] = registerMetaTileEntity(14500, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.bronze"), false));
-        STEAM_VACUUM_CHAMBER[1] = registerMetaTileEntity(14501, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.steel"),true));
-        registerSimpleSteamMetaTileEntity(STEAM_SPINNER, 14502, "spinner", GTQTcoreRecipeMaps.SPINNER_RECIPES, COMPRESS, GTQTTextures.SPINNER_OVERL, false);
-        registerSimpleSteamMetaTileEntity(STEAM_ROASTER, 14504, "roaster", ROASTER_RECIPES, COMPRESS, ROASTER_OVERLAY, false);
+        STEAM_VACUUM_CHAMBER[0] = registerMetaTileEntity(1000, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.bronze"), false));
+        STEAM_VACUUM_CHAMBER[1] = registerMetaTileEntity(1001, new MetaTileEntitySteamVacuumChamber(gtqtcoreId("vacuum_chamber.steel"),true));
+        registerSimpleSteamMetaTileEntity(STEAM_SPINNER, 1002, "spinner", GTQTcoreRecipeMaps.SPINNER_RECIPES, COMPRESS, GTQTTextures.SPINNER_OVERL, false);
+        registerSimpleSteamMetaTileEntity(STEAM_ROASTER, 1004, "roaster", ROASTER_RECIPES, COMPRESS, ROASTER_OVERLAY, false);
 
-        registerSimpleMetaTileEntity(SONICATOR, 14600, "sonicator", SONICATION_RECIPES, SONICATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(ION_IMPLANTER, 14615, "ion_implanter", ION_IMPLANTATOR_RECIPES, ION_IMPLANTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(CVD_UNIT, 14630, "cvd_unit", CVD_RECIPES, CVD_UNIT_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(FLOTATION_CELL, 14645, "flotation_cell", FLOTATION_RECIPES, FLOTATION_CELL_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(CATALYTIC_REFORMER, 14660, "catalytic_reformer", CATALYTIC_REFORMER_RECIPES, CATALYTIC_REFORMER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(ROASTER, 14675, "roaster", ROASTER_RECIPES, ROASTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(CRYOGENIC_REACTOR, 14690, "cryogenic_reactor", CRYOGENIC_REACTOR_RECIPES, CRYOGENIC_REACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(SONICATOR, 1010, "sonicator", SONICATION_RECIPES, SONICATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(ION_IMPLANTER, 1025, "ion_implanter", ION_IMPLANTATOR_RECIPES, ION_IMPLANTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(CVD_UNIT, 1040, "cvd_unit", CVD_RECIPES, CVD_UNIT_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(FLOTATION_CELL, 1055, "flotation_cell", FLOTATION_RECIPES, FLOTATION_CELL_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(CATALYTIC_REFORMER, 1070, "catalytic_reformer", CATALYTIC_REFORMER_RECIPES, CATALYTIC_REFORMER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(ROASTER, 1085, "roaster", ROASTER_RECIPES, ROASTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
         for (int i = 0; i < 13; i++) {
-            int id = 14705 + i;
+            int id = 1100 + i;
             String name = String.format("burner_reactor.%s", GTValues.VN[i + 1]);
             BURNER_REACTOR[i] = registerMetaTileEntity(id, new MetaTileEntityPressureMachine(gtqtcoreId(name), BURNER_REACTOR_RECIPES,BURNER_REACTOR_OVERLAY,i + 1,true));
         }
 
-        registerSimpleMetaTileEntity(SPINNER, 14720, "spinner", SPINNER_RECIPES, GTQTTextures.SPINNER_OVERL, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(POLYMERIZATION_TANK, 14735, "polymerization_tank", POLYMERIZATION_RECIPES, POLYMERIZATION_TANK_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(LOW_TEMP_ACTIVATOR, 14750, "low_temperature_activator", LOW_TEMP_ACTIVATOR_RECIPES, LOW_TEMP_ACTIVATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(BIO_REACTOR, 14765, "bio_reactor", GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES, GTQTTextures.BIO_REACTOR_OVERLAY, true, GTQTUtil::gtqtId, (tier) -> 16000);
-        registerSimpleMetaTileEntity(DEHYDRATOR, 14780, "dehydrator", GTQTcoreRecipeMaps.DRYER_RECIPES, Textures.SIFTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 14795, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(FLUID_CANNER, 14810, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(COMPONENT_ASSEMBLER, 14825, "component_assembler", GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(LAMINATOR, 14840, "laminator", GTQTcoreRecipeMaps.LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.largeTankSizeFunction);
+        registerSimpleMetaTileEntity(SPINNER, 1115, "spinner", SPINNER_RECIPES, GTQTTextures.SPINNER_OVERL, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(POLYMERIZATION_TANK, 1130, "polymerization_tank", POLYMERIZATION_RECIPES, POLYMERIZATION_TANK_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(LOW_TEMP_ACTIVATOR, 1145, "low_temperature_activator", LOW_TEMP_ACTIVATOR_RECIPES, LOW_TEMP_ACTIVATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(BIO_REACTOR, 1160, "bio_reactor", GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES, GTQTTextures.BIO_REACTOR_OVERLAY, true, GTQTUtil::gtqtId, (tier) -> 16000);
+        registerSimpleMetaTileEntity(DEHYDRATOR, 1175, "dehydrator", GTQTcoreRecipeMaps.DRYER_RECIPES, Textures.SIFTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(FLUID_EXTRACTOR, 1190, "fluid_extractor", GTQTcoreRecipeMaps.FLUID_EXTRACTOR_RECIPES, Textures.EXTRACTOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(FLUID_CANNER, 1205, "fluid_canner", GTQTcoreRecipeMaps.FLUID_CANNER_RECIPES, Textures.CANNER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(COMPONENT_ASSEMBLER, 1220, "component_assembler", GTQTcoreRecipeMaps.COMPONENT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(LAMINATOR, 1235, "laminator", GTQTcoreRecipeMaps.LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.largeTankSizeFunction);
 
         for (int i = 0; i < 13; i++) {
-            int id = 14855 + i;
+            int id = 1250 + i;
             String name = String.format("vacuum_chamber.%s", GTValues.VN[i + 1]);
             VACUUM_CHAMBER[i] = registerMetaTileEntity(id, new MetaTileEntityPressureMachine(gtqtcoreId(name), VACUUM_CHAMBER_RECIPES,Textures.GAS_COLLECTOR_OVERLAY,i + 1,true));
         }
 
-        registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 14870, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 14885, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(UU_PRODUCTER, 14900, "uu_producter", GTQTcoreRecipeMaps.UU_RECIPES, GTQTTextures.UUPRODUCTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(DUPLICATOR, 14915, "duplicator", GTQTcoreRecipeMaps.COPY_RECIPES, GTQTTextures.DUPLICATOR, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(RECYCLE, 14930, "recycle", GTQTcoreRecipeMaps.RECYCLE_RECIPE, Textures.MACERATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.defaultTankSizeFunction);
-        registerSimpleMetaTileEntity(POLISHER, 14945, "polisher", GTQTcoreRecipeMaps.POLISHER_RECIPES, GTQTTextures.POLISHER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(SIMULATOR, 14960, "simulator", GTQTcoreRecipeMaps.SIMULATOR_RECIPES, GTQTTextures.SIMULATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 1265, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 1280, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(UU_PRODUCTER, 1295, "uu_producter", GTQTcoreRecipeMaps.UU_RECIPES, GTQTTextures.UUPRODUCTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(DUPLICATOR, 1310, "duplicator", GTQTcoreRecipeMaps.COPY_RECIPES, GTQTTextures.DUPLICATOR, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(RECYCLE, 1325, "recycle", GTQTcoreRecipeMaps.RECYCLE_RECIPE, Textures.MACERATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.defaultTankSizeFunction);
+        registerSimpleMetaTileEntity(POLISHER, 1340, "polisher", GTQTcoreRecipeMaps.POLISHER_RECIPES, GTQTTextures.POLISHER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+        registerSimpleMetaTileEntity(SIMULATOR, 1355, "simulator", GTQTcoreRecipeMaps.SIMULATOR_RECIPES, GTQTTextures.SIMULATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
 
-        STEAM_LATEX_COLLECTOR[0] = registerMetaTileEntity(15090, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.bronze"), false));
-        STEAM_LATEX_COLLECTOR[1] = registerMetaTileEntity(15091, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.steel"), true));
-        LATEX_COLLECTOR[0] = registerMetaTileEntity(15092, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.lv"), 1));
-        LATEX_COLLECTOR[1] = registerMetaTileEntity(15093, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.mv"), 2));
-        LATEX_COLLECTOR[2] = registerMetaTileEntity(15094, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.hv"), 3));
-        LATEX_COLLECTOR[3] = registerMetaTileEntity(15095, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.ev"), 4));
-        PARTICLE_ACCELERATOR_IO[0] = registerMetaTileEntity(15096, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.lv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 1, true));
-        PARTICLE_ACCELERATOR_IO[1] = registerMetaTileEntity(15097, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.mv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 2, true));
-        PARTICLE_ACCELERATOR_IO[2] = registerMetaTileEntity(15098, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.hv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 3, true));
-        PARTICLE_ACCELERATOR_IO[3] = registerMetaTileEntity(15099, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.ev"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 4, true));
+        STEAM_LATEX_COLLECTOR[0] = registerMetaTileEntity(1500, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.bronze"), false));
+        STEAM_LATEX_COLLECTOR[1] = registerMetaTileEntity(1501, new MetaTileEntitySteamLatexCollector(gtqtcoreId("latex_collector.steel"), true));
+        LATEX_COLLECTOR[0] = registerMetaTileEntity(1502, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.lv"), 1));
+        LATEX_COLLECTOR[1] = registerMetaTileEntity(1503, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.mv"), 2));
+        LATEX_COLLECTOR[2] = registerMetaTileEntity(1504, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.hv"), 3));
+        LATEX_COLLECTOR[3] = registerMetaTileEntity(1505, new MetaTileEntityLatexCollector(gtqtcoreId("latex_collector.ev"), 4));
+        PARTICLE_ACCELERATOR_IO[0] = registerMetaTileEntity(1506, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.lv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 1, true));
+        PARTICLE_ACCELERATOR_IO[1] = registerMetaTileEntity(1507, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.mv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 2, true));
+        PARTICLE_ACCELERATOR_IO[2] = registerMetaTileEntity(1508, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.hv"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 3, true));
+        PARTICLE_ACCELERATOR_IO[3] = registerMetaTileEntity(1509, new MetaTileEntityParticleAcceleratorIO(gtqtcoreId("particle_accelerator_io.ev"), GTQTcoreRecipeMaps.PAC_RECIPES, GTQTTextures.PARTICLE_ACCELERATOR, 4, true));
 
         //凿子
-        AUTO_CHISEL[0] = registerMetaTileEntity(15100, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.lv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 1, true, GTUtility.genericGeneratorTankSizeFunction));
-        AUTO_CHISEL[1] = registerMetaTileEntity(15101, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.mv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 2, true, GTUtility.genericGeneratorTankSizeFunction));
-        AUTO_CHISEL[2] = registerMetaTileEntity(15102, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.hv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 3, true, GTUtility.genericGeneratorTankSizeFunction));
+        AUTO_CHISEL[0] = registerMetaTileEntity(1510, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.lv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 1, true, GTUtility.genericGeneratorTankSizeFunction));
+        AUTO_CHISEL[1] = registerMetaTileEntity(1511, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.mv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 2, true, GTUtility.genericGeneratorTankSizeFunction));
+        AUTO_CHISEL[2] = registerMetaTileEntity(1512, new SimpleMachineMetaTileEntity(gtqtcoreId("auto_chisel.hv"), GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, Textures.AUTOCLAVE_OVERLAY, 3, true, GTUtility.genericGeneratorTankSizeFunction));
 
-        RUBBISH_BIN = registerMetaTileEntity(15104, new MetaTileEntityRubbishBin(gtqtcoreId("rubbish_bin")));
-        FLUID_RUBBISH_BIN = registerMetaTileEntity(15105, new MetaTileEntityFluidRubbishBin(gtqtcoreId("fluid_rubbish_bin")));
-        COMMON_RUBBISH_BIN = registerMetaTileEntity(15106, new MetaTileEntityCommonRubbishBin(gtqtcoreId("common_rubbish_bin")));
+        RUBBISH_BIN = registerMetaTileEntity(1520, new MetaTileEntityRubbishBin(gtqtcoreId("rubbish_bin")));
+        FLUID_RUBBISH_BIN = registerMetaTileEntity(1521, new MetaTileEntityFluidRubbishBin(gtqtcoreId("fluid_rubbish_bin")));
+        COMMON_RUBBISH_BIN = registerMetaTileEntity(1522, new MetaTileEntityCommonRubbishBin(gtqtcoreId("common_rubbish_bin")));
 
-        //仓口
+        //仓口-1600
         for (int i = 1; i <= GTValues.V.length - 2; i++) {
             String tierName = GTValues.VN[i].toLowerCase();
-            KQCC_COMPUTATION_HATCH_RECEIVER[i] = registerMetaTileEntity(15400 + i - 1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.receiver." + tierName), i, false));
-            KQCC_COMPUTATION_HATCH_TRANSMITTER[i] = registerMetaTileEntity(15415 + i - 1, new MetaTileEntityKQCCComputationHatch(gtqtcoreId("kqcccomputation_hatch.transmitter." + tierName), i, true));
-            MICROWAVE_ENERGY_RECEIVER[i] = registerMetaTileEntity(15430 + i - 1, new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver." + tierName), i));
-
-            LASER_INPUT[i] = registerMetaTileEntity(15445 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.input." + tierName), i, false));
-            LASER_OUTPUT[i] = registerMetaTileEntity(15460 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.output." + tierName), i, true));
+            MICROWAVE_ENERGY_RECEIVER[i] = registerMetaTileEntity(1600 + i - 1, new MetaTileEntityMicrowaveEnergyReceiver(gtqtcoreId("microwave_energy_receiver." + tierName), i));
+            LASER_INPUT[i] = registerMetaTileEntity(1615 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.input." + tierName), i, false));
+            LASER_OUTPUT[i] = registerMetaTileEntity(1630 + i - 1, new MetaTileHighEnergyLaserHatch(gtqtcoreId("laser.output." + tierName), i, true));
         }
-        LASER_BOOSTER[0] = registerMetaTileEntity(15475, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + LuV), LuV));
-        LASER_BOOSTER[1] = registerMetaTileEntity(15476, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + ZPM), ZPM));
-        LASER_BOOSTER[2] = registerMetaTileEntity(15477, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UV), UV));
-        LASER_BOOSTER[3] = registerMetaTileEntity(15478, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UHV), UHV));
-        LASER_BOOSTER[4] = registerMetaTileEntity(15479, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
-        LASER_BOOSTER[5] = registerMetaTileEntity(15480, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
 
-        for (int i = 0; i < 14; i++) {
-            int id = 15481 + i;
-            String name = String.format("parallel_hatch.%s", GTValues.VN[i + 1]);
-            PARALLEL_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityParallelHatch(gtqtcoreId(name), i + 1));
-        }
+        LASER_BOOSTER[0] = registerMetaTileEntity(1645, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + LuV), LuV));
+        LASER_BOOSTER[1] = registerMetaTileEntity(1646, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + ZPM), ZPM));
+        LASER_BOOSTER[2] = registerMetaTileEntity(1647, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UV), UV));
+        LASER_BOOSTER[3] = registerMetaTileEntity(1648, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UHV), UHV));
+        LASER_BOOSTER[4] = registerMetaTileEntity(1649, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UIV), UIV));
+        LASER_BOOSTER[5] = registerMetaTileEntity(1650, new MetaTileLaserBooster(gtqtcoreId("laser_booster." + UEV), UEV));
+
+        KQCC_HATCH[0] = registerMetaTileEntity(1651, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.1"), "ram", 1));
+        KQCC_HATCH[1] = registerMetaTileEntity(1652, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.2"), "ram", 2));
+        KQCC_HATCH[2] = registerMetaTileEntity(1653, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.3"), "ram", 3));
+
+        KQCC_HATCH[3] = registerMetaTileEntity(1654, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.1"), "cpu", 1));
+        KQCC_HATCH[4] = registerMetaTileEntity(1655, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.2"), "cpu", 2));
+        KQCC_HATCH[5] = registerMetaTileEntity(1656, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.3"), "cpu", 3));
+
+        KQCC_HATCH[6] = registerMetaTileEntity(1657, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.1"), "gpu", 1));
+        KQCC_HATCH[7] = registerMetaTileEntity(1658, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.2"), "gpu", 2));
+        KQCC_HATCH[8] = registerMetaTileEntity(1659, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.3"), "gpu", 3));
+
+        LOCAL_COMPUTER_HATCH = registerMetaTileEntity(1660, new MetaTileEntityLocalModelComputationHatch(gtqtcoreId("local_computer_hatch")));
+        BIO_HATCH = registerMetaTileEntity(1661, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
+        INF_WATER_HATCH = registerMetaTileEntity(1662, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
+        MULTIPART_BUFFER_HATCH = registerMetaTileEntity(1663, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
+        MULTIPART_BALL_HATCH = registerMetaTileEntity(1664, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
+
+        AIR_INTAKE_HATCH = registerMetaTileEntity(1665,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("air_intake_hatch"), IV)
+        );
+        EXTREME_AIR_INTAKE_HATCH = registerMetaTileEntity(1666,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("extreme_air_intake_hatch"), ZPM)
+        );
+        ULTIMATE_AIR_INTAKE_HATCH = registerMetaTileEntity(1667,
+                new MetaTileEntityAirIntakeHatch(
+                        gtqtcoreId("ultimate_air_intake_hatch"), UHV));
+
+        SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(1670, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
+        SUPER_INPUT_BUS = registerMetaTileEntity(1671, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
+        SINGLE_INPUT_BUS = registerMetaTileEntity(1672, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
+
+        GENERATOR_HATCH= registerMetaTileEntity(1675, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"),3));
+        STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1676, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
+        ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1677, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));
+        ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1678, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
+        ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1679, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
+
+        CATALYST_HATCH[0] = registerMetaTileEntity(1680, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.0"), 1));
+        CATALYST_HATCH[1] = registerMetaTileEntity(1681, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.1"), 2));
+        CATALYST_HATCH[2] = registerMetaTileEntity(1682, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"), 3));
+        CATALYST_HATCH[3] = registerMetaTileEntity(1683, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"), 4));
+        PARTICLE_HATCH = registerMetaTileEntity(1685, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
+
+
         for (int i = 0; i < 5; i++) {
-            int id = 15495 + i;
+            int id = 1700 + i;
             String name = String.format("radiation_hatch.%s", GTValues.VN[4 + i]);
             RADIATION_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityRadiationHatch(gtqtcoreId(name), 4 + i));
         }
 
         for (int i = 0; i < 5; i++) {
-            int id = 15500 + i;
+            int id = 1705 + i;
             String name = String.format("electrode_hatch.%s", GTValues.VN[i + 1]);
             ELECTRODE_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityElectrodeHatch(gtqtcoreId(name), i + 1));
         }
+
         for (int i = 0; i < 5; i++) {
-            int id = 15505 + i;
+            int id = 1710 + i;
             String name = String.format("drill_head_hatch.%s", GTValues.VN[i + 1]);
             DRILL_HEAD_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityDrillHeadHatch(gtqtcoreId(name), i + 1));
         }
 
-        KQCC_HATCH[0] = registerMetaTileEntity(15510, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.1"), "ram", 1));
-        KQCC_HATCH[1] = registerMetaTileEntity(15511, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.2"), "ram", 2));
-        KQCC_HATCH[2] = registerMetaTileEntity(15512, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.ram.3"), "ram", 3));
-
-        KQCC_HATCH[3] = registerMetaTileEntity(15513, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.1"), "cpu", 1));
-        KQCC_HATCH[4] = registerMetaTileEntity(15514, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.2"), "cpu", 2));
-        KQCC_HATCH[5] = registerMetaTileEntity(15515, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.cpu.3"), "cpu", 3));
-
-        KQCC_HATCH[6] = registerMetaTileEntity(15516, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.1"), "gpu", 1));
-        KQCC_HATCH[7] = registerMetaTileEntity(15517, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.2"), "gpu", 2));
-        KQCC_HATCH[8] = registerMetaTileEntity(15518, new MetaTileEntityKQCCPartHatch(gtqtcoreId("kqcc_hatch.gpu.3"), "gpu", 3));
-
-        LOCAL_COMPUTER_HATCH = registerMetaTileEntity(15519, new MetaTileEntityLocalModelComputationHatch(gtqtcoreId("local_computer_hatch")));
-
         for (int i = 0; i < 5; i++) {
-            int id = 15520 + i;
+            int id = 1715 + i;
             String name = String.format("heat_hatch.%s", GTValues.VN[i + 1]);
             HEAT_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityHeatHatch(gtqtcoreId(name), i + 1));
         }
         for (int i = 0; i < 5; i++) {
-            int id = 15525 + i;
+            int id = 1720 + i;
             String name = String.format("electric_heater.%s", GTValues.VN[i + 1]);
             ELECTRIC_HEATER[i] = registerMetaTileEntity(id, new MetaTileEntityElectricHeater(gtqtcoreId(name), i + 1));
         }
-
-        POWER_SUPPLY_HATCH_BASIC = registerMetaTileEntity(15530, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.basic"), "frame", 1));
-        POWER_SUPPLY_HATCH_BATTLE[0] = registerMetaTileEntity(15531, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.1"), "battle", 1));
-        POWER_SUPPLY_HATCH_BATTLE[1] = registerMetaTileEntity(15532, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.2"), "battle", 2));
-        POWER_SUPPLY_HATCH_BATTLE[2] = registerMetaTileEntity(15533, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.3"), "battle", 3));
-        POWER_SUPPLY_HATCH_BATTLE[3] = registerMetaTileEntity(15534, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.4"), "battle", 4));
-        POWER_SUPPLY_HATCH_BATTLE[4] = registerMetaTileEntity(15535, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.5"), "battle", 5));
-        POWER_SUPPLY_HATCH_SUPPLY[0] = registerMetaTileEntity(15536, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.1"), "supply", 1));
-        POWER_SUPPLY_HATCH_SUPPLY[1] = registerMetaTileEntity(15537, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.2"), "supply", 2));
-        POWER_SUPPLY_HATCH_SUPPLY[2] = registerMetaTileEntity(15538, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.3"), "supply", 3));
-        POWER_SUPPLY_HATCH_SUPPLY[3] = registerMetaTileEntity(15539, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.4"), "supply", 4));
-        POWER_SUPPLY_HATCH_SUPPLY[4] = registerMetaTileEntity(15540, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.5"), "supply", 5));
-        POWER_SUPPLY_HATCH_SUPPLY[5] = registerMetaTileEntity(15541, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.6"), "supply", 6));
-        POWER_SUPPLY_HATCH_SUPPLY[6] = registerMetaTileEntity(15542, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.7"), "supply", 7));
-        POWER_SUPPLY_HATCH_SUPPLY[7] = registerMetaTileEntity(15543, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.8"), "supply", 8));
-        POWER_SUPPLY_HATCH_SUPPLY[8] = registerMetaTileEntity(15544, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.9"), "supply", 9));
-        POWER_SUPPLY_HATCH_SUPPLY[9] = registerMetaTileEntity(15545, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.10"), "supply", 10));
-
-        BIO_HATCH = registerMetaTileEntity(15546, new MetaTileEntityBioHatch(gtqtcoreId("bio_hatch")));
-        INF_WATER_HATCH = registerMetaTileEntity(15547, new MetaTileInfWaterHatch(gtqtcoreId("infinite_water_hatch")));
-        CATALYST_HATCH[0] = registerMetaTileEntity(15548, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.0"), 1));
-        MULTIPART_BUFFER_HATCH = registerMetaTileEntity(15549, new MetaTileEntityBufferHatch(gtqtcoreId("buffer_hatch")));
-        MULTIPART_BALL_HATCH = registerMetaTileEntity(15550, new MetaTileEntityMillBallHatch(gtqtcoreId("mill_ball_hatch")));
-        //LV-OpV Reinforced Rotor Holders.
-        for (int i = 0; i < 13; i++) {
-            String voltageName = VN[i + 1].toLowerCase();
-            REINFORCED_ROTOR_HOLDER[i] = registerMetaTileEntity(15553 + i, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder." + voltageName), i + 1));
-        }
-
-        // ID 14501-14999: Several Misc Hatches
-        AIR_INTAKE_HATCH = registerMetaTileEntity(15566,
-                new MetaTileEntityAirIntakeHatch(
-                        gtqtcoreId("air_intake_hatch"), IV)
-        );
-        EXTREME_AIR_INTAKE_HATCH = registerMetaTileEntity(15567,
-                new MetaTileEntityAirIntakeHatch(
-                        gtqtcoreId("extreme_air_intake_hatch"), ZPM)
-        );
-        ULTIMATE_AIR_INTAKE_HATCH = registerMetaTileEntity(15568,
-                new MetaTileEntityAirIntakeHatch(
-                        gtqtcoreId("ultimate_air_intake_hatch"), UHV));
-
-        SINGLE_ITEM_INPUT_BUS = registerMetaTileEntity(15569, new MetaTileEntitySingleItemInputBus(gtqtcoreId("single_item_input_bus")));
-        SUPER_INPUT_BUS = registerMetaTileEntity(15570, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
-        SINGLE_INPUT_BUS = registerMetaTileEntity(15571, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
-        CATALYST_HATCH[1] = registerMetaTileEntity(15572, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.1"), 2));
-        CATALYST_HATCH[2] = registerMetaTileEntity(15573, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"), 3));
-        CATALYST_HATCH[3] = registerMetaTileEntity(15574, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"), 4));
-
-        GENERATOR_HATCH= registerMetaTileEntity(15584, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"),3));
-
-        STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15586, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
-        ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15587, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));
-        ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15588, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));
-        ISO1_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(15589, new MetaTileEntityISO1CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_1_cleanroom_auto")));
-
-
         for (int i = 0; i < 5; i++) {
-            int id = 15600 + i;
+            int id = 1725 + i;
             String name = String.format("swarm_hatch.%s", i);
             SWARM_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityWrapSwarmHatch(gtqtcoreId(name), i + 5));
         }
-
-        int startId = 15605;
+        for (int i = 0; i < 13; i++) {
+            String voltageName = VN[i + 1].toLowerCase();
+            REINFORCED_ROTOR_HOLDER[i] = registerMetaTileEntity(1730 + i, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder." + voltageName), i + 1));
+        }
         for (int i = 0; i < 14; i++) {
             double min = GCYSValues.decreaseDetailP[i];
             double max = GCYSValues.increaseDetailP[i];
-
-            PRESSURE_HATCH[i] = registerMetaTileEntity(startId + i, new MetaTileEntityPressureHatch(gtqtcoreId(String.format("pressure_hatch.%s", VN[i].toLowerCase())), i, min, max));
+            PRESSURE_HATCH[i] = registerMetaTileEntity(1745 + i, new MetaTileEntityPressureHatch(gtqtcoreId(String.format("pressure_hatch.%s", VN[i].toLowerCase())), i, min, max));
         }
 
-        PARTICLE_HATCH = registerMetaTileEntity(15620, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
+        POWER_SUPPLY_HATCH_BASIC = registerMetaTileEntity(1800, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.basic"), "frame", 1));
+        POWER_SUPPLY_HATCH_BATTLE[0] = registerMetaTileEntity(1801, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.1"), "battle", 1));
+        POWER_SUPPLY_HATCH_BATTLE[1] = registerMetaTileEntity(1802, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.2"), "battle", 2));
+        POWER_SUPPLY_HATCH_BATTLE[2] = registerMetaTileEntity(1803, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.3"), "battle", 3));
+        POWER_SUPPLY_HATCH_BATTLE[3] = registerMetaTileEntity(1804, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.4"), "battle", 4));
+        POWER_SUPPLY_HATCH_BATTLE[4] = registerMetaTileEntity(1805, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.battle.5"), "battle", 5));
+        POWER_SUPPLY_HATCH_SUPPLY[0] = registerMetaTileEntity(1806, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.1"), "supply", 1));
+        POWER_SUPPLY_HATCH_SUPPLY[1] = registerMetaTileEntity(1807, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.2"), "supply", 2));
+        POWER_SUPPLY_HATCH_SUPPLY[2] = registerMetaTileEntity(1808, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.3"), "supply", 3));
+        POWER_SUPPLY_HATCH_SUPPLY[3] = registerMetaTileEntity(1809, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.4"), "supply", 4));
+        POWER_SUPPLY_HATCH_SUPPLY[4] = registerMetaTileEntity(1810, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.5"), "supply", 5));
+        POWER_SUPPLY_HATCH_SUPPLY[5] = registerMetaTileEntity(1811, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.6"), "supply", 6));
+        POWER_SUPPLY_HATCH_SUPPLY[6] = registerMetaTileEntity(1812, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.7"), "supply", 7));
+        POWER_SUPPLY_HATCH_SUPPLY[7] = registerMetaTileEntity(1813, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.8"), "supply", 8));
+        POWER_SUPPLY_HATCH_SUPPLY[8] = registerMetaTileEntity(1814, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.9"), "supply", 9));
+        POWER_SUPPLY_HATCH_SUPPLY[9] = registerMetaTileEntity(1815, new MetaTileEntityPowerSupplyHatch(gtqtcoreId("power_supply.supply.10"), "supply", 10));
 
-        simpleTiredInit(CREATIVE_ENERGY_HATCHES, (i) -> new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + GTValues.VN[i].toLowerCase()), i), GTQTMetaTileEntities::getMaterialsId);
+        for (int i = 0; i < 14; i++) {
+            String voltageName = VN[i + 1].toLowerCase();
+            CREATIVE_ENERGY_HATCHES[i] = registerMetaTileEntity(1900 + i, new MetaTileEntityCreativeEnergyHatch(gtqtcoreId("creative_energy_hatch." + voltageName), i + 1));
+        }
+
     }
 }

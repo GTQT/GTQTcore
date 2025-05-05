@@ -20,6 +20,7 @@ import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.block.state.IBlockState;
@@ -33,14 +34,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
+import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
+
 //冰箱
 public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockController {
     private int tier;
 
     public MetaTileEntityVacuumFreezer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.VACUUM_RECIPES
-        });
+                VACUUM_RECIPES});
 
         setTierFlag(true);
         //setTier(auto);

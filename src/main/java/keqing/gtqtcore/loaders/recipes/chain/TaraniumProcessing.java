@@ -81,14 +81,15 @@ public class TaraniumProcessing {
                 .buildAndRegister();
 
         //  Bedrock Smoke -> Bedrock Soot Solution
-        MIXER_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .input(dust, Naquadah)
                 .fluidInputs(AmmoniumNitrate.getFluid(1000))
                 .fluidInputs(BedrockSmoke.getFluid(1000))
                 .fluidInputs(Water.getFluid(1000))
                 .fluidOutputs(BedrockSootSolution.getFluid(1000))
-                .duration(600)
-                .EUt(1024)
+                .circuitMeta(1)
+                .duration(100)
+                .EUt(VA[LuV])
                 .buildAndRegister();
 
         //  Bedrock Soot Solution -> Clean Bedrock Solution (+ Pt, Ir, Nq)
@@ -98,8 +99,8 @@ public class TaraniumProcessing {
                 .chancedOutput(dust, Iridium, 3, 1000, 0)
                 .chancedOutput(dust, Naquadah, 1000, 0)
                 .fluidOutputs(CleanBedrockSolution.getFluid(1000))
-                .duration(600)
-                .EUt(4096)
+                .duration(200)
+                .EUt(VA[LuV])
                 .buildAndRegister();
 
         //  Clean Bedrock Solution -> Bedrock + Bedrock Smokes
@@ -110,8 +111,8 @@ public class TaraniumProcessing {
                 .fluidOutputs(MediumBedrockSmoke.getFluid(320))
                 .fluidOutputs(LightBedrockSmoke.getFluid(180))
                 .fluidOutputs(UltralightBedrockSmoke.getFluid(150))
-                .duration(90)
-                .EUt(VA[IV])
+                .duration(200)
+                .EUt(VA[LuV])
                 .buildAndRegister();
     }
 
@@ -874,7 +875,7 @@ public class TaraniumProcessing {
                 .buildAndRegister();
 
         //  CsOH + B10H14 + NaCN + 2HCl + 3CH4O -> CsB10H12CN(CH3)3Cl + 2NaCl + 4H2O
-        CRYOGENIC_REACTOR_RECIPES.recipeBuilder()
+        LOW_TEMP_ACTIVATOR_RECIPES.recipeBuilder()
                 .input(dust, CaesiumHydroxide, 3)
                 .input(dust, Decaborane, 24)
                 .input(dust,SodiumCyanide,3)
@@ -886,7 +887,6 @@ public class TaraniumProcessing {
                 .fluidOutputs(Water.getFluid(4000))
                 .EUt(VA[IV])
                 .duration(12 * SECOND)
-                .temperature(62)
                 .buildAndRegister();
 
         //  2Cs + H2O2 -> 2CsOH

@@ -129,7 +129,7 @@ public class MetaTileEntityAdvanceKQCC extends MultiblockWithDisplayBase impleme
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(RIGHT, UP, FRONT)
                 .aisle("NN", "SN", "NN", "NN")
-                .aisle("AN", "AN", "AN", "NE").setRepeatable(4, 16)
+                .aisle("AN", "AN", "AN", "NE").setRepeatable(4, 12)
                 .aisle("XN", "NN", "NN", "NN")
                 .where('S', selfPredicate())
                 .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_TRANSMISSION))

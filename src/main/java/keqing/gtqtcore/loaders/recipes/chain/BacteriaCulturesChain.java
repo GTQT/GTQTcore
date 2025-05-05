@@ -174,7 +174,7 @@ public class BacteriaCulturesChain {
                 .duration(400).cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
-        CHEMICAL_PLANT.recipeBuilder().EUt(7680).duration(400)
+        CHEMICAL_PLANT.recipeBuilder().EUt(7680).duration(40)
                 .Catalyst(CATALYST_FRAMEWORK_IV.getStackForm())
                 .recipeLevel(4)
                 .fluidInputs(BacterialGrowthMedium.getFluid(10))

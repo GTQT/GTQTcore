@@ -686,7 +686,6 @@ public class TechReSearchNET {
                 .input(ELECTRIC_PUMP_UHV, 16)
                 .input(FIELD_GENERATOR_UHV, 16)
                 .input(NANO_POWER_IC, 64)
-                .input(NANO_POWER_IC, 64)
                 .input(gear, Roentgenium, 8)
                 .input(screw, Dubnium, 32)
                 .input(cableGtQuadruple, Europium, 64)
@@ -715,7 +714,6 @@ public class TechReSearchNET {
                 .input(circuit, MarkerMaterials.Tier.UHV, 32)
                 .input(ELECTRIC_PUMP_UEV, 16)
                 .input(FIELD_GENERATOR_UEV, 16)
-                .input(PICO_POWER_IC, 64)
                 .input(PICO_POWER_IC, 64)
                 .input(gear, Lawrencium, 8)
                 .input(screw, Livermorium, 32)
@@ -746,7 +744,6 @@ public class TechReSearchNET {
                 .input(ELECTRIC_PUMP_UIV, 16)
                 .input(FIELD_GENERATOR_UIV, 16)
                 .input(FEMTO_POWER_IC, 64)
-                .input(FEMTO_POWER_IC, 64)
                 .input(gear, MetastableOganesson, 8)
                 .input(screw, MetastableFlerovium, 32)
                 .input(cableGtQuadruple, Solarium, 64)
@@ -766,70 +763,74 @@ public class TechReSearchNET {
 
         //24
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II, 8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .input(frameGt, NaquadahAlloy, 4)
                 .input(plate, Naquadria, 8)
+                .input(FIELD_GENERATOR_ZPM,8)
                 .input(HPCA_COMPUTATION_COMPONENT, 8)
                 .output(HPCA_SUPER_COMPUTATION_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
-                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .stationResearch(b -> b
                         .researchStack(DISK_24.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .EUt(VA[ZPM])
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II, 8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .input(frameGt, NaquadahAlloy, 4)
                 .input(plate, Naquadria, 8)
+                .input(FIELD_GENERATOR_ZPM,8)
                 .input(HPCA_ADVANCED_COMPUTATION_COMPONENT, 8)
                 .output(HPCA_ULTIMATE_COMPUTATION_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
-                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .stationResearch(b -> b
                         .researchStack(DISK_24.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .EUt(VA[ZPM])
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II, 8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .input(frameGt, NaquadahAlloy, 4)
                 .input(plate, Naquadria, 8)
+                .input(FIELD_GENERATOR_ZPM,8)
                 .input(HPCA_HEAT_SINK_COMPONENT, 8)
                 .output(HPCA_SUPER_COOLER_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
-                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .stationResearch(b -> b
                         .researchStack(DISK_24.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .EUt(VA[ZPM])
                 .duration(1000).buildAndRegister();
 
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(CIRCUIT_GOOD_II, 8)
+                .input(CIRCUIT_GOOD_III, 8)
                 .input(frameGt, NaquadahAlloy, 4)
                 .input(plate, Naquadria, 8)
+                .input(FIELD_GENERATOR_ZPM,8)
                 .input(HPCA_ACTIVE_COOLER_COMPONENT, 8)
                 .output(HPCA_ULTIMATE_COOLER_COMPONENT)
                 .fluidInputs(VanadiumGallium.getFluid(L * 16))
-                .fluidInputs(KaptonK.getFluid(L * 16))
+                .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(Polybenzimidazole.getFluid(L * 16))
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .stationResearch(b -> b
                         .researchStack(DISK_24.getStackForm())
-                        .CWUt(CWT[LuV])
-                        .EUt(VA[ZPM]))
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .EUt(VA[ZPM])
                 .duration(1000).buildAndRegister();
 
@@ -876,6 +877,7 @@ public class TechReSearchNET {
                 .duration(100).buildAndRegister();
 
         //
+        /*
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(circuit, Tier.EV, 2)
                 .input(ELECTRIC_PISTON_HV, 8)
@@ -1204,6 +1206,8 @@ public class TechReSearchNET {
                         .researchStack(DISK_15.getStackForm()))
                 .buildAndRegister();
 
+         */
+
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_II, 1)
                 .input(WETWARE_CIRCUIT_BOARD, 16)
@@ -1225,38 +1229,6 @@ public class TechReSearchNET {
     }
 
     private static void Pre() {
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, BorosilicateGlass, 8)
-                .input(foil, Silver, 8)
-                .input(plateDense, Aluminium, 1)
-                .fluidInputs(Polyethylene.getFluid(L))
-                .output(OPTICAL_PIPES[0])
-                .duration(100).EUt(VA[MV]).buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, BorosilicateGlass, 8)
-                .input(foil, Silver, 8)
-                .input(plateDense, Aluminium, 1)
-                .fluidInputs(Epoxy.getFluid(L))
-                .output(OPTICAL_PIPES[0], 2)
-                .duration(100).EUt(VA[MV]).buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, BorosilicateGlass, 8)
-                .input(foil, Silver, 8)
-                .input(plateDense, Aluminium, 1)
-                .fluidInputs(Polyethylene.getFluid(L))
-                .output(OPTICAL_PIPES[0], 4)
-                .duration(100).EUt(VA[MV]).buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, BorosilicateGlass, 8)
-                .input(foil, Silver, 8)
-                .input(plateDense, Aluminium, 1)
-                .fluidInputs(KaptonK.getFluid(L))
-                .output(OPTICAL_PIPES[0], 8)
-                .duration(100).EUt(VA[MV]).buildAndRegister();
-
         //物品支架
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(GOOD_CIRCUIT_BOARD)
@@ -2823,7 +2795,7 @@ public class TechReSearchNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_II, 16)
                 .input(FUSION_REACTOR[0], 48)
-                .input(swarm, Osmium, 32)
+                .input(swarm, Osmium, 1)
                 .input(circuit, MarkerMaterials.Tier.ZPM, 64)
                 .input(ELECTRIC_PUMP_LuV, 32)
                 .input(FIELD_GENERATOR_LuV, 32)
@@ -2848,7 +2820,7 @@ public class TechReSearchNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 16)
                 .input(FUSION_REACTOR[1], 48)
-                .input(swarm, Americium, 32)
+                .input(swarm, Americium, 1)
                 .input(circuit, MarkerMaterials.Tier.UV, 64)
                 .input(ELECTRIC_PUMP_ZPM, 32)
                 .input(FIELD_GENERATOR_ZPM, 32)
@@ -2873,7 +2845,7 @@ public class TechReSearchNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_IV, 16)
                 .input(FUSION_REACTOR[2], 48)
-                .input(swarm, Darmstadtium, 32)
+                .input(swarm, Darmstadtium, 1)
                 .input(circuit, MarkerMaterials.Tier.UHV, 64)
                 .input(ELECTRIC_PUMP_UV, 32)
                 .input(FIELD_GENERATOR_UV, 32)

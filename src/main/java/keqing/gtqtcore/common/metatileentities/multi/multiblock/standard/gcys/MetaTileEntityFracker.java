@@ -54,7 +54,7 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.FracturingFluid;
 public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements IWorkable, ITieredMetaTileEntity {
 
     public static final FluidStack FRACKING_FLUID = FracturingFluid.getFluid(1);
-    public static final int FLUID_USE_AMOUNT = 1000;
+    public static final int FLUID_USE_AMOUNT = 100;
     public static final int MAX_PROGRESS = 100;
 
     private final int tier;
@@ -195,7 +195,7 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
         BedrockFluidDepositDefinition definition = entry.getDefinition();
         if (definition == null) return false;
 
-        int amount = entry.getOperationsRemaining() + definition.getDepletionAmount();
+        int amount = entry.getOperationsRemaining() + definition.getDepletionAmount()*10;
         if (amount <= BedrockFluidVeinHandler.MAXIMUM_VEIN_OPERATIONS) {
             if (simulate) return true;
             entry.setOperationsRemaining(amount);
@@ -281,6 +281,7 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.fracker.tooltip.1"));
         tooltip.add(I18n.format("gtqtcore.multiblock.fracker.tooltip.2", TextFormattingUtil.formatNumbers(GTValues.VA[tier])));
+        tooltip.add(I18n.format("gtqtcore.multiblock.fracker.tooltip.3"));
     }
 
     @Override
