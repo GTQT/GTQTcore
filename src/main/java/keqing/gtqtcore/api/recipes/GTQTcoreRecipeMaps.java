@@ -965,7 +965,7 @@ public class GTQTcoreRecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> ELEOIL = new RecipeMapBuilder<>("ele_oil", new SimpleRecipeBuilder())
             .itemInputs(0)
             .itemOutputs(0)
-            .fluidInputs(1)
+            .fluidInputs(2)
             .fluidOutputs(2)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
             .build();

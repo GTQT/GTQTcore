@@ -476,7 +476,6 @@ public class OilChains {
         //预处理
         ELEOIL.recipeBuilder()
                 .fluidInputs(RawOil.getFluid(4000))
-                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
@@ -485,7 +484,6 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilHeavy.getFluid(4000))
-                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
@@ -494,7 +492,6 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(OilLight.getFluid(4000))
-                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
@@ -503,13 +500,11 @@ public class OilChains {
 
         ELEOIL.recipeBuilder()
                 .fluidInputs(Oil.getFluid(4000))
-                .fluidInputs(Demulsifier.getFluid(20))
                 .fluidOutputs(PreTreatedCrudeOil.getFluid(6000))
                 .fluidOutputs(SaltWater.getFluid(200))
                 .duration(40)
                 .EUt(120)
                 .buildAndRegister();
-
         //
         CLARIFIER.recipeBuilder()
                 .input(dust,Alunite)

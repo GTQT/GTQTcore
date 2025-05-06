@@ -252,6 +252,19 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
         return mte == null ? 0 : mte.getItemOutputLimit();
     }
 
+    @Override
+    public void setCleanroom(ICleanroomProvider provider) {
+        super.setCleanroom(provider);
+        // Sync Cleanroom Change to Internal Workable MTE
+        ((ProcessingArrayWorkable) this.recipeMapWorkable).updateCleanroom();
+    }
+
+    @Override
+    public void unsetCleanroom() {
+        super.unsetCleanroom();
+        ((ProcessingArrayWorkable) this.recipeMapWorkable).updateCleanroom();
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
     protected class ProcessingArrayWorkable extends MultiblockRecipeLogic {
 
@@ -324,6 +337,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
             }
             return (!currentMachineStack.isEmpty() && this.activeRecipeMap != null);
         }
+
 
         @Override
         public RecipeMap<?> getRecipeMap() {
