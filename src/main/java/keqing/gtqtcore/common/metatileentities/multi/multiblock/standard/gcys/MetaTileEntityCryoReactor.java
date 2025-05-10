@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
@@ -25,7 +26,7 @@ import javax.annotation.Nonnull;
 import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.black_steel;
 
-public class MetaTileEntityCryoReactor extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityCryoReactor extends GCYMAdvanceRecipeMapMultiblockController {
 
     public MetaTileEntityCryoReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{

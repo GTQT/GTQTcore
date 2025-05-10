@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -21,7 +22,7 @@ import supercritical.api.recipes.SCRecipeMaps;
 
 import javax.annotation.Nonnull;
 
-public class MetaTileEntityUltravioletLamp extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityUltravioletLamp extends GCYMAdvanceRecipeMapMultiblockController {
 
     public MetaTileEntityUltravioletLamp(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{

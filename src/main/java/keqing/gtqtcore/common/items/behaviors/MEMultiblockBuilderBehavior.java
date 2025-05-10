@@ -7,6 +7,9 @@ import appeng.api.storage.IMEMonitor;
 import appeng.api.storage.channels.IItemStorageChannel;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.core.localization.GuiText;
+import appeng.core.sync.GuiBridge;
+import appeng.core.sync.network.NetworkHandler;
+import appeng.core.sync.packets.PacketSwitchGuis;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.me.helpers.BaseActionSource;
@@ -24,7 +27,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.metatileentity.registry.MBPattern;
-import gregtech.api.pattern.PatternError;
 import gregtech.api.util.GTUtility;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.utils.GTQTLog;
@@ -33,6 +35,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,6 +49,7 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static gregtech.common.metatileentities.MetaTileEntities.*;
@@ -85,7 +89,6 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     boolean out;
     int page;
 
-    private MBPattern[] patterns;
 
     List<ItemStack> itemStacks = new ArrayList<>();
     int endPos = GregTechAPI.isHighTier() ? ENERGY_INPUT_HATCH.length - 1 : Math.min(ENERGY_INPUT_HATCH.length - 1, 10);
@@ -100,6 +103,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     private AENetworkProxy networkProxy;
 
     private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock) {
+        if(multiblock==null)return Collections.singletonList(ItemStack.EMPTY);
         MBPattern[] patternList = GregTechAPI.MULTIBLOCK_INFO_CACHE.get(multiblock.metaTileEntityId);
         MBPattern pattern = patternList[tier];
         return pattern.getParts();
@@ -533,6 +537,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                             multiblock.structurePattern.autoBuild(player, multiblock);
                             return EnumActionResult.SUCCESS;
                         }
+
                         try {
                             IItemStorageChannel channel = AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
                             IMEMonitor<IAEItemStack> monitor = networkProxy.getStorage().getInventory(channel);
@@ -561,16 +566,8 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
                     }
                     return EnumActionResult.PASS;
                 } else {
-                    // If not sneaking, try to show structure debug info (if any) in chat.
-                    if (!multiblock.isStructureFormed()) {
-                        PatternError error = multiblock.structurePattern.getError();
-                        if (error != null) {
-                            player.sendMessage(new TextComponentTranslation("gregtech.multiblock.pattern.error_message_header"));
-                            player.sendMessage(new TextComponentString(error.getErrorInfo()));
-                            return EnumActionResult.SUCCESS;
-                        }
-                    }
-                    player.sendMessage(new TextComponentTranslation("gregtech.multiblock.pattern.no_errors").setStyle(new Style().setColor(TextFormatting.GREEN)));
+                    player.sendMessage(new TextComponentTranslation("正在执行自动补全！").setStyle(new Style().setColor(TextFormatting.GREEN)));
+                    multiblock.structurePattern.autoBuild(player, multiblock);
                     return EnumActionResult.SUCCESS;
                 }
             }
@@ -583,7 +580,6 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
         }
         return EnumActionResult.SUCCESS;
     }
-
     private void extractItemsFromNetwork(IMEMonitor<IAEItemStack> monitor, IAEItemStack itemStack, EntityPlayer player) {
         // 创建原型物品堆用于比较
         final ItemStack prototype = itemStack.createItemStack();
@@ -632,7 +628,6 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
 
         //如果确实需要下单
         if (crafting > 0) {
-            //向网络发送合成 itemStack.copy().setStackSize(crafting)
             player.sendMessage(new TextComponentTranslation("网络缺失 " + crafting).setStyle(new Style().setColor(TextFormatting.RED)));
         }
         player.sendMessage(new TextComponentTranslation("实际向网络请求 " + requireFromNet).setStyle(new Style().setColor(TextFormatting.YELLOW)));
@@ -722,6 +717,9 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     @Override
     public void addInformation(ItemStack itemStack, List<String> lines) {
         lines.add(I18n.format("metaitem.tool.multiblock_builder.tooltip2"));
+        lines.add(I18n.format("对准安全终端右键可绑定网络，对准多方块控制器右键可绑定机器，对准其他方块右键可打开高级调试界面UI"));
+        lines.add(I18n.format("对准多方块控制器按住shift可进入高级构建模式，否则只进行普通构建"));
+        lines.add(I18n.format("高级构建模式需打开“放置'保险'才可真实放置多方块"));
         lines.add(I18n.format("可在UI内调整多方块的各项仓口参数配置，支持各仓开关，升级，调A，ME模式等功能"));
         lines.add(I18n.format("通过调整电流数量可升级能源类型仓室（1-16A能源/动力仓,64A变电能源/动力仓,>=256A激光源/靶仓）"));
         lines.add(I18n.format("多重仓的偏好（例如4x，9x，16x）由偏好等级决定,当设置偏好后将取代普通的输入/输出仓"));

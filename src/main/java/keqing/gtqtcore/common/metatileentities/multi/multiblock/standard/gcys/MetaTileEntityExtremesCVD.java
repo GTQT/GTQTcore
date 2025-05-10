@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class MetaTileEntityExtremesCVD extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityExtremesCVD extends GCYMAdvanceRecipeMapMultiblockController {
 
     public MetaTileEntityExtremesCVD(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.PLASMA_CVD_RECIPES, GTQTcoreRecipeMaps.CVD_RECIPES});

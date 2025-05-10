@@ -149,18 +149,17 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("PEM", "PPP", "CCC", "CCC", "CCC", "XXX")
-                .aisle("FXX", "PPP", "C#C", "C#C", "C#C", "XHX")
+                .aisle("UEM", "PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle("XXX", "PPP", "C#C", "C#C", "C#C", "XHX")
                 .aisle("ISO", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .where('X', getCasingState())
                 .where('P', getCasingState2())
                 .where('S', GTQTMetaTileEntities.BLAZING_CZ_PULLER, EnumFacing.SOUTH)
                 .where('#', Blocks.AIR.getDefaultState())
                 .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
-                .where('P', GTQTMetaTileEntities.PRESSURE_HATCH[GTValues.LV], EnumFacing.NORTH)
+                .where('U', GTQTMetaTileEntities.PRESSURE_HATCH[GTValues.LV], EnumFacing.NORTH)
                 .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
                 .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
-                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.LV], EnumFacing.WEST)
                 .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
                 .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
         GregTechAPI.HEATING_COILS.entrySet().stream()

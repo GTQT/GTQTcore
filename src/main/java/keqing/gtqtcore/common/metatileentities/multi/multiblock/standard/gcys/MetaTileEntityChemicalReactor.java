@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
@@ -26,7 +27,7 @@ import javax.annotation.Nonnull;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.Hdcs;
 
-public class MetaTileEntityChemicalReactor extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityChemicalReactor extends GCYMAdvanceRecipeMapMultiblockController {
 
     public MetaTileEntityChemicalReactor(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{

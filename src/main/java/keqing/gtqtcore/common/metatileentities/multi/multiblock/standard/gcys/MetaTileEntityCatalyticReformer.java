@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -22,7 +23,7 @@ import javax.annotation.Nonnull;
 
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.blue_steel;
 
-public class MetaTileEntityCatalyticReformer extends GCYMRecipeMapMultiblockController {
+public class MetaTileEntityCatalyticReformer extends GCYMAdvanceRecipeMapMultiblockController {
 
     public MetaTileEntityCatalyticReformer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
