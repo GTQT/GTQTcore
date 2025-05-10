@@ -135,7 +135,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
                 .aisle("XSX", "PPP", "CCC", "CCC", "CCC", "XXX")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(9)
-                        .or(autoAbilities(true,false))
+                        .or(autoAbilities(true, true, true, true, true, true, false))
                         .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
                 )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
