@@ -1,8 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMHeatCoilRecipeLogic;
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.IThreadHatch;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -21,6 +24,7 @@ import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.MetaBlocks;
@@ -59,7 +63,7 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_FIREBOX_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.MaragingSteel250;
 
-public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityBurnerReactor extends GCYMAdvanceRecipeMapMultiblockController implements IHeatingCoil {
 
     int FireBoxTier;
     private int temperature;
@@ -68,9 +72,20 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
-        this.recipeMapWorkable = new IndustrialRoasterRecipeLogic(this);
+        this.recipeMapWorkable = new ArrayList();
+        this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
     }
 
+    public void refreshThread(int thread) {
+        if (!this.checkWorkingEnable()) {
+            this.recipeMapWorkable = new ArrayList();
+
+            for(int i = 0; i < thread; ++i) {
+                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+            }
+        }
+
+    }
     private static IBlockState getBoilerCasingState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
@@ -93,6 +108,13 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
                 0);
 
         this.temperature = this.FireBoxTier * 900 + 900;
+
+        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : ((IThreadHatch)this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0)).getCurrentThread();
+        this.recipeMapWorkable = new ArrayList();
+
+        for(int i = 0; i < this.thread; ++i) {
+            this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+        }
     }
 
     @Override
@@ -149,12 +171,13 @@ public class MetaTileEntityBurnerReactor extends GCYMRecipeMapMultiblockControll
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip,
-                               boolean advanced) {
-        super.addInformation(stack, world, tooltip, advanced);
+    public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("烧起来了", new Object[0]));
+        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
 
     @Override

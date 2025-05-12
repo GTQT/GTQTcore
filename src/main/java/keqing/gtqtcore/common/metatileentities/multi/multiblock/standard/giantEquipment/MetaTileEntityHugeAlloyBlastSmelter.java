@@ -2,8 +2,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantE
 
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
-import gregicality.multiblocks.common.block.GCYMMetaBlocks;
-import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -33,7 +31,6 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
@@ -42,12 +39,10 @@ import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
-import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -84,11 +79,9 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
     public MetaTileEntityHugeAlloyBlastSmelter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GCYMRecipeMaps.ALLOY_BLAST_RECIPES,
-                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
-                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
+                GCYMRecipeMaps.ALLOY_BLAST_RECIPES
         });
-        this.recipeMapWorkable = new MetaTileEntityHugeAlloyBlastSmelterWorkable(this);
+        this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnacerWorkable(this);
 
         setMaxParallel(256);
         setMaxParallelFlag(true);
@@ -101,14 +94,6 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing3.getState(BlockMultiblockCasing3.CasingType.ALLOY_MELTING);
-    }
-
-    private static IBlockState getBoilerCasingState() {
-        return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING);
-    }
-
-    private static IBlockState getUniqueCasingState() {
-        return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
     @Override
@@ -155,7 +140,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
-        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强合金王", new Object[0]));
+        tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强冶炼王", new Object[0]));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
@@ -214,38 +199,38 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
         return this.blastFurnaceTemperature;
     }
 
+    @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("   BBBBB   ", "   CCCCC   ", "   CCCCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
-                .aisle("  BDDDDDB  ", "  G     G  ", "  G     G  ", "  G     G  ", "  BDDDDDB  ", "   DDDDD   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   DDDDD   ", "   DDDDD   ", "           ")
-                .aisle(" BDDHHHDDB ", " G       G ", " G       G ", " G       G ", " BDDHHHDDB ", "  DVVVVVD  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  DDDDDDD  ", "  DDDDDDD  ", "   DDDDD   ")
-                .aisle("BDDDDDDDDDB", "C  VWWWV  C", "C  VBBBV  C", "C  VBBBV  C", "BDDDDDDDDDB", " DVVVVVVVD ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W   W  C", "C  B   B  C", "C  B   B  C", "BDHDDDDDHDB", " DVVVVVVVD ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W V W  C", "C  B V B  C", "C  B V B  C", "BDHDDVDDHDB", " DVVVVVVVD ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDMDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W   W  C", "C  B   B  C", "C  B   B  C", "BDHDDDDDHDB", " DVVVVVVVD ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDDDDDDDDDB", "C  VWWWV  C", "C  VBBBV  C", "C  VBBBV  C", "BDDDDDDDDDB", " DVVVVVVVD ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle(" BDDHHHDDB ", " G       G ", " G       G ", " G       G ", " BDDHHHDDB ", "  DVVVVVD  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  DDDDDDD  ", "  DDDDDDD  ", "   DDDDD   ")
-                .aisle("  BDDDDDB  ", "  G     G  ", "  G     G  ", "  G     G  ", "  BDDDDDB  ", "   DDDDD   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   DDDDD   ", "   DDDDD   ", "           ")
-                .aisle("   BBBBB   ", "   CCCCC   ", "   CCSCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
-                .where('S', this.selfPredicate())
-                .where('B', states(getUniqueCasingState()))
-                .where('D', states(getCasingState()))
-                .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
-                .where('H', states(getUniqueCasingState()))
-                .where('V', states(getBoilerCasingState()))
-                .where('W', heatingCoils())
-                .where('C', states(getCasingState())
-                        .setMinGlobalLimited(15)
+                .aisle("MMMMMMMMMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMSMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMXMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
+                .where('X', selfPredicate())
+                .where('M', states(getCasingState())
+                        .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
                                 .setMaxGlobalLimited(1))
-                        .or(autoAbilities(false,true,true,true,true,true,false))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                 )
-                .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
-                .where(' ', any())
+                .where('B', heatingCoils())
+                .where('A', TiredTraceabilityPredicate.CP_GLASS.get())
+                .where('S', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where(' ', air())
                 .build();
     }
 
@@ -253,36 +238,35 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
         MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("   BBBBB   ", "   CCENC   ", "   CCCCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
-                .aisle("  BDDDDDB  ", "  G     G  ", "  G     G  ", "  G     G  ", "  BDDDDDB  ", "   DDDDD   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   DDDDD   ", "   DDDDD   ", "           ")
-                .aisle(" BDDHHHDDB ", " G       G ", " G       G ", " G       G ", " BDDHHHDDB ", "  DVVVVVD  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  DDDDDDD  ", "  DDDDDDD  ", "   DDDDD   ")
-                .aisle("BDDDDDDDDDB", "C  VWWWV  C", "C  VBBBV  C", "C  VBBBV  C", "BDDDDDDDDDB", " DVVVVVVVD ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W   W  C", "C  B   B  C", "C  B   B  C", "BDHDDDDDHDB", " DVVVVVVVD ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W V W  C", "C  B V B  C", "C  B V B  C", "BDHDDVDDHDB", " DVVVVVVVD ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " GW  V  WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDMDDD  ")
-                .aisle("BDHDDDDDHDB", "C  W   W  C", "C  B   B  C", "C  B   B  C", "BDHDDDDDHDB", " DVVVVVVVD ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " GW     WG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle("BDDDDDDDDDB", "C  VWWWV  C", "C  VBBBV  C", "C  VBBBV  C", "BDDDDDDDDDB", " DVVVVVVVD ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " GWW   WWG ", " DDDDDDDDD ", " DDDDDDDDD ", "  DDDDDDD  ")
-                .aisle(" BDDHHHDDB ", " G       G ", " G       G ", " G       G ", " BDDHHHDDB ", "  DVVVVVD  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  GWWWWWG  ", "  DDDDDDD  ", "  DDDDDDD  ", "   DDDDD   ")
-                .aisle("  BDDDDDB  ", "  G     G  ", "  G     G  ", "  G     G  ", "  BDDDDDB  ", "   DDDDD   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   GGGGG   ", "   DDDDD   ", "   DDDDD   ", "           ")
-                .aisle("   BBBBB   ", "   IUXCJ   ", "   CCSCC   ", "   CCCCC   ", "   BBBBB   ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ", "           ")
-                .where('S', HUGE_ALLOY_BLAST_FURANCE, EnumFacing.SOUTH)
-                .where('B', getUniqueCasingState())
-                .where('D', getCasingState())
-                .where('H', getUniqueCasingState())
-                .where('V', getBoilerCasingState())
-                .where('C', getCasingState())
-                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
-                .where('N', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : getCasingState(), EnumFacing.NORTH)
+                .aisle("MMMMMMMMMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMSMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
+                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
+                .aisle("EENILJKXMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
+                .where('X', HUGE_ALLOY_BLAST_FURANCE, EnumFacing.SOUTH)
+                .where('A', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
+                .where('M', getCasingState())
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.SOUTH)
+                .where('N', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH)
                 .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
-                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
-                .where('X', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
-                .where('U', MetaTileEntities.LASER_INPUT_HATCH_256[0], EnumFacing.SOUTH)
+                .where('K', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
+                .where('L', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
                 .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
-                .where('M', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
+                .where('S', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
                 .where(' ', Blocks.AIR.getDefaultState());
         GregTechAPI.HEATING_COILS.entrySet().stream()
                 .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
-                .forEach(entry -> shapeInfo.add(builder.where('W', entry.getKey()).build()));
+                .forEach(entry -> shapeInfo.add(builder.where('B', entry.getKey()).build()));
         return shapeInfo;
     }
 
@@ -295,7 +279,7 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
     @Nonnull
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.alloy_melting;
+        return GTQTTextures.ALLOY_MELTING_CASING;
     }
 
     @Nonnull
@@ -314,12 +298,11 @@ public class MetaTileEntityHugeAlloyBlastSmelter extends GTQTNoTierMultiblockCon
         return true;
     }
 
-    protected class MetaTileEntityHugeAlloyBlastSmelterWorkable extends GTQTMultiblockLogic {
+    protected class MetaTileEntityHugeBlastFurnacerWorkable extends GTQTMultiblockLogic {
 
-        public MetaTileEntityHugeAlloyBlastSmelterWorkable(RecipeMapMultiblockController tileEntity) {
+        public MetaTileEntityHugeBlastFurnacerWorkable(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
-
 
         @Override
         public void setMaxProgress(int maxProgress) {

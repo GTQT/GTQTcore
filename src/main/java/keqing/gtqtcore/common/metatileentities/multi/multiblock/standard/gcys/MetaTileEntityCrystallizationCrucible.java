@@ -1,11 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMHeatCoilRecipeLogic;
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
 import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
 import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.IThreadHatch;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -57,15 +60,25 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static gregtech.api.unification.material.Materials.TungstenSteel;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
-public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblockController implements IHeatingCoil {
+public class MetaTileEntityCrystallizationCrucible extends GCYMAdvanceRecipeMapMultiblockController implements IHeatingCoil {
 
     private int temperature;
 
     public MetaTileEntityCrystallizationCrucible(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.CRYSTALLIZER_RECIPES);
-        this.recipeMapWorkable = new CrystallizationCrucibleRecipeLogic(this);
+        this.recipeMapWorkable = new ArrayList();
+        this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
     }
+    public void refreshThread(int thread) {
+        if (!this.checkWorkingEnable()) {
+            this.recipeMapWorkable = new ArrayList();
 
+            for(int i = 0; i < thread; ++i) {
+                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+            }
+        }
+
+    }
 
     @Nonnull
     private static IBlockState getFrameState() {
@@ -101,6 +114,13 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblo
             this.temperature = CoilType.CUPRONICKEL.getCoilTemperature();
 
         this.temperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
+
+        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : ((IThreadHatch)this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0)).getCurrentThread();
+        this.recipeMapWorkable = new ArrayList();
+
+        for(int i = 0; i < this.thread; ++i) {
+            this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+        }
     }
 
     @Override
@@ -196,28 +216,5 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMRecipeMapMultiblo
                 .sorted(Comparator.comparingInt(CoilType::getLevel))
                 .forEach(coilType -> shapeInfo.add(builder.where('C', MetaBlocks.WIRE_COIL.getState(coilType)).build()));
         return shapeInfo;
-    }
-
-    public static class CrystallizationCrucibleRecipeLogic extends GCYMMultiblockRecipeLogic {
-
-        public CrystallizationCrucibleRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
-            super.modifyOverclockPre(ocParams, storage);
-            // coil EU/t discount
-            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
-                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
-                    storage.get(TemperatureProperty.getInstance(), 0)));
-        }
-
-        @Override
-        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
-                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
-            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
-                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
-        }
     }
 }

@@ -81,7 +81,9 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     public MetaTileEntityHugeBlastFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.BLAST_RECIPES,
-                GTQTcoreRecipeMaps.DRYER_RECIPES
+                GTQTcoreRecipeMaps.DRYER_RECIPES,
+                GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
         });
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnacerWorkable(this);
 
@@ -222,7 +224,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 .aisle("MMMMMMMXMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
                 .where('X', selfPredicate())
                 .where('M', states(getCasingState())
-                        .or(autoAbilities(false,true,true,true,true,true,false))
+                        .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)
@@ -281,7 +283,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     @Nonnull
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return GTQTTextures.alloy_melting;
+        return GTQTTextures.ALLOY_MELTING_CASING;
     }
 
     @Nonnull

@@ -332,6 +332,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeThermalCentrifuge LARGE_THERMAL_CENTRIFUGE;
     public static MetaTileEntityNanoscaleFabricator LARGE_NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit LARGE_CVD_UNIT;
+    public static MetaTileEntityMegaAlloyBlastSmelter MEGA_ALLOY_BLAST_FURANCE;
     public static MetaTileEntityPhotolithographyFactory PHOTOLITHOGRAPHY_FACTORY;
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityExtremesCVD LARGE_EX_CVD;
@@ -504,29 +505,6 @@ public class GTQTMetaTileEntities {
         HEAT_FURNACE = registerMetaTileEntity(153, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
         PRIMITIVE_REACTOR = registerMetaTileEntity(154, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
 
-        //多核心 160-200
-        /*
-        INDUSTRIAL_MACERATOR = registerMetaTileEntity(3120, new MetaTileEntityIndustrialMacerator(gtqtcoreId("industrial_crusher")));
-        INDUSTRIAL_CENTRIFUGE = registerMetaTileEntity(3121, new MetaTileEntityIndustrialCentrifuge(gtqtcoreId("industrial_centrifuge")));
-        INDUSTRIAL_MIX = registerMetaTileEntity(3122, new MetaTileEntityIndustrialMix(gtqtcoreId("industrial_mix")));
-        INDUSTRIAL_WASHER = registerMetaTileEntity(3123, new MetaTileEntityIndustrialWasher(gtqtcoreId("industrial_washer")));
-        INDUSTRIAL_HAMMER = registerMetaTileEntity(3124, new MetaTileEntityIndustrialHammer(gtqtcoreId("industrial_hammer")));
-        INDUSTRIAL_FURNACE = registerMetaTileEntity(3125, new MetaTileEntityIndustrialFurnace(gtqtcoreId("industrial_furnace")));
-
-        CORE_MACERATOR = registerMetaTileEntity(3126, new MetaTileEntityCoreMacerator(gtqtcoreId("core_crusher")));
-        CORE_CENTRIFUGE = registerMetaTileEntity(3127, new MetaTileEntityCoreCentrifuge(gtqtcoreId("core_centrifuge")));
-        CORE_MIX = registerMetaTileEntity(3128, new MetaTileEntityCoreMix(gtqtcoreId("core_mix")));
-        CORE_WASHER = registerMetaTileEntity(3129, new MetaTileEntityCoreWasher(gtqtcoreId("core_washer")));
-        CORE_HAMMER = registerMetaTileEntity(3130, new MetaTileEntityCoreHammer(gtqtcoreId("core_hammer")));
-        CORE_FURNACE = registerMetaTileEntity(3131, new MetaTileEntityCoreFurnace(gtqtcoreId("core_furnace")));
-
-        INDUSTRIAL_BENDER = registerMetaTileEntity(3132, new MetaTileEntityIndustrialBender(gtqtcoreId("industrial_bender")));
-        INDUSTRIAL_WIREMILL = registerMetaTileEntity(3133, new MetaTileEntityIndustrialWireMill(gtqtcoreId("industrial_wiremill")));
-        INDUSTRIAL_EXTRUDER = registerMetaTileEntity(3134, new MetaTileEntityIndustrialExtruder(gtqtcoreId("industrial_extruder")));
-        INDUSTRIAL_ASSEMBLY_LINE = registerMetaTileEntity(3135, new MetaTileEntityIndustrialAssemblyLine(gtqtcoreId("industrial_assembly_line")));
-        INDUSTRIAL_CHEMICAL_REACTOR = registerMetaTileEntity(3136, new MetaTileEntityIndustrialChemicalReactor(gtqtcoreId("industrial_chemical_reactor")));
-
-         */
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(201, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
         BLAZING_BLAST_FURNACE = registerMetaTileEntity(202, new MetaTileEntityBlazingBlastFurnace(gtqtcoreId("blazing_blast_furnace")));
@@ -602,7 +580,7 @@ public class GTQTMetaTileEntities {
         LARGE_ROASTER = registerMetaTileEntity(272, new MetaTileEntityBurnerReactor(gtqtcoreId("roaster")));
         LARGE_CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(273, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
         LARGE_CVD_UNIT = registerMetaTileEntity(274, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
-        //
+        MEGA_ALLOY_BLAST_FURANCE = registerMetaTileEntity(275, new MetaTileEntityMegaAlloyBlastSmelter(gtqtcoreId("mega_alloy_blast_furance")));
         LARGE_CRYOGENIC_REACTOR = registerMetaTileEntity(276, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
         LARGE_ION_IMPLANTATOR = registerMetaTileEntity(277, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         LARGE_CZ_PULLER = registerMetaTileEntity(278, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));

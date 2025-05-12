@@ -1091,6 +1091,8 @@ recipemap.sonication_recipes.name=超声振荡
 gtqtcore.machine.cvd_unit.name=化学气相沉积单元
 recipemap.cvd_recipes.name=化学气相沉积
 
+gtqtcore.machine.mega_alloy_blast_furance.name=合金锻炉
+
 gtqtcore.machine.nanoscale_fabricator.name=纳米级制造室
 gtqtcore.machine.nanoscale_fabricator.tooltip.1=坩埚的平均温度最多可超过目标温度§c250K§7。
 recipemap.molecular_beam_recipes.name=分子束外延
