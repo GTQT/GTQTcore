@@ -4004,8 +4004,24 @@ gtqtcore.material.naquadriatic_taranium=超能硅岩-塔兰金属合金
 
 gtqtcore.material.vinylcinnamate=负型光刻胶（聚乙烯醇肉桂酸酯）
 gtqtcore.material.xmt=xMT分子光刻胶
+gtqtcore.material.xmt_precursor=xMT前驱混合体
+gtqtcore.material.siloxane_prepolymer=硅氧烷预聚物
+gtqtcore.material.fluorinated_siloxane=氟化硅氧烷
+gtqtcore.material.epoxy_crosslinker=环氧交联剂
+gtqtcore.material.photo_acid_generator=光致酸产生剂（PAG）
+gtqtcore.material.nucleophilic_quencher=亲核猝灭剂
+gtqtcore.material.base_quencher=碱猝灭剂
+gtqtcore.material.triphenyl_methanol=三苯甲醇
+gtqtcore.material.trityl_chloride=三苯甲基氯化物
+gtqtcore.material.quaternary_ammonium_intermediate=季铵盐中间体
+gtqtcore.material.acetyl_ester_mix=乙酰酯混合物
+gtqtcore.material.nucleophilic_quencher_crude=亲核淬灭剂粗制
+gtqtcore.material.heavy_organic_waste=重有机废物
+gtqtcore.material.acid_chloride_mix=酰氯中间体
+gtqtcore.material.quencher_crystals=淬灭剂晶体
+gtqtcore.material.organic_solvent_waste=有机溶剂废料
+gtqtcore.material.silicon_dioxide_slurry=二氧化硅浆料
 gtqtcore.material.zrbtmst=氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
-
 gtqtcore.material.ulexite=钠硼解石
 gtqtcore.material.monazite_rare_earth_turbid=独居石稀土浊溶液
 gtqtcore.material.hafnium_oxide_zirconium_oxid_mixture=氧化铪-氧化锆混合物

@@ -1081,7 +1081,7 @@ public class MetaTileEntityLoader {
                 'H', MetaTileEntities.HULL[GTValues.MV].getStackForm());
 
         ModHandler.addShapedRecipe(true, "fluidized_bed_recipes",
-                GTQTMetaTileEntities.LARGE_DESULPHURIZATION.getStackForm(),
+                GTQTMetaTileEntities.LARGE_FLUIDIZED_BED.getStackForm(),
                 "CRC", "PMP", "CHC",
                 'C', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.HV),
                 'R', OreDictUnifier.get(OrePrefix.rotor, StainlessSteel),

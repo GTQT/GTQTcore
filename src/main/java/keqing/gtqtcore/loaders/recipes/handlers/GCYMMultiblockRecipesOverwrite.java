@@ -10,6 +10,7 @@ import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import supercritical.common.metatileentities.SCMetaTileEntities;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities.ALLOY_BLAST_SMELTER;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
@@ -900,11 +901,11 @@ public class GCYMMultiblockRecipesOverwrite {
         /////////////////////////MEGA Machine
         ModHandler.removeRecipeByName("gcym:mega_blast_furnace");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(ELECTRIC_BLAST_FURNACE.getStackForm(64))
-                .inputs(ELECTRIC_BLAST_FURNACE.getStackForm(64))
+                .inputs(HUGE_BLAST_FURANCE.getStackForm(64))
                 .inputs(FIELD_GENERATOR_UHV.getStackForm(64))
-                .inputs(FIELD_GENERATOR_UHV.getStackForm(64))
-                .input(CIRCUIT_GOOD_III, 8)
+                .inputs(CONVEYOR_MODULE_UHV.getStackForm(64))
+                .inputs(VOLTAGE_COIL_UHV.getStackForm(64))
+                .input(CIRCUIT_GOOD_IV, 32)
                 .input(frameGt, HMS1J22Alloy, 16)
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
@@ -934,10 +935,10 @@ public class GCYMMultiblockRecipesOverwrite {
         ModHandler.removeRecipeByName("gcym:mega_vacuum_freezer");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .inputs(MetaTileEntities.VACUUM_FREEZER.getStackForm(64))
-                .inputs(MetaTileEntities.VACUUM_FREEZER.getStackForm(64))
                 .inputs(FIELD_GENERATOR_UHV.getStackForm(64))
-                .inputs(FIELD_GENERATOR_UHV.getStackForm(64))
-                .input(CIRCUIT_GOOD_III, 8)
+                .inputs(CONVEYOR_MODULE_UHV.getStackForm(64))
+                .inputs(ELECTRIC_PUMP_UHV.getStackForm(64))
+                .input(CIRCUIT_GOOD_IV, 32)
                 .input(frameGt, HMS1J22Alloy, 16)
                 .input(circuit, MarkerMaterials.Tier.UHV, 4)
                 .input(circuit, MarkerMaterials.Tier.UV, 16)
@@ -954,6 +955,37 @@ public class GCYMMultiblockRecipesOverwrite {
                 .fluidInputs(Polyetheretherketone.getFluid(L * 16))
                 .fluidInputs(NaquadahAlloy.getFluid(L * 4))
                 .outputs(GCYMMetaTileEntities.MEGA_VACUUM_FREEZER.getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(DISK_23.getStackForm())
+                        .CWUt(CWT[IV])
+                        .EUt(VA[LuV]))
+                .EUt(VA[UV])
+                .duration(1200)
+                .cleanroom(CleanroomType.CLEANROOM)
+                .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(HUGE_ALLOY_BLAST_FURANCE.getStackForm(64))
+                .inputs(FIELD_GENERATOR_UHV.getStackForm(64))
+                .inputs(CONVEYOR_MODULE_UHV.getStackForm(64))
+                .inputs(VOLTAGE_COIL_UHV.getStackForm(64))
+                .input(CIRCUIT_GOOD_IV, 32)
+                .input(frameGt, HMS1J22Alloy, 16)
+                .input(circuit, MarkerMaterials.Tier.UHV, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
+                .input(circuit, MarkerMaterials.Tier.ZPM, 32)
+                .input(plate, SiliconCarbide, 16)
+                .input(plateDouble, Staballoy, 4)
+                .input(spring, Europium, 4)
+                .input(gearSmall, Stellite, 16)
+                .input(gearSmall, Neutronium, 16)
+                .input(cableGtHex, SiliconCarbide, 64)
+                .input(cableGtHex, SiliconCarbide, 64)
+                .fluidInputs(KaptonK.getFluid(L * 32))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .outputs(MEGA_ALLOY_BLAST_FURANCE.getStackForm())
                 .stationResearch(b -> b
                         .researchStack(DISK_23.getStackForm())
                         .CWUt(CWT[IV])

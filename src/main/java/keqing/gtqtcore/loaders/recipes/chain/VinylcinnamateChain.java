@@ -71,6 +71,15 @@ public class VinylcinnamateChain {
         // 产率75-90%。需提纯时，可用四氯化碳重结晶。
 
         //肉桂酸钠=肉桂酸与氢氧化钠
+        // 苯 + 一氧化碳 + 氢气 → 苯甲醛（氢甲酰化反应）
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(Benzene.getFluid(1000))
+                .fluidInputs(CarbonMonoxide.getFluid(1000))
+                .fluidInputs(Hydrogen.getFluid(1000))
+                .fluidOutputs(Benzaldehyde.getFluid(1000))
+                .duration(600)
+                .EUt(VA[HV])
+                .buildAndRegister();
 
         //苯乙醛+乙酸酐=肉桂酸乙酯+乙酸
         CHEMICAL_RECIPES.recipeBuilder()
@@ -78,6 +87,7 @@ public class VinylcinnamateChain {
                 .fluidInputs(AceticAnhydride.getFluid(1000))
                 .fluidOutputs(AceticAcid.getFluid(1000))
                 .fluidOutputs(EthylCinnamate.getFluid(1000))
+                .circuitMeta(1)
                 .duration(400).EUt(VA[EV]).buildAndRegister();
         //肉桂酸乙酯+水=肉桂酸+乙醇
         CHEMICAL_RECIPES.recipeBuilder()

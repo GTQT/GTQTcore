@@ -2086,6 +2086,130 @@ public class SecondDegreeMaterials {
                 .colorAverage()
                 .build();
 
+        //xMT前驱 XMTPrecursor
+        GTQTMaterials.XmtPrecursor = new Material.Builder(getMaterialsId(), gtqtcoreId("xmt_precursor"))
+                .fluid()
+                .color(0x00008B)
+                .iconSet(SHINY)
+                .build();
+
+        //硅氧烷预聚物 SiloxanePrepolymer
+        GTQTMaterials.SiloxanePrepolymer = new Material.Builder(getMaterialsId(), gtqtcoreId("siloxane_prepolymer"))
+                .fluid()
+                .color(0x30D5C8)
+                .iconSet(SHINY)
+                .build();
+
+        //氟化硅氧烷 FluorinatedSiloxane
+        GTQTMaterials.FluorinatedSiloxane = new Material.Builder(getMaterialsId(), gtqtcoreId("fluorinated_siloxane"))
+                .fluid()
+                .color(0x30D5C8)
+                .iconSet(SHINY)
+                .build();
+
+        // 环氧交联剂
+        GTQTMaterials.EpoxyCrosslinker = new Material.Builder(getMaterialsId(), gtqtcoreId("epoxy_crosslinker"))
+                .fluid()
+                .color(0x800080)
+                .iconSet(SHINY)
+                .components(Carbon, 6, Hydrogen, 6, Oxygen, 3) // 环氧树脂基化合物
+                .build();
+
+        // 光致酸产生剂（PAG）
+        GTQTMaterials.PhotoAcidGenerator = new Material.Builder(getMaterialsId(), gtqtcoreId("photo_acid_generator"))
+                .dust()
+                .color(0xFF0000)
+                .iconSet(BRIGHT)
+                .components(Sulfur, 2, Oxygen, 6, Fluorine, 6, Carbon, 12) // 六氟锑酸三苯基硫鎓盐
+                .build();
+
+        // 亲核猝灭剂
+        GTQTMaterials.NucleophilicQuencher = new Material.Builder(getMaterialsId(), gtqtcoreId("nucleophilic_quencher"))
+                .fluid()
+                .color(0xFFA500)
+                .iconSet(DULL)
+                .components(Nitrogen, 1, Hydrogen, 3, Carbon, 2) // 三乙胺类化合物
+                .build();
+
+        // 碱猝灭剂
+        GTQTMaterials.BaseQuencher = new Material.Builder(getMaterialsId(), gtqtcoreId("base_quencher"))
+                .dust()
+                .color(0xFFFFFF)
+                .iconSet(FINE)
+                .components(Sodium, 1, Carbon, 1, Oxygen, 3) // 碳酸钠基化合物
+                .build();
+
+        //三苯甲醇
+        GTQTMaterials.TriphenylMethanol = new Material.Builder(getMaterialsId(), gtqtcoreId("triphenyl_methanol"))
+                .fluid()
+                .color(0x800080)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("C19H16O");
+
+        // 三苯甲基氯化物 TritylChloride
+        GTQTMaterials.TritylChloride = new Material.Builder(getMaterialsId(), gtqtcoreId("trityl_chloride"))
+                .fluid()
+                .color(0xA52A2A)
+                .iconSet(SHINY)
+                .build()
+                .setFormula("C6H8Cl3");
+
+        //季铵盐中间体 QuaternaryAmmoniumIntermediate
+        GTQTMaterials.QuaternaryAmmoniumIntermediate = new Material.Builder(getMaterialsId(), gtqtcoreId("quaternary_ammonium_intermediate"))
+                .fluid()
+                .color(0xC7C7FF)
+                .iconSet(SHINY)
+                .build();
+
+        //乙酰酯混合物 AcetylEsterMix
+        GTQTMaterials.AcetylEsterMix = new Material.Builder(getMaterialsId(), gtqtcoreId("acetyl_ester_mix"))
+                .fluid()
+                .color(0xA52A2A)
+                .iconSet(SHINY)
+                .build();
+
+        //亲核淬灭剂粗制 NucleophilicQuencherCrude
+        GTQTMaterials.NucleophilicQuencherCrude = new Material.Builder(getMaterialsId(), gtqtcoreId("nucleophilic_quencher_crude"))
+                .fluid()
+                .color(0x30D5C8)
+                .iconSet(SHINY)
+                .build();
+
+        //重有机废物 HeavyOrganicWaste
+        GTQTMaterials.HeavyOrganicWaste = new Material.Builder(getMaterialsId(), gtqtcoreId("heavy_organic_waste"))
+                .fluid()
+                .color(0x4F4F4F)
+                .iconSet(SHINY)
+                .build();
+
+        //酰氯中间体 AcidChlorideMix
+        GTQTMaterials.AcidChlorideMix = new Material.Builder(getMaterialsId(), gtqtcoreId("acid_chloride_mix"))
+                .fluid()
+                .color(0xC7C7FF)
+                .iconSet(SHINY)
+                .build();
+
+        //淬灭剂晶体 QuencherCrystals
+        GTQTMaterials.QuencherCrystals = new Material.Builder(getMaterialsId(), gtqtcoreId("quencher_crystals"))
+                .dust()
+                .color(0xFFD700)
+                .iconSet(SHINY)
+                .build();
+
+        //有机溶剂废料 OrganicSolventWaste
+        GTQTMaterials.OrganicSolventWaste = new Material.Builder(getMaterialsId(), gtqtcoreId("organic_solvent_waste"))
+                .fluid()
+                .color(0x4F4F4F)
+                .iconSet(SHINY)
+                .build();
+
+        //二氧化硅浆料 SiliconDioxideSlurry
+        GTQTMaterials.SiliconDioxideSlurry = new Material.Builder(getMaterialsId(), gtqtcoreId("silicon_dioxide_slurry"))
+                .fluid()
+                .color(0x4F4F4F)
+                .iconSet(SHINY)
+                .build();
 
     }
 }

@@ -4026,6 +4026,23 @@ gtqtcore.material.naquadriatic_taranium=Naquadria-Taranium Alloy
 
 gtqtcore.material.vinylcinnamate=Negative photoresist（Polyvinyl Cinnamate）
 gtqtcore.material.xmt=xMT Molecular Photoresist
+gtqtcore.material.xmt_precursor=xMT Precursor Blend
+gtqtcore.material.siloxane_prepolymer=Siloxane Prepolymer
+gtqtcore.material.fluorinated_siloxane=Fluorinated Siloxane
+gtqtcore.material.epoxy_crosslinker=Epoxy Crosslinker
+gtqtcore.material.photo_acid_generator=Photo Acid Generator (PAG)
+gtqtcore.material.nucleophilic_quencher=Nucleophilic Quencher
+gtqtcore.material.base_quencher=Base Quencher
+gtqtcore.material.triphenyl_methanol=Triphenylmethanol
+gtqtcore.material.trityl_chloride=Trityl Chloride
+gtqtcore.material.quaternary_ammonium_intermediate=Quaternary Ammonium Intermediate
+gtqtcore.material.acetyl_ester_mix=Acetyl Ester Mix
+gtqtcore.material.nucleophilic_quencher_crude=Nucleophilic Quencher Crude
+gtqtcore.material.heavy_organic_waste=Heavy Organic Waste
+gtqtcore.material.acid_chloride_mix=Acid Chloride Mix
+gtqtcore.material.quencher_crystals=Quencher Crystals
+gtqtcore.material.organic_solvent_waste=Organic Solvent Waste
+gtqtcore.material.silicon_dioxide_slurry=Silicon Dioxide Slurry
 gtqtcore.material.zrbtmst=Zirconia Hybrid-(2,4-bis(trichloromethyl)-6-(4-methoxystyryl)-1,3,5-triazine)(ZrO2-BTMST)
 
 gtqtcore.material.ulexite=Ulexite

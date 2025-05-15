@@ -152,24 +152,12 @@ public class FirstDegreeMaterials {
                 .build()
                 .setFormula("C11H12O3");
 
-        //感光树脂-聚乙烯醇肉桂酸酯
-
-        //增感剂
-        //光刻胶溶剂
-
         //xMT分子光刻
         GTQTMaterials.Xmt = new Material.Builder(getMaterialsId(), gtqtcoreId("xmt"))
                 .fluid()
-                .color(0x3C3C50)
+                .color(0x00008B)
                 .iconSet(SHINY)
                 .build();
-
-        //xMT
-        //环氧交联剂
-        //光致酸产生剂(PAG)
-        //亲核猝灭剂
-        //碱猝灭剂
-
 
         //氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
         GTQTMaterials.Zrbtmst = new Material.Builder(getMaterialsId(), gtqtcoreId("zrbtmst"))

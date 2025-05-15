@@ -75,6 +75,7 @@ public class GTQTRecipesManager {
         OceanChain.init();
         MagnetoResonaticCircuits.init();
         VinylcinnamateChain.init();
+        XmtChain.init();
         YeastLine.init();
         NaquadahChain.init();
         MachineCasing.init();
