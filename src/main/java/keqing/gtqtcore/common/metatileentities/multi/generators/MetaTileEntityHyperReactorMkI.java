@@ -96,8 +96,7 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
                 .aisle("CCCCC", "G###G", "G#H#G", "G###G", "CCCCC")
                 .aisle("CCSCC", "CGGGC", "CGGGC", "CGGGC", "CCCCC")
                 .where('S', this.selfPredicate())
-                .where('C', states(getCasingState())
-                        .setMinGlobalLimited(55)
+                .where('C', states(getCasingState()).setMinGlobalLimited(55)
                         .or(autoAbilities(false, true, false, false, true, false, false))
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
@@ -106,18 +105,9 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_LASER)
-                                .stream()
-                                .filter(mte -> {
-                                    if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
-                                        return laserHatch.getTier()== GTValues.V[UEV];
-                                    }
-                                    return false;
-                                })
-                                .toArray(MetaTileEntity[]::new))
+                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
                                 .setMaxGlobalLimited(1)
-                                .setPreviewCount(1)
-                        )
+                                .setPreviewCount(1))
                 )
                 .where('G', states(getGlassState()))
                 .where('H', states(getUniqueCasingState()))

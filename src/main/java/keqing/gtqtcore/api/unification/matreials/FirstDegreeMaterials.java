@@ -4297,6 +4297,7 @@ public class FirstDegreeMaterials {
         GTQTMaterials.RhodiumOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("rhodium_oxide"))
                 .dust()
                 .color(0xD93D16)
+                .flags(DISABLE_DECOMPOSITION)
                 .iconSet(MaterialIconSet.METALLIC)
                 .components(Rhodium, 2, Oxygen, 3)
                 .build();

@@ -130,9 +130,11 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("XXX", "PPP", "CCC", "CCC", "CCC", "XXX")
-                .aisle("XXX", "PPP", "C#C", "C#C", "C#C", "XMX")
-                .aisle("XSX", "PPP", "CCC", "CCC", "CCC", "XXX")
+                .aisle(" XXX ", " PPP ", " CCC ", " CCC ", " CCC ", " XXX ")
+                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXXXX")
+                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXMXX")
+                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXXXX")
+                .aisle(" XSX ", " PPP ", " CCC ", " CCC ", " CCC ", " XXX ")
                 .where('S', selfPredicate())
                 .where('X', states(getCasingState()).setMinGlobalLimited(9)
                         .or(autoAbilities(true, true, true, true, true, true, false))

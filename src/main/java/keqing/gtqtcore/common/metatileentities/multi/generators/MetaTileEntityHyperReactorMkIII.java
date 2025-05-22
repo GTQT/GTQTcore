@@ -113,18 +113,9 @@ public class MetaTileEntityHyperReactorMkIII extends FuelMultiblockController im
                                 .toArray(MetaTileEntity[]::new))
                                 .setExactLimit(1)
                                 .setPreviewCount(1))
-                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_LASER)
-                                .stream()
-                                .filter(mte -> {
-                                    if(mte instanceof MetaTileEntityLaserHatch laserHatch ) {
-                                        return laserHatch.getTier()== GTValues.V[UXV];
-                                    }
-                                    return false;
-                                })
-                                .toArray(MetaTileEntity[]::new))
+                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
                                 .setMaxGlobalLimited(1)
-                                .setPreviewCount(1)
-                        )
+                                .setPreviewCount(1))
                 )
                 .where('F', states(getFrameState()))
                 .where('H', states(getUniqueCasingState()))

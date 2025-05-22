@@ -60,7 +60,6 @@ public class GTQTRecipesManager {
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();
-        SawmillChain.init();
         NaquadahFuelChain.init();
         LargeCircuitAssemblyLine.init();
         SodiumChain.init();

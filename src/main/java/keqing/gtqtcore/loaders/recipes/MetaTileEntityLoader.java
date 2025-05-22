@@ -854,13 +854,6 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(plate, Wood),
                 'B', new UnificationEntry(frameGt, Iron));
 
-        ModHandler.addShapedRecipe(true, "saw_mill",
-                GTQTMetaTileEntities.SAW_MILL.getStackForm(),
-                "BPB", "PCP", "BPB",
-                'C', new UnificationEntry(circuit, ULV),
-                'P', new UnificationEntry(plate, Wood),
-                'B', new UnificationEntry(frameGt, Bronze));
-
         ModHandler.addShapedRecipe(true, "gravity_separator",
                 GTQTMetaTileEntities.GRAVITY_SEPARATOR.getStackForm(),
                 "BPB", "PCP", "BPB",

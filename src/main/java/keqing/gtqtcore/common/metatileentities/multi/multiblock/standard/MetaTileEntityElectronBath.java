@@ -10,9 +10,11 @@ import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
+import gregtech.common.blocks.MetaBlocks;
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -65,24 +67,27 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("NNNNN", "NNNNN", "NNNNN", "#NNN#")
-                .aisle("NNNNN", "N###N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N#N#N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N#N#N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N###N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N#N#N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N###N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N#N#N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N#N#N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "N###N", "N#X#N", "#NMN#")
-                .aisle("NNNNN", "NNCNN", "NNNNN", "#NNN#")
-                .where('C', selfPredicate())
-                .where('N', TiredTraceabilityPredicate.CP_CASING.get()
+                .aisle("  BBB  ", "  BBB  ", "  BBB  ", "       ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BBB  ")
+                .aisle("ABBBBBA", "ACC CCA", "AAC CAA", "  BDB  ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BDB  ")
+                .aisle("ABBBBBA", "ACC CCA", "AAC CAA", "  BDB  ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BDB  ")
+                .aisle("ABBBBBA", "ACC CCA", "AAC CAA", "  BDB  ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BDB  ")
+                .aisle("ABBBBBA", "ACC CCA", "AAC CAA", "  BDB  ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BDB  ")
+                .aisle("ABBBBBA", "ACC CCA", "AAC CAA", "  BDB  ")
+                .aisle(" BBBBB ", " BB BB ", "  B B  ", "  BBB  ")
+                .aisle("  BBB  ", "  BSB  ", "  BBB  ", "       ")
+                .where('S', selfPredicate())
+                .where('B', TiredTraceabilityPredicate.CP_CASING.get()
                         .or(autoAbilities())
                 )
-                .where('M', abilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY))
-                .where('X', TiredTraceabilityPredicate.CP_TUBE.get())
-                .where('#', any())
+                .where('D', abilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY))
+                .where('C', TiredTraceabilityPredicate.CP_TUBE.get())
+                .where('A', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
+                .where(' ', any())
                 .build();
     }
 

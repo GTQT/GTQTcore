@@ -46,7 +46,6 @@ import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressur
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedFluidDrill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityAdvancedLargeMiner;
 import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.resourceCollection.MetaTileEntityVoidMiner;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.steam.MetaTileEntitySawMill;
 import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.*;
 import keqing.gtqtcore.common.metatileentities.single.electric.*;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntityCreativePressurePump;
@@ -185,7 +184,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityMiningDrill MINING_DRILL;
     public static MetaTileEntityHeatFurnace HEAT_FURNACE;
     public static MetaTileEntityPrimitiveTreeFarmer PRIMITIVE_TREE_FARMER;
-    public static MetaTileEntitySawMill SAW_MILL;
     public static MetaTileEntityAdvanceKQCC ADV_KQCC;
     public static MetaTileEntityGeneMutagenesis GENE_MUTAGENESIS;
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
@@ -500,7 +498,6 @@ public class GTQTMetaTileEntities {
 
         //早期设备
         PRIMITIVE_TREE_FARMER = registerMetaTileEntity(150, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
-        SAW_MILL = registerMetaTileEntity(151,new MetaTileEntitySawMill(gtqtcoreId("saw_mill")));
         PRIMITIVE_ROASTER = registerMetaTileEntity(152, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
         HEAT_FURNACE = registerMetaTileEntity(153, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
         PRIMITIVE_REACTOR = registerMetaTileEntity(154, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
