@@ -45,6 +45,8 @@ public class GTQTRecipesManager {
         BoronChain.init();
         EnzymesRecipes.init();
         ExtruderRecipes.init();
+        FusionReactorRecipes.init();
+        CatalystHandler.init();
         ArgChain.init();
         ChipHelper.init();
         CoverRecipes.init();

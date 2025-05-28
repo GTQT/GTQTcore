@@ -26,15 +26,18 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_FIBER;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_MULTILAYER_FIBER;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_BIO_BOARD;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_GENE_BOARD;
     public static MetaItem<?>.MetaValueItem LAMINATION_CA;
     public static MetaItem<?>.MetaValueItem LAMINATION_FG;
     public static MetaItem<?>.MetaValueItem LAMINATION_WD;
     public static MetaItem<?>.MetaValueItem LAMINATION_GE;
     public static MetaItem<?>.MetaValueItem LAMINATION_IR;
     public static MetaItem<?>.MetaValueItem LAMINATION_YR;
+    public static MetaItem<?>.MetaValueItem LAMINATION_IN;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;
     public static MetaItem<?>.MetaValueItem WATER_CLEAR;
     public static MetaItem<?>.MetaValueItem NANOSILICON_CATHODE;
+
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_I;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_II;
     public static MetaItem<?>.MetaValueItem CATALYST_FRAMEWORK_III;
@@ -71,6 +74,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem CATALYST_PHOTOELECTRONIC;
     public static MetaItem<?>.MetaValueItem CATALYST_PARTICLE_ACCELERATION;
     public static MetaItem<?>.MetaValueItem CATALYST_SYNCHROTRON_CAPABLE;
+
     public static MetaItem<?>.MetaValueItem CATALYST_BED_BASE;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_ULV;
     public static MetaItem<?>.MetaValueItem CATALYST_BED_LV;

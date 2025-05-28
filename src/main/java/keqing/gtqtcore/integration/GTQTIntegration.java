@@ -10,7 +10,6 @@ public class GTQTIntegration {
 
         ITheOneProbe oneProbe = TheOneProbe.theOneProbeImp;
         oneProbe.registerProvider(new MultiblockTemperatureProvider());
-        oneProbe.registerProvider(new MultiblockCoreProvider());
         oneProbe.registerProvider(new EvaporationPoolInfoProvider());
         oneProbe.registerProvider(new PipeInfoProvider());
         oneProbe.registerProvider(new PressureMteProvider());

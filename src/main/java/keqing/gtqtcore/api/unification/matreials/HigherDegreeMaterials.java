@@ -325,6 +325,7 @@ public class HigherDegreeMaterials {
         //高级矿物
         Prismarine = new Material.Builder(getMaterialsId(), gtqtcoreId("prismarine"))
                 .gem(1)
+                .fluid()
                 .color(0x73B5AA)
                 .iconSet(FINE)
                 .flags(CRYSTALLIZABLE, EXCLUDE_BLOCK_CRAFTING_BY_HAND_RECIPES,
@@ -335,6 +336,8 @@ public class HigherDegreeMaterials {
 
         Purpur = new Material.Builder(getMaterialsId(), gtqtcoreId("purpur"))
                 .dust(1)
+                .fluid()
+                .ingot()
                 .color(0xCC94CC)
                 .iconSet(FINE)
                 .build();
@@ -619,5 +622,31 @@ public class HigherDegreeMaterials {
                 .components(Carbon, 48)
                 .build()
                 .setFormula("CNT", false);
+
+
+        //生物培养基原液 无菌培养基+干细胞+三钛
+        GTQTMaterials.BacterialCultivationBase = new Material.Builder(getMaterialsId(), gtqtcoreId("bacterial_cultivation_base"))
+                .fluid()
+                .color(0x556B2F)
+                .build();
+
+        //灭菌生物培养基
+        GTQTMaterials.MutatedBacterialCultivationBase = new Material.Builder(getMaterialsId(), gtqtcoreId("mutated_bacterial_cultivation_base"))
+                .fluid()
+                .color(0x548B54)
+                .build();
+
+        //突变活性焊料 Mutant active solder
+        GTQTMaterials.MutantActiveSolder = new Material.Builder(getMaterialsId(), gtqtcoreId("mutant_active_solder"))
+                .fluid()
+                .color(0x5D478B)
+                .build();
+
+        //无尽催化剂 Infinite catalyst
+        GTQTMaterials.InfiniteCatalyst = new Material.Builder(getMaterialsId(), gtqtcoreId("infinite_catalyst"))
+                .dust().ore()
+                .color(0xFFFFFF)
+                .build();
+
     }
 }

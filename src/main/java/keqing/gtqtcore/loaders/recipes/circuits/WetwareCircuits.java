@@ -335,7 +335,7 @@ public class WetwareCircuits {
                 .input(LAMINATION_YR)
                 .input(foil, Samarium, 8)
                 .fluidInputs(Polyetheretherketone.getFluid(576))
-                .fluidInputs(UltraGlue.getFluid(576))
+                .fluidInputs(UltraGlue.getFluid(500))
                 .output(IMPREGNATED_BIO_BOARD, 2)
                 .buildAndRegister();
 

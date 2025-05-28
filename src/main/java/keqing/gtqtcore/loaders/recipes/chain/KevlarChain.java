@@ -120,72 +120,12 @@ public class KevlarChain {
                 .duration(20 * SECOND)
                 .buildAndRegister();
 
-        // Deleted original Kevlar fiber related recipes.
-        ModHandler.removeRecipeByName("gregtech:fine_wire_kevlar");
-        GTRecipeHandler.removeRecipesByInputs(WIREMILL_RECIPES,
-                OreDictUnifier.get(ingot, Kevlar),
-                IntCircuitIngredient.getIntegratedCircuit(3));
-        GTRecipeHandler.removeRecipesByInputs(MACERATOR_RECIPES,
-                OreDictUnifier.get(wireFine, Kevlar));
-        GTRecipeHandler.removeRecipesByInputs(EXTRACTOR_RECIPES,
-                OreDictUnifier.get(wireFine, Kevlar));
-
-        // 250L Crystal Kevlar -> 8x Kevlar fiber (equal to 1x Kevlar plate).
-        SPINNER_RECIPES.recipeBuilder()
-                .circuitMeta(1)
-                .input(stick, BlackSteel, 1)
-                .input(dustSmall, Talc, 1)
-                .fluidInputs(CrystalKevlar.getFluid(125))
-                .output(wireFine, Kevlar, 4)
-                .EUt(VA[IV])
-                .duration(5 * SECOND)
-                .buildAndRegister();
-
-        SPINNER_RECIPES.recipeBuilder()
-                .circuitMeta(1)
-                .input(stick, BlackSteel, 1)
-                .input(dustSmall, Soapstone, 1)
-                .fluidInputs(CrystalKevlar.getFluid(125))
-                .output(wireFine, Kevlar, 4)
-                .EUt(VA[IV])
-                .duration(5 * SECOND)
-                .buildAndRegister();
-
-        SPINNER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(stick, BlackSteel, 1)
-                .input(dust, Talc, 1)
-                .fluidInputs(CrystalKevlar.getFluid(500))
-                .output(wireFine, Kevlar, 16)
-                .EUt(VA[IV])
-                .duration(SECOND + 5 * TICK)
-                .buildAndRegister();
-
-        SPINNER_RECIPES.recipeBuilder()
-                .circuitMeta(2)
-                .input(stick, BlackSteel, 1)
-                .input(dust, Soapstone, 1)
-                .fluidInputs(CrystalKevlar.getFluid(500))
-                .output(wireFine, Kevlar, 16)
-                .EUt(VA[IV])
-                .duration(SECOND + 5 * TICK)
-                .buildAndRegister();
-
-        // 8x Kevlar fiber -> 1x Spinned Kevlar plate
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(wireFine, Kevlar, 8)
-                .output(wrap,Kevlar, 1)
-                .EUt(VA[LV])
-                .duration(4 * SECOND + 10 * TICK)
-                .buildAndRegister();
-
-        // Spinned Kevlar plate + Polyurethane Resin -> Kevlar plate
-        CHEMICAL_BATH_RECIPES.recipeBuilder()
-                .input(wrap,Kevlar, 1)
-                .fluidInputs(PolyurethaneResin.getFluid(250))
-                .output(plate, Kevlar, 1)
-                .EUt(VA[LV])
-                .duration(MINUTE)
+        CHEMICAL_RECIPES.recipeBuilder()
+                .fluidInputs(CrystalKevlar.getFluid(1000))
+                .fluidInputs(PolyurethaneResin.getFluid(1000))
+                .fluidOutputs(Kevlar.getFluid(1440))
+                .EUt(VA[ZPM])
+                .duration(100)
                 .buildAndRegister();
     }
     private static void PolyurethaneResinProcess() {

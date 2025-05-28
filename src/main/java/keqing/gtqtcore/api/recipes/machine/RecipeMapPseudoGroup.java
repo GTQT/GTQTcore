@@ -4,6 +4,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.recipes.ui.RecipeMapUIFunction;
 import gregtech.common.items.MetaItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -27,9 +28,8 @@ public class RecipeMapPseudoGroup<R extends RecipeBuilder<R>> extends RecipeMap<
                                 @Nonnull R defaultRecipeBuilder,
                                 RecipeMap<R> recipeMap1,
                                 RecipeMap<R> recipeMap2,
-                                RecipeMap<R> recipeMap3,
-                                boolean isHidden) {
-        super(unlocalizedName, maxInputs, maxOutputs, maxFluidInputs, maxFluidOutputs, defaultRecipeBuilder, isHidden);
+                                RecipeMap<R> recipeMap3) {
+        super(unlocalizedName,defaultRecipeBuilder,RecipeMap::getRecipeMapUI, maxInputs, maxOutputs, maxFluidInputs, maxFluidOutputs);
         this.recipeMap1 = recipeMap1;
         this.recipeMap2 = recipeMap2;
         this.recipeMap3 = recipeMap3;

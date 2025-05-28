@@ -21,8 +21,5 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.cylinder);
         MetaItems.addOrePrefix(GTQTOrePrefix.valve);
         MetaItems.addOrePrefix(GTQTOrePrefix.shell);
-
-        MetaItems.addOrePrefix(GTQTOrePrefix.power);
-
     }
 }

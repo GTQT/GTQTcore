@@ -149,11 +149,18 @@ public class BrineChain {
                 .outputs(ACRYLIC_YARN.getStackForm())
                 .buildAndRegister();
 
+        SPINNER_RECIPES.recipeBuilder().duration(60).EUt(VA[HV])
+                .input(dust, AcrylicFibers, 1)
+                .input(wireFine, Platinum)
+                .circuitMeta(2)
+                .outputs(ACRYLIC_YARN.getStackForm(4))
+                .buildAndRegister();
+
         SPINNER_RECIPES.recipeBuilder().duration(60).EUt(VA[EV])
                 .input(dust, AcrylicFibers, 1)
                 .input(wireFine, Samarium)
-                .circuitMeta(2)
-                .outputs(ACRYLIC_YARN.getStackForm(4))
+                .circuitMeta(3)
+                .outputs(ACRYLIC_YARN.getStackForm(16))
                 .buildAndRegister();
 
         // CH2O2 + CH3OH -> H2O + C2H4O2

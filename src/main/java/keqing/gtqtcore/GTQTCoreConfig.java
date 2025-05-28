@@ -74,11 +74,6 @@ public class GTQTCoreConfig {
         public boolean EnableObjSWind = true;
     }
     public static class MachineSwitch {
-        @Config.Comment("延迟巨构设备检测频率，可改善TPS性能(目前只在压缩聚变 光刻厂 加速器 PCB 锻炉测试实装，可能会造成未知后果！)")
-        @Config.RequiresMcRestart
-        @Config.Name("Delay Structure Check switch")
-        public boolean DelayStructureCheckSwitch = true;
-
         @Config.Comment("终局设备开关，包括尼戴，神锻。注意，严重影响加载时间！！！")
         @Config.RequiresMcRestart
         @Config.Name("End game machine switch")
@@ -88,15 +83,5 @@ public class GTQTCoreConfig {
         @Config.RequiresMcRestart
         @Config.Name("Last game machine switch")
         public boolean LastSwitch = false;
-
-        @Config.Comment("巨型设备开关，包括巨型高炉，巨型真空冷冻机（因为长得丑还没用，所以暂时关闭）")
-        @Config.RequiresMcRestart
-        @Config.Name("Huge Machine Switch")
-        public boolean HugeSwitch = false;
-
-        @Config.Comment("多线程设备NBT存储，由于转存NBT存在问题，所以关闭")
-        @Config.RequiresMcRestart
-        @Config.Name("Core Machine NBT Store Switch")
-        public boolean CoreMachineNBTStoreSwitch = false;
     }
 }

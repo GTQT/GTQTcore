@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.circuits;
 
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
+import gregtech.api.unification.material.MarkerMaterials;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregtechfoodoption.GTFOMaterialHandler.Blood;
@@ -23,19 +24,86 @@ public class GoowareCircuits {
         CircuitComponent();
         SoC();
         Circuits();
+        BacterialCultivation();
+    }
+
+    private static void BacterialCultivation() {
+        GENE_MUTAGENESIS.recipeBuilder()
+                .fluidInputs(SterileGrowthMedium.getFluid(8000))
+                .input(STEM_CELLS,64)
+                .input(dust,Tritanium,4)
+                .fluidOutputs(BacterialCultivationBase.getFluid(8000))
+                .EUt(VA[ZPM])
+                .duration(100)
+                .rate(50)
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .buildAndRegister();
+
+        FLUID_HEATER_RECIPES.recipeBuilder()
+                .fluidOutputs(BacterialCultivationBase.getFluid(1000))
+                .fluidOutputs(MutatedBacterialCultivationBase.getFluid(1000))
+                .EUt(VA[LuV])
+                .duration(100)
+                .buildAndRegister();
+
+        CHEMICAL_RECIPES.recipeBuilder()
+                .input(STEM_CELLS,32)
+                .input(dust,CosmicNeutronium,4)
+                .fluidInputs(MutatedBacterialCultivationBase.getFluid(2000))
+                .output(BIO_CELL,32)
+                .fluidOutputs(Mutagen.getFluid(1000))
+                .EUt(VA[UV])
+                .duration(1200)
+                .buildAndRegister();
+
+        CHEMICAL_PLANT.recipeBuilder()
+                .input(BIO_CELL,64)
+                .input(GRAVI_STAR,8)
+                .input(dust, InfiniteCatalyst,2)
+                .fluidInputs(Tin.getPlasma(14400))
+                .fluidInputs(Bismuth.getPlasma(14400))
+                .fluidInputs(GelidCryotheum.getFluid(4000))
+                .fluidOutputs(MutantActiveSolder.getFluid(40000))
+                .Catalyst(CATALYST_INFINITY_MUTATION.getStackForm())
+                .EUt(VA[UEV])
+                .duration(16000)
+                .recipeLevel(8)
+                .buildAndRegister();
     }
 
     private static void CircuitBoard() {
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(VA[LuV])
+                .input(plate, KaptonE, 8)
+                .input(ACRYLIC_YARN,32)
+                .fluidInputs(Indium.getFluid(576))
+                .fluidInputs(Kevlar.getFluid(288))
+                .output(LAMINATION_IN, 4)
+                .buildAndRegister();
 
-        //  Gooware Board
-        CVD_RECIPES.recipeBuilder()
-                .input(plate, KaptonE)
-                .input(foil, Europium, 4)
-                .fluidInputs(FluorinatedEthylenePropylene.getFluid(L))
-                .output(GOOWARE_BOARD)
+        PRESSURE_LAMINATOR_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[ZPM])
+                .input(LAMINATION_IN)
+                .input(foil, Europium, 8)
+                .fluidInputs(FluorinatedEthylenePropylene.getFluid(576))
+                .fluidInputs(Kevlar.getFluid(576))
+                .output(IMPREGNATED_GENE_BOARD, 2)
+                .buildAndRegister();
+
+        CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(IMPREGNATED_GENE_BOARD, 16)
+                .input(ELECTRICALLY_WIRED_PETRI_DISH)
+                .input(ELECTRIC_PUMP_UV)
+                .input(SENSOR_LuV)
+                .input(circuit, MarkerMaterials.Tier.UV)
+                .input(foil, Neutronium, 32)
+                .fluidInputs(MutatedBacterialCultivationBase.getFluid(16000))
+                .output(GOOWARE_BOARD, 16)
+                .cleanroom(CleanroomType.STERILE_CLEANROOM)
+                .duration(1200)
                 .EUt(VA[UV])
-                .duration(2 * SECOND)
-                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
 
         //  Gooware Circuit Board
@@ -44,7 +112,7 @@ public class GoowareCircuits {
                 EDP.getFluid(500)}) {
             CHEMICAL_RECIPES.recipeBuilder()
                     .input(GOOWARE_BOARD)
-                    .input(foil, YttriumBariumCuprate, 48)
+                    .input(foil, Neutronium, 24)
                     .fluidInputs(new FluidStack[]{stack})
                     .output(GOOWARE_CIRCUIT_BOARD)
                     .duration(10 * SECOND + 10)

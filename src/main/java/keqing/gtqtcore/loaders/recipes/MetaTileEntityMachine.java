@@ -1,6 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
-import gregtech.api.GTValues;
+import gregtech.api.GregTechAPI;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -9,11 +9,10 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.ItemMaterialInfo;
+import gregtech.api.unification.stack.RecyclingData;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -22,7 +21,10 @@ import gregtech.loaders.recipe.CraftingComponent;
 import gregtech.loaders.recipe.MetaTileEntityLoader;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.block.blocks.*;
+import keqing.gtqtcore.common.block.blocks.BlockEnergyCell;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
+import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1;
+import keqing.gtqtcore.common.block.blocks.BlockNuclearCasing;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.init.Blocks;
@@ -45,11 +47,9 @@ import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
-import static keqing.gtqtcore.api.unification.MaterialHelper.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Glue;
+import static keqing.gtqtcore.api.unification.MaterialHelper.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.plate_curved;
-
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.FISHING_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ELECTRODE_GRAPHITE;
@@ -68,83 +68,6 @@ public class MetaTileEntityMachine {
         turbine();
         dust();
         EnergyCells();
-        LBG();
-    }
-
-    private static void LBG() {
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.STEAM_TURBINE[0], 16)
-                .input(plate, Steel, 8)
-                .input(rotor, Tin, 4)
-                .input(cableGtSingle, Tin, 4)
-                .input(circuit, MarkerMaterials.Tier.MV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[0].getStackForm())
-                .EUt(VA[LV])
-                .duration(100)
-                .buildAndRegister();
-
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.GAS_TURBINE[0], 16)
-                .input(plate, Steel, 8)
-                .input(rotor, Tin, 4)
-                .input(cableGtSingle, Tin, 4)
-                .input(circuit, MarkerMaterials.Tier.MV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[1].getStackForm())
-                .EUt(VA[LV])
-                .duration(100)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.GAS_TURBINE[1], 16)
-                .input(plate, Aluminium, 8)
-                .input(rotor, Steel, 4)
-                .input(cableGtSingle, Copper, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[2].getStackForm())
-                .EUt(VA[MV])
-                .duration(100)
-                .buildAndRegister();
-
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[0], 16)
-                .input(plate, Steel, 8)
-                .input(rotor, Tin, 4)
-                .input(cableGtSingle, Tin, 4)
-                .input(circuit, MarkerMaterials.Tier.MV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[3].getStackForm())
-                .EUt(VA[LV])
-                .duration(100)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[1], 16)
-                .input(plate, Aluminium, 8)
-                .input(rotor, Steel, 4)
-                .input(cableGtSingle, Copper, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[4].getStackForm())
-                .EUt(VA[MV])
-                .duration(100)
-                .buildAndRegister();
-
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(MetaTileEntities.COMBUSTION_GENERATOR[2], 16)
-                .input(plate, StainlessSteel, 8)
-                .input(rotor, Aluminium, 4)
-                .input(cableGtSingle, Gold, 4)
-                .input(circuit, MarkerMaterials.Tier.EV, 4)
-                .fluidInputs(Tin.getFluid(576))
-                .outputs(LBG[5].getStackForm())
-                .EUt(VA[HV])
-                .duration(100)
-                .buildAndRegister();
     }
 
     private static void EnergyCells() {
@@ -503,8 +426,7 @@ public class MetaTileEntityMachine {
     }
 
     private static void Hull() {
-        for(int i=0;i<=9;i++)
-        {
+        for (int i = 0; i <= 9; i++) {
             RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(2)
                     .inputs(MACHINE_CASING.getItemVariant(MachineCasing[i]))
                     .input(plate, SecondPlate[i], 2)
@@ -527,8 +449,8 @@ public class MetaTileEntityMachine {
                 .buildAndRegister();
 
         //  Boron Silicate Glass
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4)));
 
         //  Thorium-reinforced Glass
         GTQTcoreRecipeMaps.VACUUM_CHAMBER_RECIPES.recipeBuilder()
@@ -539,8 +461,8 @@ public class MetaTileEntityMachine {
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.THY_SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.THY_SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Thorium, M * 4)));
 
         //  Titanium-reinforced Glass
@@ -552,8 +474,8 @@ public class MetaTileEntityMachine {
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.TI_BORON_SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.TI_BORON_SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Titanium, M * 4)));
 
         //  Tungsten-reinforced Glass
@@ -565,8 +487,8 @@ public class MetaTileEntityMachine {
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.W_BORON_SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.W_BORON_SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Tungsten, M * 4)));
 
 
@@ -579,8 +501,8 @@ public class MetaTileEntityMachine {
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.OSMIR_BORON_SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.OSMIR_BORON_SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Osmiridium, M * 4)));
 
         //  Naquadah-reinforced Glass
@@ -592,8 +514,8 @@ public class MetaTileEntityMachine {
                 .duration(500)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.NAQ_BORON_SILICATE_GLASS),
-                new ItemMaterialInfo(new MaterialStack(BorosilicateGlass, M * 4),
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(BlockMultiblockGlass1.CasingType.NAQ_BORON_SILICATE_GLASS),
+                new RecyclingData(new MaterialStack(BorosilicateGlass, M * 4),
                         new MaterialStack(Naquadah, M * 4)));
     }
 

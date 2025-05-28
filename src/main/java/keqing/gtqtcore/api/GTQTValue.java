@@ -103,4 +103,10 @@ public class GTQTValue {
 
     public static final int UPDATE_TIER31 = 1031;
     public static final int REQUIRE_DATA_UPDATE31 = 2031;
+
+    public static final int UPDATE_TIER32 = 1032;
+    public static final int REQUIRE_DATA_UPDATE32 = 2032;
+
+    public static final int UPDATE_TIER33 = 1033;
+    public static final int REQUIRE_DATA_UPDATE33 = 2033;
 }

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes.handlers;
 
+import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregtech.api.block.VariantBlock;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -7,6 +8,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -17,10 +19,12 @@ import net.minecraft.util.IStringSerializable;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
 import static gregicality.multiblocks.api.unification.GCYMMaterials.*;
+import static gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing.CasingType.HIGH_TEMPERATURE_CASING;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
+import static gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType.POLYTETRAFLUOROETHYLENE_PIPE;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.LARGE_MIXER_RECIPES;
@@ -35,6 +39,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.TurbineCasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6.CasingType.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.CIRCUIT_GOOD_III;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_23;
 
 public class MachineCasing {
     public static void init() {
@@ -182,126 +187,142 @@ public class MachineCasing {
                 .duration(800)
                 .buildAndRegister();
 
-        //硅岩
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        //硅岩精炼厂的两种外壳
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Americium)
-                .input(gear, HMS1J79Alloy, 2)
+                .input(plate,Neutronium,6)
                 .input(ELECTRIC_MOTOR_UV,4)
+                .input(circuit,  MarkerMaterials.Tier.UHV,8)
+                .input(gear, HMS1J79Alloy, 2)
                 .input(bolt, NaquadahAlloy, 8)
+                .input(wireFine,EnrichedNaquadahTriniumEuropiumDuranide,16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 12))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(Nitrogen.getPlasma(L * 2))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(SFTC, 2))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING))
+                        .CWUt(CWT[UV])
+                        .EUt(VA[UHV]))
                 .EUt(VA[UV])
                 .duration(1000)
-                .Tier(3)
-                .CWUt(CWT[ZPM])
                 .buildAndRegister();
 
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Americium)
-                .input(gear, HMS1J79Alloy, 2)
+                .input(plate,Neutronium,6)
                 .input(FIELD_GENERATOR_UV,4)
+                .input(circuit,  MarkerMaterials.Tier.UHV,8)
+                .input(gear, HMS1J79Alloy, 2)
                 .input(plateDouble, Naquadria, 8)
+                .input(wireFine,EnrichedNaquadahTriniumEuropiumDuranide,16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 12))
                 .fluidInputs(Kevlar.getFluid(L * 8))
                 .fluidInputs(KaptonE.getFluid(L * 4))
                 .fluidInputs(Nitrogen.getPlasma(L * 2))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(SFTS, 1))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING))
+                        .CWUt(CWT[UV])
+                        .EUt(VA[UHV]))
                 .EUt(VA[UV])
                 .duration(1000)
-                .Tier(3)
-                .CWUt(CWT[ZPM])
                 .buildAndRegister();
 
         //  Naquadria Casing
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .input(frameGt, Neutronium)
                 .input(gear, Naquadria, 2)
                 .input(stick, Naquadria, 4)
                 .input(bolt, Duranium, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 12))
+                .circuitMeta(6)
                 .fluidInputs(Kevlar.getFluid(L * 8))
-                .fluidInputs(KaptonE.getFluid(L * 4))
-                .fluidInputs(NaquadahEnriched.getFluid(L * 2))
-                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING))
                 .EUt(VA[UV])
                 .duration(1000)
-                .Tier(3)
-                .CWUt(CWT[ZPM])
                 .buildAndRegister();
 
         //  Naquadri alloy Casing
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        ASSEMBLER_RECIPES.recipeBuilder()
                 .input(frameGt, Tritanium)
                 .input(gear, NaquadahAlloy, 2)
                 .input(stick, NaquadahAlloy, 4)
                 .input(bolt, Duranium, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 6))
+                .circuitMeta(6)
                 .fluidInputs(Kevlar.getFluid(L * 4))
-                .fluidInputs(KaptonE.getFluid(L * 2))
-                .fluidInputs(NaquadahEnriched.getFluid(L))
-                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADAH_ALLOY_CASING, 2))
+                .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADAH_ALLOY_CASING))
                 .EUt(VA[ZPM])
                 .duration(1000)
-                .Tier(2)
-                .CWUt(CWT[LuV])
                 .buildAndRegister();
 
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        //高温熔炼外壳
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Tritanium)
                 .input(gear, HastelloyX78, 2)
                 .input(stick, HastelloyK243, 4)
                 .input(bolt, Duranium, 8)
-                .fluidInputs(Polybenzimidazole.getFluid(L * 6))
+                .circuitMeta(6)
                 .fluidInputs(Kevlar.getFluid(L * 4))
-                .fluidInputs(KaptonE.getFluid(L * 2))
-                .fluidInputs(NaquadahEnriched.getFluid(L))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(ALLOY_MELTING, 2))
+                .stationResearch(b -> b
+                        .researchStack(GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getItemVariant(HIGH_TEMPERATURE_CASING))
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
                 .EUt(VA[ZPM])
                 .duration(1000)
-                .Tier(2)
-                .CWUt(CWT[LuV])
                 .buildAndRegister();
 
         //  Polybenzimidazole Pipe Casing
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 4)
                 .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(NQ_MACHINE_CASING))
                 .input(frameGt, Tritanium, 2)
+                .input(ELECTRIC_PUMP_UV,4)
+                .input(circuit,  MarkerMaterials.Tier.UHV,8)
                 .input(plate, BlackPlutonium, 8)
+                .input(plateDouble, Naquadria, 8)
+                .input(wireFine,EnrichedNaquadahTriniumEuropiumDuranide,16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 24))
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 8))
                 .fluidInputs(NaquadahEnriched.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(POLYBENZIMIDAZOLE_PIPE))
+                .stationResearch(b -> b
+                        .researchStack(MetaBlocks.BOILER_CASING.getItemVariant(POLYTETRAFLUOROETHYLENE_PIPE))
+                        .CWUt(CWT[LuV])
+                        .EUt(VA[ZPM]))
                 .EUt(VA[ZPM])
                 .duration(800)
-                .Tier(3)
-                .CWUt(CWT[ZPM])
                 .buildAndRegister();
 
         //  Hyper casings
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_III, 1)
                 .inputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(NQ_TURBINE_CASING))
+                .input(FIELD_GENERATOR_UV,4)
+                .input(circuit,  MarkerMaterials.Tier.UHV,8)
                 .input(frameGt, Neutronium, 2)
                 .input(plate, Adamantium, 8)
+                .input(wireFine,EnrichedNaquadahTriniumEuropiumDuranide,16)
                 .fluidInputs(Polybenzimidazole.getFluid(L * 24))
                 .fluidInputs(Kevlar.getFluid(L * 16))
                 .fluidInputs(KaptonE.getFluid(L * 8))
                 .fluidInputs(BlackPlutonium.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(HYPER_CASING, 2))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(NAQUADRIA_CASING))
+                        .CWUt(CWT[UV])
+                        .EUt(VA[UHV]))
                 .EUt(VA[UHV])
                 .duration(1000)
-                .Tier(3)
-                .CWUt(CWT[UV])
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(MetaBlocks.METAL_CASING.getItemVariant(BlockMetalCasing.MetalCasingType.INVAR_HEATPROOF))
-                .circuitMeta(6)
+                .input(plate, HastelloyN, 4)
+                .input(gear,TungstenSteel)
+                .input(ELECTRIC_MOTOR_EV)
                 .fluidInputs(AusteniticStainlessSteel904L.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing4.getItemVariant(ADVANCED_INVAR_CASING))
                 .EUt(VA[LV])
@@ -310,7 +331,9 @@ public class MachineCasing {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(blue_steel))
-                .circuitMeta(6)
+                .input(plate, Grisium, 4)
+                .input(gear,TungstenSteel)
+                .input(ELECTRIC_MOTOR_EV)
                 .fluidInputs(BlackSteel.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.blockMultiblockCasing5.getItemVariant(ADVANCED_COLD_CASING))
                 .EUt(VA[LV])
@@ -319,7 +342,9 @@ public class MachineCasing {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .inputs(GTQTMetaBlocks.blockMultiblockCasing3.getItemVariant(red_steel))
-                .circuitMeta(6)
+                .input(plate, Stellite100, 4)
+                .input(gear,TungstenSteel)
+                .input(ELECTRIC_MOTOR_EV)
                 .fluidInputs(BlackSteel.getFluid(L * 2))
                 .outputs(GTQTMetaBlocks.blockIsaCasing.getItemVariant(VACUUM_CASING))
                 .EUt(VA[LV])

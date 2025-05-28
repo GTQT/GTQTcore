@@ -94,14 +94,14 @@ public class NaquadahChain {
                 .fluidOutputs(Phenol.getFluid(1000))
                 .duration(100).EUt(1920).buildAndRegister();
 
-        NEUTRON_ACTIVATOR.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(Nqad.getFluid(3000))
                 .fluidOutputs(HighPurityNaquadahSolution.getFluid(2000))
                 .output(dust, ConcentrateEnrichNaquadahClay,1)
                 .output(dust, NaquadahOxideRockMixture,2)
                 .output(dust,Adamantium,1)
                 .EUt(VA[IV])
-                .part(200)
+                .recipeLevel(5)
                 .duration(400)
                 .buildAndRegister();
 
@@ -130,13 +130,13 @@ public class NaquadahChain {
                 .duration(200).EUt(VA[IV]).buildAndRegister();
 
         //中子活化器			6s	中子动能460~480MeV	浓缩富集硅岩矿泥粉 16			硫酸富集硅岩粉 165	低纯硫酸超能硅岩粉 2	硫酸钠粉 140
-        NEUTRON_ACTIVATOR.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .input(dust, ConcentrateEnrichNaquadahClay,16)
                 .fluidOutputs(ImpureEnrichedNaquadahSolution.getFluid(16000))
                 .output(dust,SodiumSulfide,140)
                 .output(dust, LowPuritySulfuricAcidSuperEnergyNaquadah,2)
                 .EUt(VA[IV])
-                .part(200)
+                .recipeLevel(5)
                 .duration(400)
                 .buildAndRegister();
 
@@ -157,13 +157,13 @@ public class NaquadahChain {
                 .fluidOutputs(SulfuricAcid.getFluid(12000))
                 .duration(200).EUt(7680).buildAndRegister();
 
-        NEUTRON_ACTIVATOR.recipeBuilder()
+        CHEMICAL_PLANT.recipeBuilder()
                 .fluidInputs(HighPuritySulfuricAcidSuperEnergyNaquadah.getFluid(4000))
                 .output(dust, LowPuritySulfuricAcidSuperEnergyNaquadah,2)
                 .fluidOutputs(NaquadriaSolution.getFluid(1000))
                 .fluidOutputs(HighPurityNaquadahSolution.getFluid(1000))
                 .EUt(VA[IV])
-                .part(200)
+                .recipeLevel(5)
                 .duration(400)
                 .buildAndRegister();
         //硅岩后处理-----------------------------------------------------------------------------

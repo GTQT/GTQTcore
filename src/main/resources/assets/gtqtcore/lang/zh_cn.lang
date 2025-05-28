@@ -1653,6 +1653,7 @@ gtqtcore.material.adamantium=精金
 gtqtcore.material.taranium=塔兰金属
 gtqtcore.material.tiberium=泰伯利安
 gtqtcore.material.indium_uranium=铟铀
+gtqtcore.material.stanley=斯坦利
 gtqtcore.material.plutonium_244=钚-244
 gtqtcore.material.metastable_oganesson=亚稳态气奥
 gtqtcore.material.metastable_hassium=亚稳态钅黑
@@ -2626,7 +2627,7 @@ gtqtcore.machine.steam_extractor.name=大型蒸汽提取机
 gtqtcore.machine.steam_compressor.name=大型蒸汽压缩机
 gtqtcore.machine.huge_macerator.name=巨型粉碎工厂
 gtqtcore.machine.huge_alloy_blast_smelter.name=巨型合金炉
-gtqtcore.machine.huge_blast_furnace.name=巨型高炉
+gtqtcore.machine.huge_blast_furnace.name=巨型冶炼炉
 gtqtcore.machine.huge_chemical_reactor.name=巨型化学反应釜
 gtqtcore.machine.laser_fbt.name=强高能激光反射注入单元
 gtqtcore.machine.laser_fbc.name=强高能激光聚合嬗变核心
@@ -3802,6 +3803,10 @@ gtqtcore.material.seaborgium_carbide=钅喜碳化物
 gtqtcore.material.tantalum_carbide=碳化钽
 gtqtcore.material.hafnium_carbide=碳化铪
 gtqtcore.material.pikyonium=皮卡优合金
+gtqtcore.material.okin=奥金
+gtqtcore.material.octahedrite=八角铁
+gtqtcore.material.teflon=特氟龙
+gtqtcore.material.rsg=刚柔金
 gtqtcore.material.high_durability_compound_steel_3=高强度抗震复合钢
 gtqtcore.material.high_durability_compound_steel_2=精金掺杂的高强度复合钢（HDCS:Ad）
 gtqtcore.material.high_durability_compound_steel_1=高强度硅岩复合钢
@@ -4656,6 +4661,10 @@ gtqtcore.machine.ele.tooltip.5=消耗电极洁净液修复电极，提升其洁�
 gtqtcore.machine.alloy_klin.name=合金窑
 gtqtcore.machine.vacuum_freezer.name=真空冷冻机
 gtqtcore.machine.large_chemical_reactor.name=工业化学反应釜
+gtqtcore.machine.large_bender.name=工业卷板机
+gtqtcore.machine.large_cutter.name=工业切割机
+gtqtcore.machine.large_extruder.name=工业压模机
+gtqtcore.machine.large_wiremill.name=工业轧线机
 gtqtcore.machine.three_dim_print.name=3D部件打印机
 gtqtcore.machine.pyrolyse_oven.name=热解炉
 gtqtcore.machine.cracker.name=石油裂化机
@@ -5298,6 +5307,8 @@ metaitem.item.impregnated_graphite_rodsa.name=预处理石墨电极
 metaitem.item.impregnated_fiber.name=工程塑料-灵敏压电基板
 metaitem.item.impregnated_multilayer_fiber.name=层压复合纤维-性能合金基板
 metaitem.item.impregnated_bio_fiber.name=超活性生物基—高性能导电体基板
+metaitem.item.impregnated_gene_fiber.name=生物基因异变—活性电子基板
+
 gtqtcore.machine.froth_flotation_tank.name=工业浮选反应罐
 gtqtcore.machine.fix_bed.name=固化床
 gtqtcore.machine.cryogenic_freezer.name=凛冰冷冻机
@@ -5632,18 +5643,12 @@ metaitem.item.lamination_fg.name=玻璃纤维基板
 metaitem.item.lamination_wd.name=防腐木基板
 metaitem.item.insulating_ir.name=钌基厚膜电阻浆料覆膜
 metaitem.item.insulating_yr.name=钇基晴纶纤维复合覆膜
+metaitem.item.insulating_in.name=铟基晴纶纤维电子覆膜
+
 metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片
+
 gtqtcore.machine.gas_collector.name=大型集气机
-
-gtqtcore.machine.combustion_generator.ev.name=脉冲内燃发电机
-gtqtcore.machine.steam_turbine.ev.name=脉冲蒸气轮机
-gtqtcore.machine.gas_turbine.ev.name=脉冲燃气轮机
-
-gtqtcore.machine.combustion_generator.iv.name=爆燃内燃发电机
-gtqtcore.machine.steam_turbine.iv.name=爆燃蒸气轮机
-gtqtcore.machine.gas_turbine.iv.name=爆燃燃气轮机
-
 
 gtqtcore.machine.fuel_cell_turbine.lv.name=基础促燃轮机
 gtqtcore.machine.fuel_cell_turbine.mv.name=进阶促燃轮机

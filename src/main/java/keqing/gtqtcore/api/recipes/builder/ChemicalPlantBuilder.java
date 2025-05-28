@@ -59,7 +59,7 @@ public class ChemicalPlantBuilder extends RecipeBuilder<ChemicalPlantBuilder> {
     public ChemicalPlantBuilder Catalyst(ItemStack catalyst)
     {
         if (catalyst==ItemStack.EMPTY) {
-            GTLog.logger.error("Blast Furnace Temperature cannot be less than or equal to 0", new IllegalArgumentException());
+            GTLog.logger.error("Catalyst can not be empty!", new IllegalArgumentException());
             recipeStatus = EnumValidationResult.INVALID;
         }
         this.applyProperty(CatalystProperties.getInstance(), catalyst);

@@ -48,7 +48,6 @@ public class GTQTRecipes {
         OrePrefix.gem.addProcessingHandler(PropertyKey.GEM, BouleRecipeHandler::processCrystallizer);
         OrePrefix.plate.addProcessingHandler(PropertyKey.TOOL, GTQTRecipes::processTool);
         milled.addProcessingHandler(PropertyKey.ORE, GTQTRecipes::processMilled);
-        power.addProcessingHandler(DUST, GTQTRecipes::processPower);
         plate_curved.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateCurved);
         plate_big.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processPlateBig);
         round_cover.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRoundCover);
@@ -77,24 +76,6 @@ public class GTQTRecipes {
                     'I', new UnificationEntry(material.hasProperty(GEM) ? OrePrefix.gem : OrePrefix.ingot, material),
                     'S', OrePrefix.stone);
         }
-    }
-
-    private static void processPower(OrePrefix orePrefix, Material material, DustProperty dustProperty) {
-        REFINER_MACERATOR_RECIPES.recipeBuilder()
-                .input(dust, material, 1)
-                .output(power, material, 1)
-                .fluidInputs(Lubricant.getFluid(20))
-                .duration(300)
-                .EUt(VA[IV])
-                .buildAndRegister();
-
-        REFINER_MACERATOR_RECIPES.recipeBuilder()
-                .input(dust, material, 1)
-                .output(power, material, 1)
-                .fluidInputs(AdvancedLubricant.getFluid(5))
-                .duration(200)
-                .EUt(VA[IV])
-                .buildAndRegister();
     }
 
     public static void processWireSingle(OrePrefix wirePrefix, Material material, WireProperties property) {

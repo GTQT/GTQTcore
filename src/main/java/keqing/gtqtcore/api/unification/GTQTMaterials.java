@@ -996,6 +996,7 @@ public class GTQTMaterials {
     public static Material Taranium;
     public static Material Tiberium;
     public static Material IndiumUranium;
+    public static Material Stanley;
     // First Degree Materials
     public static Material LanthanumOxide;
     public static Material PraseodymiumOxide;
@@ -1087,6 +1088,10 @@ public class GTQTMaterials {
     public static Material PlutoniumTrihydride;
     public static Material PlutoniumPhosphide;
     public static Material CarbonNanotube;
+    public static Material BacterialCultivationBase;
+    public static Material MutatedBacterialCultivationBase;
+    public static Material MutantActiveSolder;
+    public static Material InfiniteCatalyst;
     public static Material LithiumHydroxide;
     public static Material LithiumAmalgam;
     public static Material Lithium7Hydroxide;
@@ -1286,6 +1291,10 @@ public class GTQTMaterials {
     public static Material HDCS_2;
     public static Material HDCS_3;
     public static Material Pikyonium;
+    public static Material Okin;
+    public static Material Octahedrite;
+    public static Material Teflon;
+    public static Material RSG;
     public static Material HafniumCarbide;
     public static Material SeaborgiumCarbide;
     public static Material TantalumHafniumSeaborgiumCarbide;

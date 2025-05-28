@@ -151,6 +151,40 @@ public class FusionLoader {
                 .EUToStart(160000000L) // MK1
                 .buildAndRegister();
 
+        // AstralTitanium 星体钛 氪+力量
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Krypton.getFluid(L))
+                .fluidInputs(Stanley.getFluid(L))
+                .fluidOutputs(AstralTitanium.getPlasma(1000))
+                .EUt(VA[LuV])
+                .duration((int) (1.6 * SECOND))
+                .EUToStart(300000000) // MK1
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(AstralTitanium.getPlasma(1))
+                .fluidOutputs(AstralTitanium.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (1.8 * SECOND))
+                .buildAndRegister();
+
+        // Stanley 斯坦利 氖+奥金
+        FUSION_RECIPES.recipeBuilder()
+                .fluidInputs(Neon.getFluid(144))
+                .fluidInputs(Okin.getFluid(2))
+                .fluidOutputs(Stanley.getPlasma(1000))
+                .EUt(VA[LuV])
+                .duration((int) (1.6 * SECOND))
+                .EUToStart(300000000) // MK1
+                .buildAndRegister();
+
+        PLASMA_GENERATOR_FUELS.recipeBuilder()
+                .fluidInputs(Stanley.getPlasma(1))
+                .fluidOutputs(Stanley.getFluid(1))
+                .EUt((int) V[EV])
+                .duration((int) (5.6 * SECOND))
+                .buildAndRegister();
+
         /* -------------------------------- MK2 -------------------------------- */
 
         // Dysprosium 聚变合成

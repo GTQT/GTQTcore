@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
+import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
@@ -83,7 +84,8 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 RecipeMaps.BLAST_RECIPES,
                 GTQTcoreRecipeMaps.DRYER_RECIPES,
                 GTQTcoreRecipeMaps.VACUUM_DRYING_FURNACE_RECIPES,
-                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES
+                GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES,
+                GCYMRecipeMaps.ALLOY_BLAST_RECIPES
         });
         this.recipeMapWorkable = new MetaTileEntityHugeBlastFurnacerWorkable(this);
 
@@ -101,12 +103,8 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     }
 
     @Override
-    public void checkStructurePattern() {
-        if (MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        } else super.checkStructurePattern();
+    public boolean shouldDelayCheck() {
+        return true;
     }
 
     @Override
@@ -236,42 +234,6 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 .where('S', abilities(MultiblockAbility.MUFFLER_HATCH))
                 .where(' ', air())
                 .build();
-    }
-
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("MMMMMMMMMMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMSMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "AB           BA", "MMMMMMMMMMMMMMM")
-                .aisle("MMMMMMMMMMMMMMM", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "ABBBBBBBBBBBBBA", "MMMMMMMMMMMMMMM")
-                .aisle("EENILJMXKMMMMMM", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "AAAAAAAAAAAAAAA", "MMMMMMMMMMMMMMM")
-                .where('X', HUGE_BLAST_FURANCE, EnumFacing.SOUTH)
-                .where('A', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
-                .where('M', getCasingState())
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.SOUTH)
-                .where('N', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH)
-                .where('I', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.SOUTH)
-                .where('K', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
-                .where('L', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
-                .where('J', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.SOUTH)
-                .where('S', MetaTileEntities.MUFFLER_HATCH[1], EnumFacing.UP)
-                .where(' ', Blocks.AIR.getDefaultState());
-        GregTechAPI.HEATING_COILS.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
-                .forEach(entry -> shapeInfo.add(builder.where('B', entry.getKey()).build()));
-        return shapeInfo;
     }
 
     @Override

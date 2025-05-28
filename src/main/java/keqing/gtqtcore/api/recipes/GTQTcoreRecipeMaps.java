@@ -11,7 +11,6 @@ import gregtech.api.recipes.ui.impl.DistillationTowerUI;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
-import keqing.gtqtcore.api.recipes.machine.RecipeMapPseudoGroup;
 import keqing.gtqtcore.api.recipes.ui.ComponentAssemblyLineUI;
 
 import static gregtech.api.gui.widgets.ProgressWidget.MoveType.CIRCULAR;
@@ -21,10 +20,40 @@ import static keqing.gtqtcore.api.gui.GTQTGuiTextures.*;
 
 public class GTQTcoreRecipeMaps {
 
-    public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_A = new RecipeMapPseudoGroup<>("processing_mode_a", 1, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES, false);
-    public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_B = new RecipeMapPseudoGroup<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES, false);
-    public static final RecipeMapPseudoGroup<SimpleRecipeBuilder> PROCESSING_MODE_C = new RecipeMapPseudoGroup<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES, false);
+    /*
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_A = new RecipeMap<>("processing_mode_a", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.COMPRESSOR_RECIPES, RecipeMaps.LATHE_RECIPES, RecipeMaps.POLARIZER_RECIPES);
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_B = new RecipeMap<>("processing_mode_b", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.FERMENTING_RECIPES, RecipeMaps.EXTRACTOR_RECIPES, RecipeMaps.CANNER_RECIPES );
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_C = new RecipeMap<>("processing_mode_c", 2, 2, 1, 1, new SimpleRecipeBuilder(), RecipeMaps.LASER_ENGRAVER_RECIPES, RecipeMaps.AUTOCLAVE_RECIPES, RecipeMaps.FLUID_SOLIDFICATION_RECIPES);
+     */
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_A = new RecipeMapBuilder<>("processing_mode_a",
+            new SimpleRecipeBuilder())
+            .itemInputs(2)
+            .fluidInputs(2)
+            .itemOutputs(2)
+            .fluidOutputs(2)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.SCIENCE)
+            .build();
 
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_B = new RecipeMapBuilder<>("processing_mode_b",
+            new SimpleRecipeBuilder())
+            .itemInputs(2)
+            .fluidInputs(2)
+            .itemOutputs(2)
+            .fluidOutputs(2)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.SCIENCE)
+            .build();
+
+    public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_C = new RecipeMapBuilder<>("processing_mode_c",
+            new SimpleRecipeBuilder())
+            .itemInputs(2)
+            .fluidInputs(2)
+            .itemOutputs(2)
+            .fluidOutputs(2)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.SCIENCE)
+            .build();
     public static final RecipeMap<SimpleRecipeBuilder> SIMULATOR_RECIPES = new RecipeMapBuilder<>("simulator",
             new SimpleRecipeBuilder())
             .itemInputs(2)
@@ -33,14 +62,13 @@ public class GTQTcoreRecipeMaps {
             .sound(GTSoundEvents.SCIENCE)
             .build();
 
-    public static final RecipeMap<FuelRecipeBuilder> NAQUADAH_REACTOR_RECIPES = new RecipeMapBuilder<>(
-            "naquadah_reactor", new FuelRecipeBuilder())
+    public static final RecipeMap<FuelRecipeBuilder> LARGE_NAQUADAH_REACTOR_RECIPES = new RecipeMapBuilder<>("large_naquadah_reactor", new FuelRecipeBuilder())
             .fluidInputs(1)
             .fluidOutputs(1)
-            .fluidSlotOverlay(GuiTextures.FURNACE_OVERLAY_2, false)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW, HORIZONTAL)
-            .sound(GTSoundEvents.COMBUSTION)
+            .fluidSlotOverlay(GuiTextures.DARK_CANISTER_OVERLAY, false, true)
+            .progressBar(GuiTextures.PROGRESS_BAR_GAS_COLLECTOR, HORIZONTAL)
             .allowEmptyOutputs()
+            .sound(GTSoundEvents.COMBUSTION)
             .generator()
             .build();
 
@@ -63,16 +91,6 @@ public class GTQTcoreRecipeMaps {
             .itemSlotOverlay(GuiTextures.DUST_OVERLAY, false)
             .progressBar(GuiTextures.PROGRESS_BAR_MIXER, CIRCULAR)
             .sound(GTSoundEvents.MIXER)
-            .build();
-
-    public static final RecipeMap<SimpleRecipeBuilder> REFINER_MACERATOR_RECIPES = new RecipeMapBuilder<>("refiner_macerator",
-            new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .itemOutputs(2)
-            .fluidInputs(1)
-            .fluidInputs(1)
-            .progressBar(GuiTextures.PROGRESS_BAR_CRACKING, HORIZONTAL)
-            .sound(GTSoundEvents.CHEMICAL_REACTOR)
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> POLYMERIZATION_RECIPES = new RecipeMapBuilder<>("polymerization_tank",
@@ -230,7 +248,6 @@ public class GTQTcoreRecipeMaps {
             .itemInputs(6)
             .itemOutputs(1)
             .fluidInputs(2)
-            .itemSlotOverlay(GuiTextures.BOXED_BACKGROUND, false) // 示例中未明确指定具体纹理，这里假设使用默认背景
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
             .sound(GTSoundEvents.COOLING)
             .build();
@@ -583,7 +600,7 @@ public class GTQTcoreRecipeMaps {
             .sound(GTSoundEvents.CHEMICAL_REACTOR)
             .build();
 
-    public static final RecipeMap<QFTCasingTierRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMapBuilder<>("quantum_force_transformer_recipes", new QFTCasingTierRecipeBuilder())
+    public static final RecipeMap<QFTRecipeBuilder> QUANTUM_FORCE_TRANSFORMER_RECIPES = new RecipeMapBuilder<>("quantum_force_transformer_recipes", new QFTRecipeBuilder())
             .itemInputs(6)
             .itemOutputs(6)
             .fluidInputs(6)
@@ -959,7 +976,6 @@ public class GTQTcoreRecipeMaps {
             .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_MACERATE, HORIZONTAL)
             .sound(GTSoundEvents.MACERATOR)
-            .disableJeiOverclockButton()
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> ELEOIL = new RecipeMapBuilder<>("ele_oil", new SimpleRecipeBuilder())

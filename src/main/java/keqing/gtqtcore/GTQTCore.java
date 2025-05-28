@@ -1,9 +1,5 @@
 package keqing.gtqtcore;
 
-import gregicality.multiblocks.GregicalityMultiblocks;
-import gregtech.api.GregTechAPI;
-import gregtech.api.metatileentity.registry.MTEManager;
-import gregtech.api.unification.material.event.MaterialRegistryEvent;
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.GTQTAPI;
 import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
@@ -20,13 +16,9 @@ import keqing.gtqtcore.common.worldgen.WorldGenAbandonedBase;
 import keqing.gtqtcore.core.advancement.AdvancementManager;
 import keqing.gtqtcore.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.integration.GTQTIntegration;
-import keqing.gtqtcore.loaders.MaterialInfoLoader;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(
@@ -89,10 +81,7 @@ public class GTQTCore {
     public void init(FMLInitializationEvent event) {
         proxy.init();
     }
-    @SubscribeEvent
-    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        MaterialInfoLoader.loader();
-    }
+
     @Mod.EventHandler
     public void construction(FMLConstructionEvent event) {
         proxy.construction();

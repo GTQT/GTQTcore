@@ -17,7 +17,6 @@ import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class FluidizedBedChain {
     public static void init() {
-        catalyst();
         recipes();
     }
 
@@ -172,101 +171,5 @@ public class FluidizedBedChain {
                 .buildAndRegister();
     }
 
-    private static void catalyst() {
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(frameGt, Steel, 1)
-                .input(wrap, Polyethylene, 4)
-                .output(CATALYST_BED_BASE)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
 
-        // 沸石催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Copper, 4)
-                .input(dust, Zeolite, 16)
-                .output(CATALYST_GAS)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 氧化钴催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Cobalt, 4)
-                .input(dust, CobaltOxide, 16)
-                .output(CATALYST_CO)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 铁基催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Copper, 4)
-                .input(dust, Iron, 16)
-                .output(CATALYST_CU)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 铜锌催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Copper, 4)
-                .input(dust, ZincOxide, 16)
-                .output(CATALYST_ZN)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 哈伯催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, StainlessSteel, 4)
-                .input(ring, Steel, 4)
-                .input(dust, Chrome, 16)
-                .output(CATALYST_CR)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 铬基催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Aluminium, 4)
-                .input(ring, Steel, 4)
-                .input(dust, Chrome, 16)
-                .output(CATALYST_NB)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 齐格勒催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Copper, 4)
-                .input(dust, Zirconium, 16)
-                .output(CATALYST_ZR)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-
-        // 白云石催化剂
-        ASSEMBLER_RECIPES.recipeBuilder()
-                .input(CATALYST_BED_BASE)
-                .input(stick, Steel, 4)
-                .input(ring, Copper, 4)
-                .input(dust, Dolomite, 16)
-                .output(CATALYST_RH)
-                .EUt(180)
-                .duration(120)
-                .buildAndRegister();
-    }
 }

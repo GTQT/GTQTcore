@@ -703,6 +703,41 @@ public class MachineCasingMaterials {
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_ROD, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_LONG_ROD, GENERATE_FOIL, GENERATE_RING, GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_SMALL_GEAR, GENERATE_FINE_WIRE, GENERATE_ROTOR, GENERATE_ROUND)
                 .components(HSSE, 12, Seaborgium, 7, Lead, 5, Molybdenum, 5, Beryllium, 3, Gallium, 3, Mercury, 2)
                 .build();
+
+        //奥金 Okin
+        GTQTMaterials.Okin = new Material.Builder(getMaterialsId(), gtqtcoreId("okin"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x8B8B00)
+                .components(Thorium,4)//能量水晶4 混沌 秩序
+                .build();
+
+        //八角铁
+        GTQTMaterials.Octahedrite = new Material.Builder(getMaterialsId(), gtqtcoreId("octahedrite"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x8B814C)
+                .components(Okin,6,TitanSteel,6,BlackSteel,2)//需要补神秘5 能量水晶1
+                .blast(8100,  BlastProperty.GasTier.HIGH)
+                .build();
+
+        //特氟龙 Teflon
+        GTQTMaterials.Teflon = new Material.Builder(getMaterialsId(), gtqtcoreId("teflon"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x8A2BE2)
+                .components(Polytetrafluoroethylene,15,Polyethylene,3,Carbon,1)
+                .blast(9000,  BlastProperty.GasTier.HIGH)
+                .build();
+
+        //原NH 大力合金 改为 刚柔金 RSG
+        GTQTMaterials.RSG = new Material.Builder(getMaterialsId(), gtqtcoreId("rsg"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x8A2BE2)
+                .components(TanmolyiumBetaC,14,Tungsten,10,NiobiumTitanium,9,RhodiumPlatedPalladium,8,Erbium,3)
+                .blast(9000,  BlastProperty.GasTier.HIGH)
+                .build();
     }
 
 }

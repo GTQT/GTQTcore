@@ -11,6 +11,7 @@ import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
@@ -21,8 +22,12 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
+import keqing.gtqtcore.api.capability.ICatalystHatch;
+import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
+import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.client.utils.BloomEffectUtil;
@@ -156,8 +161,16 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 .where('E', TiredTraceabilityPredicate.QFT_GLASS.get())
                 .where('H', states(getCasingState())
                         .setMinGlobalLimited(55)
+                        .or(abilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY).setExactLimit(1))
                         .or(autoAbilities()))
                 .build();
+    }
+
+    public ICatalystHatch getCatalystHatch() {
+        List<ICatalystHatch> abilities = getAbilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY);
+        if (abilities.isEmpty())
+            return null;
+        return abilities.get(0);
     }
 
     private IBlockState getCasingState() {
@@ -375,6 +388,38 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
 
         public MetaTileEntityQuantumForceTransformerHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
+        }
+
+        @Override
+        public boolean checkRecipe(@Nonnull Recipe recipe) {
+            if (!super.checkRecipe(recipe)) {
+                return false;
+            }
+
+            QFTCasingTierProperty qftCasingTierProperty = QFTCasingTierProperty.getInstance();
+            CatalystProperties catalystProps = CatalystProperties.getInstance();
+
+            // Check chemical plant properties
+            if (recipe.hasProperty(qftCasingTierProperty)) {
+                Integer tierValue = recipe.getProperty(qftCasingTierProperty, 0);
+                if (tierValue == null || tierValue > tier) {
+                    return false;
+                }
+            }
+
+            // Check catalyst properties
+            if (recipe.hasProperty(catalystProps)) {
+                ItemStack catalystStack = recipe.getProperty(catalystProps, ItemStack.EMPTY);
+                if (catalystStack != null && !catalystStack.isEmpty()) {
+                    if (getCatalystHatch().hasCatalyst(catalystStack)) {
+                        getCatalystHatch().consumeCatalyst(catalystStack, 1);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void setMaxProgress(int maxProgress) {

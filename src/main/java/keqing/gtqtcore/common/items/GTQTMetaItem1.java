@@ -1,17 +1,12 @@
 package keqing.gtqtcore.common.items;
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.items.metaitem.ElectricStats;
-import gregtech.api.items.metaitem.FilteredFluidStats;
 import gregtech.api.items.metaitem.StandardMetaItem;
-import gregtech.api.items.metaitem.stats.ItemFluidContainer;
 import gregtech.api.unification.material.MarkerMaterials;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
-import gregtech.common.items.behaviors.ColorSprayBehaviour;
+import gregtech.api.unification.stack.RecyclingData;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtech.common.items.behaviors.TooltipBehavior;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -21,12 +16,9 @@ import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.EnumDyeColor;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Adamantium;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Orichalcum;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.CommonProxy.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
@@ -44,28 +36,11 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
     public void registerSubItems() {
 
-
         //基础材料
         IMPREGNATED_GRAPHITE_RODSA = this.addItem(1, "item.impregnated_graphite_rodsa").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_GRAPHITE_RODS = this.addItem(2, "item.impregnated_graphite_rods").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
-        IMPREGNATED_SUBSTRATE = this.addItem(3, "item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(4, "item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        IMPREGNATED_EPOXY = this.addItem(5, "item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        IMPREGNATED_FIBER = this.addItem(6, "item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        IMPREGNATED_MULTILAYER_FIBER = this.addItem(7, "item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        IMPREGNATED_BIO_BOARD = this.addItem(8, "item.impregnated_bio_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         //绝缘云母
-        INSULATINGMICA = this.addItem(9, "item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
-        //13 14 15
-        LAMINATION_WD = this.addItem(13, "item.lamination_wd").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_FG = this.addItem(14, "item.lamination_fg").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_CA = this.addItem(15, "item.lamination_ca").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_GE = this.addItem(16, "item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_IR = this.addItem(17, "item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
-        LAMINATION_YR = this.addItem(18, "item.insulating_yr").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        INSULATINGMICA = this.addItem(3, "item.insulatingmica").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //其他燃料
         JIAO_XIAN_REN_ZHANG = this.addItem(20, "fuel.jiaoxianrenzhang").setBurnValue(9600).setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -261,63 +236,34 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         REFLECT_GLASS = this.addItem(217, "reflect_glass").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
         LASER_GROUP = this.addItem(218, "laser_group").setMaxStackSize(1).setCreativeTabs(GTQTCore_TAB);
 
-        CATALYST_BASE = this.addItem(220, "catalyst.base").addOreDict("catalystEmpty").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(Steel, M * 8), // 8 * Steel plate
-                new MaterialStack(Copper, (M / 8) * 4), // 4 * Copper fine wire
-                new MaterialStack(Tin, (M / 9) * 6) // 6 * Tin screw
-        ));
+        CATALYST_BASE = this.addItem(220, "catalyst.base").addOreDict("catalystEmpty");
 
         CATALYST_GREEN_METAL = this.addItem(221, "catalyst.green_metal").addOreDict("catalystGreenMetal").addOreDict("catalystAluminiumSilver").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_RED_METAL = this.addItem(222, "catalyst.red_metal").addOreDict("catalystRedMetal").addOreDict("catalystIronCopper").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_YELLOW_METAL = this.addItem(223, "catalyst.yellow_metal").addOreDict("catalystYellowMetal").addOreDict("catalystTungstenNickel").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_BLUE_METAL = this.addItem(224, "catalyst.blue_metal").addOreDict("catalystBlueMetal").addOreDict("catalystCobaltTitanium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_ORANGE_METAL = this.addItem(225, "catalyst.orange_metal").addOreDict("catalystOrangeMetal").addOreDict("catalystVanadiumPalladium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PURPLE_METAL = this.addItem(226, "catalyst.purple_metal").addOreDict("catalystPurpleMetal").addOreDict("catalystIridiumRuthenium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_BROWN_METAL = this.addItem(227, "catalyst.brown_metal").addOreDict("catalystBrownMetal").addOreDict("catalystNickelAluminium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PINK_METAL = this.addItem(228, "catalyst.pink_metal").addOreDict("catalystPinkMetal").addOreDict("catalystPlatinumRhodium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_FORMALDEHYDE = this.addItem(229, "catalyst.formaldehyde").addOreDict("catalystFormaldehyde").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_SOLID_ACID = this.addItem(230, "catalyst.solid_acid").addOreDict("catalystSolidAcid").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_INFINITY_MUTATION = this.addItem(231, "catalyst.infinity_mutation").addOreDict("catalystInfinityMutation").addComponents(new CatalystBehavior()).addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true)).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PLATINUM_GROUP = this.addItem(232, "catalyst.platinum_group").addOreDict("catalystPlatinumGroup").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PLASTIC_POLYMER = this.addItem(233, "catalyst.plastic_polymer").addOreDict("catalystPlasticPolymer").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_RUBBER_POLYMER = this.addItem(234, "catalyst.rubber_polymer").addOreDict("catalystRubberPolymer").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_ADHESION_PROMOTER = this.addItem(235, "catalyst.adhesion_promoter").addOreDict("catalystAdhesionPromoter").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_INDIUM = this.addItem(236, "catalyst.indium").addOreDict("catalystIndium").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_RADIOACTIVITY = this.addItem(237, "catalyst.radioactivity").addOreDict("catalystRadioactivity").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_RARE_EARTH = this.addItem(238, "catalyst.rare_earth").addOreDict("catalystRareEarth").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_NAQUADAH = this.addItem(239, "catalyst.naquadah").addOreDict("catalystNaquadah").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_RAW_INTELLIGENCE = this.addItem(240, "catalyst.raw_intelligence").addOreDict("catalystRawIntelligence").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_ULTIMATE_PLASTIC = this.addItem(241, "catalyst.ultimate_plastic").addOreDict("catalystUltimatePlastic").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_BIOLOGICAL_INTELLIGENCE = this.addItem(242, "catalyst.biological_intelligence").addOreDict("catalystBiologicalIntelligence").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_TEMPORAL_HARMONY = this.addItem(243, "catalyst.temporal_harmony").addOreDict("catalystTemporalHarmony").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_FLAWLESS_WATER = this.addItem(244, "catalyst.flawless_water").addOreDict("catalystFlawlessWater").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PHOTOELECTRONIC = this.addItem(245, "catalyst.photoelectronic").addOreDict("catalystPhotoelectronic").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_PARTICLE_ACCELERATION = this.addItem(246, "catalyst.particle_acceleration").addOreDict("catalystParticleAcceleration").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
-
         CATALYST_SYNCHROTRON_CAPABLE = this.addItem(247, "catalyst.synchrotron_capable").addOreDict("catalystSynchrotronCapable").addComponents(new CatalystBehavior()).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //催化剂框架 6种绰绰有余
@@ -439,14 +385,14 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         GRINDBALL_SOAPSTONE = this.addItem(391, "mill.grindball_soapstone").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(GTQTCore_TAB);
         GRINDBALL_ALUMINIUM = this.addItem(392, "mill.grindball_aluminium").setMaxStackSize(1).addComponents(new MillBallBehavior()).setCreativeTabs(GTQTCore_TAB);
         // Simple Machine Crafting Components: ID 480-499
-        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(393, "component.grinder.boron_nitride").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(CubicBoronNitride, M * 4), new MaterialStack(Vibranium, M * 8), new MaterialStack(CubicHeterodiamond, M))).setCreativeTabs(GTQTCore_TAB);
+        COMPONENT_GRINDER_BORON_NITRIDE = this.addItem(393, "component.grinder.boron_nitride").setCreativeTabs(GTQTCore_TAB);
         // Voltage Coils: ID 350-355
-        VOLTAGE_COIL_UHV = this.addItem(394, "voltage_coil.uhv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
-        VOLTAGE_COIL_UEV = this.addItem(395, "voltage_coil.uev").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
-        VOLTAGE_COIL_UIV = this.addItem(396, "voltage_coil.uiv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
-        VOLTAGE_COIL_UXV = this.addItem(397, "voltage_coil.uxv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
-        VOLTAGE_COIL_OpV = this.addItem(398, "voltage_coil.opv").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
-        VOLTAGE_COIL_MAX = this.addItem(399, "voltage_coil.max").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_UHV = this.addItem(394, "voltage_coil.uhv").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_UEV = this.addItem(395, "voltage_coil.uev").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_UIV = this.addItem(396, "voltage_coil.uiv").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_UXV = this.addItem(397, "voltage_coil.uxv").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_OpV = this.addItem(398, "voltage_coil.opv").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
+        VOLTAGE_COIL_MAX = this.addItem(399, "voltage_coil.max").setRecyclingData(new RecyclingData(new MaterialStack(MercuryCadmiumTelluride, M * 2), new MaterialStack(ChromiumGermaniumTellurideMagnetic, M / 2))).setCreativeTabs(GTQTCore_TAB);
         //封装电路板
         WRAP_CIRCUIT_ULV = this.addItem(400, "wrap.circuit.ulv").setCreativeTabs(GTQTCore_TAB);
         WRAP_CIRCUIT_LV = this.addItem(401, "wrap.circuit.lv").setCreativeTabs(GTQTCore_TAB);
@@ -506,45 +452,45 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         /* ----------------------------------------------------------------------- Extruders ---------------------------------------------------------------------- */
 
-        EXOTIC_SHAPE_EXTRUDERS[0] = EXOTIC_SHAPE_EXTRUDER_PLATE = this.addItem(450, "shape.exotic_extruder.plate").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[0] = EXOTIC_SHAPE_EXTRUDER_PLATE = this.addItem(450, "shape.exotic_extruder.plate").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[1] = EXOTIC_SHAPE_EXTRUDER_ROD = this.addItem(451, "shape.exotic_extruder.rod").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[1] = EXOTIC_SHAPE_EXTRUDER_ROD = this.addItem(451, "shape.exotic_extruder.rod").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[2] = EXOTIC_SHAPE_EXTRUDER_BOLT = this.addItem(452, "shape.exotic_extruder.bolt").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[2] = EXOTIC_SHAPE_EXTRUDER_BOLT = this.addItem(452, "shape.exotic_extruder.bolt").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[3] = EXOTIC_SHAPE_EXTRUDER_RING = this.addItem(453, "shape.exotic_extruder.ring").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[3] = EXOTIC_SHAPE_EXTRUDER_RING = this.addItem(453, "shape.exotic_extruder.ring").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[4] = EXOTIC_SHAPE_EXTRUDER_CELL = this.addItem(454, "shape.exotic_extruder.cell").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[4] = EXOTIC_SHAPE_EXTRUDER_CELL = this.addItem(454, "shape.exotic_extruder.cell").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[5] = EXOTIC_SHAPE_EXTRUDER_INGOT = this.addItem(455, "shape.exotic_extruder.ingot").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[5] = EXOTIC_SHAPE_EXTRUDER_INGOT = this.addItem(455, "shape.exotic_extruder.ingot").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[6] = EXOTIC_SHAPE_EXTRUDER_WIRE = this.addItem(456, "shape.exotic_extruder.wire").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[6] = EXOTIC_SHAPE_EXTRUDER_WIRE = this.addItem(456, "shape.exotic_extruder.wire").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[7] = EXOTIC_SHAPE_EXTRUDER_PIPE_TINY = this.addItem(457, "shape.exotic_extruder.pipe.tiny").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[7] = EXOTIC_SHAPE_EXTRUDER_PIPE_TINY = this.addItem(457, "shape.exotic_extruder.pipe.tiny").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[8] = EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL = this.addItem(458, "shape.exotic_extruder.pipe.small").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[8] = EXOTIC_SHAPE_EXTRUDER_PIPE_SMALL = this.addItem(458, "shape.exotic_extruder.pipe.small").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[9] = EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL = this.addItem(459, "shape.exotic_extruder.pipe.normal").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[9] = EXOTIC_SHAPE_EXTRUDER_PIPE_NORMAL = this.addItem(459, "shape.exotic_extruder.pipe.normal").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[10] = EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE = this.addItem(460, "shape.exotic_extruder.pipe.large").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[10] = EXOTIC_SHAPE_EXTRUDER_PIPE_LARGE = this.addItem(460, "shape.exotic_extruder.pipe.large").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[11] = EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE = this.addItem(461, "shape.exotic_extruder.pipe.huge").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[11] = EXOTIC_SHAPE_EXTRUDER_PIPE_HUGE = this.addItem(461, "shape.exotic_extruder.pipe.huge").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[12] = EXOTIC_SHAPE_EXTRUDER_BLOCK = this.addItem(462, "shape.exotic_extruder.block").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[12] = EXOTIC_SHAPE_EXTRUDER_BLOCK = this.addItem(462, "shape.exotic_extruder.block").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
         //  Free ID 463-470: also index 13-20 (inclusive) are unused (but do not add item in this ID range)
 
-        EXOTIC_SHAPE_EXTRUDERS[21] = EXOTIC_SHAPE_EXTRUDER_GEAR = addItem(471, "shape.exotic_extruder.gear").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[21] = EXOTIC_SHAPE_EXTRUDER_GEAR = addItem(471, "shape.exotic_extruder.gear").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[22] = EXOTIC_SHAPE_EXTRUDER_BOTTLE = addItem(472, "shape.exotic_extruder.bottle").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[22] = EXOTIC_SHAPE_EXTRUDER_BOTTLE = addItem(472, "shape.exotic_extruder.bottle").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[23] = EXOTIC_SHAPE_EXTRUDER_FOIL = addItem(473, "shape.exotic_extruder.foil").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[23] = EXOTIC_SHAPE_EXTRUDER_FOIL = addItem(473, "shape.exotic_extruder.foil").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[24] = EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL = addItem(474, "shape.exotic_extruder.gear_small").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[24] = EXOTIC_SHAPE_EXTRUDER_GEAR_SMALL = addItem(474, "shape.exotic_extruder.gear_small").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[25] = EXOTIC_SHAPE_EXTRUDER_ROD_LONG = addItem(475, "shape.exotic_extruder.rod_long").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[25] = EXOTIC_SHAPE_EXTRUDER_ROD_LONG = addItem(475, "shape.exotic_extruder.rod_long").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
-        EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
+        EXOTIC_SHAPE_EXTRUDERS[26] = EXOTIC_SHAPE_EXTRUDER_ROTOR = addItem(476, "shape.exotic_extruder.rotor").setRecyclingData(new RecyclingData(new MaterialStack(GTQTMaterials.Infinity, M * 4)));
 
         //  Magneto Resonatic Board
         MAGNETO_RESONATIC_BOARD = this.addItem(498, "board.magneto_resonatic").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -622,6 +568,24 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         ASUPRACHRONAL_UXV = this.addItem(562, "circuit_suprachronal_uxv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.UXV).setCreativeTabs(CommonProxy.GTQTCore_GD);
         ASUPRACHRONAL_OpV = this.addItem(563, "circuit_suprachronal_opv").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.OpV).setCreativeTabs(CommonProxy.GTQTCore_GD);
         ASUPRACHRONAL_MAX = this.addItem(564, "circuit_suprachronal_max").setUnificationData(OrePrefix.circuit, MarkerMaterials.Tier.MAX).setCreativeTabs(CommonProxy.GTQTCore_GD);
+
+
+        //570 高级基板
+        IMPREGNATED_SUBSTRATE = this.addItem(570, "item.impregnated_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_PLASTIC_SUBSTRATE = this.addItem(571, "item.impregnated_plastic_substrate").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_EPOXY = this.addItem(572, "item.impregnated_epoxy").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_FIBER = this.addItem(573, "item.impregnated_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_MULTILAYER_FIBER = this.addItem(574, "item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_BIO_BOARD = this.addItem(575, "item.impregnated_bio_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_GENE_BOARD = this.addItem(576, "item.impregnated_gene_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+
+        LAMINATION_WD = this.addItem(580, "item.lamination_wd").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_FG = this.addItem(581, "item.lamination_fg").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_CA = this.addItem(582, "item.lamination_ca").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_GE = this.addItem(583, "item.lamination_ge").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_IR = this.addItem(584, "item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_YR = this.addItem(585, "item.insulating_yr").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_IN = this.addItem(586, "item.insulating_in").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //  ID 206-211: High Tier Boule and Wafers
         EUROPIUM_BOULE = this.addItem(610, "boule.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -799,18 +763,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         /* -------------------------------------------------------------------- Nuclear Items --------------------------------------------------------------------- */
 
-        HIGH_DENSITY_THORIUM = this.addItem(820, "high_density_thorium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(UraniumThoriumCarbides, M * 64), // 64 * Th12UC3
-                new MaterialStack(TungstenSteel, (M / 4) * 16) // 16 * Tungsten Steel foil
-        ));
-
-        HIGH_DENSITY_URANIUM = this.addItem(821, "high_density_uranium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(GraphiteUraniumMixture, M * 36), // 36 * C3U dust
-                new MaterialStack(TungstenCarbide, (M / 4) * 16) // 16 * Tungsten Carbide foil
-        ));
-
-        HIGH_DENSITY_PLUTONIUM = this.addItem(822, "high_density_plutonium").setMaterialInfo(new ItemMaterialInfo(new MaterialStack(PlutoniumUraniumOxides, M * 64), // 64 * Pu10O12U2C8
-                new MaterialStack(HSSS, (M / 4) * 16) // 16 * HSSS foil
-        ));
-
+        HIGH_DENSITY_THORIUM = this.addItem(820, "high_density_thorium");
+        HIGH_DENSITY_URANIUM = this.addItem(821, "high_density_uranium");
+        HIGH_DENSITY_PLUTONIUM = this.addItem(822, "high_density_plutonium");
         // Power Components: ID 356-379
         NANO_POWER_IC_WAFER = this.addItem(840, "wafer.nano_power_integrated_circuit").setCreativeTabs(GTQTCore_TAB);
         PICO_POWER_IC_WAFER = this.addItem(841, "wafer.pico_power_integrated_circuit").setCreativeTabs(GTQTCore_TAB);

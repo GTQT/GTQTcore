@@ -25,7 +25,6 @@ public class MaterialFlagAddition {
             if (!materials.hasProperty(PropertyKey.INGOT))
                 materials.setProperty(PropertyKey.INGOT, new IngotProperty());
             if (!materials.hasProperty(PropertyKey.ORE)) materials.setProperty(PropertyKey.ORE, new OreProperty());
-            materials.addFlags(GENERATE_SPRING, GENERATE_SPRING_SMALL, GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR);
         }
 
         OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);

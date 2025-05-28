@@ -144,33 +144,6 @@ public class FirstDegreeMaterials {
                 .blast(2273)
                 .build();
 
-        //聚乙烯醇肉桂酸酯
-        GTQTMaterials.Vinylcinnamate = new Material.Builder(getMaterialsId(), gtqtcoreId("vinylcinnamate"))
-                .fluid()
-                .color(0xFF8C00)
-                .iconSet(SHINY)
-                .build()
-                .setFormula("C11H12O3");
-
-        //xMT分子光刻
-        GTQTMaterials.Xmt = new Material.Builder(getMaterialsId(), gtqtcoreId("xmt"))
-                .fluid()
-                .color(0x00008B)
-                .iconSet(SHINY)
-                .build();
-
-        //氧化锆杂化物-（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）（ZrO2-BTMST）
-        GTQTMaterials.Zrbtmst = new Material.Builder(getMaterialsId(), gtqtcoreId("zrbtmst"))
-                .fluid().dust()
-                .color(0xB2DFEE).iconSet(METALLIC)
-                .flags(GENERATE_FOIL)
-                .build()
-                .setFormula("ZrO2-BTMST");
-
-        //氧化锆杂化物
-        //（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）
-        //（ZrO2-BTMST）
-
         //纳米钛酸钡
         GTQTMaterials.NanometerBariumTitanate = new Material.Builder(getMaterialsId(), gtqtcoreId("nanometer_barium_titanate"))
                 .ingot()

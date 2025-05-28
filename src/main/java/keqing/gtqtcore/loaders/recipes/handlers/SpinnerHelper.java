@@ -44,7 +44,7 @@ public class SpinnerHelper {
         registerWrap(Zylon,6);
         registerWrap(Polybenzimidazole,7);
         registerWrap(Polyetheretherketone,8);
-        //registerWrap(Kevlar,9);
+        registerWrap(Kevlar,9);
         registerWrap(KaptonK,10);
         registerWrap(KaptonE,11);
         registerWrap(FullerenePolymerMatrix,12);

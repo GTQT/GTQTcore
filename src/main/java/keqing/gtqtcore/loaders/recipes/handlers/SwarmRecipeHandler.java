@@ -20,7 +20,6 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CarbonNanotube;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.NdYAG;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.power;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 
 public class SwarmRecipeHandler {
@@ -251,7 +250,7 @@ public class SwarmRecipeHandler {
         int amount=0;
 
         for (MaterialStack component : material.getMaterialComponents()) {
-            if(component.material.hasProperty(PropertyKey.DUST))builder3.input(power, component.material, (int) component.amount);
+            if(component.material.hasProperty(PropertyKey.DUST))builder3.input(dust, component.material, (int) component.amount);
             else builder3.fluidInputs(component.material.getFluid((int)component.amount*1000));
 
             amount+=(int)component.amount;

@@ -4,7 +4,9 @@ import gregtech.api.GTValues;
 import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.recipes.chance.output.ChancedOutputList;
 import gregtech.api.recipes.chance.output.impl.ChancedItemOutput;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
@@ -15,12 +17,14 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.CWT;
-import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.LATHE_RECIPES;
+import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.OverheatedGas;
@@ -260,6 +264,33 @@ public class CopyRecipesHandlers {
                     .EUt(EUt)
                     .buildAndRegister();
 
+        }
+
+        processRecipes(RecipeMaps.COMPRESSOR_RECIPES.getRecipeList(), 21,PROCESSING_MODE_A);
+        processRecipes(RecipeMaps.LATHE_RECIPES.getRecipeList(), 22,PROCESSING_MODE_A);
+        processRecipes(RecipeMaps.POLARIZER_RECIPES.getRecipeList(), 23,PROCESSING_MODE_A);
+
+        processRecipes(RecipeMaps.FERMENTING_RECIPES.getRecipeList(), 21,PROCESSING_MODE_B);
+        processRecipes(RecipeMaps.EXTRACTOR_RECIPES.getRecipeList(), 22,PROCESSING_MODE_B);
+        processRecipes(RecipeMaps.CANNER_RECIPES.getRecipeList(), 23,PROCESSING_MODE_B);
+
+        processRecipes(RecipeMaps.LASER_ENGRAVER_RECIPES.getRecipeList(), 21,PROCESSING_MODE_C);
+        processRecipes(RecipeMaps.AUTOCLAVE_RECIPES.getRecipeList(), 22,PROCESSING_MODE_C);
+        processRecipes(RecipeMaps.FLUID_SOLIDFICATION_RECIPES.getRecipeList(), 23,PROCESSING_MODE_C);
+
+    }
+
+    private static void processRecipes(Collection<Recipe> recipeList, int circuitMeta,RecipeMap<SimpleRecipeBuilder> MAP) {
+        for (Recipe recipe : recipeList) {
+            MAP.recipeBuilder()
+                    .duration(recipe.getDuration())
+                    .EUt(recipe.getEUt())
+                    .fluidInputs(recipe.getFluidInputs())
+                    .inputIngredients(recipe.getInputs())
+                    .outputs(recipe.getOutputs())
+                    .fluidOutputs(recipe.getFluidOutputs())
+                    .circuitMeta(circuitMeta)
+                    .buildAndRegister();
         }
     }
 }

@@ -1675,6 +1675,7 @@ gtqtcore.material.adamantium=Adamantium
 gtqtcore.material.taranium=Taranium
 gtqtcore.material.tiberium=Tiberium
 gtqtcore.material.indium_uranium=Indium Uranium
+gtqtcore.material.stanley=Stanley
 gtqtcore.material.plutonium_244=Plutonium-244
 gtqtcore.material.metastable_oganesson=Metastable Oganesson
 gtqtcore.material.metastable_hassium=Metastable Hassium
@@ -3822,6 +3823,10 @@ gtqtcore.material.seaborgium_carbide=Seaborgium Carbide
 gtqtcore.material.tantalum_carbide=Tantalum Carbide
 gtqtcore.material.hafnium_carbide=Hafnium Carbide
 gtqtcore.material.pikyonium=Pikyonium Alloy
+gtqtcore.material.okin=Okin
+gtqtcore.material.octahedrite=Octahedrite
+gtqtcore.material.teflon=Teflon
+gtqtcore.material.rsg=RSG Alloy
 gtqtcore.material.high_durability_compound_steel_3=High Strength Seismic Resistant Composite Steel
 gtqtcore.material.high_durability_compound_steel_2=High Strength Composite Steel with Adamantine Doping (HDCS:Ad)
 gtqtcore.material.high_durability_compound_steel_1=High Strength Silicon Rock Composite Steel
@@ -4679,6 +4684,10 @@ gtqtcore.machine.ele.tooltip.5=Consume electrode cleaning fluid to repair electr
 gtqtcore.machine.alloy_klin.name=Alloy Kiln
 gtqtcore.machine.vacuum_freezer.name=Vacuum Freezer
 gtqtcore.machine.large_chemical_reactor.name=Industrial Chemical Reactor
+gtqtcore.machine.large_bender.name=Industrial bending machine
+gtqtcore.machine.large_cutter.name=Industrial cutting machines
+gtqtcore.machine.large_extruder.name=Industrial Pressing Machine
+gtqtcore.machine.large_wiremill.name=Industrial rolling mills
 gtqtcore.machine.three_dim_print.name=3D Component Printer
 gtqtcore.machine.pyrolyse_oven.name=Pyrolysis Oven
 gtqtcore.machine.cracker.name=Petroleum Cracking Machine
@@ -5325,6 +5334,8 @@ metaitem.item.impregnated_graphite_rodsa.name=Pre-treated Graphite Electrodes
 metaitem.item.impregnated_fiber.name=Engineering Plastic-Sensitive Piezoelectric Substrate
 metaitem.item.impregnated_multilayer_fiber.name=Laminated Composite Fiber-Performance Alloy Substrate
 metaitem.item.impregnated_bio_fiber.name=Super-active bio-based – high-performance conductive substrates
+metaitem.item.impregnated_gene_fiber.name=Biological genetic mutation—active electronic substrates
+
 gtqtcore.machine.froth_flotation_tank.name=Industrial Flotation Reactor Tank
 gtqtcore.machine.fix_bed.name=Fixed Bed
 gtqtcore.machine.cryogenic_freezer.name=Cryogenic Freezer
@@ -5658,16 +5669,10 @@ metaitem.item.lamination_wd.name=Anticorrosive wood substrates
 metaitem.item.insulating_ir.name=Ruthenium-based Thick Film Resistor Paste Coating
 metaitem.item.lamination_ge.name=Germanium Laminate Fiber Substrate
 metaitem.item.insulating_yr.name=Yttrium-based acrylic fiber composite lamination
+metaitem.item.insulating_in.name=Indium-based acrylic fiber electronic lamination
+
 metaitem.item.insulatingmica.name=Insulating Mica Composite Sheet
 gtqtcore.machine.gas_collector.name=Large Gas Collector
-
-gtqtcore.machine.combustion_generator.ev.name=Pulse Combustion Generator
-gtqtcore.machine.steam_turbine.ev.name=Pulse Steam Turbine
-gtqtcore.machine.gas_turbine.ev.name=Pulse Gas Turbine
-
-gtqtcore.machine.combustion_generator.iv.name=Detonation Combustion Generator
-gtqtcore.machine.steam_turbine.iv.name=Detonation Steam Turbine
-gtqtcore.machine.gas_turbine.iv.name=Detonation Gas Turbine
 
 gtqtcore.machine.fuel_cell_turbine.lv.name=Basic Fuel Cell Turbine
 gtqtcore.machine.fuel_cell_turbine.mv.name=Advanced Fuel Cell Turbine

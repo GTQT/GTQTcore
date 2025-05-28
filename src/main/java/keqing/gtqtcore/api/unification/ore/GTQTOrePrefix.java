@@ -23,11 +23,9 @@ public class GTQTOrePrefix {
     public static final OrePrefix boule = new OrePrefix("boule", M * 4, null, GTQTMaterialIconType.boule, ENABLE_UNIFICATION, hasGemProperty.and(mat -> mat.hasFlag(GENERATE_BOULE) || (mat.hasFlag(MaterialFlags.CRYSTALLIZABLE) && !mat.hasFlag(GTQTMaterialFlags.DISABLE_CRYSTALLIZATION))));
     public static final OrePrefix milled = new OrePrefix("milled", -1, null, GTQTMaterialIconType.milled, ENABLE_UNIFICATION, OrePrefix.Conditions.hasOreProperty, mat -> Collections.singletonList(I18n.format("metaitem.milled.tooltip.flotation")));
 
-    public static final OrePrefix wrap = new OrePrefix("wrap", -1, null, GTQTMaterialIconType.wrap, ENABLE_UNIFICATION, mat -> mat.hasFlag(GENERATE_WRAP));
+    public static final OrePrefix wrap = new OrePrefix("wrap", M, null, GTQTMaterialIconType.wrap, ENABLE_UNIFICATION, mat -> mat.hasFlag(GENERATE_WRAP));
     public static final OrePrefix swarm = new OrePrefix("swarm", M, null, GTQTMaterialIconType.swarm, ENABLE_UNIFICATION, (mat) -> (!mat.getMaterialComponents().isEmpty() || mat.isElement()) && (mat.hasProperty(PropertyKey.INGOT) || (mat.hasProperty(PropertyKey.FLUID))), mat -> Collections.singletonList(I18n.format("metaitem.swarm.tooltip")));
     public static final OrePrefix singularity = new OrePrefix("singularity", M, null, GTQTMaterialIconType.singularity, ENABLE_UNIFICATION, Material::isElement, mat -> Collections.singletonList(I18n.format("metaitem.singularity.tooltip")));
-    public static final OrePrefix power = new OrePrefix("power", M, null, GTQTMaterialIconType.power, ENABLE_UNIFICATION, (mat) -> (mat.hasProperty(PropertyKey.DUST)), mat -> Collections.singletonList(I18n.format("metaitem.power.tooltip")));
-
     public static final OrePrefix soldering_iron_head = new OrePrefix("soldering_iron_head", M, null, GTQTMaterialIconType.soldering_iron_head, ENABLE_UNIFICATION, mat -> mat.hasFlag(GENERATE_CURVED_PLATE));
     //这里注册新的加工部件（大焊接板，弯曲板，圆盖，传动轴，气缸，阀门，外壳）
     public static final OrePrefix plate_curved = new OrePrefix("plate_curved", M, null, GTQTMaterialIconType.plate_curved, ENABLE_UNIFICATION, mat -> mat.hasFlag(GENERATE_CURVED_PLATE));

@@ -139,8 +139,8 @@ public class HexanitrohexaaxaisowurtzitaneChain {
                 .output(dust, PotassiumNitrite, 4)
                 .output(dust, Lead)
                 .EUt(VA[HV])
-                .duration(3600)
-                .blastFurnaceTemp(1300)
+                .duration(100)
+                .blastFurnaceTemp(3600)
                 .buildAndRegister();
 
         //  Nitrous Acid

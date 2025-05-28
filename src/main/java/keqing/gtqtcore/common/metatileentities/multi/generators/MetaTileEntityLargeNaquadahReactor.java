@@ -52,7 +52,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     private boolean boostAllowed;
 
     public MetaTileEntityLargeNaquadahReactor(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.NAQUADAH_REACTOR_RECIPES, UHV);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.LARGE_NAQUADAH_REACTOR_RECIPES, UHV);
         this.recipeMapWorkable = new LargeNaquadahReactorWorkableHandler(this);
         this.recipeMapWorkable.setMaximumOverclockVoltage(V[UHV]);
     }

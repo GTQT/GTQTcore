@@ -27,7 +27,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
-import gregtech.common.blocks.BlockWireCoil;
+import gregtech.common.blocks.*;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.IPressureContainer;
@@ -130,44 +130,26 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(" XXX ", " PPP ", " CCC ", " CCC ", " CCC ", " XXX ")
-                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXXXX")
-                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXMXX")
-                .aisle("XXXXX", "P   P", "C   C", "C   C", "C   C", "XXXXX")
-                .aisle(" XSX ", " PPP ", " CCC ", " CCC ", " CCC ", " XXX ")
+                .aisle(" YYYYY ", "   Y   ", "   X   ", "   G   ", "   G   ", "   G   ", "   G   ", "   G   ", "   X   ", "       ")
+                .aisle("YYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
+                .aisle("YYYYYYY", " XN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
+                .aisle("YYYYYYY", "YC   CY", "XC   CX", "GC   CG", "GC   CG", "GC   CG", "GC   CG", "GCN NCG", "XXR RXX", " XXMXX ")
+                .aisle("YYYYYYY", " YN NY ", " XN NX ", " XN NX ", " XN NX ", " XN NX ", " XNNNX ", " XN NX ", " XRRRX ", " XXXXX ")
+                .aisle("YYYYYYY", "  YCY  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XCX  ", "  XXX  ", "   X   ")
+                .aisle(" YYYYY ", "   S   ", "   X   ", "   G   ", "   G   ", "   G   ", "   G   ", "   G   ", "   X   ", "       ")
                 .where('S', selfPredicate())
-                .where('X', states(getCasingState()).setMinGlobalLimited(9)
-                        .or(autoAbilities(true, true, true, true, true, true, false))
+                .where('X', states(getCasingState()))
+                .where('Y', states(getCasingState())
+                        .or(autoAbilities(true,false))
                         .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
                 )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('#', any())
+                .where('G', states(MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS)))
+                .where('N', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST)))
+                .where('R', states(getCasingState2()))
                 .where('C', heatingCoils())
-                .where('P', states(getCasingState2()))
-                .where('#', air())
                 .build();
-    }
-
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("UEM", "PPP", "CCC", "CCC", "CCC", "XXX")
-                .aisle("XXX", "PPP", "C#C", "C#C", "C#C", "XHX")
-                .aisle("ISO", "PPP", "CCC", "CCC", "CCC", "XXX")
-                .where('X', getCasingState())
-                .where('P', getCasingState2())
-                .where('S', GTQTMetaTileEntities.BLAZING_CZ_PULLER, EnumFacing.SOUTH)
-                .where('#', Blocks.AIR.getDefaultState())
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LV], EnumFacing.NORTH)
-                .where('U', GTQTMetaTileEntities.PRESSURE_HATCH[GTValues.LV], EnumFacing.NORTH)
-                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
-                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.LV], EnumFacing.SOUTH)
-                .where('H', MetaTileEntities.MUFFLER_HATCH[GTValues.LV], EnumFacing.UP)
-                .where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
-        GregTechAPI.HEATING_COILS.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
-                .forEach(entry -> shapeInfo.add(builder.where('C', entry.getKey()).build()));
-        return shapeInfo;
     }
 
     @Override

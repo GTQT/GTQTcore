@@ -55,12 +55,12 @@ public class SodiumChain {
                 .buildAndRegister();
 
         BURNER_REACTOR_RECIPES.recipeBuilder()
-                .input(dust, SodiumNitrate, 1)
-                .notConsumable(dust, Lead, 4)
-                .output(dust, SodiumOxide, 1)
-                .fluidOutputs(Oxygen.getFluid(1000))
+                .input(dust, SodiumNitrate, 10)
+                .output(dust, SodiumOxide, 3)
+                .fluidOutputs(Oxygen.getFluid(5000))
+                .fluidOutputs(Nitrogen.getFluid(2000))
                 .EUt(VA[EV])
-                .duration(800)
+                .duration(400)
                 .blastFurnaceTemp(3600)
                 .buildAndRegister();
 

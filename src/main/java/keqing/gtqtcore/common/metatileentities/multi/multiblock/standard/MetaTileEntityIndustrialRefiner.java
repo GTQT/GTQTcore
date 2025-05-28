@@ -43,8 +43,7 @@ public class MetaTileEntityIndustrialRefiner extends GTQTNoTierMultiblockControl
     public MetaTileEntityIndustrialRefiner(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.MACERATOR_RECIPES,
-                RecipeMaps.THERMAL_CENTRIFUGE_RECIPES,
-                GTQTcoreRecipeMaps.REFINER_MACERATOR_RECIPES
+                RecipeMaps.THERMAL_CENTRIFUGE_RECIPES
         });
         setMaxParallel(256);
         setMaxParallelFlag(true);

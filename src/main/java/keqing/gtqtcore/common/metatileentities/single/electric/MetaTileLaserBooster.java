@@ -16,7 +16,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.custom.FireboxActiveRenderer;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityFusionReactor;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityHugeFusionReactor;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment.MetaTileEntityAdvancedFusionReactor;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,7 +73,7 @@ public class MetaTileLaserBooster extends MetaTileEntity {
 
         try {
             MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), this.getPos().add(xDir, 0, zDir));
-            if (mte instanceof MetaTileEntityFusionReactor || mte instanceof MetaTileEntityHugeFusionReactor) {
+            if (mte instanceof MetaTileEntityFusionReactor || mte instanceof MetaTileEntityAdvancedFusionReactor) {
                 findMachine = true;
                 processEnergyTransfer(mte);
             } else {
@@ -103,8 +103,8 @@ public class MetaTileLaserBooster extends MetaTileEntity {
     private IEnergyContainer getEnergyContainer(MetaTileEntity mte) {
         if (mte instanceof MetaTileEntityFusionReactor) {
             return ((MetaTileEntityFusionReactor) mte).getEnergyContainer();
-        } else if (mte instanceof MetaTileEntityHugeFusionReactor) {
-            return ((MetaTileEntityHugeFusionReactor) mte).getEnergyContainer();
+        } else if (mte instanceof MetaTileEntityAdvancedFusionReactor) {
+            return ((MetaTileEntityAdvancedFusionReactor) mte).getEnergyContainer();
         }
         return null;
     }

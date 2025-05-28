@@ -109,12 +109,8 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     }
 
     @Override
-    public void checkStructurePattern() {
-        if (MachineSwitch.DelayStructureCheckSwitch) {
-            if (this.getOffsetTimer() % 100 == 0 || this.isFirstTick()) {
-                super.checkStructurePattern();
-            }
-        } else super.checkStructurePattern();
+    public boolean shouldDelayCheck() {
+        return true;
     }
 
     @Override

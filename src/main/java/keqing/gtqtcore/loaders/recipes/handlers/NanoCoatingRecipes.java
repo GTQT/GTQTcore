@@ -30,7 +30,6 @@ public class NanoCoatingRecipes {
 
     public static void init() {
         PRECISION_SPRAYING();//喷涂
-        PRECISION_SPINNING();//喷丝
         Catalyst_i();
         Catalyst_ii();
         Catalyst_iii();
@@ -442,94 +441,6 @@ public class NanoCoatingRecipes {
                 .recipeLevel(5)
                 .duration(800)
                 .EUt(VA[IV])
-                .buildAndRegister();
-    }
-
-    private static void PRECISION_SPINNING() {
-
-        LARGE_CHEMICAL_RECIPES.recipeBuilder()
-                .duration(600).EUt(VA[EV])
-                .input(frameGt, StainlessSteel, 8)
-                .input(OrePrefix.foil, Titanium, 4)
-                .input(wireFine, Platinum, 2)
-                .fluidInputs(Biomass.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(StyreneButadieneRubber.getFluid(144))
-                .output(CATALYST_FRAMEWORK_BLANK,8)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        //催化剂框架 使用激光模板
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, Platinum, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesbc.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(StyreneButadieneRubber.getFluid(144))
-                .output(CATALYST_FRAMEWORK_I)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, Palladium, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesbb.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(StyreneButadieneRubber.getFluid(144))
-                .output(CATALYST_FRAMEWORK_II)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, NiobiumTitanium, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesba.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(StyreneButadieneRubber.getFluid(144))
-                .output(CATALYST_FRAMEWORK_III)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, NanometerBariumTitanate, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesca.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(Mutagen.getFluid(144))
-                .output(CATALYST_FRAMEWORK_IV)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, Osmium, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesbd.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(Mutagen.getFluid(144))
-                .output(CATALYST_FRAMEWORK_V)
-                .cleanroom(CleanroomType.CLEANROOM)
-                .buildAndRegister();
-
-        PRECISION_SPINNING.recipeBuilder()
-                .duration(400).EUt(VA[EV]).CWUt(256)
-                .input(CATALYST_FRAMEWORK_BLANK)
-                .input(OrePrefix.foil, Iridium, 4)
-                .input(circuit, MarkerMaterials.Tier.HV, 1)
-                .fluidInputs(Enzymesab.getFluid(200))
-                .fluidInputs(Zylon.getFluid(144))
-                .fluidInputs(Mutagen.getFluid(144))
-                .output(CATALYST_FRAMEWORK_VI)
-                .cleanroom(CleanroomType.CLEANROOM)
                 .buildAndRegister();
     }
 

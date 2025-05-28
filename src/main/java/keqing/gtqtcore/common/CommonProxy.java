@@ -8,7 +8,6 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.common.crafting.ToolHeadReplaceRecipe;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
 import keqing.gtqtcore.GTQTCore;
@@ -20,14 +19,15 @@ import keqing.gtqtcore.api.recipes.properties.PCBFactoryBioUpgradeProperty;
 import keqing.gtqtcore.api.recipes.properties.SwarmTierProperty;
 import keqing.gtqtcore.api.unification.ore.GTQTStoneTypes;
 import keqing.gtqtcore.api.utils.GTQTLog;
+import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockWireCoil;
-import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.block.blocks.GTQTStoneVariantBlock;
 import keqing.gtqtcore.common.covers.GTQTCoverBehavior;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.common.pipelike.pressure.BlockPressurePipe;
+import keqing.gtqtcore.common.pipelike.pressure.ItemBlockPressurePipe;
 import keqing.gtqtcore.common.pipelike.pressure.tile.TileEntityPressurePipe;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.recipes.*;
@@ -61,7 +61,6 @@ import static keqing.gtqtcore.api.utils.ChatCalculatorHelper.eval;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.*;
 import static net.minecraft.init.Blocks.DIRT;
 
-import keqing.gtqtcore.common.pipelike.pressure.ItemBlockPressurePipe;
 @Mod.EventBusSubscriber(
         modid = "gtqtcore"
 )
@@ -154,11 +153,6 @@ public class CommonProxy {
     public static void registerCoverBehavior(GregTechAPI.RegisterEvent<CoverDefinition> event) {
         GTQTLog.logger.info("Registering Cover Behaviors...");
         GTQTCoverBehavior.init();
-    }
-
-    @SubscribeEvent
-    public static void initMaterialInfo(GregTechAPI.RegisterEvent<ItemMaterialInfo> event) {
-        GCYSMaterialInfoLoader.init();
     }
 
     @SubscribeEvent
@@ -392,27 +386,26 @@ public class CommonProxy {
     }
 
     public void loadComplete() {
-        if(GTQTCoreConfig.debugSwitch.debugSwitch) {
+        if (GTQTCoreConfig.debugSwitch.debugSwitch) {
             for (Material material : GregTechAPI.materialManager.getRegisteredMaterials()) {
                 if (GTQTCoreConfig.debugSwitch.cableDebug) {
                     if (material.hasProperty(PropertyKey.WIRE))
-                        GTQTLog.logger.info("Cable Info/Material:"+material+" Amperage:"+material.getProperty(PropertyKey.WIRE).getAmperage()+" Voltage:"+material.getProperty(PropertyKey.WIRE).getVoltage()+" LossPerBlock:"+material.getProperty(PropertyKey.WIRE).getLossPerBlock());
+                        GTQTLog.logger.info("Cable Info/Material:" + material + " Amperage:" + material.getProperty(PropertyKey.WIRE).getAmperage() + " Voltage:" + material.getProperty(PropertyKey.WIRE).getVoltage() + " LossPerBlock:" + material.getProperty(PropertyKey.WIRE).getLossPerBlock());
                 }
                 if (GTQTCoreConfig.debugSwitch.pipeDebug) {
                     if (material.hasProperty(PropertyKey.FLUID_PIPE))
-                        GTQTLog.logger.info("Fluid Pipe Info/Material:"+material+" Priority:"+material.getProperty(PropertyKey.FLUID_PIPE).getPriority()+" MaxFluidTemperature:"+material.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature()+" Throughput:"+material.getProperty(PropertyKey.FLUID_PIPE).getThroughput()+" Tanks:"+material.getProperty(PropertyKey.FLUID_PIPE).getTanks());
+                        GTQTLog.logger.info("Fluid Pipe Info/Material:" + material + " Priority:" + material.getProperty(PropertyKey.FLUID_PIPE).getPriority() + " MaxFluidTemperature:" + material.getProperty(PropertyKey.FLUID_PIPE).getMaxFluidTemperature() + " Throughput:" + material.getProperty(PropertyKey.FLUID_PIPE).getThroughput() + " Tanks:" + material.getProperty(PropertyKey.FLUID_PIPE).getTanks());
 
                     if (material.hasProperty(PropertyKey.ITEM_PIPE))
-                        GTQTLog.logger.info("Item Pipe Info/Material:"+material+" Priority:"+material.getProperty(PropertyKey.ITEM_PIPE).getPriority()+" TransferRate:"+material.getProperty(PropertyKey.ITEM_PIPE).getTransferRate());
+                        GTQTLog.logger.info("Item Pipe Info/Material:" + material + " Priority:" + material.getProperty(PropertyKey.ITEM_PIPE).getPriority() + " TransferRate:" + material.getProperty(PropertyKey.ITEM_PIPE).getTransferRate());
                 }
                 if (GTQTCoreConfig.debugSwitch.rotorDebug) {
                     if (material.hasProperty(PropertyKey.ROTOR))
-                        GTQTLog.logger.info("Rotor Info/Material:"+material+" Damage:"+material.getProperty(PropertyKey.ROTOR).getDamage()+" Durability:"+material.getProperty(PropertyKey.ROTOR).getDurability()+" Speed:"+material.getProperty(PropertyKey.ROTOR).getSpeed());
+                        GTQTLog.logger.info("Rotor Info/Material:" + material + " Damage:" + material.getProperty(PropertyKey.ROTOR).getDamage() + " Durability:" + material.getProperty(PropertyKey.ROTOR).getDurability() + " Speed:" + material.getProperty(PropertyKey.ROTOR).getSpeed());
                 }
                 if (GTQTCoreConfig.debugSwitch.oreDebug) {
-                    if (material.hasProperty(PropertyKey.ORE))
-                    {
-                        GTQTLog.logger.info("Ore Info/Material:"+ material+" Name:"+material.getLocalizedName()+" Products:"+material.getProperty(PropertyKey.ORE).getOreByProducts());
+                    if (material.hasProperty(PropertyKey.ORE)) {
+                        GTQTLog.logger.info("Ore Info/Material:" + material + " Name:" + material.getLocalizedName() + " Products:" + material.getProperty(PropertyKey.ORE).getOreByProducts());
                     }
                 }
             }

@@ -210,6 +210,7 @@ public class ElementMaterials {
         GTQTMaterials.AstralTitanium = new Material.Builder(getMaterialsId(), gtqtcoreId("astral_titanium"))
                 .ingot()
                 .fluid()
+                .plasma()
                 .color(0xDCA0F0)
                 .iconSet(BRIGHT)
                 //  TODO may be re-balance
@@ -466,6 +467,21 @@ public class ElementMaterials {
                 .fluidPipeProperties(120_000, 6400, true, true, true, true)
                 .blast(9000, BlastProperty.GasTier.HIGH)
                 .build();
+
+        //原NH力量 改为 斯坦利 Stanley
+        GTQTMaterials.Stanley = new Material.Builder(getMaterialsId(), gtqtcoreId("stanley"))
+                .color(0xCD00CD).iconSet(METALLIC)
+                .ingot()
+                .fluid()
+                .plasma()
+                .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
+                .element(Elements.Iu)
+                .toolStats(MaterialToolProperty.Builder.of(200.0F, 120.0F, 76384, 7)
+                        .attackSpeed(0.5F).enchantability(33).magnetic().unbreakable().build())
+                .rotorStats(28.0f, 14.0f, 786432)
+                .fluidPipeProperties(120_000, 6400, true, true, true, true)
+                .build();
+
     }
 
     public static String addObfuscatedFormula() {

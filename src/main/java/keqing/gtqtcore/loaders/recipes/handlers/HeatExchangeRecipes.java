@@ -136,6 +136,18 @@ public class HeatExchangeRecipes {
                 .flowRate(500)
                 .duration(20)
                 .buildAndRegister();
+
+        //  AstralTitanium Plasma
+        HEAT_EXCHANGE_RECIPES.recipeBuilder()
+                .fluidInputs(DistilledWater.getFluid(5))
+                .fluidInputs(AstralTitanium.getPlasma(1))
+                .fluidOutputs(SuperheatedSteam.getFluid(160 * 5))
+                .fluidOutputs(SupercriticalSteam.getFluid(80 * 5))
+                .fluidOutputs(AstralTitanium.getFluid(1))
+                .maxRate(1600)
+                .flowRate(500)
+                .duration(20)
+                .buildAndRegister();
     }
 
     private static void Mark2Fusion() {

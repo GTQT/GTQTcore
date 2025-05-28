@@ -89,11 +89,11 @@ public class BoronChain {
 
         //  Sodium + Nitric Acid + Oxygen -> Sodium Nitrate + Water
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, Sodium)
+                .input(dust, Sodium,2)
                 .circuitMeta(1)
                 .fluidInputs(NitricAcid.getFluid(2000))
                 .fluidInputs(Oxygen.getFluid(1000))
-                .output(dust, SodiumNitrate, 1)
+                .output(dust, SodiumNitrate, 10)
                 .fluidOutputs(Water.getFluid(1000))
                 .EUt(60)
                 .duration(20)

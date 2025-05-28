@@ -5,7 +5,7 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.utils.NumberFormattingUtil;
-import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressure.MetaTileEntityPressureTank;
+import keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.pressureSystem.MetaTileEntityPressureTank;
 import keqing.gtqtcore.common.metatileentities.single.electric.MetaTileEntityPressureBooster;
 import keqing.gtqtcore.common.metatileentities.single.steam.MetaTileEntitySteamEjector;
 import keqing.gtqtcore.common.metatileentities.storage.MetaTileEntityGasTank;

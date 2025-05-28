@@ -1,9 +1,9 @@
 package keqing.gtqtcore.loaders.recipes.chain;
 
-import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.GregTechAPI;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.ItemMaterialInfo;
 import gregtech.api.unification.stack.MaterialStack;
+import gregtech.api.unification.stack.RecyclingData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -55,23 +55,23 @@ public class VanillaRecipes {
                 .duration(3 * SECOND)
                 .buildAndRegister();
 
-        OreDictUnifier.registerOre(new ItemStack(Items.CHORUS_FRUIT_POPPED, 1),
-                new ItemMaterialInfo(new MaterialStack(Purpur, M)));
-        OreDictUnifier.registerOre(new ItemStack(Blocks.PURPUR_BLOCK, 1),
-                new ItemMaterialInfo(new MaterialStack(Purpur, M)));
-        OreDictUnifier.registerOre(new ItemStack(Blocks.PURPUR_PILLAR, 1),
-                new ItemMaterialInfo(new MaterialStack(Purpur, M)));
-        OreDictUnifier.registerOre(new ItemStack(Blocks.END_ROD, 1),
-                new ItemMaterialInfo(
-                        new MaterialStack(Purpur, M / 4),
-                        new MaterialStack(Blaze, M)));
 
-        OreDictUnifier.registerOre(new ItemStack(Blocks.PRISMARINE, 1, 1),
-                new ItemMaterialInfo(new MaterialStack(Prismarine, M * 9)));
-        OreDictUnifier.registerOre(new ItemStack(Blocks.PRISMARINE, 1, 2),
-                new ItemMaterialInfo(new MaterialStack(Prismarine, M * 8)));
-        OreDictUnifier.registerOre(new ItemStack(Blocks.SEA_LANTERN, 1),
-                new ItemMaterialInfo(new MaterialStack(Prismarine, M * 9)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Items.CHORUS_FRUIT_POPPED, 1),
+                new RecyclingData(new MaterialStack(Purpur, M)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.PURPUR_BLOCK, 1),
+                new RecyclingData(new MaterialStack(Purpur, M)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.PURPUR_PILLAR, 1),
+                new RecyclingData(new MaterialStack(Purpur, M)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.END_ROD, 1),
+                new RecyclingData(new MaterialStack(Purpur, M / 4), new MaterialStack(Blaze, M)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.PRISMARINE, 1, 1),
+                new RecyclingData(new MaterialStack(Prismarine, M * 9)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.PRISMARINE, 1, 2),
+                new RecyclingData(new MaterialStack(Prismarine, M * 8)));
+        GregTechAPI.RECYCLING_MANAGER.registerRecyclingData(new ItemStack(Blocks.SEA_LANTERN, 1),
+                new RecyclingData(new MaterialStack(Prismarine, M * 9)));
+
+
 
         OrePrefix.dust.setIgnored(Prismarine);
         OrePrefix.gem.setIgnored(Prismarine);
