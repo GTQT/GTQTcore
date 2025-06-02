@@ -95,7 +95,7 @@ public class CoilWire {
                 .duration(600)
                 .buildAndRegister();
 
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV]).Tier(1).CWUt(CWT[IV])
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[LuV])
                 .input(OrePrefix.wireGtDouble, Materials.Naquadah, 8)
                 .input(OrePrefix.foil, Materials.Osmium, 8)
                 .fluidInputs(Materials.TungstenSteel.getFluid(GTValues.L))
@@ -104,7 +104,7 @@ public class CoilWire {
                 .duration(700)
                 .buildAndRegister();
 
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM]).Tier(2).CWUt(CWT[LuV])
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[ZPM])
                 .input(OrePrefix.wireGtDouble, Materials.Trinium, 8)
                 .input(OrePrefix.foil, Materials.NaquadahEnriched, 8)
                 .input(INSULATINGMICA,48)
@@ -113,7 +113,7 @@ public class CoilWire {
                 .duration(800)
                 .buildAndRegister();
 
-        PRECISE_ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV]).Tier(3).CWUt(CWT[ZPM])
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().EUt(VA[UV])
                 .input(OrePrefix.wireGtDouble, Materials.Tritanium, 8)
                 .input(OrePrefix.foil, Materials.Naquadria, 8)
                 .input(INSULATINGMICA,64)

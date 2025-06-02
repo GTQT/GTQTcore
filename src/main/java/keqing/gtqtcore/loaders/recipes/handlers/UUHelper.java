@@ -27,6 +27,8 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.ore.OrePrefix.cableGtQuadruple;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.FIELD_GENERATOR_UV;
+import static gregtech.common.metatileentities.MetaTileEntities.MASS_FABRICATOR;
+import static gregtech.common.metatileentities.MetaTileEntities.REPLICATOR;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
@@ -83,14 +85,14 @@ public class UUHelper {
                 .duration(200)
                 .buildAndRegister();
 
-        UU_RECIPES.recipeBuilder()
+        MASS_FABRICATOR_RECIPES.recipeBuilder()
                 .circuitMeta(1)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .EUt(256)
                 .duration(3200)
                 .buildAndRegister();
 
-        UU_RECIPES.recipeBuilder()
+        MASS_FABRICATOR_RECIPES.recipeBuilder()
                 .input(GTQTMetaItems.SCRAP)
                 .fluidOutputs(Materials.UUMatter.getFluid(1))
                 .EUt(256)
@@ -138,7 +140,7 @@ public class UUHelper {
                     .duration(GTQTUtil.baseTime * mass)
                     .EUt(30);
 
-            var copybuild = COPY_RECIPES.recipeBuilder()
+            var copybuild = REPLICATOR_RECIPES.recipeBuilder()
                     .notConsumable(is)
                     .fluidInputs(Materials.UUMatter.getFluid(mass))
                     .duration(GTQTUtil.baseTime * mass)
@@ -323,7 +325,7 @@ public class UUHelper {
         //多方块控制器配方
         //大UU
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(UU_PRODUCTER[8].getStackForm(4))
+                .inputs(MASS_FABRICATOR[8].getStackForm(4))
                 .input(CIRCUIT_GOOD_III, 8)
                 .input(ELECTRIC_PUMP_UV, 32)
                 .input(FIELD_GENERATOR_UV, 32)
@@ -350,7 +352,7 @@ public class UUHelper {
 
         //大复制
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(DUPLICATOR[8].getStackForm(4))
+                .inputs(REPLICATOR[8].getStackForm(4))
                 .input(CIRCUIT_GOOD_III, 8)
                 .input(ELECTRIC_PUMP_UV, 32)
                 .input(FIELD_GENERATOR_UV, 32)
@@ -384,14 +386,14 @@ public class UUHelper {
                 'H', CraftingComponent.HULL,
                 'O', CraftingComponent.BETTER_CIRCUIT);
 
-        registerMachineRecipe(DUPLICATOR, "PGP", "CMC", "PFP",
+        registerMachineRecipe(REPLICATOR, "PGP", "CMC", "PFP",
                 'M', HULL,
                 'P', EMITTER,
                 'F', CABLE_HEX,
                 'C', CIRCUIT,
                 'G', NEUTRON);
 
-        registerMachineRecipe(UU_PRODUCTER, "CGC", "FMF", "CGC",
+        registerMachineRecipe(MASS_FABRICATOR, "CGC", "FMF", "CGC",
                 'M', HULL,
                 'F', CABLE_HEX,
                 'C', CIRCUIT,

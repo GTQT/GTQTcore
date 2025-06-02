@@ -53,8 +53,6 @@ public class GTQTTextures {
     public static TextureAtlasSprite PRESSURE_PIPE_OPEN;
     public static SimpleOverlayRenderer WIRELESS_HATCH_HATCH;
     public static SimpleOverlayRenderer FISHING_CASING;
-    public static OrientedOverlayRenderer DUPLICATOR = new OrientedOverlayRenderer("machines/duplicator");
-    public static OrientedOverlayRenderer UUPRODUCTER_OVERLAY = new OrientedOverlayRenderer("machines/uu_producter");
     public static OrientedOverlayRenderer LARGE_UU_PRODUCTER = new OrientedOverlayRenderer("multiblock/large_uu_producter");
     public static SimpleOverlayRenderer MASS_GENERATION_CASING = new SimpleOverlayRenderer("multiblock/casings/mass_generation_casing");
     public static SimpleOverlayRenderer BASIC_PHOTOLITHOGRAPHIC_FRAMEWORK_CASING = new SimpleOverlayRenderer("multiblock/casing/basic_photolithographic_framework_casing");

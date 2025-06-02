@@ -105,6 +105,10 @@ gtqtcore.material.phosphine=Phosphine
 gtqtcore.material.plutonium_trihydride=Plutonium Trihydride
 gtqtcore.material.plutonium_phosphide=Plutonium Phosphide
 gtqtcore.material.carbon_nanotube=Carbon Nanotube
+gtqtcore.material.bacterial_cultivation_base=Bacterial Cultivation Base
+gtqtcore.material.mutated_bacterial_cultivation_base=Mutated Bacterial Cultivation Base
+gtqtcore.material.mutant_active_solder=Mutant Active Solder
+gtqtcore.material.infinite_catalyst=Infinite Catalyst
 gregtech.item.carbon_nanotube.dustSmall=Small Pile of Carbon Nanotubes
 gregtech.item.carbon_nanotube.dustTiny=Tiny Pile of Carbon Nanotubes
 gtqtcore.material.lithium_amalgam=Lithium Amalgam
@@ -479,7 +483,18 @@ tile.multiblock_casing.drill_head.name=Drill Head
 tile.multiblock_casing_active.airfoil.name=Airfoil Chamber
 tile.multiblock_casing_active.advanced_airfoil.name=Advanced Airfoil Chamber
 
-tile.transparent_casing.pmma.name=PMMA Glass
+tile.transparent_casing.bpa_polycarbonate_glass.name=BPA Polycarbonate Glass
+tile.transparent_casing.bpa_polycarbonate_glass.tooltip=Gray Quartz
+tile.transparent_casing.pmma_glass.name=PMMA Glass
+tile.transparent_casing.pmma_glass.tooltip=Acrylic Glass
+tile.transparent_casing.cbdo_polycarbonate_glass.name=CBDO Polycarbonate Glass
+tile.transparent_casing.cbdo_polycarbonate_glass.tooltip=Not Windshield Glass
+tile.transparent_casing.infinity_glass.name=Infinity Glass
+tile.transparent_casing.infinity_glass.tooltip=Rainbow Glass
+tile.transparent_casing.quantum_glass.name=Quantum Glass
+tile.transparent_casing.quantum_glass.tooltip=Ultimate Field Constraint Glass/n§b§lTransparent and Elegant
+tile.transparent_casing.spatially_transcendent_gravitational_lens.name=Transcendent Spatial Gravitational Lens
+tile.transparent_casing.spatially_transcendent_gravitational_lens.tooltip=A literal gravitational lens/n§b§lDo not touch it with your hands!
 
 
 # Vacuums
@@ -626,6 +641,7 @@ metaitem.component.spintronic_smd.inductor.tooltip=Spin-Electronic Inductor
 metaitem.reaction_chamber.bz.name=Belousov-Zhabotinsky Reaction Chamber
 metaitem.nonlinear_chemical_oscillator.name=Nonlinear Chemical Oscillator
 metaitem.nonlinear_chemical_oscillator.tooltip=Non-equilibrium Thermodynamics!
+metaitem.bioprocessor_unit.name=Bioprocessor Unit
 metaitem.optical_laser_control_unit.name=Optical Laser Control Unit
 metaitem.optical_laser_control_unit.tooltip=Laser Information Transmission
 metaitem.esr_computation_unit.name=ESR Computation Unit

@@ -210,35 +210,24 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
         this.writeCustomData(GTQTValue.UPDATE_TIER5, buf -> buf.writeInt(this.tier));
     }
 
-    public IElectrode getElectrodeHatch(int i) {
-        List<IElectrode> abilities = getAbilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY);
-        if (abilities.isEmpty())
-            return null;
-        return abilities.get(i);
+    public List<IElectrode> getElectrodeHatch() {
+        return getAbilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY);
     }
 
     public int getElectrodeTier() {
-        int minTier = 5;
-        for (int i = 0; i < 9; i++) {
-            if (minTier > getElectrodeHatch(i).getElectrodeTier())
-                minTier = getElectrodeHatch(i).getElectrodeTier();
-        }
-        return minTier;
+        return getElectrodeHatch().stream()
+                .mapToInt(IElectrode::getElectrodeTier)
+                .min()
+                .orElse(5); // 默认值可根据业务需求调整
     }
 
     public boolean checkAvailable() {
-        for (int i = 0; i < 9; i++) {
-            if (!getElectrodeHatch(i).isAvailable())
-                return false;
-        }
-        return true;
+        return getElectrodeHatch().stream()
+                .allMatch(IElectrode::isAvailable);
     }
 
     public void setWork(boolean work) {
-        if (checkAvailable()) {
-            for (int i = 0; i < 9; i++)
-                getElectrodeHatch(i).setWork(work);
-        }
+        getElectrodeHatch().forEach(e -> e.setWork(work));
     }
 
     protected class ElectronBathLogic extends GTQTMultiblockLogic {
@@ -251,7 +240,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
 
         @Override
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && !getElectrodeHatch().isEmpty()) {
                 if (!work) {
                     setWork(true);
                     work = true;

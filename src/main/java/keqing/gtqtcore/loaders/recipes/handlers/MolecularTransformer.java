@@ -15,6 +15,8 @@ import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.metatileentities.MetaTileEntities.*;
+import static gtqt.api.util.MaterialHelper.Plate;
+import static gtqt.api.util.MaterialHelper.Wire;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.MOLECULAR_TRANSFORMER_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.*;
@@ -27,8 +29,8 @@ public class MolecularTransformer {
     {
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(HULL[3+tier])
-                .input(frameGt, MaterialHelper.Plate[3+tier],8)
-                .input(stickLong, MaterialHelper.Wire[3+tier],32)
+                .input(frameGt, Plate.get(3+tier),8)
+                .input(stickLong, Wire.get(3+tier),32)
                 .input(circuit, MarkerMaterial.create(GTValues.VN[4+tier].toLowerCase()), 8)
                 .input(wireGtSingle, MaterialHelper.Superconductor[2+tier],64)
                 .circuitMeta(5)
@@ -40,9 +42,9 @@ public class MolecularTransformer {
 
         ASSEMBLER_RECIPES.recipeBuilder()
                 .input(HULL[3+tier])
-                .input(frameGt, MaterialHelper.Plate[3+tier],8)
+                .input(frameGt, Plate.get(tier+3),8)
                 .inputs(GTQTMetaBlocks.blockMultiblockGlass1.getItemVariant(MaterialHelper.Glass[tier],8))
-                .input(ring, MaterialHelper.Plate[3+tier],8)
+                .input(ring, Plate.get(tier+3),8)
                 .input(circuit, MarkerMaterial.create(GTValues.VN[4+tier].toLowerCase()), 8)
                 .circuitMeta(5)
                 .EUt(VA[3+tier])

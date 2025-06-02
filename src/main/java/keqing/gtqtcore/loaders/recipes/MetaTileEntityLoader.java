@@ -49,6 +49,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.*;
 import static gregtech.loaders.recipe.CraftingComponent.GLASS;
 import static gregtech.loaders.recipe.CraftingComponent.PIPE_NORMAL;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static gtqt.api.util.MaterialHelper.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.*;
 import static keqing.gtqtcore.common.block.blocks.BlockCrucible.CrucibleType.QUARTZ_CRUCIBLE;
@@ -216,6 +217,7 @@ public class MetaTileEntityLoader {
                 'B', new UnificationEntry(plate, Iron),
                 'A', new UnificationEntry(plate, Invar));
 
+        //机器外壳
         ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
                 "ABA", "CHC", "ABA",
                 'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV),
@@ -1464,9 +1466,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, MaterialHelper.Plate[1], 4)
-                .input(pipeNormalFluid, MaterialHelper.Pipe[1], 1)
-                .input(stick, MaterialHelper.Wire[1], 2)
+                .input(plate, Plate.get(1), 4)
+                .input(pipeNormalFluid, Pipe.get(1), 1)
+                .input(stick, Wire.get(1), 2)
                 .output(HEAT_SHIELD_MKI)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.LV])
@@ -1474,9 +1476,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, MaterialHelper.Plate[2], 4)
-                .input(pipeNormalFluid, MaterialHelper.Pipe[2], 1)
-                .input(stick, MaterialHelper.Wire[2], 2)
+                .input(plate, Plate.get(2), 4)
+                .input(pipeNormalFluid, Pipe.get(2), 1)
+                .input(stick, Wire.get(2), 2)
                 .output(HEAT_SHIELD_MKII)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.MV])
@@ -1484,9 +1486,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, MaterialHelper.Plate[3], 4)
-                .input(pipeNormalFluid, MaterialHelper.Pipe[3], 1)
-                .input(stick, MaterialHelper.Wire[3], 2)
+                .input(plate, Plate.get(3), 4)
+                .input(pipeNormalFluid, Pipe.get(3), 1)
+                .input(stick, Wire.get(3), 2)
                 .output(HEAT_SHIELD_MKIII)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.HV])
@@ -1494,9 +1496,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, MaterialHelper.Plate[4], 4)
-                .input(pipeNormalFluid, MaterialHelper.Pipe[4], 1)
-                .input(stick, MaterialHelper.Wire[4], 2)
+                .input(plate, Plate.get(4), 4)
+                .input(pipeNormalFluid, Pipe.get(4), 1)
+                .input(stick, Wire.get(4), 2)
                 .output(HEAT_SHIELD_MKIV)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.EV])
@@ -1504,9 +1506,9 @@ public class MetaTileEntityLoader {
                 .buildAndRegister();
 
         ASSEMBLER_RECIPES.recipeBuilder()
-                .input(plate, MaterialHelper.Plate[5], 4)
-                .input(pipeNormalFluid, MaterialHelper.Pipe[5], 1)
-                .input(stick, MaterialHelper.Wire[5], 2)
+                .input(plate, Plate.get(5), 4)
+                .input(pipeNormalFluid, Pipe.get(5), 1)
+                .input(stick, Wire.get(5), 2)
                 .output(HEAT_SHIELD_MKV)
                 .circuitMeta(6)
                 .EUt(VA[GTValues.IV])
@@ -1589,29 +1591,29 @@ public class MetaTileEntityLoader {
         for (int i = 0; i < GAS_TANK.length; i++) {
             ModHandler.addShapedRecipe(true, "gas_tank" + i, GAS_TANK[i].getStackForm(),
                     "PMP", "MHM", "PMP",
-                    'P', new UnificationEntry(pipeNormalFluid, MaterialHelper.Pipe[i]),
+                    'P', new UnificationEntry(pipeNormalFluid, Pipe.get(i)),
                     'H', HULL[i].getStackForm(),
-                    'M', new UnificationEntry(screw, MaterialHelper.Plate[i])
+                    'M', new UnificationEntry(screw, Plate.get(i))
             );
 
         }
         ModHandler.addShapedRecipe(true, "pressure_tank.i", PRESSURE_TANK[0].getStackForm(),
                 "PMP", "MHM", "PMP",
-                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[1]),
+                'P', new UnificationEntry(pipeLargeFluid, Pipe.get(1)),
                 'H', STEEL_DRUM.getStackForm(),
-                'M', new UnificationEntry(screw, MaterialHelper.Plate[1])
+                'M', new UnificationEntry(screw, Plate.get(1))
         );
         ModHandler.addShapedRecipe(true, "pressure_tank.ii", PRESSURE_TANK[1].getStackForm(),
                 "PMP", "MHM", "PMP",
-                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[3]),
+                'P', new UnificationEntry(pipeLargeFluid, Pipe.get(3)),
                 'H', STAINLESS_STEEL_DRUM.getStackForm(),
-                'M', new UnificationEntry(screw, MaterialHelper.Plate[3])
+                'M', new UnificationEntry(screw, Plate.get(3))
         );
         ModHandler.addShapedRecipe(true, "pressure_tank.iii", PRESSURE_TANK[2].getStackForm(),
                 "PMP", "MHM", "PMP",
-                'P', new UnificationEntry(pipeLargeFluid, MaterialHelper.Pipe[5]),
+                'P', new UnificationEntry(pipeLargeFluid, Pipe.get(5)),
                 'H', TUNGSTENSTEEL_DRUM.getStackForm(),
-                'M', new UnificationEntry(screw, MaterialHelper.Plate[5])
+                'M', new UnificationEntry(screw, Plate.get(5))
         );
 
 

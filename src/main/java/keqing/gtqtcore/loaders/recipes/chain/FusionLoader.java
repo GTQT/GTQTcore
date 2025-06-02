@@ -155,15 +155,15 @@ public class FusionLoader {
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Krypton.getFluid(L))
                 .fluidInputs(Stanley.getFluid(L))
-                .fluidOutputs(AstralTitanium.getPlasma(1000))
+                .fluidOutputs(AstralTitanium.getPlasma(1440))
                 .EUt(VA[LuV])
                 .duration((int) (1.6 * SECOND))
                 .EUToStart(300000000) // MK1
                 .buildAndRegister();
 
         PLASMA_GENERATOR_FUELS.recipeBuilder()
-                .fluidInputs(AstralTitanium.getPlasma(1))
-                .fluidOutputs(AstralTitanium.getFluid(1))
+                .fluidInputs(AstralTitanium.getPlasma(10))
+                .fluidOutputs(AstralTitanium.getFluid(10))
                 .EUt((int) V[EV])
                 .duration((int) (1.8 * SECOND))
                 .buildAndRegister();

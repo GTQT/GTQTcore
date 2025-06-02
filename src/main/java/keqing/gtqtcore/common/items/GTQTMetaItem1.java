@@ -621,6 +621,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         // Gooware Circuit Components: ID 180-199
         BZ_REACTION_CHAMBER = this.addItem(650, "reaction_chamber.bz").setCreativeTabs(CommonProxy.GTQTCore_CH);
         NONLINEAR_CHEMICAL_OSCILLATOR = this.addItem(651, "nonlinear_chemical_oscillator").setCreativeTabs(CommonProxy.GTQTCore_CH);
+        BIOPROCESSOR_UNIT = this.addItem(652, "bioprocessor_unit").setCreativeTabs(CommonProxy.GTQTCore_BIO);
 
         //  Cosmic Components
         COSMIC_INFORMATION_MODULE = this.addItem(655, "component.cosmic.information_module").setCreativeTabs(CommonProxy.GTQTCore_HP);

@@ -1,20 +1,50 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "block/cube_all",
+    "model": "minecraft:cube_all",
     "textures": {
       "all": "gregtech:blocks/rendering_error"
     }
   },
   "variants": {
     "variant": {
-      "pmma": {
+      "bpa_polycarbonate_glass": {
         "model": "minecraft:cube_all",
-        "ambientocclusion": false,
         "textures": {
-          "all": "gregtech:blocks/casings/transparent/pmma_glass"
+          "all": "gtqtcore:blocks/casings/bpa_polycarbonate_glass"
+        }
+      },
+      "pmma_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/pmma_glass"
+        }
+      },
+      "cbdo_polycarbonate_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/cbdo_polycarbonate_glass"
+        }
+      },
+      "infinity_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/infinity_glass"
+        }
+      },
+      "quantum_glass": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/quantum_glass"
+        }
+      },
+      "spatially_transcendent_gravitational_lens": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gtqtcore:blocks/casings/spatially_transcendent_gravitational_lens"
         }
       }
     }
   }
 }
+

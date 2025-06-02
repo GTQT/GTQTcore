@@ -24,6 +24,7 @@ import static gregtech.common.blocks.MetaBlocks.FUSION_CASING;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT;
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
@@ -162,21 +163,23 @@ public class FusionReactorRecipes {
 
     private static void Shell() {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_CASING_MK2))
-                .input(plate, Neutronium, 8)
-                .input(screw,EnrichedNaqAlloy,4)
-                .input(rotor,Americium,2)
-                .input(ELECTRIC_MOTOR_UHV,2)
+                .input(HULL[UHV])
+                .inputs(blockCompressedFusionReactor.getItemVariant(FUSION_COIL_MKII))
+                .input(VOLTAGE_COIL_UHV,2)
+                .input(FIELD_GENERATOR_UHV,2)
                 .input(ELECTRIC_PISTON_UHV)
                 .input(circuit, MarkerMaterials.Tier.UHV,8)
                 .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(plate, Neutronium, 8)
+                .input(screw,EnrichedNaqAlloy,4)
+                .input(rotor,Americium,2)
                 .fluidInputs(KaptonE.getFluid(L * 32))
                 .fluidInputs(Cinobite.getFluid(L * 4))
                 .fluidInputs(Octahedrite.getFluid(L * 4))
                 .fluidInputs(AstralTitanium.getFluid(L * 4))
                 .outputs(blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.CASING_FUSION_MKIV))
                 .stationResearch(b -> b
-                        .researchStack(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_CASING_MK2))
+                        .researchStack(MetaBlocks.FUSION_CASING.getItemVariant(BlockFusionCasing.CasingType.FUSION_CASING_MK3))
                         .EUt(VA[UHV])
                         .CWUt(CWT[UV]))
                 .duration(300)

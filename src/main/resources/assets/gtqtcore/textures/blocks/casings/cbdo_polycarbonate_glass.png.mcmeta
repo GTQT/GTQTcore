@@ -1,0 +1,13 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "CTM",
+    "layer": "TRANSLUCENT",
+    "textures": [
+      "gtqtcore:blocks/casings/cbdo_polycarbonate_glass_ctm"
+    ],
+    "extra": {
+      "connect_inside": true
+    }
+  }
+}

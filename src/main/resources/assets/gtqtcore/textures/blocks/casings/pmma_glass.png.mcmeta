@@ -1,0 +1,13 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "CTM",
+        "layer": "TRANSLUCENT",
+        "textures": [
+            "gtqtcore:blocks/casings/pmma_glass_ctm"
+        ],
+        "extra": {
+            "connect_inside": true
+        }
+    }
+}

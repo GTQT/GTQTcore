@@ -1,7 +1,7 @@
 package keqing.gtqtcore.common.block.blocks;
 
 import gregtech.api.block.VariantBlock;
-import net.minecraft.block.Block;
+import gregtech.api.items.toolitem.ToolClasses;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -19,28 +19,36 @@ import javax.annotation.Nonnull;
 public class BlockTransparentCasing extends VariantBlock<BlockTransparentCasing.CasingType> {
 
     public BlockTransparentCasing() {
-        super(Material.IRON);
+        super(Material.GLASS);
         setTranslationKey("transparent_casing");
         setHardness(5.0F);
         setResistance(5.0F);
         setSoundType(SoundType.GLASS);
-        setHarvestLevel("pickaxe", 1);
-        setDefaultState(getState(CasingType.PMMA));
+        setHarvestLevel(ToolClasses.PICKAXE, 3);
+        setDefaultState(this.getState(CasingType.BPA_POLYCARBONATE_GLASS));
+        useNeighborBrightness = true;
     }
 
     @Override
-    public boolean canCreatureSpawn(IBlockState state, IBlockAccess world, BlockPos pos, EntityLiving.SpawnPlacementType type) {
+    public boolean canCreatureSpawn(IBlockState state,
+                                    IBlockAccess world,
+                                    BlockPos pos,
+                                    EntityLiving.SpawnPlacementType type) {
         return false;
     }
 
     @Override
-    @Nonnull
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    public boolean canRenderInLayer(IBlockState state,
+                                    BlockRenderLayer layer) {
+        return layer == BlockRenderLayer.TRANSLUCENT;
+    }
+
+    @Override
     @SuppressWarnings("deprecation")
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -55,16 +63,25 @@ public class BlockTransparentCasing extends VariantBlock<BlockTransparentCasing.
     @Override
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("deprecation")
-    public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, EnumFacing side) {
-        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-        Block block = iblockstate.getBlock();
-
-        return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    public boolean shouldSideBeRendered(IBlockState state,
+                                        IBlockAccess world,
+                                        BlockPos pos,
+                                        EnumFacing side) {
+        IBlockState sideState = world.getBlockState(pos.offset(side));
+        return sideState.getBlock() == this ?
+                getState(sideState) != getState(state) :
+                super.shouldSideBeRendered(state, world, pos, side);
     }
 
     public enum CasingType implements IStringSerializable {
 
-        PMMA("pmma");
+        BPA_POLYCARBONATE_GLASS("bpa_polycarbonate_glass"),
+        PMMA_GLASS("pmma_glass"),
+        CBDO_POLYCARBONATE_GLASS("cbdo_polycarbonate_glass"),
+        INFINITY_GLASS("infinity_glass"),
+        QUANTUM_GLASS("quantum_glass"),
+        SPATIALLY_TRANSCENDENT_GRAVITATIONAL_LENS("spatially_transcendent_gravitational_lens");
+
 
         private final String name;
 

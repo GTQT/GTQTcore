@@ -6492,7 +6492,7 @@ gtqtcore.machine.super_input_bus.slot_limit=Set slot limit
 gtqtcore.machine.super_input_bus.screwdriver=§8Use Screwdriver to toggle sending item back to the faced block
 gtqtcore.machine.super_input_bus.soft_mallet=§8use Soft mallet to toggle auto pulling items
 
-itemGroup.gtqtcore=GTQT| Entanglement Source
+itemGroup.gtqtcore=GTQT| Misc
 itemGroup.gtqtbio=GTQT| Bioengineering
 itemGroup.gtqtae=GTQT| Applied Energistics
 itemGroup.gtqtnc=GTQT| Heart of the Atom

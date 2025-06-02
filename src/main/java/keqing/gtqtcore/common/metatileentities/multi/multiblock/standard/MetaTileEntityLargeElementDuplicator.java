@@ -38,6 +38,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gregtech.api.recipes.RecipeMaps.REPLICATOR_RECIPES;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.COPY_GALSS;
@@ -47,7 +48,7 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityLargeElementDuplicator(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.COPY_RECIPES);
+        super(metaTileEntityId, REPLICATOR_RECIPES);
         this.recipeMapWorkable = new DuplicatorRecipeLogic(this, true);
     }
 

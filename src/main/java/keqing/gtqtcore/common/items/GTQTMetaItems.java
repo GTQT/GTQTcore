@@ -506,6 +506,7 @@ public class GTQTMetaItems {
     // Gooware Circuit Components
     public static MetaItem<?>.MetaValueItem BZ_REACTION_CHAMBER;
     public static MetaItem<?>.MetaValueItem NONLINEAR_CHEMICAL_OSCILLATOR;
+    public static MetaItem<?>.MetaValueItem BIOPROCESSOR_UNIT;
 
     // Optical Circuit Components
 

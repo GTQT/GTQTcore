@@ -46,6 +46,7 @@ import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
+import static gtqt.api.util.MaterialHelper.Cable;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Glue;
 import static keqing.gtqtcore.api.unification.MaterialHelper.*;
@@ -426,11 +427,12 @@ public class MetaTileEntityMachine {
     }
 
     private static void Hull() {
-        for (int i = 0; i <= 9; i++) {
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(2)
+        //机器外壳
+        for (int i = 0; i <= UEV; i++) {
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(100).EUt(VA[1])
                     .inputs(MACHINE_CASING.getItemVariant(MachineCasing[i]))
                     .input(plate, SecondPlate[i], 2)
-                    .input(OrePrefix.cableGtSingle, Cable[i], 2)
+                    .input(OrePrefix.cableGtSingle, Cable.get(i), 2)
                     .outputs(MetaTileEntities.HULL[i].getStackForm())
                     .fluidInputs(Glue[i].getFluid(L * 2))
                     .buildAndRegister();

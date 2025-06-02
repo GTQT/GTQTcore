@@ -138,15 +138,16 @@ public class MetaTileEntityLocalModelComputationHatch extends MetaTileEntityMult
 
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 209)
-                .bindPlayerInventory(entityPlayer.inventory, 126)
-                .widget(new DynamicLabelWidget(7, 7, () -> "本地AI模型仓"))
-                .widget(new SlotWidget(this.containerInventory, 0, 88 - 9, 30, true, true, true)
+        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
+                .widget(new DynamicLabelWidget(28, 12, () -> "本地AI模型仓"))
+                .widget(new SlotWidget(this.containerInventory, 0, 8, 8, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty)
                         .setTooltipText("请放入蒸馏模型"))
-                .widget(new ImageWidget(88 - 9, 48, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
-                .widget((new AdvancedTextWidget(7, 68, this::addDisplayText, 2302755)).setMaxWidthLimit(181));
+                .widget(new ImageWidget(8, 26, 18, 6, GuiTextures.BUTTON_POWER_DETAIL))
+                .image(4, 28, 172, 128, GuiTextures.DISPLAY)
+                .widget((new AdvancedTextWidget(8, 32, this::addDisplayText, 16777215)).setMaxWidthLimit(180))
+                .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
     protected void addDisplayText(List<ITextComponent> textList) {

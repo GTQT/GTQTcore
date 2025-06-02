@@ -399,7 +399,18 @@ tile.multiblock_casing1.drill_head.name=钻取
 tile.multiblock_casing1_active.airfoil.name=翼型室
 tile.multiblock_casing1_active.advanced_airfoil.name=高级翼型室
 
-tile.transparent_casing.pmma.name=亚克力玻璃（PMMA）
+tile.transparent_casing.bpa_polycarbonate_glass.name=BPA聚碳酸酯玻璃
+tile.transparent_casing.bpa_polycarbonate_glass.tooltip=灰色石英
+tile.transparent_casing.pmma_glass.name=PMMA玻璃
+tile.transparent_casing.pmma_glass.tooltip=亚克力玻璃
+tile.transparent_casing.cbdo_polycarbonate_glass.name=CBDO聚碳酸酯玻璃
+tile.transparent_casing.cbdo_polycarbonate_glass.tooltip=并不是挡风玻璃
+tile.transparent_casing.infinity_glass.name=无尽玻璃
+tile.transparent_casing.infinity_glass.tooltip=彩虹玻璃
+tile.transparent_casing.quantum_glass.name=量子玻璃
+tile.transparent_casing.quantum_glass.tooltip=究极力场约束玻璃/n§b§l透明且优雅
+tile.transparent_casing.spatially_transcendent_gravitational_lens.name=超空间引力透镜
+tile.transparent_casing.spatially_transcendent_gravitational_lens.tooltip=字面意义的引力透镜/n§b§l别用手摸它！
 
 
 # Vacuums
@@ -546,6 +557,7 @@ metaitem.component.spintronic_smd.inductor.tooltip=自旋电子电感器
 metaitem.reaction_chamber.bz.name=B-Z振荡反应室
 metaitem.nonlinear_chemical_oscillator.name=非线性化学振荡器
 metaitem.nonlinear_chemical_oscillator.tooltip=非平衡热力学！
+metaitem.bioprocessor_unit.name=生物处理器单元
 metaitem.optical_laser_control_unit.name=光学激光控制装置
 metaitem.optical_laser_control_unit.tooltip=激光信息传输
 metaitem.esr_computation_unit.name=ESR计算单元

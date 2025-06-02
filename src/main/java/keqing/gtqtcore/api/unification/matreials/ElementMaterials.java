@@ -162,7 +162,6 @@ public class ElementMaterials {
                         .enchantment(Enchantments.EFFICIENCY, 5)
                         .enchantment(Enchantments.FORTUNE, 4)
                         .enchantment(Enchantments.SHARPNESS, 3).build())
-                .flags(GENERATE_FOIL, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_RING, GENERATE_ROUND, GENERATE_BOLT_SCREW, GENERATE_FRAME, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_ROTOR)
                 .build();
         //  26015 Rhugnor
         GTQTMaterials.Rhugnor = new Material.Builder(getMaterialsId(), gtqtcoreId("rhugnor"))

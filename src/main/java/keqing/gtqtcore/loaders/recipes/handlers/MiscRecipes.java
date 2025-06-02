@@ -27,6 +27,7 @@ public class MiscRecipes {
     public static void init() {
         metaBlockRecipes();
         ExoticExtruders();
+        VoltageCoilRecipes();
         //  Flux Electrum
         MIXER_RECIPES.recipeBuilder()
                 .input(dust, Electrum, 8)
@@ -99,6 +100,73 @@ public class MiscRecipes {
                 .output(toolHeadBuzzSaw, CubicBoronNitride)
                 .duration((int) (CubicBoronNitride.getMass() * 4)).EUt(240).buildAndRegister();
     }
+
+    private static void VoltageCoilRecipes() {
+        //  UHV Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, ChromiumGermaniumTellurideMagnetic)
+                .input(wireFine, Vibranium, 16)
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_UHV)
+                .EUt(VA[UHV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  UEV Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, ChromiumGermaniumTellurideMagnetic)
+                .input(wireFine, Mithril, 16)
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_UEV)
+                .EUt(VA[UEV])
+                .duration(200)
+                .buildAndRegister();
+
+        /*
+        //  UIV Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, PhosphorusDopedEuropiumIronArsenideMagnetic)
+                .input(wireFine, Astralium, 16)
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_UIV)
+                .EUt(VA[UIV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  UXV Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, PhosphorusDopedEuropiumIronArsenideMagnetic)
+                .input(wireFine, Hikarium, 16)
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_UXV)
+                .EUt(VA[UXV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  OpV Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, BismuthLawrenciumStrontiumCuprateMagnetic)
+                .input(wireFine, Arcanium, 16)
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_OpV)
+                .EUt(VA[OpV])
+                .duration(200)
+                .buildAndRegister();
+
+        //  MAX Voltage Coil
+        ASSEMBLER_RECIPES.recipeBuilder()
+                .input(stick, BismuthLawrenciumStrontiumCuprateMagnetic)
+                .input(wireFine, PrimordialMatter, 16) // TODO Omnium?
+                .circuitMeta(1)
+                .output(VOLTAGE_COIL_MAX)
+                .EUt(VA[MAX])
+                .duration(200)
+                .buildAndRegister();
+
+         */
+    }
+
+
     private static void ExoticExtruders() {
 
         //  Plate
@@ -276,7 +344,7 @@ public class MiscRecipes {
     private static void metaBlockRecipes() {
         COMPRESSOR_RECIPES.recipeBuilder()
                 .input(plate, PMMA, 4)
-                .outputs(GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA))
+                .outputs(GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA_GLASS))
                 .duration(400).EUt(2).buildAndRegister();
     }
 }

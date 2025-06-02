@@ -5,18 +5,15 @@ import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
 import net.minecraftforge.fluids.FluidStack;
 
-import static gregtechfoodoption.GTFOMaterialHandler.Blood;
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.BetaPinene;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.Polyetheretherketone;
-
-import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.*;
+import static gregtechfoodoption.GTFOMaterialHandler.Blood;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
 
 public class GoowareCircuits {
     public static void init() {
@@ -30,8 +27,8 @@ public class GoowareCircuits {
     private static void BacterialCultivation() {
         GENE_MUTAGENESIS.recipeBuilder()
                 .fluidInputs(SterileGrowthMedium.getFluid(8000))
-                .input(STEM_CELLS,64)
-                .input(dust,Tritanium,4)
+                .input(STEM_CELLS, 64)
+                .input(dust, Tritanium, 4)
                 .fluidOutputs(BacterialCultivationBase.getFluid(8000))
                 .EUt(VA[ZPM])
                 .duration(100)
@@ -40,26 +37,26 @@ public class GoowareCircuits {
                 .buildAndRegister();
 
         FLUID_HEATER_RECIPES.recipeBuilder()
-                .fluidOutputs(BacterialCultivationBase.getFluid(1000))
+                .fluidInputs(BacterialCultivationBase.getFluid(1000))
                 .fluidOutputs(MutatedBacterialCultivationBase.getFluid(1000))
                 .EUt(VA[LuV])
                 .duration(100)
                 .buildAndRegister();
 
         CHEMICAL_RECIPES.recipeBuilder()
-                .input(STEM_CELLS,32)
-                .input(dust,CosmicNeutronium,4)
+                .input(STEM_CELLS, 32)
+                .input(dust, CosmicNeutronium, 4)
                 .fluidInputs(MutatedBacterialCultivationBase.getFluid(2000))
-                .output(BIO_CELL,32)
+                .output(BIO_CELL, 32)
                 .fluidOutputs(Mutagen.getFluid(1000))
                 .EUt(VA[UV])
                 .duration(1200)
                 .buildAndRegister();
 
         CHEMICAL_PLANT.recipeBuilder()
-                .input(BIO_CELL,64)
-                .input(GRAVI_STAR,8)
-                .input(dust, InfiniteCatalyst,2)
+                .input(BIO_CELL, 64)
+                .input(GRAVI_STAR, 8)
+                .input(dust, InfiniteCatalyst, 2)
                 .fluidInputs(Tin.getPlasma(14400))
                 .fluidInputs(Bismuth.getPlasma(14400))
                 .fluidInputs(GelidCryotheum.getFluid(4000))
@@ -76,7 +73,7 @@ public class GoowareCircuits {
                 .duration(100)
                 .EUt(VA[LuV])
                 .input(plate, KaptonE, 8)
-                .input(ACRYLIC_YARN,32)
+                .input(ACRYLIC_YARN, 32)
                 .fluidInputs(Indium.getFluid(576))
                 .fluidInputs(Kevlar.getFluid(288))
                 .output(LAMINATION_IN, 4)
@@ -417,10 +414,25 @@ public class GoowareCircuits {
     }
 
     private static void Circuits() {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(GOOWARE_CIRCUIT_BOARD,16)
+                .input(BIO_CELL, 4)
+                .input(STERILIZED_PETRI_DISH, 1)
+                .input(pipeTinyFluid, NiobiumTitanium, 4)
+                .input(plate, Kevlar, 4)
+                .input(foil, SiliconeRubber, 8)
+                .input(bolt, HSSS, 6)
+                .output(BIOPROCESSOR_UNIT,16)
+                .fluidInputs(MutatedBacterialCultivationBase.getFluid(500))
+                .fluidInputs(UUMatter.getFluid(500))
+                .fluidInputs(PCBCoolant.getFluid(2000))
+                .EUt(VA[UV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
 
         //  Processor
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
-                .input(GOOWARE_CIRCUIT_BOARD)
+                .input(BIOPROCESSOR_UNIT)
                 .input(NONLINEAR_CHEMICAL_OSCILLATOR)
                 .input(CRYSTAL_CENTRAL_PROCESSING_UNIT)
                 .input(ADVANCED_SMD_CAPACITOR, 16)

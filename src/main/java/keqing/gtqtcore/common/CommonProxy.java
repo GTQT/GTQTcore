@@ -10,6 +10,7 @@ import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.common.crafting.ToolHeadReplaceRecipe;
 import gregtech.integration.crafttweaker.block.CTHeatingCoilBlockStats;
+import gregtech.loaders.recipe.CraftingComponent;
 import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
@@ -29,9 +30,11 @@ import keqing.gtqtcore.common.items.metaitems.GTQTMetaToolItems;
 import keqing.gtqtcore.common.pipelike.pressure.BlockPressurePipe;
 import keqing.gtqtcore.common.pipelike.pressure.ItemBlockPressurePipe;
 import keqing.gtqtcore.common.pipelike.pressure.tile.TileEntityPressurePipe;
+import keqing.gtqtcore.loaders.AddHighTierMaterial;
 import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.component.ComponentAssemblerRecipes;
+import keqing.gtqtcore.loaders.recipes.component.MaterialComponents;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,6 +51,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -405,10 +409,11 @@ public class CommonProxy {
                 }
                 if (GTQTCoreConfig.debugSwitch.oreDebug) {
                     if (material.hasProperty(PropertyKey.ORE)) {
-                        GTQTLog.logger.info("Ore Info/Material:" + material + " Name:" + material.getLocalizedName() + " Products:" + material.getProperty(PropertyKey.ORE).getOreByProducts());
+                        GTQTLog.logger.info("Ore Info/Material:" + material + " Name:" + material.getLocalizedName());
                     }
                 }
             }
+            if (GTQTCoreConfig.debugSwitch.crash) throw new RuntimeException("Since you enabled the crash see log option in config, it crashed here, and it's not a bug");
         }
     }
 
@@ -429,30 +434,20 @@ public class CommonProxy {
     }
 
     public void init() {
-        OreDictionaryLoader.init();
-        MiscMachineRecipes.init();
-        IntegratedMiningDivision.init();
-        HeatExchangeRecipes.init();
-        OreDeal.init();
-        TechReSearchNET.init();
-        ReinforcedRotorHolder.init();
-        ISALine.init();
-        QTF.init();
-        ComponentAssemblyLineRecipes.init();
-        ComponentAssemblerRecipes.init();
-        RocketEngineRecipes.init();
+        AddHighTierMaterial.init();
+
         GTQTRecipesManager.init();
-        WrapCircuits.init();
-        MetaTileEntityLoader.init();
-        MetaTileEntityMachine.init();
-        CrucibleRecipes.register();
-        CopyRecipesHandlers.init();
-        UUHelper.init();
 
         for (BlockWireCoil.CoilType type : BlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.blockWireCoil.getState(type), type);
         }
 
         HEATING_COILS.put(DIRT.getDefaultState(), new CTHeatingCoilBlockStats("dirt", 300, 1, 0, 1, Materials.Iron));
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void registerMaterialComponents(GregTechAPI.RegisterEvent<CraftingComponent> event) {
+        GTQTLog.logger.info("Registering material components...");
+        MaterialComponents.init();
     }
 }

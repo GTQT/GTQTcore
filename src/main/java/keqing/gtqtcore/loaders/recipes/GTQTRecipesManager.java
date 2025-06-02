@@ -1,5 +1,6 @@
 package keqing.gtqtcore.loaders.recipes;
 
+import keqing.gtqtcore.loaders.OreDictionaryLoader;
 import keqing.gtqtcore.loaders.recipes.chain.*;
 import keqing.gtqtcore.loaders.recipes.chain.AcetyleneChain;
 import keqing.gtqtcore.loaders.recipes.chain.AmmoniaChain;
@@ -22,6 +23,7 @@ import keqing.gtqtcore.loaders.recipes.chain.MagneticsChain;
 import keqing.gtqtcore.loaders.recipes.chain.MethylamineChain;
 import keqing.gtqtcore.loaders.recipes.chain.NanotubesChain;
 import keqing.gtqtcore.loaders.recipes.circuits.*;
+import keqing.gtqtcore.loaders.recipes.component.ComponentAssemblerRecipes;
 import keqing.gtqtcore.loaders.recipes.component.ComponentRecipes;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
 
@@ -86,6 +88,27 @@ public class GTQTRecipesManager {
         GlueChain.init();
         HexanitrohexaaxaisowurtzitaneChain.init();
         ZylonChain.init();
+        EnergyHatch.init();
+        LaserHatches.init();
+        HatchHandler.init();
+        WrapCircuits.init();
+        MetaTileEntityLoader.init();
+        MetaTileEntityMachine.init();
+        CrucibleRecipes.register();
+        CopyRecipesHandlers.init();
+        UUHelper.init();
+        OreDictionaryLoader.init();
+        MiscMachineRecipes.init();
+        IntegratedMiningDivision.init();
+        HeatExchangeRecipes.init();
+        OreDeal.init();
+        TechReSearchNET.init();
+        ReinforcedRotorHolder.init();
+        ISALine.init();
+        QTF.init();
+        ComponentAssemblyLineRecipes.init();
+        ComponentAssemblerRecipes.init();
+        RocketEngineRecipes.init();
         MiscRecipes.init();
         MagicChain.init();
         RecipeConflicts.init();

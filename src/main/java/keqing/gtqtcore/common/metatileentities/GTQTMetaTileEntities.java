@@ -223,8 +223,6 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] POLISHER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] SIMULATOR = new SimpleMachineMetaTileEntity[V.length - 1];
 
-    public static SimpleMachineMetaTileEntity[] DUPLICATOR = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
-    public static SimpleMachineMetaTileEntity[] UU_PRODUCTER = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static SimpleMachineMetaTileEntity[] RECYCLE = new SimpleMachineMetaTileEntity[GTValues.V.length - 1];
     public static MetaTileEntityLargeElementDuplicator LARGE_ELEMENT_DUPLICATOR;
     public static MetaTileEntityLargeUUProducter LARGE_UU_PRODUCTER;
@@ -774,8 +772,7 @@ public class GTQTMetaTileEntities {
 
         registerSimpleMetaTileEntity(ULTRAVIOLET_LAMP_CHAMBER, 1265, "ultraviolet_lamp_chamber", GTQTcoreRecipeMaps.ULTRAVIOLET_LAMP_CHAMBER_RECIPES, Textures.LASER_ENGRAVER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(PRESSURE_LAMINATOR, 1280, "pressure_laminator", GTQTcoreRecipeMaps.PRESSURE_LAMINATOR_RECIPES, GTQTTextures.LAMINATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(UU_PRODUCTER, 1295, "uu_producter", GTQTcoreRecipeMaps.UU_RECIPES, GTQTTextures.UUPRODUCTER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
-        registerSimpleMetaTileEntity(DUPLICATOR, 1310, "duplicator", GTQTcoreRecipeMaps.COPY_RECIPES, GTQTTextures.DUPLICATOR, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+
         registerSimpleMetaTileEntity(RECYCLE, 1325, "recycle", GTQTcoreRecipeMaps.RECYCLE_RECIPE, Textures.MACERATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.defaultTankSizeFunction);
         registerSimpleMetaTileEntity(POLISHER, 1340, "polisher", GTQTcoreRecipeMaps.POLISHER_RECIPES, GTQTTextures.POLISHER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(SIMULATOR, 1355, "simulator", GTQTcoreRecipeMaps.SIMULATOR_RECIPES, GTQTTextures.SIMULATOR_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);

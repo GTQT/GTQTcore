@@ -110,6 +110,7 @@ public class KQComputationRecipeBuilder extends RecipeBuilder<KQComputationRecip
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
                 .get(MachineTierProperty.getInstance(), 0);
     }
+
     public int getCWUt() {
         return this.recipePropertyStorage == null ? 0 : this.recipePropertyStorage
                 .get(ComputationProperty.getInstance(), 0);

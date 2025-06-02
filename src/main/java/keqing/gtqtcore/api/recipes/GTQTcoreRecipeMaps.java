@@ -401,14 +401,6 @@ public class GTQTcoreRecipeMaps {
             .sound(GTSoundEvents.ASSEMBLER)
             .build();
 
-    public static final RecipeMap<SimpleRecipeBuilder> COPY_RECIPES = new RecipeMapBuilder<>("uu_copy", new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .itemOutputs(1)
-            .fluidInputs(3)
-            .fluidOutputs(1)
-            .sound(GTSoundEvents.CHEMICAL_REACTOR)
-            .build();
-
     public static final RecipeMap<SimpleRecipeBuilder> ULTRAVIOLET_LAMP_CHAMBER_RECIPES = new RecipeMapBuilder<>("ultraviolet_lamp_chamber_recipes", new SimpleRecipeBuilder())
             .itemInputs(3)
             .itemOutputs(2)
@@ -587,15 +579,6 @@ public class GTQTcoreRecipeMaps {
             .itemOutputs(3)
             .fluidInputs(3)
             .fluidOutputs(3)
-            .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
-            .sound(GTSoundEvents.CHEMICAL_REACTOR)
-            .build();
-
-    public static final RecipeMap<SimpleRecipeBuilder> UU_RECIPES = new RecipeMapBuilder<>("uu_producter", new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .itemOutputs(0)
-            .fluidInputs(1)
-            .fluidOutputs(1)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
             .sound(GTSoundEvents.CHEMICAL_REACTOR)
             .build();

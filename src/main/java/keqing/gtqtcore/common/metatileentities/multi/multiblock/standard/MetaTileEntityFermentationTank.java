@@ -42,7 +42,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.WatertightSteel;
-import static keqing.gtqtcore.common.block.blocks.BlockTransparentCasing.CasingType.PMMA;
+import static keqing.gtqtcore.common.block.blocks.BlockTransparentCasing.CasingType.PMMA_GLASS;
 
 public class MetaTileEntityFermentationTank extends RecipeMapMultiblockController implements IPHValue {
     private double pH = 7;
@@ -66,7 +66,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
     }
 
     private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.blockTransparentCasing.getState(PMMA);
+        return GTQTMetaBlocks.blockTransparentCasing.getState(PMMA_GLASS);
     }
 
     @Override

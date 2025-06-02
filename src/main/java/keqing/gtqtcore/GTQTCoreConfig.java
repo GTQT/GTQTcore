@@ -28,6 +28,9 @@ public class GTQTCoreConfig {
 
         @Config.Comment({ "Print Ore Info In Logs" })
         public boolean oreDebug = false;
+
+        @Config.Comment({ "Crash to see Log" })
+        public boolean crash = false;
     }
     public static class DifficultySwitch {
         @Config.Comment({ "Allows HotIngot to be cooled by throwing it into water.", "Default: true" })

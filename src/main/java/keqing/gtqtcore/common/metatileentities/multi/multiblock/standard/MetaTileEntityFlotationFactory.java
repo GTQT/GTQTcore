@@ -56,7 +56,7 @@ public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockContr
     }
 
     private static IBlockState getGlassState() {
-        return GTQTMetaBlocks.blockTransparentCasing.getState(BlockTransparentCasing.CasingType.PMMA);
+        return GTQTMetaBlocks.blockTransparentCasing.getState(BlockTransparentCasing.CasingType.PMMA_GLASS);
     }
 
     private static IBlockState getPipeState() {

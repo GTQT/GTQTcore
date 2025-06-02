@@ -38,6 +38,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static gregtech.api.recipes.RecipeMaps.MASS_FABRICATOR_RECIPES;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingType.MASS_GENERATION_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingType.MASS_GENERATION_COIL_CASING;
@@ -48,7 +49,7 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
     private IOpticalComputationProvider computationProvider;
 
     public MetaTileEntityLargeUUProducter(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.UU_RECIPES);
+        super(metaTileEntityId, MASS_FABRICATOR_RECIPES);
         this.recipeMapWorkable = new UUProducterRecipeLogic(this, true);
     }
 
