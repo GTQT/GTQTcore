@@ -738,6 +738,16 @@ public class MachineCasingMaterials {
                 .components(TanmolyiumBetaC,14,Tungsten,10,NiobiumTitanium,9,RhodiumPlatedPalladium,8,Erbium,3)
                 .blast(9000,  BlastProperty.GasTier.HIGH)
                 .build();
+
+        //铅铋合金140
+        GTQTMaterials.PbB = new Material.Builder(getMaterialsId(), gtqtcoreId("pb_b"))
+                .ingot().fluid()
+                .iconSet(MaterialIconSet.SHINY)
+                .color(0x8A2BE2)
+                .components(Bismuth,47,Lead,25,Tin,13,Cadmium,10,Indium,5)
+                .blast(6000,  BlastProperty.GasTier.HIGH)
+                .build();
+
     }
 
 }

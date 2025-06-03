@@ -82,63 +82,20 @@ public class MaterialPropertyAddition {
         Ytterbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Hafnium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Terbium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Dubnium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Dubnium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Rutherfordium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Rutherfordium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Polonium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Bromine.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Iodine.setProperty(PropertyKey.DUST, new DustProperty());
         Iodine.setProperty(PropertyKey.INGOT, new IngotProperty());
         Iodine.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Livermorium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Livermorium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Seaborgium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Seaborgium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Seaborgium.setProperty(PropertyKey.WIRE, new WireProperties(VA[UEV], 32, 32, false));
-        Actinium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Actinium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Caesium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Californium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Californium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Curium.setProperty(PropertyKey.INGOT, new IngotProperty());
         Curium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Radium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Bohrium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Bohrium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Meitnerium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Meitnerium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Roentgenium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Roentgenium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Copernicium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Copernicium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Nihonium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Nihonium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Moscovium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Moscovium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Tennessine.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Francium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Francium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Technetium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Technetium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Protactinium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Berkelium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Berkelium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Einsteinium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Einsteinium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Fermium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Mendelevium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Mendelevium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Nobelium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Nobelium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Lawrencium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Lawrencium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Uranium238.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Graphene.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Barium.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Barium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Phosphorus.setProperty(PropertyKey.INGOT, new IngotProperty());
-        Phosphorus.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         SiliconDioxide.setProperty(PropertyKey.INGOT, new IngotProperty());
         SiliconDioxide.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         // Dusts
@@ -153,7 +110,6 @@ public class MaterialPropertyAddition {
         Ytterbium.setProperty(PropertyKey.DUST, new DustProperty());
         Tellurium.setProperty(PropertyKey.DUST, new DustProperty());
         Selenium.setProperty(PropertyKey.DUST, new DustProperty());
-        Rubidium.setProperty(PropertyKey.DUST, new DustProperty());
         Thallium.setProperty(PropertyKey.DUST, new DustProperty());
         Promethium.setProperty(PropertyKey.DUST, new DustProperty());
 
@@ -207,7 +163,6 @@ public class MaterialPropertyAddition {
         Scandium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Dysprosium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Holmium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
-        Rubidium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         AmmoniumChloride.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Promethium.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         Hafnium.setProperty(PropertyKey.DUST, new DustProperty());
@@ -257,11 +212,6 @@ public class MaterialPropertyAddition {
         Xenon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
 
         Radon.getProperty(PropertyKey.FLUID).enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
-
-        var fpPropertyNeptunium = new FluidProperty();
-        fpPropertyNeptunium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
-        fpPropertyNeptunium.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
-        Neptunium.setProperty(PropertyKey.FLUID, fpPropertyNeptunium);
 
         var fpPropertyFermium = new FluidProperty();
         fpPropertyFermium.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());

@@ -54,6 +54,17 @@ public class GTQTcoreRecipeMaps {
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.SCIENCE)
             .build();
+
+    public static final RecipeMap<SimpleRecipeBuilder> LASER_FUSION_RECIPES = new RecipeMapBuilder<>("laser_fusion",
+            new SimpleRecipeBuilder())
+            .itemInputs(3)
+            .itemOutputs(3)
+            .fluidInputs(3)
+            .fluidOutputs(3)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.SCIENCE)
+            .build();
+
     public static final RecipeMap<SimpleRecipeBuilder> SIMULATOR_RECIPES = new RecipeMapBuilder<>("simulator",
             new SimpleRecipeBuilder())
             .itemInputs(2)

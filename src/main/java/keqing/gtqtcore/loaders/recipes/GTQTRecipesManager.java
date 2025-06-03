@@ -60,7 +60,7 @@ public class GTQTRecipesManager {
         FluidizedBedChain.init();
         FuelChain.init();
         AcidReactorRecipes.init();
-        AntimatterGenerator.init();
+        AntimatterRecipes.init();
         PPBChain.init();
         BioReactor.init();
         AirDistillation.init();

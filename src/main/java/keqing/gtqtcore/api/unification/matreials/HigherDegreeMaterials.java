@@ -640,7 +640,8 @@ public class HigherDegreeMaterials {
         GTQTMaterials.MutantActiveSolder = new Material.Builder(getMaterialsId(), gtqtcoreId("mutant_active_solder"))
                 .fluid()
                 .color(0x5D478B)
-                .build();
+                .build()
+                .setFormula("?Sn?Bi?", false);
 
         //无尽催化剂 Infinite catalyst
         GTQTMaterials.InfiniteCatalyst = new Material.Builder(getMaterialsId(), gtqtcoreId("infinite_catalyst"))

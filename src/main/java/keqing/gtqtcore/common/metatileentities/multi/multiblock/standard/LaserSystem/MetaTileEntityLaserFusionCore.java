@@ -21,6 +21,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing7;
@@ -52,7 +53,7 @@ public class MetaTileEntityLaserFusionCore extends RecipeMapLaserMultiblockContr
     private boolean registeredBloomRenderTicket;
 
     public MetaTileEntityLaserFusionCore(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
+        super(metaTileEntityId, GTQTcoreRecipeMaps.LASER_FUSION_RECIPES);
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
     }
 

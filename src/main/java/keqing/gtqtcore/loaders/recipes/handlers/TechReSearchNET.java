@@ -139,6 +139,10 @@ public class TechReSearchNET {
         KQ_NET(3, 4, 31, DISK_31, HIGH_PERFORMANCE_COMPUTING_ARRAY.getStackForm());
         //32 光子晶格存储
         KQ_NET(3, 4, 32, DISK_32, DATA_BANK.getStackForm());
+        //33 超高能激光聚变
+        KQ_NET(4, 4, 33, DISK_33, SBPRC.getStackForm());
+        //34 反物质约束
+        KQ_NET(4, 4, 33, DISK_34, QUANTUM_ANOMALY.getStackForm());
     }
 
 
