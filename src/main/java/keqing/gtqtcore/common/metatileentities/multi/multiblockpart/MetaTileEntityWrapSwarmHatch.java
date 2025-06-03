@@ -149,6 +149,12 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
         return true;
 
     }
+
+    @Override
+    public int getParallel() {
+        return (int) (256*Math.pow(2,getTier()));
+    }
+
     @Nullable
     private WrapSwarmBehavior getWrapSwarmBehavior() {
         ItemStack stack = containerInventory.getStackInSlot(0);

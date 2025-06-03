@@ -13,25 +13,21 @@ import keqing.gtqtcore.common.block.blocks.BlockCompressedFusionReactor;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass;
 
 import static gregtech.api.GTValues.*;
-import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLY_LINE_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gregtech.api.unification.ore.OrePrefix.wireGtSingle;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL;
 import static gregtech.common.blocks.BlockFusionCasing.CasingType.SUPERCONDUCTOR_COIL;
 import static gregtech.common.blocks.MetaBlocks.FUSION_CASING;
 import static gregtech.common.items.MetaItems.*;
-import static gregtech.common.items.MetaItems.ULTRA_HIGH_POWER_INTEGRATED_CIRCUIT;
 import static gregtech.common.metatileentities.MetaTileEntities.FUSION_REACTOR;
 import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.KaptonK;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockCompressedFusionReactor;
 import static keqing.gtqtcore.common.block.blocks.BlockCompressedFusionReactor.CasingType.FUSION_COIL_MKII;
+import static keqing.gtqtcore.common.block.blocks.BlockCompressedFusionReactor.CasingType.FUSION_COIL_MKIII;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.CIRCUIT_GOOD_III;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.ADVANCED_FUSION_REACTOR;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.COMPRESSED_FUSION_REACTOR;
 
@@ -56,15 +52,33 @@ public class FusionReactorRecipes {
                 .input(OrePrefix.circuit, MarkerMaterials.Tier.UV, 2)
                 .input(OrePrefix.circuit, MarkerMaterials.Tier.ZPM, 4)
                 .fluidInputs(KaptonE.getFluid(L * 2))
-                .fluidInputs(Cinobite.getFluid(L * 1))
-                .fluidInputs(Octahedrite.getFluid(L * 1))
-                .fluidInputs(AstralTitanium.getFluid(L * 1))
+                .fluidInputs(Cinobite.getFluid(L))
+                .fluidInputs(Octahedrite.getFluid(L))
+                .fluidInputs(AstralTitanium.getFluid(L))
                 .outputs(GTQTMetaBlocks.blockMultiblockGlass.getItemVariant(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV))
                 .stationResearch(b -> b
                         .researchStack(MetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockGlassCasing.CasingType.FUSION_GLASS))
                         .EUt(VA[UHV])
                         .CWUt(CWT[UV]))
                 .duration(200).EUt(VA[UHV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.blockMultiblockGlass.getItemVariant(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV))
+                .input(frameGt, Solarium, 1)
+                .input(screw, Adamantium, 4)
+                .inputs(MetaItems.FIELD_GENERATOR_UEV.getStackForm(2))
+                .input(OrePrefix.circuit, MarkerMaterials.Tier.UHV, 2)
+                .input(OrePrefix.circuit, MarkerMaterials.Tier.UV, 4)
+                .fluidInputs(FullerenePolymerMatrix.getFluid(L * 2))
+                .fluidInputs(Tairitsium.getFluid(L))
+                .fluidInputs(Octahedrite.getFluid(L))
+                .fluidInputs(QuantumAlloy.getFluid(L))
+                .outputs(GTQTMetaBlocks.blockMultiblockGlass.getItemVariant(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_V))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.blockMultiblockGlass.getItemVariant(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV))
+                        .EUt(VA[UEV])
+                        .CWUt(CWT[UHV]))
+                .duration(200).EUt(VA[UEV]).buildAndRegister();
     }
 
     private static void Coils() {
@@ -159,20 +173,40 @@ public class FusionReactorRecipes {
                         .EUt(VA[UHV])
                         .CWUt(CWT[UV]))
                 .duration(800).EUt(VA[UHV]).buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .inputs(GTQTMetaBlocks.blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.FUSION_COIL_MKII))
+                .inputs(MetaItems.FIELD_GENERATOR_UEV.getStackForm(2))
+                .inputs(MetaItems.ELECTRIC_PUMP_UEV.getStackForm())
+                .inputs(MetaItems.NEUTRON_REFLECTOR.getStackForm(8))
+                .input(OrePrefix.circuit, MarkerMaterials.Tier.UHV, 8)
+                .input(OrePrefix.circuit, MarkerMaterials.Tier.UV, 16)
+                .input(OrePrefix.pipeSmallFluid, Adamantium, 4)
+                .input(OrePrefix.plate, Solarium, 4)
+                .fluidInputs(FullerenePolymerMatrix.getFluid(L * 32))
+                .fluidInputs(Tairitsium.getFluid(L * 4))
+                .fluidInputs(Octahedrite.getFluid(L * 4))
+                .fluidInputs(QuantumAlloy.getFluid(L * 4))
+                .outputs(GTQTMetaBlocks.blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.FUSION_COIL_MKIII))
+                .stationResearch(b -> b
+                        .researchStack(GTQTMetaBlocks.blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.FUSION_COIL_MKII))
+                        .EUt(VA[UHV])
+                        .CWUt(CWT[UV]))
+                .duration(800).EUt(VA[UHV]).buildAndRegister();
     }
 
     private static void Shell() {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[UHV])
                 .inputs(blockCompressedFusionReactor.getItemVariant(FUSION_COIL_MKII))
-                .input(VOLTAGE_COIL_UHV,2)
-                .input(FIELD_GENERATOR_UHV,2)
+                .input(VOLTAGE_COIL_UHV, 2)
+                .input(FIELD_GENERATOR_UHV, 2)
                 .input(ELECTRIC_PISTON_UHV)
-                .input(circuit, MarkerMaterials.Tier.UHV,8)
-                .input(circuit, MarkerMaterials.Tier.UV,16)
+                .input(circuit, MarkerMaterials.Tier.UHV, 8)
+                .input(circuit, MarkerMaterials.Tier.UV, 16)
                 .input(plate, Neutronium, 8)
-                .input(screw,EnrichedNaqAlloy,4)
-                .input(rotor,Americium,2)
+                .input(screw, EnrichedNaqAlloy, 4)
+                .input(rotor, Americium, 2)
                 .fluidInputs(KaptonE.getFluid(L * 32))
                 .fluidInputs(Cinobite.getFluid(L * 4))
                 .fluidInputs(Octahedrite.getFluid(L * 4))
@@ -185,10 +219,33 @@ public class FusionReactorRecipes {
                 .duration(300)
                 .EUt(VA[UHV])
                 .buildAndRegister();
+
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(HULL[UEV])
+                .inputs(blockCompressedFusionReactor.getItemVariant(FUSION_COIL_MKIII))
+                .input(VOLTAGE_COIL_UEV, 2)
+                .input(FIELD_GENERATOR_UEV, 2)
+                .input(ELECTRIC_PISTON_UEV)
+                .input(circuit, MarkerMaterials.Tier.UEV, 8)
+                .input(circuit, MarkerMaterials.Tier.UHV, 16)
+                .input(plate, Adamantium, 8)
+                .input(screw, Neutronium, 4)
+                .input(rotor, Orichalcum, 2)
+                .fluidInputs(FullerenePolymerMatrix.getFluid(L * 32))
+                .fluidInputs(Tairitsium.getFluid(L * 4))
+                .fluidInputs(Octahedrite.getFluid(L * 4))
+                .fluidInputs(QuantumAlloy.getFluid(L * 4))
+                .outputs(blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.CASING_FUSION_MKV))
+                .stationResearch(b -> b
+                        .researchStack(blockCompressedFusionReactor.getItemVariant(BlockCompressedFusionReactor.CasingType.CASING_FUSION_MKIV))
+                        .EUt(VA[UEV])
+                        .CWUt(CWT[UHV]))
+                .duration(300)
+                .EUt(VA[UEV])
+                .buildAndRegister();
     }
 
-    public static void Control()
-    {
+    public static void Control() {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(CIRCUIT_GOOD_I, 8)
                 .inputs(FUSION_CASING.getItemVariant(SUPERCONDUCTOR_COIL))
@@ -277,6 +334,28 @@ public class FusionReactorRecipes {
                         .EUt(VA[UHV]))
                 .duration(2000).EUt(VA[UHV]).buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_V, 8)
+                .inputs(blockCompressedFusionReactor.getItemVariant(FUSION_COIL_MKIII))
+                .input(circuit, MarkerMaterials.Tier.UIV, 64)
+                .input(plateDouble, Adamantium, 6)
+                .input(plateDouble, Solarium, 6)
+                .input(FIELD_GENERATOR_UHV, 32)
+                .input(PICO_POWER_IC, 64)
+                .input(PICO_POWER_IC, 64)
+                .input(wireGtSingle, UHVSuperconductor, 64)
+                .input(wireGtSingle, UHVSuperconductor, 64)
+                .fluidInputs(MutantActiveSolder.getFluid(L * 16))
+                .fluidInputs(Tairitsium.getFluid(L * 16))
+                .fluidInputs(QuantumAlloy.getFluid(L * 16))
+                .fluidInputs(FullerenePolymerMatrix.getFluid(L * 16))
+                .outputs(ADVANCED_FUSION_REACTOR[1].getStackForm())
+                .stationResearch(b -> b
+                        .researchStack(ADVANCED_FUSION_REACTOR[0].getStackForm())
+                        .CWUt(CWT[UHV])
+                        .EUt(VA[UEV]))
+                .duration(2000).EUt(VA[UEV]).buildAndRegister();
+
         //压缩聚变
         //  Compressed Fusion Reactor Mk I
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
@@ -343,7 +422,7 @@ public class FusionReactorRecipes {
                 .fluidInputs(PbB.getFluid(L * 48))
                 .fluidInputs(YttriumBariumCuprate.getFluid(L * 48))
                 .fluidInputs(KaptonK.getFluid(L * 40))
-                .fluidInputs(TanmolyiumBetaC.getFluid(L*16))
+                .fluidInputs(TanmolyiumBetaC.getFluid(L * 16))
                 .output(COMPRESSED_FUSION_REACTOR[2])
                 .stationResearch(b -> b
                         .researchStack(FUSION_REACTOR[2].getStackForm())
@@ -368,7 +447,32 @@ public class FusionReactorRecipes {
                 .fluidInputs(PbB.getFluid(L * 48))
                 .fluidInputs(Cinobite.getFluid(L * 48))
                 .fluidInputs(KaptonE.getFluid(L * 40))
-                .fluidInputs(Teflon.getFluid(L*16))
+                .fluidInputs(Teflon.getFluid(L * 16))
+                .output(COMPRESSED_FUSION_REACTOR[3])
+                .stationResearch(b -> b
+                        .researchStack(ADVANCED_FUSION_REACTOR[0].getStackForm())
+                        .EUt(VA[UHV])
+                        .CWUt(CWT[UHV]))
+                .EUt(VA[UHV])
+                .duration(1200)
+                .buildAndRegister();
+
+        //  Compressed Fusion Reactor Mk V
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CIRCUIT_GOOD_V, 16)
+                .input(ADVANCED_FUSION_REACTOR[1], 48)
+                .input(swarm, Adamantium, 1)
+                .input(circuit, MarkerMaterials.Tier.UIV, 64)
+                .input(ELECTRIC_PUMP_UEV, 32)
+                .input(FIELD_GENERATOR_UEV, 32)
+                .input(PICO_POWER_IC, 64)
+                .input(PICO_POWER_IC, 64)
+                .input(wireGtSingle, UEVSuperconductor, 64)
+                .input(wireGtSingle, UEVSuperconductor, 64)
+                .fluidInputs(MutantActiveSolder.getFluid(L * 48))
+                .fluidInputs(Tairitsium.getFluid(L * 48))
+                .fluidInputs(Octahedrite.getFluid(L * 40))
+                .fluidInputs(QuantumAlloy.getFluid(L * 16))
                 .output(COMPRESSED_FUSION_REACTOR[3])
                 .stationResearch(b -> b
                         .researchStack(ADVANCED_FUSION_REACTOR[0].getStackForm())

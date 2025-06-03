@@ -323,7 +323,7 @@ public class WetwareCircuits {
                 .duration(100)
                 .EUt(VA[IV])
                 .input(foil, Yttrium, 4)
-                .input(ACRYLIC_YARN,16)
+                .input(wireFine,Kevlar,16)
                 .fluidInputs(Polybenzimidazole.getFluid(288))
                 .fluidInputs(UltraGlue.getFluid(500))
                 .output(LAMINATION_YR, 4)

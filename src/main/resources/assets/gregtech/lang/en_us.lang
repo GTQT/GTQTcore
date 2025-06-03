@@ -384,7 +384,7 @@ gcys.machine.cryogenic_reactor.name=Cryogenic Reaction Chamber
 
 # Nanoscale Fabricator
 gcys.machine.nanoscale_fabricator.name=Nanoscale Fabricator
-gcys.multiblock.nanoscale_fabricator.tooltip.1=Average Crucible heat cannot exceed the target by more than §c250K§7.
+gtqtcore.multiblock.nanoscale_fabricator.tooltip.1=Average Crucible heat cannot exceed the target by more than §c250K§7.
 
 # CVD Unit
 gcys.machine.cvd_unit.name=CVD Unit

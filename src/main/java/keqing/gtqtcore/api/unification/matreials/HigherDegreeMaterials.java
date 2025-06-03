@@ -275,16 +275,15 @@ public class HigherDegreeMaterials {
                 .cableProperties(GTValues.V[GTValues.UHV], 96, 0, true)
                 .components(RutheniumTriniumAmericiumNeutronate, 1)
                 .build();
-/*
+
         UEVSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("uev_superconductor"))
                 .ingot().liquid()
-                .color(UEVSuperconductorBase.getMaterialRGB())
+                .color(0x954FE0)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
-                .cableProperties(GTValues.V[GTValues.UEV], 8,0,true)
-                .components(UEVSuperconductorBase,1)
+                .cableProperties(GTValues.V[GTValues.UEV], 128, 0, true)
                 .build();
-
+/*
         UIVSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("uiv_superconductor"))
                 .ingot().liquid()
                 .color(UIVSuperconductorBase.getMaterialRGB())

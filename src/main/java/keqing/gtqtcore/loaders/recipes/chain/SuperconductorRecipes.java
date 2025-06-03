@@ -11,7 +11,6 @@ import static gregtech.api.unification.ore.OrePrefix.pipeTinyFluid;
 import static gregtech.api.unification.ore.OrePrefix.wireGtSingle;
 import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
-
 import static keqing.gtqtcore.common.items.GTQTMetaItems.DISK_5;
 
 public class SuperconductorRecipes {
@@ -114,5 +113,16 @@ public class SuperconductorRecipes {
                 .output(wireGtSingle, UHVSuperconductor, 8)
                 .buildAndRegister();
 
+        ASSEMBLY_LINE_RECIPES.recipeBuilder().duration(600).EUt(VA[11])
+                .stationResearch(b -> b
+                        .researchStack(OreDictUnifier.get(wireGtSingle, UHVSuperconductor))
+                        .CWUt(CWT[9])
+                        .EUt(VA[10]))
+                .input(wireGtSingle, QuantumAlloy, 8)
+                .input(pipeTinyFluid, Adamantium, 4)
+                .inputs(ELECTRIC_PUMP_UEV.getStackForm(2))
+                .fluidInputs(Helium.getFluid(FluidStorageKeys.LIQUID, 1600))
+                .output(wireGtSingle, UEVSuperconductor, 8)
+                .buildAndRegister();
     }
 }

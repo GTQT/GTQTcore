@@ -7,4 +7,5 @@ public interface IWarpSwarm {
     Material getMaterial();
     boolean isAvailable();
     boolean applyDamage(int i);
+    int getParallel();
 }

@@ -6,6 +6,7 @@ import static gregtech.api.GTValues.UEV;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.Materials.Titanium;
+import static gregtechfoodoption.GTFOMaterialHandler.Blood;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class FusionLoader {
@@ -515,7 +516,7 @@ public class FusionLoader {
                 .duration(10 * SECOND)
                 .EUToStart(380000000L) // MK3
                 .buildAndRegister();
-*/
+        */
 
         //  Nickel + Polonium -> Copernicium
         FUSION_RECIPES.recipeBuilder()
@@ -727,7 +728,8 @@ public class FusionLoader {
                 .duration(11 * SECOND)
                 .EUToStart(650000000L) // MK4
                 .buildAndRegister();
-/*
+
+        /*
         //  Uranium-238 + Uranium-238 -> Quasi-fissioning Plasma
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Uranium238.getFluid(125))
@@ -737,7 +739,9 @@ public class FusionLoader {
                 .duration(5 * SECOND)
                 .EUToStart(250000000L) // MK4
                 .buildAndRegister();
-*/
+
+         */
+
 
         //  Iron + Bismuth -> Meitnerium
         FUSION_RECIPES.recipeBuilder()
@@ -759,7 +763,6 @@ public class FusionLoader {
                 .EUToStart(440000000L) // MK4
                 .buildAndRegister();
 
-/*
         //  Nether Star + Bedrock -> Ichor Liquid (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(NetherStar.getFluid(L))
@@ -780,6 +783,7 @@ public class FusionLoader {
                 .EUToStart(650000000L) // MK4
                 .buildAndRegister();
 
+        /*
         //  Silver + Starlight Liquid -> Luna Silver
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Silver.getFluid(L / 2))
@@ -789,6 +793,8 @@ public class FusionLoader {
                 .duration((int) (2.8 * SECOND))
                 .EUToStart(650000000L) // MK4
                 .buildAndRegister();
+
+         */
 
         //  Ichor Liquid + Radon -> Ichorium
         FUSION_RECIPES.recipeBuilder()
@@ -812,9 +818,9 @@ public class FusionLoader {
 
         //  Void Metal + Bedrock -> Rhugnor
         FUSION_RECIPES.recipeBuilder()
-                .fluidInputs(VoidMetal.getFluid(L * 2))
-                .fluidInputs(Bedrock.getFluid(1000))
-                .fluidOutputs(Rhugnor.getFluid(L * 4))
+                .fluidInputs(QuantumAlloy.getFluid(L * 2))
+                .fluidInputs(Neutronium.getFluid(144))
+                .fluidOutputs(Rhugnor.getFluid(144))
                 .EUt(VA[UHV])
                 .duration(8 * SECOND)
                 .EUToStart(900000000L) // MK4
@@ -830,6 +836,7 @@ public class FusionLoader {
                 .EUToStart(900000000L) // MK4
                 .buildAndRegister();
 
+/*
         //  Naquadria + Radon (plasma) -> Extremely Unstable Naquadah
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Naquadria.getFluid(32))
@@ -839,6 +846,8 @@ public class FusionLoader {
                 .duration((int) (1.6 * SECOND))
                 .EUToStart(900000000L) // MK4
                 .buildAndRegister();
+
+ */
 
         /* -------------------------------- MK5 -------------------------------- */
 
@@ -852,7 +861,7 @@ public class FusionLoader {
                 .duration((int) (1.6 * SECOND))
                 .EUToStart(1800000000L) // MK5
                 .buildAndRegister();
-/*
+
         //  Advanced Fermium Plasma recipe
         //  Taranium (plasma) + Rubidium -> Fermium (plasma)
         FUSION_RECIPES.recipeBuilder()
@@ -863,7 +872,7 @@ public class FusionLoader {
                 .duration((int) (1.6 * SECOND))
                 .EUToStart(1800000000L) // MK5
                 .buildAndRegister();
-*/
+
         //  Lutetium + Vanadium -> Plutonium-241 (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Lutetium.getFluid(L))
@@ -931,7 +940,8 @@ public class FusionLoader {
                 .EUt((int) V[EV])
                 .duration((int) (61.2 * SECOND))
                 .buildAndRegister();
-/*
+
+        /*
         //  Scandium-Titanium Mixture + Radium-Radon Mixture -> Metastable Hassium
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(ScandiumTitaniumMixture.getFluid(L * 2))
@@ -941,6 +951,8 @@ public class FusionLoader {
                 .duration(4 * SECOND)
                 .EUToStart(900000000L) // MK5
                 .buildAndRegister();
+
+         */
 
         //  Crystal Matrix + Mithril -> Infinity
         FUSION_RECIPES.recipeBuilder()
@@ -954,9 +966,9 @@ public class FusionLoader {
 
         //  Dragon Blood + Rhugnor -> Hypogen
         FUSION_RECIPES.recipeBuilder()
-                .fluidInputs(DragonBlood.getFluid(L * 4))
-                .fluidInputs(Rhugnor.getFluid(L * 4))
-                .fluidOutputs(Hypogen.getPlasma(L * 8))
+                .fluidInputs(DragonBlood.getFluid(L))
+                .fluidInputs(Rhugnor.getFluid(L * 2))
+                .fluidOutputs(Hypogen.getPlasma(36))
                 .EUt(VA[UEV])
                 .duration(16 * SECOND)
                 .EUToStart(2530000000L) // MK5
@@ -980,6 +992,7 @@ public class FusionLoader {
                 .EUt(VA[UEV])
                 .duration((int) (1.6 * SECOND))
                 .EUToStart(1800000000L) // MK5
+
                 .buildAndRegister();
         //  Advanced Rhugnor recipe
         //  Dragon Blood (plasma) + Titanium (plasma) -> Rhugnor
@@ -992,6 +1005,7 @@ public class FusionLoader {
                 .EUToStart(1300000000L) // MK5
                 .buildAndRegister();
 
+        /*
         //  Hikarium + Tairitsium -> Fatalium (plasma)
         FUSION_RECIPES.recipeBuilder()
                 .fluidInputs(Hikarium.getFluid(L * 4))
@@ -1002,6 +1016,8 @@ public class FusionLoader {
                 .EUToStart(2550000000L) // MK5
                 .buildAndRegister();
 
- */
+         */
+
+
     }
 }

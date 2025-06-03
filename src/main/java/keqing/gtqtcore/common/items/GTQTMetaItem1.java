@@ -578,6 +578,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         IMPREGNATED_MULTILAYER_FIBER = this.addItem(574, "item.impregnated_multilayer_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_BIO_BOARD = this.addItem(575, "item.impregnated_bio_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         IMPREGNATED_GENE_BOARD = this.addItem(576, "item.impregnated_gene_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        IMPREGNATED_OPTICAL_BOARD = this.addItem(577, "item.impregnated_optical_fiber").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         LAMINATION_WD = this.addItem(580, "item.lamination_wd").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_FG = this.addItem(581, "item.lamination_fg").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
@@ -586,6 +587,7 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         LAMINATION_IR = this.addItem(584, "item.insulating_ir").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_YR = this.addItem(585, "item.insulating_yr").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
         LAMINATION_IN = this.addItem(586, "item.insulating_in").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
+        LAMINATION_EU = this.addItem(587, "item.insulating_eu").setMaxStackSize(64).setCreativeTabs(CommonProxy.GTQTCore_CH);
 
         //  ID 206-211: High Tier Boule and Wafers
         EUROPIUM_BOULE = this.addItem(610, "boule.europium").setCreativeTabs(CommonProxy.GTQTCore_GD);
@@ -659,6 +661,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HELIUM_NEON_LASER = this.addItem(709, "laser.helium_neon").setCreativeTabs(CommonProxy.GTQTCore_GD);
         ND_YAG_LASER = this.addItem(710, "laser.nd_yag").setCreativeTabs(CommonProxy.GTQTCore_GD);
         OPTICAL_LASER_CONTROL_UNIT = this.addItem(711, "optical_laser_control_unit").setCreativeTabs(CommonProxy.GTQTCore_GD);
+        OPTICAL_PROCESSING_CORE = this.addItem(712, "optical_processing_core").setCreativeTabs(CommonProxy.GTQTCore_GD);
+
+
         // Spintronic Circuit Components: ID 220-239
         TOPOLOGICAL_INSULATOR_TUBE = this.addItem(721, "tube.topological_insulator").setCreativeTabs(CommonProxy.GTQTCore_HP);
         BOSE_EINSTEIN_CONDENSATE_CONTAINMENT_UNIT = this.addItem(722, "containment_unit.bose_einstein_condensate").setCreativeTabs(CommonProxy.GTQTCore_HP);

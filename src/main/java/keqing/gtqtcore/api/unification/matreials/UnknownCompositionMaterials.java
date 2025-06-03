@@ -917,6 +917,7 @@ public class UnknownCompositionMaterials {
 
 
         GTQTMaterials.DragonBlood = new Material.Builder(getMaterialsId(), gtqtcoreId("dragon_blood"))
+                .plasma()
                 .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
                 .color(0xDC2814)
                 .iconSet(DULL)

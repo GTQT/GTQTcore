@@ -194,7 +194,8 @@ metaitem.component.gooware.nonlinear_chemical_oscillator.tooltip=非平衡热力
 #  Optical Components
 metaitem.component.optical.optical_laser_control_unit.name=光学激光控制器
 metaitem.component.optical.optical_laser_control_unit.tooltip=激光信息传输
-
+metaitem.optical_processing_core.name=光学兼容内存
+metaitem.optical_processing_core.tooltip=光学计算单元
 #  Spintronic Components
 metaitem.component.spintronic.esr_computation_unit.name=电子自旋共振计算单元
 metaitem.component.spintronic.esr_computation_unit.tooltip=电子自旋共振量子计算！
@@ -3813,6 +3814,7 @@ gtqtcore.material.octahedrite=八角铁
 gtqtcore.material.teflon=特氟龙
 gtqtcore.material.rsg=刚柔金
 gtqtcore.material.pb_b=铅铋合金140
+gtqtcore.material.tairitsium=对立合金
 gtqtcore.material.high_durability_compound_steel_3=高强度抗震复合钢
 gtqtcore.material.high_durability_compound_steel_2=精金掺杂的高强度复合钢（HDCS:Ad）
 gtqtcore.material.high_durability_compound_steel_1=高强度硅岩复合钢
@@ -5324,6 +5326,7 @@ metaitem.item.impregnated_fiber.name=工程塑料-灵敏压电基板
 metaitem.item.impregnated_multilayer_fiber.name=层压复合纤维-性能合金基板
 metaitem.item.impregnated_bio_fiber.name=超活性生物基—高性能导电体基板
 metaitem.item.impregnated_gene_fiber.name=生物基因异变—活性电子基板
+metaitem.item.impregnated_optical_fiber.name=先进光学模块—脉冲调制器基板
 
 gtqtcore.machine.froth_flotation_tank.name=工业浮选反应罐
 gtqtcore.machine.fix_bed.name=固化床
@@ -5658,8 +5661,9 @@ metaitem.item.lamination_ca.name=强化碳纤维基板
 metaitem.item.lamination_fg.name=玻璃纤维基板
 metaitem.item.lamination_wd.name=防腐木基板
 metaitem.item.insulating_ir.name=钌基厚膜电阻浆料覆膜
-metaitem.item.insulating_yr.name=钇基晴纶纤维复合覆膜
+metaitem.item.insulating_yr.name=钇基特种纤维复合覆膜
 metaitem.item.insulating_in.name=铟基晴纶纤维电子覆膜
+metaitem.item.insulating_eu.name=铕基半导氮化镓覆膜
 
 metaitem.item.lamination_ge.name=锗层压纤维基板
 metaitem.item.insulatingmica.name=绝缘云母复合片

@@ -625,8 +625,8 @@ public class GTQTMetaTileEntities {
         COMPRESSED_FUSION_REACTOR[1] = registerMetaTileEntity(504, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.zpm"), ZPM, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK2), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Materials.Tritanium).getBlock(Materials.Tritanium)));
         COMPRESSED_FUSION_REACTOR[2] = registerMetaTileEntity(505, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uv"), UV, MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_CASING_MK3), MetaBlocks.FUSION_CASING.getState(gregtech.common.blocks.BlockFusionCasing.CasingType.FUSION_COIL), MetaBlocks.FRAMES.get(Neutronium).getBlock(Neutronium)));
         COMPRESSED_FUSION_REACTOR[3] = registerMetaTileEntity(506, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uhv"), UHV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKIV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKII), MetaBlocks.FRAMES.get(Infinity).getBlock(Infinity)));
-        COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(507, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(MagnetoHydrodynamicallyConstrainedStarMatter).getBlock(MagnetoHydrodynamicallyConstrainedStarMatter)));
-        COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(508, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Eternity).getBlock(Eternity)));
+        COMPRESSED_FUSION_REACTOR[4] = registerMetaTileEntity(507, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uev"), UEV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKV), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIII), MetaBlocks.FRAMES.get(Hypogen).getBlock(Hypogen)));
+        COMPRESSED_FUSION_REACTOR[5] = registerMetaTileEntity(508, new MetaTileEntityCompressedFusionReactor(gtqtcoreId("compressed_fusion_reactor.uiv"), UIV, GTQTMetaBlocks.blockCompressedFusionReactor.getState(CASING_FUSION_MKVI), GTQTMetaBlocks.blockCompressedFusionReactor.getState(FUSION_COIL_MKIV), MetaBlocks.FRAMES.get(Spacetime).getBlock(Spacetime)));
 
         //高级装配线
         ADVANCED_ASSEMBLY_LINE = registerMetaTileEntity(510, new MetaTileEntityAdvancedAssemblyLine(gtqtcoreId("advanced_assembly_line")));
@@ -643,8 +643,8 @@ public class GTQTMetaTileEntities {
 
 
         //star
-        if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(600, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
+        DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(600, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
+
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
             DIMENSIONAL_MIXER = registerMetaTileEntity(601, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)

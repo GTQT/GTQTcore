@@ -1,19 +1,24 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
+import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregtech.api.GTValues;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
-import gregtech.api.pattern.*;
+import gregtech.api.pattern.BlockPattern;
+import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.pattern.PatternMatchContext;
+import gregtech.api.pattern.TraceabilityPredicate;
+import gregtech.api.recipes.Recipe;
+import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -23,13 +28,10 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCrucible;
 import keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -38,12 +40,11 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockController { //TODO Pressure for this machine
+public class MetaTileEntityNanoscaleFabricator extends GCYMRecipeMapMultiblockController {
 
     private int temperature;
 
@@ -147,61 +148,19 @@ public class MetaTileEntityNanoscaleFabricator extends RecipeMapMultiblockContro
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gtqtcore.multiblock.nanoscale_fabricator.tooltip.1"));
+        tooltip.add(I18n.format("gtqtcore.machine.nanoscale_fabricator.tooltip.1"));
     }
 
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        List<MultiblockShapeInfo> shapeInfos = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("   TTT   ", "   TPT   ", "   TCT   ", "         ")
-                .aisle("  XXXXX  ", "  XX#XX  ", "  XXXXX  ", "  XXXXX  ")
-                .aisle(" XXXXXXX ", " X     X ", " X     X ", " XXGGGXX ")
-                .aisle("TXXTTTXXT", "TX     XT", "TX     XT", " XGGGGGX ")
-                .aisle("TXXTATXXT", "N   J   U", "CX     XC", " XGGGGGX ")
-                .aisle("TXXTTTXXT", "TX     XT", "TX     XT", " XGGGGGX ")
-                .aisle(" XXXXXXX ", " X     X ", " X     X ", " XXGGGXX ")
-                .aisle("  XXXXX  ", "  FX XO  ", "  LXXXX  ", "  XMSEX  ")
-                .aisle("   TTT   ", "   TIT   ", "   TCT   ", "         ")
-                .where('S', GTQTMetaTileEntities.LARGE_NANOSCALE_FABRICATOR, EnumFacing.SOUTH)
-                .where('X', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING))
-                .where('T', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.NONCONDUCTING_CASING))
-                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.LAMINATED_GLASS))
-                .where('J', GTQTMetaBlocks.blockPCBFactoryCasing.getState(BlockPCBFactoryCasing.PCBFactoryCasingType.ADVANCED_SUBSTRATE_CASING))
-                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.SOUTH)
-                .where('N', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.WEST)
-                .where('P', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.NORTH)
-                .where('U', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.EAST)
-                .where('A', MetaTileEntities.ITEM_IMPORT_BUS[GTValues.ULV], EnumFacing.DOWN)
-                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[GTValues.LuV], EnumFacing.SOUTH)
-                .where('F', MetaTileEntities.FLUID_IMPORT_HATCH[GTValues.HV], EnumFacing.SOUTH)
-                .where('L', MetaTileEntities.FLUID_EXPORT_HATCH[GTValues.HV], EnumFacing.SOUTH)
-                .where('O', MetaTileEntities.ITEM_EXPORT_BUS[GTValues.HV], EnumFacing.SOUTH)
-                .where(' ', Blocks.AIR.getDefaultState());
-
-        if (ConfigHolder.machines.enableMaintenance)
-            builder.where('M', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.SOUTH);
-        else
-            builder.where('M', GCYMMetaBlocks.LARGE_MULTIBLOCK_CASING.getState(BlockLargeMultiblockCasing.CasingType.ENGRAVER_CASING));
-
-        for (BlockCrucible.CrucibleType crucibleType : BlockCrucible.CrucibleType.values()) {
-            shapeInfos.add(builder.where('C', GTQTMetaBlocks.blockCrucible.getState(crucibleType)).build());
-        }
-
-        return shapeInfos;
-    }
-
-    @SuppressWarnings("InnerClassMayBeStatic")
-    private class NanoscaleFabricatorWorkableHandler extends MultiblockRecipeLogic {
+    private class NanoscaleFabricatorWorkableHandler extends GCYMMultiblockRecipeLogic {
 
         public NanoscaleFabricatorWorkableHandler(RecipeMapMultiblockController tileEntity) {
             super(tileEntity);
         }
 
-        // @Override
-        // public boolean checkRecipe(@Nonnull Recipe recipe) {
-        //   int delta = temperature - recipe.getProperty(TemperatureProperty.getInstance(), 0);
-        //  return GTUtility.isBetweenInclusive(0, 250, delta);
-        //}
+        @Override
+        public boolean checkRecipe(@Nonnull Recipe recipe) {
+            int delta = temperature - recipe.getProperty(TemperatureProperty.getInstance(), 0);
+            return delta >= 0 && delta <= 250;
+        }
     }
 }

@@ -2,6 +2,7 @@ package keqing.gtqtcore.loaders.recipes.chain;
 
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
+import static keqing.gtqtcore.api.GCYSValues.increaseDetailP;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CVD_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.DRYER_RECIPES;
 import static gregtech.api.GTValues.*;
@@ -60,6 +61,7 @@ public class GalliumNitrideChain {
                 .fluidInputs(Water.getFluid(3000))
                 .output(dust, GTQTMaterials.GalliumTrioxide, 5)
                 .fluidOutputs(Methane.getFluid(3000))
+                .pressure(increaseDetailP[MV])
                 .duration(160).EUt(VA[HV]).buildAndRegister();
 
         // Ga2O3 + 2NH3 -> 2GaN + 3H2O
@@ -68,6 +70,7 @@ public class GalliumNitrideChain {
                 .fluidInputs(Ammonia.getFluid(2000))
                 .output(plate, GTQTMaterials.GalliumNitride, 4)
                 .fluidOutputs(Steam.getFluid(3000))
+                .pressure(increaseDetailP[IV])
                 .duration(250).EUt(VA[LuV]).buildAndRegister();
     }
 }

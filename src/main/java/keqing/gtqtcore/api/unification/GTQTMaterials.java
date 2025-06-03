@@ -779,6 +779,7 @@ public class GTQTMaterials {
     public static Material ZPMSuperconductor;
     public static Material UVSuperconductor;
     public static Material UHVSuperconductor;
+    public static Material UEVSuperconductor;
     public static Material Prismarine;
     public static Material Purpur;
 
@@ -1296,6 +1297,7 @@ public class GTQTMaterials {
     public static Material Teflon;
     public static Material RSG;
     public static Material PbB;
+    public static Material Tairitsium;
     public static Material HafniumCarbide;
     public static Material SeaborgiumCarbide;
     public static Material TantalumHafniumSeaborgiumCarbide;

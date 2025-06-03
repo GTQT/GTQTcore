@@ -193,7 +193,8 @@ metaitem.component.gooware.nonlinear_chemical_oscillator.tooltip=Non-equilibrium
 # Optical Components
 metaitem.component.optical.optical_laser_control_unit.name=Optical Laser Controller
 metaitem.component.optical.optical_laser_control_unit.tooltip=Laser Information Transmission
-
+metaitem.optical_processing_core.name=Optically compatible memory
+metaitem.optical_processing_core.tooltip=Optical Computing Unit
 # Spintronic Components
 metaitem.component.spintronic.esr_computation_unit.name=Electron Spin Resonance Computation Unit
 metaitem.component.spintronic.esr_computation_unit.tooltip=Electron Spin Resonance Quantum Computing!
@@ -3829,6 +3830,7 @@ gtqtcore.material.octahedrite=Octahedrite
 gtqtcore.material.teflon=Teflon
 gtqtcore.material.rsg=RSG Alloy
 gtqtcore.material.pb_b=Lead Bismuth Alloy 140
+gtqtcore.material.tairitsium=Tairitsium
 gtqtcore.material.high_durability_compound_steel_3=High Strength Seismic Resistant Composite Steel
 gtqtcore.material.high_durability_compound_steel_2=High Strength Composite Steel with Adamantine Doping (HDCS:Ad)
 gtqtcore.material.high_durability_compound_steel_1=High Strength Silicon Rock Composite Steel
@@ -5347,6 +5349,7 @@ metaitem.item.impregnated_fiber.name=Engineering Plastic-Sensitive Piezoelectric
 metaitem.item.impregnated_multilayer_fiber.name=Laminated Composite Fiber-Performance Alloy Substrate
 metaitem.item.impregnated_bio_fiber.name=Super-active bio-based – high-performance conductive substrates
 metaitem.item.impregnated_gene_fiber.name=Biological genetic mutation—active electronic substrates
+metaitem.item.impregnated_optical_fiber.name=Advanced Optical Module—Pulse Modulator Substrate
 
 gtqtcore.machine.froth_flotation_tank.name=Industrial Flotation Reactor Tank
 gtqtcore.machine.fix_bed.name=Fixed Bed
@@ -5682,6 +5685,7 @@ metaitem.item.insulating_ir.name=Ruthenium-based Thick Film Resistor Paste Coati
 metaitem.item.lamination_ge.name=Germanium Laminate Fiber Substrate
 metaitem.item.insulating_yr.name=Yttrium-based acrylic fiber composite lamination
 metaitem.item.insulating_in.name=Indium-based acrylic fiber electronic lamination
+metaitem.item.insulating_eu.name=Europium-based hemi-gallium nitride coating
 
 metaitem.item.insulatingmica.name=Insulating Mica Composite Sheet
 gtqtcore.machine.gas_collector.name=Large Gas Collector

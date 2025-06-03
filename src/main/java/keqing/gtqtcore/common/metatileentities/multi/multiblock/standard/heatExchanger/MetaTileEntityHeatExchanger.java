@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.heatExchanger;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -204,6 +207,13 @@ public class MetaTileEntityHeatExchanger extends RecipeMapNoEnergyMultiblockCont
         this.writeCustomData(GTQTValue.UPDATE_TIER6, buf -> buf.writeInt(this.casingTier));
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
+        super.renderMetaTileEntity(renderState, translation, pipeline);
+        this.getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), true,
+                isStructureFormed());
+    }
 
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {

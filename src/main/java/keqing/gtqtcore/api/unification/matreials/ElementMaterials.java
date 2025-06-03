@@ -180,6 +180,7 @@ public class ElementMaterials {
         //  26016 Hypogen
         GTQTMaterials.Hypogen = new Material.Builder(getMaterialsId(), gtqtcoreId("hypogen"))
                 .ingot()
+                .plasma()
                 .liquid(new FluidBuilder().temperature((int) (V[UXV] - V[LuV])))
                 .element(Elements.Hypogen)
                 .color(0xDC784B)
@@ -219,6 +220,7 @@ public class ElementMaterials {
                 .build();
         //  26019 Celestial Tungsten
         GTQTMaterials.CelestialTungsten = new Material.Builder(getMaterialsId(), gtqtcoreId("celestial_tungsten"))
+                .plasma()
                 .ingot()
                 .fluid()
                 .color(0x323232)
@@ -261,6 +263,7 @@ public class ElementMaterials {
                 .build();
         //  26022 Ichor Liquid
         GTQTMaterials.IchorLiquid = new Material.Builder(getMaterialsId(), gtqtcoreId("ichor_liquid"))
+                .plasma()
                 .liquid(new FluidBuilder().temperature(214748))
                 .color(0xE5A559)
                 .element(Elements.IchorLiquid)
@@ -279,11 +282,9 @@ public class ElementMaterials {
                 .fluid()
                 .color(0x20142C)
                 .iconSet(DULL)
-                .flags(GENERATE_PLATE, GENERATE_ROD, GENERATE_RING, GENERATE_BOLT_SCREW, GENERATE_GEAR, GENERATE_ROTOR,
-                        GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROUND, GENERATE_SMALL_GEAR
-                        , GENERATE_SPRING, GENERATE_SPRING_SMALL)
                 .element(Elements.VoidMetal)
                 .build();
+
         //  26025 Mithril
         GTQTMaterials.Mithril = new Material.Builder(getMaterialsId(), gtqtcoreId("mithril"))
                 .ingot()

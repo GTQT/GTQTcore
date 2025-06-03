@@ -2,11 +2,13 @@ package keqing.gtqtcore.loaders.recipes.circuits;
 
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.unification.material.MarkerMaterials;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregicality.multiblocks.api.recipes.GCYMRecipeMaps.ALLOY_BLAST_RECIPES;
 import static gregtech.common.items.MetaItems.*;
 import static gregtech.common.items.MetaItems.SHAPE_EXTRUDER_WIRE;
+import static keqing.gtqtcore.api.GCYSValues.increaseDetailP;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -296,12 +298,42 @@ public class OpticalCircuits {
     }
 
     private static void board() {
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
+                .duration(100)
+                .EUt(VA[ZPM])
+                .input(plate, GalliumNitride, 8)
+                .input(wireFine,Americium, 32)
+                .fluidInputs(Europium.getFluid(576))
+                .fluidInputs(KaptonE.getFluid(288))
+                .output(LAMINATION_EU, 4)
+                .buildAndRegister();
+
+        PRESSURE_LAMINATOR_RECIPES.recipeBuilder()
+                .duration(200)
+                .EUt(VA[UV])
+                .input(LAMINATION_EU)
+                .input(foil, Americium, 8)
+                .fluidInputs(ElectrolyteReflectorMixture.getFluid(576))
+                .fluidInputs(KaptonE.getFluid(576))
+                .output(IMPREGNATED_OPTICAL_BOARD, 2)
+                .buildAndRegister();
+
         CVD_RECIPES.recipeBuilder()
-                .input(plate, GalliumNitride)
-                .input(foil, Americium, 4)
+                .input(plate, TantalumPentoxide, 1)
+                .input(dust, LutetiumOxide, 1)
+                .output(plate, LutetiumTantalate, 2)
+                .fluidInputs(Neon.getFluid(1000))
+                .cleanroom(CleanroomType.CLEANROOM)
+                .pressure(increaseDetailP[IV])
+                .duration(400).EUt(VA[UV]).buildAndRegister();
+
+        CVD_RECIPES.recipeBuilder()
+                .input(IMPREGNATED_OPTICAL_BOARD)
+                .input(foil, LutetiumTantalate, 4)
                 .output(OPTICAL_BOARD)
                 .cleanroom(CleanroomType.CLEANROOM)
-                .duration(40).EUt(VA[UHV]).buildAndRegister();
+                .pressure(increaseDetailP[IV])
+                .duration(80).EUt(VA[UHV]).buildAndRegister();
 
         for (FluidStack stack : new FluidStack[]{TetramethylammoniumHydroxide.getFluid(4000), EDP.getFluid(1000)}) {
             CHEMICAL_RECIPES.recipeBuilder()
@@ -310,7 +342,7 @@ public class OpticalCircuits {
                     .fluidInputs(stack)
                     .output(OPTICAL_CIRCUIT_BOARD)
                     .cleanroom(CleanroomType.CLEANROOM)
-                    .duration(210).EUt(VA[IV]).buildAndRegister();
+                    .duration(210).EUt(VA[UV]).buildAndRegister();
         }
     }
 
@@ -367,10 +399,25 @@ public class OpticalCircuits {
     }
 
     private static void circuits() {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(CRYSTAL_CENTRAL_PROCESSING_UNIT,16)
+                .input(wireFine, NiobiumTitanium, 4)
+                .input(plate, KaptonE, 4)
+                .input(bolt, HSSS, 6)
+                .output(OPTICAL_PROCESSING_CORE,16)
+                .fluidInputs(MutantActiveSolder.getFluid(1440))
+                .stationResearch(b -> b
+                        .researchStack(BIOPROCESSOR_UNIT.getStackForm())
+                        .CWUt(CWT[UV])
+                        .EUt(VA[UHV]))
+                .EUt(VA[UHV])
+                .duration(10 * SECOND)
+                .buildAndRegister();
+
         //  Processor
         CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(OPTICAL_LASER_CONTROL_UNIT)
-                .input(CRYSTAL_CENTRAL_PROCESSING_UNIT)
+                .input(OPTICAL_PROCESSING_CORE)
                 .input(OPTICAL_RESISTOR, 8)
                 .input(OPTICAL_CAPACITOR, 8)
                 .input(OPTICAL_TRANSISTOR, 8)

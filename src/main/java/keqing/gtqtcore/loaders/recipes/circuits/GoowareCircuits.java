@@ -3,6 +3,7 @@ package keqing.gtqtcore.loaders.recipes.circuits;
 import gregtech.api.GTValues;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
 import gregtech.api.unification.material.MarkerMaterials;
+import gregtech.common.items.MetaItems;
 import net.minecraftforge.fluids.FluidStack;
 
 import static gregtech.api.GTValues.*;
@@ -22,6 +23,7 @@ public class GoowareCircuits {
         SoC();
         Circuits();
         BacterialCultivation();
+        AdvancedGoowareProcessingUnit();
     }
 
     private static void BacterialCultivation() {
@@ -113,7 +115,7 @@ public class GoowareCircuits {
                     .fluidInputs(new FluidStack[]{stack})
                     .output(GOOWARE_CIRCUIT_BOARD)
                     .duration(10 * SECOND + 10)
-                    .EUt(GTValues.VA[EV])
+                    .EUt(GTValues.VA[ZPM])
                     .cleanroom(CleanroomType.CLEANROOM)
                     .buildAndRegister();
         }
@@ -412,7 +414,22 @@ public class GoowareCircuits {
                 .Tier(4) // UHV
                 .buildAndRegister();
     }
+    private static void AdvancedGoowareProcessingUnit() {
 
+        PRECISE_ASSEMBLER_RECIPES.recipeBuilder()
+                .input(plate, Kevlar)
+                .input(BIO_CELL, 4)
+                .input(pipeTinyFluid, NiobiumTitanium)
+                .input(bolt, HSSS, 4)
+                .fluidInputs(KaptonE.getFluid(L * 4))
+                .fluidInputs(SterileGrowthMedium.getFluid(125))
+                .output(BIOPROCESSOR_UNIT, 2)
+                .EUt(VA[UV])
+                .CWUt(CWT[UV])
+                .duration(10 * 20)
+                .Tier(3)
+                .buildAndRegister();
+    }
     private static void Circuits() {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(GOOWARE_CIRCUIT_BOARD,16)
@@ -422,10 +439,14 @@ public class GoowareCircuits {
                 .input(plate, Kevlar, 4)
                 .input(foil, SiliconeRubber, 8)
                 .input(bolt, HSSS, 6)
-                .output(BIOPROCESSOR_UNIT,16)
                 .fluidInputs(MutatedBacterialCultivationBase.getFluid(500))
                 .fluidInputs(UUMatter.getFluid(500))
                 .fluidInputs(PCBCoolant.getFluid(2000))
+                .output(BIOPROCESSOR_UNIT,16)
+                .stationResearch(b -> b
+                        .researchStack(NEURO_PROCESSOR.getStackForm())
+                        .CWUt(CWT[ZPM])
+                        .EUt(VA[UV]))
                 .EUt(VA[UV])
                 .duration(10 * SECOND)
                 .buildAndRegister();

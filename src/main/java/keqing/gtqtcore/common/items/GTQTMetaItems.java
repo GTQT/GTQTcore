@@ -27,6 +27,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem IMPREGNATED_MULTILAYER_FIBER;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_BIO_BOARD;
     public static MetaItem<?>.MetaValueItem IMPREGNATED_GENE_BOARD;
+    public static MetaItem<?>.MetaValueItem IMPREGNATED_OPTICAL_BOARD;
+
     public static MetaItem<?>.MetaValueItem LAMINATION_CA;
     public static MetaItem<?>.MetaValueItem LAMINATION_FG;
     public static MetaItem<?>.MetaValueItem LAMINATION_WD;
@@ -34,6 +36,7 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem LAMINATION_IR;
     public static MetaItem<?>.MetaValueItem LAMINATION_YR;
     public static MetaItem<?>.MetaValueItem LAMINATION_IN;
+    public static MetaItem<?>.MetaValueItem LAMINATION_EU;
     public static MetaItem<?>.MetaValueItem TIME_BOTTLE;
     public static MetaItem<?>.MetaValueItem WATER_CLEAR;
     public static MetaItem<?>.MetaValueItem NANOSILICON_CATHODE;
@@ -516,6 +519,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem HELIUM_NEON_LASER;
     public static MetaItem<?>.MetaValueItem ND_YAG_LASER;
     public static MetaItem<?>.MetaValueItem OPTICAL_LASER_CONTROL_UNIT;
+    public static MetaItem<?>.MetaValueItem OPTICAL_PROCESSING_CORE;
+
     public static MetaItem<?>.MetaValueItem AE_FLUIX_FIRM;
     public static MetaItem<?>.MetaValueItem AE_FLUIX_BOOSTER;
     public static MetaItem<?>.MetaValueItem AE_FLUIX_NET;

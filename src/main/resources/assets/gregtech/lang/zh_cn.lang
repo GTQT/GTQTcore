@@ -332,7 +332,7 @@ gcys.machine.cryogenic_reactor.name=低温反应室
 
 # Nanoscale Fabricator
 gcys.machine.nanoscale_fabricator.name=纳米级制造室
-gcys.multiblock.nanoscale_fabricator.tooltip.1=平均坩埚热量不能超过目标温度不能超过§c250K§7。
+gtqtcore.multiblock.nanoscale_fabricator.tooltip.1=平均坩埚热量不能超过目标温度不能超过§c250K§7。
 
 # CVD Unit
 gcys.machine.cvd_unit.name=化学气相沉积单元(CVD装置)

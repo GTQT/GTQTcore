@@ -14,6 +14,7 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
+import static gregtech.api.util.GTUtility.gregtechId;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
@@ -748,6 +749,19 @@ public class MachineCasingMaterials {
                 .blast(6000,  BlastProperty.GasTier.HIGH)
                 .build();
 
+        //对立合金
+        Tairitsium = new Material.Builder(getMaterialsId(), gregtechId("tairitsium"))
+                .ingot()
+                .fluid()
+                .color(0x003F5F)
+                .iconSet(METALLIC)
+                .components(BlackSteel, 8, Tungsten, 8, Naquadria, 7, Taranium, 4, Carbon, 4, Vanadium, 3)
+                .blast(b -> b
+                        .temp(7400, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UHV], 400)
+                        .vacuumStats(VA[EV], 130))
+                .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .build();
     }
 
 }

@@ -329,12 +329,11 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<NoCoilTemperatureRecipeBuilder> MOLECULAR_BEAM_RECIPES = new RecipeMapBuilder<>("molecular_beam_recipes", new NoCoilTemperatureRecipeBuilder())
-            .itemInputs(5)
-            .itemOutputs(5)
-            .fluidInputs(2)
-            .fluidOutputs(1)
+            .itemInputs(6)
+            .itemOutputs(6)
+            .fluidInputs(3)
+            .fluidOutputs(3)
             .itemSlotOverlay(NANOSCALE_OVERLAY_1, false, false)
-            .itemSlotOverlay(NANOSCALE_OVERLAY_1, false, true)
             .itemSlotOverlay(NANOSCALE_OVERLAY_2, false, true)
             .itemSlotOverlay(NANOSCALE_OVERLAY_1, true, false)
             .itemSlotOverlay(NANOSCALE_OVERLAY_2, true, true)
@@ -1031,7 +1030,17 @@ public class GTQTcoreRecipeMaps {
             .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_COMPRESS, HORIZONTAL)
             .sound(GTSoundEvents.ARC)
-            .build();;
+            .build();
+
+    //超维度熔炼
+    public static final RecipeMap<BlastRecipeBuilder> EXTRADIMENSIONAL_SMELTING_RECIPES = new RecipeMapBuilder<>("extradimensional_smelting_recipes", new BlastRecipeBuilder())
+            .itemInputs(9)
+            .itemOutputs(9)
+            .fluidInputs(9)
+            .fluidOutputs(9)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.ARC)
+            .build();
 
     public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMapBuilder<>("fuel_cell", new FuelRecipeBuilder())
             .itemInputs(0)

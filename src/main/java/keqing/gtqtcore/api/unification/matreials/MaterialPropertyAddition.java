@@ -262,5 +262,9 @@ public class MaterialPropertyAddition {
         fpPropertyAstatine.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
         fpPropertyAstatine.enqueueRegistration(FluidStorageKeys.PLASMA, new FluidBuilder());
         Astatine.setProperty(PropertyKey.FLUID, fpPropertyAstatine);
+
+        var fpNetherStar = new FluidProperty();
+        fpNetherStar.enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
+        NetherStar.setProperty(PropertyKey.FLUID, fpNetherStar);
     }
 }

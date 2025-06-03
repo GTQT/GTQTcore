@@ -264,11 +264,6 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
         this.cleanroom = provider;
     }
 
-    public ILaser getAbility() {
-        if (this.getAbilities(LASER_INPUT) != null) return this.getAbilities(LASER_INPUT).get(0);
-        return null;
-    }
-
     public int getTier() {
         if (!isStructureFormed()) return 0;
         if (this.getAbilities(LASER_INPUT) == null || inputNum == 0) return 0;
