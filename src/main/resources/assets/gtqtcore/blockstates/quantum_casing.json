@@ -8,6 +8,12 @@
           "all": "gregtech:blocks/multiblock/quantumcasing/high_energy_casing"
         }
       },
+      "dimensional_injection_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/dimensional_injection_casing"
+        }
+      },
       "advanced_high_energy_casing": {
         "model": "minecraft:cube_all",
         "textures": {

@@ -42,6 +42,7 @@ public class GTQTRecipesManager {
         ChemicalBath.init();
         FusionLoader.init();
         NeutralNetworkNexus.init();
+        QuantumMachine.init();
         AirIntakeHatchRecipes.register();
         GCYMMultiblockRecipesOverwrite.init();
         BoronChain.init();

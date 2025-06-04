@@ -27,11 +27,15 @@ public class BlockQuantumCasing extends VariantBlock<BlockQuantumCasing.CasingTy
         return false;
     }
 
-    public static enum CasingType implements IStringSerializable {
+    public enum CasingType implements IStringSerializable {
 
-
+        //维度注入机械方块
+        DIMENSIONAL_INJECTION_CASING("dimensional_injection_casing"),
+        //超能机械方块
         HIGH_ENERGY_CASING("high_energy_casing"),
+        //进阶超能机械方块
         ADVANCED_HIGH_ENERGY_CASING("advanced_high_energy_casing"),
+        //终极超能机械方块
         ULTIMATE_HIGH_ENERGY_CASING("ultimate_high_energy_casing"),
         ANNIHILATION_CASING("annihilation_casing"),
         FIELD_GENERATOR_CASING("field_generator_casing"),
@@ -39,12 +43,15 @@ public class BlockQuantumCasing extends VariantBlock<BlockQuantumCasing.CasingTy
         MOLECULAR_COIL("molecular_coil"),
         HOLLOW_CASING("hollow_casing"),
         SPACETIME_CASING("spacetime_casing"),
+        //维度桥接机械方块
         DIMENSIONAL_BRIDGE_CASING("dimensional_bridge_casing"),
         DIMENSIONAL_PRESERVE_CASING("dimensional_preserve_casing"),
         SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING("singularity_reinforced_stellar_shielding_casing"),
         CELESTIAL_MATTER_GUIDANCE_CASING("celestial_matter_guidance_casing"),
         BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING("boundless_gravitationally_severed_structure_casing"),
         TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING("transcendentally_amplified_magnetic_confinement_casing");
+
+
 
 
         private final String name;

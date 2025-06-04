@@ -1298,6 +1298,7 @@ public class GTQTMaterials {
     public static Material RSG;
     public static Material PbB;
     public static Material Tairitsium;
+    public static Material Laurenium;
     public static Material HafniumCarbide;
     public static Material SeaborgiumCarbide;
     public static Material TantalumHafniumSeaborgiumCarbide;

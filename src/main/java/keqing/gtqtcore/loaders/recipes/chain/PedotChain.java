@@ -71,11 +71,11 @@ public class PedotChain {
                 .fluidInputs(GTQTMaterials.Polystyrene.getFluid(L))
                 .fluidInputs(SulfurTrioxide.getFluid(1000))
                 .fluidOutputs(GTQTMaterials.PolystyreneSulfonate.getFluid(L))
-                .EUt(VA[HV])
+                .EUt(VA[UV])
                 .duration(8 * SECOND)
                 .buildAndRegister();
 
-        MIXER_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(GTQTMaterials.Edot.getFluid(1000))
                 .fluidInputs(GTQTMaterials.PolystyreneSulfonate.getFluid(L))
                 .fluidOutputs(GTQTMaterials.PedotPSS.getFluid(L * 9))
@@ -83,7 +83,7 @@ public class PedotChain {
     }
 
     private static void tma() {
-        MIXER_RECIPES.recipeBuilder()
+        CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(GTQTMaterials.Edot.getFluid(1000))
                 .fluidInputs(GTQTMaterials.PMMA.getFluid(L))
                 .fluidOutputs(GTQTMaterials.PedotTMA.getFluid(L * 9))

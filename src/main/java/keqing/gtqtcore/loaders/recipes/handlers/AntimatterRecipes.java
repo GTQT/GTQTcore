@@ -51,7 +51,7 @@ public class AntimatterRecipes {
         //虚空力场通量外壳 UHV-UEV
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt,Neutronium,1)
-                .input(FIELD_GENERATOR_UHV,1)
+                .input(FIELD_GENERATOR_ZPM,1)
                 .input(circuit, MarkerMaterials.Tier.UHV,2)
                 .input(circuit, MarkerMaterials.Tier.UV,4)
                 .input(plate, Duranium, 8)

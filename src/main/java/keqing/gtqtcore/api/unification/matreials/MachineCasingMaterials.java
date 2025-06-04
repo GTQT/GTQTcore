@@ -750,7 +750,7 @@ public class MachineCasingMaterials {
                 .build();
 
         //对立合金
-        Tairitsium = new Material.Builder(getMaterialsId(), gregtechId("tairitsium"))
+        Tairitsium = new Material.Builder(getMaterialsId(), gtqtcoreId("tairitsium"))
                 .ingot()
                 .fluid()
                 .color(0x003F5F)
@@ -761,6 +761,20 @@ public class MachineCasingMaterials {
                         .blastStats(VA[UHV], 400)
                         .vacuumStats(VA[EV], 130))
                 .flags(DECOMPOSITION_BY_CENTRIFUGING)
+                .build();
+
+        //劳伦姆
+        Laurenium = new Material.Builder(getMaterialsId(), gtqtcoreId("laurenium"))
+                .ingot()
+                .fluid()
+                .color(0xE564E4)
+                .iconSet(SHINY)
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_FRAME)
+                .components(EglinSteel, 8, Indium, 2, Chrome, 4, Lanthanum, 1, Rhenium, 1)
+                .blast(b -> b
+                        .temp(7100, BlastProperty.GasTier.HIGHER)
+                        .blastStats(VA[LuV], 400)
+                        .vacuumStats(VA[IV]))
                 .build();
     }
 

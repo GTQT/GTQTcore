@@ -59,8 +59,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
-import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.DIMENSIONAL_BRIDGE_CASING;
-import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
+import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMapMultiblockController implements IHeatingCoil {
 
@@ -83,12 +82,17 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
         this.recipeMapWorkable = new DTPFRecipeLogic(this);
     }
 
+    @Override
+    public boolean shouldDelayCheck() {
+        return true;
+    }
+
     private static IBlockState getCasingState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
+        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_INJECTION_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
+        return GTQTMetaBlocks.blockQuantumCasing.getState(HIGH_ENERGY_CASING);
     }
 
     private static IBlockState getThirdCasingState() {
@@ -196,7 +200,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return iMultiblockPart == null ? GTQTTextures.DIMENSIONAL_BRIDGE_CASING : Textures.HIGH_POWER_CASING;
+        return iMultiblockPart == null ? GTQTTextures.DIMENSIONAL_BRIDGE_CASING : GTQTTextures.HIGH_POWER_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -240,6 +244,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
         if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null) return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);
         return null;
     }
+
     @Override
     public int getCurrentTemperature() {
         return this.blastFurnaceTemperature;
