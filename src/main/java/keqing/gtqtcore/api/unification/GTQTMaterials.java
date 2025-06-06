@@ -780,6 +780,10 @@ public class GTQTMaterials {
     public static Material UVSuperconductor;
     public static Material UHVSuperconductor;
     public static Material UEVSuperconductor;
+    public static Material UIVSuperconductor;
+    public static Material UXVSuperconductor;
+    public static Material OpVSuperconductor;
+    public static Material MAXSuperconductor;
     public static Material Prismarine;
     public static Material Purpur;
 
@@ -1093,6 +1097,9 @@ public class GTQTMaterials {
     public static Material MutatedBacterialCultivationBase;
     public static Material MutantActiveSolder;
     public static Material InfiniteCatalyst;
+    public static Material SuperDimensionalCatalystMKI;
+    public static Material SuperDimensionalCatalystMKII;
+    public static Material SuperDimensionalCatalystMKIII;
     public static Material LithiumHydroxide;
     public static Material LithiumAmalgam;
     public static Material Lithium7Hydroxide;

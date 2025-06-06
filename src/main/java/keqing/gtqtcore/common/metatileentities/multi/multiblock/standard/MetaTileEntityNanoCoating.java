@@ -65,7 +65,7 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

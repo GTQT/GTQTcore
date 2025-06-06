@@ -71,7 +71,7 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

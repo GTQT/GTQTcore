@@ -13,56 +13,46 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
-import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockComputerCasing;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.GTQTAPI;
-import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.api.capability.IWarpSwarm;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.GTValues.UHV;
+import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_DM_CASING;
-import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.DIMENSIONAL_BRIDGE_CASING;
-import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.ULTIMATE_HIGH_ENERGY_CASING;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.DIMENSIONAL_MIXER;
+import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController {
 
-    public int casingTier;
-
     public MetaTileEntityDimensionalMixer(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, new RecipeMap[]{RecipeMaps.FURNACE_RECIPES});
+        super(metaTileEntityId, new RecipeMap[]{
+                GTQTcoreRecipeMaps.EXTRADIMENSIONAL_MIXING_RECIPES,
+                RecipeMaps.MIXER_RECIPES,
+
+        });
         this.recipeMapWorkable = new DimensionalMixerRecipeLogic(this);
     }
 
     private static IBlockState getCasingState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(ULTIMATE_HIGH_ENERGY_CASING);
+        return GTQTMetaBlocks.blockQuantumCasing.getState(HIGH_ENERGY_CASING);
     }
 
     private static IBlockState getSecondCasingState() {
-        return MetaBlocks.COMPUTER_CASING.getState(BlockComputerCasing.CasingType.HIGH_POWER_CASING);
+        return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_INJECTION_CASING);
     }
 
     private static IBlockState getThirdCasingState() {
@@ -72,21 +62,6 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityDimensionalMixer(metaTileEntityId);
-    }
-
-    @Override
-    protected void formStructure(PatternMatchContext context) {
-        super.formStructure(context);
-        Object casingTier = context.get("FieldCasingTieredStats");
-        this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
-                () -> ((WrappedIntTired) casingTier).getIntTier(),
-                0);
-    }
-
-    @Override
-    public void invalidateStructure() {
-        super.invalidateStructure();
-        this.casingTier = 0;
     }
 
     @Override
@@ -105,13 +80,18 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         return FactoryBlockPattern.start()
                 .aisle(" CAC ", " ABA ", " ABA ", " ABA ", " ABA ", " ABA ", " CAC ")
                 .aisle("CBBBC", "A###A", "A###A", "A###A", "A###A", "A###A", "CBBBC")
-                .aisle("ABBBA", "B#F#B", "B#F#B", "B#F#B", "B#F#B", "B#F#B", "ABBBA")
+                .aisle("ABBBA", "B###B", "B###B", "B###B", "B###B", "B###B", "ABBBA")
                 .aisle("CBBBC", "A###A", "A###A", "A###A", "A###A", "A###A", "CBBBC")
                 .aisle(" CAC ", " ABA ", " ABA ", " ASA ", " ABA ", " ABA ", " CAC ")
                 .where('S', this.selfPredicate())
                 .where('A', states(getCasingState()))
                 .where('B', states(getSecondCasingState())
-                        .or(autoAbilities()))
+                        .or(autoAbilities())
+                        .or(abilities(MultiblockAbility.INPUT_LASER)
+                                .setMaxGlobalLimited(1))
+                        .or(abilities(WARP_SWARM_MULTIBLOCK_ABILITY)
+                                .setExactLimit(1))
+                )
                 .where('C', states(getThirdCasingState()))
                 .where('F', CP_DM_CASING.get())
                 .where('#', air())
@@ -122,7 +102,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return iMultiblockPart == null ? GTQTTextures.ULTIMATE_HIGH_ENERGY_CASING : Textures.HIGH_POWER_CASING;
+        return iMultiblockPart == null ? GTQTTextures.ULTIMATE_HIGH_ENERGY_CASING : GTQTTextures.HIGH_POWER_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -142,44 +122,62 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         return true;
     }
 
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle(" CAC ", " AMA ", " AXA ", " ABA ", " ABA ", " ABA ", " CAC ")
-                .aisle("CBBBC", "A###A", "A###A", "A###A", "A###A", "A###A", "CBBBC")
-                .aisle("ABBBA", "B#F#B", "B#F#B", "B#F#B", "B#F#B", "B#F#B", "ABBBA")
-                .aisle("CBBBC", "A###A", "A###A", "A###A", "A###A", "A###A", "CBBBC")
-                .aisle(" CAC ", " ALA ", " AKA ", " ASA ", " AJA ", " AIA ", " CAC ")
-                .where('S', DIMENSIONAL_MIXER, EnumFacing.SOUTH)
-                .where('A', getCasingState())
-                .where('B', getSecondCasingState())
-                .where('I', MetaTileEntities.ITEM_IMPORT_BUS[UHV], EnumFacing.SOUTH)
-                .where('J', MetaTileEntities.ITEM_EXPORT_BUS[UHV], EnumFacing.SOUTH)
-                .where('K', MetaTileEntities.FLUID_IMPORT_HATCH[UHV], EnumFacing.SOUTH)
-                .where('L', MetaTileEntities.FLUID_EXPORT_HATCH[UHV], EnumFacing.SOUTH)
-                .where('M', MetaTileEntities.AUTO_MAINTENANCE_HATCH, EnumFacing.NORTH)
-                .where('X', MetaTileEntities.LASER_INPUT_HATCH_256[0], EnumFacing.NORTH)
-                .where('C', getThirdCasingState())
-                .where('#', Blocks.AIR.getDefaultState());
-        MultiblockShapeInfo.Builder finalBuilder = builder;
-        GTQTAPI.MAP_DC_CASING.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier()))
-                .forEach(entry -> shapeInfo.add(finalBuilder.where('F', entry.getKey()).build()));
-        return shapeInfo;
+    public IWarpSwarm getAbility() {
+        if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null)
+            return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);
+        return null;
     }
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("我是搅拌机"));
+        tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("搅拌原始星云"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("本设备支持纳米蜂群仓，每完成一次配方会消耗一点耐久（无视并行）"));
+        tooltip.add(I18n.format("每等级纳米蜂群提供Math.pow(2,tier)*256的并行"));
+        tooltip.add(I18n.format("每等级纳米蜂群提供10%%的耗时减免"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKI,产生4点维度翘曲点"));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKII,产生6点维度翘曲点"));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKIII,产生8点维度翘曲点"));
+        tooltip.add(I18n.format("维度翘曲点数量多于576000时，多方块进入无损超频模式"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("正常情况下机器每Tick降低1点维度翘曲点"));
+        tooltip.add(I18n.format("维度翘曲点数量多于576000时,每Tick降低2点维度翘曲点"));
+        tooltip.add(I18n.format("=============================================="));
     }
 
     public class DimensionalMixerRecipeLogic extends MultiblockRecipeLogic {
 
         public DimensionalMixerRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
+            super(tileEntity, true);
         }
 
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress * getTimeBound()));
+        }
+
+        public double getTimeBound() {
+            if (getAbility().isAvailable()) return (10 - getAbility().getWarpSwarmTier()) / 10.0;
+            return 1;
+        }
+
+        @Override
+        protected void updateRecipeProgress() {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++this.progressTime > this.maxProgressTime) {
+                    getAbility().applyDamage(1);
+                    this.completeRecipe();
+                }
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
+                    this.hasNotEnoughEnergy = false;
+                }
+            } else if (this.recipeEUt > 0L) {
+                this.hasNotEnoughEnergy = true;
+                this.decreaseProgress();
+            }
+        }
     }
 }

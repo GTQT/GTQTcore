@@ -72,7 +72,7 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     public int getCurrentTemperature() {

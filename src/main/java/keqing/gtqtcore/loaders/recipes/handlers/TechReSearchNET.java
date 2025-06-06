@@ -142,7 +142,11 @@ public class TechReSearchNET {
         //33 超高能激光聚变
         KQ_NET(4, 4, 33, DISK_33, SBPRC.getStackForm());
         //34 反物质约束
-        KQ_NET(4, 4, 33, DISK_34, QUANTUM_ANOMALY.getStackForm());
+        KQ_NET(4, 4, 34, DISK_34, SUN_MATTER.getStackForm());
+        //35 超维度技术
+        KQ_NET(4, 5, 35, DISK_35, QUANTUM_ANOMALY.getStackForm());
+        //36 自律纳米蜂群
+        KQ_NET(4, 5, 36, DISK_36, swarm,Neutronium);
     }
 
 

@@ -176,7 +176,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        if(Overclocking==4.0)tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
+        if(Overclocking==0.25)tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.oc",Overclocking));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
         if (setTier) tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
@@ -336,12 +336,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
 
         @Override
         protected double getOverclockingDurationFactor() {
-            return OCFirst ? 1/Overclocking : 0.5;
-        }
-
-        @Override
-        protected double getOverclockingVoltageFactor() {
-            return OCFirst ? Overclocking : 2.0;
+            return OCFirst ? Overclocking : 0.5;
         }
 
         @Override

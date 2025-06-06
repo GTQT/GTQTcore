@@ -44,7 +44,7 @@ public class MetaTileEntityLargeMixer extends GTQTRecipeMapMultiblockController 
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

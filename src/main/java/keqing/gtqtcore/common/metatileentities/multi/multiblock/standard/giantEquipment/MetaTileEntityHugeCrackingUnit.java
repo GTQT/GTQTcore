@@ -83,7 +83,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
 
-        setOverclocking(4.0);
+        setOverclocking(0.25);
     }
 
     private static IBlockState getCasingState() {

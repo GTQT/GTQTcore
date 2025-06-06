@@ -73,7 +73,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     private static IBlockState getCasingState() {
@@ -263,13 +263,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
 
         @Override
         protected double getOverclockingDurationFactor() {
-            return OCFirst ? 1/Overclocking : 0.5;
+            return OCFirst ? Overclocking : 0.5;
         }
-
-        @Override
-        protected double getOverclockingVoltageFactor() {
-            return OCFirst ? Overclocking : 2.0;
-        }
+        
 
         @Override
         public void update() {

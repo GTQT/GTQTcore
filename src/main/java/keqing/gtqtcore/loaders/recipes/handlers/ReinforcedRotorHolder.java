@@ -196,14 +196,14 @@ public class ReinforcedRotorHolder {
                         .CWUt(1024))
                 .buildAndRegister();
 
-        /*
+
         //  UEV
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, Adamantium)
                 .input(HULL[UEV])
                 .input(ELECTRIC_MOTOR_UEV)
                 .input(gear, BlackTitanium, 2)
-                .input(rotor, LanthanumGroupHAlloy, 2)
+                .input(rotor, Neutronium, 2)
                 .input(stickLong, Adamantium, 2)
                 .fluidInputs(SolderingAlloy.getFluid(L * 16))
                 .fluidInputs(Lubricant.getFluid(4000))
@@ -236,7 +236,7 @@ public class ReinforcedRotorHolder {
                         .EUt(VA[UEV])
                         .CWUt(512))
                 .buildAndRegister();
-
+        /*
         //  UXV
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(frameGt, CosmicNeutronium)

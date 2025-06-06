@@ -1042,6 +1042,16 @@ public class GTQTcoreRecipeMaps {
             .sound(GTSoundEvents.ARC)
             .build();
 
+    //超维度搅拌
+    public static final RecipeMap<SimpleRecipeBuilder> EXTRADIMENSIONAL_MIXING_RECIPES = new RecipeMapBuilder<>("extradimensional_mixing_recipes", new SimpleRecipeBuilder())
+            .itemInputs(1)
+            .itemOutputs(0)
+            .fluidInputs(12)
+            .fluidOutputs(1)
+            .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
+            .sound(GTSoundEvents.MINER)
+            .build();
+
     public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMapBuilder<>("fuel_cell", new FuelRecipeBuilder())
             .itemInputs(0)
             .itemOutputs(0)

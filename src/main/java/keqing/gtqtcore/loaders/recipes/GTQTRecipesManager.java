@@ -105,6 +105,7 @@ public class GTQTRecipesManager {
         OreDeal.init();
         TechReSearchNET.init();
         ReinforcedRotorHolder.init();
+        WrapSwarmHandler.init();
         ISALine.init();
         QTF.init();
         ComponentAssemblyLineRecipes.init();

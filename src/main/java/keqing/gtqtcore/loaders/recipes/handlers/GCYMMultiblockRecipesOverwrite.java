@@ -992,9 +992,9 @@ public class GCYMMultiblockRecipesOverwrite {
 
         ModHandler.removeRecipeByName("gcym:mega_chemical_reactor");
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(ALLOY_BLAST_SMELTER.getStackForm(64))
+                .inputs(MetaTileEntities.LARGE_CHEMICAL_REACTOR.getStackForm(64))
                 .inputs(FIELD_GENERATOR_UV.getStackForm(64))
-                .inputs(CONVEYOR_MODULE_UV.getStackForm(64))
+                .inputs(ELECTRIC_PUMP_UV.getStackForm(64))
                 .inputs(VOLTAGE_COIL_UV.getStackForm(64))
                 .input(CIRCUIT_GOOD_III, 32)
                 .input(frameGt, HMS1J22Alloy, 16)

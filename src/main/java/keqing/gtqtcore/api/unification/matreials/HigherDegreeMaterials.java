@@ -283,32 +283,29 @@ public class HigherDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION)
                 .cableProperties(GTValues.V[GTValues.UEV], 128, 0, true)
                 .build();
-/*
+
         UIVSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("uiv_superconductor"))
                 .ingot().liquid()
-                .color(UIVSuperconductorBase.getMaterialRGB())
+                .color(0x954FE0)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .cableProperties(GTValues.V[GTValues.UIV], 16,0,true)
-                .components(UIVSuperconductorBase,1)
                 .build();
 
         UXVSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("uxv_superconductor"))
                 .ingot().liquid()
-                .color(UXVSuperconductorBase.getMaterialRGB())
+                .color(0x954FE0)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .cableProperties(GTValues.V[GTValues.UXV], 16,0,true)
-                .components(UXVSuperconductorBase,1)
                 .build();
 
         OpVSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("opv_superconductor"))
                 .ingot().liquid()
-                .color(OpVSuperconductorBase.getMaterialRGB())
+                .color(0x954FE0)
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .cableProperties(GTValues.V[OpV], 16,0,true)
-                .components(OpVSuperconductorBase,1)
                 .build();
 
         MAXSuperconductor = new Material.Builder(getMaterialsId(), gtqtcoreId("max_superconductor"))
@@ -317,9 +314,7 @@ public class HigherDegreeMaterials {
                 .iconSet(SHINY)
                 .flags(DISABLE_DECOMPOSITION)
                 .cableProperties(GTValues.V[GTValues.MAX], 32,0,true)
-                .components(OpVSuperconductorBase,1)
                 .build();
-*/
 
         //高级矿物
         Prismarine = new Material.Builder(getMaterialsId(), gtqtcoreId("prismarine"))
@@ -645,6 +640,24 @@ public class HigherDegreeMaterials {
         //无尽催化剂 Infinite catalyst
         GTQTMaterials.InfiniteCatalyst = new Material.Builder(getMaterialsId(), gtqtcoreId("infinite_catalyst"))
                 .dust().ore()
+                .color(0xFFFFFF)
+                .build();
+
+        //超维度催化剂MKI
+        GTQTMaterials.SuperDimensionalCatalystMKI = new Material.Builder(getMaterialsId(), gtqtcoreId("super_dimensional_catalyst_mki"))
+                .plasma()
+                .color(0xFFFFFF)
+                .build();
+
+        //超维度催化剂MKII
+        GTQTMaterials.SuperDimensionalCatalystMKII = new Material.Builder(getMaterialsId(), gtqtcoreId("super_dimensional_catalyst_mkii"))
+                .plasma()
+                .color(0xFFFFFF)
+                .build();
+
+        //超维度催化剂MKIII
+        GTQTMaterials.SuperDimensionalCatalystMKIII = new Material.Builder(getMaterialsId(), gtqtcoreId("super_dimensional_catalyst_mkiii"))
+                .plasma()
                 .color(0xFFFFFF)
                 .build();
 

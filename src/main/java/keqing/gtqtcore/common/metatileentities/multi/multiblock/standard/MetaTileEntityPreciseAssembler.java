@@ -47,12 +47,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
-import static keqing.gtqtcore.api.GTQTAPI.MAP_PA_CASING;
+import static keqing.gtqtcore.api.GTQTAPI.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
 public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
@@ -72,7 +72,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     private static IBlockState getFrameState() {
@@ -142,17 +142,86 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     @Override
     public List<MultiblockShapeInfo> getMatchingShapes() {
         ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder;
-        builder = MultiblockShapeInfo.builder().aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC").aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "CCCCOCCCC").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC").aisle("CCCISCCCC", "F       F", "F       F", "F       F", "CCCCCCCCC").where('S', PRECISE_ASSEMBLER, EnumFacing.SOUTH).where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[LuV], EnumFacing.SOUTH).where('X', MetaTileEntities.ITEM_IMPORT_BUS[IV], EnumFacing.NORTH).where('Y', MetaTileEntities.ITEM_EXPORT_BUS[IV], EnumFacing.NORTH).where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[IV], EnumFacing.NORTH).where('E', MetaTileEntities.ENERGY_INPUT_HATCH[IV], EnumFacing.NORTH).where('T', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH).where('O', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP).where('G', getGlassState()).where('M', MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV)).where('F', getFrameState()).where(' ', Blocks.AIR.getDefaultState());
-        MultiblockShapeInfo.Builder finalBuilder = builder;
-        MAP_PA_CASING.entrySet().stream().sorted(Comparator.comparingInt(entry -> ((WrappedIntTired) entry.getValue()).getIntTier())).forEach(entry -> shapeInfo.add(finalBuilder.where('C', entry.getKey()).build()));
+        MultiblockShapeInfo.Builder builder = null;
+        if (Blocks.AIR != null) {
+            builder = MultiblockShapeInfo.builder()
+                .aisle("ETCCCCCCC", "F       F", "F       F", "F       F", "XYZCCCCCC")
+                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
+                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "CCCCOCCCC")
+                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "CCCCCCCCC")
+                .aisle("CCCISCCCC", "F       F", "F       F", "F       F", "CCCCCCCCC")
+                .where('S', PRECISE_ASSEMBLER, EnumFacing.SOUTH)
+                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[LuV], EnumFacing.SOUTH)
+                .where('X', MetaTileEntities.ITEM_IMPORT_BUS[IV], EnumFacing.NORTH)
+                .where('Y', MetaTileEntities.ITEM_EXPORT_BUS[IV], EnumFacing.NORTH)
+                .where('Z', MetaTileEntities.FLUID_IMPORT_HATCH[IV], EnumFacing.NORTH)
+                .where('E', MetaTileEntities.ENERGY_INPUT_HATCH[IV], EnumFacing.NORTH)
+                .where('T', () -> ConfigHolder.machines.enableMaintenance ? MetaTileEntities.MAINTENANCE_HATCH : MetaTileEntities.ENERGY_INPUT_HATCH[LuV], EnumFacing.NORTH)
+                .where('O', MetaTileEntities.MUFFLER_HATCH[LV], EnumFacing.UP)
+                .where('G', getGlassState())
+                .where('F', getFrameState())
+                .where(' ', Blocks.AIR.getDefaultState());
+        }
+        if (builder == null) return shapeInfo;
+
+        // 按层级排序组件（仅保留 CASING 和 INTERNAL_CASING）
+        TreeMap<Integer, IBlockState> casings = new TreeMap<>();
+        MAP_PA_CASING.forEach((block, tier) ->
+                casings.put((Integer) tier.getTier(), block));
+
+        TreeMap<Integer, IBlockState> internalCasings = new TreeMap<>();
+        MAP_PA_INTERNAL_CASING.forEach((block, tier) ->
+                internalCasings.put((Integer) tier.getTier(), block));
+
+        // 获取两个组件的最高层级
+        int maxCasingTier = casings.isEmpty() ? 0 : casings.lastKey();
+        int maxInternalCasingTier = internalCasings.isEmpty() ? 0 : internalCasings.lastKey();
+
+        // 计算整体最高层级（取两者最大值）
+        int maxTier = Math.max(maxCasingTier, maxInternalCasingTier);
+
+        // 为每个层级创建预览
+        for (int tier = 1; tier <= maxTier; tier++) {
+            MultiblockShapeInfo.Builder tierBuilder = builder.shallowCopy(); // 创建 builder 副本
+
+            // 设置当前层级的 CASING（假设使用符号 'C'）
+            int actualCasingTier = Math.min(tier, maxCasingTier);
+            if (actualCasingTier > 0) {
+                tierBuilder = tierBuilder.where('C', casings.get(actualCasingTier));
+            }
+
+            // 设置当前层级的 INTERNAL_CASING（假设使用符号 'D'）
+            int actualInternalCasingTier = Math.min(tier, maxInternalCasingTier);
+            if (actualInternalCasingTier > 0) {
+                tierBuilder = tierBuilder.where('M', internalCasings.get(actualInternalCasingTier));
+            }
+
+            shapeInfo.add(tierBuilder.build());
+        }
+
         return shapeInfo;
     }
+
+
 
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("DDDDDDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD").aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDODDDD").aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD").aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD").where('S', selfPredicate()).where('C', TiredTraceabilityPredicate.CP_PA_CASING.get()).where('D', TiredTraceabilityPredicate.CP_PA_CASING.get().setMinGlobalLimited(42).or(autoAbilities(true, true, true, true, true, true, false))).where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('O', abilities(MultiblockAbility.MUFFLER_HATCH)).where('F', states(getFrameState())).where('G', states(getGlassState())).where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING.get()).build();
+        return FactoryBlockPattern.start()
+                .aisle("DDDDDDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
+                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
+                .aisle("CMMMMMMMC", "C       C", "C       C", "C       C", "DDDDODDDD")
+                .aisle("CMMMMMMMC", "CGGGGGGGC", "CGGGGGGGC", "CGGGGGGGC", "DDDDDDDDD")
+                .aisle("DDDXSDDDD", "F       F", "F       F", "F       F", "DDDDDDDDD")
+                .where('S', selfPredicate())
+                .where('C', TiredTraceabilityPredicate.CP_PA_CASING.get())
+                .where('D', TiredTraceabilityPredicate.CP_PA_CASING.get().setMinGlobalLimited(42)
+                        .or(autoAbilities(true, true, true, true, true, true, false)))
+                .where('X', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
+                .where('O', abilities(MultiblockAbility.MUFFLER_HATCH))
+                .where('F', states(getFrameState()))
+                .where('G', states(getGlassState()))
+                .where('M', TiredTraceabilityPredicate.CP_PA_INTERNAL_CASING.get()).build();
     }
 
     @SideOnly(Side.CLIENT)

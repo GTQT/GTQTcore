@@ -182,13 +182,9 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle("##X#X##","##C#C##","#######","#######","#######","#######","#######","#######","#######")
-                .aisle("#F#F#F#","#FCCCF#","#F###F#","#######","#######","#######","#######","#######","#######")
-                .aisle("X#####X","CCCCCCC","##CCC##","###F###","###F###","###F###","#######","#######","#######")
-                .aisle("#F#C#F#","#CCCCC#","##CCC##","##FCF##","##FCF##","##FCF##","###F###","###F###","###F###")
-                .aisle("X#####X","CCCCCCC","##CCC##","###F###","###F###","###F###","#######","#######","#######")
-                .aisle("#F#F#F#","#FCSCF#","#F###F#","#######","#######","#######","#######","#######","#######")
-                .aisle("##X#X##","##C#C##","#######","#######","#######","#######","#######","#######","#######")
+                .aisle("XXX", "#F#", "#F#", "#F#", "###", "###", "###")
+                .aisle("XXX", "FCF", "FCF", "FCF", "#F#", "#F#", "#F#")
+                .aisle("XSX", "#F#", "#F#", "#F#", "###", "###", "###")
                 .where('S', this.selfPredicate())
                 .where('X', states(getCasingState())
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS)
@@ -202,7 +198,6 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
                                 .setMaxGlobalLimited(3)
                                 .setPreviewCount(1)))
                 .where('C', states(getCasingState()))
-                .where('T', states(getTurbineState()))
                 .where('F', getFrameState())
                 .where('#', any())
                 .build();
@@ -312,15 +307,6 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
         } else {
             return this.material.equals(Orichalcum) ? GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.ST_TURBINE_CASING) :
                     GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AD_TURBINE_CASING);
-        }
-    }
-
-    public IBlockState getTurbineState() {
-        if (this.material.equals(Materials.Naquadah)) {
-            return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_MACHINE_CASING);
-        } else {
-            return this.material.equals(Orichalcum) ? GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.ST_MACHINE_CASING) :
-                    GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.AD_MACHINE_CASING);
         }
     }
 

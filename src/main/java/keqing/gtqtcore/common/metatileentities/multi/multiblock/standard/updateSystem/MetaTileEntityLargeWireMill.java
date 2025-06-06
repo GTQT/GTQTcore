@@ -49,7 +49,7 @@ public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockControll
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

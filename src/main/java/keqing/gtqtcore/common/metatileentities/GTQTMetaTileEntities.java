@@ -93,7 +93,7 @@ public class GTQTMetaTileEntities {
     public static final SimpleGeneratorMetaTileEntity[] PLASMA_GENERATOR = new SimpleGeneratorMetaTileEntity[5];
     public static final MetaTileEntityReinforcedRotorHolder[] REINFORCED_ROTOR_HOLDER = new MetaTileEntityReinforcedRotorHolder[14];
     public static final MetaTileEntityCompressedFusionReactor[] COMPRESSED_FUSION_REACTOR = new MetaTileEntityCompressedFusionReactor[6];
-    public static MetaTileEntityWrapSwarmHatch[] SWARM_HATCH = new MetaTileEntityWrapSwarmHatch[5];
+    public static MetaTileEntityWrapSwarmHatch SWARM_HATCH ;
     public static MetaTileEntityPressureHatch[] PRESSURE_HATCH = new MetaTileEntityPressureHatch[14];
     //////////////////////////
     public static MetaTileEntityBioHatch BIO_HATCH;
@@ -644,9 +644,8 @@ public class GTQTMetaTileEntities {
 
         //star
         DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE = registerMetaTileEntity(600, new MetaTileEntityDimensionallyTranscendentPlasmaForge(gtqtcoreId("dimensionally_transcendent_plasma_forge")));
+        DIMENSIONAL_MIXER = registerMetaTileEntity(601, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
 
-        if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONAL_MIXER = registerMetaTileEntity(601, new MetaTileEntityDimensionalMixer(gtqtcoreId("dimensional_mixer")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
             DIMENSIONAL_PLASMA_FURNACE = registerMetaTileEntity(602, new MetaTileEntityDimensionallyPlasmFurnace(gtqtcoreId("dimensional_plasma_furnace")));
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
@@ -857,6 +856,7 @@ public class GTQTMetaTileEntities {
         CATALYST_HATCH[2] = registerMetaTileEntity(1682, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.2"), 3));
         CATALYST_HATCH[3] = registerMetaTileEntity(1683, new MetaTileEntityCatalystHatch(gtqtcoreId("catalyst_hatch.3"), 4));
         PARTICLE_HATCH = registerMetaTileEntity(1685, new MetaTileEntityParticleHatch(gtqtcoreId("particle_hatch")));
+        SWARM_HATCH = registerMetaTileEntity(1686, new MetaTileEntityWrapSwarmHatch(gtqtcoreId("swarm_hatch")));
 
 
         for (int i = 0; i < 5; i++) {
@@ -887,11 +887,7 @@ public class GTQTMetaTileEntities {
             String name = String.format("electric_heater.%s", GTValues.VN[i + 1]);
             ELECTRIC_HEATER[i] = registerMetaTileEntity(id, new MetaTileEntityElectricHeater(gtqtcoreId(name), i + 1));
         }
-        for (int i = 0; i < 5; i++) {
-            int id = 1725 + i;
-            String name = String.format("swarm_hatch.%s", i);
-            SWARM_HATCH[i] = registerMetaTileEntity(id, new MetaTileEntityWrapSwarmHatch(gtqtcoreId(name), i + 5));
-        }
+
         for (int i = 0; i < 13; i++) {
             String voltageName = VN[i + 1].toLowerCase();
             REINFORCED_ROTOR_HOLDER[i] = registerMetaTileEntity(1730 + i, new MetaTileEntityReinforcedRotorHolder(gtqtcoreId("reinforced_rotor_holder." + voltageName), i + 1));

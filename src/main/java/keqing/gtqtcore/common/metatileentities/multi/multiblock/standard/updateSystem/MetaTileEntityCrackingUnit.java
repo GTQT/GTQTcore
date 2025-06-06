@@ -51,7 +51,7 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

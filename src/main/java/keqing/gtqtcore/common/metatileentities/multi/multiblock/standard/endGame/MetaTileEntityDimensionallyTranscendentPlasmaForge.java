@@ -1,12 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
-import gregicality.multiblocks.common.metatileentities.GCYMMetaTileEntities;
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IHeatingCoil;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
@@ -19,7 +18,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -27,44 +25,43 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.client.renderer.ICubeRenderer;
-import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockComputerCasing;
 import gregtech.common.blocks.BlockWireCoil;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.capability.IWarpSwarm;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMapMultiblockController implements IHeatingCoil {
 
+    private static final FluidStack CatalystMKI = SuperDimensionalCatalystMKI.getPlasma(1);
+    private static final FluidStack CatalystMKII = SuperDimensionalCatalystMKII.getPlasma(1);
+    private static final FluidStack CatalystMKIII = SuperDimensionalCatalystMKIII.getPlasma(1);
+
     protected int heatingCoilLevel;
     protected int coilTier;
+    int heat;
     private int blastFurnaceTemperature;
 
     public MetaTileEntityDimensionallyTranscendentPlasmaForge(ResourceLocation metaTileEntityId) {
@@ -82,11 +79,6 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
         this.recipeMapWorkable = new DTPFRecipeLogic(this);
     }
 
-    @Override
-    public boolean shouldDelayCheck() {
-        return true;
-    }
-
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_INJECTION_CASING);
     }
@@ -97,6 +89,52 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
 
     private static IBlockState getThirdCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound data) {
+        super.writeToNBT(data);
+        data.setInteger("heat", heat);
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(@Nonnull NBTTagCompound data) {
+        super.readFromNBT(data);
+        heat = data.getInteger("heat");
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        if (heat < 0) heat = 0;
+        if (heat > 576000) {
+            heat -= 2;
+        } else {
+            getBoosterByFluidStack();
+            heat -= 1;
+        }
+    }
+
+    public void getBoosterByFluidStack() {
+        IMultipleTankHandler inputTank = this.getInputFluidInventory();
+        if (CatalystMKI.isFluidStackIdentical(inputTank.drain(CatalystMKI, false))) {
+            inputTank.drain(CatalystMKI, true);
+            heat += 4;
+        }
+        if (CatalystMKII.isFluidStackIdentical(inputTank.drain(CatalystMKII, false))) {
+            inputTank.drain(CatalystMKII, true);
+            heat += 6;
+        }
+        if (CatalystMKIII.isFluidStackIdentical(inputTank.drain(CatalystMKIII, false))) {
+            inputTank.drain(CatalystMKIII, true);
+            heat += 8;
+        }
+    }
+
+    @Override
+    public boolean shouldDelayCheck() {
+        return true;
     }
 
     @Override
@@ -225,7 +263,24 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                                List<String> tooltip,
                                boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("我是熔炉"));
+        tooltip.add(TooltipHelper.BLINKING_RED + I18n.format("超越维度的边界"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("本设备支持纳米蜂群仓，每完成一次配方会消耗一点耐久（无视并行）"));
+        tooltip.add(I18n.format("每等级纳米蜂群提供Math.pow(2,tier)*256的并行"));
+        tooltip.add(I18n.format("每等级纳米蜂群提供10%%的耗时减免"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKI,产生4点维度翘曲点"));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKII,产生6点维度翘曲点"));
+        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKIII,产生8点维度翘曲点"));
+        tooltip.add(I18n.format("维度翘曲点数量多于576000时，多方块进入无损超频模式"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("正常情况下机器每Tick降低1点维度翘曲点"));
+        tooltip.add(I18n.format("维度翘曲点数量多于576000时,每Tick降低2点维度翘曲点"));
+        tooltip.add(I18n.format("=============================================="));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
+        tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
+        tooltip.add(I18n.format("=============================================="));
     }
 
     @Override
@@ -237,11 +292,15 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                 textList.add(2, new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature", blastFurnaceTemperature)
                         .setStyle(new Style().setColor(TextFormatting.RED)));
             }
+            textList.add(new TextComponentTranslation("维度翘曲点数量：%s", heat));
+            if (heat > 576000)
+                textList.add(new TextComponentTranslation("已进入无损超频"));
         }
     }
 
     public IWarpSwarm getAbility() {
-        if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null) return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);
+        if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null)
+            return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);
         return null;
     }
 
@@ -258,16 +317,23 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
 
         @Override
         public int getParallelLimit() {
-            return getAbility().isAvailable()?getAbility().getParallel():super.getParallelLimit();
+            return getAbility().isAvailable() ? getAbility().getParallel() : super.getParallelLimit();
         }
+
         @Override
         public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress*getTimeBound()));
+            super.setMaxProgress((int) (maxProgress * getTimeBound()));
         }
+
         public double getTimeBound() {
-            if(getAbility().isAvailable())return  (10 - getAbility().getWarpSwarmTier()) /10.0;
+            if (getAbility().isAvailable()) return (10 - getAbility().getWarpSwarmTier()) / 10.0;
             return 1;
         }
+
+        protected double getOverclockingDurationFactor() {
+            return heat > 576000 ? 0.25 : 0.5;
+        }
+
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {

@@ -18,12 +18,9 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.unification.material.Material;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
-import keqing.gtqtcore.api.capability.IDrillHead;
 import keqing.gtqtcore.api.capability.IWarpSwarm;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.utils.GTQTDateHelper;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtqtcore.common.items.behaviors.DrillHeadBehavior;
 import keqing.gtqtcore.common.items.behaviors.WrapSwarmBehavior;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,7 +42,12 @@ import java.util.List;
 
 public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart implements IMultiblockAbilityPart<IWarpSwarm>, IWarpSwarm {
     private final ItemStackHandler containerInventory;
-    int tier;
+
+
+    public MetaTileEntityWrapSwarmHatch(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, 9);
+        this.containerInventory = new GTItemStackHandler(this, 1);
+    }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {
@@ -64,13 +66,6 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
         }
     }
 
-    public MetaTileEntityWrapSwarmHatch(ResourceLocation metaTileEntityId, int tier) {
-        super(metaTileEntityId, tier);
-        this.tier = tier;
-        this.containerInventory = new GTItemStackHandler(this, 1);
-    }
-
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setTag("ContainerInventory", this.containerInventory.serializeNBT());
         return super.writeToNBT(data);
@@ -84,7 +79,7 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
     @Override
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240)
-                .widget(new DynamicLabelWidget(28, 12, () -> "纳米封装芯片仓-等级：" + (tier-5)))
+                .widget(new DynamicLabelWidget(28, 12, () -> "纳米封装芯片仓"))
                 .widget(new SlotWidget(this.containerInventory, 0, 8, 8, true, true, true)
                         .setBackgroundTexture(GuiTextures.SLOT)
                         .setChangeListener(this::markDirty)
@@ -95,6 +90,7 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
                 .bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 8, 160);
         return builder.build(this.getHolder(), entityPlayer);
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {
@@ -111,7 +107,7 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
 
 
     protected void addDisplayText(List<ITextComponent> textList) {
-        if(getWrapSwarmBehavior()==null||!isAvailable())return;
+        if (getWrapSwarmBehavior() == null || !isAvailable()) return;
         textList.add(new TextComponentString("芯片材料: " + getWrapSwarmBehavior().getMaterial().getLocalizedName()));
         textList.add(new TextComponentString("芯片等级: " + getWrapSwarmBehavior().getWrapSwarmTier()));
         textList.add(new TextComponentString("生命耐久: " + getWrapSwarmBehavior().getDurabilityPercent(containerInventory.getStackInSlot(0))));
@@ -121,7 +117,7 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
-        return new MetaTileEntityWrapSwarmHatch(metaTileEntityId,tier);
+        return new MetaTileEntityWrapSwarmHatch(metaTileEntityId);
     }
 
     @Override
@@ -133,18 +129,15 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
     public void registerAbilities(AbilityInstances abilityInstances) {
         abilityInstances.add(this);
     }
+
     @Override
     public boolean isAvailable() {
         return isItemValid(containerInventory.getStackInSlot(0));
     }
 
-    @Override
-    public int getTier() {
-        return tier-5;
-    }
 
     public boolean applyDamage(int damageApplied) {
-        if(getWrapSwarmBehavior()==null||!isAvailable())return false;
+        if (getWrapSwarmBehavior() == null || !isAvailable()) return false;
         getWrapSwarmBehavior().applyDamage(containerInventory.getStackInSlot(0), damageApplied);
         return true;
 
@@ -152,7 +145,8 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getParallel() {
-        return (int) (256*Math.pow(2,getTier()));
+        if(isAvailable()) return (int) (256 * Math.pow(2, getWarpSwarmTier()));
+        return 1;
     }
 
     @Nullable
@@ -165,13 +159,13 @@ public class MetaTileEntityWrapSwarmHatch extends MetaTileEntityMultiblockPart i
 
     @Override
     public int getWarpSwarmTier() {
-        if(getWrapSwarmBehavior()==null||!isAvailable())return 0;
+        if (getWrapSwarmBehavior() == null || !isAvailable()) return 0;
         return getWrapSwarmBehavior().getWrapSwarmTier();
     }
 
     @Override
     public Material getMaterial() {
-        if(getWrapSwarmBehavior()==null||!isAvailable())return null;
+        if (getWrapSwarmBehavior() == null || !isAvailable()) return null;
         return WrapSwarmBehavior.getInstanceFor(containerInventory.getStackInSlot(0)).getMaterial();
     }
 }

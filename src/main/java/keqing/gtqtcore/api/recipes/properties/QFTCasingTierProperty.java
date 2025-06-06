@@ -28,7 +28,7 @@ public class QFTCasingTierProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("结构等级：%s",
+        minecraft.fontRenderer.drawString(I18n.format("脉冲控制器等级+：%s",
                 castValue(value)), x, y, color);
     }
     @Override

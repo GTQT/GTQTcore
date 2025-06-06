@@ -120,6 +120,7 @@ public class MachineCasingMaterials {
                         GENERATE_FRAME, GENERATE_DOUBLE_PLATE, GENERATE_DENSE, GENERATE_LONG_ROD, GENERATE_ROUND, GENERATE_SMALL_GEAR
                         , GENERATE_SPRING, GENERATE_SPRING_SMALL)
                 .rotorStats(18.0f, 7.0f, 8000)
+                .fluidPipeProperties(23000, 8000, true, true, true, true)
                 .toolStats(MaterialToolProperty.Builder.of(7.0F, 6.0F, 60000, 5)
                         .attackSpeed(0.1F).enchantability(21).build())
                 .components(HastelloyN, 8, Naquadria, 4, Samarium, 2, Tungsten, 4, Aluminium, 6, Nickel, 8, Titanium, 4, Carbon, 2, Argon, 2)

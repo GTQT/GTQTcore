@@ -127,7 +127,7 @@ public class GTQTAPI {
         MAP_PA_CASING.put(GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6),
                 new WrappedIntTired(BlockMultiblockCasing5.TurbineCasingType.PRECISE_ASSEMBLER_CASING_MK6, 6));
 
-        MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
+        MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.IV),
                 new WrappedIntTired(BlockMachineCasing.MachineCasingType.IV, 1));
         MAP_PA_INTERNAL_CASING.put(MetaBlocks.MACHINE_CASING.getState(BlockMachineCasing.MachineCasingType.LuV),
                 new WrappedIntTired(BlockMachineCasing.MachineCasingType.LuV, 2));
@@ -215,13 +215,10 @@ public class GTQTAPI {
 
         MAP_GLASS.put(MetaBlocks.TRANSPARENT_CASING.getState(gregtech.common.blocks.BlockGlassCasing.CasingType.FUSION_GLASS),
                 new WrappedIntTired(gregtech.common.blocks.BlockGlassCasing.CasingType.FUSION_GLASS, 1));
-
         MAP_GLASS.put(GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV),
                 new WrappedIntTired(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_IV, 2));
-
         MAP_GLASS.put(GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_V),
                 new WrappedIntTired(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_V, 3));
-
         MAP_GLASS.put(GTQTMetaBlocks.blockMultiblockGlass.getState(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_VI),
                 new WrappedIntTired(BlockMultiblockGlass.CasingType.TECH_FUSION_GLASS_VI, 4));
 

@@ -45,7 +45,7 @@ public class MetaTileEntityLargeForging extends GTQTRecipeMapMultiblockControlle
         setMaxVoltageFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

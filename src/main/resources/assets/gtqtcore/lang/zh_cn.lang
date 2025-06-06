@@ -1701,6 +1701,9 @@ gtqtcore.material.bacterial_cultivation_base=生物培养基原液
 gtqtcore.material.mutated_bacterial_cultivation_base=灭菌生物培养基
 gtqtcore.material.mutant_active_solder=突变活性焊料
 gtqtcore.material.infinite_catalyst=无尽催化剂
+gtqtcore.material.super_dimensional_catalyst_mki=超维度催化剂MKI
+gtqtcore.material.super_dimensional_catalyst_mkii=超维度催化剂MKII
+gtqtcore.material.super_dimensional_catalyst_mkiii=超维度催化剂MKIII
 gtqtcore.material.silver_tetrafluoroborate=四氟硼酸银
 gtqtcore.material.trimethyltin_chloride=三甲基氯化锡
 gtqtcore.material.silver_chloride=氯化银
@@ -2686,11 +2689,7 @@ gtqtcore.machine.rotor_holder.uxv.name=极限转子固定器（§eUXV§r）
 gtqtcore.machine.rotor_holder.opv.name=极限转子固定器（§9OpV§r）
 gtqtcore.machine.rotor_holder.max.name=极限转子固定器（§c§lMAX§r）
 
-gtqtcore.machine.swarm_hatch.0.name=纳米封装芯片仓 I
-gtqtcore.machine.swarm_hatch.1.name=纳米封装芯片仓 II
-gtqtcore.machine.swarm_hatch.2.name=纳米封装芯片仓 III
-gtqtcore.machine.swarm_hatch.3.name=纳米封装芯片仓 IV
-gtqtcore.machine.swarm_hatch.4.name=纳米封装芯片仓 V
+gtqtcore.machine.swarm_hatch.name=纳米封装芯片仓
 gtqtcore.machine.particle_hatch.name=粒子仓
 ###  Energy Hatches
 gtqtcore.machine.energy_hatch.input_4a.uev.name=4安能源仓（§aUEV§r）
@@ -4699,6 +4698,7 @@ recipemap.target_chamber.name=粒子对撞（靶室轰击）
 recipemap.nucleosynthesis.name=核子合成
 recipemap.beam_collection.name=束流收集
 recipemap.extradimensional_smelting_recipes.name=超维度熔炼
+recipemap.extradimensional_mixing_recipes.name=超维度搅拌
 gtqtcore.machine.ele_oil.name=电催破乳反应罐
 recipemap.ele_oil.name=电催破乳反应
 gtqtcore.machine.salt_flied.name=晒盐场
@@ -5126,6 +5126,16 @@ gtqtcore.multiblock.kqn.nx34=随着材料学与激光学的进步，我们通过
 metaitem.disk.34.name=数据存储器
 metaitem.disk.34.tooltip=§a反物质约束与控制
 
+gtqtcore.multiblock.kqn.nb35=超维度翘曲点
+gtqtcore.multiblock.kqn.nx35=在传统三维空间中，我们难以对物质进行再进一步的处理，只有使用量子反常点在物质局部突破维度限制打开一个前往高维空间的微型空间泡，我们便能在更高的层次对物质进行更加高维的处理加工。
+metaitem.disk.35.name=数据存储器
+metaitem.disk.35.tooltip=§a超维度技术
+
+gtqtcore.multiblock.kqn.nb36=纳米蜂群机器人
+gtqtcore.multiblock.kqn.nx36=制造史上尺寸最小的机器人，大自然都达不到的鬼斧神工，让蛋白质们瑟瑟发抖！该技术赋予纳米蜂群更高的自主智慧，在加工中使用纳米蜂群芯片取代繁琐的宏观电路操作，赋予设备更加优异的计算性能与自修复性能。
+metaitem.disk.36.name=数据存储器
+metaitem.disk.36.tooltip=§a纳米蜂群机器人
+
 gtqtcore.multiblock.kqn.bio0=欢迎使用KQCC科研计算机集成系统！
 metaitem.bio.0.name=基因存储器
 metaitem.bio.0.tooltip=§aNULL
@@ -5241,7 +5251,7 @@ recipemap.quantum_force_transformer_recipes.name=量子操纵者
 gtqtcore.machine.quantum_force_transformer.name=量子操纵者
 gtqtcore.machine.quantum_force_transformer.tooltip.1=可以让复杂的化工流程一步到位
 gtqtcore.machine.quantum_force_transformer.tooltip.2=需要不同等级的§r脉冲控制器§7，§r屏蔽核心§7与§r力场玻璃§7
-gtqtcore.machine.quantum_force_transformer.tooltip.3=脉冲控制器，屏蔽核心与力场玻璃的§r等级§7限制了机器可执行的§r配方§7
+gtqtcore.machine.quantum_force_transformer.tooltip.3=脉冲控制器，屏蔽核心的§r等级§7限制了机器可执行的§r配方§7
 gtqtcore.machine.quantum_force_transformer.tier=机器等级：
 gtqtcore.machine.quantum_force_transformer.tier.1=中子 (1级)
 gtqtcore.machine.quantum_force_transformer.tier.2=寰宇 (2级)

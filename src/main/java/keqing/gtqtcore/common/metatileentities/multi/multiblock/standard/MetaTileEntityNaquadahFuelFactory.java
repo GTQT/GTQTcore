@@ -64,7 +64,7 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
 
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     @Override

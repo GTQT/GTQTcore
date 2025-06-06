@@ -95,7 +95,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
 
-        setOverclocking(3.0);
+        setOverclocking(0.33);
     }
 
     private static IBlockState getCasingState() {

@@ -119,46 +119,6 @@ public class MiscMachineRecipes {
                 .circuitMeta(2)
                 .buildAndRegister();
 
-
-        GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
-                .fluidInputs(Oxygen.getPlasma(1000))
-                .fluidInputs(Nitrogen.getPlasma(1000))
-                .fluidInputs(Helium.getPlasma(1000))
-                .fluidOutputs(StellarMaterialResidueA.getPlasma(1000))
-                .duration(18000)
-                .EUt(7864320)
-                .circuitMeta(1)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
-                .fluidInputs(Oxygen.getPlasma(1000))
-                .fluidInputs(Nitrogen.getPlasma(1000))
-                .fluidInputs(Helium.getPlasma(1000))
-                .fluidInputs(Iron.getPlasma(1000))
-                .fluidInputs(Nickel.getPlasma(1000))
-                .fluidInputs(Argon.getPlasma(1000))
-                .fluidOutputs(StellarMaterialResidueB.getPlasma(1000))
-                .duration(36000)
-                .EUt(7864320)
-                .circuitMeta(2)
-                .buildAndRegister();
-
-        GTQTcoreRecipeMaps.STAR_MIXER.recipeBuilder()
-                .fluidInputs(Oxygen.getPlasma(1000))
-                .fluidInputs(Nitrogen.getPlasma(1000))
-                .fluidInputs(Helium.getPlasma(1000))
-                .fluidInputs(Iron.getPlasma(1000))
-                .fluidInputs(Nickel.getPlasma(1000))
-                .fluidInputs(Argon.getPlasma(1000))
-                .fluidInputs(Adamantium.getPlasma(1000))
-                .fluidInputs(Vibranium.getPlasma(1000))
-                .fluidInputs(StellarMaterial.getPlasma(1000))
-                .fluidOutputs(StellarMaterialResidueC.getPlasma(1000))
-                .duration(72000)
-                .EUt(7864320)
-                .circuitMeta(3)
-                .buildAndRegister();
-
         // 砷化镓粉 * 2
         GTRecipeHandler.removeRecipesByInputs(MIXER_RECIPES, OreDictUnifier.get(dust, Gallium), OreDictUnifier.get(dust, Arsenic), IntCircuitIngredient.getIntegratedCircuit(1));
         RecipeMaps.BLAST_RECIPES.recipeBuilder()
