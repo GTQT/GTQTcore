@@ -131,7 +131,7 @@ public class FantasyMaterials {
                 .fluidOutputs(Helium3.getFluid(20))
                 .duration(100).EUt(1024).buildAndRegister();
 
-        ELECTROMAGNETIC_SEPARATOR_RECIPES.recipeBuilder()
+        CENTRIFUGE_RECIPES.recipeBuilder()
                 .input(dust, Bedrock)
                 .chancedOutput(dust, Slate, 7000, 0)
                 .chancedOutput(dust, Adamantium, 3000, 500)

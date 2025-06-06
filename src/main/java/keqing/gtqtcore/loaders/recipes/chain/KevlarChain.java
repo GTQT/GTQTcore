@@ -219,7 +219,7 @@ public class KevlarChain {
         // Processing Polyurethane.
 
         // C2H4O + 4C2H6Cl2Si + 5H2O -> (C2H4O)(C2H6Cl2Si)4(H2O)5
-        LARGE_MIXER_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .circuitMeta(3)
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(Dimethyldichlorosilane.getFluid(4000))
@@ -229,7 +229,7 @@ public class KevlarChain {
                 .duration(15 * TICK)
                 .buildAndRegister();
 
-        LARGE_MIXER_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .circuitMeta(3)
                 .fluidInputs(EthyleneOxide.getFluid(1000))
                 .fluidInputs(Dimethyldichlorosilane.getFluid(4000))

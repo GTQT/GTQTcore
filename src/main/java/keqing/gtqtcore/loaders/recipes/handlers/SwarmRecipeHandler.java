@@ -154,7 +154,7 @@ public class SwarmRecipeHandler {
         for (MaterialStack component : material.getMaterialComponents()) {
             totalInputAmount += (int) component.amount;
         }
-
+        if(totalInputAmount==0)return;
         // generate builder
         RecipeBuilder<?> builder;
 

@@ -926,7 +926,7 @@ public class CPULine {
                 .output(MULTILAYER_FIBER_BOARD)
                 .buildAndRegister();
 
-        CHEMICAL_RECIPES.recipeBuilder()
+        LARGE_CHEMICAL_RECIPES.recipeBuilder()
                 .duration(100)
                 .EUt(7680)
                 .input(dust, SiliconDioxide, 1)

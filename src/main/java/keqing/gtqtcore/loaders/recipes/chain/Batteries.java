@@ -135,7 +135,7 @@ public class Batteries {
                 .buildAndRegister();
 
         // 9AlCl3 + GaCl3 + 10SiO2 + 15H2O + 30NH3 + 15O -> Al9Si10O50Ga + 30NH4Cl
-        LARGE_CHEMICAL_RECIPES.recipeBuilder().duration(470).EUt(7680)
+        CHEMICAL_PLANT.recipeBuilder().duration(470).EUt(7680)
                 .input(dust,AluminiumTrichloride,36)
                 .input(dust,GalliumChloride,4)
                 .input(dust,SilicaGel,30)
@@ -144,6 +144,7 @@ public class Batteries {
                 .fluidInputs(Oxygen.getFluid(15000))
                 .output(dust,Halloysite,90)
                 .fluidOutputs(AmmoniumChloride.getFluid(30*144))
+                .recipeLevel(4)
                 .circuitMeta(23)
                 .buildAndRegister();
 

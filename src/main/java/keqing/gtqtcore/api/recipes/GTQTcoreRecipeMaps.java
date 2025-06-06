@@ -98,7 +98,7 @@ public class GTQTcoreRecipeMaps {
             .itemInputs(9)
             .itemOutputs(1)
             .fluidInputs(6)
-            .fluidInputs(1)
+            .fluidOutputs(1)
             .itemSlotOverlay(GuiTextures.DUST_OVERLAY, false)
             .progressBar(GuiTextures.PROGRESS_BAR_MIXER, CIRCULAR)
             .sound(GTSoundEvents.MIXER)
@@ -109,7 +109,7 @@ public class GTQTcoreRecipeMaps {
             .itemInputs(2)
             .itemOutputs(2)
             .fluidInputs(2)
-            .fluidInputs(2)
+            .fluidOutputs(2)
             .itemSlotOverlay(GuiTextures.VIAL_OVERLAY_1, false)
             .fluidSlotOverlay(GuiTextures.VIAL_OVERLAY_1, false)
             .fluidSlotOverlay(GuiTextures.VIAL_OVERLAY_2, true)
@@ -468,7 +468,7 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<SwarmTierRecipeBuilder> SWARM_ASSEMBLER = new RecipeMapBuilder<>("swarm_assembler", new SwarmTierRecipeBuilder())
-            .itemInputs(3)
+            .itemInputs(6)
             .itemOutputs(1)
             .fluidInputs(9)
             .fluidOutputs(1)
@@ -863,9 +863,9 @@ public class GTQTcoreRecipeMaps {
 
     public static final RecipeMap<HeatRecipeBuilder> PYROLYSIS_TOWER = new RecipeMapBuilder<>("pyrolysis_tower", new HeatRecipeBuilder())
             .itemInputs(1)
-            .itemOutputs(12)
+            .itemOutputs(1)
             .fluidInputs(1)
-            .fluidOutputs(1)
+            .fluidOutputs(12)
             .progressBar(GuiTextures.PROGRESS_BAR_SIFT, HORIZONTAL)
             .sound(GTSoundEvents.CHEMICAL_REACTOR)
             .build();
