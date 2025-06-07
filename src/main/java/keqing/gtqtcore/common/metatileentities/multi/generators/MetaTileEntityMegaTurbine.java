@@ -324,7 +324,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
 
     @Override
     public String[] getDescription() {
-        return new String[]{I18n.format("gregtech.machine.mega_turbine.description")};
+        return new String[]{I18n.format("gtqtcore.machine.mega_turbine.description")};
     }
 
     @Nonnull
