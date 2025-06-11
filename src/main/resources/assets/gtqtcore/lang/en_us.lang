@@ -557,6 +557,27 @@ tile.energy_cell.mv.name=Stable Energy Cell
 tile.energy_cell.hv.name=Dense Energy Cell
 tile.energy_cell.ev.name=Advanced Energy Cell
 
+##  Singularities
+metaitem.singularity_nitronic.name=Flash Singularity
+metaitem.singularity_psychotic.name=Holy Spirit Singularity
+metaitem.singularity_fantastic.name=Fantasy Singularity
+metaitem.singularity_pneumatic.name=Atmospheric Singularity
+metaitem.singularity_cryptic.name=Cryptic Singularity
+metaitem.singularity_historic.name=Legendary Singularity
+metaitem.singularity_meteoric.name=Stellar Singularity
+
+metaitem.singularity_angelic.name=Angel Singularity
+metaitem.singularity_chromatic.name=Seven-colored Singularity
+metaitem.singularity_prismatic.name=Prismatic Singularity
+metaitem.singularity_robotic.name=Robotic Singularity
+metaitem.singularity_galactic.name=Galactic Singularity
+metaitem.singularity_hydrolic.name=Aquatic Singularity
+metaitem.singularity_geologic.name=Geological Singularity
+
+metaitem.singularity_eternitic.name=Eternal Singularity
+metaitem.singularity_eternitic.tooltip=§oInfinite in palm, moments become eternity...
+metaitem.singularity_chronic.name=Timeless Void Singularity
+metaitem.singularity_chronic.tooltip=§oI exist among all things...
 # Others
 metaitem.magnetron.name=Magnetron
 metaitem.carbon_allotrope.name=Carbon Allotrope Mixture
@@ -1258,6 +1279,32 @@ gtqtcore.machine.catalytic_reformer.uxv.tooltip=Coking Treatment Array D20
 gtqtcore.machine.catalytic_reformer.opv.name=Legendary Catalytic Reformer
 gtqtcore.machine.catalytic_reformer.opv.tooltip=Coking Treatment Array D20
 
+gtqtcore.machine.condenser.lv.name=Basic State Condenser
+gtqtcore.machine.condenser.lv.tooltip=State Converter
+gtqtcore.machine.condenser.mv.name=Advanced State Condenser
+gtqtcore.machine.condenser.mv.tooltip=State Converter
+gtqtcore.machine.condenser.hv.name=Advanced State Condenser II
+gtqtcore.machine.condenser.hv.tooltip=State Converter
+gtqtcore.machine.condenser.ev.name=Advanced State Condenser III
+gtqtcore.machine.condenser.ev.tooltip=State Converter
+gtqtcore.machine.condenser.iv.name=Elite State Condenser
+gtqtcore.machine.condenser.iv.tooltip=State Converter
+gtqtcore.machine.condenser.luv.name=Elite State Condenser II
+gtqtcore.machine.condenser.luv.tooltip=State Converter
+gtqtcore.machine.condenser.zpm.name=Elite State Condenser III
+gtqtcore.machine.condenser.zpm.tooltip=State Converter
+gtqtcore.machine.condenser.uv.name=Ultimate State Condenser
+gtqtcore.machine.condenser.uv.tooltip=Compressed Galaxy
+gtqtcore.machine.condenser.uhv.name=Epic State Condenser
+gtqtcore.machine.condenser.uhv.tooltip=Compressed Galaxy
+gtqtcore.machine.condenser.uev.name=Epic State Condenser II
+gtqtcore.machine.condenser.uev.tooltip=Compressed Galaxy
+gtqtcore.machine.condenser.uiv.name=Epic State Condenser III
+gtqtcore.machine.condenser.uiv.tooltip=Compressed Galaxy
+gtqtcore.machine.condenser.uxv.name=Epic State Condenser IV
+gtqtcore.machine.condenser.uxv.tooltip=Compressed Galaxy
+gtqtcore.machine.condenser.opv.name=Legendary State Condenser
+gtqtcore.machine.condenser.opv.tooltip=Compressed Galaxy
 # Spinner Machines
 gtqtcore.machine.spinner.bronze.name=Steam Spinning Machine
 gtqtcore.machine.spinner.bronze.tooltip=Faster than hand-operated!
@@ -1677,6 +1724,10 @@ gtqtcore.material.taranium=Taranium
 gtqtcore.material.tiberium=Tiberium
 gtqtcore.material.indium_uranium=Indium Uranium
 gtqtcore.material.stanley=Stanley
+gtqtcore.material.magmatter=Magmatter
+gtqtcore.material.primordial_matter=Primordial Matter
+gregtech.material.astralium=Astralium
+gregtech.material.hikarium=Hikarium
 gtqtcore.material.plutonium_244=Plutonium-244
 gtqtcore.material.metastable_oganesson=Metastable Oganesson
 gtqtcore.material.metastable_hassium=Metastable Hassium
@@ -4568,7 +4619,10 @@ gtqtcore.material.palladium_bis=Palladium Acetylacetonate
 
 metaitem.dragon_cell.name=Dragon Cell
 metaitem.pre_dragon_cell.name=Pre-Treated Dragon Cell
-
+metaitem.crude_hypercube.name=Crude hypercubes
+metaitem.crude_hypercube.tooltip=The first practice of four-dimensional engineering
+metaitem.charged_hypercube.name=Charged hypercube
+metaitem.charged_hypercube.tooltip=A true hypercube
 metaitem.algae.barnarda_c.chlorella.name=Chlorella of Barnard's Star C
 metaitem.algae.barnarda_c.bryopsis_hypnoides.name=Bryopsis Hypnoides of Barnard's Star C
 metaitem.algae.barnarda_c.zooxanthellae.name=Zooxanthellae of Barnard's Star C
@@ -4828,6 +4882,10 @@ gtqtcore.machine.bio_centrifuge.name=High-Speed Centrifuge
 recipemap.bio_centrifuge.name=High-Speed Wall Breaking
 
 gtqtcore.machine.msf.name=Large Flash Evaporator
+
+gtqtcore.machine.energy_infuser.name=Energy Infuser
+gtqtcore.machine.energy_infuser.tooltip.0=Charges electric items in its input bus
+gtqtcore.machine.energy_infuser.tooltip.1=If UU matter is supplied, it also repairs items using %smB per durability point
 
 gtqtcore.machine.extreme_industrial_greenhouse.name=Extreme Industrial Greenhouse
 gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=Super Crop Cultivation Chamber
@@ -6263,6 +6321,17 @@ metaitem.debug.structure_writer.rotate_along_y_axis=Rotate Along Y Axis
 metaitem.debug.structure_writer.ex=None
 metaitem.debug.structure_writer.structural_scale=Structure Scale: X:%s Y:%s Z:%s
 metaitem.debug.structure_builder.name=Advanced Builder
+
+metaitem.debug.structure_writer.tooltip.1=You need an §5absolutely§d §4heavensent§c galloping§e §aempty§b §3imagination§9 to use this!
+metaitem.debug.structure_writer.tooltip.2=For developers only!
+metaitem.debug.structure_writer.tooltip.3=While holding this tool, right-click a block with the mouse to select a starting block as the origin,
+metaitem.debug.structure_writer.tooltip.4=Repeating this operation will define a selection area ranging from the origin to the specified coordinates;
+metaitem.debug.structure_writer.tooltip.5=While holding this tool, right-click a non-block area with the mouse to open the GUI.
+metaitem.debug.structure_writer.tooltip.6=This tool has two export modes: Log file and JSON file,
+metaitem.debug.structure_writer.tooltip.7=both of which will export blocks within the selected area in a format compatible with §rFactoryBlockPattern§7,
+metaitem.debug.structure_writer.tooltip.8=the formatted code can be directly used as multiblock structure definitions.
+metaitem.debug.structure_writer.tooltip.9=In the GUI, click §6Rotate along Y-axis§7 to adjust the overall orientation of the multiblock structure,
+metaitem.debug.structure_writer.tooltip.10=especially useful for multiblock structures in §bGregTech 5§7.
 
 gtqtcore.machine.mega_cleanroom.name=Large Cleanroom (LCF)
 gtqtcore.machine.cleanroom.tooltip.1=§bSize: §f21x21x10 to 101x101x101

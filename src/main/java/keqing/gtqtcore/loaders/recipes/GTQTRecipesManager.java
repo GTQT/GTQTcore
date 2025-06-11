@@ -116,6 +116,7 @@ public class GTQTRecipesManager {
         RecipeConflicts.init();
         removeRecipes.init();
         SpinnerHelper.init();
+        PressurePipeHandler.init();
         AluminiumLine.init();
         CoilWire.init();
         GCYSMetaTileEntityLoader.init();

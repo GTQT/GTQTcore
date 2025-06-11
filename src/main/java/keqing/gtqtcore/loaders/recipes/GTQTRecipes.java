@@ -66,6 +66,7 @@ public class GTQTRecipes {
         singleMaterialRecipes();
     }
 
+
     private static void singleMaterialRecipes() {
         ModHandler.addShapedRecipe(String.format("bplate_big_%s", Steel),
                 OreDictUnifier.get(plate_big, Steel),

@@ -1002,6 +1002,10 @@ public class GTQTMaterials {
     public static Material Tiberium;
     public static Material IndiumUranium;
     public static Material Stanley;
+    public static Material Magmatter;
+    public static Material PrimordialMatter;
+    public static Material Astralium;
+    public static Material Hikarium;
     // First Degree Materials
     public static Material LanthanumOxide;
     public static Material PraseodymiumOxide;
@@ -1028,7 +1032,6 @@ public class GTQTMaterials {
     public static Material SodiumNitrate;
     public static Material SodiumPeroxide;
     public static Material RhodiumOxide;
-    public static Material SodiumChlorate;
     public static Material SulfurDichloride;
     public static Material ThionylChloride;
     public static Material OsmiumTetrachloride;

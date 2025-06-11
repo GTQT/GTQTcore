@@ -544,6 +544,28 @@ tile.energy_cell.lv.name=原始能量单元
 tile.energy_cell.mv.name=稳定能量单元
 tile.energy_cell.hv.name=致密能量单元
 tile.energy_cell.ev.name=先进能量单元
+
+##  Singularities
+metaitem.singularity_nitronic.name=闪瞬奇点
+metaitem.singularity_psychotic.name=圣灵奇点
+metaitem.singularity_fantastic.name=幻梦奇点
+metaitem.singularity_pneumatic.name=大气奇点
+metaitem.singularity_cryptic.name=诡秘奇点
+metaitem.singularity_historic.name=史诗奇点
+metaitem.singularity_meteoric.name=星耀奇点
+
+metaitem.singularity_angelic.name=天使奇点
+metaitem.singularity_chromatic.name=七彩奇点
+metaitem.singularity_prismatic.name=棱镜奇点
+metaitem.singularity_robotic.name=智械奇点
+metaitem.singularity_galactic.name=太空奇点
+metaitem.singularity_hydrolic.name=水灵奇点
+metaitem.singularity_geologic.name=地心奇点
+
+metaitem.singularity_eternitic.name=永恒奇点
+metaitem.singularity_eternitic.tooltip=§o无限掌中置，刹那成永恒...
+metaitem.singularity_chronic.name=静空奇点
+metaitem.singularity_chronic.tooltip=§o我于万物之中...
 #  Others
 metaitem.magnetron.name=磁控管
 metaitem.carbon_allotrope.name=碳同素异构体混合物
@@ -1241,6 +1263,33 @@ gtqtcore.machine.catalytic_reformer.uxv.tooltip=烧裂处理阵列 D20
 gtqtcore.machine.catalytic_reformer.opv.name=传奇催化重整炉
 gtqtcore.machine.catalytic_reformer.opv.tooltip=烧裂处理阵列 D20
 
+gtqtcore.machine.condenser.lv.name=基础态素凝聚器
+gtqtcore.machine.condenser.lv.tooltip=态素转换器
+gtqtcore.machine.condenser.mv.name=进阶态素凝聚器
+gtqtcore.machine.condenser.mv.tooltip=态素转换器
+gtqtcore.machine.condenser.hv.name=进阶态素凝聚器 II
+gtqtcore.machine.condenser.hv.tooltip=态素转换器
+gtqtcore.machine.condenser.ev.name=进阶态素凝聚器 III
+gtqtcore.machine.condenser.ev.tooltip=态素转换器
+gtqtcore.machine.condenser.iv.name=精英态素凝聚器
+gtqtcore.machine.condenser.iv.tooltip=态素转换器
+gtqtcore.machine.condenser.luv.name=精英态素凝聚器 II
+gtqtcore.machine.condenser.luv.tooltip=态素转换器
+gtqtcore.machine.condenser.zpm.name=精英态素凝聚器 III
+gtqtcore.machine.condenser.zpm.tooltip=态素转换器
+gtqtcore.machine.condenser.uv.name=终极态素凝聚器
+gtqtcore.machine.condenser.uv.tooltip=压缩银河
+gtqtcore.machine.condenser.uhv.name=史诗态素凝聚器
+gtqtcore.machine.condenser.uhv.tooltip=压缩银河
+gtqtcore.machine.condenser.uev.name=史诗态素凝聚器 II
+gtqtcore.machine.condenser.uev.tooltip=压缩银河
+gtqtcore.machine.condenser.uiv.name=史诗态素凝聚器 III
+gtqtcore.machine.condenser.uiv.tooltip=压缩银河
+gtqtcore.machine.condenser.uxv.name=史诗态素凝聚器 IV
+gtqtcore.machine.condenser.uxv.tooltip=压缩银河
+gtqtcore.machine.condenser.opv.name=传奇态素凝聚器
+gtqtcore.machine.condenser.opv.tooltip=压缩银河
+
 gtqtcore.machine.burner_reactor.lv.name=基础燃烧反应室
 gtqtcore.machine.burner_reactor.lv.tooltip=高温反应釜
 gtqtcore.machine.burner_reactor.mv.name=进阶燃烧反应室
@@ -1655,6 +1704,10 @@ gtqtcore.material.taranium=塔兰金属
 gtqtcore.material.tiberium=泰伯利安
 gtqtcore.material.indium_uranium=铟铀
 gtqtcore.material.stanley=斯坦利
+gtqtcore.material.magmatter=纯磁
+gtqtcore.material.primordial_matter=原始物质
+gregtech.material.astralium=星辉
+gregtech.material.hikarium=光素
 gtqtcore.material.plutonium_244=钚-244
 gtqtcore.material.metastable_oganesson=亚稳态气奥
 gtqtcore.material.metastable_hassium=亚稳态钅黑
@@ -4545,7 +4598,10 @@ gtqtcore.material.palladium_bis=乙酰丙酮钯
 
 metaitem.dragon_cell.name=龙细胞
 metaitem.pre_dragon_cell.name=预处理龙细胞
-
+metaitem.crude_hypercube.name=粗制超立方体
+metaitem.crude_hypercube.tooltip=四维工程学的初次实践
+metaitem.charged_hypercube.name=充能超立方体
+metaitem.charged_hypercube.tooltip=真正的超立方体
 metaitem.algae.barnarda_c.chlorella.name=巴纳德C球藻
 metaitem.algae.barnarda_c.bryopsis_hypnoides.name=巴纳德C藓羽藻
 metaitem.algae.barnarda_c.zooxanthellae.name=巴纳德C黄藻
@@ -4805,6 +4861,10 @@ gtqtcore.machine.bio_centrifuge.name=高速离心机
 recipemap.bio_centrifuge.name=高速破壁
 
 gtqtcore.machine.msf.name=大型闪蒸器
+
+gtqtcore.machine.energy_infuser.name=能量充能器
+gtqtcore.machine.energy_infuser.tooltip.0=对其输入总线中的电力物品进行充电
+gtqtcore.machine.energy_infuser.tooltip.1=如果提供了UU物质，还会使用%s mB的UU物质每耐久点来修复物品
 
 gtqtcore.machine.extreme_industrial_greenhouse.name=极限工业温室
 gtqtcore.machine.extreme_industrial_greenhouse.tooltip.1=超级作物培养仓
@@ -6241,6 +6301,17 @@ metaitem.debug.structure_writer.rotate_along_y_axis=沿Y轴旋转
 metaitem.debug.structure_writer.ex=无
 metaitem.debug.structure_writer.structural_scale=结构规模： X:%s  Y:%s  Z:%s
 metaitem.debug.structure_builder.name=高级构建器
+
+metaitem.debug.structure_writer.tooltip.1=你需要§5绝§d对§4天§c马§e行§a空§b的§3想§9象§1能§5力§7来使用它
+metaitem.debug.structure_writer.tooltip.2=仅供开发者使用！
+metaitem.debug.structure_writer.tooltip.3=手持此工具时§r鼠标右键§7选中一个起始方块作为坐标原点，
+metaitem.debug.structure_writer.tooltip.4=重复上述操作将会§9框选§7出从坐标原点到指定坐标处的一片范围；
+metaitem.debug.structure_writer.tooltip.5=手持此工具时§r鼠标右键§7非方块区域来打开GUI。
+metaitem.debug.structure_writer.tooltip.6=该工具具有两种导出模式：日志（Log文件）与Json文件，
+metaitem.debug.structure_writer.tooltip.7=均会将框选区域内的方块以§rFactoryBlockPattern§7可用的方式导出，
+metaitem.debug.structure_writer.tooltip.8=导出后的格式化代码可以直接作为多方块结构使用。
+metaitem.debug.structure_writer.tooltip.9=在GUI界面点击§6沿Y轴旋转§7以调整多方块结构的总体方位，
+metaitem.debug.structure_writer.tooltip.10=对§b格雷科技5§7的多方块结构的场合尤其有效。
 
 gtqtcore.machine.mega_cleanroom.name=大型洁净室（LCF）
 gtqtcore.machine.cleanroom.tooltip.1=§b尺寸：§f21x21x10至101x101x101

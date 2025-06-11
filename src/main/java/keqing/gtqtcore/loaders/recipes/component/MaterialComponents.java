@@ -113,17 +113,17 @@ public class MaterialComponents {
                 {10, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.PMMA_GLASS)},
                 {11, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.CBDO_POLYCARBONATE_GLASS)},
                 {12, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.CBDO_POLYCARBONATE_GLASS)},
-                //{13, GTLiteMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.TransparentCasingType.INFINITY_GLASS)},
-                //{14, GTLiteMetaBlocks.TRANSPARENT_CASING.getItemVariant(BlockTransparentCasing.TransparentCasingType.INFINITY_GLASS)}
+                {13, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.INFINITY_GLASS)},
+                {14, GTQTMetaBlocks.blockTransparentCasing.getItemVariant(BlockTransparentCasing.CasingType.INFINITY_GLASS)}
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         PLATE.appendIngredients(Stream.of(new Object[][]{
-                {9, new UnificationEntry(OrePrefix.plate, Orichalcum)},
-                {10, new UnificationEntry(OrePrefix.plate, Adamantium)},
-                {11, new UnificationEntry(OrePrefix.plate, Infinity)},
-                {12, new UnificationEntry(OrePrefix.plate, CosmicNeutronium)},
-                //{13, new UnificationEntry(OrePrefix.plate, Spacetime)},
-                //{14, new UnificationEntry(OrePrefix.plate, Eternity)}
+                {9, new UnificationEntry(OrePrefix.plate, Orichalcum)},  //UHV
+                {10, new UnificationEntry(OrePrefix.plate, Adamantium)}, //UEV
+                {11, new UnificationEntry(OrePrefix.plate, Infinity)},  //UIV
+                {12, new UnificationEntry(OrePrefix.plate, Spacetime)}, //UXV
+                {13, new UnificationEntry(OrePrefix.plate, Eternity)}, //OpV
+                {14, new UnificationEntry(OrePrefix.plate, Magmatter)} //MAX
         }).collect(Collectors.toMap(data -> (Integer) data[0], data -> data[1])));
 
         HULL_PLATE.appendIngredients(Stream.of(new Object[][]{

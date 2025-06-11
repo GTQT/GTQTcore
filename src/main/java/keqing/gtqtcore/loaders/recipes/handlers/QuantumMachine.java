@@ -21,6 +21,7 @@ import static gregtech.common.items.MetaItems.*;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.EXTRADIMENSIONAL_MIXING_RECIPES;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
+import static keqing.gtqtcore.common.block.GTQTMetaBlocks.blockWireCoil;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing.CasingType.*;
@@ -33,6 +34,30 @@ public class QuantumMachine {
         DTPFRecipes();
         QFTRecipes();
         CasingRecipes();
+        //能量注入器
+        EnergyInfuser();
+    }
+
+    private static void EnergyInfuser() {
+        ASSEMBLY_LINE_RECIPES.recipeBuilder()
+                .input(MetaTileEntities.ACTIVE_TRANSFORMER)
+                .input(HIGH_POWER_INTEGRATED_CIRCUIT, 16)
+                .input(VOLTAGE_COIL_UV, 4)
+                .input(CIRCUIT_GOOD_II, 4)
+                .input(circuit, MarkerMaterials.Tier.UV, 8)
+                .input(screw,Neutronium,8)
+                .fluidInputs(VanadiumGallium.getFluid(L * 16))
+                .fluidInputs(Kevlar.getFluid(L * 16))
+                .fluidInputs(Polybenzimidazole.getFluid(L * 16))
+                .fluidInputs(Polyetheretherketone.getFluid(L * 16))
+                .output(ENERGY_INFUSER)
+                .stationResearch(b -> b
+                        .researchStack(MetaTileEntities.ACTIVE_TRANSFORMER.getStackForm())
+                        .EUt(VA[UV])
+                        .CWUt(CWT[ZPM]))
+                .EUt(VA[UV])
+                .duration(1200)
+                .buildAndRegister();
     }
 
     public static void DTPFRecipes() {
@@ -230,14 +255,12 @@ public class QuantumMachine {
 
         //量操线圈
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .inputs(GTQTMetaBlocks.blockMultiblockCasing7.getItemVariant(BlockMultiblockCasing7.CasingType.MAGNETIC_FIELD_CASING))
-                .input(frameGt, Neutronium)
-                .input(circuit, MarkerMaterials.Tier.UHV)
-                .input(screw, Inconel625, 32)
-                .input(bolt, GCYMMaterials.Zeron100, 12)
+                .inputs(blockWireCoil.getItemVariant(NEUTRONIUM))
+                .inputs(GTQTMetaBlocks.blockQuantumCasing.getItemVariant(MOLECULAR_COIL))
+                .input(screw, Neutronium,4)
                 .input(plate, Osmiridium, 8)
-                .fluidInputs(PbB.getFluid(L * 4))
-                .fluidInputs(NaquadahAlloy.getFluid(L * 4))
+                .fluidInputs(MutantActiveSolder.getFluid(L * 4))
+                .fluidInputs(QuantumAlloy.getFluid(L * 4))
                 .outputs(GTQTMetaBlocks.blockQuantumForceTransformerCasing.getItemVariant(QUANTUM_FORCE_TRANSFORMER_COIL))
                 .EUt(VA[UEV])
                 .duration(400)

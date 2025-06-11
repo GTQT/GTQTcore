@@ -9,6 +9,19 @@ public class AddHighTierMaterial {
      public static void init() {
          UEV();
          UIV();
+         UXV();
+         OpV();
+         MAX();
+    }
+    private static void MAX() {
+        Plate.add(Magmatter);
+    }
+    private static void OpV() {
+        Plate.add(Eternity);
+    }
+
+    private static void UXV() {
+        Plate.add(Spacetime);
     }
 
     private static void UIV() {

@@ -18,5 +18,5 @@ public class GTQTMaterialIconSet {
     public static final MaterialIconSet CUSTOM_MAGNETO_RESONATIC = new MaterialIconSet("magneto_resonatic", null, true);
     public static final MaterialIconSet REAGENT = new MaterialIconSet("reagent", null, true);
     public static final MaterialIconSet CUSTOM_OMNIUM = new MaterialIconSetWithRenderer("omnium", null, true, new HaloRenderItemBehavior(10, 0xFFFFFFFF, () -> GTQTTextures.HALO, true));
-
+    public static final MaterialIconSetWithRenderer CUSTOM_MAGMATTER = new MaterialIconSetWithRenderer("magmatter", null, true, new HaloRenderItemBehavior(10, 0x33FFFFFF, () -> GTQTTextures.HALO_NOISE, true));
 }

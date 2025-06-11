@@ -638,6 +638,16 @@ public class MetaTileEntityMachine {
                 'O', ORE_DICTIONARY_FILTER,
                 'X', CraftingComponent.CIRCUIT);
 
+        //  Condenser
+        MetaTileEntityLoader.registerMachineRecipe(true, CONDENSER,
+                "RFR", "PHP", "WXW",
+                'H', CraftingComponent.HULL,
+                'P', CraftingComponent.PISTON,
+                'F', CraftingComponent.FIELD_GENERATOR,
+                'W', CraftingComponent.CABLE,
+                'X', CraftingComponent.BETTER_CIRCUIT,
+                'R', CraftingComponent.STICK_RADIOACTIVE);
+
         // Ion Implanter
         MetaTileEntityLoader.registerMachineRecipe(true, ION_IMPLANTER,
                 "PXP", "EHE", "DXD",

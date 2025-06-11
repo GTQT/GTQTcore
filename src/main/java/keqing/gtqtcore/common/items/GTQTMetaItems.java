@@ -558,6 +558,9 @@ public class GTQTMetaItems {
 
     public static MetaItem<?>.MetaValueItem DRAGON_CELL;
     public static MetaItem<?>.MetaValueItem PRE_DRAGON_CELL;
+
+    public static MetaItem<?>.MetaValueItem CRUDE_HYPERCUBE;
+    public static MetaItem<?>.MetaValueItem CHARGED_HYPERCUBE;
     //  Biological
     public static MetaItem<?>.MetaValueItem ELECTROCHEMICAL_GRADIENT_RECORDER;
     public static MetaItem<?>.MetaValueItem ULTRA_MICRO_PHASE_SEPARATOR;
@@ -899,6 +902,25 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_OpV;
     public static MetaItem<?>.MetaValueItem COVER_ONE_STACK_FILTER;
     public static ArmorMetaItem<?>.ArmorMetaValueItem PISTON_BOOTS;
+
+    //  Singularities
+    public static MetaItem<?>.MetaValueItem NITRONIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem PSYCHOTIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem FANTASTIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem PNEUMATIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CRYPTIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem HISTORIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem METEORIC_SINGULARITY;
+
+    public static MetaItem<?>.MetaValueItem ANGELIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CHROMATIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem PRISMATIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem ROBOTIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem GALACTIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem HYDROLIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem GEOLOGIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem ETERNITIC_SINGULARITY;
+    public static MetaItem<?>.MetaValueItem CHRONIC_SINGULARITY;
     // Process-Specific Components
     public static MetaItem<?>.MetaValueItem MAGNETRON;
     public static GTQTMetaItem1 GTQT_META_ITEM;

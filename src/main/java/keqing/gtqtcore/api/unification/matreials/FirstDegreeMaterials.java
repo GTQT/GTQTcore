@@ -4275,14 +4275,6 @@ public class FirstDegreeMaterials {
                 .components(Rhodium, 2, Oxygen, 3)
                 .build();
 
-        GTQTMaterials.SodiumChlorate = new Material.Builder(getMaterialsId(), gtqtcoreId("sodium_chlorate"))
-                .dust().fluid()
-                .color(0xAB8D85)
-                .iconSet(MaterialIconSet.METALLIC)
-                .flags(DISABLE_DECOMPOSITION)
-                .components(Sodium, 1, Chlorine, 1, Oxygen, 3)
-                .build();
-
         GTQTMaterials.SulfurDichloride = new Material.Builder(getMaterialsId(), gtqtcoreId("sulfur_dichloride"))
                 .fluid()
                 .color(0x761410)

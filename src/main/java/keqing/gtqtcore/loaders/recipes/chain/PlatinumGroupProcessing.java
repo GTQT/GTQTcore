@@ -298,6 +298,16 @@ public class PlatinumGroupProcessing {
     }
 
     private static void IridiumProcess() {
+        //  NaCl + 3H2O -> NaClO3 + 6H
+        ELECTROLYZER_RECIPES.recipeBuilder()
+                .input(dust, Salt, 2)
+                .fluidInputs(Water.getFluid(3000))
+                .circuitMeta(2)
+                .output(dust,SodiumChlorate,5)
+                .fluidOutputs(Hydrogen.getFluid(6000))
+                .duration(100)
+                .EUt(VA[MV])
+                .buildAndRegister();
 
         //  NaCl + 3H2O -> NaClO3 + 6H
         ELECTROLYZER_RECIPES.recipeBuilder()
@@ -328,7 +338,7 @@ public class PlatinumGroupProcessing {
                 .output(dust, OsmiumTetroxide, 5)
                 .output(dust, Salt, 4)
                 .duration(200)
-                .EUt(VA[IV])
+                .EUt(VA[EV])
                 .buildAndRegister();
 
         //  Ir2O3 + 6HCl -> 2IrCl3 + 3H2O

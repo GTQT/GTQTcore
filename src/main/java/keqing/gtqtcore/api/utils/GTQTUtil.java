@@ -17,10 +17,12 @@ import keqing.gtqtcore.api.GCYSValues;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -30,6 +32,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -413,5 +416,9 @@ public class GTQTUtil {
         }
         return 0;
     }
-
+    public static void writeCustomData(MetaTileEntity mte, World world, int dataID, Consumer<PacketBuffer> bufWriter) {
+        if (world != null && !world.isRemote) {
+            mte.writeCustomData(dataID, bufWriter);
+        }
+    }
 }

@@ -13,6 +13,7 @@ import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.recipes.builder.*;
 import keqing.gtqtcore.api.recipes.ui.ComponentAssemblyLineUI;
 
+import static gregtech.api.gui.GuiTextures.BOX_OVERLAY;
 import static gregtech.api.gui.widgets.ProgressWidget.MoveType.CIRCULAR;
 import static gregtech.api.gui.widgets.ProgressWidget.MoveType.HORIZONTAL;
 import static gregtech.api.recipes.RecipeMaps.*;
@@ -292,6 +293,16 @@ public class GTQTcoreRecipeMaps {
             .fluidOutputs(6)
             .progressBar(GuiTextures.PROGRESS_BAR_CRACKING, HORIZONTAL)
             .sound(GTSoundEvents.FURNACE)
+            .build();
+
+    public static final RecipeMap<SimpleRecipeBuilder> CONDENSER_RECIPES = new RecipeMapBuilder<>("condenser", new SimpleRecipeBuilder())
+            .itemInputs(1)
+            .itemOutputs(1)
+            .fluidInputs(1)
+            .fluidOutputs(0)
+            .itemSlotOverlay(BOX_OVERLAY,false)
+            .fluidSlotOverlay(BOX_OVERLAY,false)
+            .sound(GTSoundEvents.COMPRESSOR)
             .build();
 
     public static final RecipeMap<BlastRecipeBuilder> BURNER_REACTOR_RECIPES = new RecipeMapBuilder<>("burner_reactor_recipes", new BlastRecipeBuilder())

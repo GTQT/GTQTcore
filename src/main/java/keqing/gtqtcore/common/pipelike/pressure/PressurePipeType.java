@@ -6,6 +6,7 @@ import keqing.gtqtcore.api.GCYSValues;
 import javax.annotation.Nonnull;
 
 public enum PressurePipeType implements IPipeType<PressurePipeData> {
+    //真空管
     LOW_VACUUM("low_vacuum", 0.125f, GCYSValues.P[GCYSValues.LV], GCYSValues.EARTH_PRESSURE, 1.0D),
     MEDIUM_VACUUM("medium_vacuum", 0.25f, GCYSValues.P[GCYSValues.MV], GCYSValues.EARTH_PRESSURE, 1.25D),
     HIGH_VACUUM("high_vacuum", 0.5f, GCYSValues.P[GCYSValues.HV], GCYSValues.EARTH_PRESSURE, 1.5D),
@@ -13,6 +14,7 @@ public enum PressurePipeType implements IPipeType<PressurePipeData> {
     EXTREMELY_HIGH_VACUUM("extremely_high_vacuum", 0.75f, GCYSValues.P[GCYSValues.EHV], GCYSValues.EARTH_PRESSURE, 3.0D),
     CLOSE_SPACE_VACUUM("close_space_vacuum", 0.825f, GCYSValues.P[GCYSValues.CSV], GCYSValues.EARTH_PRESSURE, 5.0D),
     INTERGALACTIC_VOID_VACUUM("intergalactic_void_vacuum", 0.9f, GCYSValues.P[GCYSValues.IVV], GCYSValues.EARTH_PRESSURE, 10.0D),
+    //高压管
     LOW_PRESSURE("low_pressure", 0.75f, GCYSValues.EARTH_PRESSURE, GCYSValues.P[GCYSValues.LP], 1.0D),
     MEDIUM_PRESSURE("medium_pressure", 0.625f, GCYSValues.EARTH_PRESSURE, GCYSValues.P[GCYSValues.MP], 0.75D),
     HIGH_PRESSURE("high_pressure", 0.5f, GCYSValues.EARTH_PRESSURE, GCYSValues.P[GCYSValues.HP], 0.625D),

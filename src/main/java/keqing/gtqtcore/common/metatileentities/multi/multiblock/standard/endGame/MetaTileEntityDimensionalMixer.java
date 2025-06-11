@@ -102,7 +102,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return iMultiblockPart == null ? GTQTTextures.ULTIMATE_HIGH_ENERGY_CASING : GTQTTextures.HIGH_POWER_CASING;
+        return iMultiblockPart == null ? GTQTTextures.HIGH_ENERGY_CASING : GTQTTextures.DIMENSIONAL_INJECTION_CASING;
     }
 
     @SideOnly(Side.CLIENT)
@@ -136,6 +136,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         tooltip.add(I18n.format("本设备支持纳米蜂群仓，每完成一次配方会消耗一点耐久（无视并行）"));
         tooltip.add(I18n.format("每等级纳米蜂群提供Math.pow(2,tier)*256的并行"));
         tooltip.add(I18n.format("每等级纳米蜂群提供10%%的耗时减免"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
         tooltip.add(I18n.format("=============================================="));
         tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKI,产生4点维度翘曲点"));
         tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKII,产生6点维度翘曲点"));

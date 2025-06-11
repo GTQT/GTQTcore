@@ -20,6 +20,7 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.CarbonNanotube;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.NdYAG;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
+import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.singularity;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
 
 public class SwarmRecipeHandler {
@@ -144,6 +145,25 @@ public class SwarmRecipeHandler {
     }
 
     private static void processDecomposition(Material material) {
+        if(material.isElement())
+        {
+            if (material.hasProperty(PropertyKey.INGOT)) {
+                CONDENSER_RECIPES.recipeBuilder()
+                        .input(block, material, 64)
+                        .output(singularity, material)
+                        .EUt(VA[IV])
+                        .duration((int) material.getMass() * 8)
+                        .buildAndRegister();
+            }
+            if(material.hasFluid()) {
+                CONDENSER_RECIPES.recipeBuilder()
+                        .fluidInputs(material.getFluid(L * 9 * 64))
+                        .output(singularity, material)
+                        .EUt(VA[IV])
+                        .duration((int) material.getMass() * 8)
+                        .buildAndRegister();
+            }
+        }
         if (material.getMaterialComponents().isEmpty() || material.getMaterialComponents().size() > 15)
             return;
 

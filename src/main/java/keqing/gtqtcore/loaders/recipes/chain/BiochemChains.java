@@ -14,9 +14,9 @@ import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
 import static gregtech.common.items.MetaItems.PLANT_BALL;
 import static gregtech.common.items.MetaItems.STICKY_RESIN;
+import static gregtechfoodoption.GTFOMaterialHandler.SodiumChlorate;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.PR_MIX;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Latex;
-
 public class BiochemChains {
 
     /* chem template
@@ -278,7 +278,7 @@ public class BiochemChains {
         CHEMICAL_RECIPES.recipeBuilder()
                 .duration(145)
                 .EUt(VA[EV])
-                .input(dust, GTQTMaterials.SodiumChlorate)
+                .input(dust, SodiumChlorate)
                 .fluidInputs(Water.getFluid(1000))
                 .output(dust, GTQTMaterials.SodiumPerchlorate)
                 .fluidOutputs(Hydrogen.getFluid(2000))

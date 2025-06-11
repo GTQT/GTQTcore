@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/metaitems/singularities/chronic",
+    "layer1": "gtqtcore:items/metaitems/singularities/chronic_overlay"
+  }
+}

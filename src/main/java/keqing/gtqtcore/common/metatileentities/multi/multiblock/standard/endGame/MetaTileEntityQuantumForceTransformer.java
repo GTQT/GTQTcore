@@ -409,8 +409,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {
                     getAbility().applyDamage(1);
+                    if(canBoosterOutput)this.outputRecipeOutputs();;
                     this.completeRecipe();
-                    if(canBoosterOutput)this.completeRecipe();
                     canBoosterOutput=false;
                     canOverclocking=false;
                 }

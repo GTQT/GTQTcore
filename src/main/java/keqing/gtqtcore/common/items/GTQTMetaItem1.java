@@ -7,6 +7,7 @@ import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
 import gregtech.api.unification.stack.RecyclingData;
+import gregtech.client.utils.TooltipHelper;
 import gregtech.common.items.behaviors.ProspectorScannerBehavior;
 import gregtech.common.items.behaviors.TooltipBehavior;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
@@ -16,6 +17,7 @@ import keqing.gtqtcore.common.block.GTQTCrops;
 import keqing.gtqtcore.common.items.behaviors.*;
 import keqing.gtqtcore.common.items.behaviors.render.HaloRenderItemBehavior;
 import net.minecraft.client.resources.I18n;
+import org.lwjgl.input.Keyboard;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -416,7 +418,25 @@ public class GTQTMetaItem1 extends StandardMetaItem {
 
         POS_BINDING_CARD = this.addItem(417, "pos_binding_card").setMaxStackSize(1).addComponents(new PosBindingCardBehaviors()).setCreativeTabs(GTQTCore_TAB);
 
-        DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer").addComponents(StructureWriteBehavior.INSTANCE).setCreativeTabs(GTQTCore_TO);
+        DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer")
+                .addComponents(StructureWriteBehavior.INSTANCE)
+                .addComponents(new TooltipBehavior((lines) -> {
+                    lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.1"));
+                    lines.add(TooltipHelper.BLINKING_CYAN + I18n.format("metaitem.debug.structure_writer.tooltip.2"));
+                    if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.3"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.4"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.5"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.6"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.7"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.8"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.9"));
+                        lines.add(I18n.format("metaitem.debug.structure_writer.tooltip.10"));
+                    } else {
+                        lines.add(I18n.format("gregtech.tooltip.hold_shift"));
+                    }
+                })).setCreativeTabs(GTQTCore_TO);
+
         DEBUG_STRUCTURE_BUILDER = this.addItem(419, "debug.structure_builder").addComponents(new MEMultiblockBuilderBehavior()).setCreativeTabs(GTQTCore_TO);
 
         CARBON_ALLOTROPE_MIXTURE = this.addItem(420, "mixture.carbon_allotrope").setCreativeTabs(CommonProxy.GTQTCore_CH);
@@ -854,7 +874,142 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         // Process-Specific Components: ID 500-999
         MAGNETRON = this.addItem(951, "magnetron").setCreativeTabs(GTQTCore_TAB);
 
+        /* -------------------------------------------------------------------- Singularities --------------------------------------------------------------------- */
 
+        //Eternitic Singularity Components
+        NITRONIC_SINGULARITY = this.addItem(960, "singularity_nitronic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityNitronic");
+
+        PSYCHOTIC_SINGULARITY = this.addItem(961, "singularity_psychotic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPsychotic");
+
+        FANTASTIC_SINGULARITY = this.addItem(962, "singularity_fantastic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityFantastic");
+
+        PNEUMATIC_SINGULARITY = this.addItem(963, "singularity_pneumatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPneumatic");
+
+        CRYPTIC_SINGULARITY = this.addItem(964, "singularity_cryptic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityCryptic");
+
+        HISTORIC_SINGULARITY = this.addItem(965, "singularity_historic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityHistoric");
+
+        METEORIC_SINGULARITY = this.addItem(9666, "singularity_meteoric")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityMeteoric");
+
+        //Chronic Singularity Components
+        ANGELIC_SINGULARITY = this.addItem(967, "singularity_angelic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityAngelic");
+
+        CHROMATIC_SINGULARITY = this.addItem(968, "singularity_chromatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityChromatic");
+
+        PRISMATIC_SINGULARITY = this.addItem(969, "singularity_prismatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPrismatic");
+
+        ROBOTIC_SINGULARITY = this.addItem(970, "singularity_robotic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityRobotic");
+
+        GALACTIC_SINGULARITY = this.addItem(971, "singularity_galactic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityGalactic");
+
+        HYDROLIC_SINGULARITY = this.addItem(972, "singularity_hydrolic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityHydrolic");
+
+        GEOLOGIC_SINGULARITY = this.addItem(973, "singularity_geologic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityGeologic");
+
+        //Ultimate Singularities
+        ETERNITIC_SINGULARITY = this.addItem(974, "singularity_eternitic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityEternitic");
+
+        CHRONIC_SINGULARITY = this.addItem(975, "singularity_chronic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityChronic");        /* -------------------------------------------------------------------- Singularities --------------------------------------------------------------------- */
+
+        //Eternitic Singularity Components
+        NITRONIC_SINGULARITY = this.addItem(976, "singularity_nitronic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityNitronic");
+
+        PSYCHOTIC_SINGULARITY = this.addItem(977, "singularity_psychotic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPsychotic");
+
+        FANTASTIC_SINGULARITY = this.addItem(978, "singularity_fantastic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityFantastic");
+
+        PNEUMATIC_SINGULARITY = this.addItem(979, "singularity_pneumatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPneumatic");
+
+        CRYPTIC_SINGULARITY = this.addItem(980, "singularity_cryptic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityCryptic");
+
+        HISTORIC_SINGULARITY = this.addItem(981, "singularity_historic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityHistoric");
+
+        METEORIC_SINGULARITY = this.addItem(982, "singularity_meteoric")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityMeteoric");
+
+        //Chronic Singularity Components
+        ANGELIC_SINGULARITY = this.addItem(983, "singularity_angelic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityAngelic");
+
+        CHROMATIC_SINGULARITY = this.addItem(984, "singularity_chromatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityChromatic");
+
+        PRISMATIC_SINGULARITY = this.addItem(985, "singularity_prismatic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityPrismatic");
+
+        ROBOTIC_SINGULARITY = this.addItem(986, "singularity_robotic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityRobotic");
+
+        GALACTIC_SINGULARITY = this.addItem(987, "singularity_galactic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityGalactic");
+
+        HYDROLIC_SINGULARITY = this.addItem(988, "singularity_hydrolic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityHydrolic");
+
+        GEOLOGIC_SINGULARITY = this.addItem(989, "singularity_geologic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityGeologic");
+
+        //Ultimate Singularities
+        ETERNITIC_SINGULARITY = this.addItem(990, "singularity_eternitic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityEternitic");
+
+        CHRONIC_SINGULARITY = this.addItem(991, "singularity_chronic")
+                .addComponents(new HaloRenderItemBehavior(10, 0xFF000000, () -> GTQTTextures.HALO, true))
+                .addOreDict("singularityChronic");
+        
         //  Biological Components
         ELECTROCHEMICAL_GRADIENT_RECORDER = this.addItem(1000, "biological.components.electrochemical_gradient_recorder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         ULTRA_MICRO_PHASE_SEPARATOR = this.addItem(1001, "biological.components.ultra_micro_phase_separator").setCreativeTabs(CommonProxy.GTQTCore_BIO);
@@ -867,6 +1022,10 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         DNA_DECODE_ENCODER = this.addItem(1008, "biological.components.dna_decode_encoder").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         DRAGON_CELL = this.addItem(1009, "dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
         PRE_DRAGON_CELL = this.addItem(1010, "pre_dragon_cell").setCreativeTabs(CommonProxy.GTQTCore_BIO);
+
+        //Hypercubes
+        CRUDE_HYPERCUBE = this.addItem(1020, "crude_hypercube");
+        CHARGED_HYPERCUBE = this.addItem(1021, "charged_hypercube");
 
         //  ID 711-715 Alien Algae
         BARNARDA_C_CHLORELLA = this.addItem(1050, "algae.barnarda_c.chlorella").addOreDict("dyePurple").setCreativeTabs(CommonProxy.GTQTCore_BIO);

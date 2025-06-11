@@ -55,6 +55,7 @@ import keqing.gtqtcore.common.metatileentities.storage.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
+import static appeng.core.features.AEFeature.CONDENSER;
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -178,6 +179,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHeatFurnace HEAT_FURNACE;
     public static MetaTileEntityPrimitiveTreeFarmer PRIMITIVE_TREE_FARMER;
     public static MetaTileEntityAdvanceKQCC ADV_KQCC;
+    public static MetaTileEntityEnergyInfuser ENERGY_INFUSER;
     public static MetaTileEntityGeneMutagenesis GENE_MUTAGENESIS;
     public static MetaTileEntityIndustrialInductionFurnace INDUSTRIAL_INDUCTION_FURNACE;
     public static MetaTileEntityPressureMachine[] VACUUM_CHAMBER = new MetaTileEntityPressureMachine[V.length - 1];
@@ -216,6 +218,7 @@ public class GTQTMetaTileEntities {
     public static SimpleMachineMetaTileEntity[] SPINNER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] BURNER_REACTOR = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] CATALYTIC_REFORMER = new SimpleMachineMetaTileEntity[V.length - 1];
+    public static SimpleMachineMetaTileEntity[] CONDENSER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] SONICATOR = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] ION_IMPLANTER = new SimpleMachineMetaTileEntity[V.length - 1];
     public static SimpleMachineMetaTileEntity[] CVD_UNIT = new SimpleMachineMetaTileEntity[V.length - 1];
@@ -521,7 +524,7 @@ public class GTQTMetaTileEntities {
         PYROLYSIS_TOWER = registerMetaTileEntity(220, new MetaTileEntityPyrolysisTower(gtqtcoreId("pyrolysis_tower")));
         PRECISE_ASSEMBLER = registerMetaTileEntity(221, new MetaTileEntityPreciseAssembler(gtqtcoreId("precise_assembler")));
         PARTICLE_ACCELERATOR = registerMetaTileEntity(222, new MetaTileEntityParticleAccelerator(gtqtcoreId("particle_accelerator")));
-
+        ENERGY_INFUSER = registerMetaTileEntity(223, new MetaTileEntityEnergyInfuser(gtqtcoreId("energy_infuser")));
         BIOLOGICAL_REACTION = registerMetaTileEntity(224, new MetaTileEntityBiologicalReaction(gtqtcoreId(("biological_reaction"))));
         OIL_POOL = registerMetaTileEntity(225, new MetaTileEntityOilPool(gtqtcoreId(("oil_pool"))));
         MINING_DRILL = registerMetaTileEntity(226, new MetaTileEntityMiningDrill(gtqtcoreId(("mining_drill"))));
@@ -746,6 +749,8 @@ public class GTQTMetaTileEntities {
         registerSimpleMetaTileEntity(CVD_UNIT, 1040, "cvd_unit", CVD_RECIPES, CVD_UNIT_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(FLOTATION_CELL, 1055, "flotation_cell", FLOTATION_RECIPES, FLOTATION_CELL_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
         registerSimpleMetaTileEntity(CATALYTIC_REFORMER, 1070, "catalytic_reformer", CATALYTIC_REFORMER_RECIPES, CATALYTIC_REFORMER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.hvCappedTankSizeFunction);
+
+        registerSimpleMetaTileEntity(CONDENSER, 1085, "condenser", CONDENSER_RECIPES, CONDENSER_OVERLAY, true, GTQTUtil::gtqtId, GTUtility.genericGeneratorTankSizeFunction);
 
         for (int i = 0; i < 13; i++) {
             int id = 1100 + i;

@@ -255,6 +255,7 @@ public class ElementMaterials {
                 .iconSet(BRIGHT)
                 .blast(12800, BlastProperty.GasTier.HIGHER)
                 .element(Elements.Ichorium)
+                .cableProperties(V[UEV], 36, 18, false)
                 .rotorStats(18.0f, 10.0f, 64000)
                 .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 1280000, 8)
                         .attackSpeed(0.1F).enchantability(21).build())
@@ -482,6 +483,53 @@ public class ElementMaterials {
                 .fluidPipeProperties(120_000, 6400, true, true, true, true)
                 .build();
 
+        //  10031 Magmatter
+        GTQTMaterials.Magmatter = new Material.Builder(getMaterialsId(), gtqtcoreId("magmatter"))
+                .ingot()
+                .fluid()
+                .iconSet(CUSTOM_MAGMATTER)
+                .element(Mx)
+                .flags(NO_UNIFICATION, GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_DOUBLE_PLATE)
+                .cableProperties(V[MAX], 1024, 36, false)
+                .build();
+
+        //  10032 Primordial Matter
+        GTQTMaterials.PrimordialMatter = new Material.Builder(getMaterialsId(), gtqtcoreId("primordial_matter"))
+                .ingot()
+                .fluid()
+                .color(0xFFD6FB)
+                .iconSet(BRIGHT)
+                .element(Pi)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE)
+                .cableProperties(V[MAX], 500, 125, false)
+                .build();
+
+        //  10022 Astralium
+        Astralium = new Material.Builder(getMaterialsId(), gtqtcoreId("astralium"))
+                .ingot()
+                .liquid()
+                .color(0x3B48A7)
+                .iconSet(BRIGHT)
+                .element(Ax)
+                .blast(15000, BlastProperty.GasTier.HIGHEST)
+                .flags(GENERATE_PLATE, GENERATE_FOIL, GENERATE_FINE_WIRE, GENERATE_ROD, GENERATE_LONG_ROD, GENERATE_SPRING)
+                .cableProperties(V[UIV], 48, 24, false)
+                .build();
+
+        //  10023 Hikarium
+        Hikarium = new Material.Builder(getMaterialsId(), gtqtcoreId("hikarium"))
+                .ingot()
+                .liquid()
+                .color(0xCCF7FB)
+                .iconSet(BRIGHT)
+                .element(Hr)
+                .blast(b -> b
+                        .temp(18000, BlastProperty.GasTier.HIGHEST)
+                        .blastStats(VA[UXV], 480)
+                        .vacuumStats(VA[UXV], 240))
+                .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_SPRING, GENERATE_FINE_WIRE, GENERATE_DENSE)
+                .cableProperties(V[UXV], 64, 32, false)
+                .build();
     }
 
     public static String addObfuscatedFormula() {

@@ -2,7 +2,6 @@ package keqing.gtqtcore.client.textures;
 
 import codechicken.lib.texture.TextureUtils;
 import gregtech.api.gui.resources.SteamTexture;
-import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOrientedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleOverlayRenderer;
@@ -47,7 +46,7 @@ public class GTQTTextures {
             = new SimpleOverlayRenderer("multiblock/casing/osmiridium");
     public static final SimpleOverlayRenderer NEUTRONIUM_CASING
             = new SimpleOverlayRenderer("multiblock/casing/neutronium");
-    public static SimpleOverlayRenderer HIGH_POWER_CASING  = new SimpleOverlayRenderer("multiblock/quantumcasing/dimensional_injection_casing");
+    public static SimpleOverlayRenderer DIMENSIONAL_INJECTION_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/dimensional_injection_casing");
     public static SimpleOverlayRenderer REINFORCED_TREATED_WOOD_WALL = new SimpleOverlayRenderer("multiblock/casing/reinforced_treated_wood_wall");
     public static SimpleOverlayRenderer ELEMENT_CONSTRAINS_MACHINE_CASING = new SimpleOverlayRenderer("multiblock/casings/element_constrains_machine_casing");
     public static OrientedOverlayRenderer PARTICLE_ACCELERATOR = new OrientedOverlayRenderer("overlay/particle_accelerator");
@@ -93,6 +92,9 @@ public class GTQTTextures {
     public static OrientedOverlayRenderer SUPERSONIC_AXIAL_COMPRESSOR_OVERLAY = new OrientedOverlayRenderer("multiblock/supersonic_axial_compressor");
     public static SimpleOverlayRenderer DIMENSIONAL_BRIDGE_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/dimensional_bridge_casing");
     public static SimpleOverlayRenderer ULTIMATE_HIGH_ENERGY_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/ultimate_high_energy_casing");
+
+    public static SimpleOverlayRenderer HIGH_ENERGY_CASING = new SimpleOverlayRenderer("multiblock/quantumcasing/high_energy_casing");
+
     public static SimpleOverlayRenderer TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING = new SimpleOverlayRenderer("casings/transcendentally_amplified_magnetic_confinement_casing");
     public static SimpleOverlayRenderer SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING = new SimpleOverlayRenderer("casings/singularity_reinforced_stellar_shielding_casing");
     public static SimpleOverlayRenderer DIRT = new SimpleOverlayRenderer("stones/concrete_light/concrete_light_smooth");

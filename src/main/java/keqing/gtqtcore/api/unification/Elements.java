@@ -46,4 +46,8 @@ public class Elements {
     public static final Element p = gregtech.api.unification.Elements.add(1, 0, -1, null, "Protons", "*p*", false);
     public static final Element n = gregtech.api.unification.Elements.add(0, 1, -1, null, "Neutrons", "*n*", false);
 
+    public static final Element Mx = gregtech.api.unification.Elements.add(1931, 1994, -1, null, "Magmatter", "M⎋", false);
+    public static final Element Pi = gregtech.api.unification.Elements.add(50000, 50000, -1, null, "PrimordialMatter", "Pm⎋", false);
+    public static final Element Ax=gregtech.api.unification.Elements.add(290, 282, -1, null, "Astralium", "Ax⚶", false);
+    public static final Element Hr=gregtech.api.unification.Elements.add(640, 789, -1, null, "Hikarium", "Hr⚶", false);
 }
