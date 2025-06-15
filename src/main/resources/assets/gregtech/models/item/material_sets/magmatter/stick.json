@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/material_sets/magmatter/stick",
+    "layer1": "gtqtcore:items/material_sets/magmatter/stick_overlay"
+  }
+}

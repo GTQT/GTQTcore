@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "gtqtcore:items/material_sets/mhcsm/gem_chipped",
+    "layer1": "gtqtcore:items/material_sets/mhcsm/gem_chipped_overlay"
+  }
+}

@@ -328,6 +328,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityLargeThermalCentrifuge LARGE_THERMAL_CENTRIFUGE;
     public static MetaTileEntityNanoscaleFabricator LARGE_NANOSCALE_FABRICATOR;
     public static MetaTileEntityCVDUnit LARGE_CVD_UNIT;
+    public static MetaTileEntityLargeEUVMaskAligner LARGE_EUV_MASK_ALIGNER;
     public static MetaTileEntityPhotolithographyFactory PHOTOLITHOGRAPHY_FACTORY;
     public static MetaTileEntityMicrowaveEnergyReceiverControl MICROWAVE_ENERGY_RECEIVER_CONTROL;
     public static MetaTileEntityExtremesCVD LARGE_EX_CVD;
@@ -576,7 +577,7 @@ public class GTQTMetaTileEntities {
         LARGE_ROASTER = registerMetaTileEntity(272, new MetaTileEntityBurnerReactor(gtqtcoreId("roaster")));
         LARGE_CRYSTALLIZATION_CRUCIBLE = registerMetaTileEntity(273, new MetaTileEntityCrystallizationCrucible(gtqtcoreId("crystallization_crucible")));
         LARGE_CVD_UNIT = registerMetaTileEntity(274, new MetaTileEntityCVDUnit(gtqtcoreId("cvd_unit")));
-        //
+        LARGE_EUV_MASK_ALIGNER = registerMetaTileEntity(275, new MetaTileEntityLargeEUVMaskAligner(gtqtcoreId("large_euv_mask_aligner")));
         LARGE_CRYOGENIC_REACTOR = registerMetaTileEntity(276, new MetaTileEntityCryoReactor(gtqtcoreId("cryogenic_reactor")));
         LARGE_ION_IMPLANTATOR = registerMetaTileEntity(277, new MetaTileEntityIonImplanter(gtqtcoreId("ion_implantator")));
         LARGE_CZ_PULLER = registerMetaTileEntity(278, new MetaTileEntityCZPuller(gtqtcoreId("cz_puller")));

@@ -1,0 +1,16 @@
+{
+  "animation": {
+    "frametime": 1
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "CTM",
+    "layer": "BLOOM",
+    "textures": [
+      "gregtech:blocks/multiblock/wire_coil/machine_coil_eternity_ctm"
+    ],
+    "extra": {
+      "connect_inside": true
+    }
+  }
+}

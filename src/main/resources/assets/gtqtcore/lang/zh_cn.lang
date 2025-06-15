@@ -1114,6 +1114,8 @@ recipemap.sonication_recipes.name=超声振荡
 gtqtcore.machine.cvd_unit.name=化学气相沉积单元
 recipemap.cvd_recipes.name=化学气相沉积
 
+gtqtcore.machine.large_euv_mask_aligner.name=大型EUV掩模光刻机
+
 gtqtcore.machine.mega_alloy_blast_furance.name=合金锻炉
 
 gtqtcore.machine.nanoscale_fabricator.name=纳米级制造室

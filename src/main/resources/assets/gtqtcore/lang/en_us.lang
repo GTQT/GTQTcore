@@ -1131,6 +1131,8 @@ recipemap.sonication_recipes.name=Sonication
 gtqtcore.machine.cvd_unit.name=Chemical Vapor Deposition Unit
 recipemap.cvd_recipes.name=Chemical Vapor Deposition
 
+gtqtcore.machine.large_euv_mask_aligner.name=Large EUV Mask Aligner
+
 gtqtcore.machine.mega_alloy_blast_furance.name=Mega Alloy Blast Furance
 
 gtqtcore.machine.nanoscale_fabricator.name=Nanoscale Fabricator

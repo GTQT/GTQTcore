@@ -1,0 +1,7 @@
+{
+  "parent": "gtqtcore:block/tinted_cube_column",
+  "textures": {
+    "end": "gtqtcore:blocks/material_sets/cosmic/frame_gt",
+    "side": "gtqtcore:blocks/material_sets/cosmic/sheeted_frame"
+  }
+}

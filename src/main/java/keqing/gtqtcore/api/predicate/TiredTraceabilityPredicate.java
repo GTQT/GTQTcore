@@ -22,6 +22,10 @@ public class TiredTraceabilityPredicate {
     
     public static Supplier<TierTraceabilityPredicate> CP_PAF_CASING = () -> new TierTraceabilityPredicate(MAP_PAF_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAF_CASING.get(s)).getIntTier()), "PAF", null);
+    public static Supplier<TierTraceabilityPredicate> CP_PAV_CASING = () -> new TierTraceabilityPredicate(MAP_PAV_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAV_CASING.get(s)).getIntTier()), "PAV", null);
+    public static Supplier<TierTraceabilityPredicate> CP_PAE_CASING = () -> new TierTraceabilityPredicate(MAP_PAE_CASING,
+            Comparator.comparing((s) -> ((WrappedIntTired) MAP_PAE_CASING.get(s)).getIntTier()), "PAE", null);
 
     public static Supplier<TierTraceabilityPredicate> FORCE_FIELD_COIL = () -> new TierTraceabilityPredicate(MAP_FORCE_FIELD_COIL,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_FORCE_FIELD_COIL.get(s)).getIntTier()), "ForceFieldCoil", null);

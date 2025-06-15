@@ -10,7 +10,7 @@
     "extra": {
       "light": 15,
       "connect_to": [
-        { "block": "gtqtcore:wire_coil:5" }
+        { "block": "gtqtcore:wire_coil:6" }
       ]
     }
   }
