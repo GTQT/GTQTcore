@@ -44,7 +44,13 @@ public class GTQTAPI {
     public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_ZW_CASING = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_TJ_CASING = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_ZJ_CASING = new Object2ObjectOpenHashMap<>();
-    //计算机
+    //鸿蒙
+    //BlockSpacetimeCompression
+    public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_SPACETIME_COMPRESSION = new Object2ObjectOpenHashMap<>();
+    //BlockStabilization
+    public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_STABILIZATION = new Object2ObjectOpenHashMap<>();
+    //BlockTimeAcceleration
+    public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_TIME_ACCELERATION = new Object2ObjectOpenHashMap<>();
 
     public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_PAF_CASING = new Object2ObjectOpenHashMap<>();
     public static final Object2ObjectOpenHashMap<IBlockState, IBlockTier> MAP_PAE_CASING = new Object2ObjectOpenHashMap<>();
@@ -418,5 +424,65 @@ public class GTQTAPI {
 
         MAP_FORCE_FIELD_COIL.put(GTQTMetaBlocks.blockActiveUniqueCasing.getState(BlockActiveUniqueCasing.ActiveCasingType.ULTIMATE_FORCE_FIELD_CONSTRAINT_COIL),
                 new WrappedIntTired(BlockActiveUniqueCasing.ActiveCasingType.ULTIMATE_FORCE_FIELD_CONSTRAINT_COIL, 4));
+
+        //BlockSpacetimeCompression
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.CRUDE),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.CRUDE, 1));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.PRIMITIVE),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.PRIMITIVE, 2));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.STABLE),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.STABLE, 3));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.ADVANCED),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.ADVANCED, 4));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.SUPERB),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.SUPERB, 5));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.EXOTIC),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.EXOTIC, 6));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.PERFECT),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.PERFECT, 7));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.TIPLER),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.TIPLER, 8));
+        MAP_SPACETIME_COMPRESSION.put(blockSpacetimeCompression.getState(BlockSpacetimeCompression.CasingType.GALLIFREYAN),
+                new WrappedIntTired(BlockSpacetimeCompression.CasingType.GALLIFREYAN, 9));
+
+        //BlockStabilization
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.CRUDE),
+                new WrappedIntTired(BlockStabilization.CasingType.CRUDE, 1));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.PRIMITIVE),
+                new WrappedIntTired(BlockStabilization.CasingType.PRIMITIVE, 2));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.STABLE),
+                new WrappedIntTired(BlockStabilization.CasingType.STABLE, 3));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.ADVANCED),
+                new WrappedIntTired(BlockStabilization.CasingType.ADVANCED, 4));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.SUPERB),
+                new WrappedIntTired(BlockStabilization.CasingType.SUPERB, 5));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.EXOTIC),
+                new WrappedIntTired(BlockStabilization.CasingType.EXOTIC, 6));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.PERFECT),
+                new WrappedIntTired(BlockStabilization.CasingType.PERFECT, 7));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.TIPLER),
+                new WrappedIntTired(BlockStabilization.CasingType.TIPLER, 8));
+        MAP_STABILIZATION.put(blockStabilization.getState(BlockStabilization.CasingType.GALLIFREYAN),
+                new WrappedIntTired(BlockStabilization.CasingType.GALLIFREYAN, 9));
+
+        //BlockTimeAcceleration
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.CRUDE),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.CRUDE, 1));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.PRIMITIVE),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.PRIMITIVE, 2));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.STABLE),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.STABLE, 3));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.ADVANCED),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.ADVANCED, 4));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.SUPERB),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.SUPERB, 5));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.EXOTIC),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.EXOTIC, 6));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.PERFECT),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.PERFECT, 7));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.TIPLER),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.TIPLER, 8));
+        MAP_TIME_ACCELERATION.put(blockTimeAcceleration.getState(BlockTimeAcceleration.CasingType.GALLIFREYAN),
+                new WrappedIntTired(BlockTimeAcceleration.CasingType.GALLIFREYAN, 9));
     }
 }

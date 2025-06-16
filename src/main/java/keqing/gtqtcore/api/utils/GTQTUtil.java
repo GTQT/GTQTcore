@@ -421,4 +421,10 @@ public class GTQTUtil {
             mte.writeCustomData(dataID, bufWriter);
         }
     }
+
+    public static double logBase(int value, int base) {
+        return Math.log(value) / Math.log(base);
+    }
+
+
 }

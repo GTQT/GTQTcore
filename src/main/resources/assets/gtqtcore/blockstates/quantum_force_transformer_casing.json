@@ -15,67 +15,107 @@
         }
       },
       "neutron_pulse_manipulator_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_pulse_manipulator_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_pulse_manipulator_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_pulse_manipulator_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_pulse_manipulator_side_bloom",
+
+          "bot_bottom": "#bot_up",
+          "top_bottom": "#top_up"
         }
       },
       "neutron_shielding_core_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_casing",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_bloom",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/neutron_shielding_core_bloom",
+
+          "bot_bottom": "#bot_side",
+          "top_bottom": "#top_side"
         }
       },
       "cosmic_fabric_manipulator_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_manipulator_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_manipulator_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_manipulator_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_manipulator_side_bloom",
+
+          "bot_bottom": "#bot_up",
+          "top_bottom": "#top_up"
         }
       },
       "cosmic_fabric_shielding_core_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_casing",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_bloom",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/cosmic_fabric_shielding_core_bloom",
+
+          "bot_bottom": "#bot_side",
+          "top_bottom": "#top_side"
         }
       },
       "infinity_infused_manipulator_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_manipulator_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_manipulator_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_manipulator_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_manipulator_side_bloom",
+
+          "bot_bottom": "#bot_up",
+          "top_bottom": "#top_up"
         }
       },
       "infinity_infused_shielding_core_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_casing",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_bloom",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/infinity_infused_shielding_core_bloom",
+
+          "bot_bottom": "#bot_side",
+          "top_bottom": "#top_side"
         }
       },
       "supracausal_continuum_manipulator_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_manipulator_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_manipulator_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/quantum_constraint_top",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_manipulator_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/spacetime_continuum_ripper_side_bloom",
+
+          "bot_bottom": "#bot_up",
+          "top_bottom": "#top_up"
         }
       },
       "supracausal_continuum_shielding_core_casing": {
-        "model": "minecraft:cube_bottom_top",
+        "model": "gregtech:cube_2_layer_bottom_top",
         "textures": {
-          "top": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_shielding_core_casing_top",
-          "side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_shielding_core_casing",
-          "bottom": "#side"
+          "bot_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_shielding_core_casing",
+          "top_up": "gregtech:blocks/multiblock/quantum_force_transformer_casing/spacetime_bending_core_bloom",
+
+          "bot_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/supracausal_continuum_shielding_core_casing",
+          "top_side": "gregtech:blocks/multiblock/quantum_force_transformer_casing/spacetime_bending_core_bloom",
+
+          "bot_bottom": "#bot_side",
+          "top_bottom": "#top_side"
         }
       },
       "quantum_force_transformer_coil": {

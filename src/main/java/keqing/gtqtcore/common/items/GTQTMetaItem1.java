@@ -1062,6 +1062,9 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         HEAT_SHIELD_MKIV = this.addItem(1103, "heat_shield_mkiv").setCreativeTabs(CommonProxy.GTQTCore_NC);
         HEAT_SHIELD_MKV = this.addItem(1104, "heat_shield_mkv").setCreativeTabs(CommonProxy.GTQTCore_NC);
 
+        //1150
+        //AstralArray
+        ASTRAL_ARRAY = this.addItem(1150, "astral_array").setCreativeTabs(GTQTCore_HP);
         //纳米封装机器人 1200
         WRAP_NANO_SWARM_CARBON = this.addItem(1200, "wrap_nano_swarm.carbon").addComponents(new WrapSwarmBehavior(120, 1, Carbon)).setCreativeTabs(CommonProxy.GTQTCore_BIO);
         WRAP_NANO_SWARM_GOLD = this.addItem(1201, "wrap_nano_swarm.gold").addComponents(new WrapSwarmBehavior(240, 1, Gold)).setCreativeTabs(CommonProxy.GTQTCore_BIO);

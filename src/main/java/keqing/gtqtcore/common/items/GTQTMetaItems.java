@@ -887,6 +887,8 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem ARROW_LEFT_MKIII;
     public static MetaItem<?>.MetaValueItem ARROW_RIGHT_MKIII;
 
+    public static MetaItem<?>.MetaValueItem ASTRAL_ARRAY;
+
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_LV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_MV;
     public static MetaItem<?>.MetaValueItem MICROWAVE_ENERGY_RECEIVER_HV;

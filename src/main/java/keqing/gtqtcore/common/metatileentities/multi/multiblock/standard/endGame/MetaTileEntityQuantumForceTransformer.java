@@ -1,7 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
 
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -291,6 +295,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         tooltip.add(I18n.format("=============================================="));
         tooltip.add(I18n.format("本设备支持催化剂仓，在运行含催化剂的配方时需将催化剂放置在仓内"));
         tooltip.add(I18n.format("会在配方检查时无视并行数量消耗一点耐久，加工中途失败需重新消耗耐久"));
+        tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
         tooltip.add(I18n.format("=============================================="));
         tooltip.add(I18n.format("本设备支持纳米蜂群仓，每完成一次配方会消耗一点耐久（无视并行）"));
         tooltip.add(I18n.format("配方等级：由脉冲控制器等级决定"));
@@ -313,7 +318,16 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         }
 
     }
-
+    @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.INPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

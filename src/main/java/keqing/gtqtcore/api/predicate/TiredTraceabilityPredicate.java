@@ -37,6 +37,8 @@ public class TiredTraceabilityPredicate {
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_TJ_CASING.get(s)).getIntTier()), "TJ", null);
     public static Supplier<TierTraceabilityPredicate> CP_ZJ_CASING = () -> new TierTraceabilityPredicate(MAP_ZJ_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired) MAP_ZJ_CASING.get(s)).getIntTier()), "ZJ", null);
+
+
     
 
      public static Supplier<TierTraceabilityPredicate> CP_LGLASS= () -> new TierTraceabilityPredicate(MAP_LGLASS,
@@ -77,4 +79,15 @@ public class TiredTraceabilityPredicate {
 
     public static Supplier<TierTraceabilityPredicate> FIREBOX_CASING= () -> new TierTraceabilityPredicate(MAP_FIREBOX_CASING,
             Comparator.comparing((s) -> ((WrappedIntTired)MAP_FIREBOX_CASING.get(s)).getIntTier()),"FireboxCasing",null);
+
+    public static Supplier<TierTraceabilityPredicate> SPACETIME_COMPRESSION= () -> new TierTraceabilityPredicate(MAP_SPACETIME_COMPRESSION,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_SPACETIME_COMPRESSION.get(s)).getIntTier()),"SpacetimeCompression",null);
+
+    public static Supplier<TierTraceabilityPredicate> STABILIZATION= () -> new TierTraceabilityPredicate(MAP_STABILIZATION,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_STABILIZATION.get(s)).getIntTier()),"Stabilization",null);
+
+    public static Supplier<TierTraceabilityPredicate> TIME_ACCELERATION= () -> new TierTraceabilityPredicate(MAP_TIME_ACCELERATION,
+            Comparator.comparing((s) -> ((WrappedIntTired)MAP_TIME_ACCELERATION.get(s)).getIntTier()),"TimeAcceleration",null);
+
+
 }

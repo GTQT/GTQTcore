@@ -1,5 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
-
+/*
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -53,7 +53,7 @@ import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_ND_CAS
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.NICOLL_DYSON_BEAMER;
 import static net.minecraft.util.EnumFacing.Axis.*;
-
+/*
 public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockController implements IBloomEffect, IFastRenderMetaTileEntity {
 
     protected static final int NO_COLOR = 0;
@@ -67,7 +67,7 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
         super(metaTileEntityId, new RecipeMap[]{RecipeMaps.BLAST_RECIPES});
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }
-
+/*
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING);
     }
@@ -739,3 +739,4 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
         }
     }
 }
+*/

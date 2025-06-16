@@ -76,6 +76,24 @@
           "all": "gregtech:blocks/multiblock/quantumcasing/dimensional_preserve_casing"
         }
       },
+      "reinforced_temporal_structure_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/reinforced_temporal_structure_casing"
+        }
+      },
+      "reinforced_spatial_structure_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/reinforced_spatial_structure_casing"
+        }
+      },
+      "infinite_spacetime_energy_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/infinite_spacetime_energy_casing"
+        }
+      },
       "singularity_reinforced_stellar_shielding_casing": {
         "model": "minecraft:cube_all",
         "textures": {

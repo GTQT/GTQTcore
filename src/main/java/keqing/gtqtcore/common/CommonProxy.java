@@ -204,6 +204,9 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.blockTransparentCasing);
         registry.register(GTQTMetaBlocks.blockWireCoil);
         registry.register(GTQTMetaBlocks.blocksResearchSystem);
+        registry.register(GTQTMetaBlocks.blockSpacetimeCompression);
+        registry.register(GTQTMetaBlocks.blockStabilization);
+        registry.register(GTQTMetaBlocks.blockTimeAcceleration);
 
         registry.register(GTQTCrops.COPPER_CROP);
         registry.register(GTQTCrops.IRON_CROP);
@@ -273,6 +276,9 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.blockTransparentCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockWireCoil, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blocksResearchSystem, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockSpacetimeCompression, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockStabilization, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockTimeAcceleration, VariantItemBlock::new));
         registry.register(createItemBlock(blockCleanroomCasing, VariantItemBlock::new));
 
         registry.register(createItemBlock(STNT, ItemBlock::new));

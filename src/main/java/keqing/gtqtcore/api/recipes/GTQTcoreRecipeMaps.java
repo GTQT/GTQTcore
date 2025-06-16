@@ -1062,6 +1062,13 @@ public class GTQTcoreRecipeMaps {
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.MINER)
             .build();
+    public static RecipeMap<EOHRecipeBuilder> VIRTUAL_COSMOS_SIMULATOR_RECIPES = new RecipeMapBuilder<>("virtual_cosmos_simulator_recipes", new EOHRecipeBuilder())
+            .itemInputs(1)
+            .itemOutputs(81)
+            .fluidInputs(2)
+            .fluidOutputs(18)
+            .ui(EOHUI::new)
+            .build();
 
     public static RecipeMap<FuelRecipeBuilder> FUEL_CELL = new RecipeMapBuilder<>("fuel_cell", new FuelRecipeBuilder())
             .itemInputs(0)

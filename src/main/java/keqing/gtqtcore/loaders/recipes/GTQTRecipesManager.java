@@ -123,6 +123,7 @@ public class GTQTRecipesManager {
         GCYSBlockRecipeLoader.init();
         BoulesRecipes.init();
         FEPChain.init();
+        EOHRecipesHandler.init();
         NdYAGChain.init();
         FireboxCasingRecipes.register();
         GrapheneChain.init();

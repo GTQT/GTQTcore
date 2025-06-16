@@ -46,10 +46,21 @@ public class BlockQuantumCasing extends VariantBlock<BlockQuantumCasing.CasingTy
         //维度桥接机械方块
         DIMENSIONAL_BRIDGE_CASING("dimensional_bridge_casing"),
         DIMENSIONAL_PRESERVE_CASING("dimensional_preserve_casing"),
+        //强化时间结构方块
+        REINFORCED_SPACETIME_CASING("reinforced_temporal_structure_casing"),
+        //强化空间结构方块
+        REINFORCED_SPACE_CASING("reinforced_spatial_structure_casing"),
+        //无尽时空能量
+        INFINITE_SPACETIME_ENERGY_CASING("infinite_spacetime_energy_casing");
+
+
+        /*
         SINGULARITY_REINFORCED_STELLAR_SHIELDING_CASING("singularity_reinforced_stellar_shielding_casing"),
         CELESTIAL_MATTER_GUIDANCE_CASING("celestial_matter_guidance_casing"),
         BOUNDLESS_GRAVITATIONALLY_SEVERED_STRUCTURE_CASING("boundless_gravitationally_severed_structure_casing"),
         TRANSCENDENTALLY_AMPLIFIED_MAGNETIC_CONFINEMENT_CASING("transcendentally_amplified_magnetic_confinement_casing");
+
+         */
 
 
 

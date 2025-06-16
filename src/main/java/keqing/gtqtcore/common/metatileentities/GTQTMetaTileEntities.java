@@ -55,7 +55,6 @@ import keqing.gtqtcore.common.metatileentities.storage.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-import static appeng.core.features.AEFeature.CONDENSER;
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.unification.material.Materials.*;
@@ -270,8 +269,8 @@ public class GTQTMetaTileEntities {
     public static MetaTileHighEnergyLaserHatch[] LASER_INPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileHighEnergyLaserHatch[] LASER_OUTPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileEntityMSF MSF;
-    public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
-    public static MetaTileEntityDimensionallyBiomimeticFactory DIMENSIONAL_BIOMIMETIC_FACTORY;
+    //public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
+    public static MetaTileEntityEyeOfHarmony EOH;
     public static MetaTileEntityLargeBiomassGenerator LARGE_BIOMASS_GENERATOR;
     public static MetaTileEntityFluidRubbishBin FLUID_RUBBISH_BIN;
     public static MetaTileEntityParticleAcceleratorIO[] PARTICLE_ACCELERATOR_IO = new MetaTileEntityParticleAcceleratorIO[4];
@@ -652,10 +651,11 @@ public class GTQTMetaTileEntities {
 
         if (GTQTCoreConfig.MachineSwitch.LastSwitch)
             DIMENSIONAL_PLASMA_FURNACE = registerMetaTileEntity(602, new MetaTileEntityDimensionallyPlasmFurnace(gtqtcoreId("dimensional_plasma_furnace")));
-        if (GTQTCoreConfig.MachineSwitch.LastSwitch)
-            DIMENSIONAL_BIOMIMETIC_FACTORY = registerMetaTileEntity(603, new MetaTileEntityDimensionallyBiomimeticFactory(gtqtcoreId("dimensional_biomimetic_factory")));
+
+        EOH = registerMetaTileEntity(603, new MetaTileEntityEyeOfHarmony(gtqtcoreId("eye_of_harmony")));
+
         if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
-            NICOLL_DYSON_BEAMER = registerMetaTileEntity(604, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
+            //NICOLL_DYSON_BEAMER = registerMetaTileEntity(604, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
         if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
             SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(605, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
 

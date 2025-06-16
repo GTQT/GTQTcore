@@ -59,7 +59,9 @@ public class GTQTMetaBlocks {
     public static BlockTransparentCasing blockTransparentCasing;
     public static BlockWireCoil blockWireCoil;
     public static BlocksResearchSystem blocksResearchSystem;
-
+    public static BlockSpacetimeCompression blockSpacetimeCompression;
+    public static BlockStabilization blockStabilization;
+    public static BlockTimeAcceleration blockTimeAcceleration;
     public static BlockSTNT STNT;
 
     public static final BlockPineLeaves BLOCK_PINE_LEAVES = new BlockPineLeaves();
@@ -176,6 +178,15 @@ public class GTQTMetaBlocks {
         blocksResearchSystem = new BlocksResearchSystem();
         blocksResearchSystem.setRegistryName("computer_competent");
 
+        blockSpacetimeCompression = new BlockSpacetimeCompression();
+        blockSpacetimeCompression.setRegistryName("spacetime_compression_field_generator");
+
+        blockStabilization = new BlockStabilization();
+        blockStabilization.setRegistryName("stabilization_field_generator");
+
+        blockTimeAcceleration = new BlockTimeAcceleration();
+        blockTimeAcceleration.setRegistryName("time_acceleration_field_generator");
+
         STNT = new BlockSTNT();
         STNT.setRegistryName("stnt").setTranslationKey("stnt");
 
@@ -227,6 +238,9 @@ public class GTQTMetaBlocks {
         registerItemModel(blockTransparentCasing);
         registerItemModel(blockWireCoil);
         registerItemModel(blocksResearchSystem);
+        registerItemModel(blockSpacetimeCompression);
+        registerItemModel(blockStabilization);
+        registerItemModel(blockTimeAcceleration);
 
         registerItemModel(STNT);
         registerItemModel(BLOCK_PINE_LEAVES);
