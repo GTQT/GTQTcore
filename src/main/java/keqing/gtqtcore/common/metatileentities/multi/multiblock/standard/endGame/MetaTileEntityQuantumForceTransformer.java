@@ -309,14 +309,12 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
         if (this.isStructureFormed()) {
-
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", coreTier));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTier));
             textList.add(new TextComponentTranslation("gtqtcore.casingTire", manioulatorTier));
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 10 * this.glassTier));
             textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 10 * coreTier));
         }
-
     }
     @Override
     protected void initializeAbilities() {

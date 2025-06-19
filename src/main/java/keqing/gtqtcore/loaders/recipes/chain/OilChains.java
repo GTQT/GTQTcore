@@ -981,7 +981,7 @@ public class OilChains {
                 .duration(120).EUt(30).buildAndRegister();
     }
 
-    private static void lightlyCrack(Material raw, Material hydroCracked, Material steamCracked) {
+    static void lightlyCrack(Material raw, Material hydroCracked, Material steamCracked) {
         CRACKING_RECIPES.recipeBuilder()
                 .circuitMeta(1)
                 .fluidInputs(raw.getFluid(1000))
@@ -999,7 +999,7 @@ public class OilChains {
 
     }
 
-    private static void severelyCrack(Material raw, Material hydroCracked, Material steamCracked) {
+    static void severelyCrack(Material raw, Material hydroCracked, Material steamCracked) {
         CRACKING_RECIPES.recipeBuilder()
                 .circuitMeta(2)
                 .fluidInputs(raw.getFluid(1000))

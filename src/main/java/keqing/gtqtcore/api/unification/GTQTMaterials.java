@@ -480,6 +480,16 @@ public class GTQTMaterials {
     public static Material BariumAcetate;
     public static Material TitaniumAlloyTCF;
     public static Material BioOil;
+    public static Material CrudeBioOil;
+    public static Material LightOrganicFraction;
+    public static Material HeavyOrganicFraction;
+    public static Material AqueousPhase;
+    public static Material BioChar;
+    public static Material RefinedOil;
+    public static Material OrganicAcids;
+    public static Material ButyricAcid;
+    public static Material PropionateEster;
+    public static Material ButyrateEster;
     public static Material Enzymesa;
     public static Material Enzymesb;
     public static Material Enzymesc;
@@ -1229,6 +1239,11 @@ public class GTQTMaterials {
     public static Material Edot;
     public static Material Polystyrene;
     public static Material PolystyreneSulfonate;
+    public static Material SodiumSulfite;
+    public static Material SodiumBenzenesulfonate;
+    public static Material SodiumPhenoxide;
+    public static Material MagnesiumHydroxide;
+    public static Material BariumChloride;
     public static Material PedotPSS;
     public static Material PedotTMA;
     // Unknown Composition Materials

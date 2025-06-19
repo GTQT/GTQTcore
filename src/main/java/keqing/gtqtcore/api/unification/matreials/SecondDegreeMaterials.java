@@ -12,6 +12,7 @@ import keqing.gtqtcore.api.unification.GTQTMaterials;
 import net.minecraft.util.text.TextFormatting;
 
 import static gregtech.api.GTValues.*;
+import static gregtech.api.fluids.attribute.FluidAttributes.ACID;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.material.info.MaterialFlags.*;
 import static gregtech.api.unification.material.info.MaterialIconSet.*;
@@ -380,7 +381,7 @@ public class SecondDegreeMaterials {
 
         //  11007 Hexachloroplatinic Acid
         GTQTMaterials.HexachloroplatinicAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("hexachloroplatinic_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(0xFEF4D1)
                 .components(Hydrogen, 2, Platinum, 1, Chlorine, 6)
                 .build();
@@ -736,7 +737,7 @@ public class SecondDegreeMaterials {
 
         //  13197 Para Toluic Acid
         GTQTMaterials.ParaToluicAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("para_toluic_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(0x4FA597)
                 .components(Carbon, 8, Hydrogen, 8, Oxygen, 2)
                 .build();
@@ -757,7 +758,7 @@ public class SecondDegreeMaterials {
 
         //  24075 Exotic Mutagen
         ExoticMutagen = new Material.Builder(getMaterialsId(), gtqtcoreId("exotic_mutagen"))
-                .liquid(new FluidBuilder().temperature(18406).attributes(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().temperature(18406).attributes(ACID))
                 .color(0x9C31F9)
                 .build()
                 .setFormula(TextFormatting.OBFUSCATED + "aaa", false);
@@ -1368,7 +1369,7 @@ public class SecondDegreeMaterials {
 
         //  11266 Dirty Hexafluorosilicic Acid
         DirtyHexafluorosilicicAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("dirty_hexafluorosilicic_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(Stone.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
                 .iconSet(DULL)
                 .components(Hydrogen, 2, Silicon, 1, Fluorine, 6)
@@ -1378,7 +1379,7 @@ public class SecondDegreeMaterials {
 
         //  11267 Diluted Hexafluorosilicic Acid
         DilutedHexafluorosilicicAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("diluted_hexafluorosilicic_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(Stone.getMaterialRGB() + HydrofluoricAcid.getMaterialRGB())
                 .components(Hydrogen, 6, Oxygen, 2, Silicon, 1, Fluorine, 6)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1395,7 +1396,7 @@ public class SecondDegreeMaterials {
 
         //  11269 Diluted Hydrofluoric Acid
         DilutedHydrofluoricAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("diluted_hydrofluoric_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color((HydrofluoricAcid.getMaterialRGB() + Water.getMaterialRGB()) / 3)
                 .components(HydrofluoricAcid, 1, Water, 1)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1417,7 +1418,7 @@ public class SecondDegreeMaterials {
 
         //  11272 Xenic Acid
         XenicAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("xenic_acid"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(Xenon.getMaterialRGB() + Hydrogen.getMaterialRGB() + Oxygen.getMaterialRGB())
                 .components(Hydrogen, 2, Xenon, 1, Oxygen, 4)
                 .flags(DISABLE_DECOMPOSITION)
@@ -1549,7 +1550,7 @@ public class SecondDegreeMaterials {
 
         //  24150 Ultra-acidic Stone Residue Solution
         UltraacidicStoneResidueSolution = new Material.Builder(getMaterialsId(), gtqtcoreId("ultraacidic_stone_residue_solution"))
-                .liquid(new FluidBuilder().attribute(FluidAttributes.ACID))
+                .liquid(new FluidBuilder().attribute(ACID))
                 .color(FluoroantimonicAcid.getMaterialRGB() + Helium3Hydride.getMaterialRGB())
                 .iconSet(DULL)
                 .build();
@@ -2237,5 +2238,83 @@ public class SecondDegreeMaterials {
         //氧化锆杂化物
         //（2,4-双（三氯甲基）-6-（4-甲氧基苯乙烯基）-1,3,5-三嗪）
         //（ZrO2-BTMST）
+
+        // 粗生物原油（流体）
+        GTQTMaterials.CrudeBioOil = new Material.Builder(getMaterialsId(), gtqtcoreId("crude_bio_oil"))
+                .fluid()
+                .color(0x4A2F28) // 深棕色
+                .iconSet(SHINY)
+                .build();
+
+        // 轻质有机馏分（流体）
+        GTQTMaterials.LightOrganicFraction = new Material.Builder(getMaterialsId(), gtqtcoreId("light_organic_fraction"))
+                .fluid()
+                .color(0xE6DAA6) // 浅黄色
+                .iconSet(FLUID)
+                .build();
+
+        // 重质有机馏分（流体）
+        GTQTMaterials.HeavyOrganicFraction = new Material.Builder(getMaterialsId(), gtqtcoreId("heavy_organic_fraction"))
+                .fluid()
+                .color(0xE6DAA6) // 浅黄色
+                .iconSet(FLUID)
+                .build();
+
+        // 水相（流体）
+        GTQTMaterials.AqueousPhase = new Material.Builder(getMaterialsId(), gtqtcoreId("aqueous_phase"))
+                .fluid()
+                .color(0x87CEEB) // 淡蓝色
+                .build();
+
+        // 生物炭（固体）
+        GTQTMaterials.BioChar = new Material.Builder(getMaterialsId(), gtqtcoreId("bio_char"))
+                .dust()
+                .gem(1, 2400)
+                .color(0x1A1A1A) // 纯黑色
+                .iconSet(ROUGH)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 85, Hydrogen, 4, Oxygen, 8, Ash, 3)
+                .build()
+                .setFormula("C85H4O8(Ash)3", true);
+
+        // 精炼生物油（流体）
+        GTQTMaterials.RefinedOil = new Material.Builder(getMaterialsId(), gtqtcoreId("refined_oil"))
+                .fluid()
+                .color(0x3CB371) // 中绿色
+                .iconSet(SHINY)
+                .build();
+
+        // 有机酸（流体）
+        GTQTMaterials.OrganicAcids = new Material.Builder(getMaterialsId(), gtqtcoreId("organic_acids"))
+                .fluid()
+                .color(0xFFD700) // 金色
+                .build();
+
+        // 丁酸 (Butyric Acid)
+        GTQTMaterials.ButyricAcid = new Material.Builder(getMaterialsId(), gtqtcoreId("butyric_acid"))
+                .liquid(new FluidBuilder().attributes(FluidAttributes.ACID))
+                .color(0xFFF8DC) // 玉米丝色
+                .components(Carbon, 4, Hydrogen, 8, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("CH3(CH2)2COOH", true);
+
+        // 丙酸乙酯 (Ethyl Propionate) 水果香精，用于食品添加剂
+        GTQTMaterials.PropionateEster = new Material.Builder(getMaterialsId(), gtqtcoreId("propionate_ester"))
+                .fluid()
+                .color(0xFFFACD) // 柠檬绸色
+                .components(Carbon, 5, Hydrogen, 10, Oxygen, 2)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C2H5COOC2H5", true);
+
+        // 丁酸乙酯 (Ethyl Butyrate) 菠萝香精，常用于饮料和糖果
+        GTQTMaterials.ButyrateEster = new Material.Builder(getMaterialsId(), gtqtcoreId("butyrate_ester"))
+                .fluid()
+                .color(0xFAFAD2) // 浅金黄
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Carbon, 6, Hydrogen, 12, Oxygen, 2)
+                .build()
+                .setFormula("CH3(CH2)2COOC2H5", true);
     }
 }

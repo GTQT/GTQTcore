@@ -1999,7 +1999,7 @@ public class TechReSearchNET {
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
                 .input(HULL[EV])
                 .input(frameGt, TungstenSteel, 4)
-                .input(plate, TitaniumTungstenCarbide, 4)
+                .input(plate, Titanium, 4)
                 .input(circuit, MarkerMaterials.Tier.EV, 4)
                 .input(ELECTRIC_PISTON_EV, 2)
                 .input(gear, TanmolyiumBetaC, 2)

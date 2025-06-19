@@ -7,12 +7,16 @@ import gregtech.api.unification.ore.OrePrefix;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;
 import static gregtech.api.recipes.RecipeMaps.GAS_TURBINE_FUELS;
+import static gregtech.api.unification.material.MarkerMaterials.Color.Lime;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.dust;
+import static gregtechfoodoption.GTFOMaterialHandler.FertilizerSolution;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Tiberium;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtqtcore.loaders.recipes.chain.OilChains.lightlyCrack;
+import static keqing.gtqtcore.loaders.recipes.chain.OilChains.severelyCrack;
 
 public class AlgaeChain {
     public static void init() {
@@ -23,23 +27,80 @@ public class AlgaeChain {
         AlgaeGroth(GOLD_ALGAE, 80);
 
         ExoticGasProcessing();
+
+        // 初级处理 - 生物油初步分离
         SFM.recipeBuilder()
-                .duration(100)
-                .EUt(120)
+                .duration(120)
+                .EUt(96)
                 .fluidInputs(BioOil.getFluid(6000))
                 .input(OrePrefix.dust, SodaAsh, 10)
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(400))
-                .fluidOutputs(RawOil.getFluid(200))
-                .fluidOutputs(RawOil.getFluid(200))
-                .fluidOutputs(RawOil.getFluid(200))
-                .fluidOutputs(Biomass.getFluid(200))
-                .fluidOutputs(Biomass.getFluid(200))
-                .fluidOutputs(Biomass.getFluid(200))
+                .fluidOutputs(CrudeBioOil.getFluid(6000)) // 初级原油
+                .fluidOutputs(Naphtha.getFluid(800)) // 石脑油
+                .fluidOutputs(BioDiesel.getFluid(500)) // 生物柴油
+                .fluidOutputs(OrganicAcids.getFluid(200)) // 有机酸
+                .fluidOutputs(AqueousPhase.getFluid(200)) // 水相
+                .output(dust, BioChar, 2) // 生物炭
+                .buildAndRegister();
+
+        // 中级处理 - 原油精炼
+        DISTILLATION_RECIPES.recipeBuilder()
+                .duration(180)
+                .EUt(192)
+                .fluidInputs(CrudeBioOil.getFluid(000))
+                .fluidOutputs(BioDiesel.getFluid(1000)) // 精炼油
+                .fluidOutputs(LightOrganicFraction.getFluid(2500)) // 轻质有机馏分
+                .fluidOutputs(HeavyOrganicFraction.getFluid(2500)) // 重质有机馏分
+                .buildAndRegister();
+
+        lightlyCrack(HeavyOrganicFraction, LightlyHydroCrackedHeavyFuel, LightlySteamCrackedHeavyFuel);
+        severelyCrack(HeavyOrganicFraction, SeverelyHydroCrackedHeavyFuel, SeverelySteamCrackedHeavyFuel);
+        lightlyCrack(LightOrganicFraction, LightlyHydroCrackedLightFuel, LightlySteamCrackedLightFuel);
+        severelyCrack(LightOrganicFraction, SeverelyHydroCrackedLightFuel, SeverelySteamCrackedLightFuel);
+
+        // 水相处理 - 资源回收
+        DISTILLATION_RECIPES.recipeBuilder()
+                .duration(90)
+                .EUt(128)
+                .fluidInputs(AqueousPhase.getFluid(1000)) // 5批初级处理产物
+                .input(OrePrefix.dust, Lime, 3) // 添加石灰
+                .fluidOutputs(FertilizerSolution.getFluid(800)) // 肥料溶液
+                .output(OrePrefix.dust, RockSalt, 2) // 钾盐
+                .output(OrePrefix.dust, Phosphorus, 1) // 磷
+                .buildAndRegister();
+
+        // 精密分馏分离有机酸
+        DISTILLATION_RECIPES.recipeBuilder()
+                .duration(160)
+                .EUt(512)
+                .fluidInputs(OrganicAcids.getFluid(1000))
+                .fluidOutputs(AceticAcid.getFluid(600))   // 乙酸
+                .fluidOutputs(PropionicAcid.getFluid(300)) // 丙酸
+                .fluidOutputs(ButyricAcid.getFluid(100))   // 丁酸
+                .buildAndRegister();
+
+        // 乙酸制醋酸乙烯酯
+        DISTILLATION_RECIPES.recipeBuilder()
+                .duration(180)
+                .EUt(480)
+                .fluidInputs(AceticAcid.getFluid(1000))
+                .fluidInputs(Ethylene.getFluid(1000))
+                .fluidInputs(Oxygen.getFluid(1000))
+                .input(OrePrefix.dust, Palladium, 1)    // 钯催化剂
+                .fluidOutputs(VinylAcetate.getFluid(1600)) // 醋酸乙烯酯
+                .fluidOutputs(Water.getFluid(400))
+                .buildAndRegister();
+
+        // 酯化反应生产食品添加剂
+        DISTILLATION_RECIPES.recipeBuilder()
+                .duration(150)
+                .EUt(320)
+                .fluidInputs(PropionicAcid.getFluid(500))
+                .fluidInputs(ButyricAcid.getFluid(500))
+                .fluidInputs(Ethanol.getFluid(1000))
+                .input(OrePrefix.dust, SulfuricAcid, 1) // 酸催化剂
+                .fluidOutputs(PropionateEster.getFluid(800)) // 丙酸乙酯(水果香精)
+                .fluidOutputs(ButyrateEster.getFluid(800))   // 丁酸乙酯(菠萝香精)
+                .fluidOutputs(Water.getFluid(400))
                 .buildAndRegister();
 
     }

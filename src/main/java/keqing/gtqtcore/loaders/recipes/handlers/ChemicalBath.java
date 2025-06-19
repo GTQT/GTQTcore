@@ -17,7 +17,7 @@ public class ChemicalBath {
         ChemicalBathRecipes(StainlessSteel);
         ChemicalBathRecipes(Polysilicon);
         ChemicalBathRecipes(VibrantAlloy);
-        ChemicalBathRecipes(Talonite);
+        ChemicalBathRecipes( Talonite);
         ChemicalBathRecipes(MagnesiumDiboride);
     }
     public static void ChemicalBathRecipes(Material material)

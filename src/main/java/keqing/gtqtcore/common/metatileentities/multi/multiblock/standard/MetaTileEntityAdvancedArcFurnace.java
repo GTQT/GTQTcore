@@ -17,6 +17,7 @@ import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
+import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -79,17 +80,20 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
 
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
-                .aisle(" AAA ", " AAA ", " EEE ", "     ")
-                .aisle("AAAAA", "A#C#A", "E#C#E", " ACA ")
-                .aisle("CAAAC", "C###C", "C###C", "CAAAC")
-                .aisle("AAAAA", "A#C#A", "E#C#E", " ACA ")
-                .aisle(" AAA ", " ASA ", " EEE ", "     ")
+                .aisle("  AAA  ", "  AAA  ", "  BBB  ", "  AAA  ", "  BBB  ", "  AAA  ", "       ", "       ", "       ", "       ", "       ")
+                .aisle(" AAAAA ", " A   A ", " B   B ", " A   A ", " B   B ", " A   A ", "  AAA  ", "       ", "       ", "  AAA  ", "       ")
+                .aisle("AAAAAAA", "A C C A", "B C C B", "A C C A", "B C C B", "A C C A", " ACACA ", "  C C  ", "  C C  ", " ACACA ", "  D D  ")
+                .aisle("AAAAAAA", "A     A", "B     B", "A     A", "B     B", "A     A", " AAAAA ", "       ", "       ", " AAAAA ", "       ")
+                .aisle("AAAAAAA", "A C C A", "B C C B", "A C C A", "B C C B", "A C C A", " ACACA ", "  C C  ", "  C C  ", " ACACA ", "  D D  ")
+                .aisle(" AAAAA ", " A   A ", " B   B ", " A   A ", " B   B ", " A   A ", "  AAA  ", "       ", "       ", "  AAA  ", "       ")
+                .aisle("  AAA  ", "  ASA  ", "  BBB  ", "  AAA  ", "  BBB  ", "  AAA  ", "  E E  ", "  E E  ", "  E E  ", "  AAA  ", "       ")
                 .where('S', selfPredicate())
-                .where('A', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.TUNGSTENSTEEL_ROBUST)).setMinGlobalLimited(28)
+                .where('A', states(MetaBlocks.METAL_CASING.getState(MetalCasingType.TUNGSTENSTEEL_ROBUST)).setMinGlobalLimited(55)
                         .or(autoAbilities()))
-                .where('C', abilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY))
-                .where('D', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.TUNGSTENSTEEL_PIPE))))
-                .where('E', states(MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX)))
+                .where('D', abilities(GTQTMultiblockAbility.ELECTRODE_MULTIBLOCK_ABILITY))
+                .where('C', states(MetaBlocks.BOILER_CASING.getState((BoilerCasingType.STEEL_PIPE))))
+                .where('E', states(MetaBlocks.FRAMES.get(Materials.Steel).getBlock(Materials.Steel)))
+                .where('B', states(MetaBlocks.BOILER_FIREBOX_CASING.getState(BlockFireboxCasing.FireboxCasingType.TUNGSTENSTEEL_FIREBOX)))
                 .where(' ', any())
                 .where('#', air())
                 .build();
@@ -104,7 +108,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("彼岸双生"));
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc", new Object[0]));
         tooltip.add(I18n.format("gtqtcore.machine.modify_overclock", "Electrode Tier"));
-        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom", 2, "Electrode Tier", 32));
+        tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.custom", 2, "Electrode Tier", 64));
         tooltip.add(I18n.format("gtqtcore.machine.max_voltage"));
     }
 
@@ -117,7 +121,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
 
     public int getElectrodeTier() {
         int minTier = 5;
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 4; i++) {
             if (minTier > getElectrodeHatch(i).getElectrodeTier())
                 minTier = getElectrodeHatch(i).getElectrodeTier();
         }
@@ -125,7 +129,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
     }
 
     public boolean checkAvailable() {
-        for (int i = 0; i < 14; i++) {
+        for (int i = 0; i < 4; i++) {
             if (!getElectrodeHatch(i).isAvailable())
                 return false;
         }
@@ -152,7 +156,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
 
         @Override
         public int getParallelLimit() {
-            return Math.min((int) Math.pow(2, ElectrodeTier), 32);
+            return Math.min((int) Math.pow(2, ElectrodeTier), 64);
         }
 
         @Override

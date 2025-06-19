@@ -33,6 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -66,7 +68,16 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
     //+成功率
     //+额外产出
     //减少电量产出
-
+    protected void addDisplayText(List<ITextComponent> textList) {
+        super.addDisplayText(textList);
+        if (this.isStructureFormed()) {
+            textList.add(new TextComponentTranslation("时间膨胀发生器:%s", timeAcceleration));
+            textList.add(new TextComponentTranslation("压缩时空发生器:%s", spaceTimeCompression));
+            textList.add(new TextComponentTranslation("稳定力场发生器:%s", stabilization));
+            textList.add(new TextComponentTranslation("星阵数量：%s", calculateStarArray()));
+            textList.add(new TextComponentTranslation("最大超频次数:%s", maxAllowedOc));
+        }
+    }
     public MetaTileEntityEyeOfHarmony(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.VIRTUAL_COSMOS_SIMULATOR_RECIPES);
         this.recipeMapWorkable=new EOHRecipeLogic(this);

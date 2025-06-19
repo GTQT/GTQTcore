@@ -7,8 +7,8 @@ import gregtech.api.fluids.store.FluidStorageKeys;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.info.MaterialIconSet;
 import gregtech.api.unification.material.properties.BlastProperty;
-import gregtech.api.unification.material.properties.PropertyKey;
 import gregtech.api.unification.material.properties.MaterialToolProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
 import static gregicality.multiblocks.api.unification.GCYMMaterials.IncoloyMA956;
@@ -4507,7 +4507,7 @@ public class FirstDegreeMaterials {
                 .gem().fluid()
                 .color(0x545572)
                 .iconSet(MaterialIconSet.DIAMOND)
-                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION, CRYSTALLIZABLE, FLAMMABLE, EXPLOSIVE, DISABLE_CRYSTALLIZATION,GENERATE_GEAR, GENERATE_ROD, GENERATE_SMALL_GEAR,GENERATE_FRAME,GENERATE_DENSE,GENERATE_FINE_WIRE,GENERATE_BOLT_SCREW,GENERATE_RING,GENERATE_ROUND,GENERATE_ROD,GENERATE_LONG_ROD)
+                .flags(GENERATE_PLATE, DISABLE_DECOMPOSITION, CRYSTALLIZABLE, FLAMMABLE, EXPLOSIVE, DISABLE_CRYSTALLIZATION, GENERATE_GEAR, GENERATE_ROD, GENERATE_SMALL_GEAR, GENERATE_FRAME, GENERATE_DENSE, GENERATE_FINE_WIRE, GENERATE_BOLT_SCREW, GENERATE_RING, GENERATE_ROUND, GENERATE_ROD, GENERATE_LONG_ROD)
                 .components(Boron, 1, Nitrogen, 1)
                 .toolStats(MaterialToolProperty.Builder.of(14.0F, 9.0F, 12400, 15).build())
                 .build()
@@ -5559,6 +5559,53 @@ public class FirstDegreeMaterials {
                 .flags(DISABLE_DECOMPOSITION, GENERATE_PLATE)
                 .components(Carbon, 8, Hydrogen, 8, Sulfur, 1, Oxygen, 3)
                 .build();
+
+        // 亚硫酸钠
+        GTQTMaterials.SodiumSulfite = new Material.Builder(getMaterialsId(), gtqtcoreId("sodium_sulfite"))
+                .dust()
+                .color(0xD1E0E0) // 淡青色
+                .iconSet(ROUGH)
+                .components(Sodium, 2, Sulfur, 1, Oxygen, 3)
+                .build()
+                .setFormula("Na2SO3", true);
+
+        // 苯磺酸钠
+        GTQTMaterials.SodiumBenzenesulfonate = new Material.Builder(getMaterialsId(), gtqtcoreId("sodium_benzenesulfonate"))
+                .dust()
+                .color(0xF5F5DC) // 米色
+                .iconSet(ROUGH)
+                .components(Carbon, 6, Hydrogen, 5, Sodium, 1, Sulfur, 1, Oxygen, 3)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H5SO3Na", true);
+
+        // 苯酚钠
+        GTQTMaterials.SodiumPhenoxide = new Material.Builder(getMaterialsId(), gtqtcoreId("sodium_phenoxide"))
+                .dust()
+                .color(0xFFF8DC) // 淡黄色
+                .iconSet(ROUGH)
+                .components(Carbon, 6, Hydrogen, 5, Sodium, 1, Oxygen, 1)
+                .flags(DISABLE_DECOMPOSITION)
+                .build()
+                .setFormula("C6H5ONa", true);
+
+        // 氢氧化镁
+        GTQTMaterials.MagnesiumHydroxide = new Material.Builder(getMaterialsId(), gtqtcoreId("magnesium_hydroxide"))
+                .dust()
+                .color(0xFAFAD2) // 浅黄色
+                .iconSet(FINE)
+                .components(Magnesium, 1, Oxygen, 2, Hydrogen, 2)
+                .build()
+                .setFormula("Mg(OH)2", true);
+
+        // 氯化钡
+        GTQTMaterials.BariumChloride = new Material.Builder(getMaterialsId(), gtqtcoreId("barium_chloride"))
+                .dust()
+                .color(0xE0FFFF) // 浅蓝色
+                .iconSet(SHINY)
+                .components(Barium, 1, Chlorine, 2)
+                .build()
+                .setFormula("BaCl2", true);
 
     }
 }
