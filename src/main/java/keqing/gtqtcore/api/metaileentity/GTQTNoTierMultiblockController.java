@@ -35,7 +35,10 @@ import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
 public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected boolean setMaxParallel;
     protected int maxParallel;
     protected boolean setTimeReduce;

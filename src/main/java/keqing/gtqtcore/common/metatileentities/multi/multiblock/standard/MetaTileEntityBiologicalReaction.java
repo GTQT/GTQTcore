@@ -59,6 +59,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
 public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     int liquid = 0;
     int bio = 0;
     double rate = 0;

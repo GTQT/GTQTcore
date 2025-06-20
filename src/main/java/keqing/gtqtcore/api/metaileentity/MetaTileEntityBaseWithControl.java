@@ -34,6 +34,10 @@ import java.util.List;
 
 //万物基类
 public abstract class MetaTileEntityBaseWithControl extends MultiblockWithDisplayBase implements IControllable, IDataInfoProvider, IWorkable {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;

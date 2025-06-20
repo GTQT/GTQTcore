@@ -52,8 +52,10 @@ import java.util.stream.Stream;
 import static gregtech.api.capability.GregtechDataCodes.WORKABLE_ACTIVE;
 
 public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase implements IControllable {
-
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final int BASE_EU_CONSUMPTION_PER_PUMP = 128;
     private IEnergyContainer energyContainers;
     private IMultipleTankHandler outputTankInventory;

@@ -51,7 +51,10 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapNoEnergyMultiblockC
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
         return Textures.PRIMITIVE_BRICKS;
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         return ModularUI.builder(GuiTextures.PRIMITIVE_BACKGROUND, 176, 204).shouldColor(false).widget(new TankWidget(this.importFluids.getTankAt(0), 22, 25, 20, 58).setBackgroundTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK).setOverlayTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY).setContainerClicking(true, true)).widget(new LabelWidget(5, 5, this.getMetaFullName())).widget((new SlotWidget(this.importItems, 0, 52, 25, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.importItems, 1, 52, 45, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.importItems, 2, 52, 65, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget(new RecipeProgressWidget(this.recipeMapWorkable::getProgressPercent, 76, 46, 20, 15, GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, ProgressWidget.MoveType.HORIZONTAL, GTQTcoreRecipeMaps.PRIMITIVE_ROASTING_RECIPES)).widget((new SlotWidget(this.exportItems, 0, 103, 25, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.exportItems, 1, 103, 45, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.exportItems, 2, 103, 65, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new TankWidget(this.exportFluids.getTankAt(0), 134, 25, 20, 58)).setBackgroundTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK).setOverlayTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY).setContainerClicking(true, false)).bindPlayerInventory(entityPlayer.inventory, GuiTextures.PRIMITIVE_SLOT, 37);
     }

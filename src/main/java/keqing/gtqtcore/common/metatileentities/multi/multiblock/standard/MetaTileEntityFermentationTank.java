@@ -46,7 +46,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockTransparentCasing.CasingT
 
 public class MetaTileEntityFermentationTank extends RecipeMapMultiblockController implements IPHValue {
     private double pH = 7;
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityFermentationTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.FERMENTATION_TANK_RECIPES);
         this.recipeMapWorkable = new PHRecipeLogic(this);

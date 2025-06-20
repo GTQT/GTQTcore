@@ -84,7 +84,10 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     public IMultipleTankHandler getInputFluidInventory() {
         return this.inputFluidInventory;
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -168,7 +171,7 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

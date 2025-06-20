@@ -38,6 +38,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockController {
+
     private int casingTier;
     private int tubeTier;
     private int ElectrodeTier;
@@ -92,7 +93,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return true;
     }
 

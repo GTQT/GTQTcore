@@ -268,7 +268,10 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -488,7 +491,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

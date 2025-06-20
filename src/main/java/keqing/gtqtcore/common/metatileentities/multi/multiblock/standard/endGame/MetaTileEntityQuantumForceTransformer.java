@@ -78,7 +78,10 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.SuperDimensionalCata
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private int manioulatorTier;
     private int coreTier;
     private int glassTier;

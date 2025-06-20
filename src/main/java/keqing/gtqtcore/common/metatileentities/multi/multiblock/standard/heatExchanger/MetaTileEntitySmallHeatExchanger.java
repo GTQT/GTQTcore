@@ -45,6 +45,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5.Turbine
 import static net.minecraft.util.text.TextFormatting.*;
 
 public class MetaTileEntitySmallHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final int heatTime = 600;
     private int thresholdPercentage = 100;
 
@@ -200,7 +204,7 @@ public class MetaTileEntitySmallHeatExchanger extends RecipeMapNoEnergyMultibloc
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 }

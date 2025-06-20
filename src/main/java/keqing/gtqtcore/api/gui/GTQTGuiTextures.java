@@ -1,8 +1,11 @@
 package keqing.gtqtcore.api.gui;
 
 
+import com.cleanroommc.modularui.drawable.UITexture;
 import gregtech.api.gui.resources.SteamTexture;
 import gregtech.api.gui.resources.TextureArea;
+
+import static com.cleanroommc.modularui.drawable.UITexture.fullImage;
 
 public class GTQTGuiTextures {
     //  Steam Texture
@@ -32,8 +35,12 @@ public class GTQTGuiTextures {
     public static final TextureArea PROGRESS_BAR_CHISEL = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_chisel.png");
     public static final TextureArea PROGRESS_BAR_REACTION = TextureArea.fullImage("textures/gui/progress_bar/progress_bar_reaction.png");
 
-    public static final TextureArea FUSION_REACTOR_MK4_TITLE = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk4_title.png");
-    public static final TextureArea FUSION_REACTOR_MK5_TITLE = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk5_title.png");
-    public static final TextureArea FUSION_REACTOR_MK6_TITLE = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk6_title.png");
-    public static final TextureArea BUTTON_STRUCTURE_SWITCHING = TextureArea.fullImage("textures/gui/widget/button_structure_switching.png");
+    // FUSION
+    public static final TextureArea FUSION_REACTOR_MK4_TITLE_MUI = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk4_title.png");
+    public static final TextureArea FUSION_REACTOR_MK5_TITLE_MUI = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk5_title.png");
+    public static final TextureArea FUSION_REACTOR_MK6_TITLE_MUI = TextureArea.fullImage("textures/gui/widget/fusion_reactor_mk6_title.png");
+
+    public static final UITexture FUSION_REACTOR_MK4_TITLE = fullImage("textures/gui/widget/fusion_reactor_mk4_title.png");
+    public static final UITexture FUSION_REACTOR_MK5_TITLE = fullImage("textures/gui/widget/fusion_reactor_mk5_title.png");
+    public static final UITexture FUSION_REACTOR_MK6_TITLE = fullImage("textures/gui/widget/fusion_reactor_mk6_title.png");
 }

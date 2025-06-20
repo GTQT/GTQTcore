@@ -41,6 +41,12 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 
 public class MetaTileEntityDissolutionTank extends RecipeMapMultiblockController {
+
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
+
     private int glass_tier;
 
     public MetaTileEntityDissolutionTank(ResourceLocation metaTileEntityId) {

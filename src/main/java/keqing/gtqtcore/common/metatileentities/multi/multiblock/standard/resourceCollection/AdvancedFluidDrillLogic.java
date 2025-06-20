@@ -102,6 +102,15 @@ public class AdvancedFluidDrillLogic {
         return produced;
     }
 
+    /**
+     *
+     * @return the current progress towards producing fluid of the rig
+     */
+    public int getProgressTime() {
+        return this.progressTime;
+    }
+
+
     protected boolean checkCanDrain() {
         if (!this.consumeEnergy(true)) {
             if (this.progressTime >= 2) {
@@ -135,7 +144,7 @@ public class AdvancedFluidDrillLogic {
         }
     }
 
-    private boolean isActive() {
+    boolean isActive() {
         return this.isActive;
     }
 
@@ -172,6 +181,13 @@ public class AdvancedFluidDrillLogic {
         }
 
     }
+    /**
+     *
+     * @return whether working is enabled for the logic
+     */
+    public boolean isWorkingEnabled() {
+        return isWorkingEnabled;
+    }
 
     public boolean isWorking() {
         return this.isActive && !this.hasNotEnoughEnergy && this.isWorkingEnabled;
@@ -183,6 +199,14 @@ public class AdvancedFluidDrillLogic {
 
     protected boolean isOverclocked() {
         return this.metaTileEntity.getEnergyTier() > this.metaTileEntity.getTier();
+    }
+
+    /**
+     *
+     * @return whether the inventory is full
+     */
+    public boolean isInventoryFull() {
+        return this.isInventoryFull;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {

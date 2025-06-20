@@ -1,5 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
+import com.cleanroommc.modularui.api.drawable.IDrawable;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.LongSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.widgets.layout.Column;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.AtomicDouble;
 import gregtech.api.GTValues;
@@ -19,6 +25,9 @@ import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -28,6 +37,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.FusionEUToStartProperty;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.RelativeDirection;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
@@ -42,6 +52,7 @@ import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+import gregtech.common.metatileentities.multi.electric.MetaTileEntityFusionReactor;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -67,12 +78,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.DoubleSupplier;
+import java.util.function.UnaryOperator;
 
 import static gregtech.api.GTValues.UEV;
 import static gregtech.api.GTValues.UHV;
@@ -81,15 +94,15 @@ import static gregtech.api.recipes.logic.OverclockingLogic.PERFECT_HALF_VOLTAGE_
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.ADVANCED_FUSION_REACTOR;
 
 public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockController
-        implements IFastRenderMetaTileEntity, IBloomEffect {
+        implements IFastRenderMetaTileEntity, IBloomEffect, ProgressBarMultiblock {
 
     protected static final int NO_COLOR = 0;
 
     private final int tier;
-    private final FusionProgressSupplier progressBarSupplier;
     private EnergyContainerList inputEnergyContainers;
     private long heat = 0; // defined in TileEntityFusionReactor but serialized in FusionRecipeLogic
     private int fusionRingColor = NO_COLOR;
+
     @SideOnly(Side.CLIENT)
     private boolean registeredBloomRenderTicket;
 
@@ -99,18 +112,12 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         this.tier = tier;
         this.energyContainer = new EnergyContainerHandler(this, 0, 0, 0, 0, 0) {
 
-
+            @NotNull
             @Override
             public String getName() {
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
             }
         };
-        this.progressBarSupplier = new FusionProgressSupplier();
-    }
-
-    private static BloomType getBloomType() {
-        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
-        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
     }
 
     @Override
@@ -362,313 +369,99 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         return heat;
     }
 
+
+
+
+
+
+
+
+
+
+
     @Override
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        // Background
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 198, 236);
-
-        // Display
-        builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
-
-        // Energy Bar
-        builder.widget(new ProgressWidget(
-                () -> energyContainer.getEnergyCapacity() > 0 ?
-                        1.0 * energyContainer.getEnergyStored() / energyContainer.getEnergyCapacity() : 0,
-                4, 144, 94, 7,
-                GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addEnergyBarHoverText));
-
-        // Heat Bar
-        builder.widget(new ProgressWidget(
-                () -> energyContainer.getEnergyCapacity() > 0 ? 1.0 * heat / energyContainer.getEnergyCapacity() : 0,
-                100, 144, 94, 7,
-                GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addHeatBarHoverText));
-
-        // Indicator Widget
-        builder.widget(new IndicatorImageWidget(174, 122, 17, 17, getLogo())
-                .setWarningStatus(getWarningLogo(), this::addWarningText)
-                .setErrorStatus(getErrorLogo(), this::addErrorText));
-
-        // Title
+    protected MultiblockUIFactory createUIFactory() {
+        IDrawable title;
         if (tier == GTValues.UHV) {
             // MK1
-            builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE).setIgnoreColor(true));
+            title = GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE;
         } else if (tier == GTValues.UEV) {
             // MK2
-            builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE).setIgnoreColor(true));
+            title = GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE;
         } else {
             // MK3
-            builder.widget(new ImageWidget(64, 9, 71, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE).setIgnoreColor(true));
+            title = GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE;
         }
 
-        // Fusion Diagram + Progress Bar
-        builder.widget(new ImageWidget(55, 24, 89, 101, GuiTextures.FUSION_REACTOR_DIAGRAM).setIgnoreColor(true));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_RIGHT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_RIGHT.getWidget(this));
-
-        // Fusion Legend
-        builder.widget(new ImageWidget(7, 98, 108, 41, GuiTextures.FUSION_REACTOR_LEGEND).setIgnoreColor(true));
-
-        // Power Button + Detail
-        builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
-                recipeMapWorkable::isWorkingEnabled, recipeMapWorkable::setWorkingEnabled));
-        builder.widget(new ImageWidget(173, 229, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
-
-        // Voiding Mode Button
-        builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK,
-                4, this::getVoidingMode, this::setVoidingMode)
-                .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
-
-        // Distinct Buses Unavailable Image
-        builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
-                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
-
-        // Flex Unavailable Image
-        builder.widget(getFlexButton(173, 153, 18, 18));
-
-        // Player Inventory
-        builder.bindPlayerInventory(entityPlayer.inventory, 153);
-        return builder;
-    }
-
-    private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent energyInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                TextFormattingUtil.formatNumbers(energyContainer.getEnergyStored()) + " / " +
-                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()) + " EU");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.energy_stored",
-                energyInfo));
-    }
-
-    private void addHeatBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent heatInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.RED,
-                TextFormattingUtil.formatNumbers(heat) + " / " +
-                        TextFormattingUtil.formatNumbers(energyContainer.getEnergyCapacity()));
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.fusion_reactor.heat",
-                heatInfo));
+        DoubleSyncValue progress = new DoubleSyncValue(recipeMapWorkable::getProgressPercent);
+        return new MultiblockUIFactory(this)
+                .setScreenHeight(138)
+                .disableDisplayText()
+                .addScreenChildren((parent, syncManager) -> {
+                    var status = MultiblockUIFactory.builder("status", syncManager);
+                    status.setAction(b -> b.structureFormed(true)
+                            .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                            .addWorkingStatusLine());
+                    parent.child(new Column()
+                            .padding(4)
+                            .expanded()
+                            .child(title.asWidget()
+                                    .marginBottom(8)
+                                    .size(69, 12))
+                            .child(new com.cleanroommc.modularui.widgets.ProgressWidget()
+                                    .size(77, 77)
+                                    .tooltipAutoUpdate(true)
+                                    .tooltipBuilder(status::build)
+                                    .background(GTGuiTextures.FUSION_DIAGRAM.asIcon()
+                                            .size(89, 101)
+                                            .marginTop(11))
+                                    .direction(com.cleanroommc.modularui.widgets.ProgressWidget.Direction.CIRCULAR_CW)
+                                    .value(progress)
+                                    .texture(null, GTGuiTextures.FUSION_PROGRESS, 77))
+                            .child(GTGuiTextures.FUSION_LEGEND.asWidget()
+                                    .left(4)
+                                    .bottom(4)
+                                    .size(108, 41)));
+                });
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        if (this.hasFusionRingColor() && !this.registeredBloomRenderTicket) {
-            this.registeredBloomRenderTicket = true;
-            BloomEffectUtil.registerBloomRender(FusionBloomSetup.INSTANCE, getBloomType(), this, this);
-        }
+    public int getProgressBarCount() {
+        return 2;
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void renderBloomEffect(BufferBuilder buffer, EffectRenderContext context) {
-        if (!this.hasFusionRingColor()) return;
-        int color = RenderUtil.interpolateColor(this.getFusionRingColor(), -1, Eases.QUAD_IN.getInterpolation(
-                Math.abs((Math.abs(getOffsetTimer() % 50) + context.partialTicks()) - 25) / 25));
-        float a = (float) (color >> 24 & 255) / 255.0F;
-        float r = (float) (color >> 16 & 255) / 255.0F;
-        float g = (float) (color >> 8 & 255) / 255.0F;
-        float b = (float) (color & 255) / 255.0F;
-        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-        EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
-                .getAxis();
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        LongSyncValue capacity = new LongSyncValue(energyContainer::getEnergyCapacity);
+        syncManager.syncValue("capacity", capacity);
+        LongSyncValue stored = new LongSyncValue(energyContainer::getEnergyStored);
+        syncManager.syncValue("stored", stored);
+        LongSyncValue heat = new LongSyncValue(this::getHeat);
+        syncManager.syncValue("heat", heat);
 
-        buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
-        RenderBufferHelper.renderRing(buffer,
-                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 7 + 0.5,
-                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 7 + 0.5,
-                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 7 + 0.5,
-                6, 0.2, 10, 20,
-                r, g, b, a, axis);
-        Tessellator.getInstance().draw();
+        bars.add(barTest -> barTest
+                .progress(() -> capacity.getLongValue() > 0 ?
+                        1.0 * stored.getLongValue() / capacity.getLongValue() : 0)
+                .texture(GTGuiTextures.PROGRESS_BAR_FUSION_ENERGY)
+                .tooltipBuilder(tooltip -> tooltip
+                        .add(KeyUtil.lang(TextFormatting.GRAY,
+                                "gregtech.multiblock.energy_stored",
+                                stored.getLongValue(), capacity.getLongValue()))));
+
+        bars.add(barTest -> barTest
+                .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                .tooltipBuilder(tooltip -> {
+                    IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                            "%,d / %,d EU",
+                            heat.getLongValue(), capacity.getLongValue());
+                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.fusion_reactor.heat",
+                            heatInfo));
+                })
+                .progress(() -> capacity.getLongValue() > 0 ?
+                        1.0 * heat.getLongValue() / capacity.getLongValue() : 0));
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean shouldRenderBloomEffect(EffectRenderContext context) {
-        return this.hasFusionRingColor() && context.camera().isBoundingBoxInFrustum(getRenderBoundingBox());
-    }
-
-    @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        EnumFacing relativeRight = RelativeDirection.RIGHT.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
-                isFlipped());
-
-        return new AxisAlignedBB(
-                this.getPos().offset(relativeBack).offset(relativeRight, 6),
-                this.getPos().offset(relativeBack, 13).offset(relativeRight.getOpposite(), 6));
-    }
-
-    @Override
-    public boolean shouldRenderInPass(int pass) {
-        return pass == 0;
-    }
-
-    @Override
-    public boolean isGlobalRenderer() {
-        return true;
-    }
-
-    private static class FusionProgressSupplier {
-
-        private final AtomicDouble tracker = new AtomicDouble(0.0);
-        private final ProgressWidget.TimedProgressSupplier bottomLeft;
-        private final DoubleSupplier topLeft;
-        private final DoubleSupplier topRight;
-        private final DoubleSupplier bottomRight;
-
-        public FusionProgressSupplier() {
-            // Bottom Left, fill on [0, 0.25)
-            bottomLeft = new ProgressWidget.TimedProgressSupplier(200, 164, false) {
-
-                @Override
-                public double getAsDouble() {
-                    double val = super.getAsDouble();
-                    tracker.set(val);
-                    if (val >= 0.25) {
-                        return 1;
-                    }
-                    return 4 * val;
-                }
-
-                @Override
-                public void resetCountdown() {
-                    super.resetCountdown();
-                    tracker.set(0);
-                }
-            };
-
-            // Top Left, fill on [0.25, 0.5)
-            topLeft = () -> {
-                double val = tracker.get();
-                if (val < 0.25) {
-                    return 0;
-                } else if (val >= 0.5) {
-                    return 1;
-                }
-                return 4 * (val - 0.25);
-            };
-
-            // Top Right, fill on [0.5, 0.75)
-            topRight = () -> {
-                double val = tracker.get();
-                if (val < 0.5) {
-                    return 0;
-                } else if (val >= 0.75) {
-                    return 1;
-                }
-                return 4 * (val - 0.5);
-            };
-
-            // Bottom Right, fill on [0.75, 1.0]
-            bottomRight = () -> {
-                double val = tracker.get();
-                if (val < 0.75) {
-                    return 0;
-                } else if (val >= 1) {
-                    return 1;
-                }
-                return 4 * (val - 0.75);
-            };
-        }
-
-        public void resetCountdown() {
-            bottomLeft.resetCountdown();
-        }
-
-        public DoubleSupplier getSupplier(FusionProgressSupplier.Type type) {
-            return switch (type) {
-                case BOTTOM_LEFT -> bottomLeft;
-                case TOP_LEFT -> topLeft;
-                case TOP_RIGHT -> topRight;
-                case BOTTOM_RIGHT -> bottomRight;
-            };
-        }
-
-        private enum Type {
-
-            BOTTOM_LEFT(
-                    61, 66, 35, 41,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BL, ProgressWidget.MoveType.VERTICAL),
-            TOP_LEFT(
-                    61, 30, 41, 35,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TL, ProgressWidget.MoveType.HORIZONTAL),
-            TOP_RIGHT(
-                    103, 30, 35, 41,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TR, ProgressWidget.MoveType.VERTICAL_DOWNWARDS),
-            BOTTOM_RIGHT(
-                    97, 72, 41, 35,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BR, ProgressWidget.MoveType.HORIZONTAL_BACKWARDS);
-
-            private final int x;
-            private final int y;
-            private final int width;
-            private final int height;
-            private final TextureArea texture;
-            private final ProgressWidget.MoveType moveType;
-
-            Type(int x, int y, int width, int height, TextureArea texture, ProgressWidget.MoveType moveType) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-                this.texture = texture;
-                this.moveType = moveType;
-            }
-
-            public ProgressWidget getWidget(MetaTileEntityAdvancedFusionReactor instance) {
-                return new ProgressWidget(
-                        () -> instance.recipeMapWorkable.isActive() ?
-                                instance.progressBarSupplier.getSupplier(this).getAsDouble() : 0,
-                        x, y, width, height, texture, moveType)
-                        .setIgnoreColor(true)
-                        .setHoverTextConsumer(
-                                tl -> MultiblockDisplayText.builder(tl, instance.isStructureFormed())
-                                        .setWorkingStatus(instance.recipeMapWorkable.isWorkingEnabled(),
-                                                instance.recipeMapWorkable.isActive())
-                                        .addWorkingStatusLine());
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static final class FusionBloomSetup implements IRenderSetup {
-
-        private static final FusionBloomSetup INSTANCE = new FusionBloomSetup();
-
-        float lastBrightnessX;
-        float lastBrightnessY;
-
-        @Override
-        public void preDraw(BufferBuilder buffer) {
-            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
-            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
-            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
-            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
-            BloomEffect.step = 1;
-
-            lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1, 1, 1, 1);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-            GlStateManager.disableTexture2D();
-        }
-
-        @Override
-        public void postDraw(BufferBuilder buffer) {
-            GlStateManager.enableTexture2D();
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
-        }
-    }
 
     private class FusionRecipeLogic extends MultiblockRecipeLogic {
 
@@ -707,7 +500,7 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         }
 
         @Override
-        public boolean checkRecipe(Recipe recipe) {
+        public boolean checkRecipe(@NotNull Recipe recipe) {
             if (!super.checkRecipe(recipe))
                 return false;
 
@@ -732,7 +525,7 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         }
 
         @Override
-        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+        protected void modifyOverclockPre(@NotNull OCParams ocParams, @NotNull RecipePropertyStorage storage) {
             super.modifyOverclockPre(ocParams, storage);
 
             // Limit the number of OCs to the difference in fusion reactor MK.
@@ -740,10 +533,11 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
             // MK3 reactor can overclock a MK2 recipe once, or a MK1 recipe twice.
             long euToStart = storage.get(FusionEUToStartProperty.getInstance(), 0L);
             int fusionTier = FusionEUToStartProperty.getFusionTier(euToStart);
-            if (fusionTier != 0) fusionTier = tier - fusionTier;
+            if (fusionTier != 0) fusionTier = MetaTileEntityAdvancedFusionReactor.this.tier - fusionTier;
             ocParams.setOcAmount(Math.min(fusionTier, ocParams.ocAmount()));
         }
 
+        @NotNull
         @Override
         public NBTTagCompound serializeNBT() {
             NBTTagCompound tag = super.serializeNBT();
@@ -752,18 +546,108 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         }
 
         @Override
-        public void deserializeNBT(NBTTagCompound compound) {
+        public void deserializeNBT(@NotNull NBTTagCompound compound) {
             super.deserializeNBT(compound);
             heat = compound.getLong("Heat");
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
+        if (this.hasFusionRingColor() && !this.registeredBloomRenderTicket) {
+            this.registeredBloomRenderTicket = true;
+            BloomEffectUtil.registerBloomRender(MetaTileEntityAdvancedFusionReactor.FusionBloomSetup.INSTANCE, getBloomType(), this, this);
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void renderBloomEffect(@NotNull BufferBuilder buffer, @NotNull EffectRenderContext context) {
+        if (!this.hasFusionRingColor()) return;
+        int color = RenderUtil.interpolateColor(this.getFusionRingColor(), -1, Eases.QUAD_IN.getInterpolation(
+                Math.abs((Math.abs(getOffsetTimer() % 50) + context.partialTicks()) - 25) / 25));
+        float a = (float) (color >> 24 & 255) / 255.0F;
+        float r = (float) (color >> 16 & 255) / 255.0F;
+        float g = (float) (color >> 8 & 255) / 255.0F;
+        float b = (float) (color & 255) / 255.0F;
+        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+        EnumFacing.Axis axis = RelativeDirection.UP.getRelativeFacing(getFrontFacing(), getUpwardsFacing(), isFlipped())
+                .getAxis();
+
+        buffer.begin(GL11.GL_QUAD_STRIP, DefaultVertexFormats.POSITION_COLOR);
+        RenderBufferHelper.renderRing(buffer,
+                getPos().getX() - context.cameraX() + relativeBack.getXOffset() * 7 + 0.5,
+                getPos().getY() - context.cameraY() + relativeBack.getYOffset() * 7 + 0.5,
+                getPos().getZ() - context.cameraZ() + relativeBack.getZOffset() * 7 + 0.5,
+                6, 0.2, 10, 20,
+                r, g, b, a, axis);
+        Tessellator.getInstance().draw();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldRenderBloomEffect(@NotNull EffectRenderContext context) {
+        return this.hasFusionRingColor() && context.camera().isBoundingBoxInFrustum(getRenderBoundingBox());
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        EnumFacing relativeRight = RelativeDirection.RIGHT.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+        EnumFacing relativeBack = RelativeDirection.BACK.getRelativeFacing(getFrontFacing(), getUpwardsFacing(),
+                isFlipped());
+
+        return new AxisAlignedBB(
+                this.getPos().offset(relativeBack).offset(relativeRight, 6),
+                this.getPos().offset(relativeBack, 13).offset(relativeRight.getOpposite(), 6));
+    }
+
+    @Override
+    public boolean shouldRenderInPass(int pass) {
+        return pass == 0;
+    }
+
+    @Override
+    public boolean isGlobalRenderer() {
+        return true;
+    }
+
+    private static BloomType getBloomType() {
+        ConfigHolder.FusionBloom fusionBloom = ConfigHolder.client.shader.fusionBloom;
+        return BloomType.fromValue(fusionBloom.useShader ? fusionBloom.bloomStyle : -1);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static final class FusionBloomSetup implements IRenderSetup {
+
+        private static final MetaTileEntityAdvancedFusionReactor.FusionBloomSetup INSTANCE = new MetaTileEntityAdvancedFusionReactor.FusionBloomSetup();
+
+        float lastBrightnessX;
+        float lastBrightnessY;
 
         @Override
-        protected void setActive(boolean active) {
-            if (active != isActive) {
-                progressBarSupplier.resetCountdown();
-            }
-            super.setActive(active);
+        public void preDraw(@NotNull BufferBuilder buffer) {
+            BloomEffect.strength = (float) ConfigHolder.client.shader.fusionBloom.strength;
+            BloomEffect.baseBrightness = (float) ConfigHolder.client.shader.fusionBloom.baseBrightness;
+            BloomEffect.highBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.highBrightnessThreshold;
+            BloomEffect.lowBrightnessThreshold = (float) ConfigHolder.client.shader.fusionBloom.lowBrightnessThreshold;
+            BloomEffect.step = 1;
+
+            lastBrightnessX = OpenGlHelper.lastBrightnessX;
+            lastBrightnessY = OpenGlHelper.lastBrightnessY;
+            GlStateManager.color(1, 1, 1, 1);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+            GlStateManager.disableTexture2D();
+        }
+
+        @Override
+        public void postDraw(@NotNull BufferBuilder buffer) {
+            GlStateManager.enableTexture2D();
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
         }
     }
 }
+
 

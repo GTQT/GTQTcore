@@ -57,6 +57,7 @@ import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockController implements IHeatingCoil {
+
     protected static int heatingCoilLevel;
     private FluidStack pyrotheumFluid = Pyrotheum.getFluid(1);
     private int blastFurnaceTemperature;

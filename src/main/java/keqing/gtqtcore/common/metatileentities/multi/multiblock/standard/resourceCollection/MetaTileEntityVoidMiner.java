@@ -55,7 +55,10 @@ import static gregtech.api.util.TextFormattingUtil.formatNumbers;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6.CasingType.*;
 
 public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implements IWorkable, IVoidMinerProvider {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final VoidMinerLogic logic;
 
     private final int maxTemperature;
@@ -381,7 +384,7 @@ public class MetaTileEntityVoidMiner extends MultiblockWithDisplayBase implement
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

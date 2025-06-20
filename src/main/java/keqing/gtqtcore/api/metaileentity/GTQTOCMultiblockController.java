@@ -36,7 +36,10 @@ import static gregtech.api.GTValues.VA;
 import static gregtech.api.recipes.logic.OverclockingLogic.*;
 
 public abstract class GTQTOCMultiblockController extends MultiMapMultiblockController implements IOpticalComputationReceiver {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected boolean setTier;
     protected int tier;
     protected boolean setMaxParallel;

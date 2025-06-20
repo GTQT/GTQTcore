@@ -1265,6 +1265,7 @@ gtqtcore.machine.catalytic_reformer.uxv.tooltip=烧裂处理阵列 D20
 gtqtcore.machine.catalytic_reformer.opv.name=传奇催化重整炉
 gtqtcore.machine.catalytic_reformer.opv.tooltip=烧裂处理阵列 D20
 
+recipesmap.condenser.name=态素凝聚
 gtqtcore.machine.condenser.lv.name=基础态素凝聚器
 gtqtcore.machine.condenser.lv.tooltip=态素转换器
 gtqtcore.machine.condenser.mv.name=进阶态素凝聚器

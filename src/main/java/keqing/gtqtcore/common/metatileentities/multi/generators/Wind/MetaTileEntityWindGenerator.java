@@ -108,6 +108,10 @@ public class MetaTileEntityWindGenerator extends MetaTileEntityBaseWithControl  
         this.containerInventory.deserializeNBT(data.getCompoundTag("ContainerInventory"));
     }
     @Override
+    public boolean usesMui2() {
+        return false;
+    }
+    @Override
     protected void updateFormedValid() {
         if (this.frontFacing == EnumFacing.UP||this.frontFacing == EnumFacing.DOWN) return;
 

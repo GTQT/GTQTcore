@@ -39,6 +39,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private int glass_tier;
     private int laser_tier;
     private int tier;

@@ -4,6 +4,10 @@ import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.api.widget.Interactable;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.widgets.CycleButtonWidget;
 import com.google.common.collect.Lists;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
@@ -24,6 +28,9 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -32,6 +39,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -58,6 +66,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -236,69 +245,91 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (this.isStructureFormed()) {
-            int workingAreaChunks;
-            if (this.energyContainer != null && this.energyContainer.getEnergyCapacity() > 0L) {
-                workingAreaChunks = this.getEnergyTier();
-                long maxVoltage = GTValues.V[workingAreaChunks];
-                String voltageName = GTValues.VNF[workingAreaChunks];
-                textList.add(new TextComponentTranslation("gregtech.multiblock.max_energy_per_tick", maxVoltage, voltageName));
-            }
+    protected MultiblockUIFactory createUIFactory() {
+        return super.createUIFactory()
+                .createFlexButton((posGuiData, panelSyncManager) -> {
+                    IntSyncValue buttonSync = new IntSyncValue(this::getCurrentMode, this::setCurrentMode);
 
-            workingAreaChunks = this.minerLogic.getCurrentRadius() * 2 / 16;
-            int workingArea = this.getWorkingArea(this.minerLogic.getCurrentRadius());
-            textList.add(new TextComponentTranslation("gregtech.machine.miner.startx", this.minerLogic.getX().get() == Integer.MAX_VALUE ? 0 : this.minerLogic.getX().get()));
-            textList.add(new TextComponentTranslation("gregtech.machine.miner.starty", this.minerLogic.getY().get() == Integer.MAX_VALUE ? 0 : this.minerLogic.getY().get()));
-            textList.add(new TextComponentTranslation("gregtech.machine.miner.startz", this.minerLogic.getZ().get() == Integer.MAX_VALUE ? 0 : this.minerLogic.getZ().get()));
-            if (this.minerLogic.isChunkMode()) {
-                textList.add(new TextComponentTranslation("gregtech.machine.miner.working_area_chunks", workingAreaChunks, workingAreaChunks));
-            } else {
-                textList.add(new TextComponentTranslation("gregtech.machine.miner.working_area", workingArea, workingArea));
-            }
+                    return new CycleButtonWidget() {
 
-            if (this.minerLogic.isDone()) {
-                textList.add((new TextComponentTranslation("gregtech.machine.miner.done")).setStyle((new Style()).setColor(TextFormatting.GREEN)));
-            } else if (this.minerLogic.isWorking()) {
-                textList.add((new TextComponentTranslation("gregtech.machine.miner.working")).setStyle((new Style()).setColor(TextFormatting.GOLD)));
-            } else if (!this.isWorkingEnabled()) {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
-            }
-        }
-
-    }
-
-    private void addDisplayText2(List<ITextComponent> textList) {
-        if (this.isStructureFormed()) {
-            ITextComponent mCoords = (new TextComponentString("    "))
-                    .appendSibling(new TextComponentTranslation("gregtech.machine.miner.minex", this.minerLogic.getMineX().get()))
-                    .appendText("\n    ")
-                    .appendSibling(new TextComponentTranslation("gregtech.machine.miner.miney", this.minerLogic.getMineY().get()))
-                    .appendText("\n    ")
-                    .appendSibling(new TextComponentTranslation("gregtech.machine.miner.minez", this.minerLogic.getMineZ().get()));
-            textList.add(mCoords);
-        }
-
+                        @Override
+                        public @NotNull Result onMousePressed(int mouseButton) {
+                            if (minerLogic.isWorking()) {
+                                Interactable.playButtonClickSound();
+                                return Result.IGNORE;
+                            } else {
+                                return super.onMousePressed(mouseButton);
+                            }
+                        }
+                    }
+                            .stateCount(4)
+                            .value(buttonSync)
+                            .stateBackground(GTGuiTextures.BUTTON_MINER_MODES)
+                            .addTooltip(0, IKey.lang("gregtech.multiblock.miner.neither_mode"))
+                            .addTooltip(1, IKey.lang("gregtech.multiblock.miner.chunk_mode"))
+                            .addTooltip(2, IKey.lang("gregtech.multiblock.miner.silk_touch_mode"))
+                            .addTooltip(3, IKey.lang("gregtech.multiblock.miner.both_modes"));
+                });
     }
 
     @Override
-    protected void addWarningText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed(), false)
-                .addLowPowerLine(this.isStructureFormed() && !this.drainEnergy(true))
-                .addCustom((tl) -> {
-                    if (this.isStructureFormed() && this.isInventoryFull) {
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.YELLOW, "gregtech.machine.miner.invfull"));
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(minerLogic.isWorkingEnabled(), minerLogic.isActive())
+                .addEnergyUsageLine(energyContainer)
+                .addCustom((list, syncer) -> {
+                    if (isStructureFormed()) {
+                        int workingAreaChunks = syncer.syncInt(this.minerLogic.getCurrentRadius() * 2 / CHUNK_LENGTH);
+                        int workingArea = syncer.syncInt(getWorkingArea(minerLogic.getCurrentRadius()));
+
+                        list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.mining_at"));
+                        list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.mining_pos",
+                                syncer.syncInt(minerLogic.getMineX().get()),
+                                syncer.syncInt(minerLogic.getMineY().get()),
+                                syncer.syncInt(minerLogic.getMineZ().get())));
+
+                        if (syncer.syncBoolean(minerLogic.isChunkMode())) {
+                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.working_area_chunks",
+                                    workingAreaChunks,
+                                    workingAreaChunks));
+                        } else {
+                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.working_area",
+                                    workingArea, workingArea));
+                        }
+
+                        if (syncer.syncBoolean(minerLogic.isDone())) {
+                            list.add(KeyUtil.lang(TextFormatting.GREEN, "gregtech.machine.miner.done"));
+                        } else if (syncer.syncBoolean(minerLogic.isWorking())) {
+                            list.add(KeyUtil.lang(TextFormatting.GOLD, "gregtech.machine.miner.working"));
+                        } else if (!syncer.syncBoolean(isWorkingEnabled())) {
+                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.work_paused"));
+                        }
                     }
                 });
     }
 
     @Override
-    protected void addErrorText(List<ITextComponent> textList) {
-        super.addErrorText(textList);
-        if (this.isStructureFormed() && !this.drainFluid(true)) {
-            textList.add(TextComponentUtil.translationWithColor(TextFormatting.RED, "gregtech.machine.miner.multi.needsfluid"));
+    protected void configureErrorText(MultiblockUIBuilder builder) {
+        super.configureErrorText(builder);
+        builder.addCustom((list, syncer) -> {
+            if (isStructureFormed() && syncer.syncBoolean(() -> !drainFluid(false))) {
+                list.add(KeyUtil.lang(TextFormatting.RED, "gregtech.machine.miner.multi.needsfluid"));
+            }
+        });
+    }
+
+    @Override
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        boolean lowPower = false;
+        if (isStructureFormed() && !getWorld().isRemote) {
+            lowPower = !drainEnergy(true);
         }
+        builder.addLowPowerLine(lowPower)
+                .addCustom((list, syncer) -> {
+                    if (isStructureFormed() && syncer.syncBoolean(isInventoryFull)) {
+                        list.add(KeyUtil.lang(TextFormatting.YELLOW, "gregtech.machine.miner.invfull"));
+                    }
+                });
+        super.configureWarningText(builder);
     }
 
     public IBlockState getCasingState() {
@@ -371,18 +402,6 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
     public long getMaxVoltage() {
         return GTValues.V[GTUtility.getTierByVoltage(this.energyContainer.getInputVoltage())];
     }
-
-    @Override
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder = super.createUITemplate(entityPlayer);
-        builder.widget((new AdvancedTextWidget(63, 31, this::addDisplayText2, 16777215))
-                .setMaxWidthLimit(68)
-                .setClickHandler((x$0, x$1) -> {
-                    this.handleDisplayClick(x$0, x$1);
-                }));
-        return builder;
-    }
-
 
     private int getCurrentMode() {
         if (!this.minerLogic.isChunkMode() && !this.minerLogic.isSilkTouchMode()) {
@@ -540,7 +559,7 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
         return Collections.singletonList(new TextComponentTranslation("gregtech.machine.miner.working_area", workingArea, workingArea));
     }
 
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

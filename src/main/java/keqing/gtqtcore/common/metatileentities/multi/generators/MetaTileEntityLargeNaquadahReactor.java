@@ -69,7 +69,10 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
         energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         LargeNaquadahReactorWorkableHandler recipeLogic = (LargeNaquadahReactorWorkableHandler) this.recipeMapWorkable;
@@ -175,7 +178,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

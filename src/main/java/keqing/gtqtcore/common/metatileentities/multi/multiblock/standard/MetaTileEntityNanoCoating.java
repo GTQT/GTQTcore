@@ -41,6 +41,10 @@ import java.util.List;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
 public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private int glass_tier;
     private int clean_tier;
     private int radio_tier;

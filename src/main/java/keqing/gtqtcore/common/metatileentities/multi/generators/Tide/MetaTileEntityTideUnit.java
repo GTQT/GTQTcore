@@ -94,6 +94,12 @@ public class MetaTileEntityTideUnit extends MetaTileEntityBaseWithControl {
     public MetaTileEntityTideUnit(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
     }
+
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, @Nonnull List<String> tooltip, boolean advanced) {

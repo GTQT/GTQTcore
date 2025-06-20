@@ -15,6 +15,7 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -199,7 +200,7 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
         return Textures.DATA_BANK_OVERLAY;
     }
 
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 
@@ -217,14 +218,21 @@ public class MetaTileEntityMiniDataBank extends MultiblockWithDisplayBase implem
         tooltip.add(I18n.format("gregtech.machine.data_bank.tooltip.5", TextFormattingUtil.formatNumbers(EUT_PER_HATCH_CHAINED)));
     }
 
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed()).setWorkingStatus(true, this.isActive() && this.isWorkingEnabled()).setWorkingStatusKeys("gregtech.multiblock.idling", "gregtech.multiblock.idling", "gregtech.multiblock.data_bank.providing").addEnergyUsageExactLine(this.getEnergyUsage()).addWorkingStatusLine();
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
+                .setWorkingStatusKeys("gregtech.multiblock.idling",
+                        "gregtech.multiblock.idling",
+                        "gregtech.multiblock.data_bank.providing")
+                .addEnergyUsageExactLine(getEnergyUsage())
+                .addWorkingStatusLine();
     }
 
-    protected void addWarningText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed(), false).addLowPowerLine(this.hasNotEnoughEnergy).addMaintenanceProblemLines(this.getMaintenanceProblems());
+    @Override
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        builder.addLowPowerLine(hasNotEnoughEnergy);
+        super.configureWarningText(builder);
     }
-
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setBoolean("isActive", this.isActive);

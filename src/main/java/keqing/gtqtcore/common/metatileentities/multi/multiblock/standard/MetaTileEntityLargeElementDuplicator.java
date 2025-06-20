@@ -44,6 +44,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingTy
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.COPY_GALSS;
 
 public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     int requestCWUt;
     private IOpticalComputationProvider computationProvider;
 

@@ -50,7 +50,10 @@ import static gregtech.api.util.RelativeDirection.*;
 //闪蒸
 public class MetaTileEntitySMSF extends MultiMapMultiblockController implements IProgressBarMultiblock {
     int[] steam = new int[3];
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     FluidStack STEAM = Steam.getFluid(1000);
     private int coilLevel;
     private int number;

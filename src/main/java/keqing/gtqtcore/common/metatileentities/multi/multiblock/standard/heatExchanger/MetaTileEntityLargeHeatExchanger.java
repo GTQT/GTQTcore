@@ -44,6 +44,10 @@ import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate
 import static net.minecraft.util.text.TextFormatting.*;
 
 public class MetaTileEntityLargeHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final int heatTime = 300;
     private int thresholdPercentage = 100;
 
@@ -199,7 +203,7 @@ public class MetaTileEntityLargeHeatExchanger extends RecipeMapNoEnergyMultibloc
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 }

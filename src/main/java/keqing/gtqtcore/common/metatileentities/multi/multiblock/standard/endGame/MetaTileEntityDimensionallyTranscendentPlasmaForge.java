@@ -90,7 +90,10 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
     private static IBlockState getThirdCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound data) {
         super.writeToNBT(data);
@@ -253,7 +256,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return true;
     }
 

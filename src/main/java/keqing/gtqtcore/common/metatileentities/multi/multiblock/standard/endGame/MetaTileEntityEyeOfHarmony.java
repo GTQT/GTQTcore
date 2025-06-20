@@ -52,7 +52,10 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.logBase;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ASTRAL_ARRAY;
 
 public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     //时间膨胀发生器
     int timeAcceleration;
     //-耗时 OK
@@ -409,7 +412,7 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

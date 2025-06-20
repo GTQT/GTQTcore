@@ -231,7 +231,10 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
         this.tier = this.casing;
         this.writeCustomData(GTQTValue.UPDATE_TIER2,buf -> buf.writeInt(this.casing));
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     //gui数据
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -362,30 +365,24 @@ public class MetaTileEntityKineticEnergyBattery extends MultiblockWithDisplayBas
 
     //储能上限计算
     protected class MetaTileEntityKineticEnergyBatteryLogic {
-        private final MetaTileEntityKineticEnergyBattery metaTileEntity;
         int tier;
         public MetaTileEntityKineticEnergyBatteryLogic(MetaTileEntityKineticEnergyBattery metaTileEntity, int tier) {
-            this.metaTileEntity = metaTileEntity;
             this.tier = tier;
         }
 
         long wkcl = 0;
-        int flcl = 8 ;
-//        long zjcl = 0 ;
-
 
         //外壳储能上限计算
         public long euMax() {
             long euMax;
-            this.wkcl = (long) (9600000 * casing);
-//            this.zjcl = (long) (4800000 * 0);
+            this.wkcl = 9600000L * casing;
             euMax = ( wkcl ) * length;
             return euMax;
         }
         //飞轮转速上限计算
         public long speedMax() {
             long speedMax;
-            speedMax = (long) sqrt(euMax() / length);
+            speedMax = (long) sqrt((double) euMax() / length);
             return speedMax;
         }
         //飞轮充能功率上限计算

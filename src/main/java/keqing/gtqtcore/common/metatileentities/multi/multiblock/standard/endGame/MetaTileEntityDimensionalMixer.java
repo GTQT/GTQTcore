@@ -37,7 +37,10 @@ import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_DM_CAS
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityDimensionalMixer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.EXTRADIMENSIONAL_MIXING_RECIPES,
@@ -118,7 +121,7 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return true;
     }
 

@@ -45,6 +45,10 @@ import java.util.List;
 import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.POWER_SUPPLY_ABILITY;
 
 public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     int HatchLength;
     long maxEuStore;
     long EuStore = 0;
@@ -278,7 +282,7 @@ public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

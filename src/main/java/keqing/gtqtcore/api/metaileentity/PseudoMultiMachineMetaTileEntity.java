@@ -17,6 +17,10 @@ import net.minecraft.util.ResourceLocation;
 import java.util.function.Function;
 
 public class PseudoMultiMachineMetaTileEntity extends SimpleMachineMetaTileEntity {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private IBlockState targetBlockState;
 
     public IBlockState getTargetBlockState() {

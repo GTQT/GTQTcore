@@ -60,7 +60,10 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBase implements IWorkable, IDataInfoProvider {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final FishPondLogic logic;
     protected IMultipleTankHandler inputFluidInventory;
     protected IItemHandler outputItemInventory;
@@ -322,7 +325,7 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

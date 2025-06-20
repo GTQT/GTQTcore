@@ -249,7 +249,10 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(), this.isWorkingEnabled());
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);
@@ -393,7 +396,7 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

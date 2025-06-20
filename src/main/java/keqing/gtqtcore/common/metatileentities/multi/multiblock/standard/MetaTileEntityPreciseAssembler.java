@@ -56,6 +56,10 @@ import static keqing.gtqtcore.api.GTQTAPI.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
 public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;

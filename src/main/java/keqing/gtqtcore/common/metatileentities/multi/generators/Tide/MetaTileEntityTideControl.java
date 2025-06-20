@@ -86,6 +86,11 @@ public class MetaTileEntityTideControl extends MetaTileEntityBaseWithControl {
         tooltip.add(I18n.format("在以控制器为中心半径为16的范围内放置 潮汐浮漂单元，即可自动检测链接！"));
         tooltip.add(I18n.format("控制器可最多容纳16个潮汐浮标单元"));
     }
+
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     @Nonnull
     protected Widget getFlexButton(int x, int y, int width, int height) {

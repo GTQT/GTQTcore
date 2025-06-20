@@ -63,7 +63,10 @@ import static gregtech.api.GregTechAPI.HEATING_COILS;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.EVAPORATION_POOL;
 
 public class MetaTileEntityEvaporationPool extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     /*
         For future reference: "((IGregTechTileEntity)world.getTileEntity(pos)).getMetaTileEntity() instanceof IMultiblockAbilityPart"
         is the way ceu gets mte from te. You might also try using MetaTileEntityHolder.

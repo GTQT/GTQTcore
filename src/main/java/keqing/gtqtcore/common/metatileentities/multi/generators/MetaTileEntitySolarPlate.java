@@ -72,14 +72,28 @@ public class MetaTileEntitySolarPlate extends MultiblockWithDisplayBase {
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("CCCCCC").aisle("CSSSSC").aisle("CSSSSC").aisle("CSSSSC").aisle("CSSSSC").aisle("XCCCCC").where('X', selfPredicate()).where('S', TiredTraceabilityPredicate.CP_SP_CASING.get()).where('C', states(GTQTMetaBlocks.blockElectrolyticBath.getState(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING)).or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4))).build();
+        return FactoryBlockPattern.start()
+                .aisle("CCCCCC")
+                .aisle("CSSSSC")
+                .aisle("CSSSSC")
+                .aisle("CSSSSC")
+                .aisle("CSSSSC")
+                .aisle("XCCCCC")
+                .where('X', selfPredicate())
+                .where('S', TiredTraceabilityPredicate.CP_SP_CASING.get())
+                .where('C', states(GTQTMetaBlocks.blockElectrolyticBath.getState(BlockElectrolyticBath.CasingType.SOLAR_PLATE_CASING))
+                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY).setMaxGlobalLimited(4)))
+                .build();
     }
 
     @Override
     public boolean hasMaintenanceMechanics() {
         return false;
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addWarningText(List<ITextComponent> textList) {
         super.addWarningText(textList);

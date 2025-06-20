@@ -59,7 +59,10 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityHyperReactorMkI(metaTileEntityId);
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         HyperReactorMark1WorkableHandler recipeLogic = (HyperReactorMark1WorkableHandler) this.recipeMapWorkable;
@@ -147,7 +150,7 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

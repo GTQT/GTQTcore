@@ -46,7 +46,7 @@ public class AlgaeChain {
         DISTILLATION_RECIPES.recipeBuilder()
                 .duration(180)
                 .EUt(192)
-                .fluidInputs(CrudeBioOil.getFluid(000))
+                .fluidInputs(CrudeBioOil.getFluid(6000))
                 .fluidOutputs(BioDiesel.getFluid(1000)) // 精炼油
                 .fluidOutputs(LightOrganicFraction.getFluid(2500)) // 轻质有机馏分
                 .fluidOutputs(HeavyOrganicFraction.getFluid(2500)) // 重质有机馏分

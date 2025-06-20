@@ -45,6 +45,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 
 
 public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private int glass_tier;
 
     public MetaTileEntityGeneMutagenesis(ResourceLocation metaTileEntityId) {

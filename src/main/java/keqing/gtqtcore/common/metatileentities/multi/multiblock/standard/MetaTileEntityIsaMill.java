@@ -45,7 +45,10 @@ import java.util.List;
 import static gregtech.api.GTValues.*;
 
 public class MetaTileEntityIsaMill extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityIsaMill(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ISA_MILL_GRINDER);
         this.recipeMapWorkable = new MetaTileEntityIsaMill.IsaMillLogic(this);

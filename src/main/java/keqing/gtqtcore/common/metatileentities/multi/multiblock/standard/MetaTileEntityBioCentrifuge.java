@@ -36,6 +36,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 
 
 public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     int tier;
     private int glass_tier;
     private int clean_tier;

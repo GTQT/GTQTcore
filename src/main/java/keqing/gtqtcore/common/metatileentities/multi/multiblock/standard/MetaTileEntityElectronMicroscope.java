@@ -39,7 +39,10 @@ import java.util.List;
 import static gregtech.api.GTValues.EV;
 
 public class MetaTileEntityElectronMicroscope extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     int LENS;
     int SOURCE;
 

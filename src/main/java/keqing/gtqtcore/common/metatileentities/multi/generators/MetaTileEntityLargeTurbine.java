@@ -90,7 +90,10 @@ public abstract class MetaTileEntityLargeTurbine extends FuelMultiblockControlle
             return 0L;
         }
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         MultiblockFuelRecipeLogic recipeLogic = (MultiblockFuelRecipeLogic) this.recipeMapWorkable;
@@ -204,7 +207,7 @@ public abstract class MetaTileEntityLargeTurbine extends FuelMultiblockControlle
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

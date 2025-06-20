@@ -61,6 +61,10 @@ import static gregtech.api.unification.material.Materials.Lubricant;
 
 //大矿机
 public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final ItemStackHandler containerInventory;
     int tier = 1;
     int casing;

@@ -43,7 +43,10 @@ import static gregtech.api.GTValues.IV;
 
 
 public class MetaTileEntityExtremeIndustrialGreenhouse extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityExtremeIndustrialGreenhouse(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTFORecipeMaps.GREENHOUSE_RECIPES);
         this.recipeMapWorkable = new ExtremeIndustrialGreenhouseRecipeLogic(this);

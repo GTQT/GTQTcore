@@ -58,6 +58,7 @@ import java.util.List;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockController implements IHeatingCoil, IPressureMachine {
+
     protected static int heatingCoilLevel;
     private int blastFurnaceTemperature;
     private FluidStack pyrotheumFluid = Pyrotheum.getFluid(heatingCoilLevel);

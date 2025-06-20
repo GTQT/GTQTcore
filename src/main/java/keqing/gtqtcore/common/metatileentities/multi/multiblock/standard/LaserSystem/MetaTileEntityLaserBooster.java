@@ -282,7 +282,7 @@ public class MetaTileEntityLaserBooster extends MetaTileEntityBaseWithControl im
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

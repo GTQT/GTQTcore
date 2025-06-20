@@ -40,6 +40,11 @@ import java.util.List;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES;
 
 public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
+
     public MetaTileEntityFrothFlotationTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, FLOTATION_FACTORY_RECIPES);
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);

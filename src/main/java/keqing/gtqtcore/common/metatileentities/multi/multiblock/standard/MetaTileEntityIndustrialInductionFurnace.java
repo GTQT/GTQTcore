@@ -40,7 +40,10 @@ import java.util.List;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.HastelloyN;
 
 public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
 

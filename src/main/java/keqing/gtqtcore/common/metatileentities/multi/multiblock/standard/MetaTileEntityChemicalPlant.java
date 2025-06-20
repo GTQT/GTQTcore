@@ -97,7 +97,7 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

@@ -61,7 +61,10 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.HydrogenSilsesquioxa
 import static keqing.gtqtcore.api.unification.GTQTMaterials.SU8_Photoresist;
 
 public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWithControl {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public int[][] core = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
     int laserTier;
     int laserKind;

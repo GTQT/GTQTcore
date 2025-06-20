@@ -45,7 +45,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     boolean gasModel;
     private int clean_tier;
 

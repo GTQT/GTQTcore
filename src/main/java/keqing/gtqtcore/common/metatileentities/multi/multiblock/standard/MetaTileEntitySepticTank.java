@@ -55,7 +55,10 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 public class MetaTileEntitySepticTank extends MultiMapMultiblockController implements IHeatingCoil {
     private int tier;
     private int blastFurnaceTemperature;
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.FERMENTING_RECIPES,

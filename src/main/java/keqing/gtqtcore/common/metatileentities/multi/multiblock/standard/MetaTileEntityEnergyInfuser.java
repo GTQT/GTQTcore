@@ -55,7 +55,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.
 
 
 public class MetaTileEntityEnergyInfuser extends MultiblockWithDisplayBase implements IControllable {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;

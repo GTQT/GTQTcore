@@ -59,6 +59,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CASING;
 
 public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockController implements IOpticalComputationReceiver {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
 
     int requestCWUt;
     private byte auxiliaryUpgradeNumber = 0;

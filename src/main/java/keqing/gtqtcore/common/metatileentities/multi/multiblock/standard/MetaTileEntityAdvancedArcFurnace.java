@@ -44,7 +44,10 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 
 public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockController implements IParallelMultiblock {
     private int ElectrodeTier;
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityAdvancedArcFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.ARC_FURNACE_RECIPES,

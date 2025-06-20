@@ -39,7 +39,10 @@ import java.util.List;
 import static gregtech.api.GTValues.V;
 
 public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public final RecipeMap<?> recipeMap;
     protected HeatRecipeLogic recipeMapWorkable;
     protected IItemHandlerModifiable inputInventory;

@@ -47,7 +47,10 @@ import java.util.List;
 import static gregtech.api.unification.material.Materials.Steel;
 
 public class MetaTileEntityOilPool extends RecipeMapNoEnergyMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));
 

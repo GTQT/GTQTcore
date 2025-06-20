@@ -39,7 +39,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected int glass_tier;
     protected int tubeTier;
     protected int casingTier;

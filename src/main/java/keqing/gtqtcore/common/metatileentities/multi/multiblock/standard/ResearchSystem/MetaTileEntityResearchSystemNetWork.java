@@ -73,6 +73,10 @@ import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingTyp
 
 
 public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockController implements IOpticalComputationReceiver, IFastRenderMetaTileEntity {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final HologramConfig hologramConfig = new HologramConfig();
     double tier;
     int page = 0;
@@ -436,7 +440,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         return Textures.RESEARCH_STATION_OVERLAY;
     }
 
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

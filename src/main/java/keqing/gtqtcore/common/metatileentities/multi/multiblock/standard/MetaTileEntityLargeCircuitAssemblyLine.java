@@ -63,8 +63,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing.Active
  * @since 2.8.7-beta
  */
 public class MetaTileEntityLargeCircuitAssemblyLine extends MultiMapMultiblockController implements IOpticalComputationReceiver {
-
-    private static final ResourceLocation LASER_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser.png");
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }    private static final ResourceLocation LASER_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser.png");
     private static final ResourceLocation LASER_HEAD_LOCATION = GTUtility.gregtechId("textures/fx/laser/laser_start.png");
     @SideOnly(Side.CLIENT)
     private GTLaserBeamParticle[][] beamParticles;

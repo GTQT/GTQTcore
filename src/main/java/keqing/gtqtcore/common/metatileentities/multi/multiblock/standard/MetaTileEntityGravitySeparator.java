@@ -53,7 +53,10 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
     int updatetime = 1;
     int[] steam = new int[3];
     FluidStack STEAM = Steam.getFluid(1000 * updatetime);
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityGravitySeparator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GRAVITY_SEPARATOR_RECIPES,

@@ -564,7 +564,7 @@ public class MetaTileEntityNicollDysonBeamer extends MultiMapMultiblockControlle
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

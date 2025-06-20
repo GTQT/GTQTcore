@@ -79,7 +79,10 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
         numSaplingsInOutput = data.getInteger("numSaplingsInOutput");
         work = data.getBoolean("work");
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
 
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);

@@ -36,6 +36,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockNuclearCasing.CasingType.
 import static keqing.gtqtcore.common.block.blocks.BlockNuclearCasing.CasingType.NEUTRON_ACTIVATOR_FRAME;
 
 public class MetaTileEntityNeutronActivator extends RecipeMapMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected int heatingCoilLevel;
     double pa;
     double pamax;

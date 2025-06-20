@@ -64,7 +64,10 @@ import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 
 public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockController implements IOpticalComputationReceiver {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     boolean shuliu;
     boolean bashi;
     boolean hehecheng;
@@ -348,7 +351,7 @@ public class MetaTileEntityParticleAccelerator extends MultiMapMultiblockControl
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return true;
     }
 

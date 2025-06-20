@@ -45,6 +45,7 @@ import java.util.Set;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
+
     private static final int EUT_PER_HATCH = VA[GTValues.LV];
     private final MultipleComputationHandler computationHandler = new MultipleComputationHandler();
     int tire;
@@ -254,7 +255,10 @@ public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDat
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
                 TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())

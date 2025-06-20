@@ -30,7 +30,10 @@ import java.util.List;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.ZirconiumCarbide;
 
 public class MetaTileEntityPlasmaCondenser extends RecipeMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityPlasmaCondenser(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PLASMA_CONDENSER_RECIPES);
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);

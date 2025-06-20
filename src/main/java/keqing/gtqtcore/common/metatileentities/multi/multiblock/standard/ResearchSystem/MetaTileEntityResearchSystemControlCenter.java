@@ -57,6 +57,10 @@ import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingTyp
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
 
 public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDisplayBase implements IOpticalComputationProvider {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     float HOT;
     int length;
     int thresholdPercentage = 0;
@@ -150,7 +154,7 @@ public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDis
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

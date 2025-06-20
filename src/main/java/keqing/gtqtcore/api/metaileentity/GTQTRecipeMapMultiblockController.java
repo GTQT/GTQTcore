@@ -34,7 +34,10 @@ import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblockController {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected boolean setTier;
     protected int tier;
     protected boolean setMaxParallel;

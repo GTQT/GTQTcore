@@ -1281,6 +1281,7 @@ gtqtcore.machine.catalytic_reformer.uxv.tooltip=Coking Treatment Array D20
 gtqtcore.machine.catalytic_reformer.opv.name=Legendary Catalytic Reformer
 gtqtcore.machine.catalytic_reformer.opv.tooltip=Coking Treatment Array D20
 
+recipesmap.condenser.name=State Condenser
 gtqtcore.machine.condenser.lv.name=Basic State Condenser
 gtqtcore.machine.condenser.lv.tooltip=State Converter
 gtqtcore.machine.condenser.mv.name=Advanced State Condenser

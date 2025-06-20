@@ -54,6 +54,11 @@ import static gregtech.api.util.RelativeDirection.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
 public class MetaTileEntityHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
+
     private final int heatTime = 200;
     private int coilLevel;
     private int number;
@@ -321,7 +326,7 @@ public class MetaTileEntityHeatExchanger extends RecipeMapNoEnergyMultiblockCont
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 }

@@ -58,7 +58,10 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     private int laser_tier;
     private int casing_tier;
     private IOpticalComputationProvider computationProvider;
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.STEPPER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);

@@ -51,6 +51,10 @@ import java.util.List;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_FORCE_FIELD_COIL;
 
 public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockController {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     protected int CoilLevel;
 
     public MetaTileEntityNaquadahFuelFactory(ResourceLocation metaTileEntityId) {

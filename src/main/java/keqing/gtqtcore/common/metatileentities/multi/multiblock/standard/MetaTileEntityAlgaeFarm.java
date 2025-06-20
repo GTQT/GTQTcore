@@ -49,6 +49,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final AlgaeFarmLogic logic;
     protected IMultipleTankHandler inputFluidInventory;
     protected ItemHandlerList itemImportInventory;
@@ -265,7 +269,7 @@ public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implement
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

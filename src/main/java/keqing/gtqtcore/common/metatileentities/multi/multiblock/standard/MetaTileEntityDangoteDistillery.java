@@ -48,6 +48,11 @@ import static gregtech.api.GTValues.*;
 import static gregtech.api.util.RelativeDirection.*;
 
 public class MetaTileEntityDangoteDistillery extends MultiMapMultiblockController implements IDistillationTower {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
+
     protected DistillationTowerLogicHandler handler;
 
     public MetaTileEntityDangoteDistillery(ResourceLocation metaTileEntityId) {

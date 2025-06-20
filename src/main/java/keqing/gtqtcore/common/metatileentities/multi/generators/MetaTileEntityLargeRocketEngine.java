@@ -60,7 +60,10 @@ public class MetaTileEntityLargeRocketEngine extends FuelMultiblockController im
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityLargeRocketEngine(metaTileEntityId, tier);
     }
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         LargeRocketEngineWorkableHandler recipeLogic = ((LargeRocketEngineWorkableHandler) recipeMapWorkable);
@@ -216,7 +219,7 @@ public class MetaTileEntityLargeRocketEngine extends FuelMultiblockController im
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 

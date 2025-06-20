@@ -63,6 +63,10 @@ import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.api.gui.GTQTGuiTextures.PSS_POWER;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private final ItemStackHandler inputCardInventory;
     private final ItemStackHandler outputCardInventory;
     private final ItemStackHandler pssInventory;
@@ -399,7 +403,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public double getEnergy() {
-        if (pssModel && PSSmte != null) return PSSmte.getFillPercentage(0);
+        if (pssModel && PSSmte != null) return (double) PSSmte.getStoredLong() /PSSmte.getCapacityLong();
         else return (double) euStore / maxStore();
     }
 

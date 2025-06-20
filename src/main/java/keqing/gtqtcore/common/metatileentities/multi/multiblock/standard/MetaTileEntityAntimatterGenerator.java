@@ -57,7 +57,10 @@ import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ANTIMATTER_GENERATO
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 
 public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockController implements IProgressBarMultiblock {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     private static final FluidStack HydrogenStack = Materials.Hydrogen.getPlasma(100);
     private static final FluidStack HeliumStack = Materials.Helium.getPlasma(100);
     private static final FluidStack NitrogenStack = Materials.Nitrogen.getPlasma(100);

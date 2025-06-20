@@ -501,7 +501,7 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return true;
     }
 

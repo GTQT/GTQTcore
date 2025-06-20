@@ -42,7 +42,10 @@ import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 
 public class MetaTileEntityAntimatterForge extends RecipeMapLaserMultiblockController implements IFastRenderMetaTileEntity {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityAntimatterForge(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.ANTIMATTER_FORGE);
         //反物质锻炉

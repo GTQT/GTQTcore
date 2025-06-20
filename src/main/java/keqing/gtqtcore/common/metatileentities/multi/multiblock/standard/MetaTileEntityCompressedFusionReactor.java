@@ -367,11 +367,11 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                     .setIgnoreColor(true));
             case UV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE)
                     .setIgnoreColor(true));
-            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE)
+            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE_MUI)
                     .setIgnoreColor(true));
-            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE)
+            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE_MUI)
                     .setIgnoreColor(true));
-            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE)
+            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE_MUI)
                     .setIgnoreColor(true));
         }
 

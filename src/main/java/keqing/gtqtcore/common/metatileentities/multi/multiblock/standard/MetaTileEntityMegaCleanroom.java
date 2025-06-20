@@ -46,6 +46,10 @@ import java.util.function.Supplier;
 
 //TODO: Decrease tps lag when they try to cheat it
 public class MetaTileEntityMegaCleanroom extends MetaTileEntityCleanroom implements ICleanroomProvider {
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public static final int MIN_RADIUS = 10;
     public static final int MIN_DEPTH = 9;
     private static final Supplier<TraceabilityPredicate> FILTER_CASING_PRED =

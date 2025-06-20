@@ -62,7 +62,10 @@ import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing1.Activ
 import static keqing.gtqtcore.common.block.blocks.BlockActiveUniqueCasing1.ActiveCasingType.AIRFOIL;
 
 public class MetaTileEntityAxialCompressor extends MultiblockWithDisplayBase implements IWorkable {
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public static final int MAX_PROGRESS = 20;
     public static final int FLUID_USE_AMOUNT = 100;
     protected static final FluidStack LUBRICANT = Materials.Lubricant.getFluid(1);
@@ -514,7 +517,7 @@ public class MetaTileEntityAxialCompressor extends MultiblockWithDisplayBase imp
     }
 
     @Override
-    protected boolean shouldShowVoidingModeButton() {
+    public boolean shouldShowVoidingModeButton() {
         return false;
     }
 }

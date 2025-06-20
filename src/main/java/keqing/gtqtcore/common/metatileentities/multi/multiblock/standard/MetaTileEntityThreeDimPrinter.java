@@ -45,7 +45,10 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
     private int radio_tier;
     private int casing_tier;
     private IOpticalComputationProvider computationProvider;
-
+    @Override
+    public boolean usesMui2() {
+        return false;
+    }
     public MetaTileEntityThreeDimPrinter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.TD_PRINT_RECIPES, GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, SPINNER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
