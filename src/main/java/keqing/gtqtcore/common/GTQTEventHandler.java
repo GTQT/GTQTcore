@@ -5,6 +5,7 @@ import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.metatileentity.registry.MTEManager;
 import gregtech.api.unification.material.event.MaterialEvent;
 import gregtech.api.unification.material.event.MaterialRegistryEvent;
+import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.GTQTCore;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.api.unification.OrePrefixAdditions;
@@ -120,9 +121,11 @@ public class GTQTEventHandler {
 
         @SubscribeEvent(priority = EventPriority.HIGHEST)
         public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-            Objects.requireNonNull(event.player);
-            for (String line : lines) {
-                event.player.sendMessage(new TextComponentString(line));
+            if(ConfigHolder.misc.loginMessage) {
+                Objects.requireNonNull(event.player);
+                for (String line : lines) {
+                    event.player.sendMessage(new TextComponentString(line));
+                }
             }
         }
     }
