@@ -1184,27 +1184,6 @@ gtqtcore.machine.mill_ball_hatch.name=Grinding Ball Hatch
 gtqtcore.multipart.ball.only=Only grinding balls can be placed
 gtqtcore.machine.industrial_maintenance_hatch.name=Industrial Maintenance Hatch
 
-
-gtqtcore.machine.industrial_crusher.name=Industrial Crushing Complex
-gtqtcore.machine.industrial_centrifuge.name=Industrial Centrifuge Complex
-gtqtcore.machine.industrial_mix.name=Industrial Mixing Complex
-gtqtcore.machine.industrial_washer.name=Industrial Washing Complex
-gtqtcore.machine.industrial_hammer.name=Industrial Forging Complex
-gtqtcore.machine.industrial_furnace.name=Industrial Smelting Complex
-
-gtqtcore.machine.industrial_bender.name=Industrial Plate Bending Machine
-gtqtcore.machine.industrial_wiremill.name=Industrial Wire Drawing Machine
-gtqtcore.machine.industrial_extruder.name=Industrial Extrusion Machine
-gtqtcore.machine.industrial_assembly_line.name=Industrial Assembly Line
-gtqtcore.machine.industrial_chemical_reactor.name=Industrial Chemical Reactors
-
-gtqtcore.machine.core_crusher.name=Industrial Crusher
-gtqtcore.machine.core_centrifuge.name=Industrial Centrifuge
-gtqtcore.machine.core_mix.name=Industrial Mixer
-gtqtcore.machine.core_washer.name=Industrial Washer
-gtqtcore.machine.core_hammer.name=Industrial Hammer
-gtqtcore.machine.core_furnace.name=Industrial Furnace
-
 gtqtcore.machine.nuclear_reactor.name=Nuclear Fission Pressure Reactor Vessel
 recipemap.nuclear_recipes.name=Pebble Bed Fission
 gtqtcore.machine.burner_reactor.name=Burner Reactor

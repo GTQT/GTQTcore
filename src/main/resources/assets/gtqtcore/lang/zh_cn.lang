@@ -1168,27 +1168,6 @@ gtqtcore.multipart.ball.only=仅能放入研磨球
 
 gtqtcore.machine.industrial_maintenance_hatch.name=工业级维护仓
 
-
-gtqtcore.machine.industrial_crusher.name=工业破壁复合体
-gtqtcore.machine.industrial_centrifuge.name=工业离心复合体
-gtqtcore.machine.industrial_mix.name=工业搅拌复合体
-gtqtcore.machine.industrial_washer.name=工业浸洗复合体
-gtqtcore.machine.industrial_hammer.name=工业锻造复合体
-gtqtcore.machine.industrial_furnace.name=工业熔炼复合体
-
-gtqtcore.machine.industrial_bender.name=工业卷板机
-gtqtcore.machine.industrial_wiremill.name=工业轧线机
-gtqtcore.machine.industrial_extruder.name=工业压模机
-gtqtcore.machine.industrial_assembly_line.name=工业装配线
-gtqtcore.machine.industrial_chemical_reactor.name=工业化学反应釜
-
-gtqtcore.machine.core_crusher.name=工业破壁机
-gtqtcore.machine.core_centrifuge.name=工业离心机
-gtqtcore.machine.core_mix.name=工业搅拌机
-gtqtcore.machine.core_washer.name=工业浸洗机
-gtqtcore.machine.core_hammer.name=工业锻造机
-gtqtcore.machine.core_furnace.name=工业熔炼机
-
 gtqtcore.machine.nuclear_reactor.name=核裂变压力反应容器
 recipemap.nuclear_recipes.name=球床裂变
 gtqtcore.machine.burner_reactor.name=燃烧反应室

@@ -349,26 +349,6 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityHeatHatchExchange HEAT_HATCH_EXCHANGE;
     public static MetaTileEntityDimensionallyTranscendentPlasmaForge DIMENSIONALLY_TRANSCENDENT_PLASMA_FORGE;
 
-    /*
-    public static MetaTileEntityIndustrialMacerator INDUSTRIAL_MACERATOR;
-    public static MetaTileEntityIndustrialCentrifuge INDUSTRIAL_CENTRIFUGE;
-    public static MetaTileEntityIndustrialMix INDUSTRIAL_MIX;
-    public static MetaTileEntityIndustrialWasher INDUSTRIAL_WASHER;
-    public static MetaTileEntityIndustrialHammer INDUSTRIAL_HAMMER;
-    public static MetaTileEntityIndustrialFurnace INDUSTRIAL_FURNACE;
-    public static MetaTileEntityIndustrialAssemblyLine INDUSTRIAL_ASSEMBLY_LINE;
-    public static MetaTileEntityIndustrialChemicalReactor INDUSTRIAL_CHEMICAL_REACTOR;
-    public static MetaTileEntityCoreMacerator CORE_MACERATOR;
-    public static MetaTileEntityCoreCentrifuge CORE_CENTRIFUGE;
-    public static MetaTileEntityCoreMix CORE_MIX;
-    public static MetaTileEntityCoreWasher CORE_WASHER;
-    public static MetaTileEntityCoreHammer CORE_HAMMER;
-    public static MetaTileEntityCoreFurnace CORE_FURNACE;
-    public static MetaTileEntityIndustrialBender INDUSTRIAL_BENDER;
-    public static MetaTileEntityIndustrialWireMill INDUSTRIAL_WIREMILL;
-    public static MetaTileEntityIndustrialExtruder INDUSTRIAL_EXTRUDER;
-    */
-
     public static MetaTileEntityLargeTurbine LARGE_FUEL_TURBINE;
     public static MetaTileEntitySterileCleaningMaintenanceHatch STERILE_CLEANING_MAINTENANCE_HATCH;
     public static MetaTileEntityISO3CleaningMaintenanceHatch ISO3_CLEANING_MAINTENANCE_HATCH;

@@ -11,6 +11,7 @@ import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.multiblock.MultiblockControllerBase;
 import gregtech.api.unification.material.Material;
 import gregtech.api.util.BlockInfo;
+import gregtech.api.util.SmallDigits;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.GCYSValues;
@@ -36,6 +37,10 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static gregtech.api.GTValues.*;
+import static gregtech.common.items.MetaItems.*;
+import static keqing.gtqtcore.common.items.GTQTMetaItems.*;
+import static keqing.gtsteam.common.item.GTSMetaitems.*;
 import static net.minecraft.util.EnumFacing.*;
 
 public class GTQTUtil {
@@ -416,6 +421,7 @@ public class GTQTUtil {
         }
         return 0;
     }
+
     public static void writeCustomData(MetaTileEntity mte, World world, int dataID, Consumer<PacketBuffer> bufWriter) {
         if (world != null && !world.isRemote) {
             mte.writeCustomData(dataID, bufWriter);
@@ -426,5 +432,268 @@ public class GTQTUtil {
         return Math.log(value) / Math.log(base);
     }
 
+    /**
+     * Get Electric Motor Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Electric Motor Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getMotorByTier(int tier) {
+        return switch (tier) {
+            case LV -> ELECTRIC_MOTOR_LV;
+            case MV -> ELECTRIC_MOTOR_MV;
+            case HV -> ELECTRIC_MOTOR_HV;
+            case EV -> ELECTRIC_MOTOR_EV;
+            case IV -> ELECTRIC_MOTOR_IV;
+            case LuV -> ELECTRIC_MOTOR_LuV;
+            case ZPM -> ELECTRIC_MOTOR_ZPM;
+            case UV -> ELECTRIC_MOTOR_UV;
+            case UHV -> ELECTRIC_MOTOR_UHV;
+            case UEV -> ELECTRIC_MOTOR_UEV;
+            case UIV -> ELECTRIC_MOTOR_UIV;
+            case UXV -> ELECTRIC_MOTOR_UXV;
+            case OpV -> ELECTRIC_MOTOR_OpV;
+            case MAX -> ELECTRIC_MOTOR_MAX;
+            default -> ELECTRIC_MOTOR_ULV;
+        };
+    }
 
+    /**
+     * Get Electric Piston Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Electric Piston Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getPistonByTier(int tier) {
+        return switch (tier) {
+            case LV -> ELECTRIC_PISTON_LV;
+            case MV -> ELECTRIC_PISTON_MV;
+            case HV -> ELECTRIC_PISTON_HV;
+            case EV -> ELECTRIC_PISTON_EV;
+            case IV -> ELECTRIC_PISTON_IV;
+            case LuV -> ELECTRIC_PISTON_LUV;
+            case ZPM -> ELECTRIC_PISTON_ZPM;
+            case UV -> ELECTRIC_PISTON_UV;
+            case UHV -> ELECTRIC_PISTON_UHV;
+            case UEV -> ELECTRIC_PISTON_UEV;
+            case UIV -> ELECTRIC_PISTON_UIV;
+            case UXV -> ELECTRIC_PISTON_UXV;
+            case OpV -> ELECTRIC_PISTON_OpV;
+            case MAX -> ELECTRIC_PISTON_MAX;
+            default -> ELECTRIC_PISTON_ULV;
+        };
+    }
+
+    /**
+     * Get Robot Arm Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Robot Arm Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getRobotArmByTier(int tier) {
+        return switch (tier) {
+            case LV -> ROBOT_ARM_LV;
+            case MV -> ROBOT_ARM_MV;
+            case HV -> ROBOT_ARM_HV;
+            case EV -> ROBOT_ARM_EV;
+            case IV -> ROBOT_ARM_IV;
+            case LuV -> ROBOT_ARM_LuV;
+            case ZPM -> ROBOT_ARM_ZPM;
+            case UV -> ROBOT_ARM_UV;
+            case UHV -> ROBOT_ARM_UHV;
+            case UEV -> ROBOT_ARM_UEV;
+            case UIV -> ROBOT_ARM_UIV;
+            case UXV -> ROBOT_ARM_UXV;
+            case OpV -> ROBOT_ARM_OpV;
+            case MAX -> ROBOT_ARM_MAX;
+            default -> ROBOT_ARM_ULV;
+        };
+    }
+
+    /**
+     * Get Electric Pump Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Electric Pump Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getPumpByTier(int tier) {
+        return switch (tier) {
+            case LV -> ELECTRIC_PUMP_LV;
+            case MV -> ELECTRIC_PUMP_MV;
+            case HV -> ELECTRIC_PUMP_HV;
+            case EV -> ELECTRIC_PUMP_EV;
+            case IV -> ELECTRIC_PUMP_IV;
+            case LuV -> ELECTRIC_PUMP_LuV;
+            case ZPM -> ELECTRIC_PUMP_ZPM;
+            case UV -> ELECTRIC_PUMP_UV;
+            case UHV -> ELECTRIC_PUMP_UHV;
+            case UEV -> ELECTRIC_PUMP_UEV;
+            case UIV -> ELECTRIC_PUMP_UIV;
+            case UXV -> ELECTRIC_PUMP_UXV;
+            case OpV -> ELECTRIC_PUMP_OpV;
+            case MAX -> ELECTRIC_PUMP_MAX;
+            default -> ELECTRIC_PUMP_ULV;
+        };
+    }
+
+    /**
+     * Get Conveyor Module Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Conveyor Module Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getConveyorByTier(int tier) {
+        return switch (tier) {
+            case LV -> CONVEYOR_MODULE_LV;
+            case MV -> CONVEYOR_MODULE_MV;
+            case HV -> CONVEYOR_MODULE_HV;
+            case EV -> CONVEYOR_MODULE_EV;
+            case IV -> CONVEYOR_MODULE_IV;
+            case LuV -> CONVEYOR_MODULE_LuV;
+            case ZPM -> CONVEYOR_MODULE_ZPM;
+            case UV -> CONVEYOR_MODULE_UV;
+            case UHV -> CONVEYOR_MODULE_UHV;
+            case UEV -> CONVEYOR_MODULE_UEV;
+            case UIV -> CONVEYOR_MODULE_UIV;
+            case UXV -> CONVEYOR_MODULE_UXV;
+            case OpV -> CONVEYOR_MODULE_OpV;
+            case MAX -> CONVEYOR_MODULE_MAX;
+            default -> CONVEYOR_MODULE_ULV;
+        };
+    }
+
+    /**
+     * Get Emitter Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Emitter Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getEmitterByTier(int tier) {
+        return switch (tier) {
+            case LV -> EMITTER_LV;
+            case MV -> EMITTER_MV;
+            case HV -> EMITTER_HV;
+            case EV -> EMITTER_EV;
+            case IV -> EMITTER_IV;
+            case LuV -> EMITTER_LuV;
+            case ZPM -> EMITTER_ZPM;
+            case UV -> EMITTER_UV;
+            case UHV -> EMITTER_UHV;
+            case UEV -> EMITTER_UEV;
+            case UIV -> EMITTER_UIV;
+            case UXV -> EMITTER_UXV;
+            case OpV -> EMITTER_OpV;
+            case MAX -> EMITTER_MAX;
+            default -> EMITTER_ULV;
+        };
+    }
+
+    /**
+     * Get Sensor Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Sensor Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getSensorByTier(int tier) {
+        return switch (tier) {
+            case LV -> SENSOR_LV;
+            case MV -> SENSOR_MV;
+            case HV -> SENSOR_HV;
+            case EV -> SENSOR_EV;
+            case IV -> SENSOR_IV;
+            case LuV -> SENSOR_LuV;
+            case ZPM -> SENSOR_ZPM;
+            case UV -> SENSOR_UV;
+            case UHV -> SENSOR_UHV;
+            case UEV -> SENSOR_UEV;
+            case UIV -> SENSOR_UIV;
+            case UXV -> SENSOR_UXV;
+            case OpV -> SENSOR_OpV;
+            case MAX -> SENSOR_MAX;
+            default -> SENSOR_ULV;
+        };
+    }
+
+    /**
+     * Get Field Generator Meta Item by Voltage Tier.
+     *
+     * @param tier Voltage Tier.
+     * @return Correspondence Field Generator Meta Item.
+     */
+    public static MetaItem<?>.MetaValueItem getFieldGenByTier(int tier) {
+        return switch (tier) {
+            case LV -> FIELD_GENERATOR_LV;
+            case MV -> FIELD_GENERATOR_MV;
+            case HV -> FIELD_GENERATOR_HV;
+            case EV -> FIELD_GENERATOR_EV;
+            case IV -> FIELD_GENERATOR_IV;
+            case LuV -> FIELD_GENERATOR_LuV;
+            case ZPM -> FIELD_GENERATOR_ZPM;
+            case UV -> FIELD_GENERATOR_UV;
+            case UHV -> FIELD_GENERATOR_UHV;
+            case UEV -> FIELD_GENERATOR_UEV;
+            case UIV -> FIELD_GENERATOR_UIV;
+            case UXV -> FIELD_GENERATOR_UXV;
+            case OpV -> FIELD_GENERATOR_OpV;
+            case MAX -> FIELD_GENERATOR_MAX;
+            default -> FIELD_GENERATOR_ULV;
+        };
+    }
+
+    /**
+     * Sub-script style Formula Numbers.
+     *
+     * @param formula Formula (used string, such as {@code "CO2"}).
+     * @return Formula with Sub-script Numbers.
+     * @author Bartimaeusnek
+     * @see SmallDigits
+     */
+    public static String subscriptNumbers(String formula) {
+        char[] formulas = formula.toCharArray();
+        char[] chars = new char[formulas.length];
+        for (int i = 0; i < formulas.length; i++) {
+            chars[i] = switch (formulas[i]) {
+                case '0' -> '₀';
+                case '1' -> '₁';
+                case '2' -> '₂';
+                case '3' -> '₃';
+                case '4' -> '₄';
+                case '5' -> '₅';
+                case '6' -> '₆';
+                case '7' -> '₇';
+                case '8' -> '₈';
+                case '9' -> '₉';
+                default -> formulas[i];
+            };
+        }
+        return new String(chars);
+    }
+
+    /**
+     * Super-script style Formula Numbers.
+     *
+     * @param formula Formula (used string, such as {@code "239Pu"}).
+     * @return Formula with Super-script Numbers.
+     * @author Bartimaeusnek
+     */
+    public static String superscriptNumbers(String formula) {
+        char[] formulas = formula.toCharArray();
+        char[] chars = new char[formulas.length];
+        for (int i = 0; i < formulas.length; i++) {
+            chars[i] = switch (formulas[i]) {
+                case '0' -> '⁰';
+                case '1' -> '¹';
+                case '2' -> '²';
+                case '3' -> '³';
+                case '4' -> '⁴';
+                case '5' -> '⁵';
+                case '6' -> '⁶';
+                case '7' -> '⁷';
+                case '8' -> '⁸';
+                case '9' -> '⁹';
+                default -> formulas[i];
+            };
+        }
+        return new String(chars);
+    }
 }
