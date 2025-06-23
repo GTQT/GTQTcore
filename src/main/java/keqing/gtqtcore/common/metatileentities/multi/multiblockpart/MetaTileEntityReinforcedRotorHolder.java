@@ -29,6 +29,7 @@ import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
@@ -56,6 +59,24 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
     private int rotorColor = -1;
     private boolean isRotorSpinning;
     private boolean frontFaceFree;
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing side) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ?
+                CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) :
+                super.getCapability(capability, side);
+    }
+
+    @Override
+    public void onRemoval() {
+        super.onRemoval();
+        var pos = getPos();
+        if (!inventory.getStackInSlot(0).isEmpty()) {
+            getWorld().spawnEntity(new EntityItem(getWorld(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    inventory.getStackInSlot(0)));
+            inventory.extractItem(0, 1, false);
+        }
+    }
 
     public MetaTileEntityReinforcedRotorHolder(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, tier);
@@ -185,27 +206,18 @@ public class MetaTileEntityReinforcedRotorHolder extends MetaTileEntityMultibloc
     }
 
     private boolean checkTurbineFaceFree() {
-        /*EnumFacing facing = getFrontFacing();
-        boolean permuteXZ = facing.getAxis() == EnumFacing.Axis.Z;
-        BlockPos centerPos = getPos().offset(facing);
-        for (int x = -1; x < 2; x++) {
-            for (int y = -1; y < 2; y++) {
-                BlockPos blockPos = centerPos.add(permuteXZ ? x : 0, y, permuteXZ ? 0 : x);
-                IBlockState blockState = getWorld().getBlockState(blockPos);
-                if (!blockState.getBlock().isAir(blockState, getWorld(), blockPos)) {
-                    return false;
-                }
-            }
-        }
-        return true;*/
-        EnumFacing front = this.getFrontFacing();
-        EnumFacing upwards = front.getAxis() == EnumFacing.Axis.Y ? EnumFacing.NORTH : EnumFacing.UP;
+        final EnumFacing front = getFrontFacing();
+        // this can be anything really, as long as it is not up/down when on Y axis
+        final EnumFacing upwards = front.getAxis() == EnumFacing.Axis.Y ? EnumFacing.NORTH : EnumFacing.UP;
 
-        for (int left = -1; left <= 1; ++left) {
-            for (int up = -1; up <= 1; ++up) {
-                BlockPos checkPos = RelativeDirection.offsetPos(this.getPos(), front, upwards, false, up, left, 1);
-                IBlockState state = this.getWorld().getBlockState(checkPos);
-                if (!state.getBlock().isAir(state, this.getWorld(), checkPos)) {
+        for (int left = -1; left <= 1; left++) {
+            for (int up = -1; up <= 1; up++) {
+                if (left == 0 && up == 0) continue;
+                // flip doesn't affect anything here since we are checking a square anyway
+                final BlockPos checkPos = RelativeDirection.offsetPos(
+                        getPos(), front, upwards, false, up, left, 1);
+                final IBlockState state = getWorld().getBlockState(checkPos);
+                if (!state.getBlock().isAir(state, getWorld(), checkPos)) {
                     return false;
                 }
             }

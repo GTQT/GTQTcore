@@ -217,6 +217,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     }
     public boolean drainPyrotheum(boolean sim)
     {
+        if(!sim&&!isStructureFormed())return false;
         if (pyrotheumFluid.isFluidStackIdentical(getInputFluidInventory().drain(pyrotheumFluid, false))) {
             getInputFluidInventory().drain(pyrotheumFluid, sim);
             return true;

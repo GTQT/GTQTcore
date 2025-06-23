@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
-import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -246,6 +245,16 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         super.invalidateStructure();
         this.temperature = Integer.MAX_VALUE;
     }
+    public boolean drainColdStack(boolean sim)
+    {
+        if(!sim&&!isStructureFormed())return false;
+        if (GELID_STACK.isFluidStackIdentical(getInputFluidInventory().drain(GELID_STACK, false))) {
+            getInputFluidInventory().drain(GELID_STACK, sim);
+            return true;
+        }
+        return false;
+    }
+
 
     protected class CryogenicFreezerRecipeLogic extends GTQTMultiblockLogic {
 
@@ -259,14 +268,13 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         @Override
         protected void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                IMultipleTankHandler inputTank = freezer.getInputFluidInventory();
-                if (GELID_STACK.isFluidStackIdentical(inputTank.drain(GELID_STACK, false))) {
-                    inputTank.drain(GELID_STACK, true);
+                if (drainColdStack(false)) {
+                    drainColdStack(true);
                     if (++this.progressTime > this.maxProgressTime) {
                         this.completeRecipe();
                     }
                 } else {
-                    return;
+                    decreaseProgress();
                 }
                 this.drawEnergy(this.recipeEUt, false);
             }
