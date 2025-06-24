@@ -76,7 +76,7 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     private static IBlockState getFrameState() {

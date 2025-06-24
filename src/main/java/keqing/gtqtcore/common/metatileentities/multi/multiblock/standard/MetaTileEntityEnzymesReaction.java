@@ -68,7 +68,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockControlle
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
 

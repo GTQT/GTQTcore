@@ -300,10 +300,12 @@ public class CommonProxy {
         return itemBlock;
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         GTQTLog.logger.info("Registering recipes...");
+        AddHighTierMaterial.init();
 
+        GTQTRecipesManager.init();
 
         NeutronActivatorIOPartProperty.registeredPart(1, "质子");
         NeutronActivatorIOPartProperty.registeredPart(2, "氘核");
@@ -440,9 +442,9 @@ public class CommonProxy {
     }
 
     public void init() {
-        AddHighTierMaterial.init();
 
-        GTQTRecipesManager.init();
+
+        CopyRecipesHandlers.init();
 
         for (BlockWireCoil.CoilType type : BlockWireCoil.CoilType.values()) {
             HEATING_COILS.put(GTQTMetaBlocks.blockWireCoil.getState(type), type);

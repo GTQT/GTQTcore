@@ -48,7 +48,7 @@ public class MetaTileEntityLargeChemicalReactor extends GTQTRecipeMapMultiblockC
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     @Override

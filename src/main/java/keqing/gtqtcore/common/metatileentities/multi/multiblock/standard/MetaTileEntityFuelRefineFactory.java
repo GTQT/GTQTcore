@@ -38,7 +38,7 @@ public class MetaTileEntityFuelRefineFactory extends GTQTNoTierMultiblockControl
         //setTimeReduce(glassTire);
         setTimeReduceFlag(false);
 
-        setOverclocking(0.25);
+        setOverclocking(4);
     }
 
     private static IBlockState getCasingState() {

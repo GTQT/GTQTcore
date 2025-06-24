@@ -64,7 +64,7 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockContr
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     @Nonnull

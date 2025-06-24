@@ -48,7 +48,7 @@ public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockContr
         setMaxVoltageFlag(false);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.25);
+        setOverclocking(4);
     }
 
     private static IBlockState getCasingState() {

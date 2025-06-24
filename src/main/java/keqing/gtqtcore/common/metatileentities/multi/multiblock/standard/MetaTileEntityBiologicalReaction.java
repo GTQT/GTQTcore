@@ -77,7 +77,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     private static IBlockState getTubeState() {

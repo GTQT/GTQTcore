@@ -104,8 +104,8 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         //setTimeReduce(none);
         setTimeReduceFlag(false);
 
-        if(tier<=9)setOverclocking(0.33);
-        else setOverclocking(0.25);
+        if(tier<=9)setOverclocking(3);
+        else setOverclocking(4);
     }
 
     @Override

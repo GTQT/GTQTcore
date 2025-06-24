@@ -94,7 +94,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
         //setTimeReduce(glassTire);
         setTimeReduceFlag(true);
 
-        setOverclocking(0.25);
+        setOverclocking(4);
     }
 
     @Override

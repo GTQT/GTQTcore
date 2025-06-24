@@ -53,7 +53,7 @@ public class MetaTileEntityIndustrialRefiner extends GTQTNoTierMultiblockControl
 
         setTimeReduce(1);
         setTimeReduceFlag(false);
-        setOverclocking(0.25);
+        setOverclocking(4);
     }
 
     private static IBlockState getCasingState() {

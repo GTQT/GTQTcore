@@ -33,7 +33,7 @@ public class MetaTileEntityElectronOil extends GTQTNoTierMultiblockController {
         setMaxParallelFlag(true);
         setTimeReduce(0.8);
         setTimeReduceFlag(true);
-        setOverclocking(0.25);
+        setOverclocking(4);
     }
 
     @Override

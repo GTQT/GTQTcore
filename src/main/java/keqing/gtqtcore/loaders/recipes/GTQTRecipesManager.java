@@ -96,7 +96,6 @@ public class GTQTRecipesManager {
         MetaTileEntityLoader.init();
         MetaTileEntityMachine.init();
         CrucibleRecipes.register();
-        CopyRecipesHandlers.init();
         UUHelper.init();
         OreDictionaryLoader.init();
         MiscMachineRecipes.init();

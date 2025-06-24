@@ -73,7 +73,7 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     private static IBlockState getCasingState() {

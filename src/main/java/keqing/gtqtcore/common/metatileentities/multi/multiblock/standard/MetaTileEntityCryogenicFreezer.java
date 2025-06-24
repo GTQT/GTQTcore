@@ -84,7 +84,7 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         setMaxParallelFlag(true);
         //setTimeReduce(auto);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     public static TraceabilityPredicate coolingCoils() {

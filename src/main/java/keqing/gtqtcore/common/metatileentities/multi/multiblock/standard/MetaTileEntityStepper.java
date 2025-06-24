@@ -74,7 +74,7 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
         setMaxVoltageFlag(true);
         setTimeReduce(1);//初始化
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     @Override

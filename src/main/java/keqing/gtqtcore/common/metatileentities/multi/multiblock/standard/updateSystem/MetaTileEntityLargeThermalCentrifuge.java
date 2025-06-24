@@ -50,7 +50,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
         setMaxVoltageFlag(true);
         //setTimeReduce(coilLevel);
         setTimeReduceFlag(true);
-        setOverclocking(0.33);
+        setOverclocking(3);
     }
 
     @Override
