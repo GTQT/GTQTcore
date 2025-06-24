@@ -7,7 +7,7 @@ import codechicken.lib.vec.Matrix4;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.unification.material.Material;
-import keqing.gtqtcore.api.metaileentity.multiblock.logistics.MetaTileEntityDelegator;
+import keqing.gtqtcore.api.metatileentity.multiblock.logistics.MetaTileEntityDelegator;
 import keqing.gtqtcore.client.render.ExtenderRender;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

@@ -15,7 +15,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityAutoMaintenanceHatch;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import keqing.gtqtcore.api.metaileentity.multiblock.GCYLCleanroomType;
+import keqing.gtqtcore.api.metatileentity.multiblock.GCYLCleanroomType;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;

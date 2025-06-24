@@ -18,7 +18,7 @@ import gregtech.common.blocks.BlockBoilerCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IPHValue;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.PHChangeProperty;
 import keqing.gtqtcore.api.recipes.properties.PHErrorRangeProperty;

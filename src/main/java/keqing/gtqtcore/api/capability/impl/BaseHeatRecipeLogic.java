@@ -10,7 +10,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.properties.HeatProperty;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.World;
@@ -25,7 +25,6 @@ import java.util.List;
 
 import static gregtech.api.GTValues.LV;
 import static gregtech.api.GTValues.V;
-import static gregtech.api.recipes.logic.OverclockingLogic.standardOC;
 
 public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
 
@@ -33,7 +32,6 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
     protected int lastRecipeIndex = 0;
     protected IItemHandlerModifiable currentDistinctInputBus;
     protected List<IItemHandlerModifiable> invalidatedInputList = new ArrayList<>();
-    RecipeMapHeatMultiblockController tileEntity;
 
     public BaseHeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
         super(tileEntity, recipeMap);
@@ -62,12 +60,6 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
     @Override
     public long getMaxVoltage() {
         return V[LV];
-    }
-
-    @Override
-    public void setMaxProgress(int maxProgress) {
-        double speedBonus = Math.min(previousRecipe.getProperty(HeatProperty.getInstance(), 0)/tileEntity.getHeat(),1);
-        super.setMaxProgress((int) (maxProgress*speedBonus));
     }
 
     @Override

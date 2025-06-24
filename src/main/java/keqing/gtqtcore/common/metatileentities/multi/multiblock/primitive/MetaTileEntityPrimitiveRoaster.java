@@ -5,6 +5,12 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.utils.Alignment;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.widgets.ItemSlot;
+import com.cleanroommc.modularui.widgets.ProgressWidget;
+import com.cleanroommc.modularui.widgets.slot.ModularSlot;
 import gregtech.api.GTValues;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -12,6 +18,10 @@ import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.GTGuiTheme;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
@@ -25,9 +35,10 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.mui.widget.GTFluidSlot;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -37,7 +48,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 
-public class MetaTileEntityPrimitiveRoaster extends RecipeMapNoEnergyMultiblockController {
+public class MetaTileEntityPrimitiveRoaster extends RecipeMapPrimitiveMultiblockController {
 
     public MetaTileEntityPrimitiveRoaster(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.PRIMITIVE_ROASTING_RECIPES);
@@ -52,11 +63,73 @@ public class MetaTileEntityPrimitiveRoaster extends RecipeMapNoEnergyMultiblockC
         return Textures.PRIMITIVE_BRICKS;
     }
     @Override
-    public boolean usesMui2() {
-        return false;
+    protected MultiblockUIFactory createUIFactory() {
+        return new MultiblockUIFactory(this)
+                .disableButtons()
+                .disableDisplay()
+                .setSize(176, 166)
+                .addScreenChildren((parent, syncManager) -> {
+                    // 标题位置调整（居中）
+                    parent.child(IKey.lang(getMetaFullName()).asWidget().pos(5, 5));
+
+                    // 输入流体槽（左侧）
+                    parent.child(new GTFluidSlot()
+                            .overlay(GTGuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY.asIcon()
+                                    .alignment(Alignment.CenterLeft)
+                                    .marginLeft(1))
+                            .syncHandler(GTFluidSlot.sync(importFluids.getTankAt(0))
+                                    .drawAlwaysFull(false)
+                                    .showAmountOnSlot(false)
+                                    .accessibility(true, false))
+                            .pos(5, 2) // 移动到最左侧
+                            .size(20, 58));
+
+                    // 输入物品槽 - 2x2布局 (4个槽位)
+                    for (int y = 0; y < 2; y++) {
+                        for (int x = 0; x < 2; x++) {
+                            int index = y * 2 + x;
+                            parent.child(new ItemSlot()
+                                    .slot(new ModularSlot(importItems, index)
+                                            .singletonSlotGroup())
+                                    .pos(30 + x * 18, 30 + y * 18)); // X坐标从30开始
+                        }
+                    }
+
+                    // 进度条（居中）
+                    parent.child(new ProgressWidget()
+                            .texture(GTGuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, -1)
+                            .size(20, 15)
+                            .pos(76, 39) // 调整到物品槽中间位置
+                            .value(new DoubleSyncValue(recipeMapWorkable::getProgressPercent)));
+
+                    // 输出物品槽 - 2x2布局 (4个槽位)
+                    for (int y = 0; y < 2; y++) {
+                        for (int x = 0; x < 2; x++) {
+                            int index = y * 2 + x;
+                            parent.child(new ItemSlot()
+                                    .slot(new ModularSlot(exportItems, index)
+                                            .accessibility(false, true))
+                                    .pos(106 + x * 18, 30 + y * 18)); // X坐标从106开始
+                        }
+                    }
+
+                    // 输出流体槽（右侧）
+                    parent.child(new GTFluidSlot()
+                            .overlay(GTGuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY.asIcon()
+                                    .alignment(Alignment.CenterLeft)
+                                    .marginLeft(1))
+                            .syncHandler(GTFluidSlot.sync(exportFluids.getTankAt(0))
+                                    .drawAlwaysFull(false)
+                                    .showAmountOnSlot(false)
+                                    .accessibility(true, false))
+                            .pos(151, 20) // 移动到最右侧（176-20-5=151）
+                            .size(20, 58));
+                });
     }
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        return ModularUI.builder(GuiTextures.PRIMITIVE_BACKGROUND, 176, 204).shouldColor(false).widget(new TankWidget(this.importFluids.getTankAt(0), 22, 25, 20, 58).setBackgroundTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK).setOverlayTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY).setContainerClicking(true, true)).widget(new LabelWidget(5, 5, this.getMetaFullName())).widget((new SlotWidget(this.importItems, 0, 52, 25, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.importItems, 1, 52, 45, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.importItems, 2, 52, 65, true, true)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget(new RecipeProgressWidget(this.recipeMapWorkable::getProgressPercent, 76, 46, 20, 15, GuiTextures.PRIMITIVE_BLAST_FURNACE_PROGRESS_BAR, ProgressWidget.MoveType.HORIZONTAL, GTQTcoreRecipeMaps.PRIMITIVE_ROASTING_RECIPES)).widget((new SlotWidget(this.exportItems, 0, 103, 25, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.exportItems, 1, 103, 45, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new SlotWidget(this.exportItems, 2, 103, 65, true, false)).setBackgroundTexture(GuiTextures.PRIMITIVE_SLOT, GuiTextures.PRIMITIVE_FURNACE_OVERLAY)).widget((new TankWidget(this.exportFluids.getTankAt(0), 134, 25, 20, 58)).setBackgroundTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK).setOverlayTexture(GuiTextures.PRIMITIVE_LARGE_FLUID_TANK_OVERLAY).setContainerClicking(true, false)).bindPlayerInventory(entityPlayer.inventory, GuiTextures.PRIMITIVE_SLOT, 37);
+
+    @Override
+    public GTGuiTheme getUITheme() {
+        return GTGuiTheme.PRIMITIVE;
     }
 
     public void renderMetaTileEntity(CCRenderState renderState, Matrix4 translation, IVertexOperation[] pipeline) {

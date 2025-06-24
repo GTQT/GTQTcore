@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
 
 import gregtech.api.GTValues;
@@ -16,12 +16,10 @@ import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;

@@ -21,20 +21,19 @@ import gregtech.api.recipes.Recipe;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
+import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.ICatalystHatch;
 import keqing.gtqtcore.api.capability.IWarpSwarm;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.CatalystProperties;
 import keqing.gtqtcore.api.recipes.properties.QFTCasingTierProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtqtcore.client.utils.BloomEffectUtil;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
@@ -51,7 +50,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -66,18 +64,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.unification.material.Materials.Fermium;
 import static gregtech.api.unification.material.Materials.Neptunium;
 import static keqing.gtqtcore.api.GTQTAPI.*;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
-import static keqing.gtqtcore.api.unification.GTQTMaterials.SuperDimensionalCatalystMKI;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING;
 
-public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController implements IFastRenderMetaTileEntity {
+public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController {
     @Override
     public boolean usesMui2() {
         return false;
@@ -437,153 +433,5 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 this.decreaseProgress();
             }
         }
-    }
-
-    static BloomEffectUtil.IBloomRenderFast RENDER_HANDLER = new BloomEffectUtil.IBloomRenderFast() {
-        float lastBrightnessX;
-        float lastBrightnessY;
-
-        @Override
-        public int customBloomStyle() {
-            return 2;
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void preDraw(BufferBuilder buffer) {
-            BloomEffect.strength = 1.5F;
-            BloomEffect.baseBrightness = 0.0F;
-            BloomEffect.highBrightnessThreshold = 1.3F;
-            BloomEffect.lowBrightnessThreshold = 0.3F;
-            BloomEffect.step = 1;
-
-            lastBrightnessX = OpenGlHelper.lastBrightnessX;
-            lastBrightnessY = OpenGlHelper.lastBrightnessY;
-            GlStateManager.color(1, 1, 1, 1);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
-        }
-
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void postDraw(BufferBuilder buffer) {
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
-        }
-    };
-
-    @SideOnly(Side.CLIENT)
-    private void renderForceField(BufferBuilder buffer, double x, double y, double z, int side, double minU, double maxU, double minV, double maxV) {
-
-        switch (side) {
-            case 0 -> {
-                buffer.pos(x + 3, y, z + 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x + 3, y + 4, z + 7).tex(maxU, minV).endVertex();
-                buffer.pos(x - 3, y + 4, z + 7).tex(minU, minV).endVertex();
-                buffer.pos(x - 3, y, z + 7).tex(minU, maxV).endVertex();
-            }
-            case 1 -> {
-                buffer.pos(x + 7, y, z + 4).tex(maxU, maxV).endVertex();
-                buffer.pos(x + 7, y + 4, z + 4).tex(maxU, minV).endVertex();
-                buffer.pos(x + 7, y + 4, z - 4).tex(minU, minV).endVertex();
-                buffer.pos(x + 7, y, z - 4).tex(minU, maxV).endVertex();
-            }
-            case 2 -> {
-                buffer.pos(x + 3, y, z - 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x + 3, y + 4, z - 7).tex(maxU, minV).endVertex();
-                buffer.pos(x - 3, y + 4, z - 7).tex(minU, minV).endVertex();
-                buffer.pos(x - 3, y, z - 7).tex(minU, maxV).endVertex();
-            }
-            case 3 -> {
-                buffer.pos(x - 7, y, z + 4).tex(maxU, maxV).endVertex();
-                buffer.pos(x - 7, y + 4, z + 4).tex(maxU, minV).endVertex();
-                buffer.pos(x - 7, y + 4, z - 4).tex(minU, minV).endVertex();
-                buffer.pos(x - 7, y, z - 4).tex(minU, maxV).endVertex();
-            }
-            case 4 -> {
-                buffer.pos(x - 3, y, z + 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x - 3, y + 4, z + 7).tex(maxU, minV).endVertex();
-                buffer.pos(x - 7, y + 4, z + 4).tex(minU, minV).endVertex();
-                buffer.pos(x - 7, y, z + 4).tex(minU, maxV).endVertex();
-            }
-            case 5 -> {
-                buffer.pos(x - 3, y, z - 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x - 3, y + 4, z - 7).tex(maxU, minV).endVertex();
-                buffer.pos(x - 7, y + 4, z - 4).tex(minU, minV).endVertex();
-                buffer.pos(x - 7, y, z - 4).tex(minU, maxV).endVertex();
-            }
-            case 6 -> {
-                buffer.pos(x + 3, y, z + 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x + 3, y + 4, z + 7).tex(maxU, minV).endVertex();
-                buffer.pos(x + 7, y + 4, z + 4).tex(minU, minV).endVertex();
-                buffer.pos(x + 7, y, z + 4).tex(minU, maxV).endVertex();
-            }
-            case 7 -> {
-                buffer.pos(x + 3, y, z - 7).tex(maxU, maxV).endVertex();
-                buffer.pos(x + 3, y + 4, z - 7).tex(maxU, minV).endVertex();
-                buffer.pos(x + 7, y + 4, z - 4).tex(minU, minV).endVertex();
-                buffer.pos(x + 7, y, z - 4).tex(minU, maxV).endVertex();
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void renderMetaTileEntity(double x, double y, double z, float partialTicks) {
-        TextureAtlasSprite forceField = GTQTTextures.FORCE_FIELD;
-        if (isActive() && MinecraftForgeClient.getRenderPass() == 0) {
-
-            BloomEffectUtil.requestCustomBloom(RENDER_HANDLER, (buffer) -> {
-                Entity entity = Minecraft.getMinecraft().getRenderViewEntity();
-                if (entity != null) {
-                    double minU = forceField.getMinU();
-                    double maxU = forceField.getMaxU();
-                    double minV = forceField.getMinV();
-                    double maxV = forceField.getMaxV();
-                    double xBaseOffset = 3 * getFrontFacing().getOpposite().getXOffset();
-                    double zBaseOffset = 3 * getFrontFacing().getOpposite().getZOffset();
-                    GlStateManager.pushMatrix();
-                    GlStateManager.disableCull();
-                    GlStateManager.disableAlpha();
-                    GlStateManager.enableBlend();
-                    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                    //Center O:  0,  0         1 ------- 8
-                    //Corner 1:  7, -2        /           \
-                    //Corner 2:  3, -6     2 /             \ 7
-                    //Corner 3: -2, -6      |               |
-                    //Corner 4: -6, -2      |       O       |
-                    //Corner 5: -6,  3      |               |
-                    //Corner 6: -2,  7     3 \             / 6
-                    //Corner 7:  3,  7        \           /
-                    //Corner 8:  7,  3         4 ------- 5
-                    buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-                    GlStateManager.translate(x + xBaseOffset + 0.5, 0, z + zBaseOffset + 0.5);
-                    if (zBaseOffset == 0) {
-                        GlStateManager.rotate(90F, 0F, 1F, 0F);
-                    }
-                    for (int i = 0; i < 8; i++) {
-                        renderForceField(buffer, 0, y, 0, i, minU, maxU, minV, maxV);
-                    }
-                    Tessellator.getInstance().draw();
-                    GlStateManager.disableBlend();
-                    GlStateManager.enableAlpha();
-                    GlStateManager.enableCull();
-                    GlStateManager.popMatrix();
-                }
-            });
-        }
-    }
-
-    public AxisAlignedBB getRenderBoundingBox() {
-        double xBaseOffset = 3 * getFrontFacing().getOpposite().getXOffset();
-        double zBaseOffset = 3 * getFrontFacing().getOpposite().getZOffset();
-        BlockPos pos = new BlockPos(this.getPos().getX() + xBaseOffset + 0.5, this.getPos().getY(), this.getPos().getZ() + zBaseOffset + 0.5);
-        return new AxisAlignedBB(pos).grow(6, 6, 6);
-    }
-
-    public boolean shouldRenderInPass(int pass) {
-        return pass == 0;
-    }
-
-    public boolean isGlobalRenderer() {
-        return true;
     }
 }

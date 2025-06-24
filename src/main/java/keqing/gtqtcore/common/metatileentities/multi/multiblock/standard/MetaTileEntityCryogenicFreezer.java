@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.GTValues;
+import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -20,7 +21,7 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -69,7 +70,7 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
             .map(type -> new BlockInfo(GTQTMetaBlocks.blockCoolingCoil.getState(type)))
             .toArray(BlockInfo[]::new)
     );
-    private final FluidStack GELID_STACK = GelidCryotheum.getFluid(1);
+    private final FluidStack GelidStack = GelidCryotheum.getFluid(1);
     private int temperature;
 
     public MetaTileEntityCryogenicFreezer(ResourceLocation metaTileEntityId) {
@@ -245,16 +246,17 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         super.invalidateStructure();
         this.temperature = Integer.MAX_VALUE;
     }
+
     public boolean drainColdStack(boolean sim)
     {
+        IMultipleTankHandler inputTank = getInputFluidInventory();
         if(!sim&&!isStructureFormed())return false;
-        if (GELID_STACK.isFluidStackIdentical(getInputFluidInventory().drain(GELID_STACK, false))) {
-            getInputFluidInventory().drain(GELID_STACK, sim);
+        if (GelidStack.isFluidStackIdentical(inputTank.drain(GelidStack, false))) {
+            inputTank.drain(GelidStack, sim);
             return true;
         }
         return false;
     }
-
 
     protected class CryogenicFreezerRecipeLogic extends GTQTMultiblockLogic {
 

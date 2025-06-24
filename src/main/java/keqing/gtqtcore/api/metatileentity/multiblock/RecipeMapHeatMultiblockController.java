@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity.multiblock;
+package keqing.gtqtcore.api.metatileentity.multiblock;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
@@ -9,11 +9,9 @@ import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.multiblock.ICleanroomProvider;
-import gregtech.api.metatileentity.multiblock.ICleanroomReceiver;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.pattern.PatternMatchContext;
-import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.TextFormattingUtil;
@@ -32,7 +30,6 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,8 +48,8 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     protected IMultipleTankHandler outputFluidInventory;
     int heat;
     int tier;
+    public int recipeHeat;
     private boolean isDistinct = false;
-    private ICleanroomProvider cleanroom;
 
     public RecipeMapHeatMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
         super(metaTileEntityId);
@@ -80,6 +77,7 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("heat", heat);
         data.setInteger("tier", tier);
+        data.setInteger("recipeHeat", recipeHeat);
         data.setBoolean("isDistinct", isDistinct);
         return super.writeToNBT(data);
     }
@@ -88,6 +86,7 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         super.readFromNBT(data);
         heat = data.getInteger("heat");
         tier = data.getInteger("tier");
+        recipeHeat = data.getInteger("recipeHeat");
         isDistinct = data.getBoolean("isDistinct");
     }
 
@@ -120,7 +119,8 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
 
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         if(heat<300)return false;
-        return heat >= recipe.getProperty(HeatProperty.getInstance(), 0);
+        recipeHeat=recipe.getProperty(HeatProperty.getInstance(),0);
+        return heat >= recipeHeat;
     }
 
     @Override
@@ -253,6 +253,17 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
 
         public HeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
             super(tileEntity, recipeMap);
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            if(recipeHeat==0)
+            {
+                super.setMaxProgress(maxProgress);
+                return;
+            };
+            double speedBonus = Math.min(heat/recipeHeat,1);
+            super.setMaxProgress((int) (maxProgress*speedBonus));
         }
 
         @Override

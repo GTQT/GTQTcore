@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity.multiblock.logistics;
+package keqing.gtqtcore.api.metatileentity.multiblock.logistics;
 
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;

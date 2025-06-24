@@ -2,10 +2,7 @@ package keqing.gtqtcore.loaders.recipes.handlers;
 
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.metatileentity.multiblock.CleanroomType;
-import gregtech.api.recipes.GTRecipeHandler;
-import keqing.gtqtcore.api.metaileentity.multiblock.GCYLCleanroomType;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
+import keqing.gtqtcore.api.metatileentity.multiblock.GCYLCleanroomType;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.*;

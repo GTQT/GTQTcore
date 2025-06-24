@@ -11,7 +11,6 @@ import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.resources.IGuiTexture;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -20,7 +19,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer;
 import gregtech.client.renderer.texture.cube.SimpleSidedCubeRenderer.RenderSide;
 import gregtech.common.blocks.MetaBlocks;
-import keqing.gtqtcore.api.metaileentity.PseudoMultiSteamMachineMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.PseudoMultiSteamMachineMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -51,7 +50,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.EXTRACTION_STEAM;
+import static keqing.gtqtcore.api.metatileentity.SteamProgressIndicators.EXTRACTION_STEAM;
 
 public class MetaTileEntitySteamLatexCollector extends PseudoMultiSteamMachineMetaTileEntity {
     private final int energyPerTick = 16;

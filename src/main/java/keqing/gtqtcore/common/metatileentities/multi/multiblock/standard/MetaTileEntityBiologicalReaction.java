@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
@@ -11,7 +10,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
@@ -27,8 +25,8 @@ import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IBio;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.properties.BioReactorProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -53,7 +51,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 

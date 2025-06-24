@@ -26,7 +26,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;

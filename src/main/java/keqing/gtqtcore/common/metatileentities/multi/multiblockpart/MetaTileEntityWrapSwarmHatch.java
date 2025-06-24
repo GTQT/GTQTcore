@@ -19,7 +19,7 @@ import gregtech.api.unification.material.Material;
 import gregtech.common.items.behaviors.AbstractMaterialPartBehavior;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IWarpSwarm;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.WrapSwarmBehavior;
 import net.minecraft.entity.item.EntityItem;

@@ -1,9 +1,7 @@
-package keqing.gtqtcore.api.metaileentity.multiblock;
+package keqing.gtqtcore.api.metatileentity.multiblock;
 
-import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import keqing.gtqtcore.api.capability.*;
-import net.minecraftforge.fluids.IFluidTank;
 
 public class GTQTMultiblockAbility {
     public static final MultiblockAbility<IReinforcedRotorHolder> REINFORCED_ROTOR_HOLDER_ABILITY = new MultiblockAbility<>("reinforced_rotor_holder",IReinforcedRotorHolder.class);

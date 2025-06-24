@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
 
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
@@ -8,7 +8,7 @@ import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.List;

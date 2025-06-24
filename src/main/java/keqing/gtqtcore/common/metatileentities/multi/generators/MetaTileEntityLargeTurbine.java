@@ -15,7 +15,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

@@ -14,7 +14,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.client.renderer.ICubeRenderer;
-import keqing.gtqtcore.api.metaileentity.SteamProgressIndicator;
+import keqing.gtqtcore.api.metatileentity.SteamProgressIndicator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

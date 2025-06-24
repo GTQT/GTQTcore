@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregicality.multiblocks.api.capability.IParallelMultiblock;
-import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -16,7 +15,6 @@ import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
-import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -26,7 +24,7 @@ import gregtech.common.blocks.BlockFireboxCasing;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IElectrode;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

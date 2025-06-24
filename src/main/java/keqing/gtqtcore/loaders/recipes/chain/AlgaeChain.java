@@ -20,11 +20,11 @@ import static keqing.gtqtcore.loaders.recipes.chain.OilChains.severelyCrack;
 
 public class AlgaeChain {
     public static void init() {
-        AlgaeGroth(COMMON_ALGAE, 40);
-        AlgaeGroth(GREEN_ALGAE, 60);
-        AlgaeGroth(RED_ALGAE, 60);
-        AlgaeGroth(BROWN_ALGAE, 80);
-        AlgaeGroth(GOLD_ALGAE, 80);
+        AlgaeGroth(COMMON_ALGAE);
+        AlgaeGroth(GREEN_ALGAE);
+        AlgaeGroth(RED_ALGAE);
+        AlgaeGroth(BROWN_ALGAE);
+        AlgaeGroth(GOLD_ALGAE);
 
         ExoticGasProcessing();
 
@@ -348,7 +348,7 @@ public class AlgaeChain {
                 .buildAndRegister();
     }
 
-    private static void AlgaeGroth(MetaItem.MetaValueItem items, int rate) {
+    private static void AlgaeGroth(MetaItem.MetaValueItem items) {
         BIOLOGICAL_REACTION_RECIPES.recipeBuilder()
                 .fluidInputs(SterileGrowthMedium.getFluid(100))
                 .notConsumable(items)
@@ -360,6 +360,7 @@ public class AlgaeChain {
                 .input(items, 1)
                 .fluidOutputs(BioOil.getFluid(2000))
                 .pH(8.6)
+                .pHErrorRange(0.5)
                 .duration(1600).EUt(480).buildAndRegister();
 
         FLUIDIZED_BED.recipeBuilder()

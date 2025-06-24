@@ -2,8 +2,8 @@ package keqing.gtqtcore.api.utils;
 
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
-import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
-import keqing.gtqtcore.api.metaileentity.SteamProgressIndicator;
+import keqing.gtqtcore.api.metatileentity.SimpleSteamMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.SteamProgressIndicator;
 
 import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTileEntity;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;

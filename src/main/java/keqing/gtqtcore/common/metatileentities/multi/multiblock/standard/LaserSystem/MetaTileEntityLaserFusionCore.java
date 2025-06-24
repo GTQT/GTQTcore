@@ -6,7 +6,6 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.IRenderSetup;
@@ -20,7 +19,7 @@ import gregtech.client.utils.RenderBufferHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapLaserMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -40,7 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import static gregtech.api.metatileentity.multiblock.MultiblockAbility.*;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 import static net.minecraft.util.EnumFacing.Axis.*;
 

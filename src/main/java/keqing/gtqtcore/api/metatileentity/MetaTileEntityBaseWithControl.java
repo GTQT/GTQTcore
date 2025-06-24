@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
 
 import codechicken.lib.render.CCRenderState;

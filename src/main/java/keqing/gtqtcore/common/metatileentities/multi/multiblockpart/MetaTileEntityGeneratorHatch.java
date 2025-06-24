@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblockpart;
 
+import codechicken.lib.render.CCRenderState;
+import codechicken.lib.render.pipeline.IVertexOperation;
+import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.impl.NotifiableItemStackHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -7,13 +10,11 @@ import gregtech.api.gui.resources.IGuiTexture;
 import gregtech.api.gui.widgets.BlockableSlotWidget;
 import gregtech.api.metatileentity.IMachineHatchMultiblock;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.SimpleGeneratorMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
-import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.ItemStackHashStrategy;
 import gregtech.client.renderer.texture.Textures;
-
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockNotifiablePart;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,16 +22,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandlerModifiable;
-
-import codechicken.lib.render.CCRenderState;
-import codechicken.lib.render.pipeline.IVertexOperation;
-import codechicken.lib.vec.Matrix4;
-import org.apache.commons.lang3.ArrayUtils;
-
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-
-import static gregtech.api.util.GTUtility.getMetaTileEntity;
 
 public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifiablePart
         implements IMultiblockAbilityPart<IItemHandlerModifiable> {
@@ -65,7 +59,7 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
 
     protected ModularUI createUI(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 130).label(10, 5, this.getMetaFullName());
-        builder.widget((new BlockableSlotWidget(this.machineHandler, 0, 81, 18, true, true)).setIsBlocked(this::isSlotBlocked).setBackgroundTexture(new IGuiTexture[]{GuiTextures.SLOT}));
+        builder.widget((new BlockableSlotWidget(this.machineHandler, 0, 81, 18, true, true)).setIsBlocked(this::isSlotBlocked).setBackgroundTexture(GuiTextures.SLOT));
         return builder.bindPlayerInventory(entityPlayer.inventory, GuiTextures.SLOT, 7, 48).build(this.getHolder(), entityPlayer);
     }
 
@@ -88,14 +82,14 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
     }
 
     @Override
-    public void addInformation(ItemStack stack,  World player, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gregtech.machine.machine_hatch.processing_array"));
         tooltip.add(I18n.format("gregtech.universal.disabled"));
     }
 
     @Override
-    public void addToolUsages(ItemStack stack,  World world, List<String> tooltip, boolean advanced) {
+    public void addToolUsages(ItemStack stack, World world, List<String> tooltip, boolean advanced) {
         tooltip.add(I18n.format("gregtech.tool_action.screwdriver.access_covers"));
         tooltip.add(I18n.format("gregtech.tool_action.wrench.set_facing"));
         super.addToolUsages(stack, world, tooltip, advanced);
@@ -114,9 +108,10 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
             super(metaTileEntity, 1, null, false);
         }
 
+        @NotNull
         @Override
         // Insert item returns the remainder stack that was not inserted
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             // If the item was not valid, nothing from the stack can be inserted
             if (!isItemValid(slot, stack)) {
                 return stack;
@@ -170,19 +165,20 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
         }
 
         @Override
-        public boolean isItemValid(int slot, ItemStack stack) {
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             boolean slotMatches = this.getStackInSlot(slot).isEmpty() ||
                     ItemStackHashStrategy.comparingAllButCount().equals(this.getStackInSlot(slot), stack);
 
             MultiblockControllerBase controller = getController();
             if (controller instanceof IMachineHatchMultiblock)
-                return slotMatches && isMachineValidForMachineHatch(stack,
+                return slotMatches && GTUtility.isMachineValidForMachineHatch(stack,
                         ((IMachineHatchMultiblock) controller).getBlacklist());
 
             // If the controller is null, this part is not attached to any Multiblock
             return slotMatches;
         }
 
+        @NotNull
         @Override
         public ItemStack extractItem(int slot, int amount, boolean simulate) {
             if (isSlotBlocked()) {
@@ -203,18 +199,5 @@ public class MetaTileEntityGeneratorHatch extends MetaTileEntityMultiblockNotifi
             return MetaTileEntityGeneratorHatch.this.getMachineLimit();
         }
 
-        public static boolean isMachineValidForMachineHatch(ItemStack machineStack, String[] recipeMapBlacklist) {
-            if (machineStack != null && !machineStack.isEmpty()) {
-                MetaTileEntity machine = getMetaTileEntity(machineStack);
-                if (machine instanceof SimpleGeneratorMetaTileEntity) {
-                    RecipeMap<?> recipeMap = machine.getRecipeMap();
-                    return recipeMap != null && !ArrayUtils.contains(recipeMapBlacklist, recipeMap.getUnlocalizedName());
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
     }
 }

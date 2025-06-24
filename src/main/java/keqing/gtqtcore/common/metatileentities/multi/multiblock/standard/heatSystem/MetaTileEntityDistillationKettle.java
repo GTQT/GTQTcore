@@ -15,8 +15,8 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,6 @@ public class MetaTileEntityDistillationKettle extends RecipeMapHeatMultiblockCon
 
     public MetaTileEntityDistillationKettle(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.DISTILLATION_KETTLE);
-        this.recipeMapWorkable = new HeatRecipeLogic(this, GTQTcoreRecipeMaps.DISTILLATION_KETTLE);
     }
 
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {

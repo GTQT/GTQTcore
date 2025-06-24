@@ -19,7 +19,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import keqing.gtqtcore.api.capability.ILaser;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -42,8 +42,8 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 
 public class MetaTileEntitySwitch extends MetaTileEntityBaseWithControl {

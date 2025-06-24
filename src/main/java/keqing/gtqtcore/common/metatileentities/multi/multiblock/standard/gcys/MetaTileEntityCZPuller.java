@@ -2,7 +2,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -12,7 +11,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.logic.OCParams;
@@ -26,19 +24,14 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.*;
-import gregtech.common.metatileentities.MetaTileEntities;
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -50,8 +43,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;

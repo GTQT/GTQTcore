@@ -1,12 +1,12 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.SimpleMachineMetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.client.renderer.ICubeRenderer;
-import keqing.gtqtcore.api.capability.impl.PseudoMultiRecipeLogic;
+import keqing.gtqtcore.api.capability.impl.PseudoMultiSteamRecipeLogic;
+import keqing.gtqtcore.common.metatileentities.single.steam.SimpleSteamMetaTileEntity;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,30 +14,21 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.function.Function;
 
-public class PseudoMultiMachineMetaTileEntity extends SimpleMachineMetaTileEntity {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+public class PseudoMultiSteamMachineMetaTileEntity extends SimpleSteamMetaTileEntity {
     private IBlockState targetBlockState;
 
     public IBlockState getTargetBlockState() {
         return targetBlockState;
     }
-    public PseudoMultiMachineMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, ICubeRenderer renderer, int tier, boolean hasFrontFacing, Function<Integer, Integer> tankScalingFunction) {
-        super(metaTileEntityId, recipeMap, renderer, tier, hasFrontFacing, tankScalingFunction);
+    public PseudoMultiSteamMachineMetaTileEntity(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap, SteamProgressIndicator progressIndicator, ICubeRenderer renderer, boolean isBrickedCasing, boolean isHighPressure) {
+        super(metaTileEntityId, recipeMap, progressIndicator, renderer, isBrickedCasing, isHighPressure);
+        this.workableHandler = new PseudoMultiSteamRecipeLogic(this, recipeMap, isHighPressure, steamFluidTank, 1.0);
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new PseudoMultiMachineMetaTileEntity(this.metaTileEntityId, this.workable.getRecipeMap(), this.renderer, this.getTier(), this.hasFrontFacing(), this.getTankScalingFunction());
-    }
-
-    @Override
-    protected PseudoMultiRecipeLogic createWorkable(RecipeMap<?> recipeMap) {
-        return new PseudoMultiRecipeLogic(this, recipeMap, () -> this.energyContainer);
+        return new PseudoMultiSteamMachineMetaTileEntity(metaTileEntityId, workableHandler.getRecipeMap(), progressIndicator, renderer, isBrickedCasing, isHighPressure);
     }
 
     public void checkAdjacentBlocks(){
@@ -74,5 +65,12 @@ public class PseudoMultiMachineMetaTileEntity extends SimpleMachineMetaTileEntit
         boolean wrenchClickSucceeded = super.onWrenchClick(playerIn, hand, facing, hitResult);
         if (wrenchClickSucceeded) this.checkAdjacentBlocks();
         return wrenchClickSucceeded;
+    }
+
+    @Override
+    public boolean needsSneakToRotate() { return true; }
+    @Override
+    public boolean getIsWeatherOrTerrainResistant() {
+        return true;
     }
 }

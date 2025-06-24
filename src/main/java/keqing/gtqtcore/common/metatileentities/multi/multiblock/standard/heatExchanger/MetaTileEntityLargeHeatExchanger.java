@@ -8,7 +8,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
@@ -22,7 +21,7 @@ import keqing.gtqtcore.api.capability.IHeatExchanger;
 import keqing.gtqtcore.api.capability.impl.HeatExchangerRecipeLogic;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -43,7 +42,7 @@ import java.util.List;
 import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntityLargeHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
+public class MetaTileEntityLargeHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
     @Override
     public boolean usesMui2() {
         return false;

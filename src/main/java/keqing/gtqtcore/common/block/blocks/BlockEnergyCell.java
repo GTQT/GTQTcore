@@ -1,7 +1,7 @@
 package keqing.gtqtcore.common.block.blocks;
 
 import gregtech.api.block.VariantBlock;
-import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
+import keqing.gtqtcore.api.metatileentity.multiblock.ICellData;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

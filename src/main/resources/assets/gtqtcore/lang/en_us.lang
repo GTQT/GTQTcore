@@ -3603,6 +3603,7 @@ gtqtcore.machine.integrated_ore_processor.mode.1=Processing Mode: Grinding-Washi
 gtqtcore.machine.integrated_ore_processor.mode.2=Processing Mode: Grinding-Grinding-Centrifuge
 gtqtcore.machine.integrated_ore_processor.mode.3=Processing Mode: Grinding-Washing-Sieving
 gtqtcore.machine.integrated_ore_processor.mode.4=Processing Mode: Grinding-Chemical Leaching-Grinding-Centrifuge
+gtqtcore.machine.integrated_ore_processor.mode.error=空索引
 gtqtcore.machine.integrated_ore_processor.void.true=Stone Powder Destruction Enabled
 gtqtcore.machine.integrated_ore_processor.void.false=Stone Powder Destruction Disabled
 gregtech.integrated_ore_processor.statue=Auto Smelting: %s Stone Powder Destruction: %s

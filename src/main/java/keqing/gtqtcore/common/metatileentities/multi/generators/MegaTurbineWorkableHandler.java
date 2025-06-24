@@ -13,7 +13,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTUtility;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.ITurbineMode;
+import keqing.gtqtcore.api.metatileentity.multiblock.ITurbineMode;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;

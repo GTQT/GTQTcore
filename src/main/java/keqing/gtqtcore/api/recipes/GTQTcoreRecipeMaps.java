@@ -184,8 +184,8 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<PrimitiveRecipeBuilder> PRIMITIVE_ROASTING_RECIPES = new RecipeMapBuilder<>("primitive_roaster", new PrimitiveRecipeBuilder())
-            .itemInputs(3)
-            .itemOutputs(3)
+            .itemInputs(4)
+            .itemOutputs(4)
             .fluidInputs(1)
             .fluidOutputs(1)
             .itemSlotOverlay(GuiTextures.FURNACE_OVERLAY_1, false)

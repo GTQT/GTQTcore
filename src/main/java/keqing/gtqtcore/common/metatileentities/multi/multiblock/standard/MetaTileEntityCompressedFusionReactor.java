@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import com.google.common.util.concurrent.AtomicDouble;
-import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.*;
@@ -29,8 +28,7 @@ import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
 import keqing.gtqtcore.api.gui.GTQTGuiTextures;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
-import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass;

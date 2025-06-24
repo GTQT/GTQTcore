@@ -28,7 +28,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,7 +46,7 @@ import java.util.List;
 
 import static gregtech.api.unification.material.Materials.Steel;
 
-public class MetaTileEntityOilPool extends RecipeMapNoEnergyMultiblockController {
+public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
     @Override
     public boolean usesMui2() {
         return false;

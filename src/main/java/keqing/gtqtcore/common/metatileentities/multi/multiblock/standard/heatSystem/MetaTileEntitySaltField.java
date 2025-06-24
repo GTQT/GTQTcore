@@ -22,8 +22,8 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapHeatMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapHeatMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -40,7 +40,6 @@ public class MetaTileEntitySaltField extends RecipeMapHeatMultiblockController {
 
     public MetaTileEntitySaltField(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.SALT_FLIED);
-        this.recipeMapWorkable = new HeatRecipeLogic(this, GTQTcoreRecipeMaps.SALT_FLIED);
     }
 
     @Override

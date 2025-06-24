@@ -20,7 +20,8 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.capability.impl.NoEnergyMultiblockRecipeLogic;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,7 +33,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MetaTileEntityClarifier extends RecipeMapNoEnergyMultiblockController {
+public class MetaTileEntityClarifier extends NoEnergyMultiblockController {
     int heat;
 
     public MetaTileEntityClarifier(ResourceLocation metaTileEntityId) {
@@ -115,9 +116,9 @@ public class MetaTileEntityClarifier extends RecipeMapNoEnergyMultiblockControll
         return true;
     }
 
-    protected class ClarifierLogic extends PrimitiveRecipeLogic {
+    protected class ClarifierLogic extends NoEnergyMultiblockRecipeLogic {
 
-        public ClarifierLogic(RecipeMapNoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+        public ClarifierLogic(NoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
             super(tileEntity, recipeMap);
         }
 

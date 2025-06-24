@@ -32,7 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.WARP_SWARM_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_DM_CASING;
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 

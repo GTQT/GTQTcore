@@ -29,7 +29,7 @@ import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.client.objmodels.ObjModels;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.items.behaviors.WindRotorBehavior;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.item.EntityItem;

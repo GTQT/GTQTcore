@@ -7,7 +7,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.unification.material.Material;
 import gregtech.client.renderer.ICubeRenderer;
-import keqing.gtqtcore.api.metaileentity.multiblock.logistics.MetaTileEntityDelegator;
+import keqing.gtqtcore.api.metatileentity.multiblock.logistics.MetaTileEntityDelegator;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;

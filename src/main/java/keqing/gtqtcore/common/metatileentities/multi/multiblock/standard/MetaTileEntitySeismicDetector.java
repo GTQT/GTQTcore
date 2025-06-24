@@ -14,7 +14,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
 import net.minecraft.block.state.IBlockState;

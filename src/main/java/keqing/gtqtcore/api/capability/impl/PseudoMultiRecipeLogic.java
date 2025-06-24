@@ -4,7 +4,7 @@ import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.RecipeLogicEnergy;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import keqing.gtqtcore.api.metaileentity.PseudoMultiMachineMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.PseudoMultiMachineMetaTileEntity;
 import keqing.gtqtcore.api.recipes.properties.PseudoMultiProperty;
 
 

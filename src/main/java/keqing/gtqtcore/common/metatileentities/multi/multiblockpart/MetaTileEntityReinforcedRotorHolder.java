@@ -26,7 +26,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
@@ -37,7 +37,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

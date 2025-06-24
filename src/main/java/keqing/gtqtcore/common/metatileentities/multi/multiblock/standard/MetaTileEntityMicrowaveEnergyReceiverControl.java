@@ -29,7 +29,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;

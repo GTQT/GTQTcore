@@ -38,8 +38,8 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 
 public class MetaTileHighEnergyLaserHatch extends MetaTileEntityMultiblockNotifiablePart implements IMultiblockAbilityPart<ILaser>, ILaser {
 

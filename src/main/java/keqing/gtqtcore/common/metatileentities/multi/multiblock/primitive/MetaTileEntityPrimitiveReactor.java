@@ -29,6 +29,7 @@ import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,7 +44,7 @@ import java.util.List;
 
 import static gregtech.api.util.RelativeDirection.*;
 
-public class MetaTileEntityPrimitiveReactor extends RecipeMapPrimitiveMultiblockController {
+public class MetaTileEntityPrimitiveReactor extends NoEnergyMultiblockController {
 
     private static final TraceabilityPredicate SNOW_PREDICATE = new TraceabilityPredicate(
             bws -> GTUtility.isBlockSnow(bws.getBlockState()));

@@ -3,7 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantE
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -16,7 +15,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -32,13 +30,10 @@ import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
-import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockWireCoil;
-import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -47,9 +42,7 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
@@ -62,13 +55,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_BLAST_FURANCE;
 
 public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 

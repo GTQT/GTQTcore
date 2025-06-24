@@ -17,7 +17,7 @@ import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

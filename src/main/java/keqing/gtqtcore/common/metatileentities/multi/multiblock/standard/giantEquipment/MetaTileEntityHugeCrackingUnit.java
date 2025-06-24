@@ -36,7 +36,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.block.state.IBlockState;

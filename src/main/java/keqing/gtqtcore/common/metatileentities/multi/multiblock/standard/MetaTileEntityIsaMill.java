@@ -20,7 +20,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.core.advancement.AdvancementTriggers;
 import keqing.gtqtcore.api.capability.IBall;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.recipes.properties.GrindBallTierProperty;
 import keqing.gtqtcore.client.textures.GTQTTextures;

@@ -9,7 +9,7 @@ import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.client.renderer.texture.Textures;
-import keqing.gtqtcore.api.metaileentity.PseudoMultiMachineMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.PseudoMultiMachineMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;

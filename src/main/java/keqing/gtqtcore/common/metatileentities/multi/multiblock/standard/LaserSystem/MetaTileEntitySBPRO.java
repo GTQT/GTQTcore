@@ -21,7 +21,7 @@ import gregtech.client.particle.GTParticleManager;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import keqing.gtqtcore.api.capability.ILaser;
-import keqing.gtqtcore.api.metaileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.client.particle.LaserBeamParticle;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -49,7 +49,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VN;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_OUTPUT;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.MaragingSteel250;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;
 

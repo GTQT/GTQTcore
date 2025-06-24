@@ -35,7 +35,7 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
             }
 
             if (this.hasNotEnoughEnergy) {
-                if (this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                if (this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;
                 }
             }
@@ -91,11 +91,11 @@ public class PressureSteamRecipeLogic extends RecipeLogicSteam {
 
             IPressureContainer container = this.getPressureContainer();
             final double containerPressure = container.getPressure();
-            if (pressure > GCYSValues.EARTH_PRESSURE) {
-                if (containerPressure > pressure) return super.checkRecipe(recipe);
+            if (pressure > GCYSValues.EARTH_PRESSURE * 0.95) {
+                if (containerPressure >= pressure) return super.checkRecipe(recipe);
             }
-            if (pressure < GCYSValues.EARTH_PRESSURE) {
-                if (containerPressure < pressure) return super.checkRecipe(recipe);
+            if (pressure < GCYSValues.EARTH_PRESSURE * 1.05) {
+                if (containerPressure <= pressure) return super.checkRecipe(recipe);
             }
         }
         return false;

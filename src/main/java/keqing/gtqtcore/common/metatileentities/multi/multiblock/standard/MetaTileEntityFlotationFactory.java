@@ -19,7 +19,7 @@ import gregtech.client.renderer.cclop.ColourOperation;
 import gregtech.client.renderer.cclop.LightMapOperation;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.BloomEffectUtil;
-import keqing.gtqtcore.api.metaileentity.GTQTRecipeMapMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTRecipeMapMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

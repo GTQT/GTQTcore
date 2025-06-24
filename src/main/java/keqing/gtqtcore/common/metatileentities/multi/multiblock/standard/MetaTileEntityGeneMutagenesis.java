@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.RADIATION_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.RADIATION_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GENE_MUTAGENESIS;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING;

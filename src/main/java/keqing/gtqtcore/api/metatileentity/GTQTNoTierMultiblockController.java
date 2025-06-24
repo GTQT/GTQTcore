@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
@@ -9,7 +9,6 @@ import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.RecipeMap;
@@ -30,20 +29,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.BooleanSupplier;
 
-import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VA;
-
-public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblockController {
+public abstract class GTQTNoTierMultiblockController extends MultiMapMultiblockController {
     @Override
     public boolean usesMui2() {
         return false;
     }
-    protected boolean setTier;
-    protected int tier;
     protected boolean setMaxParallel;
     protected int maxParallel;
-    protected boolean setMaxVoltage;
-    protected int maxVoltage;
     protected boolean setTimeReduce;
     protected double timeReduce;
 
@@ -55,18 +47,14 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     protected int energyHatchMaxWork = 32;
     protected double Overclocking;
 
-    public GTQTRecipeMapMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
+    public GTQTNoTierMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId, recipeMaps);
         this.recipeMapWorkable = new GTQTMultiblockLogic(this);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setBoolean("setTier", this.setTier);
-        data.setInteger("tier", this.tier);
         data.setBoolean("setMaxParallel", this.setMaxParallel);
         data.setInteger("maxParallel", this.maxParallel);
-        data.setBoolean("setMaxVoltage", this.setMaxVoltage);
-        data.setInteger("maxVoltage", this.maxVoltage);
         data.setBoolean("setTimeReduce", this.setTimeReduce);
         data.setDouble("timeReduce", this.timeReduce);
 
@@ -76,19 +64,14 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         data.setBoolean("OCFirst", this.OCFirst);
         data.setInteger("limitAutoParallel", this.limitAutoParallel);
         data.setInteger("energyHatchMaxWork", this.energyHatchMaxWork);
-
         data.setDouble("Overclocking", this.Overclocking);
 
         return super.writeToNBT(data);
     }
 
     public void readFromNBT(NBTTagCompound data) {
-        this.setTier = data.getBoolean("setTier");
-        this.tier = data.getInteger("tier");
         this.setMaxParallel = data.getBoolean("setMaxParallel");
         this.maxParallel = data.getInteger("maxParallel");
-        this.setMaxVoltage = data.getBoolean("setMaxVoltage");
-        this.maxVoltage = data.getInteger("maxVoltage");
         this.setTimeReduce = data.getBoolean("setTimeReduce");
         this.timeReduce = data.getDouble("timeReduce");
 
@@ -98,7 +81,6 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         this.OCFirst = data.getBoolean("OCFirst");
         this.limitAutoParallel = data.getInteger("limitAutoParallel");
         this.energyHatchMaxWork = data.getInteger("energyHatchMaxWork");
-
         this.Overclocking = data.getDouble("Overclocking");
 
         super.readFromNBT(data);
@@ -106,12 +88,8 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
-        buf.writeBoolean(this.setTier);
-        buf.writeInt(this.tier);
         buf.writeBoolean(this.setMaxParallel);
         buf.writeInt(this.maxParallel);
-        buf.writeBoolean(this.setMaxVoltage);
-        buf.writeInt(this.maxVoltage);
         buf.writeBoolean(this.setTimeReduce);
         buf.writeDouble(this.timeReduce);
 
@@ -126,12 +104,8 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
-        this.setTier = buf.readBoolean();
-        this.tier = buf.readInt();
         this.setMaxParallel = buf.readBoolean();
         this.maxParallel = buf.readInt();
-        this.setMaxVoltage = buf.readBoolean();
-        this.maxVoltage = buf.readInt();
         this.setTimeReduce = buf.readBoolean();
         this.timeReduce = buf.readDouble();
 
@@ -148,31 +122,15 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         this.Overclocking = Overclocking;
     }
 
-    protected void setTier(int tier) {
-        this.tier = tier;
-    }
-
-    protected void setMaxVoltage(int maxVoltage) {
-        this.maxVoltage = maxVoltage;
-    }
-
     protected void setTimeReduce(double timeReduce) {
         this.timeReduce = timeReduce;
-    }
-    protected void setTierFlag(boolean setTier) {
-        this.setTier = setTier;
     }
     protected void setMaxParallelFlag(boolean setMaxParallel) {
         this.setMaxParallel = setMaxParallel;
     }
-    protected void setMaxVoltageFlag(boolean setMaxVoltage) {
-        this.setMaxVoltage = setMaxVoltage;
-    }
     protected void setTimeReduceFlag(boolean setTimeReduce) {
         this.setTimeReduce = setTimeReduce;
     }
-
-
 
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
@@ -180,22 +138,12 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         if(Overclocking==4)tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("gregtech.machine.perfect_oc"));
         tooltip.add(I18n.format("gregtech.machine.gtqt.oc",Overclocking));
         tooltip.add(I18n.format("gregtech.machine.gtqt.update.1"));
-        if (setTier) tooltip.add(I18n.format("gregtech.machine.gtqt.update.2"));
         if (setTimeReduce) tooltip.add(I18n.format("gregtech.machine.time.reduce","详见机器内部UI"));
-        if (setMaxVoltage) tooltip.add(I18n.format("gregtech.machine.gtqt.update.3"));
         if (setMaxParallel) tooltip.add(I18n.format("gtqtcore.machine.parallel.pow.machineTier", 2, "详见机器内部UI"));
-        if (setMaxVoltage) tooltip.add(I18n.format("gtqtcore.machine.voltage.num", "外壳等级对应的电压"));
-    }
-
-    @Override
-    public String[] getDescription() {
-        if (setTier) return new String[]{I18n.format("gtqt.tooltip.update")};
-        return super.getDescription();
     }
 
     public int getMaxParallel() {
-        if (setMaxParallel) return (int) Math.min(maxParallel, Math.pow(2, tier));
-        else return (int) Math.pow(2, tier);
+        return maxParallel;
     }
 
     protected void setMaxParallel(int maxParallel) {
@@ -255,7 +203,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
         builder.widget(new ClickButtonWidget(240, 160, 40, 20, "gui.recommend", data ->
         {
-            energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / VA[maxVoltage]);
+            energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / this.energyContainer.getInputVoltage());
             energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
             energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
 
@@ -310,8 +258,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
     }
 
     protected void addInfo(List<ITextComponent> textList) {
-        if (autoParallelModel)
-            textList.add(new TextComponentTranslation("%s / %s / %s", autoParallel, limitAutoParallel, getMaxParallel()));
+        if (autoParallelModel) textList.add(new TextComponentTranslation("%s / %s / %s", autoParallel, limitAutoParallel, getMaxParallel()));
         else textList.add(new TextComponentTranslation("%s / %s", customParallel, getMaxParallel()));
     }
 
@@ -341,23 +288,17 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         }
 
         @Override
-        public long getMaxVoltage() {
-            if (setMaxVoltage) return V[maxVoltage];
-            else return super.getMaxVoltage();
-        }
-
-        @Override
         public void update() {
             super.update();
             if (autoParallelModel) {
-                autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec() / 19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
+                autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec()/19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
                 autoParallel = Math.min(autoParallel, limitAutoParallel);
                 autoParallel = Math.min(autoParallel, getMaxParallel());
             }
         }
 
         public int getMinVoltage() {
-            if ((Math.min(this.getEnergyCapacity() / (energyHatchMaxWork == 0 ? 32 : energyHatchMaxWork), this.getMaxVoltage())) == 0)
+            if ((Math.min(this.getEnergyCapacity() / (energyHatchMaxWork == 0 ? 1 : energyHatchMaxWork), this.getMaxVoltage())) == 0)
                 return 1;
             return (int) (Math.min(this.getEnergyCapacity() / (energyHatchMaxWork == 0 ? 1 : energyHatchMaxWork), this.getMaxVoltage()));
         }
@@ -366,7 +307,6 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         public int getParallelLimit() {
             return autoParallelModel ? autoParallel : customParallel;
         }
-
         @Override
         public long getMaxParallelVoltage() {
             if (OCFirst) return super.getMaxParallelVoltage();

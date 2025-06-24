@@ -6,10 +6,7 @@ import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
-import gregtech.api.metatileentity.IMachineHatchMultiblock;
-import gregtech.api.metatileentity.ITieredMetaTileEntity;
-import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.*;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
 import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
@@ -19,12 +16,8 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.recipes.logic.OCParams;
-import gregtech.api.recipes.logic.OCResult;
-import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -33,7 +26,6 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.multi.electric.MetaTileEntityProcessingArray;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -43,9 +35,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.Tuple;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -56,21 +45,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.V;
-import static gregtech.api.recipes.logic.OverclockingLogic.standardOC;
-import static gregtech.api.recipes.logic.OverclockingLogic.subTickParallelOC;
 
 public class MetaTileEntityGeneratorArray extends FuelMultiblockController implements IMachineHatchMultiblock {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     private final int tier;
     private boolean machineChanged;
-
     public MetaTileEntityGeneratorArray(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId, null, tier);
         this.tier = tier;
         this.recipeMapWorkable = new ProcessingArrayWorkable(this);
+    }
+
+    @Override
+    public boolean usesMui2() {
+        return false;
     }
 
     @Override
@@ -283,6 +270,7 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
         return mte == null ? 0 : mte.getItemOutputLimit();
     }
 
+
     @SuppressWarnings("InnerClassMayBeStatic")
     protected class ProcessingArrayWorkable extends MultiblockFuelRecipeLogic {
 
@@ -302,7 +290,7 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
         }
 
         public long getMaximumOverclockVoltage() {
-            return machineVoltage*getParallelLimit();
+            return machineVoltage * getParallelLimit();
         }
 
         @Override
@@ -322,10 +310,12 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
             machineVoltage = 0L;
             activeRecipeMap = null;
         }
+
         @Override
         protected boolean shouldSearchForRecipes() {
             return canWorkWithMachines() && super.shouldSearchForRecipes();
         }
+
         @Override
         public boolean isAllowOverclocking() {
             return true;
@@ -352,28 +342,27 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
         }
 
         protected long getMaxParallelVoltage() {
-            return machineVoltage*getParallelLimit();
+            return machineVoltage * getParallelLimit();
         }
 
         @Override
         public RecipeMap<?> getRecipeMap() {
             return activeRecipeMap;
         }
+
         @Override
         protected Recipe findRecipe(long maxVoltage, IItemHandlerModifiable inputs, IMultipleTankHandler fluidInputs) {
             return super.findRecipe(Math.min(super.getMaxVoltage(), this.machineVoltage), inputs, fluidInputs);
         }
+
         public void findMachineStack() {
             RecipeMapMultiblockController controller = (RecipeMapMultiblockController) this.metaTileEntity;
 
             // The Processing Array is limited to 1 Machine Interface per multiblock, and only has 1 slot
             ItemStack machine = controller.getAbilities(MultiblockAbility.MACHINE_HATCH).get(0).getStackInSlot(0);
-
             mte = GTUtility.getMetaTileEntity(machine);
 
-            if (mte == null) {
-                this.activeRecipeMap = null;
-            } else {
+            if (mte != null && mte instanceof SimpleGeneratorMetaTileEntity) {
                 this.activeRecipeMap = mte.getRecipeMap();
                 // Set the world for MTEs, as some need it for checking their recipes
                 MetaTileEntityHolder holder = new MetaTileEntityHolder();
@@ -389,14 +378,14 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
                         if (provider != null) receiver.setCleanroom(provider);
                     }
                 }
+
+                // Find the voltage tier of the machine.
+                this.machineTier = mte instanceof ITieredMetaTileEntity ? ((ITieredMetaTileEntity) mte).getTier() : 0;
+
+                this.machineVoltage = V[this.machineTier];
+
+                this.currentMachineStack = machine;
             }
-
-            // Find the voltage tier of the machine.
-            this.machineTier = mte instanceof ITieredMetaTileEntity ? ((ITieredMetaTileEntity) mte).getTier() : 0;
-
-            this.machineVoltage = V[this.machineTier];
-
-            this.currentMachineStack = machine;
         }
 
         @Override
@@ -408,5 +397,6 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
         private ItemStack getMachineStack() {
             return currentMachineStack;
         }
+
     }
 }

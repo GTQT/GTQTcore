@@ -65,6 +65,7 @@ public class GTQTEventHandler {
         OrePrefixAdditions.init();
     }
 
+    /*
     // override GTCEu fall event to enable piston boots fall damage
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public static void onEntityLivingFallEvent(LivingFallEvent event) {
@@ -104,6 +105,8 @@ public class GTQTEventHandler {
             }
         }
     }
+
+     */
 
     public static class PlayerLoginEventHandler {
 

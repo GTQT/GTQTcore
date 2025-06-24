@@ -3587,6 +3587,7 @@ gtqtcore.machine.integrated_ore_processor.mode.1=处理模式：研磨-洗矿-�
 gtqtcore.machine.integrated_ore_processor.mode.2=处理模式：研磨-研磨-离心
 gtqtcore.machine.integrated_ore_processor.mode.3=处理模式：研磨-洗矿-筛选
 gtqtcore.machine.integrated_ore_processor.mode.4=处理模式：研磨-化学浸洗-研磨-离心
+gtqtcore.machine.integrated_ore_processor.mode.error=空索引
 gtqtcore.machine.integrated_ore_processor.void.true=石粉销毁已开启
 gtqtcore.machine.integrated_ore_processor.void.false=石粉销毁已关闭
 gregtech.integrated_ore_processor.statue=自动熔炼：%s 石粉销毁：%s

@@ -42,7 +42,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.POWER_SUPPLY_ABILITY;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.POWER_SUPPLY_ABILITY;
 
 public class MetaTileEntityPowerSupply extends MultiblockWithDisplayBase {
     @Override

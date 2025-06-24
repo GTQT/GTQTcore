@@ -3,7 +3,7 @@ package keqing.gtqtcore.api.capability.impl;
 import gregtech.api.capability.impl.RecipeLogicSteam;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import keqing.gtqtcore.api.metaileentity.PseudoMultiSteamMachineMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.PseudoMultiSteamMachineMetaTileEntity;
 import keqing.gtqtcore.api.recipes.properties.PseudoMultiProperty;
 import net.minecraftforge.fluids.IFluidTank;
 

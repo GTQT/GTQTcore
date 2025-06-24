@@ -10,7 +10,8 @@ import gregtech.api.util.GTUtility;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
 import keqing.gtqtcore.api.recipes.properties.FlowRateProperty;
 import keqing.gtqtcore.api.recipes.properties.MaxRateProperty;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.capability.impl.NoEnergyMultiblockRecipeLogic;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fluids.FluidStack;
@@ -23,14 +24,14 @@ import static keqing.gtqtcore.api.capability.GTQTDataCode.*;
 import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 
 @SuppressWarnings("all")
-public class HeatExchangerRecipeLogic extends PrimitiveRecipeLogic {
+public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
 
     private int currentHeat;
     private final int maxHeat;
     private boolean isSuperheat;
     private int rate;
 
-    public HeatExchangerRecipeLogic(RecipeMapNoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
+    public HeatExchangerRecipeLogic(NoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
         super(tileEntity, recipeMap);
         this.maxHeat = ((IHeatExchanger) tileEntity).getHeatTime() * 20;
     }

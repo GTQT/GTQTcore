@@ -1,4 +1,4 @@
-package keqing.gtqtcore.api.metaileentity.multiblock;
+package keqing.gtqtcore.api.metatileentity.multiblock;
 
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 

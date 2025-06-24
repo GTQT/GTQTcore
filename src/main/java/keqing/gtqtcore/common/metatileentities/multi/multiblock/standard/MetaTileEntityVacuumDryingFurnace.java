@@ -22,7 +22,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

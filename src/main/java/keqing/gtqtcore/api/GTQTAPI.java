@@ -5,7 +5,7 @@ import gregtech.common.blocks.*;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import keqing.gtqtcore.api.blocks.IBlockTier;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.multiblock.ICellData;
+import keqing.gtqtcore.api.metatileentity.multiblock.ICellData;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.*;
 import net.minecraft.block.state.IBlockState;

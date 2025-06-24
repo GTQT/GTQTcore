@@ -19,7 +19,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
-import keqing.gtqtcore.api.metaileentity.GTQTOCMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTOCMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;

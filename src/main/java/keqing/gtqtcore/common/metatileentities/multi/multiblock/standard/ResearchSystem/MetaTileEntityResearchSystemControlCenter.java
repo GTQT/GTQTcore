@@ -29,7 +29,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.capability.IKQCC;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import net.minecraft.block.state.IBlockState;
@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static gregtech.api.unification.material.Materials.*;
-import static keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;
+import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.KQCC_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.COMPUTER_VENT;
 import static keqing.gtqtcore.common.block.blocks.BlocksResearchSystem.CasingType.KQCC_COMPUTER_CASING;
 

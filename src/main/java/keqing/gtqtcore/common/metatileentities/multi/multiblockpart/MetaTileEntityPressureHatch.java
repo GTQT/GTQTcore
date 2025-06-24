@@ -20,7 +20,7 @@ import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.GTQTTileCapabilities;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureContainer;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.api.utils.NumberFormattingUtil;
 import net.minecraft.client.resources.I18n;

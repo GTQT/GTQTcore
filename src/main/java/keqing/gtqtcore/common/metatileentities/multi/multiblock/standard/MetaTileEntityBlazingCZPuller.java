@@ -5,7 +5,6 @@ import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockLargeMultiblockCasing;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -16,7 +15,6 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
@@ -28,21 +26,17 @@ import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.*;
-import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.GCYSValues;
 import keqing.gtqtcore.api.capability.IPressureContainer;
 import keqing.gtqtcore.api.capability.IPressureMachine;
 import keqing.gtqtcore.api.capability.impl.AtmosphericPressureContainer;
 import keqing.gtqtcore.api.capability.impl.PressureMultiblockRecipeLogic;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -51,8 +45,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
@@ -217,9 +209,10 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
     }
     public boolean drainPyrotheum(boolean sim)
     {
+        IMultipleTankHandler inputTank = getInputFluidInventory();
         if(!sim&&!isStructureFormed())return false;
-        if (pyrotheumFluid.isFluidStackIdentical(getInputFluidInventory().drain(pyrotheumFluid, false))) {
-            getInputFluidInventory().drain(pyrotheumFluid, sim);
+        if (pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
+            inputTank.drain(pyrotheumFluid, sim);
             return true;
         }
         return false;

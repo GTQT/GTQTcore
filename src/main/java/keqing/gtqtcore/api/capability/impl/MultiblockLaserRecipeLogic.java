@@ -13,7 +13,7 @@ import gregtech.api.recipes.logic.OCParams;
 import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.common.ConfigHolder;
-import keqing.gtqtcore.api.metaileentity.multiblock.RecipeMapLaserMultiblockController;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapLaserMultiblockController;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;

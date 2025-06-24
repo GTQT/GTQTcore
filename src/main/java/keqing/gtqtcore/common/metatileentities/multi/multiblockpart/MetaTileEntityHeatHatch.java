@@ -15,7 +15,7 @@ import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMultiblockPart;
 import keqing.gtqtcore.api.capability.IHeat;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

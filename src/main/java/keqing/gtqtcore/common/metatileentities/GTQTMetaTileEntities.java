@@ -12,7 +12,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import keqing.gtqtcore.GTQTCoreConfig;
 import keqing.gtqtcore.api.GCYSValues;
-import keqing.gtqtcore.api.metaileentity.SimpleSteamMetaTileEntity;
+import keqing.gtqtcore.api.metatileentity.SimpleSteamMetaTileEntity;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTLog;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -62,7 +62,7 @@ import static gregtech.common.metatileentities.MetaTileEntities.registerMetaTile
 import static gregtech.common.metatileentities.MetaTileEntities.registerSimpleMetaTileEntity;
 import static keqing.gtqtcore.api.GCYSValues.*;
 import static keqing.gtqtcore.api.GTQTValue.gtqtcoreId;
-import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
+import static keqing.gtqtcore.api.metatileentity.SteamProgressIndicators.COMPRESS;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 import static keqing.gtqtcore.api.utils.GTQTUtil.genericGeneratorTankSizeFunctionPlus;
@@ -831,7 +831,7 @@ public class GTQTMetaTileEntities {
         SUPER_INPUT_BUS = registerMetaTileEntity(1671, new MetaTileEntitySuperInputBus(gtqtcoreId("super_input_bus")));
         SINGLE_INPUT_BUS = registerMetaTileEntity(1672, new MetaTileEntitySingleInputBus(gtqtcoreId("single_input_bus")));
 
-        GENERATOR_HATCH = registerMetaTileEntity(1675, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"), 3));
+        GENERATOR_HATCH = registerMetaTileEntity(1675, new MetaTileEntityGeneratorHatch(gtqtcoreId("generator_hatch"), 2));
         STERILE_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1676, new MetaTileEntitySterileCleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_sterile_cleanroom_auto")));
         ISO3_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1677, new MetaTileEntityISO3CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_3_cleanroom_auto")));
         ISO2_CLEANING_MAINTENANCE_HATCH = registerMetaTileEntity(1678, new MetaTileEntityISO2CleaningMaintenanceHatch(gtqtcoreId("maintenance_hatch_iso_2_cleanroom_auto")));

@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static keqing.gtqtcore.api.GCYSValues.decreaseDetailP;
-import static keqing.gtqtcore.api.metaileentity.SteamProgressIndicators.COMPRESS;
+import static keqing.gtqtcore.api.metatileentity.SteamProgressIndicators.COMPRESS;
 
 public class MetaTileEntitySteamVacuumChamber extends SimpleSteamMetaTileEntity implements IPressureMachine {
 

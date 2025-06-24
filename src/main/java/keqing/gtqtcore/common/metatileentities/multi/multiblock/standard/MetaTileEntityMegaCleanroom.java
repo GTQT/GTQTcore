@@ -21,7 +21,7 @@ import gregtech.api.util.TextComponentUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityCleanroom;
-import keqing.gtqtcore.api.metaileentity.multiblock.GCYLCleanroomType;
+import keqing.gtqtcore.api.metatileentity.multiblock.GCYLCleanroomType;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockCleanroomCasing;
 import net.minecraft.block.Block;

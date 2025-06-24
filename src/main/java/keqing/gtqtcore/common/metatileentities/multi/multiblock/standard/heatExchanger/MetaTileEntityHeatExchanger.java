@@ -12,7 +12,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.*;
 import gregtech.api.util.BlockInfo;
 import gregtech.client.renderer.ICubeRenderer;
@@ -29,7 +28,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
-import keqing.gtsteam.api.metatileentity.multiblock.RecipeMapNoEnergyMultiblockController;
+import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -53,7 +52,7 @@ import static gregtech.api.gui.widgets.AdvancedTextWidget.withHoverTextTranslate
 import static gregtech.api.util.RelativeDirection.*;
 import static net.minecraft.util.text.TextFormatting.*;
 
-public class MetaTileEntityHeatExchanger extends RecipeMapNoEnergyMultiblockController implements IHeatExchanger {
+public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController implements IHeatExchanger {
     @Override
     public boolean usesMui2() {
         return false;

@@ -1,6 +1,5 @@
-package keqing.gtqtcore.api.metaileentity;
+package keqing.gtqtcore.api.metatileentity;
 
-import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.resources.SteamTexture;
 import gregtech.api.gui.widgets.ProgressWidget;
 

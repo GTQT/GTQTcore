@@ -22,7 +22,7 @@ import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityMulti
 import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IBuffer;
 import keqing.gtqtcore.api.capability.IPHValue;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTUniversUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
@@ -32,7 +32,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;

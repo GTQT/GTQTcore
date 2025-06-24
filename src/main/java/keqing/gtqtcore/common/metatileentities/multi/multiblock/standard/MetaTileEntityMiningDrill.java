@@ -1,7 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
@@ -17,7 +16,6 @@ import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.properties.impl.ComputationProperty;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -30,10 +28,9 @@ import gregtech.common.blocks.StoneVariantBlock;
 import keqing.gtqtcore.api.GTQTValue;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.capability.IDrillHead;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.LaserNetProperty;
 import keqing.gtqtcore.api.recipes.properties.MiningDrillProperties;
 import keqing.gtqtcore.api.utils.GTQTDateHelper;
 import keqing.gtqtcore.api.utils.GTQTOreHelper;

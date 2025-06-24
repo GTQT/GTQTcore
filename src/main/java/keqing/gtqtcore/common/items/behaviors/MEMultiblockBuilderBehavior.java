@@ -105,7 +105,7 @@ public class MEMultiblockBuilderBehavior implements IItemBehaviour, ItemUIFactor
     private static List<ItemStack> getItemStacks(int tier, MultiblockControllerBase multiblock) {
         if(multiblock==null)return Collections.singletonList(ItemStack.EMPTY);
         MBPattern[] patternList = GregTechAPI.MULTIBLOCK_INFO_CACHE.get(multiblock.metaTileEntityId);
-        MBPattern pattern = patternList[tier];
+        MBPattern pattern = patternList[Math.min(patternList.length, tier)];
         return pattern.getParts();
     }
 

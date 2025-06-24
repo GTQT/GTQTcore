@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -25,7 +24,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.IParticle;
 import keqing.gtqtcore.api.capability.impl.GTQTCoreLogic;
-import keqing.gtqtcore.api.metaileentity.multiblock.GTQTMultiblockAbility;
+import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;

@@ -1,17 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import gregicality.multiblocks.api.capability.IParallelMultiblock;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IMultipleTankHandler;
-import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
@@ -30,7 +27,7 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.ConfigHolder;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.metatileentities.MetaTileEntities;
-import keqing.gtqtcore.api.metaileentity.GTQTNoTierMultiblockController;
+import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -53,7 +50,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.GTValues.VA;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 
 public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockController implements IHeatingCoil {
@@ -210,9 +206,10 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
 
     public boolean drainPyrotheum(boolean sim)
     {
+        IMultipleTankHandler inputTank = getInputFluidInventory();
         if(!sim&&!isStructureFormed())return false;
-        if (pyrotheumFluid.isFluidStackIdentical(getInputFluidInventory().drain(pyrotheumFluid, false))) {
-            getInputFluidInventory().drain(pyrotheumFluid, sim);
+        if (pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
+            inputTank.drain(pyrotheumFluid, sim);
             return true;
         }
         return false;
