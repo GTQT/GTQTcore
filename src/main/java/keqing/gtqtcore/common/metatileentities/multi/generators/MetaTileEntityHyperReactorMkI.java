@@ -54,7 +54,14 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
         this.recipeMapWorkable = new HyperReactorMark1WorkableHandler(this);
         this.recipeMapWorkable.setMaximumOverclockVoltage(V[UEV]);
     }
-
+    @Override
+    protected void initializeAbilities() {
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityHyperReactorMkI(metaTileEntityId);
@@ -104,13 +111,22 @@ public class MetaTileEntityHyperReactorMkI extends FuelMultiblockController impl
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getOutputVoltage() == GTValues.V[UEV];})
+                                    return container != null && container.getOutputVoltage() <= GTValues.V[UXV];})
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_LASER)
+                                .stream()
+                                .filter(mte -> {
+                                    if (mte instanceof MetaTileEntityLaserHatch laserHatch) {
+                                        return laserHatch.getTier() <= UXV;
+                                    }
+                                    return false;
+                                })
+                                .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
-                                .setPreviewCount(1))
+                                .setPreviewCount(0)
+                        )
                 )
                 .where('G', states(getGlassState()))
                 .where('H', states(getUniqueCasingState()))

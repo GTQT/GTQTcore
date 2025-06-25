@@ -7,12 +7,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockAbilityPart;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternStringError;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.util.BlockInfo;
 import gregtech.common.blocks.MetaBlocks;
 import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.common.metatileentities.multi.multiblockpart.MetaTileEntityReinforcedRotorHolder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -53,13 +55,22 @@ public class GTQTTraceabilityPredicate {
         }, GTQTUtil.getCandidates(Arrays.stream(allowedAbilities).flatMap(ability -> MultiblockAbility.REGISTRY.get(ability).stream()).toArray(MetaTileEntity[]::new)));
     }
 
+    /**
+     * (Reinforced) Rotor Holder Predicate.
+     *
+     * <p>
+     *     Just a rotor holder predicate rewrite for {@link MetaTileEntityReinforcedRotorHolder}.
+     * </p>
+     */
     public static Supplier<TraceabilityPredicate> ROTOR_HOLDER = () -> new TraceabilityPredicate(blockWorldState -> {
         TileEntity tileEntity = blockWorldState.getTileEntity();
+        //  Check if TileEntity is GregTech TileEntity (all GregTech MetaTileEntity impl this interface).
         if (tileEntity instanceof IGregTechTileEntity) {
             List<ResourceLocation> list = MultiblockAbility.REGISTRY.get(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY).stream()
                     .map(mte -> mte.metaTileEntityId)
                     .collect(Collectors.toList());
-            MetaTileEntity mte = ((IGregTechTileEntity)tileEntity).getMetaTileEntity();
+            //  Get MetaTileEntity.
+            MetaTileEntity mte = ((IGregTechTileEntity) tileEntity).getMetaTileEntity();
             if (list.contains(mte.metaTileEntityId)) {
                 int tier = ((ITieredMetaTileEntity) mte).getTier();
                 Object currentTier = blockWorldState.getMatchContext().getOrPut("RotorHolderTier", tier);
@@ -78,6 +89,16 @@ public class GTQTTraceabilityPredicate {
             .map(mte -> new BlockInfo(MetaBlocks.MACHINE.getDefaultState(), getTileEntity(mte)))
             .toArray(BlockInfo[]::new))
             .addTooltips("gtqtcore.machine.reinforced_rotor_holder.error");
+
+    /**
+     * Rotor Holder Predicate Getter.
+     *
+     * @return  Get {@link #ROTOR_HOLDER} predicate.
+     */
+    public static TraceabilityPredicate rotorHolders() {
+        return ROTOR_HOLDER.get();
+    }
+
 
     public static Supplier<BlockInfo[]> getCandidates(IBlockState... allowedStates) {
         return () -> Arrays.stream(allowedStates).map(state -> new BlockInfo(state, null)).toArray(BlockInfo[]::new);

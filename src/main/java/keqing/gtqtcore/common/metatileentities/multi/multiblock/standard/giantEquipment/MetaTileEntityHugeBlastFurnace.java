@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregicality.multiblocks.api.render.GCYMTextures;
 import gregtech.api.GTValues;
@@ -13,6 +14,9 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -25,6 +29,7 @@ import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -130,7 +135,34 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
         textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
         textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire, coilTier));
     }
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addHeatCapacity)
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
 
+                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s",  glassTire, coilTier);
+                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate",  requestCWUt, getAccelerateByCWU(requestCWUt));
+                    textList.add(KeyUtil.setHover(text1, text2));
+
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (isStructureFormed()) {
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(getCurrentTemperature()), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        }
+    }
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强冶炼王", new Object[0]));

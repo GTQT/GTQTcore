@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -10,10 +11,13 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.LocalizationUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -35,6 +39,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -52,10 +57,6 @@ import static keqing.gtqtcore.api.utils.GTQTUtil.logBase;
 import static keqing.gtqtcore.common.items.GTQTMetaItems.ASTRAL_ARRAY;
 
 public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     //时间膨胀发生器
     int timeAcceleration;
     //-耗时 OK
@@ -80,6 +81,27 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
             textList.add(new TextComponentTranslation("星阵数量：%s", calculateStarArray()));
             textList.add(new TextComponentTranslation("最大超频次数:%s", maxAllowedOc));
         }
+    }
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+
+                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", timeAcceleration);
+                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "压缩时空发生器:%s", spaceTimeCompression);
+                    IKey text3 = KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", stabilization);
+                    IKey text4 = KeyUtil.lang(TextFormatting.GRAY, "星阵数量:%s", calculateStarArray());
+                    IKey text5 = KeyUtil.lang(TextFormatting.GRAY, "最大超频次数:%s", maxAllowedOc);
+                    textList.add(KeyUtil.setHover(text1, text2,text3,text4,text5));
+
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
     public MetaTileEntityEyeOfHarmony(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.VIRTUAL_COSMOS_SIMULATOR_RECIPES);

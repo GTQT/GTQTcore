@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -13,11 +14,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.shader.postprocessing.BloomEffect;
@@ -56,6 +60,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.FluidStack;
@@ -74,10 +79,7 @@ import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbilit
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing.CasingType.NEUTRON_PULSE_MANIPULATOR_CASING;
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     private int manioulatorTier;
     private int coreTier;
     private int glassTier;
@@ -305,15 +307,28 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         tooltip.add(I18n.format("每次消耗100 *Math.pow(2,聚焦等级)mb的镄等离子提供一次双倍产出"));
         tooltip.add(I18n.format("=============================================="));
     }
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (this.isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.level", coreTier));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.md.glass", glassTier));
-            textList.add(new TextComponentTranslation("gtqtcore.casingTire", manioulatorTier));
-            textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - 10 * this.glassTier));
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.fu.level", 10 * coreTier));
-        }
+
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+
+                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.level", coreTier);
+                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.glass", glassTier);
+                    IKey text3 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", manioulatorTier);
+                    IKey text4 = KeyUtil.lang(TextFormatting.GRAY, "当前耗时减免：%s", 10*Math.min(getAbility().getWarpSwarmTier(),glassTier));
+                    IKey text5 = KeyUtil.lang(TextFormatting.GRAY, "当前配方超频：%s", canOverclocking);
+                    IKey text6 = KeyUtil.lang(TextFormatting.GRAY, "当前配方无损：%s", canBoosterOutput);
+                    textList.add(KeyUtil.setHover(text1, text2,text3,text4,text5,text6));
+
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
     @Override
     protected void initializeAbilities() {

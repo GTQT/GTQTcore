@@ -65,6 +65,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
     @Override
     protected void initializeAbilities() {
         this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
         List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
         energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
@@ -114,7 +115,7 @@ public class MetaTileEntityLargeNaquadahReactor extends FuelMultiblockController
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getOutputVoltage() == GTValues.V[UHV];})
+                                    return container != null && container.getOutputVoltage() <= GTValues.V[UIV];})
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))

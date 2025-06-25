@@ -1111,6 +1111,7 @@ gtqtcore.machine.mega_high_pressure_steam_turbine.name=Mega High-Pressure Steam 
 gtqtcore.machine.mega_supercritical_steam_turbine.name=Mega Supercritical Steam Turbine
 recipemap.high_pressure_steam_turbine.name= High-Pressure Steam Turbine
 recipemap.supercritical_steam_turbine.name=Supercritical Steam Turbine
+recipemap.large_naquadah_reactor.name=Naquadah Reactor
 gtqtcore.machine.large_naquadah_reactor.tooltip.1=Use with Moderation, Conserve Resources
 gtqtcore.machine.large_naquadah_reactor.tooltip.2=Produces up to §3UV§7-grade energy
 

@@ -28,6 +28,7 @@ import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
+import keqing.gtsteam.api.capability.impl.NoEnergyMultiblockRecipeLogic;
 import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -66,10 +67,11 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
     private int glassTier;
     private int tier;
     private int thresholdPercentage = 100;
+    protected HeatExchangerRecipeLogic recipeMapWorkable;
 
     public MetaTileEntityHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
     }
 
     @Override
@@ -80,17 +82,17 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
     @Override
     protected BlockPattern createStructurePattern() {
         FactoryBlockPattern pattern = FactoryBlockPattern.start(FRONT, UP, RIGHT)
-                .aisle(" XXX ", " XIX ", " XXX ", " XXX ", " XIX ", " XXX ")
+                .aisle(" XXX ", " XIX ", " XIX ", " XIX ", " XIX ", " XXX ")
                 .aisle("XXXXX", "XTTTX", "STTTX", "XTTTX", "XTTTX", "XXXXX")
                 .aisle("XXXXX", "GTTTG", "GTTTG", "GTTTG", "GTTTG", "XXXXX")
                 .aisle("XXXXX", "GCTCG", "GCTCG", "GCTCG", "GCTCG", "XXXXX").setRepeatable(1, 10)
                 .aisle("XXXXX", "GTTTG", "GTTTG", "GTTTG", "GTTTG", "XXXXX")
                 .aisle("XXXXX", "XTTTX", "XTTTX", "XTTTX", "XTTTX", "XXXXX")
-                .aisle(" XHX ", " XOX ", " XXX ", " XXX ", " XOX ", " XXX ")
+                .aisle(" XHX ", " XOX ", " XOX ", " XOX ", " XOX ", " XXX ")
                 .where('S', selfPredicate())
                 .where('H', (abilities(MultiblockAbility.MAINTENANCE_HATCH)))
-                .where('O', (abilities(MultiblockAbility.EXPORT_FLUIDS)))
-                .where('I', (abilities(MultiblockAbility.IMPORT_FLUIDS)))
+                .where('O', TiredTraceabilityPredicate.CP_CASING.get().or(abilities(MultiblockAbility.EXPORT_FLUIDS)))
+                .where('I', TiredTraceabilityPredicate.CP_CASING.get().or(abilities(MultiblockAbility.IMPORT_FLUIDS)))
                 .where('C', coilPredicate())
                 .where('X', TiredTraceabilityPredicate.CP_CASING.get())
                 .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
@@ -286,12 +288,16 @@ public class MetaTileEntityHeatExchanger extends NoEnergyMultiblockController im
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeVarInt(thresholdPercentage);
+        buf.writeInt(this.casingTier);
+        this.recipeMapWorkable.writeInitialData(buf);
     }
 
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         thresholdPercentage = buf.readVarInt();
+        this.casingTier = buf.readInt();
+        this.recipeMapWorkable.receiveInitialData(buf);
     }
 
     @Override

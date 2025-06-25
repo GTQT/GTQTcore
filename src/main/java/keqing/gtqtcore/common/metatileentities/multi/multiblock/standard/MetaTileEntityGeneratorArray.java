@@ -249,6 +249,10 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
 
         predicate = predicate.or(abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1));
 
+        predicate = predicate.or(abilities(MultiblockAbility.DUAL_IMPORT).setPreviewCount(1));
+
+        predicate = predicate.or(abilities(MultiblockAbility.DUAL_EXPORT).setPreviewCount(1));
+
         return predicate;
     }
 

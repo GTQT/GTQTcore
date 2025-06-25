@@ -53,7 +53,14 @@ public class MetaTileEntityHyperReactorMkII extends FuelMultiblockController imp
         this.recipeMapWorkable = new HyperReactorMark2WorkableHandler(this);
         this.recipeMapWorkable.setMaximumOverclockVoltage(V[UIV]);
     }
-
+    @Override
+    protected void initializeAbilities() {
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityHyperReactorMkII(metaTileEntityId);
@@ -114,13 +121,22 @@ public class MetaTileEntityHyperReactorMkII extends FuelMultiblockController imp
                         .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_ENERGY).stream()
                                 .filter(mte -> {
                                     IEnergyContainer container = mte.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, null);
-                                    return container != null && container.getOutputVoltage() == GTValues.V[UIV];})
+                                    return container != null && container.getOutputVoltage() <= GTValues.V[OpV];})
                                 .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
                                 .setPreviewCount(1))
-                        .or(abilities(MultiblockAbility.OUTPUT_LASER)
+                        .or(metaTileEntities(MultiblockAbility.REGISTRY.get(MultiblockAbility.OUTPUT_LASER)
+                                .stream()
+                                .filter(mte -> {
+                                    if (mte instanceof MetaTileEntityLaserHatch laserHatch) {
+                                        return laserHatch.getTier() <= OpV;
+                                    }
+                                    return false;
+                                })
+                                .toArray(MetaTileEntity[]::new))
                                 .setMaxGlobalLimited(1)
-                                .setPreviewCount(1))
+                                .setPreviewCount(0)
+                        )
                 )
                 .where('F', states(getFrameState()))
                 .where('H', states(getUniqueCasingState()))

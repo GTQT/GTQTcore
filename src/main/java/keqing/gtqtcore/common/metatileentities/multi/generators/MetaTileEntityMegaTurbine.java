@@ -3,29 +3,41 @@ package keqing.gtqtcore.common.metatileentities.multi.generators;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.api.widget.Interactable;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.value.sync.StringSyncValue;
+import com.cleanroommc.modularui.widgets.CycleButtonWidget;
 import gregtech.api.GTValues;
+import gregtech.api.capability.IEnergyContainer;
+import gregtech.api.capability.IRotorHolder;
+import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockFuelRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
-import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.FuelMultiblockController;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.sync.FixedIntArraySyncValue;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.LocalizationUtils;
-import gregtech.api.util.TextComponentUtil;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.items.behaviors.TurbineRotorBehavior;
@@ -33,32 +45,32 @@ import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IReinforcedRotorHolder;
 import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.metatileentity.multiblock.ITurbineMode;
-import keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import static gregtech.api.util.TextFormattingUtil.formatNumbers;
+import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.rotorHolders;
 
-public class MetaTileEntityMegaTurbine extends FuelMultiblockController implements ITieredMetaTileEntity, ITurbineMode, IProgressBarMultiblock {
+public class MetaTileEntityMegaTurbine extends FuelMultiblockController implements ITieredMetaTileEntity, ITurbineMode, ProgressBarMultiblock {
 
     private static final int MIN_DURABILITY_TO_WARN = 10;
     public final int tier;
@@ -108,6 +120,18 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     }
 
     @Override
+    protected void initializeAbilities() {
+        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
+        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IEnergyContainer> energyContainer = new ArrayList<>(this.getAbilities(MultiblockAbility.OUTPUT_ENERGY));
+        energyContainer.addAll(this.getAbilities(MultiblockAbility.OUTPUT_LASER));
+        this.energyContainer = new EnergyContainerList(energyContainer);
+    }
+
+
+    @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         return super.checkRecipe(recipe, consumeIfSuccess) && checkRotors() && checkRotorMaterial();
     }
@@ -123,6 +147,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         }
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected boolean isRotorFaceFree() {
         List<IReinforcedRotorHolder> rotorHolders = getRotorHolders();
         if (!isStructureFormed() || rotorHolders == null) return false;
@@ -134,6 +159,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         }
         return true;
     }
+
 
     @Override
     public List<IReinforcedRotorHolder> getRotorHolders() {
@@ -203,7 +229,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
         }
     }
 
-    @Nonnull
+    @NotNull
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()
@@ -217,27 +243,30 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState()))
                 .where('G', states(getGearBoxState()))
-                .where('R', GTQTTraceabilityPredicate.ROTOR_HOLDER.get())
+                .where('R', rotorHolders())
                 .where('M', states(getCasingState())
                         .or(abilities(MultiblockAbility.MUFFLER_HATCH))
                         .setPreviewCount(8))
                 .where('A', states(getCasingState())
                         .or(abilities(MultiblockAbility.OUTPUT_ENERGY)
-                                .setPreviewCount(1)
-                                .setMaxGlobalLimited(4))
+                                .setMaxGlobalLimited(1)
+                                .setPreviewCount(1))
                         .or(abilities(MultiblockAbility.OUTPUT_LASER)
-                                .setPreviewCount(1)
-                                .setMaxGlobalLimited(1))
+                                .setMaxGlobalLimited(1)
+                                .setPreviewCount(1))
                         .or(abilities(MultiblockAbility.MAINTENANCE_HATCH)
                                 .setExactLimit(1))
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS)
-                                .setExactLimit(1))
+                                .setMaxGlobalLimited(1)
+                                .setPreviewCount(1))
                         .or(abilities(MultiblockAbility.IMPORT_FLUIDS)
                                 .setMinGlobalLimited(1)
-                                .setMaxGlobalLimited(4))
+                                .setMaxGlobalLimited(4)
+                                .setPreviewCount(1))
                         .or(abilities(MultiblockAbility.EXPORT_FLUIDS)
                                 .setMinGlobalLimited(1)
-                                .setMaxGlobalLimited(4)))
+                                .setMaxGlobalLimited(4)
+                                .setPreviewCount(1)))
                 .build();
     }
 
@@ -268,54 +297,104 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     protected ICubeRenderer getFrontOverlay() {
         return Textures.FUSION_REACTOR_OVERLAY;
     }
+
     @Override
-    public boolean usesMui2() {
-        return false;
+    protected MultiblockUIFactory createUIFactory() {
+        return super.createUIFactory()
+                .createFlexButton((posGuiData, panelSyncManager) -> {
+                    IntSyncValue buttonSync = new IntSyncValue(this::getMode, this::setMode);
+
+                    return new CycleButtonWidget() {
+
+                        @Override
+                        public @NotNull Result onMousePressed(int mouseButton) {
+                            if (recipeMapWorkable.isWorking()) {
+                                Interactable.playButtonClickSound();
+                                return Result.IGNORE;
+                            } else {
+                                return super.onMousePressed(mouseButton);
+                            }
+                        }
+                    }
+                            .stateCount(2)
+                            .value(buttonSync)
+                            .addTooltip(0, IKey.lang("低速模式(只能在停机时切换)"))  // 模式0的提示
+                            .addTooltip(1, IKey.lang("高速模式(只能在停机时切换)")); // 模式1的提示
+                });
     }
+
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed()) {
-            IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        MultiblockFuelRecipeLogic recipeLogic = (MultiblockFuelRecipeLogic) recipeMapWorkable;
+        builder.setWorkingStatus(recipeLogic.isWorkingEnabled(), recipeLogic.isActive())
+                .addEnergyProductionLine(getMaxVoltage(), recipeLogic.getRecipeEUt())
+                .addCustom((keyList, syncer) -> {
+                    if (!isStructureFormed()) return;
 
-            if (checkRotors() && checkRotorMaterial() && rotorHolder.getRotorEfficiency() > 0) {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.rotor_speed", formatNumbers(rotorHolder.getRotorSpeed()), formatNumbers(rotorHolder.getMaxRotorHolderSpeed())));
-                textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.efficiency", rotorHolder.getTotalEfficiency()));
+                    int rotorEfficiency = syncer.syncInt(() -> getRotorHolder().getRotorEfficiency());
+                    int totalEfficiency = syncer.syncInt(() -> getRotorHolder().getTotalEfficiency());
 
-                long maxProduction = recipeMapWorkable.getMaxVoltage();
-                long currentProduction = isActive() ? ((MegaTurbineWorkableHandler) recipeMapWorkable).boostProduction((int) maxProduction) : 0;
-                String voltageName = GTValues.VNF[GTUtility.getTierByVoltage(currentProduction)];
+                    if (rotorEfficiency > 0) {
+                        IKey efficiencyInfo = KeyUtil.number(TextFormatting.AQUA,
+                                totalEfficiency, "%");
+                        keyList.add(KeyUtil.lang(TextFormatting.GRAY,
+                                "gregtech.multiblock.turbine.efficiency",
+                                efficiencyInfo));
 
-                if (isActive()) {
-                    textList.add(3, new TextComponentTranslation("gregtech.multiblock.turbine.energy_per_tick", formatNumbers(currentProduction), voltageName));
-                }
+                    }
+                    IKey mod;
+                    mod = KeyUtil.lang(TextFormatting.GRAY, "模式：%s", mode == 0 ? "低速模式" : "高速模式");
+                    keyList.add(KeyUtil.setHover(mod));
+                })
+                .addFuelNeededLine(recipeLogic.getRecipeFluidInputInfo(), recipeLogic.getPreviousRecipeDuration())
+                .addWorkingStatusLine();
+    }
 
-                int rotorDurability = rotorHolder.getRotorDurabilityPercent();
-                if (rotorDurability > MIN_DURABILITY_TO_WARN) {
-                    textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.rotor_durability", rotorDurability));
-                } else {
-                    textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.rotor_durability", rotorDurability).setStyle(new Style().setColor(TextFormatting.RED)));
-                }
+    @Override
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        builder.addCustom((keyList, syncer) -> {
+            if (!isStructureFormed() || syncer.syncBoolean(() -> getRotorHolder() == null))
+                return;
+
+            int rotorEfficiency = syncer.syncInt(() -> getRotorHolder().getRotorEfficiency());
+            int rotorDurability = syncer.syncInt(() -> getRotorHolder().getRotorDurabilityPercent());
+
+            if (rotorEfficiency > 0 && rotorDurability <= MIN_DURABILITY_TO_WARN) {
+                keyList.add(KeyUtil.lang(TextFormatting.YELLOW,
+                        "gregtech.multiblock.turbine.rotor_durability_low"));
             }
-        }
+        });
+        super.configureWarningText(builder);
     }
 
     @Override
-    protected void addWarningText(List<ITextComponent> textList) {
-        super.addWarningText(textList);
-        if (isStructureFormed()) {
-            if (!checkRotors()) {
-                textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.no_rotor"));
+    protected void configureErrorText(MultiblockUIBuilder builder) {
+        super.configureErrorText(builder);
+        builder.addCustom((keyList, syncer) -> {
+            if (!isStructureFormed() || syncer.syncBoolean(() -> getRotorHolder() == null))
+                return;
+
+            if (syncer.syncBoolean(!isRotorFaceFree())) {
+                keyList.add(KeyUtil.lang(TextFormatting.RED,
+                        "gregtech.multiblock.turbine.obstructed"));
+                keyList.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "gregtech.multiblock.turbine.obstructed.desc"));
             }
-        }
+            int rotorEfficiency = syncer.syncInt(() -> getRotorHolder().getRotorEfficiency());
+
+            if (rotorEfficiency <= 0) {
+                keyList.add(KeyUtil.lang(TextFormatting.RED,
+                        "gregtech.multiblock.turbine.no_rotor"));
+            }
+        });
     }
 
-    @Override
-    protected void addErrorText(List<ITextComponent> textList) {
-        super.addErrorText(textList);
-        if (isStructureFormed() && !isRotorFaceFree()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.turbine.obstructed").setStyle(new Style().setColor(TextFormatting.RED)));
+    private IReinforcedRotorHolder getRotorHolder() {
+        List<IReinforcedRotorHolder> holders = getRotorHolders();
+        if (holders == null || holders.isEmpty()) {
+            return null;
         }
+        return holders.get(0);
     }
 
     @Override
@@ -362,107 +441,137 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
     }
 
     @Override
-    public int getNumProgressBars() {
+    public int getProgressBarCount() {
         return 3;
     }
 
     @Override
-    public double getFillPercentage(int index) {
-        IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
-
-        long maxProduction = recipeMapWorkable.getMaxVoltage();
-        long currentProduction = isActive() ? ((MegaTurbineWorkableHandler) recipeMapWorkable).boostProduction((int) maxProduction) : 0;
-        if (index == 0) {
-            int[] fuelAmount = new int[2];
-            if (getInputFluidInventory() != null) {
-                MultiblockFuelRecipeLogic recipeLogic = (MultiblockFuelRecipeLogic) recipeMapWorkable;
-                if (recipeLogic.getInputFluidStack() != null) {
-                    FluidStack testStack = recipeLogic.getInputFluidStack().copy();
-                    testStack.amount = Integer.MAX_VALUE;
-                    fuelAmount = getTotalFluidAmount(testStack, getInputFluidInventory());
-                }
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        FixedIntArraySyncValue fuelValue = new FixedIntArraySyncValue(this::getFuelAmount, null);
+        StringSyncValue fuelNameValue = new StringSyncValue(() -> {
+            FluidStack stack = ((MultiblockFuelRecipeLogic) recipeMapWorkable).getInputFluidStack();
+            if (stack == null) {
+                return null;
             }
-            return fuelAmount[1] != 0 ? 1.0 * fuelAmount[0] / fuelAmount[1] : 0;
-        } else if (index == 1) {
-            return 1.0 * rotorHolder.getRotorSpeed() / rotorHolder.getMaxRotorHolderSpeed();
-        } else {
-            return 1.0 * getRotorDurabilityPercent() / 100;
-        }
-    }
-
-    public TextureArea getProgressBarTexture(int index) {
-        if (index == 0) {
-            return GuiTextures.PROGRESS_BAR_LCE_FUEL;
-        } else if (index == 1) {
-            return GuiTextures.PROGRESS_BAR_TURBINE_ROTOR_SPEED;
-        } else {
-            return GuiTextures.PROGRESS_BAR_TURBINE_ROTOR_DURABILITY;
-        }
-    }
-
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
-        if (index == 0) {
-            // Fuel
-            addFuelText(hoverList);
-        } else if (index == 1) {
-            // Rotor speed
-            {
-                int rotorSpeed = rotorHolder.getRotorSpeed();
-                int rotorMaxSpeed = rotorHolder.getMaxRotorHolderSpeed();
-                ITextComponent rpmTranslated = TextComponentUtil.translationWithColor(
-                        getRotorSpeedColor(rotorSpeed, rotorMaxSpeed),
-                        "gregtech.multiblock.turbine.rotor_rpm_unit_name");
-                ITextComponent rotorInfo = TextComponentUtil.translationWithColor(
-                        getRotorSpeedColor(rotorSpeed, rotorMaxSpeed),
-                        "%s / %s %s",
-                        TextFormattingUtil.formatNumbers(rotorSpeed),
-                        TextFormattingUtil.formatNumbers(rotorMaxSpeed),
-                        rpmTranslated);
-                hoverList.add(TextComponentUtil.translationWithColor(
-                        TextFormatting.GRAY,
-                        "gregtech.multiblock.turbine.rotor_speed",
-                        rotorInfo));
+            Fluid fluid = stack.getFluid();
+            if (fluid == null) {
+                return null;
             }
-        } else {
-            // Rotor durability
-            {
-                int rotorDurability = getRotorDurabilityPercent();
-                ITextComponent rotorInfo = TextComponentUtil.stringWithColor(
-                        getRotorDurabilityColor(rotorDurability),
-                        rotorDurability + "%");
-                hoverList.add(TextComponentUtil.translationWithColor(
-                        TextFormatting.GRAY,
-                        "gregtech.multiblock.turbine.rotor_durability",
-                        rotorInfo));
+            return fluid.getName();
+        });
+        syncManager.syncValue("fuel_amount", fuelValue);
+        syncManager.syncValue("fuel_name", fuelNameValue);
+
+        IntSyncValue rotorSpeedValue = new IntSyncValue(() -> {
+            IRotorHolder rotorHolder = getRotorHolder();
+            if (rotorHolder == null) {
+                return 0;
             }
-        }
+            return rotorHolder.getRotorSpeed();
+        });
+
+        IntSyncValue rotorMaxSpeedValue = new IntSyncValue(() -> {
+            IRotorHolder rotorHolder = getRotorHolder();
+            if (rotorHolder == null) {
+                return 0;
+            }
+            return rotorHolder.getMaxRotorHolderSpeed();
+        });
+
+        syncManager.syncValue("rotor_speed", rotorSpeedValue);
+        syncManager.syncValue("rotor_max_speed", rotorMaxSpeedValue);
+        IntSyncValue durabilityValue = new IntSyncValue(() -> {
+            IRotorHolder rotorHolder = getRotorHolder();
+            if (rotorHolder == null) {
+                return 0;
+            }
+            return rotorHolder.getRotorDurabilityPercent();
+        });
+        IntSyncValue efficiencyValue = new IntSyncValue(() -> {
+            IRotorHolder rotorHolder = getRotorHolder();
+            if (rotorHolder == null) {
+                return 0;
+            }
+            return rotorHolder.getRotorEfficiency();
+        });
+
+        syncManager.syncValue("rotor_durability", durabilityValue);
+        syncManager.syncValue("rotor_efficiency", efficiencyValue);
+
+        bars.add(barTest -> barTest
+                .progress(() -> fuelValue.getValue(1) == 0 ? 0 :
+                        1.0 * fuelValue.getValue(0) / fuelValue.getValue(1))
+                .texture(GTGuiTextures.PROGRESS_BAR_LCE_FUEL)
+                .tooltipBuilder(t -> createFuelTooltip(t, fuelValue, fuelNameValue)));
+
+        bars.add(barTest -> barTest
+                .progress(() -> rotorMaxSpeedValue.getIntValue() == 0 ? 0 :
+                        1.0 * rotorSpeedValue.getIntValue() / rotorMaxSpeedValue.getIntValue())
+                .texture(GTGuiTextures.PROGRESS_BAR_TURBINE_ROTOR_SPEED)
+                .tooltipBuilder(t -> {
+                    if (isStructureFormed()) {
+                        int speed = rotorSpeedValue.getIntValue();
+                        int maxSpeed = rotorMaxSpeedValue.getIntValue();
+
+                        t.addLine(KeyUtil.lang("gregtech.multiblock.turbine.rotor_speed",
+                                getSpeedFormat(maxSpeed, speed), speed, maxSpeed));
+                    } else {
+                        t.addLine(IKey.lang("gregtech.multiblock.invalid_structure"));
+                    }
+                }));
+
+        bars.add(barTest -> barTest
+                .progress(() -> durabilityValue.getIntValue() / 100.0)
+                .texture(GTGuiTextures.PROGRESS_BAR_TURBINE_ROTOR_DURABILITY)
+                .tooltipBuilder(t -> {
+                    if (isStructureFormed()) {
+                        if (efficiencyValue.getIntValue() <= 0) {
+                            t.addLine(IKey.lang("gregtech.multiblock.turbine.no_rotor"));
+                        } else {
+                            int durability = durabilityValue.getIntValue();
+                            // TODO working dynamic color substitutions into IKey.lang
+                            if (durability > 40) {
+                                t.addLine(IKey.lang("gregtech.multiblock.turbine.rotor_durability.high",
+                                        durability));
+                            } else if (durability > MIN_DURABILITY_TO_WARN) {
+                                t.addLine(IKey.lang("gregtech.multiblock.turbine.rotor_durability.medium",
+                                        durability));
+                            } else {
+                                t.addLine(IKey.lang("gregtech.multiblock.turbine.rotor_durability.low",
+                                        durability));
+                            }
+                        }
+                    } else {
+                        t.addLine(IKey.lang("gregtech.multiblock.invalid_structure"));
+                    }
+                }));
     }
 
-    int getRotorDurabilityPercent() {
-        IReinforcedRotorHolder rotorHolder = getRotorHolders().get(0);
-        return rotorHolder.getRotorDurabilityPercent();
-    }
+    private @NotNull TextFormatting getSpeedFormat(int maxSpeed, int speed) {
+        float percent = maxSpeed == 0 ? 0 : 1.0f * speed / maxSpeed;
 
-    private TextFormatting getRotorSpeedColor(int rotorSpeed, int maxRotorSpeed) {
-        double speedRatio = 1.0 * rotorSpeed / maxRotorSpeed;
-        if (speedRatio < 0.4) {
+        if (percent < 0.4) {
             return TextFormatting.RED;
-        } else if (speedRatio < 0.8) {
+        } else if (percent < 0.8) {
             return TextFormatting.YELLOW;
         } else {
             return TextFormatting.GREEN;
         }
     }
 
-    private TextFormatting getRotorDurabilityColor(int durability) {
-        if (durability > 40) {
-            return TextFormatting.GREEN;
-        } else if (durability > 10) {
-            return TextFormatting.YELLOW;
-        } else {
-            return TextFormatting.RED;
+    /**
+     * @return an array of [fuel stored, fuel capacity]
+     */
+    private int[] getFuelAmount() {
+        if (getInputFluidInventory() != null) {
+            MultiblockFuelRecipeLogic recipeLogic = (MultiblockFuelRecipeLogic) recipeMapWorkable;
+            if (recipeLogic.getInputFluidStack() != null) {
+                FluidStack testStack = recipeLogic.getInputFluidStack().copy();
+                testStack.amount = Integer.MAX_VALUE;
+                return getTotalFluidAmount(testStack, getInputFluidInventory());
+            }
         }
+        return new int[2];
     }
 
     @Override

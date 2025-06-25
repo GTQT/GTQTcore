@@ -37,10 +37,6 @@ import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.CP_DM_CAS
 import static keqing.gtqtcore.common.block.blocks.BlockQuantumCasing.CasingType.*;
 
 public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     public MetaTileEntityDimensionalMixer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.EXTRADIMENSIONAL_MIXING_RECIPES,
@@ -140,14 +136,6 @@ public class MetaTileEntityDimensionalMixer extends MultiMapMultiblockController
         tooltip.add(I18n.format("每等级纳米蜂群提供Math.pow(2,tier)*256的并行"));
         tooltip.add(I18n.format("每等级纳米蜂群提供10%%的耗时减免"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
-        tooltip.add(I18n.format("=============================================="));
-        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKI,产生4点维度翘曲点"));
-        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKII,产生6点维度翘曲点"));
-        tooltip.add(I18n.format("每Tick消耗 1mb 超维度催化剂MKIII,产生8点维度翘曲点"));
-        tooltip.add(I18n.format("维度翘曲点数量多于576000时，多方块进入无损超频模式"));
-        tooltip.add(I18n.format("=============================================="));
-        tooltip.add(I18n.format("正常情况下机器每Tick降低1点维度翘曲点"));
-        tooltip.add(I18n.format("维度翘曲点数量多于576000时,每Tick降低2点维度翘曲点"));
         tooltip.add(I18n.format("=============================================="));
     }
 

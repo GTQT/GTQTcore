@@ -369,28 +369,18 @@ public class MetaTileEntityAdvancedFusionReactor extends RecipeMapMultiblockCont
         return heat;
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     protected MultiblockUIFactory createUIFactory() {
         IDrawable title;
         if (tier == GTValues.UHV) {
             // MK1
-            title = GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE;
+            title = GTGuiTextures.FUSION_REACTOR_MK4_TITLE;
         } else if (tier == GTValues.UEV) {
             // MK2
-            title = GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE;
+            title = GTGuiTextures.FUSION_REACTOR_MK5_TITLE;
         } else {
             // MK3
-            title = GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE;
+            title = GTGuiTextures.FUSION_REACTOR_MK6_TITLE;
         }
 
         DoubleSyncValue progress = new DoubleSyncValue(recipeMapWorkable::getProgressPercent);

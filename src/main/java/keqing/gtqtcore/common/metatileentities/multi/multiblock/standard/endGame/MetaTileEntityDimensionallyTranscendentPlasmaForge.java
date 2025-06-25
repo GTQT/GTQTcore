@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -16,6 +17,9 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -24,6 +28,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockWireCoil;
@@ -90,10 +95,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
     private static IBlockState getThirdCasingState() {
         return GTQTMetaBlocks.blockQuantumCasing.getState(DIMENSIONAL_BRIDGE_CASING);
     }
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     @Override
     public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound data) {
         super.writeToNBT(data);
@@ -288,20 +290,34 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addHeatCapacity)
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "维度翘曲点数量：%s", heat);
+                    textList.add(KeyUtil.setHover(text1));
+                    if (heat > 576000) {
+                        IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "已进入无损超频");
+                        textList.add(KeyUtil.setHover(text2));
+                    }
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
-            IEnergyContainer energyContainer = this.recipeMapWorkable.getEnergyContainer();
-            if (energyContainer != null && energyContainer.getEnergyCapacity() > 0L) {
-                textList.add(2, new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature", blastFurnaceTemperature)
-                        .setStyle(new Style().setColor(TextFormatting.RED)));
-            }
-            textList.add(new TextComponentTranslation("维度翘曲点数量：%s", heat));
-            if (heat > 576000)
-                textList.add(new TextComponentTranslation("已进入无损超频"));
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(getCurrentTemperature()), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
-
     public IWarpSwarm getAbility() {
         if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null)
             return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);

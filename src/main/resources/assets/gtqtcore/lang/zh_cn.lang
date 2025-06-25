@@ -1094,6 +1094,7 @@ gtqtcore.machine.mega_high_pressure_steam_turbine.name=特大高压蒸汽涡轮
 gtqtcore.machine.mega_supercritical_steam_turbine.name=特大超临界蒸汽涡轮
 recipemap.high_pressure_steam_turbine.name=高压蒸汽涡轮
 recipemap.supercritical_steam_turbine.name=超临界蒸汽涡轮
+recipemap.large_naquadah_reactor.name=硅岩反应堆
 gtqtcore.machine.large_naquadah_reactor.tooltip.1=取之有度，用之有节
 gtqtcore.machine.large_naquadah_reactor.tooltip.2=最高产生§3UV§7级的能量
 

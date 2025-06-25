@@ -8,7 +8,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.client.renderer.ICubeRenderer;
@@ -51,10 +50,10 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     }
     private final int heatTime = 600;
     private int thresholdPercentage = 100;
-
+    protected HeatExchangerRecipeLogic recipeMapWorkable;
     public MetaTileEntitySmallHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
     }
 
     @Override
@@ -165,12 +164,14 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeVarInt(thresholdPercentage);
+        this.recipeMapWorkable.writeInitialData(buf);
     }
 
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         thresholdPercentage = buf.readVarInt();
+        this.recipeMapWorkable.receiveInitialData(buf);
     }
 
     @Override

@@ -204,7 +204,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                                     return false;
                                 })
                                 .toArray(MetaTileEntity[]::new))
-                                .setMaxGlobalLimited(32)
+                                .setMaxGlobalLimited(8)
                                 .setPreviewCount(0)
                         )
                 )
@@ -365,11 +365,11 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                     .setIgnoreColor(true));
             case UV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE)
                     .setIgnoreColor(true));
-            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK4_TITLE_MUI)
+            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK4_TITLE)
                     .setIgnoreColor(true));
-            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK5_TITLE_MUI)
+            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK5_TITLE)
                     .setIgnoreColor(true));
-            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GTQTGuiTextures.FUSION_REACTOR_MK6_TITLE_MUI)
+            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK6_TITLE)
                     .setIgnoreColor(true));
         }
 
@@ -462,12 +462,12 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     protected void addDisplayText(List<ITextComponent> textList) {
         if(!isStructureFormed())return;
         String energyFormatted = TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getMaximumOverclockVoltage());
-        ITextComponent voltageName1 = new TextComponentString(GTValues.VNF[GTUtility.getFloorTierByVoltage(this.recipeMapWorkable.getMaximumOverclockVoltage())]);
+        ITextComponent voltageName1 = new TextComponentString(GTValues.VOCNF[GTUtility.getFloorTierByVoltage(this.recipeMapWorkable.getMaximumOverclockVoltage())]);
         ITextComponent bodyText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", energyFormatted, voltageName1);
         ITextComponent hoverText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick_hover");
         textList.add(TextComponentUtil.setHover(bodyText1, hoverText1));
 
-        ITextComponent voltageName2 = new TextComponentString(GTValues.VNF[tier]);
+        ITextComponent voltageName2 = new TextComponentString(GTValues.VOCNF[tier]);
         ITextComponent bodyText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier", voltageName2);
         ITextComponent hoverText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier_hover");
         textList.add(TextComponentUtil.setHover(bodyText2, hoverText2));

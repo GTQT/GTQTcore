@@ -49,10 +49,11 @@ public class MetaTileEntityLargeHeatExchanger extends NoEnergyMultiblockControll
     }
     private final int heatTime = 300;
     private int thresholdPercentage = 100;
+    protected HeatExchangerRecipeLogic recipeMapWorkable;
 
     public MetaTileEntityLargeHeatExchanger(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
-        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this, GTQTcoreRecipeMaps.HEAT_EXCHANGE_RECIPES);
+        this.recipeMapWorkable = new HeatExchangerRecipeLogic(this);
     }
 
     @Override
@@ -163,12 +164,14 @@ public class MetaTileEntityLargeHeatExchanger extends NoEnergyMultiblockControll
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
         buf.writeVarInt(thresholdPercentage);
+        this.recipeMapWorkable.writeInitialData(buf);
     }
 
     @Override
     public void receiveInitialSyncData(PacketBuffer buf) {
         super.receiveInitialSyncData(buf);
         thresholdPercentage = buf.readVarInt();
+        this.recipeMapWorkable.receiveInitialData(buf);
     }
 
     @Override

@@ -1,12 +1,10 @@
 package keqing.gtqtcore.api.capability.impl;
 
-import gregtech.api.capability.impl.PrimitiveRecipeLogic;
-import gregtech.api.metatileentity.multiblock.RecipeMapPrimitiveMultiblockController;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
-import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import keqing.gtqtcore.api.capability.GTQTDataCode;
 import keqing.gtqtcore.api.capability.IHeatExchanger;
 import keqing.gtqtcore.api.recipes.properties.FlowRateProperty;
 import keqing.gtqtcore.api.recipes.properties.MaxRateProperty;
@@ -15,24 +13,25 @@ import keqing.gtsteam.api.metatileentity.multiblock.NoEnergyMultiblockController
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static keqing.gtqtcore.api.capability.GTQTDataCode.*;
 import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 
 @SuppressWarnings("all")
 public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
 
-    private int currentHeat;
     private final int maxHeat;
+    private int currentHeat;
     private boolean isSuperheat;
     private int rate;
 
-    public HeatExchangerRecipeLogic(NoEnergyMultiblockController tileEntity, RecipeMap<?> recipeMap) {
-        super(tileEntity, recipeMap);
+    public HeatExchangerRecipeLogic(NoEnergyMultiblockController tileEntity) {
+        super(tileEntity, tileEntity.recipeMap);
         this.maxHeat = ((IHeatExchanger) tileEntity).getHeatTime() * 20;
     }
 
@@ -69,7 +68,7 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    protected void trySearchNewRecipe() {
+    protected void trySearchNewRecipeCombined() {
         long maxVoltage = getMaxVoltage();
         List<FluidStack> fluidStackList = new ArrayList<>(GTUtility.fluidHandlerToList(getInputTank()));
         fluidStackList.add(Materials.DistilledWater.getFluid(Integer.MAX_VALUE));
@@ -118,7 +117,7 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     private boolean setRecipe(Recipe recipe, int amount, int i) {
-        Recipe tRecipe =  getRecipeMap().recipeBuilder().append(recipe, 1, false)
+        Recipe tRecipe = getRecipeMap().recipeBuilder().append(recipe, 1, false)
                 .clearFluidOutputs()
                 .fluidOutputs(recipe.getFluidOutputs().get(i))
                 .fluidOutputs(recipe.getFluidOutputs().get(2))
@@ -127,17 +126,17 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
         recipeBuilder.append(tRecipe, amount, false);
         applyParallelBonus(recipeBuilder);
         recipe = recipeBuilder.build().getResult();
+
         if (recipe != null) {
             recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
             if (recipe != null) {
                 setupRecipe(recipe);
                 return true;
             }
-            return false;
-        } else {
-            metaTileEntity.doExplosion(6);
-            return false;
         }
+        metaTileEntity.doExplosion(6);
+        return false;
+
     }
 
     public FluidStack getInputFluidStack(FluidStack fluidStack) {
@@ -146,23 +145,9 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
 
     private void setHeat(int heat) {
         if (heat != this.currentHeat && !metaTileEntity.getWorld().isRemote) {
-            writeCustomData(ChannelHeatExchangerHeat, b -> b.writeVarInt(heat));
+            writeCustomData(GTQTDataCode.ChannelHeatExchangerHeat, b -> b.writeVarInt(heat));
         }
         this.currentHeat = heat;
-    }
-
-    private void setSuperheat(boolean isSuperheat) {
-        if (this.isSuperheat != isSuperheat && !metaTileEntity.getWorld().isRemote) {
-            writeCustomData(ChannelHeatExchangerSuperheat, b -> b.writeBoolean(isSuperheat));
-        }
-        this.isSuperheat = isSuperheat;
-    }
-
-    private void setRate(int rate) {
-        if (this.rate != rate && ! metaTileEntity.getWorld().isRemote) {
-            writeCustomData(ChannelHeatExchangerRate, b -> b.writeVarInt(rate));
-        }
-        this.rate = rate;
     }
 
     public double getHeatEfficiency() {
@@ -173,11 +158,25 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
         return rate;
     }
 
+    private void setRate(int rate) {
+        if (this.rate != rate && !metaTileEntity.getWorld().isRemote) {
+            writeCustomData(GTQTDataCode.ChannelHeatExchangerRate, b -> b.writeVarInt(rate));
+        }
+        this.rate = rate;
+    }
+
     public boolean isSuperheat() {
         return isSuperheat;
     }
 
+    private void setSuperheat(boolean isSuperheat) {
+        if (this.isSuperheat != isSuperheat && !metaTileEntity.getWorld().isRemote) {
+            writeCustomData(GTQTDataCode.ChannelHeatExchangerSuperheat, b -> b.writeBoolean(isSuperheat));
+        }
+        this.isSuperheat = isSuperheat;
+    }
 
+    @NotNull
     @Override
     public NBTTagCompound serializeNBT() {
         NBTTagCompound compound = super.serializeNBT();
@@ -188,39 +187,35 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     @Override
-    public void deserializeNBT( NBTTagCompound compound) {
+    public void deserializeNBT(@NotNull NBTTagCompound compound) {
         super.deserializeNBT(compound);
         currentHeat = compound.getInteger("Heat");
         rate = compound.getInteger("Rate");
         isSuperheat = compound.getBoolean("isSuperheat");
     }
 
-    @Override
-    public void writeInitialSyncData( PacketBuffer buf) {
-        super.writeInitialSyncData(buf);
+    public void writeInitialData(@Nonnull PacketBuffer buf) {
         buf.writeVarInt(currentHeat);
         buf.writeVarInt(rate);
         buf.writeBoolean(isSuperheat);
     }
 
-    @Override
-    public void receiveInitialSyncData( PacketBuffer buf) {
-        super.receiveInitialSyncData(buf);
+    public void receiveInitialData(@Nonnull PacketBuffer buf) {
         this.currentHeat = buf.readVarInt();
         this.rate = buf.readVarInt();
         this.isSuperheat = buf.readBoolean();
     }
 
     @Override
-    public void receiveCustomData(int dataId,  PacketBuffer buf) {
+    public void receiveCustomData(int dataId, @NotNull PacketBuffer buf) {
         super.receiveCustomData(dataId, buf);
-        if (dataId ==ChannelHeatExchangerHeat) {
+        if (dataId == GTQTDataCode.ChannelHeatExchangerHeat) {
             this.currentHeat = buf.readVarInt();
         }
-        if (dataId ==ChannelHeatExchangerSuperheat) {
+        if (dataId == GTQTDataCode.ChannelHeatExchangerSuperheat) {
             this.isSuperheat = buf.readBoolean();
         }
-        if (dataId == ChannelHeatExchangerRate) {
+        if (dataId == GTQTDataCode.ChannelHeatExchangerRate) {
             this.rate = buf.readVarInt();
         }
     }
