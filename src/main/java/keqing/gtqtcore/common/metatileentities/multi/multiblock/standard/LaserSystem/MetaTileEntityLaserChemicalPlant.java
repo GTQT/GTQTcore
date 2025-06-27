@@ -4,11 +4,14 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.core.sound.GTSoundEvents;
@@ -29,6 +32,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -133,13 +137,16 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            super.addDisplayText(textList);
-            textList.add(new TextComponentTranslation("激光转换化工厂等级：%s", (int) ((long) this.getTemp() / 1800)));
+    public void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
+        int temp=getCurrentTemperature();
+        if (isStructureFormed()&&temp!=0) {
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(this.getTemp() / 1800));
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "激光转换化工厂等级：%s", heatString));
         }
     }
-
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List<String> tooltip, boolean advanced) {

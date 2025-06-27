@@ -1,31 +1,43 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
+import com.cleanroommc.modularui.api.GuiAxis;
+import com.cleanroommc.modularui.api.IPanelHandler;
 import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.drawable.ItemDrawable;
+import com.cleanroommc.modularui.drawable.Rectangle;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.utils.Color;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.value.sync.StringSyncValue;
+import com.cleanroommc.modularui.widgets.ButtonWidget;
+import com.cleanroommc.modularui.widgets.SliderWidget;
+import com.cleanroommc.modularui.widgets.layout.Flow;
+import com.cleanroommc.modularui.widgets.textfield.TextFieldWidget;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.ImageCycleButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.GTGuis;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
-import gregtech.api.util.LocalizationUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
-import keqing.gtqtcore.api.recipes.properties.*;
+import keqing.gtqtcore.api.recipes.properties.GeneratorProperty;
+import keqing.gtqtcore.api.recipes.properties.SpacetimeCompressionProperty;
+import keqing.gtqtcore.api.recipes.properties.SuccessChanceProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -36,17 +48,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-
 import java.util.List;
 import java.util.Random;
 
@@ -54,149 +61,214 @@ import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate.*;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Spacetime;
 import static keqing.gtqtcore.api.utils.GTQTUtil.logBase;
-import static keqing.gtqtcore.common.items.GTQTMetaItems.ASTRAL_ARRAY;
 
-public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
-    //时间膨胀发生器
-    int timeAcceleration;
-    //-耗时 OK
-    //-成功率 OK
-
-    //压缩时空发生器
-    int spaceTimeCompression;
-    //配方等级 OK
-    //+并行 OK
-
-    //稳定力场发生器
-    int stabilization;
+public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController {
     //+成功率
     //+额外产出
     //减少电量产出
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (this.isStructureFormed()) {
-            textList.add(new TextComponentTranslation("时间膨胀发生器:%s", timeAcceleration));
-            textList.add(new TextComponentTranslation("压缩时空发生器:%s", spaceTimeCompression));
-            textList.add(new TextComponentTranslation("稳定力场发生器:%s", stabilization));
-            textList.add(new TextComponentTranslation("星阵数量：%s", calculateStarArray()));
-            textList.add(new TextComponentTranslation("最大超频次数:%s", maxAllowedOc));
-        }
+    //成功率
+    int successChance;
+    //-耗时 OK
+    //-成功率 OK
+    //发电量
+    long generator;
+    //配方等级 OK
+    //+并行 OK
+    int maxAllowedOc;
+    //时间膨胀发生器
+    private int timeAcceleration;
+    //压缩时空发生器
+    private int spaceTimeCompression;
+    //稳定力场发生器
+    private int stabilization;
+
+    public MetaTileEntityEyeOfHarmony(ResourceLocation metaTileEntityId) {
+        super(metaTileEntityId, GTQTcoreRecipeMaps.VIRTUAL_COSMOS_SIMULATOR_RECIPES);
+        this.recipeMapWorkable = new EOHRecipeLogic(this);
     }
+
+    private static IBlockState getCommonState() {
+        return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.INFINITE_SPACETIME_ENERGY_CASING);
+    }
+
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        this.timeAcceleration = 0;
+        this.spaceTimeCompression = 0;
+        this.stabilization = 0;
+        this.maxAllowedOc = 0;
+    }
+
     @Override
     protected void configureDisplayText(MultiblockUIBuilder builder) {
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom((textList, syncer) -> {
-                    if (!isStructureFormed()) return;
-
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", timeAcceleration);
-                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "压缩时空发生器:%s", spaceTimeCompression);
-                    IKey text3 = KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", stabilization);
-                    IKey text4 = KeyUtil.lang(TextFormatting.GRAY, "星阵数量:%s", calculateStarArray());
-                    IKey text5 = KeyUtil.lang(TextFormatting.GRAY, "最大超频次数:%s", maxAllowedOc);
-                    textList.add(KeyUtil.setHover(text1, text2,text3,text4,text5));
-
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", syncer.syncInt(timeAcceleration)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "压缩时空发生器:%s", syncer.syncInt(spaceTimeCompression)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", syncer.syncInt(stabilization)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "星阵数量:%s", syncer.syncInt(calculateStarArray())));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "最大超频次数:%s", syncer.syncInt(maxAllowedOc)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
-    public MetaTileEntityEyeOfHarmony(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, GTQTcoreRecipeMaps.VIRTUAL_COSMOS_SIMULATOR_RECIPES);
-        this.recipeMapWorkable=new EOHRecipeLogic(this);
-    }
-    //成功率
-    int successChance;
-    //发电量
-    long generator;
-    int maxAllowedOc;
 
     @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("increment"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("decrement"));
-        return group;
+    protected MultiblockUIFactory createUIFactory() {
+        return super.createUIFactory()
+                .createFlexButton((guiData, syncManager) -> {
+                    var throttle = syncManager.panel("throttle_panel", this::makeThrottlePanel, true);
+
+                    return new ButtonWidget<>()
+                            .size(18)
+                            .overlay(GTGuiTextures.FILTER_SETTINGS_OVERLAY.asIcon().size(16))
+                            .addTooltipLine(IKey.lang("调整最大超频次数"))
+                            .onMousePressed(i -> {
+                                if (throttle.isPanelOpen()) {
+                                    throttle.closePanel();
+                                } else {
+                                    throttle.openPanel();
+                                }
+                                return true;
+                            });
+                });
     }
 
-    private void incrementThreshold(Widget.ClickData clickData) {
-        this.maxAllowedOc = MathHelper.clamp(maxAllowedOc + 1, 0, 8);
+    private ModularPanel makeThrottlePanel(PanelSyncManager syncManager, IPanelHandler syncHandler) {
+        StringSyncValue throttleValue = new StringSyncValue(() -> maxAllowedOc+"", str -> {
+            try {
+                if (str.charAt(str.length() - 1) == '%') {
+                    str = str.substring(0, str.length() - 1);
+                }
+
+                this.maxAllowedOc = Integer.parseInt(str);
+            } catch (NumberFormatException ignored) {
+
+            }
+        });
+        DoubleSyncValue sliderValue = new DoubleSyncValue(
+                () -> (double) getMaxAllowedOc() / 8,
+                d -> setMaxAllowedOc((int) (d * 8)));
+
+        return GTGuis.createPopupPanel("boiler_throttle", 116, 53)
+                .child(Flow.row()
+                        .pos(4, 4)
+                        .height(16)
+                        .coverChildrenWidth()
+                        .child(new ItemDrawable(getStackForm())
+                                .asWidget()
+                                .size(16)
+                                .marginRight(4))
+                        .child(IKey.lang("超频次数")
+                                .asWidget()
+                                .heightRel(1.0f)))
+                .child(Flow.row()
+                        .top(20)
+                        .margin(4, 0)
+                        .coverChildrenHeight()
+                        .child(new SliderWidget()
+                                .background(new Rectangle().setColor(Color.BLACK.brighter(2)).asIcon()
+                                        .height(8))
+                                .bounds(0, 1)
+                                .setAxis(GuiAxis.X)
+                                .value(sliderValue)
+                                .widthRel(0.7f)
+                                .height(20))
+                        // todo switch this text field with GTTextFieldWidget in PR #2700
+                        .child(new TextFieldWidget()
+                                .widthRel(0.3f)
+                                .height(20)
+                                // TODO proper color
+                                .setTextColor(Color.WHITE.darker(1))
+                                .setValidator(str -> {
+                                    if (str.charAt(str.length() - 1) == '%') {
+                                        str = str.substring(0, str.length() - 1);
+                                    }
+
+                                    try {
+                                        long l = Long.parseLong(str);
+                                        if (l < 0) l = 0;
+                                        else if (l > 8) l = 8;
+                                        return String.valueOf(l);
+                                    } catch (NumberFormatException ignored) {
+                                        return throttleValue.getValue();
+                                    }
+                                })
+                                .value(throttleValue)
+                                .background(GTGuiTextures.DISPLAY)));
     }
 
-    private void decrementThreshold(Widget.ClickData clickData) {
-        this.maxAllowedOc = MathHelper.clamp(maxAllowedOc - 1, 0, 8);
+    private int getMaxAllowedOc() {
+        return maxAllowedOc;
     }
 
-    public int calculateStarArray()
-    {
-        if(getImportItems()==null)return 0;
+    private void setMaxAllowedOc(int i) {
+        maxAllowedOc = i;
+    }
+
+
+    public int calculateStarArray() {
+        if (getImportItems() == null) return 0;
         int number = 0;
         var slots = this.getInputInventory().getSlots();
         for (int i = 0; i < slots; i++) {
             ItemStack item = this.getInputInventory().getStackInSlot(i);
-            if(GTQTMetaItems.ASTRAL_ARRAY.isItemEqual(item))
-            {
-                number+=item.getCount();
+            if (GTQTMetaItems.ASTRAL_ARRAY.isItemEqual(item)) {
+                number += item.getCount();
             }
         }
         return number;
     }
-    public void consumeStarArray(int number)
-    {
+
+    public void consumeStarArray(int number) {
         var slots = this.getInputInventory().getSlots();
         for (int i = 0; i < slots; i++) {
             ItemStack item = this.getInputInventory().getStackInSlot(i);
-            if(GTQTMetaItems.ASTRAL_ARRAY.isItemEqual(item))
-            {
-                if(item.getCount()>=number)
-                {
-                    this.getInputInventory().extractItem(i,number,false);
+            if (GTQTMetaItems.ASTRAL_ARRAY.isItemEqual(item)) {
+                if (item.getCount() >= number) {
+                    this.getInputInventory().extractItem(i, number, false);
                     return;
-                }
-                else
-                {
-                    this.getInputInventory().extractItem(i,item.getCount(),false);
+                } else {
+                    this.getInputInventory().extractItem(i, item.getCount(), false);
                 }
             }
         }
     }
+
     @Override
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
         SpacetimeCompressionProperty spacetimeCompressionProps = SpacetimeCompressionProperty.getInstance();
 
         if (recipe.hasProperty(spacetimeCompressionProps)) {
-            if(spaceTimeCompression<recipe.getProperty(spacetimeCompressionProps, 0))return false;
+            if (spaceTimeCompression < recipe.getProperty(spacetimeCompressionProps, 0)) return false;
         }
         //记录
         SuccessChanceProperty successChanceProps = SuccessChanceProperty.getInstance();
-        GeneratorProperty  generatorProps = GeneratorProperty.getInstance();
+        GeneratorProperty generatorProps = GeneratorProperty.getInstance();
 
-        successChance=recipe.getProperty(successChanceProps, 0);
-        generator=recipe.getProperty(generatorProps, 0L);
-        return super.checkRecipe(recipe,consumeIfSuccess);
+        successChance = recipe.getProperty(successChanceProps, 0);
+        generator = recipe.getProperty(generatorProps, 0L);
+        return super.checkRecipe(recipe, consumeIfSuccess);
     }
-
 
     //时间膨胀 每级减少50%
     public double getTimeBound() {
-        return Math.pow(0.5,timeAcceleration-1);
+        return Math.pow(0.5, timeAcceleration - 1);
     }
 
     //成功率
     public int getSuccessChance() {
-        return Math.max(0, Math.min(100, successChance-timeAcceleration*10+stabilization*5));
+        return Math.max(0, Math.min(100, successChance - timeAcceleration * 10 + stabilization * 5));
     }
 
     //发电
     public long getEUOutput() {
-        return (long) (generator*Math.pow(0.95,stabilization-1));
+        return (long) (generator * Math.pow(0.95, stabilization - 1));
     }
 
     private void doGenerator() {
@@ -204,7 +276,7 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
     }
 
     public int getExtraOutput() {
-        return stabilization*5;
+        return stabilization * 5;
     }
 
     @Override
@@ -254,74 +326,8 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
         tooltip.add(I18n.format("=============================================="));
     }
 
-    private class EOHRecipeLogic extends MultiblockRecipeLogic {
-
-        public EOHRecipeLogic(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        public void setMaxProgress(int maxProgress) {
-            super.setMaxProgress((int) (maxProgress * getTimeBound()));
-        }
-        protected double getOverclockingDurationFactor() {
-            return calculateStarArray()>64 ? 0.25 : 0.5;
-        }
-        //并行
-        @Override
-        public int getParallelLimit() {
-            if(calculateStarArray()==0)return spaceTimeCompression;
-            int number = (int) logBase(calculateStarArray()*4,2);
-            return (int) Math.pow(2,number)+spaceTimeCompression;
-        }
-
-
-        protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
-                if (++this.progressTime > this.maxProgressTime) {
-                    Random random = new Random();
-                    if (random.nextInt(100) < getExtraOutput()) {
-                        //额外产出
-                        this.outputRecipeOutputs();
-                    }
-                    random = new Random();
-                    if (random.nextInt(100) < getSuccessChance()) {
-                        //发电
-                        doGenerator();
-                        this.completeRecipe();
-                    } else {
-                        //发电
-                        doGenerator();
-                        //产出时空
-                        outputTimeSpace();
-                        invalidate();
-                    }
-                    if(calculateStarArray()>=64)
-                    {
-                        consumeStarArray((int)logBase(calculateStarArray(),8));
-                    }
-                    this.completeRecipe();
-                }
-
-                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
-                    this.hasNotEnoughEnergy = false;
-                }
-            } else if (this.recipeEUt > 0L) {
-                this.hasNotEnoughEnergy = true;
-                invalidate();
-            }
-
-        }
-
-        @Override
-        protected int getNumberOfOCs(long recipeEUt) {
-            return Math.min(super.getNumberOfOCs(recipeEUt), maxAllowedOc);
-        }
-    }
-
     private void outputTimeSpace() {
-        getOutputFluidInventory().fill(Spacetime.getFluid((int)(144*successChance*Math.pow(2,spaceTimeCompression))),true);
+        getOutputFluidInventory().fill(Spacetime.getFluid((int) (144 * successChance * Math.pow(2, spaceTimeCompression))), true);
     }
 
 
@@ -407,10 +413,6 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
         return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.REINFORCED_SPACETIME_CASING);
     }
 
-    private static IBlockState getCommonState() {
-        return GTQTMetaBlocks.blockQuantumCasing.getState(BlockQuantumCasing.CasingType.INFINITE_SPACETIME_ENERGY_CASING);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
@@ -438,12 +440,12 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
         return false;
     }
 
-
     @Override
     public void update() {
         super.update();
 
     }
+
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("successChance", this.successChance);
         data.setLong("generator", this.generator);
@@ -456,5 +458,72 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController{
         this.generator = data.getLong("generator");
         this.maxAllowedOc = data.getInteger("maxAllowedOc");
         super.readFromNBT(data);
+    }
+
+    private class EOHRecipeLogic extends MultiblockRecipeLogic {
+
+        public EOHRecipeLogic(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        public void setMaxProgress(int maxProgress) {
+            super.setMaxProgress((int) (maxProgress * getTimeBound()));
+        }
+
+        protected double getOverclockingDurationFactor() {
+            return calculateStarArray() > 64 ? 0.25 : 0.5;
+        }
+
+        //并行
+        @Override
+        public int getParallelLimit() {
+            if (calculateStarArray() == 0) return spaceTimeCompression;
+            int number = (int) logBase(calculateStarArray() * 4, 2);
+            return (int) Math.pow(2, number) + spaceTimeCompression;
+        }
+
+
+        protected void updateRecipeProgress() {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
+                this.drawEnergy(this.recipeEUt, false);
+                if (++this.progressTime > this.maxProgressTime) {
+                    Random random = new Random();
+                    if (random.nextInt(100) < getExtraOutput()) {
+                        //额外产出
+                        this.outputRecipeOutputs();
+                    }
+                    random = new Random();
+                    if (random.nextInt(100) < getSuccessChance()) {
+                        //发电
+                        doGenerator();
+                        this.completeRecipe();
+                    } else {
+                        //发电
+                        doGenerator();
+                        //产出时空
+                        outputTimeSpace();
+                        invalidate();
+                    }
+                    if (calculateStarArray() >= 64) {
+                        consumeStarArray((int) logBase(calculateStarArray(), 8));
+                    }
+                    this.completeRecipe();
+                }
+
+                if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
+                    this.hasNotEnoughEnergy = false;
+                }
+            } else if (this.recipeEUt > 0L) {
+                this.hasNotEnoughEnergy = true;
+                invalidate();
+            }
+
+        }
+
+        @Override
+        protected int getNumberOfOCs(long recipeEUt) {
+            return Math.min(super.getNumberOfOCs(recipeEUt), maxAllowedOc);
+        }
     }
 }

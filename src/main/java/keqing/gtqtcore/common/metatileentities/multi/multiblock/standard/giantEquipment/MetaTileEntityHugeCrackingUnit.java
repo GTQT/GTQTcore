@@ -44,6 +44,7 @@ import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
+import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
@@ -133,10 +134,8 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
                 .addCustom(this::addHeatCapacity)
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s",  glassTire, coilTier);
-                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate",  requestCWUt, getAccelerateByCWU(requestCWUt));
-                    textList.add(KeyUtil.setHover(text1, text2));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s", syncer.syncInt(glassTire), syncer.syncInt(coilTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
 
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -204,12 +203,9 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
                 .aisle("CCCCCCSCCCCCC", " C         C ", " C         C ", " C         C ", " C         C ", " C         C ", " C         C ")
                 .where('S', this.selfPredicate())
                 .where('C', states(getCasingState())
-                        .setMinGlobalLimited(190)
-                        .or(abilities(MultiblockAbility.INPUT_ENERGY)
-                                .setMaxGlobalLimited(3))
-                        .or(abilities(MultiblockAbility.INPUT_LASER)
-                                .setMaxGlobalLimited(1))
-                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH))
+                        .or(abilities(MultiblockAbility.INPUT_ENERGY).setMaxGlobalLimited(3))
+                        .or(abilities(MultiblockAbility.INPUT_LASER).setMaxGlobalLimited(1))
+                        .or(abilities(MultiblockAbility.MAINTENANCE_HATCH).setExactLimit(1))
                         .or(abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION).setExactLimit(1))
                 )
                 .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
@@ -243,7 +239,6 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.1"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.2"));
         tooltip.add(I18n.format("gregtech.machine.electric_blast_furnace.tooltip.3"));
-        super.addInformation(stack, player, tooltip, advanced);
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.acc.tooltip"));
         tooltip.add(I18n.format("gtqtcore.multiblock.kq.laser.tooltip"));
     }
@@ -251,36 +246,6 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
-    }
-
-    @Override
-    public List<MultiblockShapeInfo> getMatchingShapes() {
-        ArrayList<MultiblockShapeInfo> shapeInfo = new ArrayList<>();
-        MultiblockShapeInfo.Builder builder = MultiblockShapeInfo.builder()
-                .aisle("CCCCCCJHCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
-                .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
-                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
-                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
-                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CALALALALAC ", " DALALALALAN ", " CALALALALAC ", " GALALALALAG ", " CGGGCVCGGGC ")
-                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " CAAAAAAAAAC ", " CALALALALAC ", " CAAAAAAAAAC ", " GALALALALAG ", " CGGGCCCGGGC ")
-                .aisle("CCCCCCCCCCCCC", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " GALALALALAG ", " CGGGGGGGGGC ")
-                .aisle("CCCCCCCCCCCCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC", "CCGGGGGGGGGCC")
-                .aisle("CCCCCISKCCCCC", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ", " CAAAAAAAAAC ")
-                .where('S', HUGE_CRACKING_UNIT, EnumFacing.SOUTH)
-                .where('C', getCasingState())
-                .where('V', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.UP)
-                .where('D', MetaTileEntities.FLUID_IMPORT_HATCH[4], EnumFacing.WEST)
-                .where('N', MetaTileEntities.FLUID_EXPORT_HATCH[4], EnumFacing.EAST)
-                .where('K', MetaTileEntities.ITEM_IMPORT_BUS[4], EnumFacing.SOUTH)
-                .where('H', MetaTileEntities.ENERGY_INPUT_HATCH[5], EnumFacing.NORTH)
-                .where('I', MetaTileEntities.COMPUTATION_HATCH_RECEIVER[5], EnumFacing.SOUTH)
-                .where('G', MetaBlocks.TRANSPARENT_CASING.getState(BlockGlassCasing.CasingType.FUSION_GLASS))
-                .where('A', Blocks.AIR.getDefaultState())
-                .where('J', MetaTileEntities.MAINTENANCE_HATCH, EnumFacing.NORTH);
-        GregTechAPI.HEATING_COILS.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> entry.getValue().getTier()))
-                .forEach(entry -> shapeInfo.add(builder.where('L', entry.getKey()).build()));
-        return shapeInfo;
     }
 
     @Override

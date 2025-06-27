@@ -25,7 +25,7 @@ import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 @SuppressWarnings("all")
 public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
 
-    private final int maxHeat;
+    private int maxHeat;
     private int currentHeat;
     private boolean isSuperheat;
     private int rate;
@@ -35,6 +35,10 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
         this.maxHeat = ((IHeatExchanger) tileEntity).getHeatTime() * 20;
     }
 
+    public void setHeatTime(int maxHeat) {
+        this.maxHeat = maxHeat * 20;
+    }
+
     @Override
     public void update() {
         if ((!isActive() || !canProgressRecipe() || !isWorkingEnabled()) && currentHeat > 0) {
@@ -42,7 +46,7 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
             setRate(0);
             setSuperheat(false);
         }
-        super.update();
+        super.updateWorkable();
     }
 
     @Override
@@ -117,7 +121,7 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
     }
 
     private boolean setRecipe(Recipe recipe, int amount, int i) {
-        Recipe tRecipe = getRecipeMap().recipeBuilder().append(recipe, 1, false)
+        Recipe tRecipe =  getRecipeMap().recipeBuilder().append(recipe, 1, false)
                 .clearFluidOutputs()
                 .fluidOutputs(recipe.getFluidOutputs().get(i))
                 .fluidOutputs(recipe.getFluidOutputs().get(2))
@@ -126,17 +130,19 @@ public class HeatExchangerRecipeLogic extends NoEnergyMultiblockRecipeLogic {
         recipeBuilder.append(tRecipe, amount, false);
         applyParallelBonus(recipeBuilder);
         recipe = recipeBuilder.build().getResult();
-
         if (recipe != null) {
             recipe = setupAndConsumeRecipeInputs(recipe, getInputInventory());
             if (recipe != null) {
                 setupRecipe(recipe);
+                setRate(amount);
                 return true;
             }
+            return false;
         }
-        metaTileEntity.doExplosion(6);
-        return false;
-
+        else {
+            metaTileEntity.doExplosion(6);
+            return false;
+        }
     }
 
     public FluidStack getInputFluidStack(FluidStack fluidStack) {

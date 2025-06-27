@@ -143,11 +143,8 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 .addCustom(this::addHeatCapacity)
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s",  glassTire, coilTier);
-                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate",  requestCWUt, getAccelerateByCWU(requestCWUt));
-                    textList.add(KeyUtil.setHover(text1, text2));
-
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s", syncer.syncInt(glassTire), syncer.syncInt(coilTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

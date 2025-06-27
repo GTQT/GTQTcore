@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
-import com.cleanroommc.modularui.api.drawable.IKey;
 import gregicality.multiblocks.api.recipes.GCYMRecipeMaps;
 import gregtech.api.GTValues;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -41,9 +40,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
@@ -297,11 +293,9 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                 .addCustom(this::addHeatCapacity)
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "维度翘曲点数量：%s", heat);
-                    textList.add(KeyUtil.setHover(text1));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "维度翘曲点数量：%s", syncer.syncInt(heat)));
                     if (heat > 576000) {
-                        IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "已进入无损超频");
-                        textList.add(KeyUtil.setHover(text2));
+                        textList.add(KeyUtil.lang(TextFormatting.GRAY, "已进入无损超频"));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -309,6 +303,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+
     private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
             var heatString = KeyUtil.number(TextFormatting.RED,
@@ -318,6 +313,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                     "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
+
     public IWarpSwarm getAbility() {
         if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null)
             return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);

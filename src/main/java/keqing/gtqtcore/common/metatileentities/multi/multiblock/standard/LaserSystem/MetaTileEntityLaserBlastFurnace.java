@@ -121,24 +121,6 @@ public class MetaTileEntityLaserBlastFurnace extends RecipeMapLaserMultiblockCon
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .addCustom(tl -> {
-                    // Coil heat capacity line
-                    if (isStructureFormed()) {
-                        ITextComponent heatString = TextComponentUtil.stringWithColor(
-                                TextFormatting.RED,
-                                TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K");
-                        tl.add(TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.blast_furnace.max_temperature",
-                                heatString));
-                    }
-                });
-    }
-
-    @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
         Object type = context.get("CoilType");

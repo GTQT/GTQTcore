@@ -1,6 +1,5 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
-import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
@@ -29,8 +28,6 @@ import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
-import gregtech.api.util.TextComponentUtil;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -56,8 +53,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -151,16 +146,15 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
 
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s",  glassTire, coilTier);
-                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate",  requestCWUt, getAccelerateByCWU(requestCWUt));
-                    textList.add(KeyUtil.setHover(text1, text2));
-
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s", syncer.syncInt(glassTire), syncer.syncInt(coilTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+
     private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
             var heatString = KeyUtil.number(TextFormatting.RED,
@@ -226,7 +220,7 @@ public class MetaTileEntityHugeChemicalReactor extends GTQTNoTierMultiblockContr
                 .aisle("CCCCC", "CGGGC", "CGOGC", "CGGGC", "CCCCC")
                 .where('O', this.selfPredicate())
                 .where('C', states(this.getCasingState())
-                        .or(autoAbilities(false,true,true,true,true,true,false))
+                        .or(autoAbilities(false, true, true, true, true, true, false))
                         .or(abilities(MultiblockAbility.INPUT_ENERGY)
                                 .setMaxGlobalLimited(3))
                         .or(abilities(MultiblockAbility.INPUT_LASER)

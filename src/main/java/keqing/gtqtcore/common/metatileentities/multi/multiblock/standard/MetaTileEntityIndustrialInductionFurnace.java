@@ -1,10 +1,14 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -12,6 +16,7 @@ import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -40,10 +45,7 @@ import java.util.List;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing1.CasingType.HastelloyN;
 
 public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     protected int heatingCoilLevel;
     protected int heatingCoilDiscount;
 
@@ -142,35 +144,6 @@ public class MetaTileEntityIndustrialInductionFurnace extends MultiMapMultiblock
     @Override
     public boolean hasMufflerMechanics() {
         return true;
-    }
-
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed())
-                .setWorkingStatus(this.recipeMapWorkable.isWorkingEnabled(), this.recipeMapWorkable.isActive())
-                .addEnergyUsageLine(this.recipeMapWorkable.getEnergyContainer())
-                .addEnergyTierLine(GTUtility.getTierByVoltage(this.recipeMapWorkable.getMaxVoltage()))
-                .addCustom((tl) -> {
-                    if (this.isStructureFormed()) {
-                        TextComponentString parallels;
-                        TextComponentTranslation bodyText;
-                        TextComponentTranslation hoverText;
-                        if (this.heatingCoilDiscount > 1) {
-                            parallels = TextComponentUtil.stringWithColor(TextFormatting.AQUA, TextFormattingUtil.formatNumbers(100.0 / (double) this.heatingCoilDiscount) + "%");
-                            bodyText = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.multi_furnace.heating_coil_discount", parallels);
-                            hoverText = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.multi_furnace.heating_coil_discount_hover");
-                            TextComponentUtil.setHover(bodyText, hoverText);
-                            tl.add(bodyText);
-                        }
-                        if (this.recipeMapWorkable.getParallelLimit() > 1) {
-                            parallels = TextComponentUtil.stringWithColor(TextFormatting.DARK_PURPLE, TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getParallelLimit()));
-                            bodyText = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.parallel", parallels);
-                            hoverText = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.multi_furnace.parallel_hover");
-                            tl.add(TextComponentUtil.setHover(bodyText, hoverText));
-                        }
-                    }
-                })
-                .addWorkingStatusLine().addProgressLine(this.recipeMapWorkable.getProgressPercent());
     }
 
     protected class InductionFurnaceRecipeLogic extends MultiblockRecipeLogic {

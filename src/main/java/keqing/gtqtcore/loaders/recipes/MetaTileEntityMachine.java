@@ -9,10 +9,11 @@ import gregtech.api.unification.material.Material;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.info.MaterialFlags;
 import gregtech.api.unification.ore.OrePrefix;
-import gregtech.api.unification.stack.RecyclingData;
 import gregtech.api.unification.stack.MaterialStack;
+import gregtech.api.unification.stack.RecyclingData;
 import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.ConfigHolder;
+import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockSteamCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
@@ -44,6 +45,7 @@ import static gregtech.common.blocks.MetaBlocks.MACHINE_CASING;
 import static gregtech.common.items.MetaItems.ORE_DICTIONARY_FILTER;
 import static gregtech.common.items.MetaItems.SHAPE_MOLD_BLOCK;
 import static gregtech.common.metatileentities.MetaTileEntities.ARC_FURNACE;
+import static gregtech.common.metatileentities.MetaTileEntities.HULL;
 import static gregtech.loaders.recipe.CraftingComponent.*;
 import static gregtech.loaders.recipe.MetaTileEntityLoader.registerMachineRecipe;
 import static gtqt.api.util.MaterialHelper.Cable;
@@ -437,6 +439,41 @@ public class MetaTileEntityMachine {
                     .fluidInputs(Glue[i].getFluid(L * 2))
                     .buildAndRegister();
         }
+        //机器外壳
+        ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
+                "ABA", "CHC", "ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV),
+                'C', new UnificationEntry(wireGtSingle, Lead),
+                'B', new UnificationEntry(plate, Iron),
+                'A', new UnificationEntry(plate, RedAlloy));
+
+        ModHandler.addShapedRecipe(true, "lv_casing", HULL[1].getStackForm(),
+                "ABA", "CHC", "ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV),
+                'C', new UnificationEntry(cableGtSingle, Tin),
+                'B', new UnificationEntry(plate, GalvanizedSteel),
+                'A', new UnificationEntry(plate, Rubber));
+
+        ModHandler.addShapedRecipe(true, "mv_casing", HULL[2].getStackForm(),
+                "ABA", "CHC", "ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV),
+                'C', new UnificationEntry(cableGtSingle, Copper),
+                'B', new UnificationEntry(plate, Invar),
+                'A', new UnificationEntry(plate, Polyethylene));
+
+        ModHandler.addShapedRecipe(true, "hv_casing", HULL[3].getStackForm(),
+                "ABA", "CHC", "ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV),
+                'C', new UnificationEntry(cableGtSingle, Gold),
+                'B', new UnificationEntry(plate, Talonite),
+                'A', new UnificationEntry(plate, Epoxy));
+
+        ModHandler.addShapedRecipe(true, "ev_casing", HULL[4].getStackForm(),
+                "ABA", "CHC", "ABA",
+                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV),
+                'C', new UnificationEntry(cableGtSingle, Aluminium),
+                'B', new UnificationEntry(plate, NiobiumTitanium),
+                'A', new UnificationEntry(plate, Polytetrafluoroethylene));
         //////////////////////////////////////玻璃
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(120).EUt(120)
                 .fluidInputs(BorosilicateGlass.getFluid(L * 4))
@@ -556,7 +593,7 @@ public class MetaTileEntityMachine {
 
         registerMachineRecipe(MetaTileEntities.DISTILLERY,
                 "GBG", "CMC", "WPW",
-                'M', HULL,
+                'M', CraftingComponent.HULL,
                 'P', PUMP,
                 'B', STICK_DISTILLATION,
                 'C', HIGH_TIER_CIRCUIT,
@@ -709,11 +746,11 @@ public class MetaTileEntityMachine {
                 'X', CraftingComponent.CIRCUIT);
 
 
-        registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
+        registerMachineRecipe(GTQTMetaTileEntities.FLUID_EXTRACTOR, "PGP", "EGE", "CMC", 'M', CraftingComponent.HULL, 'P', PUMP, 'E', PISTON, 'C',
                 CIRCUIT, 'G', GLASS);
-        registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', HULL, 'P', PUMP, 'E', PISTON, 'C',
+        registerMachineRecipe(GTQTMetaTileEntities.FLUID_CANNER, "EGE", "PGP", "CMC", 'M', CraftingComponent.HULL, 'P', PUMP, 'E', PISTON, 'C',
                 CIRCUIT, 'G', GLASS);
-        registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', HULL,
+        registerMachineRecipe(GTQTMetaTileEntities.DEHYDRATOR, "WCW", "MHM", "GAG", 'C', CIRCUIT, 'M', CABLE_QUAD, 'H', CraftingComponent.HULL,
                 'G', MOTOR, 'A', ROBOT_ARM, 'W', COIL_HEATING_DOUBLE);
 
         // Laminator
@@ -730,21 +767,21 @@ public class MetaTileEntityMachine {
         registerMachineRecipe(GTQTMetaTileEntities.RADIATION_HATCH,
                 "SCS", "EHE", "SCS",
                 'C', CIRCUIT,
-                'H', HULL,
+                'H', CraftingComponent.HULL,
                 'S', OreDictUnifier.get(plateDense, Lead),
                 'E', OreDictUnifier.get(screw, TungstenSteel));
 
         registerMachineRecipe(GTQTMetaTileEntities.ELECTRODE_HATCH,
                 "SCS", "EHE", "SCS",
                 'C', CIRCUIT,
-                'H', HULL,
+                'H', CraftingComponent.HULL,
                 'S', OreDictUnifier.get(stick, Steel),
                 'E', OreDictUnifier.get(screw, Copper));
 
         registerMachineRecipe(GTQTMetaTileEntities.DRILL_HEAD_HATCH,
                 "SCS", "EHE", "SCS",
                 'C', CIRCUIT,
-                'H', HULL,
+                'H', CraftingComponent.HULL,
                 'S', OreDictUnifier.get(rotor, Aluminium),
                 'E', OreDictUnifier.get(screw, Invar));
     }

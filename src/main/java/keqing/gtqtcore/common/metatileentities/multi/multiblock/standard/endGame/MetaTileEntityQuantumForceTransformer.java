@@ -1,14 +1,12 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.endGame;
 
 
-import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.metatileentity.IFastRenderMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
@@ -24,8 +22,6 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.client.shader.postprocessing.BloomEffect;
-import gregtech.client.utils.BloomEffectUtil;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.metatileentities.MetaTileEntities;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
@@ -42,34 +38,21 @@ import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCasing;
 import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 import static gregtech.api.GTValues.UHV;
 import static gregtech.api.unification.material.Materials.Fermium;
@@ -80,43 +63,52 @@ import static keqing.gtqtcore.common.block.blocks.BlockQuantumForceTransformerCa
 
 public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockController {
 
-    private int manioulatorTier;
-    private int coreTier;
-    private int glassTier;
-
     //消耗 对应聚焦等级数量的等离子 消耗一轮置为true 配方完成后设置为false
-    boolean canOverclocking;
-    boolean canBoosterOutput;
+
+    private boolean canOverclocking;
+
+    private boolean canBoosterOutput;
+
+    private int manioulatorTier;
+
+    private int coreTier;
+
+    private int glassTier;
 
     public MetaTileEntityQuantumForceTransformer(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.QUANTUM_FORCE_TRANSFORMER_RECIPES);
         this.recipeMapWorkable = new MetaTileEntityQuantumForceTransformerHandler(this);
     }
 
+    private static IBlockState getSecondCasingState() {
+        return GTQTMetaBlocks.blockQuantumForceTransformerCasing.getState(NEUTRON_PULSE_MANIPULATOR_CASING);
+    }
 
     @Override
     public void update() {
         super.update();
-        if(!canOverclocking)getBoosterByFluidStackA();
-        if(!canBoosterOutput)getBoosterByFluidStackB();
+        if (!canOverclocking) getBoosterByFluidStackA();
+        if (!canBoosterOutput) getBoosterByFluidStackB();
     }
 
     public void getBoosterByFluidStackA() {
-        FluidStack CatalystMKI = Neptunium.getPlasma((int) (100 *Math.pow(2,coreTier)));
+        FluidStack CatalystMKI = Neptunium.getPlasma((int) (100 * Math.pow(2, coreTier)));
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         if (CatalystMKI.isFluidStackIdentical(inputTank.drain(CatalystMKI, false))) {
             inputTank.drain(CatalystMKI, true);
-            canOverclocking=true;
+            canOverclocking = true;
         }
     }
+
     public void getBoosterByFluidStackB() {
-        FluidStack CatalystMKII = Fermium.getPlasma((int) (100 * Math.pow(2,coreTier)));
+        FluidStack CatalystMKII = Fermium.getPlasma((int) (100 * Math.pow(2, coreTier)));
         IMultipleTankHandler inputTank = this.getInputFluidInventory();
         if (CatalystMKII.isFluidStackIdentical(inputTank.drain(CatalystMKII, false))) {
             inputTank.drain(CatalystMKII, true);
-            canBoosterOutput=true;
+            canBoosterOutput = true;
         }
     }
+
     @Override
     public boolean canBeDistinct() {
         return true;
@@ -126,7 +118,6 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityQuantumForceTransformer(metaTileEntityId);
     }
-
 
     @SuppressWarnings("SpellCheckingInspection")
     @Nonnull
@@ -176,10 +167,6 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
 
     private IBlockState getCoilState() {
         return GTQTMetaBlocks.blockQuantumForceTransformerCasing.getState(BlockQuantumForceTransformerCasing.CasingType.QUANTUM_FORCE_TRANSFORMER_COIL);
-    }
-
-    private static IBlockState getSecondCasingState() {
-        return GTQTMetaBlocks.blockQuantumForceTransformerCasing.getState(NEUTRON_PULSE_MANIPULATOR_CASING);
     }
 
     @SideOnly(Side.CLIENT)
@@ -313,23 +300,28 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+
                 .addCustom((textList, syncer) -> {
-                    if (!isStructureFormed()) return;
-
-                    IKey text1 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.level", coreTier);
-                    IKey text2 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.glass", glassTier);
-                    IKey text3 = KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", manioulatorTier);
-                    IKey text4 = KeyUtil.lang(TextFormatting.GRAY, "当前耗时减免：%s", 10*Math.min(getAbility().getWarpSwarmTier(),glassTier));
-                    IKey text5 = KeyUtil.lang(TextFormatting.GRAY, "当前配方超频：%s", canOverclocking);
-                    IKey text6 = KeyUtil.lang(TextFormatting.GRAY, "当前配方无损：%s", canBoosterOutput);
-                    textList.add(KeyUtil.setHover(text1, text2,text3,text4,text5,text6));
-
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.level", syncer.syncInt(coreTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.glass", syncer.syncInt(glassTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncer.syncInt(manioulatorTier)));
+                    if (isStructureFormed())
+                        textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前耗时减免：%s", syncer.syncInt(10 * Math.min(getWarpSwarmTier(), glassTier))));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前配方超频：%s", syncer.syncBoolean(canOverclocking)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前配方无损：%s", syncer.syncBoolean(canBoosterOutput)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+    public int getWarpSwarmTier(){
+        if(getAbility()!=null){
+            return getAbility().getWarpSwarmTier();
+        }
+        return 0;
+    }
+
     @Override
     protected void initializeAbilities() {
         this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
@@ -340,6 +332,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         energyContainer.addAll(this.getAbilities(MultiblockAbility.INPUT_LASER));
         this.energyContainer = new EnergyContainerList(energyContainer);
     }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -361,12 +354,9 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
 
     }
 
-
-
     public IWarpSwarm getAbility() {
-        if (this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY) != null)
-            return this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY).get(0);
-        return null;
+        List<IWarpSwarm> abilities = this.getAbilities(WARP_SWARM_MULTIBLOCK_ABILITY);
+        return (abilities != null && !abilities.isEmpty()) ? abilities.get(0) : null;
     }
 
     private class MetaTileEntityQuantumForceTransformerHandler extends MultiblockRecipeLogic {
@@ -409,7 +399,8 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         //并行由 纳米蜂群等级与聚焦等级较小值决定
         @Override
         public int getParallelLimit() {
-            return (int) Math.pow(4,Math.min(getAbility().getWarpSwarmTier(),coreTier));
+            if (!isStructureFormed()) return 0;
+            return (int) Math.pow(4, Math.min(getAbility().getWarpSwarmTier(), coreTier));
         }
 
         //耗时减免由 纳米蜂群等级与玻璃等级较小值决定
@@ -419,7 +410,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
         }
 
         public double getTimeBound() {
-            if (getAbility().isAvailable()) return (10 - Math.min(getAbility().getWarpSwarmTier(),glassTier)) / 10.0;
+            if (getAbility().isAvailable()) return (10 - Math.min(getAbility().getWarpSwarmTier(), glassTier)) / 10.0;
             return 1;
         }
 
@@ -435,10 +426,10 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {
                     getAbility().applyDamage(1);
-                    if(canBoosterOutput)this.outputRecipeOutputs();;
+                    if (canBoosterOutput) this.outputRecipeOutputs();
                     this.completeRecipe();
-                    canBoosterOutput=false;
-                    canOverclocking=false;
+                    canBoosterOutput = false;
+                    canOverclocking = false;
                 }
                 if (this.hasNotEnoughEnergy && this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;

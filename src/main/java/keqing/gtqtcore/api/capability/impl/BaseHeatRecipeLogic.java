@@ -11,7 +11,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.common.ConfigHolder;
 import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapHeatMultiblockController;
-import keqing.gtqtcore.api.recipes.properties.HeatProperty;
+import keqing.gtqtcore.api.metatileentity.multiblock.RecipeMapLaserMultiblockController;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -315,8 +315,14 @@ public class BaseHeatRecipeLogic extends AbstractRecipeLogic {
         return previousRecipe != null && previousRecipe.matches(false, previousBus, getInputTank());
     }
 
-    protected boolean prepareRecipeDistinct(Recipe recipe) {
+    @Override
+    public boolean prepareRecipe(Recipe recipe) {
+        ((RecipeMapLaserMultiblockController) metaTileEntity).refreshAllBeforeConsumption();
+        return super.prepareRecipe(recipe);
+    }
 
+    protected boolean prepareRecipeDistinct(Recipe recipe) {
+        ((RecipeMapLaserMultiblockController) metaTileEntity).refreshAllBeforeConsumption();
         recipe = Recipe.trimRecipeOutputs(recipe, getRecipeMap(), metaTileEntity.getItemOutputLimit(), metaTileEntity.getFluidOutputLimit());
 
         recipe = findParallelRecipe(

@@ -6,7 +6,6 @@ import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.logic.OCParams;
@@ -125,20 +124,15 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
         this.lastRecipeIndex = 0;
     }
 
-    public IEnergyContainer getEnergyContainer() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
-        return controller.getEnergyContainer();
-    }
-
     @Override
     protected IItemHandlerModifiable getInputInventory() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         return controller.getInputInventory();
     }
 
     // Used for distinct bus recipe checking
     protected List<IItemHandlerModifiable> getInputBuses() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         List<IItemHandlerModifiable> inputItems = new ArrayList<>(
                 controller.getAbilities(MultiblockAbility.IMPORT_ITEMS));
         inputItems.addAll(controller.getAbilities(MultiblockAbility.DUAL_IMPORT));
@@ -147,13 +141,13 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     protected IItemHandlerModifiable getOutputInventory() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         return controller.getOutputInventory();
     }
 
     @Override
     protected IMultipleTankHandler getInputTank() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         return controller.getInputFluidInventory();
     }
 
@@ -183,14 +177,14 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     protected IMultipleTankHandler getOutputTank() {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         return controller.getOutputFluidInventory();
     }
 
     @Override
     protected boolean canWorkWithInputs() {
         MultiblockWithDisplayBase controller = (MultiblockWithDisplayBase) metaTileEntity;
-        if (!(controller instanceof RecipeMapMultiblockController distinctController) ||
+        if (!(controller instanceof RecipeMapLaserMultiblockController distinctController) ||
                 !distinctController.canBeDistinct() ||
                 !distinctController.isDistinct() ||
                 getInputInventory().getSlots() == 0) {
@@ -289,7 +283,7 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
         }
 
         // Distinct buses only apply to some multiblocks, so check the controller against a lower class
-        if (controller instanceof RecipeMapMultiblockController distinctController) {
+        if (controller instanceof RecipeMapLaserMultiblockController distinctController) {
 
             if (distinctController.canBeDistinct() && distinctController.isDistinct() &&
                     getInputInventory().getSlots() > 0) {
@@ -376,7 +370,14 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
         return false;
     }
 
+    @Override
+    public boolean prepareRecipe(Recipe recipe) {
+        ((RecipeMapLaserMultiblockController) metaTileEntity).refreshAllBeforeConsumption();
+        return super.prepareRecipe(recipe);
+    }
+
     protected boolean prepareRecipeDistinct(Recipe recipe) {
+        ((RecipeMapLaserMultiblockController) metaTileEntity).refreshAllBeforeConsumption();
         recipe = Recipe.trimRecipeOutputs(recipe, getRecipeMap(), metaTileEntity.getItemOutputLimit(),
                 metaTileEntity.getFluidOutputLimit());
         boolean dualInput = hasDualInput();
@@ -465,7 +466,7 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
     @Override
     public void invalidateInputs() {
         MultiblockWithDisplayBase controller = (MultiblockWithDisplayBase) metaTileEntity;
-        RecipeMapMultiblockController distinctController = (RecipeMapMultiblockController) controller;
+        RecipeMapLaserMultiblockController distinctController = (RecipeMapLaserMultiblockController) controller;
         if (distinctController.canBeDistinct() && distinctController.isDistinct() &&
                 !(getInputInventory() instanceof DualHandler) &&
                 getInputInventory().getSlots() > 0) {
@@ -523,7 +524,7 @@ public class MultiblockLaserRecipeLogic extends AbstractRecipeLogic {
 
     @Override
     public boolean checkRecipe(Recipe recipe) {
-        RecipeMapMultiblockController controller = (RecipeMapMultiblockController) metaTileEntity;
+        RecipeMapLaserMultiblockController controller = (RecipeMapLaserMultiblockController) metaTileEntity;
         if (controller.checkRecipe(recipe, false)) {
             controller.checkRecipe(recipe, true);
             return super.checkRecipe(recipe);

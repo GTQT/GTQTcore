@@ -6172,7 +6172,7 @@ tile.wire_coil.eternity_coil_block.name=*-永恒线圈-*
 tile.wire_coil.hypogen_coil_block.name=*-海珀珍线圈-*
 tile.wire_coil.space_time_coil_block.name=*-时空线圈-*
 tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-超导金属氢线圈-*
-tile.wire_coil.cupar_proton_pair_coil.name=*-库珀质子对线圈(I)-*
+tile.wire_coil.cupar_proton_pair_coil_block.name=*-库珀质子对线圈(I)-*
 tile.wire_coil.cupara_proton_pair_coil.name=*-库珀质子对线圈(II)-*
 tile.wire_coil.cuparb_proton_pair_coil.name=*-库珀质子对线圈(III)-*
 

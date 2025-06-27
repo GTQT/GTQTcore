@@ -143,7 +143,6 @@ dependencies {
         implementation 'zone.rong:mixinbooter:7.1'
     }
 
-
     api("com.cleanroommc:groovyscript:1.2.0-hotfix1") { transitive = false }
     api("com.cleanroommc:modularui:2.5.0-rc4") { transitive = false }
 

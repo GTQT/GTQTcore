@@ -6191,7 +6191,7 @@ tile.wire_coil.eternity_coil_block.name=*-Eternal Coil-*
 tile.wire_coil.hypogen_coil_block.name=*-Hypogen Coil-*
 tile.wire_coil.space_time_coil_block.name=*-Space Time Coil-*
 tile.wire_coil.superconducting_metallic_hydrogen_coil.name=*-Superconducting Metallic Hydrogen Coil-*
-tile.wire_coil.cupar_proton_pair_coil.name=*-Cooper Proton Pair Coil (I)-*
+tile.wire_coil.cupar_proton_pair_coil_block.name=*-Cooper Proton Pair Coil (I)-*
 tile.wire_coil.cupara_proton_pair_coil.name=*-Cooper Proton Pair Coil (II)-*
 tile.wire_coil.cuparb_proton_pair_coil.name=*-Cooper Proton Pair Coil (III)-*
 

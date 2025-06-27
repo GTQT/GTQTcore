@@ -3,19 +3,26 @@ package keqing.gtqtcore.api.metatileentity.multiblock;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IDistinctBusController;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
+import gregtech.api.metatileentity.interfaces.IRefreshBeforeConsumption;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.common.ConfigHolder;
+import gtqt.api.util.GTQTUtility;
 import keqing.gtqtcore.api.capability.ILaser;
 import keqing.gtqtcore.api.capability.impl.MultiblockLaserRecipeLogic;
 import net.minecraft.client.resources.I18n;
@@ -29,20 +36,17 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static gregtech.api.GTValues.V;
-import static gregtech.api.GTValues.VN;
+import static gregtech.api.GTValues.VOC;
+import static gregtech.api.GTValues.VOCN;
 import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 
-public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements IDistinctBusController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements  IDistinctBusController, IControllable {
     public final RecipeMap<?> recipeMap;
     protected MultiblockLaserRecipeLogic recipeMapWorkable;
     protected IItemHandlerModifiable inputInventory;
@@ -50,6 +54,7 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
     protected int inputNum;
+    protected List<IRefreshBeforeConsumption> refreshBeforeConsumptions;
     private boolean isDistinct = false;
     private ICleanroomProvider cleanroom;
 
@@ -57,7 +62,14 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
         super(metaTileEntityId);
         this.recipeMap = recipeMap;
         this.recipeMapWorkable = new MultiblockLaserRecipeLogic(this);
+        this.refreshBeforeConsumptions = new ArrayList<>();
         this.resetTileAbilities();
+    }
+
+    public void refreshAllBeforeConsumption() {
+        for (IRefreshBeforeConsumption refresh : refreshBeforeConsumptions) {
+            refresh.refreshBeforeConsumption();
+        }
     }
 
     public IItemHandlerModifiable getInputInventory() {
@@ -109,10 +121,27 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
     }
 
     protected void initializeAbilities() {
-        this.inputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
-        this.inputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.IMPORT_FLUIDS));
-        this.outputInventory = new ItemHandlerList(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
-        this.outputFluidInventory = new FluidTankList(this.allowSameFluidFillForOutputs(), this.getAbilities(MultiblockAbility.EXPORT_FLUIDS));
+        List<IItemHandler> inputItems = new ArrayList<>(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        inputItems.addAll(getAbilities(MultiblockAbility.DUAL_IMPORT));
+        this.inputInventory = new ItemHandlerList(inputItems);
+
+        List<IMultipleTankHandler> inputFluids = new ArrayList<>(getAbilities(MultiblockAbility.DUAL_IMPORT));
+        inputFluids.add(new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS)));
+        this.inputFluidInventory = GTQTUtility.mergeTankHandlers(inputFluids, true);
+
+        List<IItemHandler> outputItems = new ArrayList<>(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        outputItems.addAll(getAbilities(MultiblockAbility.DUAL_EXPORT));
+        this.outputInventory = new ItemHandlerList(outputItems);
+        List<IMultipleTankHandler> outputFluids = new ArrayList<>(getAbilities(MultiblockAbility.DUAL_EXPORT));
+        outputFluids.add(new FluidTankList(false, getAbilities(MultiblockAbility.EXPORT_FLUIDS)));
+        this.outputFluidInventory = GTQTUtility.mergeTankHandlers(outputFluids, false);
+
+
+        for (IMultiblockPart part : getMultiblockParts()) {
+            if (part instanceof IRefreshBeforeConsumption refresh) {
+                refreshBeforeConsumptions.add(refresh);
+            }
+        }
     }
 
     private void resetTileAbilities() {
@@ -120,22 +149,45 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
         this.inputFluidInventory = new FluidTankList(true);
         this.outputInventory = new GTItemStackHandler(this, 0);
         this.outputFluidInventory = new FluidTankList(true);
+        this.refreshBeforeConsumptions.clear();
     }
 
     protected boolean allowSameFluidFillForOutputs() {
         return true;
     }
 
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed())
-                .setWorkingStatus(this.recipeMapWorkable.isWorkingEnabled(), this.recipeMapWorkable.isActive())
-                .addCustom(tl -> tl.add(new TextComponentTranslation("激光最大转换EU：%s %s",V[getMaxLaser()],VN[getMaxLaser()])))
-                .addCustom(tl -> tl.add(new TextComponentTranslation("实际激光转换EU：%s %s",LaserToEu(),VN[GTUtility.getTierByVoltage(LaserToEu())])))
-                .addCustom(tl -> tl.add(new TextComponentTranslation("激光器最大等级：%s",getTier())))
-                .addCustom(tl -> tl.add(new TextComponentTranslation("激光最大换热温度温度：%s",getTemp())))
-                .addEnergyTierLine(GTUtility.getTierByVoltage(this.recipeMapWorkable.getMaxVoltage()))
-                .addParallelsLine(this.recipeMapWorkable.getParallelLimit()).addWorkingStatusLine()
-                .addProgressLine(this.recipeMapWorkable.getProgressPercent());
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addHeatCapacity)
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+
+                    textList.add(KeyUtil.lang(TextFormatting.RED, "激光最大转换EU：%s %s", syncer.syncLong(VOC[getMaxLaser()]), syncer.syncString(VOCN[getMaxLaser()])));
+                    textList.add(KeyUtil.lang(TextFormatting.GREEN, "实际激光转换EU：%s %s", syncer.syncLong(LaserToEu()), syncer.syncString(VOCN[GTUtility.getTierByVoltage(LaserToEu())])));
+                    textList.add(KeyUtil.lang(TextFormatting.YELLOW, "激光器最大等级：%s", syncer.syncInt(getTier())));
+                    textList.add(KeyUtil.lang(TextFormatting.YELLOW, "激光最大换热温度温度：%s K", syncer.syncInt(getTemp())));
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    public void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
+        int temp = getCurrentTemperature();
+        if (isStructureFormed() && temp != 0) {
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(temp), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+        }
+    }
+
+    public int getCurrentTemperature() {
+        return 0;
     }
 
     @Override
@@ -177,6 +229,17 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
             predicate = predicate.or(abilities(MultiblockAbility.EXPORT_FLUIDS).setPreviewCount(1));
         }
 
+        if (checkItemIn || checkFluidIn) {
+            if (recipeMap.getMaxInputs() > 0 || recipeMap.getMaxFluidInputs() > 0) {
+                predicate = predicate.or(abilities(MultiblockAbility.DUAL_IMPORT).setPreviewCount(1));
+            }
+        }
+
+        if (checkItemOut || checkFluidOut) {
+            if (recipeMap.getMaxOutputs() > 0 || recipeMap.getMaxFluidOutputs() > 0) {
+                predicate = predicate.or(abilities(MultiblockAbility.DUAL_EXPORT).setPreviewCount(1));
+            }
+        }
         return predicate;
     }
 
@@ -308,5 +371,13 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
         return (int) Math.pow(2, getTier());
     }
 
+    @Override
+    public boolean isWorkingEnabled() {
+        return recipeMapWorkable.isWorkingEnabled();
+    }
 
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        recipeMapWorkable.setWorkingEnabled(isWorkingAllowed);
+    }
 }

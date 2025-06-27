@@ -16,7 +16,6 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.loaders.recipe.CraftingComponent;
-import keqing.gtqtcore.api.unification.MaterialHelper;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockElectrolyticBath;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing6;
@@ -216,42 +215,6 @@ public class MetaTileEntityLoader {
                 'C', new UnificationEntry(pipeLargeFluid, Steel),
                 'B', new UnificationEntry(plate, Iron),
                 'A', new UnificationEntry(plate, Invar));
-
-        //机器外壳
-        ModHandler.addShapedRecipe(true, "ulv_casing", HULL[0].getStackForm(),
-                "ABA", "CHC", "ABA",
-                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.ULV),
-                'C', new UnificationEntry(wireGtSingle, Lead),
-                'B', new UnificationEntry(plate, Iron),
-                'A', new UnificationEntry(plate, RedAlloy));
-
-        ModHandler.addShapedRecipe(true, "lv_casing", HULL[1].getStackForm(),
-                "ABA", "CHC", "ABA",
-                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.LV),
-                'C', new UnificationEntry(cableGtSingle, Tin),
-                'B', new UnificationEntry(plate, GalvanizedSteel),
-                'A', new UnificationEntry(plate, Rubber));
-
-        ModHandler.addShapedRecipe(true, "mv_casing", HULL[2].getStackForm(),
-                "ABA", "CHC", "ABA",
-                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.MV),
-                'C', new UnificationEntry(cableGtSingle, Copper),
-                'B', new UnificationEntry(plate, Invar),
-                'A', new UnificationEntry(plate, Polyethylene));
-
-        ModHandler.addShapedRecipe(true, "hv_casing", HULL[3].getStackForm(),
-                "ABA", "CHC", "ABA",
-                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV),
-                'C', new UnificationEntry(cableGtSingle, Aluminium),
-                'B', new UnificationEntry(plate, Talonite),
-                'A', new UnificationEntry(plate, Epoxy));
-
-        ModHandler.addShapedRecipe(true, "ev_casing", HULL[4].getStackForm(),
-                "ABA", "CHC", "ABA",
-                'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV),
-                'C', new UnificationEntry(cableGtSingle, Gold),
-                'B', new UnificationEntry(plate, Palladium),
-                'A', new UnificationEntry(plate, Polytetrafluoroethylene));
 
         ModHandler.addShapedRecipe(true, "item_input_hatch", ITEM_IMPORT_BUS[0].getStackForm(),
                 "MC", "hc",
