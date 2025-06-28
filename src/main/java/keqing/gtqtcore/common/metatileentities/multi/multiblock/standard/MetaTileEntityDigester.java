@@ -128,7 +128,7 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed())
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.cracking_unit.energy", syncer.syncInt(100 - this.coilTier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gregtech.multiblock.cracking_unit.energy", syncer.syncInt(100 - this.coilTier)));
     }
 
     @Override

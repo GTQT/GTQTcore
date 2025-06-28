@@ -343,7 +343,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                 IKey truncated = KeyUtil.string(TextFormatting.GOLD,
                         TextFormattingUtil.formatBigIntToCompactString(energyStored, 7) + " EU");
 
-                IKey bodyStored = (KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.stored",
+                IKey bodyStored = (KeyUtil.lang( "gregtech.multiblock.power_substation.stored",
                         truncated));
 
                 manager.add(KeyUtil.setHover(bodyStored, storedFormatted));
@@ -355,7 +355,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                 IKey capCompact = KeyUtil.string(TextFormatting.GOLD,
                         TextFormattingUtil.formatBigIntToCompactString(energyCapacity, 7) + " EU");
 
-                IKey bodyCap = KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.capacity",
+                IKey bodyCap = KeyUtil.lang( "gregtech.multiblock.power_substation.capacity",
                         capCompact);
 
                 manager.add(KeyUtil.setHover(bodyCap, capacityFormatted));
@@ -363,7 +363,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                 // Passive Drain line
                 IKey passiveDrain = KeyUtil.string(TextFormatting.DARK_RED,
                         TextFormattingUtil.formatNumbers(syncer.syncLong(getPassiveDrain())) + " EU/t");
-                manager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.passive_drain",
+                manager.add(KeyUtil.lang( "gregtech.multiblock.power_substation.passive_drain",
                         passiveDrain));
 
                 // Average EU IN line
@@ -371,15 +371,15 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                 long avgOut = syncer.syncLong(averageOutLastSec);
 
                 IKey avgValue = KeyUtil.number(TextFormatting.GREEN, avgIn, " EU/t");
-                IKey base = KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.average_in",
+                IKey base = KeyUtil.lang( "gregtech.multiblock.power_substation.average_in",
                         avgValue);
-                IKey hover = KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.average_in_hover");
+                IKey hover = KeyUtil.lang( "gregtech.multiblock.power_substation.average_in_hover");
                 manager.add(KeyUtil.setHover(base, hover));
 
                 // Average EU OUT line
                 avgValue = KeyUtil.number(TextFormatting.RED, avgOut, " EU/t");
-                base = KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.average_out", avgValue);
-                hover = KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.average_out_hover");
+                base = KeyUtil.lang( "gregtech.multiblock.power_substation.average_out", avgValue);
+                hover = KeyUtil.lang( "gregtech.multiblock.power_substation.average_out_hover");
                 manager.add(KeyUtil.setHover(base, hover));
 
                 // Time to fill/drain line
@@ -388,7 +388,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                             .divide(BigInteger.valueOf((avgIn - avgOut) * 20)))
                             .style(TextFormatting.GREEN);
 
-                    manager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.time_to_fill",
+                    manager.add(KeyUtil.lang( "gregtech.multiblock.power_substation.time_to_fill",
                             timeToFill));
 
                 } else if (avgIn < avgOut) {
@@ -396,7 +396,7 @@ public class MetaTileEntityEnergySubstation extends MultiblockWithDisplayBase im
                             energyStored.divide(BigInteger.valueOf((avgOut - avgIn) * 20)))
                             .style(TextFormatting.RED);
 
-                    manager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.power_substation.time_to_drain",
+                    manager.add(KeyUtil.lang( "gregtech.multiblock.power_substation.time_to_drain",
                             timeToDrain));
                 }
             }

@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
@@ -44,10 +45,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -130,11 +133,12 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         tooltip.add(I18n.format("在输入总线放置绑定微波仓（覆盖板）的数据卡来将其存入系统对其供能，绑定的微波仓需要在多方块的供能范围内，否则不会存入系统"));
         tooltip.add(I18n.format("升级结构来获得更大的供能范围与缓存电量,最大容量为 V[Math.min(heatingCoilLevel,9)]*16*coilHeight EU"));
         tooltip.add(I18n.format("最多管理：%s 个设备,升级线圈获得更多的管理容量", 64));
-        tooltip.add(I18n.format("使用操作按钮配合加减按钮完成不同功能操作"));
+        tooltip.add(I18n.format("使用螺丝刀右键可以调整设备更新时间间隔(过大的时间间隔可能导致机器检测迟钝！)"));
         tooltip.add(I18n.format("不要共用！"));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("checkTime",checkTime);
         data.setTag("inputCardInventory", this.inputCardInventory.serializeNBT());
         data.setTag("outputCardInventory", this.outputCardInventory.serializeNBT());
         data.setTag("pssInventory", this.pssInventory.serializeNBT());
@@ -150,6 +154,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
+        checkTime=data.getInteger("checkTime");
         this.inputCardInventory.deserializeNBT(data.getCompoundTag("inputCardInventory"));
         this.outputCardInventory.deserializeNBT(data.getCompoundTag("outputCardInventory"));
         this.pssInventory.deserializeNBT(data.getCompoundTag("pssInventory"));
@@ -518,13 +523,14 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
             }
 
         }
-        for (int i = 0; i < maxLength; i++) {
+        if(getOffsetTimer()%checkTime==0) for (int i = 0; i < maxLength; i++) {
             if (io[i][0] == 1) {
                 if (!checkLoacl(i)||GTQTUtil.rangeMetFormMte(new BlockPos(io[i][1], io[i][2], io[i][3]),getPos())>range) {
                     clean(false, i);
                 }
             }
         }
+
         //供电
         //if电多
         for (int i = 0; i < maxLength; i++) {
@@ -532,6 +538,23 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 addEnergy(i, V[io[i][4]]);
             }
         }
+    }
+    int checkTime=10;
+    @Override
+    public boolean onScrewdriverClick(EntityPlayer playerIn,
+                                      EnumHand hand,
+                                      EnumFacing facing,
+                                      CuboidRayTraceResult hitResult) {
+        return changeCheckTime(playerIn);
+    }
+
+    private boolean changeCheckTime(EntityPlayer playerIn) {
+        if(getWorld().isRemote) {
+            checkTime += 10;
+            if (checkTime >= 200) checkTime = 10;
+            playerIn.sendMessage(new TextComponentString("蓄能变电站调整检测间隔:"+checkTime));
+        }
+        return true;
     }
 
     //对 x y z +eu

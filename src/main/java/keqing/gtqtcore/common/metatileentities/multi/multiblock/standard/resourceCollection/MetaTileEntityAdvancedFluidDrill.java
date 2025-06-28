@@ -180,7 +180,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
                         IKey noFluid = KeyUtil.lang(TextFormatting.RED,
                                 "gregtech.multiblock.fluid_rig.no_fluid_in_area");
 
-                        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        keyManager.add(KeyUtil.lang(
                                 "gregtech.multiblock.fluid_rig.drilled_fluid",
                                 noFluid));
                         return;
@@ -188,7 +188,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
 
                     IKey fluidInfo = KeyUtil.fluid(drilledFluid).style(TextFormatting.GREEN);
 
-                    keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    keyManager.add(KeyUtil.lang(
                             "gregtech.multiblock.fluid_rig.drilled_fluid",
                             fluidInfo));
 
@@ -197,7 +197,7 @@ public class MetaTileEntityAdvancedFluidDrill extends MultiblockWithDisplayBase 
                     IKey amountInfo = KeyUtil.number(TextFormatting.BLUE,
                             fluidProduce * 20L / FluidDrillLogic.MAX_PROGRESS, " L/s");
 
-                    keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    keyManager.add(KeyUtil.lang(
                             "gregtech.multiblock.fluid_rig.fluid_amount",
                             amountInfo));
                 })

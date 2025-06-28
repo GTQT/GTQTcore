@@ -222,7 +222,7 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
             if (isStructureFormed() && syncer.syncBoolean(getWaterFilled() == 0)) {
                 manager.add(KeyUtil.lang(TextFormatting.YELLOW,
                         "gregtech.multiblock.large_boiler.no_water"));
-                manager.add(KeyUtil.lang(TextFormatting.GRAY,
+                manager.add(KeyUtil.lang(
                         "gregtech.multiblock.large_boiler.explosion_tooltip"));
             }
         });
@@ -258,18 +258,18 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
             int number = syncer.syncInt((int) Math.ceil(logic.getHeatEfficiency() * (40 + 0.6 * thresholdPercentage)));
 
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            keyManager.add(KeyUtil.lang(
                     "gtqtcore.machine.heat_exchanger.rate." + logic.isSuperheat(), logic.getRate()));
 
             // Efficiency line
             IKey efficiency = KeyUtil.number(
                     getNumberColor(number), number, "%");
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.large_boiler.efficiency", efficiency));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gregtech.multiblock.large_boiler.efficiency", efficiency));
 
             // Throttle line
             IKey throttle = KeyUtil.number(
                     getNumberColor(throttleAmt), throttleAmt, "%");
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            keyManager.add(KeyUtil.lang(
                     "gtqtcore.machine.heat_exchanger.threshold", throttle));
         }
     }

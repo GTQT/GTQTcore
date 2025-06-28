@@ -103,8 +103,8 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed()){
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "结构等级：%s 玻璃等级：%", syncer.syncInt(casing_tier), syncer.syncInt(glass_tier)));
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.eleTire4", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"结构等级：%s 玻璃等级：%", syncer.syncInt(casing_tier), syncer.syncInt(glass_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.eleTire4", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
         }
     }
     @Override

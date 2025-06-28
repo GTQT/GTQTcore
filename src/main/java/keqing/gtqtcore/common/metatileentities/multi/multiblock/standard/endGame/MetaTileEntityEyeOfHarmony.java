@@ -106,11 +106,11 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController {
                 .addEnergyUsageLine(getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom((textList, syncer) -> {
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", syncer.syncInt(timeAcceleration)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "压缩时空发生器:%s", syncer.syncInt(spaceTimeCompression)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "时间膨胀发生器:%s", syncer.syncInt(stabilization)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "星阵数量:%s", syncer.syncInt(calculateStarArray())));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "最大超频次数:%s", syncer.syncInt(maxAllowedOc)));
+                    textList.add(KeyUtil.lang( "时间膨胀发生器:%s", syncer.syncInt(timeAcceleration)));
+                    textList.add(KeyUtil.lang( "压缩时空发生器:%s", syncer.syncInt(spaceTimeCompression)));
+                    textList.add(KeyUtil.lang( "时间膨胀发生器:%s", syncer.syncInt(stabilization)));
+                    textList.add(KeyUtil.lang( "星阵数量:%s", syncer.syncInt(calculateStarArray())));
+                    textList.add(KeyUtil.lang( "最大超频次数:%s", syncer.syncInt(maxAllowedOc)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

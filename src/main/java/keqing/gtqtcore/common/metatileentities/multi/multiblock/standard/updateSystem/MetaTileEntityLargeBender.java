@@ -89,11 +89,15 @@ public class MetaTileEntityLargeBender extends GTQTRecipeMapMultiblockController
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.coilTire" , syncer.syncInt(coilLevel)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire" , syncer.syncInt(casingTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
-        if (casingTier != tubeTier)
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
+
+        if (casingTier != tubeTier) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal", syncedCasing, syncedTube));
+        }
     }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {

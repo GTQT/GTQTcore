@@ -293,9 +293,9 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
                 .addCustom(this::addHeatCapacity)
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "维度翘曲点数量：%s", syncer.syncInt(heat)));
+                    textList.add(KeyUtil.lang( "维度翘曲点数量：%s", syncer.syncInt(heat)));
                     if (heat > 576000) {
-                        textList.add(KeyUtil.lang(TextFormatting.GRAY, "已进入无损超频"));
+                        textList.add(KeyUtil.lang( "已进入无损超频"));
                     }
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
@@ -309,8 +309,7 @@ public class MetaTileEntityDimensionallyTranscendentPlasmaForge extends MultiMap
             var heatString = KeyUtil.number(TextFormatting.RED,
                     syncer.syncInt(getCurrentTemperature()), "K");
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+            keyManager.add(KeyUtil.lang("gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
 

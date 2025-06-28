@@ -143,8 +143,7 @@ public class MetaTileEntityLaserChemicalPlant extends RecipeMapLaserMultiblockCo
             var heatString = KeyUtil.number(TextFormatting.RED,
                     syncer.syncInt(this.getTemp() / 1800));
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "激光转换化工厂等级：%s", heatString));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"激光转换化工厂等级：%s", heatString));
         }
     }
     @Override

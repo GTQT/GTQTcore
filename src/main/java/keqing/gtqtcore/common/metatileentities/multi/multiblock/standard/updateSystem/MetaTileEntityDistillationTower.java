@@ -54,7 +54,9 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
 
     public MetaTileEntityDistillationTower(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                RecipeMaps.DISTILLATION_RECIPES
+                RecipeMaps.DISTILLATION_RECIPES,
+                RecipeMaps.DISTILLERY_RECIPES,
+
         });
 
 
@@ -120,12 +122,16 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTirev" , syncer.syncInt(casingTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
-        if (casingTier != tubeTier)
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
-    }
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
+
+        if (casingTier != tubeTier) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal", syncedCasing, syncedTube));
+        }
+    }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start(RIGHT, FRONT, UP)

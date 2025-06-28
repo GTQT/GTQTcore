@@ -162,9 +162,9 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         if (getInputFluidInventory() != null) {
             FluidStack fluidStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
             int liquidOxygenAmount = fluidStack == null ? 0 : fluidStack.amount;
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.vc.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.multiblock.vc.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
         }
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "Temperature : %s", syncer.syncInt(blastFurnaceTemperature)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"Temperature : %s", syncer.syncInt(blastFurnaceTemperature)));
 
     }
 
@@ -176,7 +176,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
                 FluidStack lubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
                 if (lubricantStack == null || lubricantStack.amount == 0) {
                     manager.add(KeyUtil.lang(TextFormatting.RED,
-                            "gtqtcore.multiblock.vc.nogtqtcore.multiblock.vc.no"));
+                            "gtqtcore.multiblock.vc.no"));
                 }
             }
         });

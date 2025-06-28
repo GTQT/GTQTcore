@@ -130,9 +130,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockControlle
                 .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
                 .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
                 .where('C', states(getCasingState()).setMinGlobalLimited(32)
-                        .or(autoAbilities())
-                        .or(abilities(GTQTMultiblockAbility.BUFFER_MULTIBLOCK_ABILITY).setExactLimit(1))
-                )
+                        .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where(' ', any())
                 .build();
@@ -157,9 +155,9 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockControlle
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.br.3", syncer.syncInt(glass_tier), syncer.syncInt(tubeTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "洁净等级:%s", syncer.syncInt(clean_tier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "组合因子：%s %s %s %s %s", syncer.syncInt(A), syncer.syncInt(B), syncer.syncInt(C), syncer.syncInt(D), syncer.syncInt(E)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.multiblock.br.3", syncer.syncInt(glass_tier), syncer.syncInt(tubeTier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"洁净等级:%s", syncer.syncInt(clean_tier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"组合因子：%s %s %s %s %s", syncer.syncInt(A), syncer.syncInt(B), syncer.syncInt(C), syncer.syncInt(D), syncer.syncInt(E)));
 
     }
 

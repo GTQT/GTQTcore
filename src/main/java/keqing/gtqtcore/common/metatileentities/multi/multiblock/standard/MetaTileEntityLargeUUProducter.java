@@ -74,7 +74,7 @@ public class MetaTileEntityLargeUUProducter extends RecipeMapMultiblockControlle
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
+                    textList.add(KeyUtil.lang( "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
 
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())

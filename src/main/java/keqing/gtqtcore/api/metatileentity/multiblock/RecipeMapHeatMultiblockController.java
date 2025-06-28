@@ -205,7 +205,7 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom((textList, syncer) -> {
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "热源温度:%s", syncer.syncInt(heat)));
+                    textList.add(KeyUtil.lang( "热源温度:%s", syncer.syncInt(heat)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

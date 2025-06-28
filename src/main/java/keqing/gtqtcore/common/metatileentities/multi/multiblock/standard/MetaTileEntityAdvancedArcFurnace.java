@@ -74,7 +74,7 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "电极状态：%s 电极等级：%s", syncer.syncBoolean(checkAvailable()), syncer.syncInt(ElectrodeTier)));
+                    textList.add(KeyUtil.lang( "电极状态：%s 电极等级：%s", syncer.syncBoolean(checkAvailable()), syncer.syncInt(ElectrodeTier)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

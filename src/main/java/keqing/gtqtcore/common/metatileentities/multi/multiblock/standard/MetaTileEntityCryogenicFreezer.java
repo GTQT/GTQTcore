@@ -199,7 +199,7 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
                 }
             }
             var heatString = KeyUtil.number(TextFormatting.RED, syncer.syncInt(temperature), "K");
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
 

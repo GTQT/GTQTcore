@@ -281,18 +281,18 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
                         int workingAreaChunks = syncer.syncInt(this.minerLogic.getCurrentRadius() * 2 / CHUNK_LENGTH);
                         int workingArea = syncer.syncInt(getWorkingArea(minerLogic.getCurrentRadius()));
 
-                        list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.mining_at"));
-                        list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.mining_pos",
+                        list.add(KeyUtil.lang( "gregtech.machine.miner.mining_at"));
+                        list.add(KeyUtil.lang( "gregtech.machine.miner.mining_pos",
                                 syncer.syncInt(minerLogic.getMineX().get()),
                                 syncer.syncInt(minerLogic.getMineY().get()),
                                 syncer.syncInt(minerLogic.getMineZ().get())));
 
                         if (syncer.syncBoolean(minerLogic.isChunkMode())) {
-                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.working_area_chunks",
+                            list.add(KeyUtil.lang( "gregtech.machine.miner.working_area_chunks",
                                     workingAreaChunks,
                                     workingAreaChunks));
                         } else {
-                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.machine.miner.working_area",
+                            list.add(KeyUtil.lang( "gregtech.machine.miner.working_area",
                                     workingArea, workingArea));
                         }
 
@@ -301,7 +301,7 @@ public class MetaTileEntityAdvancedLargeMiner extends MultiblockWithDisplayBase 
                         } else if (syncer.syncBoolean(minerLogic.isWorking())) {
                             list.add(KeyUtil.lang(TextFormatting.GOLD, "gregtech.machine.miner.working"));
                         } else if (!syncer.syncBoolean(isWorkingEnabled())) {
-                            list.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.work_paused"));
+                            list.add(KeyUtil.lang( "gregtech.multiblock.work_paused"));
                         }
                     }
                 });

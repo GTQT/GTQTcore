@@ -134,24 +134,59 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
                 .addRecipeOutputLine(recipeMapWorkable);
     }
 
-    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
-        if (isStructureFormed()) {
-            if (getRadiationHatch().isAvailable()) {
-                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                        "放射仓等级：%s 辐射：%s Sv", syncer.syncInt(getRadiationHatch().getTier()), syncer.syncInt(getRadiationHatch().getRadiation())));
-                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                        "辐射物质: %s", getRadiationHatch().getMaterial().getLocalizedName()));
-                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                        "已经工作: %s", syncer.syncString(GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getRadiation()))));
-                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                        "剩余时间: %s", syncer.syncString(GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getTotalTick() - getRadiationHatch().getWorkTime()))));
-            }
-            else keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "放射仓等级：%s", syncer.syncInt(getRadiationHatch().getTier())));
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "玻璃等级：%s 玻璃储量：%s", syncer.syncInt(glass_tier), syncer.syncDouble((10 - glass_tier) / 10.0)));
-        }
+private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+    if (!isStructureFormed()) return;
+
+    IRadiation radiationHatch = getRadiationHatch();
+    if (radiationHatch == null) return;
+
+    // 第一步：同步所有数值数据
+    Integer syncedTier = syncer.syncInt(radiationHatch.getTier());
+    Integer syncedRadiation = radiationHatch.isAvailable() ?
+        syncer.syncInt(radiationHatch.getRadiation()) : null;
+    String syncedMaterialName = radiationHatch.isAvailable() ?
+        syncer.syncString(radiationHatch.getMaterial().getLocalizedName()) : null;
+    String syncedWorkedTime = radiationHatch.isAvailable() ?
+        syncer.syncString(GTQTDateHelper.getTimeFromTicks(radiationHatch.getRadiation())) : null;
+    String syncedRemainingTime = radiationHatch.isAvailable() ?
+        syncer.syncString(GTQTDateHelper.getTimeFromTicks(
+            radiationHatch.getTotalTick() - radiationHatch.getWorkTime())) : null;
+
+    // 同步玻璃相关数据
+    Integer syncedGlassTier = syncer.syncInt(glass_tier);
+    Double syncedGlassValue = syncer.syncDouble((10 - glass_tier) / 10.0);
+
+    // 第二步：添加放射仓信息
+    if (radiationHatch.isAvailable()) {
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            "放射仓等级：%s 辐射：%s Sv",
+            syncedTier,
+            syncedRadiation));
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            "辐射物质: %s",
+            syncedMaterialName));
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            "已经工作: %s",
+            syncedWorkedTime));
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            "剩余时间: %s",
+            syncedRemainingTime));
+    } else {
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            "放射仓等级：%s",
+            syncedTier));
     }
+
+    // 第三步：添加玻璃信息
+    keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+        "玻璃等级：%s 玻璃储量：%s",
+        syncedGlassTier,
+        syncedGlassValue));
+}
+
 
     public IRadiation getRadiationHatch() {
         List<IRadiation> abilities = getAbilities(RADIATION_MULTIBLOCK_ABILITY);
@@ -183,14 +218,13 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
 
         boolean work = false;
 
+
         public BiologicalReactionLogic(RecipeMapMultiblockController tileEntity) {
             super(tileEntity, true);
         }
-
-        @Override
         public int getParallelLimit() {
-            if (getRadiationHatch().isAvailable()) return (int) Math.pow(2, getRadiationHatch().getTier());
-            return 1;
+            IRadiation hatch = getRadiationHatch();
+            return hatch != null && hatch.isAvailable() ? (int) Math.pow(2, hatch.getTier()) : 1;
         }
 
         public void setMaxProgress(int maxProgress) {

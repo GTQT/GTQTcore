@@ -183,7 +183,16 @@ public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockControlle
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.atier" , syncer.syncInt(tier), syncer.syncInt(glass_tier),syncer.syncInt( laser_tier),syncer.syncInt( casing_tier)));
+
+        // 第一步：同步所有数值并保存返回值
+        Integer syncedTier = syncer.syncInt(tier);
+        Integer syncedGlass = syncer.syncInt(glass_tier);
+        Integer syncedLaser = syncer.syncInt(laser_tier);
+        Integer syncedCasing = syncer.syncInt(casing_tier);
+
+        // 第二步：添加带格式化文本的键
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.atier", syncedTier, syncedGlass, syncedLaser, syncedCasing
+        ));
     }
     @Override
     protected Function<BlockPos, Integer> multiblockPartSorter() {

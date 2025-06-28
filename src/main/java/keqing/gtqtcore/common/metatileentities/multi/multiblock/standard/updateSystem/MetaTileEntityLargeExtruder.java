@@ -4,12 +4,15 @@ import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockWireCoil;
@@ -27,6 +30,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -82,15 +86,20 @@ public class MetaTileEntityLargeExtruder extends GTQTRecipeMapMultiblockControll
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
-        if (casingTier != tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
-    }
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        Integer syncedCoil = syncer.syncInt(coilLevel);
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.coilTire" , syncedCoil));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
+
+        if (casingTier != tubeTier) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal", syncedCasing, syncedTube));
+        }
+    }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {

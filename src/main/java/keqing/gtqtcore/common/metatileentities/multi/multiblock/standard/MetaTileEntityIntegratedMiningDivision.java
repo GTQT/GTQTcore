@@ -80,8 +80,13 @@ public class MetaTileEntityIntegratedMiningDivision extends GTQTRecipeMapMultibl
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.level1" , syncer.syncInt(coilType),syncer.syncInt(glass_tier)));
+        Integer syncedCoil = syncer.syncInt(coilType);
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.coilTire" , syncedCoil));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
     }
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {

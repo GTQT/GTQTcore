@@ -135,8 +135,8 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 .addCustom(this::addHeatCapacity)
                 .addCustom((textList, syncer) -> {
                     if (!isStructureFormed()) return;
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "玻璃等级：%s 线圈等级:%s", syncer.syncInt(glassTire), syncer.syncInt(coilTier)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
+                    textList.add(KeyUtil.lang( "玻璃等级：%s 线圈等级:%s", syncer.syncInt(glassTire), syncer.syncInt(coilTier)));
+                    textList.add(KeyUtil.lang( "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
@@ -149,7 +149,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
             var heatString = KeyUtil.number(TextFormatting.RED,
                     syncer.syncInt(getCurrentTemperature()), "K");
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+            keyManager.add(KeyUtil.lang(
                     "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }

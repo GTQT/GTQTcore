@@ -288,7 +288,7 @@ public class MetaTileEntityMSF extends MultiMapMultiblockController implements P
                         IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
                                 "%s / %s  kPa",
                                 hatch.getIntValue()+100, 10000);
-                        tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                        tooltip.add(KeyUtil.lang(
                                 "仓室压力",
                                 heatInfo));
                     })

@@ -321,7 +321,7 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (this.isStructureFormed() && casingTier > 0) {
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "结构等级 : %s", syncer.syncInt(casingTier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"结构等级 : %s", syncer.syncInt(casingTier)));
         }
     }
 

@@ -651,7 +651,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                         1.0 * stored.getLongValue() / capacity.getLongValue() : 0)
                 .texture(GTGuiTextures.PROGRESS_BAR_FUSION_ENERGY)
                 .tooltipBuilder(tooltip -> tooltip
-                        .add(KeyUtil.lang(TextFormatting.GRAY,
+                        .add(KeyUtil.lang(
                                 "gregtech.multiblock.energy_stored",
                                 stored.getLongValue(), capacity.getLongValue()))));
 
@@ -661,7 +661,7 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                     IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
                             "%,d / %,d EU",
                             heat.getLongValue(), capacity.getLongValue());
-                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                    tooltip.add(KeyUtil.lang(
                             "gregtech.multiblock.fusion_reactor.heat",
                             heatInfo));
                 })

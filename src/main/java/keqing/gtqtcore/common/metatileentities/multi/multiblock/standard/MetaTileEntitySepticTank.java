@@ -105,11 +105,9 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
             var heatString = KeyUtil.number(TextFormatting.RED,
                     syncer.syncInt(getCurrentTemperature()), "K");
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"gregtech.multiblock.blast_furnace.max_temperature", heatString));
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gtqtcore.tire", syncer.syncInt(tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"gtqtcore.tire", syncer.syncInt(tier)));
         }
     }
     @Override

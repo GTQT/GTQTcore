@@ -37,7 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockController {
-    private int coilLevel;
     private int casingTier;
     private int tubeTier;
 
@@ -88,12 +87,16 @@ public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockControll
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire" , syncer.syncInt(casingTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
-        if (casingTier != tubeTier)
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
-    }
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
+
+        if (casingTier != tubeTier) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal", syncedCasing, syncedTube));
+        }
+    }
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
         switch (this.casingTier) {
@@ -133,12 +136,10 @@ public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockControll
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
-        Object coilType = context.get("CoilType");
+
         Object casingTier = context.get("ChemicalPlantCasingTieredStats");
         Object tubeTier = context.get("ChemicalPlantTubeTieredStats");
-        this.coilLevel = GTQTUtil.getOrDefault(() -> coilType instanceof IHeatingCoilBlockStats,
-                () -> ((IHeatingCoilBlockStats) coilType).getLevel(),
-                BlockWireCoil.CoilType.CUPRONICKEL.getLevel());
+
         this.casingTier = GTQTUtil.getOrDefault(() -> casingTier instanceof WrappedIntTired,
                 () -> ((WrappedIntTired) casingTier).getIntTier(),
                 0);
@@ -148,7 +149,7 @@ public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockControll
 
         setTier(Math.min(this.casingTier, this.tubeTier));
         setMaxVoltage(Math.min(this.casingTier, this.tubeTier));
-        setTimeReduce((100 - Math.min(coilLevel, 10) * 5.0) / 100);
+        setTimeReduce((100 - Math.min(this.tubeTier, 10) * 5.0) / 100);
 
         this.writeCustomData(GTQTValue.UPDATE_TIER31, buf -> buf.writeInt(this.casingTier));
     }

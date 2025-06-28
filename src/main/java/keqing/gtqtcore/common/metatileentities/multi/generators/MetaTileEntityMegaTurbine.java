@@ -337,13 +337,13 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
                     if (rotorEfficiency > 0) {
                         IKey efficiencyInfo = KeyUtil.number(TextFormatting.AQUA,
                                 totalEfficiency, "%");
-                        keyList.add(KeyUtil.lang(TextFormatting.GRAY,
+                        keyList.add(KeyUtil.lang(
                                 "gregtech.multiblock.turbine.efficiency",
                                 efficiencyInfo));
 
                     }
                     IKey mod;
-                    mod = KeyUtil.lang(TextFormatting.GRAY, "模式：%s", mode == 0 ? "低速模式" : "高速模式");
+                    mod = KeyUtil.lang( "模式：%s", mode == 0 ? "低速模式" : "高速模式");
                     keyList.add(KeyUtil.setHover(mod));
                 })
                 .addFuelNeededLine(recipeLogic.getRecipeFluidInputInfo(), recipeLogic.getPreviousRecipeDuration())
@@ -377,7 +377,7 @@ public class MetaTileEntityMegaTurbine extends FuelMultiblockController implemen
             if (syncer.syncBoolean(!isRotorFaceFree())) {
                 keyList.add(KeyUtil.lang(TextFormatting.RED,
                         "gregtech.multiblock.turbine.obstructed"));
-                keyList.add(KeyUtil.lang(TextFormatting.GRAY,
+                keyList.add(KeyUtil.lang(
                         "gregtech.multiblock.turbine.obstructed.desc"));
             }
             int rotorEfficiency = syncer.syncInt(() -> getRotorHolder().getRotorEfficiency());

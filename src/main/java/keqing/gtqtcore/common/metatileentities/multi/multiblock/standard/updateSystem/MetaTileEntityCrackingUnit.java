@@ -175,17 +175,17 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
                     IKey energyDiscount = KeyUtil.number(TextFormatting.AQUA,
                             syncer.syncLong(100 - 10L * coilTier), "%");
 
-                    IKey base = KeyUtil.lang(TextFormatting.GRAY,
+                    IKey base = KeyUtil.lang(
                             "gregtech.multiblock.cracking_unit.energy",
                             energyDiscount);
 
-                    IKey hover = KeyUtil.lang(TextFormatting.GRAY,
+                    IKey hover = KeyUtil.lang(
                             "gregtech.multiblock.cracking_unit.energy_hover");
 
                     textList.add(KeyUtil.setHover(base, hover));
 
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire",syncer.syncInt(casingTier)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "线圈等级：%s",syncer.syncInt(coilTier)));
+                    textList.add(KeyUtil.lang( "gtqtcore.casingTire",syncer.syncInt(casingTier)));
+                    textList.add(KeyUtil.lang( "线圈等级：%s",syncer.syncInt(coilTier)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

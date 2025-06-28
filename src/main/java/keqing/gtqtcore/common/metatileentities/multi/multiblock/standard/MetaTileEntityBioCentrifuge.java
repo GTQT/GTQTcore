@@ -130,10 +130,7 @@ public class MetaTileEntityBioCentrifuge extends MultiMapMultiblockController {
     }
 
     private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
-
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                "Glass:%s Tube:%s Clean:%s", syncer.syncInt(glass_tier), syncer.syncDouble(tubeTier),syncer.syncInt(clean_tier)));
-
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"Glass:%s Tube:%s Clean:%s", syncer.syncInt(glass_tier), syncer.syncDouble(tubeTier),syncer.syncInt(clean_tier)));
     }
 
     @Override

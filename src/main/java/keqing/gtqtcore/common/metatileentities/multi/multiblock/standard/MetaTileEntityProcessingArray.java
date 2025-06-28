@@ -144,16 +144,16 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
                     // Shared text components for both states
                     IKey maxMachinesText = KeyUtil.number(TextFormatting.DARK_PURPLE,
                             syncer.syncInt(getMachineLimit()));
-                    maxMachinesText = KeyUtil.lang(TextFormatting.GRAY,
+                    maxMachinesText = KeyUtil.lang(
                             "gregtech.machine.machine_hatch.machines_max", maxMachinesText);
 
                     if (syncer.syncBoolean(logic.activeRecipeMap == null)) {
                         // No machines in hatch
                         IKey noneText = KeyUtil.lang(TextFormatting.YELLOW,
                                 "gregtech.machine.machine_hatch.machines_none");
-                        IKey bodyText = KeyUtil.lang(TextFormatting.GRAY,
+                        IKey bodyText = KeyUtil.lang(
                                 "gregtech.machine.machine_hatch.machines", noneText);
-                        IKey hoverText1 = KeyUtil.lang(TextFormatting.GRAY,
+                        IKey hoverText1 = KeyUtil.lang(
                                 "gregtech.machine.machine_hatch.machines_none_hover");
                         manager.add(KeyUtil.setHover(bodyText, hoverText1, maxMachinesText));
                     } else {
@@ -165,7 +165,7 @@ public class MetaTileEntityProcessingArray extends RecipeMapMultiblockController
                                 TextFormatting.DARK_PURPLE,
                                 "%sx %s",
                                 syncer.syncInt(logic.getParallelLimit()), mapText);
-                        IKey bodyText = KeyUtil.lang(TextFormatting.GRAY,
+                        IKey bodyText = KeyUtil.lang(
                                 "gregtech.machine.machine_hatch.machines", mapText);
                         int tier = syncer.syncInt(logic.machineTier);
                         IKey voltageName = KeyUtil.string(GTValues.VNF[tier]);

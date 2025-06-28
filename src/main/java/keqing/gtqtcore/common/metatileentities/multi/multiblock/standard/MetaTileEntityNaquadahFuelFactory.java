@@ -71,7 +71,7 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed())
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "线圈等级 %s", syncer.syncInt(CoilLevel)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"线圈等级 %s", syncer.syncInt(CoilLevel)));
     }
 
     @Override

@@ -228,11 +228,11 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
             int energyContainer = GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage());
             long maxVoltage = GTValues.V[energyContainer] / 2;
             String voltageName = GTValues.VNF[energyContainer];
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", syncer.syncLong(maxVoltage), syncer.syncString(voltageName)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gregtech.multiblock.max_energy_per_tick", syncer.syncLong(maxVoltage), syncer.syncString(voltageName)));
         }
         if (this.isActive() && drainEnergy(true)) {
-            keyManager.add((KeyUtil.lang(TextFormatting.GRAY,"gregtech.machine.miner.working")));
-            keyManager.add((KeyUtil.lang(TextFormatting.GRAY,"当前抽取速率：%s", syncer.syncInt(drainRate))));
+            keyManager.add((KeyUtil.lang("gregtech.machine.miner.working")));
+            keyManager.add((KeyUtil.lang("当前抽取速率：%s", syncer.syncInt(drainRate))));
         } else if (!drainEnergy(true))
             keyManager.add((KeyUtil.lang(TextFormatting.RED,"gregtech.machine.miner.needspower")));
         else if (!this.isWorkingEnabled())

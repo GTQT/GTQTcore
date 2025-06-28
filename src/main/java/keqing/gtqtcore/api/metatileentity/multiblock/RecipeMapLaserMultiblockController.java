@@ -181,8 +181,7 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
             var heatString = KeyUtil.number(TextFormatting.RED,
                     syncer.syncInt(temp), "K");
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
 

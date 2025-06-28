@@ -30,6 +30,7 @@ import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.mui.GTGuis;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.utils.GTQTUtil;
@@ -52,6 +53,7 @@ import java.util.function.BooleanSupplier;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
 public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblockController {
 
@@ -278,14 +280,18 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
         }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Override
     protected void configureDisplayText(MultiblockUIBuilder builder) {
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom(this::addCustomData)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
-
     //这里是警告
     @Override
     protected void configureWarningText(MultiblockUIBuilder builder) {
@@ -316,7 +322,7 @@ public abstract class GTQTRecipeMapMultiblockController extends MultiMapMultiblo
 
     //留给外部自定义
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gui.time_reduction" , syncer.syncDouble(timeReduce)));
+        if(setTimeReduce)keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gui.time_reduction" , syncer.syncDouble(timeReduce)));
     }
 
     //新UI

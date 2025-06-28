@@ -176,9 +176,9 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockControlle
                     int processingSpeed = tier == 0 ? 75 : 50 * (tier + 1);
                     IKey speed = KeyUtil.number(() -> getSpeedColor(processingSpeed), processingSpeed, "%");
 
-                    IKey body = KeyUtil.lang(TextFormatting.GRAY,
+                    IKey body = KeyUtil.lang(
                             "gregtech.multiblock.pyrolyse_oven.speed", speed);
-                    IKey hover = KeyUtil.lang(TextFormatting.GRAY,
+                    IKey hover = KeyUtil.lang(
                             "gregtech.multiblock.pyrolyse_oven.speed_hover");
                     textList.add(KeyUtil.setHover(body, hover));
                 })

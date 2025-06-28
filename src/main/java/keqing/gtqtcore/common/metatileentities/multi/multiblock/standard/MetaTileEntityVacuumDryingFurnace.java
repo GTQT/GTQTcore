@@ -80,7 +80,7 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockContr
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed())
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "Temperature : %s", syncer.syncString(TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"Temperature : %s", syncer.syncString(TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K")));
     }
     @Override
     protected void formStructure(PatternMatchContext context) {

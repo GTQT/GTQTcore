@@ -107,6 +107,7 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
         tooltip.add(I18n.format("gtqt.machine.stepper.3"));
         tooltip.add(I18n.format("gtqt.machine.stepper.4"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
+        tooltip.add(TextFormatting.GOLD + I18n.format("使用螺丝刀右键控制器使多方块退出缓存光刻胶"));
     }
 
     @Override
@@ -164,9 +165,9 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed()){
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "外壳等级：%s 紫外等级：%s 玻璃等级：%s ", syncer.syncInt(casing_tier), syncer.syncInt(laser_tier), syncer.syncInt(glass_tier)));
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "洁净等级：%s 射频调节器等级：%s", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "光刻胶等级：%s 光刻胶储量：%s ", syncer.syncInt(LaserKind), syncer.syncInt(LaserAmount)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"外壳等级：%s 紫外等级：%s 玻璃等级：%s ", syncer.syncInt(casing_tier), syncer.syncInt(laser_tier), syncer.syncInt(glass_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"洁净等级：%s 射频调节器等级：%s", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"光刻胶等级：%s 光刻胶储量：%s ", syncer.syncInt(LaserKind), syncer.syncInt(LaserAmount)));
         }
     }
     @Override

@@ -537,31 +537,61 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
     @Override
     protected void configureDisplayText(MultiblockUIBuilder builder) {
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
                 .addCustom(this::addCustomData)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
-                .addRecipeOutputLine(recipeMapWorkable);
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress());
     }
-
     private void addCustomData(KeyManager keyManager, UISyncer syncer) {
-        if (isStructureFormed()) {
+        if (!isStructureFormed()) return;
 
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gtqtcore.machine.pcb_factory.structure.info", syncer.syncInt(this.getMainUpgradeNumber()), syncer.syncInt(this.getTraceSize())));
-            if (this.getCoolingUpgradeNumber() > 0) {
-                keyManager.add(KeyUtil.lang(TextFormatting.AQUA,
-                        "gtqtcore.machine.pcb_factory.structure.cooling_tower"));
-                if (this.getCoolingUpgradeNumber() == 2) {
-                    keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                            "gtqtcore.machine.pcb_factory.structure.cooling_tower.info", syncer.syncInt(this.getCoolingUpgradeNumber()), syncer.syncInt(this.getCoolingUpgradeNumber())));
-                }
-            }
-            if (this.getBioUpgradeNumber() == 1) {
-                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                        "gtqtcore.machine.pcb_factory.structure.bio_reactor"));
-            }
+        // 第一步：同步所有数值数据
+        Integer syncedCWUt = syncer.syncInt(requestCWUt);
+        Double syncedAcceleration = syncer.syncDouble(getAccelerateByCWU(requestCWUt));
+        Integer syncedMainUpgrade = syncer.syncInt(this.getMainUpgradeNumber());
+        Integer syncedTraceSize = syncer.syncInt(this.getTraceSize());
+        Integer syncedCoolingUpgrade = syncer.syncInt(this.getCoolingUpgradeNumber());
 
+        // 第二步：添加基础信息显示
+        keyManager.add(KeyUtil.lang(
+                TextFormatting.GRAY,
+                "gtqtcore.kqcc_accelerate",
+                syncedCWUt,
+                syncedAcceleration
+        ));
+
+        keyManager.add(KeyUtil.lang(
+                TextFormatting.GRAY,
+                "gtqtcore.machine.pcb_factory.structure.info",
+                syncedMainUpgrade,
+                syncedTraceSize
+        ));
+
+        // 第三步：条件性添加冷却塔信息
+        if (this.getCoolingUpgradeNumber() > 0) {
+            keyManager.add(KeyUtil.lang(
+                    TextFormatting.AQUA,
+                    "gtqtcore.machine.pcb_factory.structure.cooling_tower"
+            ));
+
+            if (this.getCoolingUpgradeNumber() == 2) {
+                Integer syncedCoolingUpgradeForInfo = syncer.syncInt(this.getCoolingUpgradeNumber());
+                keyManager.add(KeyUtil.lang(
+                        TextFormatting.GRAY,
+                        "gtqtcore.machine.pcb_factory.structure.cooling_tower.info",
+                        syncedCoolingUpgradeForInfo,
+                        syncedCoolingUpgradeForInfo
+                ));
+            }
+        }
+
+        // 第四步：条件性添加生物反应器信息
+        if (this.getBioUpgradeNumber() == 1) {
+            keyManager.add(KeyUtil.lang(
+                    "gtqtcore.machine.pcb_factory.structure.bio_reactor"
+            ));
         }
     }
 

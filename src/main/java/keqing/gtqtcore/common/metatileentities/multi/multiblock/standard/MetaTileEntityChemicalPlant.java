@@ -33,8 +33,6 @@ import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
@@ -129,13 +127,28 @@ public class MetaTileEntityChemicalPlant extends GTQTRecipeMapMultiblockControll
     @Override
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.coilTire" , syncer.syncInt(coilLevel)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire" , syncer.syncInt(casingTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.voltageTier" , syncer.syncInt(voltageTier)));
-        if (casingTier != tubeTier)
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
+
+        // 第一步：同步所有数值并保存返回值
+        Integer syncedCoil = syncer.syncInt(coilLevel);
+        Integer syncedCasing = syncer.syncInt(casingTier);
+        Integer syncedTube = syncer.syncInt(tubeTier);
+        Integer syncedVoltage = syncer.syncInt(voltageTier);
+
+        // 第二步：添加基础信息显示
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.coilTire", syncedCoil));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncedCasing));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire", syncedTube));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.voltageTier", syncedVoltage));
+
+        // 第三步：条件性添加警告信息
+        if (casingTier != tubeTier) {
+            Integer syncedCasingForEqual = syncer.syncInt(casingTier);
+            Integer syncedTubeForEqual = syncer.syncInt(tubeTier);
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal", syncedCasingForEqual, syncedTubeForEqual
+            ));
+        }
     }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityChemicalPlant(metaTileEntityId);

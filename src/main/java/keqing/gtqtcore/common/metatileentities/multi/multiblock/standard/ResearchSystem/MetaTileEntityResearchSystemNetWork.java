@@ -1,5 +1,6 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.ResearchSystem;
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
 import gregtech.api.capability.IOpticalComputationReceiver;
@@ -53,11 +54,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -84,7 +87,6 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     int y;
     int z;
     int card;
-    boolean preLoad = false;
     int[][] io = new int[40][5];
     int thresholdPercentage = 0;
     private IOpticalComputationProvider computationProvider;
@@ -95,6 +97,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
+        data.setInteger("checkTime", checkTime);
         data.setInteger("page", page);
         for (int i = 0; i < 40; i++) data.setIntArray("io" + i, io[i]);
         data.setInteger("thresholdPercentage", thresholdPercentage); // 添加这一行
@@ -103,7 +106,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-
+        checkTime = data.getInteger("checkTime");
         page = data.getInteger("page");
         for (int i = 0; i < 40; i++) io[i] = data.getIntArray("io" + i);
         thresholdPercentage = data.getInteger("thresholdPercentage"); // 添加这一行
@@ -158,37 +161,52 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
             }
         }
 
-        if (!preLoad) for (int i = 0; i < 40; i++)
-            if (io[i][0] == 1 && MachineCheck(i, io[i][1], io[i][2], io[i][3])) preLoad = true;
+        if(getOffsetTimer()%checkTime==0) {
+            //检查 已经赋值的还在不在
+            double helpTier = 1;
 
-        //检查 已经赋值的还在不在
-        double helpTier = 1;
+            for (int i = 0; i < 40; i++)
+                if (io[i][0] == 1) {
+                    //如果检查失败
+                    if (!this.getWorld().isRemote && !MachineCheck(i, io[i][1], io[i][2], io[i][3])) {
+                        io[i][0] = 0;
+                        io[i][1] = 0;
+                        io[i][2] = 0;
+                        io[i][3] = 0;
+                        io[i][4] = 0;
+                    }
+                    //量子计算机 HPCA
+                    if (io[i][4] == 3) helpTier += 1.0;
 
-        if (!preLoad) return;
-        for (int i = 0; i < 40; i++)
-            if (io[i][0] == 1) {
-                //如果检查失败
-                if (!this.getWorld().isRemote && !MachineCheck(i, io[i][1], io[i][2], io[i][3])) {
-                    io[i][0] = 0;
-                    io[i][1] = 0;
-                    io[i][2] = 0;
-                    io[i][3] = 0;
-                    io[i][4] = 0;
+                    if (io[i][4] == 30) helpTier += 0.25;
+                    if (io[i][4] == 31) helpTier += 0.5;
+                    if (io[i][4] == 32) helpTier += 1.0;
+
+                    if (io[i][4] == 33) helpTier += 0.25;
+                    if (io[i][4] == 34) helpTier += 0.5;
+                    if (io[i][4] == 35) helpTier += 1.0;
                 }
-                //量子计算机 HPCA
-                if (io[i][4] == 3) helpTier += 1.0;
 
-                if (io[i][4] == 30) helpTier += 0.25;
-                if (io[i][4] == 31) helpTier += 0.5;
-                if (io[i][4] == 32) helpTier += 1.0;
+            if (helpTier != tier) tier = helpTier;
+        }
 
-                if (io[i][4] == 33) helpTier += 0.25;
-                if (io[i][4] == 34) helpTier += 0.5;
-                if (io[i][4] == 35) helpTier += 1.0;
-            }
+    }
+    int checkTime=10;
+    @Override
+    public boolean onScrewdriverClick(EntityPlayer playerIn,
+                                      EnumHand hand,
+                                      EnumFacing facing,
+                                      CuboidRayTraceResult hitResult) {
+        return changeCheckTime(playerIn);
+    }
 
-        if (helpTier != tier) tier = helpTier;
-
+    private boolean changeCheckTime(EntityPlayer playerIn) {
+        if(getWorld().isRemote) {
+            checkTime += 10;
+            if (checkTime >= 200) checkTime = 10;
+            playerIn.sendMessage(new TextComponentString("蓄能变电站调整检测间隔:"+checkTime));
+        }
+        return true;
     }
 
     public boolean localCheck() {
@@ -208,6 +226,7 @@ public class MetaTileEntityResearchSystemNetWork extends RecipeMapMultiblockCont
         tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.2"));
         tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.3"));
         tooltip.add(I18n.format("gtqtcore.machine.kqnet.tooltip.4"));
+        tooltip.add(I18n.format("使用螺丝刀右键可以调整设备更新时间间隔(过大的时间间隔可能导致机器检测迟钝！)"));
     }
 
     @Override

@@ -142,8 +142,7 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
 
     private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
-                    "gtqtcore.machine.fermentation_tank.ph", syncer.syncString(String.format("%, .2f", this.pH))));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,"gtqtcore.machine.fermentation_tank.ph", syncer.syncString(String.format("%, .2f", this.pH))));
         }
     }
 

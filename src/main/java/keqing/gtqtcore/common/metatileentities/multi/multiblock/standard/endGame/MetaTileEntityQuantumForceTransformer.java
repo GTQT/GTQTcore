@@ -302,13 +302,13 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
 
                 .addCustom((textList, syncer) -> {
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.level", syncer.syncInt(coreTier)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.md.glass", syncer.syncInt(glassTier)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire", syncer.syncInt(manioulatorTier)));
+                    textList.add(KeyUtil.lang( "gtqtcore.multiblock.md.level", syncer.syncInt(coreTier)));
+                    textList.add(KeyUtil.lang( "gtqtcore.multiblock.md.glass", syncer.syncInt(glassTier)));
+                    textList.add(KeyUtil.lang( "gtqtcore.casingTire", syncer.syncInt(manioulatorTier)));
                     if (isStructureFormed())
-                        textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前耗时减免：%s", syncer.syncInt(10 * Math.min(getWarpSwarmTier(), glassTier))));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前配方超频：%s", syncer.syncBoolean(canOverclocking)));
-                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "当前配方无损：%s", syncer.syncBoolean(canBoosterOutput)));
+                        textList.add(KeyUtil.lang( "当前耗时减免：%s", syncer.syncInt(10 * Math.min(getWarpSwarmTier(), glassTier))));
+                    textList.add(KeyUtil.lang( "当前配方超频：%s", syncer.syncBoolean(canOverclocking)));
+                    textList.add(KeyUtil.lang( "当前配方无损：%s", syncer.syncBoolean(canBoosterOutput)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()

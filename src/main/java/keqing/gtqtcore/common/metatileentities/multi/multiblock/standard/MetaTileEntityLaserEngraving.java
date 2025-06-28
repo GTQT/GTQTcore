@@ -97,7 +97,7 @@ public class MetaTileEntityLaserEngraving extends GTQTOCMultiblockController {
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (isStructureFormed())
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.eleTire2", syncer.syncInt(tier), syncer.syncInt(glass_tier), syncer.syncInt(laser_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.eleTire2", syncer.syncInt(tier), syncer.syncInt(glass_tier), syncer.syncInt(laser_tier)));
     }
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
         data.setInteger("tier", tier);

@@ -132,9 +132,9 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
         if (!isStructureFormed()) return;
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "电极状态：%s 电极等级：%s" , syncer.syncBoolean(checkAvailable()),syncer.syncInt(ElectrodeTier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"电极状态：%s 电极等级：%s" , syncer.syncBoolean(checkAvailable()),syncer.syncInt(ElectrodeTier)));
         if (casingTier != tubeTier)
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
     }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {

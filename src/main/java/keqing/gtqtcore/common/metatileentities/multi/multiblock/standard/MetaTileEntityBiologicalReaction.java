@@ -122,7 +122,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
                     IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
                             "%s / %s",
                             rate.getDoubleValue()*100, 100);
-                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                    tooltip.add(KeyUtil.lang(
                             "生物浓度",
                             heatInfo));
                 })
@@ -135,7 +135,7 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
                     IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
                             "%s / %s",
                             bio.getDoubleValue(), 4000);
-                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                    tooltip.add(KeyUtil.lang(
                             "生物质储量",
                             heatInfo));
                 })
@@ -228,8 +228,8 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
     public void addCustomData(KeyManager keyManager, UISyncer syncer) {
         super.addCustomData(keyManager, syncer);
 
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.br.1" , syncer.syncInt(liquid), syncer.syncInt(bio), syncer.syncDouble(rate)));
-        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.br.3" , syncer.syncInt(glass_tier), syncer.syncInt(clean_tier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.multiblock.br.1" , syncer.syncInt(liquid), syncer.syncInt(bio), syncer.syncDouble(rate)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gtqtcore.multiblock.br.3" , syncer.syncInt(glass_tier), syncer.syncInt(clean_tier)));
     }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
