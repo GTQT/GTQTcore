@@ -1,9 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.giantEquipment;
 
 
-import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.GTValues;
-import gregtech.api.GregTechAPI;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.*;
 import gregtech.api.capability.impl.EnergyContainerList;
@@ -19,7 +17,6 @@ import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
-import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
@@ -30,30 +27,21 @@ import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.KeyUtil;
-import gregtech.api.util.TextComponentUtil;
-import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
-import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
-import gregtech.common.metatileentities.MetaTileEntities;
 import gregtech.core.sound.GTSoundEvents;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.api.predicate.TiredTraceabilityPredicate;
 import keqing.gtqtcore.api.utils.GTQTUtil;
-import keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -61,12 +49,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
-import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.HUGE_CRACKING_UNIT;
 
 public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockController implements IHeatingCoil, IOpticalComputationReceiver {
 
@@ -143,6 +129,7 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+
     private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
             var heatString = KeyUtil.number(TextFormatting.RED,
@@ -211,10 +198,10 @@ public class MetaTileEntityHugeCrackingUnit extends GTQTNoTierMultiblockControll
                 .where('G', TiredTraceabilityPredicate.CP_GLASS.get())
                 .where('L', heatingCoils())
                 .where('D', states(getCasingState())
-                        .or(autoAbilities(false,true,false,true,false,true,false))
+                        .or(autoAbilities(false, true, false, true, false, true, false))
                 )
                 .where('E', states(getCasingState())
-                        .or(autoAbilities(false,true,true,false,true,false,false))
+                        .or(autoAbilities(false, true, true, false, true, false, false))
                 )
                 .where(' ', any())
                 .where('A', air())

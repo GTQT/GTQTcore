@@ -8,12 +8,15 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -36,6 +39,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -46,10 +50,7 @@ import java.util.List;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_FORCE_FIELD_COIL;
 
 public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     protected int CoilLevel;
 
     public MetaTileEntityNaquadahFuelFactory(ResourceLocation metaTileEntityId) {
@@ -67,11 +68,10 @@ public class MetaTileEntityNaquadahFuelFactory extends GTQTNoTierMultiblockContr
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            super.addDisplayText(textList);
-            textList.add(new TextComponentTranslation("线圈等级 %s", CoilLevel));
-        }
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed())
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "线圈等级 %s", syncer.syncInt(CoilLevel)));
     }
 
     @Override

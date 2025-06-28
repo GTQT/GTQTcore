@@ -11,10 +11,13 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.pattern.TraceabilityPredicate;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -44,10 +47,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing.CasingTy
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.COPY_GALSS;
 
 public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockController implements IOpticalComputationReceiver {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     int requestCWUt;
     private IOpticalComputationProvider computationProvider;
 
@@ -70,11 +69,20 @@ public class MetaTileEntityLargeElementDuplicator extends RecipeMapMultiblockCon
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-    }
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
 
+                })
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
     @Override
     protected BlockPattern createStructurePattern() {
         TraceabilityPredicate abilities = autoAbilities();

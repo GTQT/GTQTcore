@@ -9,10 +9,13 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -31,6 +34,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,10 +49,7 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
     private int radio_tier;
     private int casing_tier;
     private IOpticalComputationProvider computationProvider;
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     public MetaTileEntityThreeDimPrinter(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.TD_PRINT_RECIPES, GTQTcoreRecipeMaps.AUTO_CHISEL_RECIPES, SPINNER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
@@ -99,13 +100,13 @@ public class MetaTileEntityThreeDimPrinter extends GTQTOCMultiblockController im
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("结构等级：%s 玻璃等级：%s", casing_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire4", clean_tier, radio_tier));
-
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed()){
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "结构等级：%s 玻璃等级：%", syncer.syncInt(casing_tier), syncer.syncInt(glass_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.eleTire4", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
+        }
     }
-
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start().aisle("JXXXXXX", "JXXXXXX", "JXXGGGX").aisle("JXXXXXX", "JXXPPPX", "JXXGGGX").aisle("JXXXXXX", "JCSGGGX", "JXXGGGX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities())).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();

@@ -154,7 +154,7 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
         ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 180, 240);
         builder.dynamicLabel(28, 12, () -> "大型钻机平台", 0xFFFFFF);
-        builder.widget(new SlotWidget(containerInventory, 0, 8, 8, false, true)
+        builder.widget(new SlotWidget(containerInventory, 0, 8, 8, true, true)
                 .setBackgroundTexture(GuiTextures.SLOT)
                 .setTooltipText("输入槽位"));
 

@@ -1,16 +1,24 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
-import com.google.common.util.concurrent.AtomicDouble;
+import com.cleanroommc.modularui.api.drawable.IDrawable;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.LongSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.widgets.layout.Column;
 import gregtech.api.GTValues;
 import gregtech.api.capability.*;
-import gregtech.api.capability.impl.*;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.ModularUI;
-import gregtech.api.gui.resources.TextureArea;
-import gregtech.api.gui.widgets.*;
+import gregtech.api.capability.impl.EnergyContainerHandler;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.ui.*;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -19,6 +27,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.properties.impl.FusionEUToStartProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -27,14 +36,12 @@ import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.multiblockpart.MetaTileEntityLaserHatch;
-import keqing.gtqtcore.api.gui.GTQTGuiTextures;
 import keqing.gtqtcore.api.metatileentity.GTQTNoTierMultiblockController;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -45,16 +52,15 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import supercritical.api.gui.SCGuiTextures;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.DoubleSupplier;
+import java.util.function.UnaryOperator;
 
 import static gregtech.api.GTValues.*;
-import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
-public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
+public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver, ProgressBarMultiblock {
     //  Block State for CFR, for Mark 4 and Mark 5,
     //  we do not need Cryostat, Divertor and Vacuum in CFR anymore.
     //  Parameter {@code CoilState} means Fusion Coils.
@@ -65,8 +71,6 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
     //  we use {@link #LuV} to {@link #UEV} for Mark 1 to Mark 5.
     private final int tier;
     //  Used for Special Progress Bar in Modular UI.
-    //  TODO Add new Modular UI form of CFR (different with Fusion Reactor)?
-    private final FusionProgressSupplier progressBarSupplier;
     int requestCWUt;
     //  Internal Energy Container, just like common Fusion Reactors.
     private EnergyContainerList inputEnergyContainers;
@@ -95,14 +99,13 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
                 return GregtechDataCodes.FUSION_REACTOR_ENERGY_CONTAINER_TRAIT;
             }
         };
-        this.progressBarSupplier = new FusionProgressSupplier();
 
         //setMaxParallel(auto);
         setMaxParallelFlag(true);
         //setTimeReduce(none);
         setTimeReduceFlag(false);
 
-        if(tier<=9)setOverclocking(3);
+        if (tier <= 9) setOverclocking(3);
         else setOverclocking(4);
     }
 
@@ -333,177 +336,137 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         }
     }
 
-    @Override
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ///////////////////////////Main GUI
-        //  Background
-        ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 368, 236);
+    /*
+        @Override
+        protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
+            ///////////////////////////Main GUI
+            //  Background
+            ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 368, 236);
 
-        //  Display
-        builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
+            //  Display
+            builder.image(4, 4, 190, 138, GuiTextures.DISPLAY);
 
-        //  Energy Bar
-        builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.energyContainer.getEnergyStored() / (double) this.energyContainer.getEnergyCapacity() : 0.0,
-                4, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addEnergyBarHoverText));
+            //  Energy Bar
+            builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.energyContainer.getEnergyStored() / (double) this.energyContainer.getEnergyCapacity() : 0.0,
+                    4, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_ENERGY, ProgressWidget.MoveType.HORIZONTAL)
+                    .setHoverTextConsumer(this::addEnergyBarHoverText));
 
-        //  Heat Bar
-        builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.heat / (double) this.energyContainer.getEnergyCapacity() : 0.0,
-                100, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
-                .setHoverTextConsumer(this::addHeatBarHoverText));
+            //  Heat Bar
+            builder.widget(new ProgressWidget(() -> this.energyContainer.getEnergyCapacity() > 0L ? 1.0 * this.heat / (double) this.energyContainer.getEnergyCapacity() : 0.0,
+                    100, 144, 94, 7, GuiTextures.PROGRESS_BAR_FUSION_HEAT, ProgressWidget.MoveType.HORIZONTAL)
+                    .setHoverTextConsumer(this::addHeatBarHoverText));
 
-        //  Indicator Image Widget (logo)
-        builder.widget(new IndicatorImageWidget(174, 122, 17, 17, this.getLogo())
-                .setWarningStatus(this.getWarningLogo(), this::addWarningText)
-                .setErrorStatus(this.getErrorLogo(), this::addErrorText));
+            //  Indicator Image Widget (logo)
+            builder.widget(new IndicatorImageWidget(174, 122, 17, 17, this.getLogo())
+                    .setWarningStatus(this.getWarningLogo(), this::addWarningText)
+                    .setErrorStatus(this.getErrorLogo(), this::addErrorText));
 
-        //  Title (MK1 to MK5)
-        switch (this.tier) {
-            case LuV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK1_TITLE)
+            //  Title (MK1 to MK5)
+            switch (this.tier) {
+                case LuV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK1_TITLE)
+                        .setIgnoreColor(true));
+                case ZPM -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK2_TITLE)
+                        .setIgnoreColor(true));
+                case UV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE)
+                        .setIgnoreColor(true));
+                case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK4_TITLE)
+                        .setIgnoreColor(true));
+                case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK5_TITLE)
+                        .setIgnoreColor(true));
+                case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK6_TITLE)
+                        .setIgnoreColor(true));
+            }
+
+            //  Fusion Diagram + Progress Bar
+            builder.widget(new ImageWidget(55, 24, 89, 101, GuiTextures.FUSION_REACTOR_DIAGRAM)
                     .setIgnoreColor(true));
-            case ZPM -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK2_TITLE)
+            builder.widget(FusionProgressSupplier.Type.BOTTOM_LEFT.getWidget(this));
+            builder.widget(FusionProgressSupplier.Type.TOP_LEFT.getWidget(this));
+            builder.widget(FusionProgressSupplier.Type.TOP_RIGHT.getWidget(this));
+            builder.widget(FusionProgressSupplier.Type.BOTTOM_RIGHT.getWidget(this));
+
+            //  Fusion Legend
+            builder.widget(new ImageWidget(7, 98, 108, 41, GuiTextures.FUSION_REACTOR_LEGEND)
                     .setIgnoreColor(true));
-            case UV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK3_TITLE)
-                    .setIgnoreColor(true));
-            case UHV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK4_TITLE)
-                    .setIgnoreColor(true));
-            case UEV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK5_TITLE)
-                    .setIgnoreColor(true));
-            case UIV -> builder.widget(new ImageWidget(66, 9, 67, 12, GuiTextures.FUSION_REACTOR_MK6_TITLE)
-                    .setIgnoreColor(true));
+
+            //  Power Button + Detail
+            builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
+                    this.recipeMapWorkable::isWorkingEnabled, this.recipeMapWorkable::setWorkingEnabled));
+
+            //  Voiding Mode Button
+            builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK, 4,
+                    this::getVoidingMode, this::setVoidingMode)
+                    .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
+
+            //  Distinct Buses Unavailable Image
+            builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
+                    .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
+
+            //  Flex Unavailable Image
+            builder.widget(this.getFlexButton(173, 153, 18, 18));
+
+            ///////////////////////////智能并行组件
+            builder.image(200, 4, 160, 20, GuiTextures.DISPLAY);
+            builder.widget((new AdvancedTextWidget(204, 10,  this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+            builder.widget(new ClickButtonWidget(200, 28, 80, 20, "gui.mode_switch",
+                    clickData -> autoParallelModel = !autoParallelModel));
+
+            //builder.image(280, 4, 80, 20, GuiTextures.DISPLAY);
+            builder.widget((new AdvancedTextWidget(284, 10, this::addInfo, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+            builder.widget(new IncrementButtonWidget(280, 28, 40, 20, 1, 4, 16, 64, this::setCurrentParallel)
+                    .setDefaultTooltip()
+                    .setShouldClientCallback(false));
+
+            builder.widget(new IncrementButtonWidget(320, 28, 40, 20, -1, -4, -16, -64, this::setCurrentParallel)
+                    .setDefaultTooltip()
+                    .setShouldClientCallback(false));
+
+            builder.widget(
+                    new SliderWidget("gui.auto_parallel_limit", 200, 52, 160, 20, 1, getMaxParallel(), limitAutoParallel,
+                            this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
+                            .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
+
+            builder.image(200, 76, 160, 20, GuiTextures.DISPLAY);
+            builder.widget((new AdvancedTextWidget(204, 82, this::addEnergyHatch, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+            //builder.image(280, 76, 80, 20, GuiTextures.DISPLAY);
+            builder.widget((new AdvancedTextWidget(284, 82, this::addOC, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
+
+            builder.widget(new ClickButtonWidget(200, 100, 40, 20, "gui.reset", data ->
+                    energyHatchMaxWork = 32).setTooltipText("gui.reset_tooltip"));
+
+            builder.widget(new ClickButtonWidget(240, 100, 40, 20, "gui.recommend", data ->
+            {
+                energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / V[tier]);
+                energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
+                energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
+
+            }).setTooltipText("gui.recommend_tooltip"));
+
+            builder.widget(new ClickButtonWidget(280, 100, 80, 20, "gui.oc_parallel_mode",
+                    clickData -> OCFirst = !OCFirst).setTooltipText("gui.oc_parallel_mode_tooltip"));
+
+            builder.image(200, 124, 160, 106, GuiTextures.DISPLAY);
+            builder.widget((new AdvancedTextWidget(204, 128, this::addDisplayText, 16777215)).setMaxWidthLimit(160).setClickHandler(this::handleDisplayClick));
+
+
+            //  Player Inventory
+            builder.bindPlayerInventory(entityPlayer.inventory, 153);
+            return builder;
         }
-
-        //  Fusion Diagram + Progress Bar
-        builder.widget(new ImageWidget(55, 24, 89, 101, GuiTextures.FUSION_REACTOR_DIAGRAM)
-                .setIgnoreColor(true));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_LEFT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.TOP_RIGHT.getWidget(this));
-        builder.widget(FusionProgressSupplier.Type.BOTTOM_RIGHT.getWidget(this));
-
-        //  Fusion Legend
-        builder.widget(new ImageWidget(7, 98, 108, 41, GuiTextures.FUSION_REACTOR_LEGEND)
-                .setIgnoreColor(true));
-
-        //  Power Button + Detail
-        builder.widget(new ImageCycleButtonWidget(173, 211, 18, 18, GuiTextures.BUTTON_POWER,
-                this.recipeMapWorkable::isWorkingEnabled, this.recipeMapWorkable::setWorkingEnabled));
-
-        //  Voiding Mode Button
-        builder.widget(new ImageCycleButtonWidget(173, 189, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK, 4,
-                this::getVoidingMode, this::setVoidingMode)
-                .setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
-
-        //  Distinct Buses Unavailable Image
-        builder.widget(new ImageWidget(173, 171, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)
-                .setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
-
-        //  Flex Unavailable Image
-        builder.widget(this.getFlexButton(173, 153, 18, 18));
-
-        ///////////////////////////智能并行组件
-        builder.image(200, 4, 160, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 10, this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new ClickButtonWidget(200, 28, 80, 20, "gui.mode_switch",
-                clickData -> autoParallelModel = !autoParallelModel));
-
-        //builder.image(280, 4, 80, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(284, 10, this::addInfo, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new IncrementButtonWidget(280, 28, 40, 20, 1, 4, 16, 64, this::setCurrentParallel)
-                .setDefaultTooltip()
-                .setShouldClientCallback(false));
-
-        builder.widget(new IncrementButtonWidget(320, 28, 40, 20, -1, -4, -16, -64, this::setCurrentParallel)
-                .setDefaultTooltip()
-                .setShouldClientCallback(false));
-
-        builder.widget(
-                new SliderWidget("gui.auto_parallel_limit", 200, 52, 160, 20, 1, getMaxParallel(), limitAutoParallel,
-                        this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
-                        .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
-
-        builder.image(200, 76, 160, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 82, this::addEnergyHatch, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        //builder.image(280, 76, 80, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(284, 82, this::addOC, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new ClickButtonWidget(200, 100, 40, 20, "gui.reset", data ->
-                energyHatchMaxWork = 32).setTooltipText("gui.reset_tooltip"));
-
-        builder.widget(new ClickButtonWidget(240, 100, 40, 20, "gui.recommend", data ->
-        {
-            energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / V[tier]);
-            energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
-            energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
-
-        }).setTooltipText("gui.recommend_tooltip"));
-
-        builder.widget(new ClickButtonWidget(280, 100, 80, 20, "gui.oc_parallel_mode",
-                clickData -> OCFirst = !OCFirst).setTooltipText("gui.oc_parallel_mode_tooltip"));
-
-        builder.image(200, 124, 160, 106, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 128, this::addDisplayText, 16777215)).setMaxWidthLimit(160).setClickHandler(this::handleDisplayClick));
-
-
-        //  Player Inventory
-        builder.bindPlayerInventory(entityPlayer.inventory, 153);
-        return builder;
-    }
-
+    */
     @Override
     public IOpticalComputationProvider getComputationProvider() {
         return this.computationProvider;
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if(!isStructureFormed())return;
-        String energyFormatted = TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getMaximumOverclockVoltage());
-        ITextComponent voltageName1 = new TextComponentString(GTValues.VOCNF[GTUtility.getFloorTierByVoltage(this.recipeMapWorkable.getMaximumOverclockVoltage())]);
-        ITextComponent bodyText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", energyFormatted, voltageName1);
-        ITextComponent hoverText1 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick_hover");
-        textList.add(TextComponentUtil.setHover(bodyText1, hoverText1));
 
-        ITextComponent voltageName2 = new TextComponentString(GTValues.VOCNF[tier]);
-        ITextComponent bodyText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier", voltageName2);
-        ITextComponent hoverText2 = TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.max_recipe_tier_hover");
-        textList.add(TextComponentUtil.setHover(bodyText2, hoverText2));
-
-        ITextComponent parallels = TextComponentUtil.stringWithColor(TextFormatting.DARK_PURPLE, TextFormattingUtil.formatNumbers(this.recipeMapWorkable.getParallelLimit()));
-        textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.parallel", parallels));
-
-        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        textList.add(new TextComponentTranslation("能量存储上限： %s", this.energyContainer.getEnergyCapacity()));
-        textList.add(new TextComponentTranslation("能量缓存上限： %s", this.energyContainer.getEnergyStored()));
+    protected void sdfsf(List<ITextComponent> textList) {
 
 
-    }
 
-    private void addEnergyBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent energyInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyStored()) + " / "
-                        + TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyCapacity()) + " EU");
-
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.energy_stored",
-                energyInfo));
-    }
-
-    private void addHeatBarHoverText(List<ITextComponent> hoverList) {
-        ITextComponent heatInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.RED,
-                TextFormattingUtil.formatNumbers(this.heat) + " / "
-                        + TextFormattingUtil.formatNumbers(this.energyContainer.getEnergyCapacity()));
-
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.fusion_reactor.heat",
-                heatInfo));
     }
 
     @Override
@@ -609,124 +572,101 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
         return energyContainer.getEnergyStored();
     }
 
-    private static class FusionProgressSupplier {
-
-        private final AtomicDouble tracker = new AtomicDouble(0.0);
-        private final ProgressWidget.TimedProgressSupplier bottomLeft;
-        private final DoubleSupplier topLeft;
-        private final DoubleSupplier topRight;
-        private final DoubleSupplier bottomRight;
-
-        public FusionProgressSupplier() {
-
-            //  Bottom Left, fill on [0, 0.25)
-            bottomLeft = new ProgressWidget.TimedProgressSupplier(200, 164, false) {
-
-                @Override
-                public double getAsDouble() {
-                    double val = super.getAsDouble();
-                    tracker.set(val);
-                    if (val >= 0.25) {
-                        return 1;
-                    }
-                    return 4 * val;
-                }
-
-                @Override
-                public void resetCountdown() {
-                    super.resetCountdown();
-                    tracker.set(0);
-                }
-            };
-
-            // Top Left, fill on [0.25, 0.5)
-            topLeft = () -> {
-                double val = tracker.get();
-                if (val < 0.25) {
-                    return 0;
-                } else if (val >= 0.5) {
-                    return 1;
-                }
-                return 4 * (val - 0.25);
-            };
-
-            // Top Right, fill on [0.5, 0.75)
-            topRight = () -> {
-                double val = tracker.get();
-                if (val < 0.5) {
-                    return 0;
-                } else if (val >= 0.75) {
-                    return 1;
-                }
-                return 4 * (val - 0.5);
-            };
-
-            // Bottom Right, fill on [0.75, 1.0]
-            bottomRight = () -> {
-                double val = tracker.get();
-                if (val < 0.75) {
-                    return 0;
-                } else if (val >= 1) {
-                    return 1;
-                }
-                return 4 * (val - 0.75);
-            };
+    @Override
+    protected MultiblockUIFactory createUIFactory() {
+        IDrawable title;
+        if (tier == LuV) {
+            // MK1
+            title = GTGuiTextures.FUSION_REACTOR_MK1_TITLE;
+        } else if (tier == ZPM) {
+            // MK2
+            title = GTGuiTextures.FUSION_REACTOR_MK2_TITLE;
+        } else if (tier == GTValues.UV) {
+            // MK3
+            title = GTGuiTextures.FUSION_REACTOR_MK3_TITLE;
+        } else if (tier == GTValues.UHV) {
+            // MK1
+            title = GTGuiTextures.FUSION_REACTOR_MK4_TITLE;
+        } else if (tier == GTValues.UEV) {
+            // MK2
+            title = GTGuiTextures.FUSION_REACTOR_MK5_TITLE;
+        } else {
+            // MK3
+            title = GTGuiTextures.FUSION_REACTOR_MK6_TITLE;
         }
 
-        @SuppressWarnings("unused")
-        public void resetCountdown() {
-            bottomLeft.resetCountdown();
-        }
+        DoubleSyncValue progress = new DoubleSyncValue(recipeMapWorkable::getProgressPercent);
+        return super.createUIFactory()
+                .setScreenHeight(138)
+                .disableDisplayText()
+                .addScreenChildren((parent, syncManager) -> {
+                    var status = MultiblockUIFactory.builder("status", syncManager);
+                    status.setAction(b -> b.structureFormed(true)
+                            .addEnergyUsageLine(getEnergyContainer())
+                            .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                            .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                            .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                            .addWorkingStatusLine()
+                            .addRecipeOutputLine(recipeMapWorkable));
+                    parent.child(new Column()
+                            .padding(4)
+                            .expanded()
+                            .child(title.asWidget()
+                                    .marginBottom(8)
+                                    .size(69, 12))
+                            .child(new com.cleanroommc.modularui.widgets.ProgressWidget()
+                                    .size(77, 77)
+                                    .tooltipAutoUpdate(true)
+                                    .tooltipBuilder(status::build)
+                                    .background(GTGuiTextures.FUSION_DIAGRAM.asIcon()
+                                            .size(89, 101)
+                                            .marginTop(11))
+                                    .direction(com.cleanroommc.modularui.widgets.ProgressWidget.Direction.CIRCULAR_CW)
+                                    .value(progress)
+                                    .texture(null, GTGuiTextures.FUSION_PROGRESS, 77))
+                            .child(GTGuiTextures.FUSION_LEGEND.asWidget()
+                                    .left(4)
+                                    .bottom(4)
+                                    .size(108, 41)));
+                })
+                ;
+    }
 
-        public DoubleSupplier getSupplier(Type type) {
-            return switch (type) {
-                case BOTTOM_LEFT -> bottomLeft;
-                case TOP_LEFT -> topLeft;
-                case TOP_RIGHT -> topRight;
-                case BOTTOM_RIGHT -> bottomRight;
-            };
-        }
+    @Override
+    public int getProgressBarCount() {
+        return 2;
+    }
 
-        private enum Type {
+    @Override
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        LongSyncValue capacity = new LongSyncValue(energyContainer::getEnergyCapacity);
+        syncManager.syncValue("capacity", capacity);
+        LongSyncValue stored = new LongSyncValue(energyContainer::getEnergyStored);
+        syncManager.syncValue("stored", stored);
+        LongSyncValue heat = new LongSyncValue(this::getHeat);
+        syncManager.syncValue("heat", heat);
 
-            BOTTOM_LEFT(61, 66, 35, 41,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BL, ProgressWidget.MoveType.VERTICAL),
-            TOP_LEFT(61, 30, 41, 35,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TL, ProgressWidget.MoveType.HORIZONTAL),
-            TOP_RIGHT(103, 30, 35, 41,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_TR, ProgressWidget.MoveType.VERTICAL_DOWNWARDS),
-            BOTTOM_RIGHT(97, 72, 41, 35,
-                    GuiTextures.PROGRESS_BAR_FUSION_REACTOR_DIAGRAM_BR, ProgressWidget.MoveType.HORIZONTAL_BACKWARDS);
+        bars.add(barTest -> barTest
+                .progress(() -> capacity.getLongValue() > 0 ?
+                        1.0 * stored.getLongValue() / capacity.getLongValue() : 0)
+                .texture(GTGuiTextures.PROGRESS_BAR_FUSION_ENERGY)
+                .tooltipBuilder(tooltip -> tooltip
+                        .add(KeyUtil.lang(TextFormatting.GRAY,
+                                "gregtech.multiblock.energy_stored",
+                                stored.getLongValue(), capacity.getLongValue()))));
 
-            private final int x;
-            private final int y;
-            private final int width;
-            private final int height;
-            private final TextureArea texture;
-            private final ProgressWidget.MoveType moveType;
-
-            Type(int x, int y, int width, int height, TextureArea texture, ProgressWidget.MoveType moveType) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-                this.texture = texture;
-                this.moveType = moveType;
-            }
-
-            public ProgressWidget getWidget(MetaTileEntityCompressedFusionReactor instance) {
-                return new ProgressWidget(
-                        () -> instance.recipeMapWorkable.isActive() ?
-                                instance.progressBarSupplier.getSupplier(this).getAsDouble() : 0,
-                        x, y, width, height, texture, moveType)
-                        .setIgnoreColor(true)
-                        .setHoverTextConsumer(
-                                tl -> MultiblockDisplayText.builder(tl, instance.isStructureFormed())
-                                        .setWorkingStatus(instance.recipeMapWorkable.isWorkingEnabled(),
-                                                instance.recipeMapWorkable.isActive())
-                                        .addWorkingStatusLine());
-            }
-        }
+        bars.add(barTest -> barTest
+                .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                .tooltipBuilder(tooltip -> {
+                    IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                            "%,d / %,d EU",
+                            heat.getLongValue(), capacity.getLongValue());
+                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.fusion_reactor.heat",
+                            heatInfo));
+                })
+                .progress(() -> capacity.getLongValue() > 0 ?
+                        1.0 * heat.getLongValue() / capacity.getLongValue() : 0));
     }
 
     private class CompressedFusionReactorRecipeLogic extends GTQTMultiblockLogic {
@@ -798,62 +738,62 @@ public class MetaTileEntityCompressedFusionReactor extends GTQTNoTierMultiblockC
             switch (tier) {
                 case LuV -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
                 case ZPM -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase * 2);
+                        setMaxParallel(parallelBase * 2);
                     } else if (startCost <= 320000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
                 case UV -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase * 3);
+                        setMaxParallel(parallelBase * 3);
                     } else if (startCost <= 320000000L) {
-                        this.setParallelLimit(parallelBase * 2);
+                        setMaxParallel(parallelBase * 2);
                     } else if (startCost <= 640000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
                 case UHV -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase * 4);
+                        setMaxParallel(parallelBase * 4);
                     } else if (startCost <= 320000000L) {
-                        this.setParallelLimit(parallelBase * 3);
+                        setMaxParallel(parallelBase * 3);
                     } else if (startCost <= 640000000L) {
-                        this.setParallelLimit(parallelBase * 2);
+                        setMaxParallel(parallelBase * 2);
                     } else if (startCost <= 1280000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
                 case UEV -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase * 5);
+                        setMaxParallel(parallelBase * 5);
                     } else if (startCost <= 320000000L) {
-                        this.setParallelLimit(parallelBase * 4);
+                        setMaxParallel(parallelBase * 4);
                     } else if (startCost <= 640000000L) {
-                        this.setParallelLimit(parallelBase * 3);
+                        setMaxParallel(parallelBase * 3);
                     } else if (startCost <= 1280000000L) {
-                        this.setParallelLimit(parallelBase * 2);
+                        setMaxParallel(parallelBase * 2);
                     } else if (startCost <= 2560000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
                 case UIV -> {
                     if (startCost <= 160000000L) {
-                        this.setParallelLimit(parallelBase * 6);
+                        setMaxParallel(parallelBase * 6);
                     } else if (startCost <= 320000000L) {
-                        this.setParallelLimit(parallelBase * 5);
+                        setMaxParallel(parallelBase * 5);
                     } else if (startCost <= 640000000L) {
-                        this.setParallelLimit(parallelBase * 4);
+                        setMaxParallel(parallelBase * 4);
                     } else if (startCost <= 1280000000L) {
-                        this.setParallelLimit(parallelBase * 3);
+                        setMaxParallel(parallelBase * 3);
                     } else if (startCost <= 2560000000L) {
-                        this.setParallelLimit(parallelBase * 2);
+                        setMaxParallel(parallelBase * 2);
                     } else if (startCost <= 5120000000L) {
-                        this.setParallelLimit(parallelBase);
+                        setMaxParallel(parallelBase);
                     }
                 }
             }

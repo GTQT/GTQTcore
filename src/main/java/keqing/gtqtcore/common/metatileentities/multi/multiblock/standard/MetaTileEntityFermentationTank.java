@@ -5,10 +5,15 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.LocalizationUtils;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -32,6 +37,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,10 +52,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockTransparentCasing.CasingT
 
 public class MetaTileEntityFermentationTank extends RecipeMapMultiblockController implements IPHValue {
     private double pH = 7;
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     public MetaTileEntityFermentationTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, GTQTcoreRecipeMaps.FERMENTATION_TANK_RECIPES);
         this.recipeMapWorkable = new PHRecipeLogic(this);
@@ -125,13 +128,25 @@ public class MetaTileEntityFermentationTank extends RecipeMapMultiblockControlle
                 .where('E', air())
                 .build();
     }
-
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed())
-            textList.add(new TextComponentTranslation("gtqtcore.machine.fermentation_tank.ph", String.format("%, .2f", this.pH)));
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addHeatCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
+
+    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (isStructureFormed()) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gtqtcore.machine.fermentation_tank.ph", syncer.syncString(String.format("%, .2f", this.pH))));
+        }
+    }
+
 
     @Override
     public String[] getDescription() {

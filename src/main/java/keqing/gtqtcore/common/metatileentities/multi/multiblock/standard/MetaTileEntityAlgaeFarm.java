@@ -5,6 +5,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechTileCapabilities;
+import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IWorkable;
 import gregtech.api.capability.impl.FluidTankList;
@@ -15,10 +16,13 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTTransferUtils;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.impl.AlgaeFarmLogic;
@@ -35,6 +39,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,11 +53,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
+
+public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implements IDataInfoProvider, IWorkable, IControllable {
+
     private final AlgaeFarmLogic logic;
     protected IMultipleTankHandler inputFluidInventory;
     protected ItemHandlerList itemImportInventory;
@@ -131,7 +135,12 @@ public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implement
         tooltip.add(I18n.format("gtqtcore.machine.af.tooltip.1"));
     }
 
-
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(logic.isWorkingEnabled(), logic.isActive())
+                .addWorkingStatusLine()
+                .addProgressLine(logic.getProgress(), logic.getMaxProgress());
+    }
     @Nonnull
     @Override
     protected BlockPattern createStructurePattern() {
@@ -240,24 +249,7 @@ public class MetaTileEntityAlgaeFarm extends MultiblockWithDisplayBase implement
         return (isStructureFormed() && this.logic.isActive() && this.logic.isWorkingEnabled());
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (!isStructureFormed())
-            return;
 
-        if (!logic.isWorkingEnabled()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
-
-        } else if (logic.isActive()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.running"));
-            int currentProgress = (int) (logic.getProgressPercent() * 100);
-            textList.add(new TextComponentTranslation("gregtech.multiblock.progress", currentProgress));
-        } else {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
-        }
-
-    }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {

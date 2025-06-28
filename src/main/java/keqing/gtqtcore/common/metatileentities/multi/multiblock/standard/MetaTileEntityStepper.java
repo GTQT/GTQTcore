@@ -1,6 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import codechicken.lib.raytracer.CuboidRayTraceResult;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.IOpticalComputationHatch;
 import gregtech.api.capability.IOpticalComputationProvider;
@@ -13,11 +14,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -31,13 +35,17 @@ import keqing.gtqtcore.api.recipes.properties.LaserNetProperty;
 import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,10 +65,6 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     private int laser_tier;
     private int casing_tier;
     private IOpticalComputationProvider computationProvider;
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     public MetaTileEntityStepper(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{GTQTcoreRecipeMaps.STEPPER_RECIPES});
         this.recipeMapWorkable = new LaserEngravingWorkableHandler(this);
@@ -77,14 +81,13 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
     }
 
     @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::outputlaser).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("退回缓存(返回缓存光刻胶以及晶圆)"));
-        return group;
+    public boolean onScrewdriverClick(EntityPlayer playerIn,
+                                      EnumHand hand,
+                                      EnumFacing facing,
+                                      CuboidRayTraceResult hitResult) {
+        return outputlaser();
     }
-
-    private void outputlaser(Widget.ClickData clickData) {
+    private boolean outputlaser() {
         if (LaserKind == 1) this.getOutputFluidInventory().fill(HydrogenSilsesquioxane.getFluid(LaserAmount), true);
         if (LaserKind == 2) this.getOutputFluidInventory().fill(Vinylcinnamate.getFluid(LaserAmount), true);
         if (LaserKind == 3) this.getOutputFluidInventory().fill(SU8_Photoresist.getFluid(LaserAmount), true);
@@ -92,6 +95,7 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
         if (LaserKind == 5) this.getOutputFluidInventory().fill(Zrbtmst.getFluid(LaserAmount), true);
         LaserKind = 0;
         LaserAmount = 0;
+        return true;
     }
 
     @Override
@@ -155,17 +159,32 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
         return false;
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("外壳等级：%s 紫外等级：%s 玻璃等级：%s", casing_tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("洁净等级：%s 射频调节器等级：%s", clean_tier, radio_tier));
-        textList.add(new TextComponentTranslation("光刻胶等级：%s 光刻胶储量：%s ", LaserKind, LaserAmount));
-    }
 
     @Override
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed()){
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "外壳等级：%s 紫外等级：%s 玻璃等级：%s ", syncer.syncInt(casing_tier), syncer.syncInt(laser_tier), syncer.syncInt(glass_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "洁净等级：%s 射频调节器等级：%s", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "光刻胶等级：%s 光刻胶储量：%s ", syncer.syncInt(LaserKind), syncer.syncInt(LaserAmount)));
+        }
+    }
+    @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("JXXXXXX", "JXXXXXX", "JXXGGGX").aisle("JXXXXXX", "JPPZZZX", "JXXGGGX").aisle("JXXXXXX", "JCSGGGX", "JXXGGGX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24).or(autoAbilities())).where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();
+        return FactoryBlockPattern.start()
+                .aisle("JXXXXXX", "JXXXXXX", "JXXGGGX")
+                .aisle("JXXXXXX", "JPPZZZX", "JXXGGGX")
+                .aisle("JXXXXXX", "JCSGGGX", "JXXGGGX")
+                .where('S', selfPredicate())
+                .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24)
+                        .or(autoAbilities()))
+                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
+                .where('#', air())
+                .build();
     }
 
     @SideOnly(Side.CLIENT)

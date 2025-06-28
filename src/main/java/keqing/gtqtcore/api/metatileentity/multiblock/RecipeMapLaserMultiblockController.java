@@ -46,7 +46,7 @@ import static gregtech.api.GTValues.VOC;
 import static gregtech.api.GTValues.VOCN;
 import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 
-public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements  IDistinctBusController, IControllable {
+public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements IDistinctBusController, IControllable {
     public final RecipeMap<?> recipeMap;
     protected MultiblockLaserRecipeLogic recipeMapWorkable;
     protected IItemHandlerModifiable inputInventory;

@@ -3379,9 +3379,8 @@ gregtech.machine.gene_mutagenesis.gtqtupdate.2=请往多方块的辐射仓里置
 gregtech.machine.gene_mutagenesis.gtqtupdate.3=运行其他配方（除了基因诱变）无视反应条件，但是依旧会消耗辐射源的耐久
 gregtech.machine.gene_mutagenesis.gtqtupdate.4=获得等同于Pow(2,辐射源等级)的并行
 
-gregtech.machine.bioreb.gtqtupdate.2=使用五种基本菌群进行线性组合，不支持倍数组合，查询JEI获取目标菌群所需要的酸碱度以及性状因子，当GUI显示找到配方时点击开始加工按钮，加工完毕后原始菌群参数全部清零.
-gregtech.machine.bioreb.gtqtupdate.3=提供富集生物培养基提升多方块并行数量（并行不额外消耗原始菌群）
-gregtech.machine.bioreb.gtqtupdate.4=提供水默认PH7 盐酸PH4 氢氧化钠PH10，暂不支持其他材料。
+gregtech.machine.bioreb.gtqtupdate.1=使用五种基本菌群进行线性组合，满足jei所示需求后扣除一轮（无视并行数量）
+gregtech.machine.bioreb.gtqtupdate.2=向输入仓内输入五种基本菌群可提升设备的缓存菌种数量
 
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1=用于生产特殊高能燃料
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2=需要不同等级的§6力场约束线圈方块§7以遏制巨量致命辐射外泄
@@ -5005,8 +5004,8 @@ gtqtcore.machine.research_system_network.name=科研计算机
 
 gtqtcore.machine.kqnet.tooltip.1=提供算力，研究对象与数据卡，选定好研究项目即可开始研究
 gtqtcore.machine.kqnet.tooltip.2=在界面内使用按钮进行操作，在研究界面内可通过切换类型转换研究对象
-gtqtcore.machine.kqnet.tooltip.3=使用坐标绑定卡绑定附属结构控制器坐标后（须在控制器半径48格内）放入输入总线即可完成绑定，可在接入拓展列表内查看
-gtqtcore.machine.kqnet.tooltip.4=使用坐标绑定卡绑定数据库，计算机等结构可升级科研等级，可在科技等级列表内查看
+gtqtcore.machine.kqnet.tooltip.3=使用数据卡绑定附属结构控制器坐标后（须在控制器半径48格内）放入输入总线即可完成绑定，可在接入拓展列表内查看
+gtqtcore.machine.kqnet.tooltip.4=使用数据卡绑定数据库，计算机等结构可升级科研等级，可在科技等级列表内查看
 
 gtqtcore.multiblock.kqn.nb0=欢迎界面
 gtqtcore.multiblock.kqn.nx0=欢迎使用KQCC科研计算机集成系统！

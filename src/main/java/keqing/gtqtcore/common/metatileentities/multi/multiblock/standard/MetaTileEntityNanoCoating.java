@@ -9,10 +9,13 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -32,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,10 +45,6 @@ import java.util.List;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.SPINNER_RECIPES;
 
 public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implements IOpticalComputationReceiver {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     private int glass_tier;
     private int clean_tier;
     private int radio_tier;
@@ -116,16 +116,31 @@ public class MetaTileEntityNanoCoating extends GTQTOCMultiblockController implem
         this.casing_tier = buf.readInt();
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire2", casing_tier, laser_tier, glass_tier));
-        textList.add(new TextComponentTranslation("gtqtcore.eleTire4", clean_tier, radio_tier));
-    }
 
     @Override
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed()){
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.eleTire2", syncer.syncInt(tier), syncer.syncInt(glass_tier), syncer.syncInt(laser_tier)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.eleTire4", syncer.syncInt(clean_tier), syncer.syncInt(radio_tier)));
+        }
+    }
+    @Override
     protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start().aisle("XJXXXXXXX", "XJXGGGGXX", "XJXGGGGXX").aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX").aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX").aisle("CJXXXXXXX", "SJXGGGGXX", "XJXGGGGXX").where('S', selfPredicate()).where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION)).where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities())).where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get()).where('G', TiredTraceabilityPredicate.CP_LGLASS.get()).where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get()).where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get()).where('#', air()).build();
+        return FactoryBlockPattern.start()
+                .aisle("XJXXXXXXX", "XJXGGGGXX", "XJXGGGGXX")
+                .aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX")
+                .aisle("XJXXXXXXX", "XJPZZZZPX", "XJXGGGGXX")
+                .aisle("CJXXXXXXX", "SJXGGGGXX", "XJXGGGGXX")
+                .where('S', selfPredicate())
+                .where('C', abilities(MultiblockAbility.COMPUTATION_DATA_RECEPTION))
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40).or(autoAbilities()))
+                .where('Z', TiredTraceabilityPredicate.CP_ZW_CASING.get())
+                .where('G', TiredTraceabilityPredicate.CP_LGLASS.get())
+                .where('J', TiredTraceabilityPredicate.CP_ZJ_CASING.get())
+                .where('P', TiredTraceabilityPredicate.CP_TJ_CASING.get())
+                .where('#', air())
+                .build();
     }
 
     @SideOnly(Side.CLIENT)

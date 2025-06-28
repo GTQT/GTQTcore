@@ -11,7 +11,6 @@ import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.IDataInfoProvider;
 import gregtech.api.metatileentity.interfaces.IRefreshBeforeConsumption;
-import gregtech.api.metatileentity.multiblock.ICleanroomProvider;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
@@ -36,7 +35,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -47,27 +45,29 @@ import static gregtech.api.GTValues.V;
 public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController, IControllable {
 
     public final RecipeMap<?> recipeMap;
+    public int recipeHeat;
     protected HeatRecipeLogic recipeMapWorkable;
     protected IItemHandlerModifiable inputInventory;
     protected IItemHandlerModifiable outputInventory;
     protected IMultipleTankHandler inputFluidInventory;
     protected IMultipleTankHandler outputFluidInventory;
+    protected List<IRefreshBeforeConsumption> refreshBeforeConsumptions;
     int heat;
     int tier;
-    public int recipeHeat;
     private boolean isDistinct = false;
-    protected List<IRefreshBeforeConsumption> refreshBeforeConsumptions;
-    public void refreshAllBeforeConsumption() {
-        for (IRefreshBeforeConsumption refresh : refreshBeforeConsumptions) {
-            refresh.refreshBeforeConsumption();
-        }
-    }
+
     public RecipeMapHeatMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?> recipeMap) {
         super(metaTileEntityId);
         this.recipeMap = recipeMap;
         this.recipeMapWorkable = new HeatRecipeLogic(this, recipeMap);
         this.refreshBeforeConsumptions = new ArrayList<>();
         resetTileAbilities();
+    }
+
+    public void refreshAllBeforeConsumption() {
+        for (IRefreshBeforeConsumption refresh : refreshBeforeConsumptions) {
+            refresh.refreshBeforeConsumption();
+        }
     }
 
     public int getTier() {
@@ -130,8 +130,8 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
     }
 
     public boolean checkRecipe(@Nonnull Recipe recipe, boolean consumeIfSuccess) {
-        if(heat<300)return false;
-        recipeHeat=recipe.getProperty(HeatProperty.getInstance(),0);
+        if (heat < 300) return false;
+        recipeHeat = recipe.getProperty(HeatProperty.getInstance(), 0);
         return heat >= recipeHeat;
     }
 
@@ -212,6 +212,7 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+
     @Override
     public void writeInitialSyncData(PacketBuffer buf) {
         super.writeInitialSyncData(buf);
@@ -272,6 +273,16 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         return list;
     }
 
+    @Override
+    public boolean isWorkingEnabled() {
+        return recipeMapWorkable.isWorkingEnabled();
+    }
+
+    @Override
+    public void setWorkingEnabled(boolean isWorkingAllowed) {
+        recipeMapWorkable.setWorkingEnabled(isWorkingAllowed);
+    }
+
     protected class HeatRecipeLogic extends BaseHeatRecipeLogic {
 
         public HeatRecipeLogic(RecipeMapHeatMultiblockController tileEntity, RecipeMap<?> recipeMap) {
@@ -280,13 +291,12 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
 
         @Override
         public void setMaxProgress(int maxProgress) {
-            if(recipeHeat==0)
-            {
+            if (recipeHeat == 0) {
                 super.setMaxProgress(maxProgress);
                 return;
-            };
-            double speedBonus = Math.min(heat/recipeHeat,1);
-            super.setMaxProgress((int) (maxProgress*speedBonus));
+            }
+            double speedBonus = Math.min(heat / recipeHeat, 1);
+            super.setMaxProgress((int) (maxProgress * speedBonus));
         }
 
         @Override
@@ -298,15 +308,5 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         public long getMaximumOverclockVoltage() {
             return heat;
         }
-    }
-
-    @Override
-    public boolean isWorkingEnabled() {
-        return recipeMapWorkable.isWorkingEnabled();
-    }
-
-    @Override
-    public void setWorkingEnabled(boolean isWorkingAllowed) {
-        recipeMapWorkable.setWorkingEnabled(isWorkingAllowed);
     }
 }

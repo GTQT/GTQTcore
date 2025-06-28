@@ -6,6 +6,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.GregtechDataCodes;
+import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.gui.GuiTextures;
@@ -47,14 +48,6 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
     public boolean active = false;
     public boolean source = true;
     int tier;
-    int[][] pos = {
-            {0, 0, 1},
-            {0, 0, -1},
-            {0, 1, 0},
-            {0, -1, 0},
-            {1, 0, 0},
-            {-1, 0, 0}
-    };
 
     public MetaTileEntityMicrowaveEnergyReceiver(ResourceLocation metaTileEntityId, int tier) {
         super(metaTileEntityId);
@@ -95,32 +88,47 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
         active = data.getBoolean("active");
     }
 
+    @Override
     public void update() {
         super.update();
-        if (!active || Voltage <= 0 || Amperage <= 0) return;
+        if (getWorld().isRemote) return;  // 客户端直接返回
 
-        for (EnumFacing opposite : EnumFacing.values()) {
-            TileEntity tile = getNeighbor(opposite);
-            if (tile != null) {
-                for (EnumFacing facing : EnumFacing.VALUES) {
-                    if (tile.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing) instanceof IEnergyContainer) {
-                        IEnergyContainer container = tile.getCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, facing);
-                        assert container != null;
-                        transferEnergy(container);
-                    }
-                }
+        if (!active || Voltage <= 0 || Amperage <= 0) return;  // 检查工作状态
+
+        long ampsUsed = 0;
+        // 遍历所有方向传输能量
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            EnumFacing opposite = facing.getOpposite();
+            TileEntity tile = getNeighbor(facing);
+            if (tile == null) continue;
+
+            // 尝试获取能量容器能力
+            IEnergyContainer container = tile.getCapability(
+                    GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, opposite);
+
+            // 如果未找到则尝试激光能力
+            if (container == null) {
+                container = tile.getCapability(
+                        GregtechTileCapabilities.CAPABILITY_LASER, opposite);
             }
-        }
-    }
 
-    private void transferEnergy(IEnergyContainer container) {
-        long energyToTransfer = Math.min(V[Voltage] * Amperage, energyContainer.getEnergyStored());
-        long maxCapacity = container.getEnergyCapacity() - container.getEnergyStored();
+            // 验证容器有效性
+            if (container == null ||
+                    !container.inputsEnergy(opposite) ||
+                    container.getEnergyCanBeInserted() == 0) {
+                continue;
+            }
 
-        if (energyToTransfer > 0 && maxCapacity > 0) {
-            long transferAmount = Math.min(energyToTransfer, maxCapacity);
-            container.addEnergy(transferAmount);
-            energyContainer.removeEnergy(transferAmount);
+            // 计算可传输的电流量（不超过剩余电流上限）
+            long availableAmps = Amperage - ampsUsed;
+            long transferredAmps = container.acceptEnergyFromNetwork(
+                    opposite,
+                    Voltage,
+                    availableAmps
+            );
+
+            ampsUsed += transferredAmps;
+            if (ampsUsed >= Amperage) break;  // 达到电流上限时停止
         }
     }
 
@@ -225,6 +233,6 @@ public class MetaTileEntityMicrowaveEnergyReceiver extends MetaTileEntity implem
         super.addInformation(stack, world, tooltip, advanced);
         tooltip.add(I18n.format("需要使用坐标卡绑定到微波控制器使用"));
         tooltip.add(I18n.format("调节电压电流改变六面输出电量（无视电压电流限制）"));
-        tooltip.add(I18n.format("可以使用动力仓中转向导线传输电力"));
+        tooltip.add(I18n.format("微波无线接收仓也是能源容器，因此也会因为下雨，电压过载等原因触发爆炸！"));
     }
 }

@@ -11,6 +11,8 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -21,6 +23,7 @@ import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.GTRecipeInput;
 import gregtech.api.recipes.properties.impl.ResearchProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.particle.GTLaserBeamParticle;
 import gregtech.client.particle.GTParticleManager;
@@ -46,6 +49,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.relauncher.Side;
@@ -176,14 +180,11 @@ public class MetaTileEntityAssemblyLine extends GTQTRecipeMapMultiblockControlle
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
-
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.atier", tier, glass_tier, laser_tier, casing_tier));
-
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.atier" , syncer.syncInt(tier), syncer.syncInt(glass_tier),syncer.syncInt( laser_tier),syncer.syncInt( casing_tier)));
     }
-
     @Override
     protected Function<BlockPos, Integer> multiblockPartSorter() {
         // player's right when looking at the controller, but the controller's left

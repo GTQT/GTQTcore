@@ -1,5 +1,9 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
@@ -10,18 +14,18 @@ import gregtech.api.gui.widgets.ImageCycleButtonWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
-import gregtech.api.util.LocalizationUtils;
-import gregtech.api.util.TextComponentUtil;
-import gregtech.api.util.TextFormattingUtil;
+import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -43,13 +47,15 @@ import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import static gregtech.api.recipes.RecipeMaps.SIFTER_RECIPES;
 import static gregtech.api.unification.material.Materials.Steam;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.GRAVITY_SEPARATOR_RECIPES;
 import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.SEPARATOR_ROTOR;
 
-public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController implements IProgressBarMultiblock {
+public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController implements ProgressBarMultiblock {
+
     int updatetime = 1;
     int[] steam = new int[3];
     FluidStack STEAM = Steam.getFluid(1000 * updatetime);
@@ -99,18 +105,31 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addCustomCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (getInputFluidInventory() != null) {
             FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.gc.count1", TextFormattingUtil.formatNumbers(SteamAmount)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.gc.count1",syncer.syncString(TextFormattingUtil.formatNumbers(SteamAmount))));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) steam[0] / 1000, (double) steam[1] / 1000, (double) steam[2] / 1000));
-        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
-        else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
-    }
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.msf.count2",syncer.syncDouble(steam[0] / 1000.0), syncer.syncDouble(steam[1] / 1000.0), syncer.syncDouble(steam[2] / 1000.0)));
+        if (getStatue()) keyManager.add(KeyUtil.lang(TextFormatting.GREEN,
+                "gtqtcore.msf.good"));
+        else keyManager.add(KeyUtil.lang(TextFormatting.YELLOW,
+                "gtqtcore.msf.no"));
+
+    }
     @Override
     public void update() {
         super.update();
@@ -169,31 +188,31 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
     }
 
     @Override
-    public int getNumProgressBars() {
+    public int getProgressBarCount() {
         return 3;
     }
 
     @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                (steam[index] + 1000) + " / " + (10000) + " kPa");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.msf.computation",
-                cwutInfo));
-    }
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        for(int i=0;i<3;i++)
+        {
+            IntSyncValue hatch = new IntSyncValue(()->steam[0]);
+            syncManager.syncValue("hatch"+i, hatch);
 
-    @Override
-    public double getFillPercentage(int index) {
-        return (double) (steam[index] + 1000) / (10000);
+            bars.add(barTest -> barTest
+                    .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                    .tooltipBuilder(tooltip -> {
+                        IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                                "%s / %s  kPa",
+                                hatch.getIntValue()+100, 10000);
+                        tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                                "仓室压力",
+                                heatInfo));
+                    })
+                    .progress(() -> hatch.getIntValue() > 0 ?
+                            (double) (hatch.getIntValue() + 1000) /10000 : 0));
+        }
     }
-
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
-    }
-
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityGravitySeparator(this.metaTileEntityId);
     }

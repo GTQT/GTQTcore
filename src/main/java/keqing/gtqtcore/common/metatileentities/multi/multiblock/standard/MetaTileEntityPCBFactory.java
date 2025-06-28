@@ -1,6 +1,20 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import com.cleanroommc.modularui.api.GuiAxis;
+import com.cleanroommc.modularui.api.IPanelHandler;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.drawable.ItemDrawable;
+import com.cleanroommc.modularui.drawable.Rectangle;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.utils.Color;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.value.sync.StringSyncValue;
+import com.cleanroommc.modularui.widgets.ButtonWidget;
+import com.cleanroommc.modularui.widgets.SliderWidget;
+import com.cleanroommc.modularui.widgets.layout.Flow;
+import com.cleanroommc.modularui.widgets.textfield.TextFieldWidget;
 import gregicality.multiblocks.api.unification.GCYMMaterials;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IOpticalComputationHatch;
@@ -10,22 +24,23 @@ import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
 import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.Widget;
-import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.GTGuis;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -47,8 +62,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -64,11 +77,9 @@ import static gregtech.api.GTValues.LuV;
 import static gregtech.api.GTValues.ZPM;
 import static gregtech.api.unification.material.Materials.Gold;
 import static gregtech.api.unification.material.Materials.Silver;
-import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.SiliconCarbide;
 import static keqing.gtqtcore.api.unification.ore.GTQTOrePrefix.swarm;
-import static keqing.gtqtcore.api.utils.GTQTMathUtil.clamp;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 import static keqing.gtqtcore.common.block.blocks.BlockPCBFactoryCasing.PCBFactoryCasingType.SUBSTRATE_CASING;
 
@@ -303,25 +314,57 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
                 .build();
     }
 
-    @Nonnull
-    @Override
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 18, "", this::decrementTraceSize)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("gtqtcore.machine.pcb_factory.trace_size.decrement"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 18, "", this::incrementTraceSize)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("gtqtcore.machine.pcb_factory.trace_size.increment"));
-        return group;
-    }
+    private ModularPanel makeThrottlePanel(PanelSyncManager syncManager, IPanelHandler syncHandler) {
+        StringSyncValue traceSizeValue = new StringSyncValue(() -> "线宽:" + traceSize);
 
-    private void incrementTraceSize(Widget.ClickData clickData) {
-        this.traceSize = clamp(traceSize - 25, minTraceSize, maxTraceSize);
-    }
+        DoubleSyncValue sliderValue = new DoubleSyncValue(
+                () -> (double) getTraceSize() / maxTraceSize,
+                d -> setTraceSize((int) (d * maxTraceSize)));
 
-    private void decrementTraceSize(Widget.ClickData clickData) {
-        this.traceSize = clamp(traceSize + 25, minTraceSize, maxTraceSize);
+        return GTGuis.createPopupPanel("boiler_throttle", 116, 53)
+                .child(Flow.row()
+                        .pos(4, 4)
+                        .height(16)
+                        .coverChildrenWidth()
+                        .child(new ItemDrawable(getStackForm())
+                                .asWidget()
+                                .size(16)
+                                .marginRight(4))
+                        .child(IKey.lang("线宽调整")
+                                .asWidget()
+                                .heightRel(1.0f)))
+                .child(Flow.row()
+                        .top(20)
+                        .margin(4, 0)
+                        .coverChildrenHeight()
+                        .child(new SliderWidget()
+                                .background(new Rectangle().setColor(Color.BLACK.brighter(2)).asIcon()
+                                        .height(8))
+                                .bounds(0, 1)
+                                .setAxis(GuiAxis.X)
+                                .value(sliderValue)
+                                .widthRel(0.7f)
+                                .height(20))
+                        .child(new TextFieldWidget()
+                                .widthRel(0.3f)
+                                .height(20)
+                                .setTextColor(Color.WHITE.darker(1))
+                                .setValidator(str -> {
+                                    if (str.charAt(str.length() - 1) == '%') {
+                                        str = str.substring(0, str.length() - 1);
+                                    }
+
+                                    try {
+                                        long l = Long.parseLong(str);
+                                        if (l < minTraceSize) l = minTraceSize;
+                                        else if (l > maxTraceSize) l = maxTraceSize;
+                                        return String.valueOf(l);
+                                    } catch (NumberFormatException ignored) {
+                                        return traceSizeValue.getValue();
+                                    }
+                                })
+                                .value(traceSizeValue)
+                                .background(GTGuiTextures.DISPLAY)));
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -469,31 +512,59 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
         return new String[]{I18n.format("gtqtcore.machine.pcb_factory.description")};
     }
 
+
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, this.isStructureFormed())
-                .addCustom((tl) -> {
-                    if (this.isStructureFormed()) {
-                        tl.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-                        tl.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gtqtcore.machine.pcb_factory.structure.info", this.getMainUpgradeNumber(), this.getTraceSize()));
-                        if (this.getCoolingUpgradeNumber() > 0) {
-                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.AQUA, "gtqtcore.machine.pcb_factory.structure.cooling_tower"));
-                            if (this.getCoolingUpgradeNumber() == 2) {
-                                tl.add(TextComponentUtil.translationWithColor(TextFormatting.BLUE, "gtqtcore.machine.pcb_factory.structure.thermosink"));
-                            }
-                        }
-                        if (this.getBioUpgradeNumber() == 1) {
-                            tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "gtqtcore.machine.pcb_factory.structure.bio_chamber"));
-                        }
-                    }
-                })
-                .setWorkingStatus(this.recipeMapWorkable.isWorkingEnabled(), this.recipeMapWorkable.isActive())
-                .addEnergyUsageLine(this.recipeMapWorkable.getEnergyContainer())
-                .addEnergyTierLine(GTUtility.getTierByVoltage(this.recipeMapWorkable.getMaxVoltage()))
-                .addParallelsLine(this.recipeMapWorkable.getParallelLimit())
-                .addWorkingStatusLine()
-                .addProgressLine(this.recipeMapWorkable.getProgressPercent());
+    protected MultiblockUIFactory createUIFactory() {
+        return super.createUIFactory()
+                .createFlexButton((guiData, syncManager) -> {
+                    var throttle = syncManager.panel("throttle_panel", this::makeThrottlePanel, true);
+
+                    return new ButtonWidget<>()
+                            .size(18)
+                            .overlay(GTGuiTextures.FILTER_SETTINGS_OVERLAY.asIcon().size(16))
+                            .addTooltipLine(IKey.lang("gregtech.multiblock.large_boiler.throttle_button.tooltip"))
+                            .onMousePressed(i -> {
+                                if (throttle.isPanelOpen()) {
+                                    throttle.closePanel();
+                                } else {
+                                    throttle.openPanel();
+                                }
+                                return true;
+                            });
+                });
     }
+
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addCustom(this::addCustomData)
+                .addWorkingStatusLine()
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    private void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        if (isStructureFormed()) {
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gtqtcore.kqcc_accelerate", syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gtqtcore.machine.pcb_factory.structure.info", syncer.syncInt(this.getMainUpgradeNumber()), syncer.syncInt(this.getTraceSize())));
+            if (this.getCoolingUpgradeNumber() > 0) {
+                keyManager.add(KeyUtil.lang(TextFormatting.AQUA,
+                        "gtqtcore.machine.pcb_factory.structure.cooling_tower"));
+                if (this.getCoolingUpgradeNumber() == 2) {
+                    keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                            "gtqtcore.machine.pcb_factory.structure.cooling_tower.info", syncer.syncInt(this.getCoolingUpgradeNumber()), syncer.syncInt(this.getCoolingUpgradeNumber())));
+                }
+            }
+            if (this.getBioUpgradeNumber() == 1) {
+                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "gtqtcore.machine.pcb_factory.structure.bio_reactor"));
+            }
+
+        }
+    }
+
 
     @Override
     public boolean canBeDistinct() {
@@ -519,6 +590,10 @@ public class MetaTileEntityPCBFactory extends RecipeMapMultiblockController impl
 
     public int getTraceSize() {
         return this.traceSize;
+    }
+
+    public void setTraceSize(int traceSize) {
+        this.traceSize = traceSize;
     }
 
     private class PCBFactoryRecipeLogic extends MultiblockRecipeLogic {

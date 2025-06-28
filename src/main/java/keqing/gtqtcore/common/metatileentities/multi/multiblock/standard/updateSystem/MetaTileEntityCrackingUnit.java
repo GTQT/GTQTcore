@@ -1,16 +1,19 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.updateSystem;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -28,6 +31,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -160,33 +164,33 @@ public class MetaTileEntityCrackingUnit extends GTQTRecipeMapMultiblockControlle
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(tl -> {
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+
                     // Coil energy discount line
-                    if (isStructureFormed()) {
-                        ITextComponent energyDiscount = TextComponentUtil.stringWithColor(TextFormatting.AQUA,
-                                (100 - 10 * coilTier) + "%");
+                    IKey energyDiscount = KeyUtil.number(TextFormatting.AQUA,
+                            syncer.syncLong(100 - 10L * coilTier), "%");
 
-                        ITextComponent base = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.cracking_unit.energy",
-                                energyDiscount);
+                    IKey base = KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.cracking_unit.energy",
+                            energyDiscount);
 
-                        ITextComponent hover = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.cracking_unit.energy_hover");
+                    IKey hover = KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.cracking_unit.energy_hover");
 
-                        tl.add(TextComponentUtil.setHover(base, hover));
-                    }
+                    textList.add(KeyUtil.setHover(base, hover));
+
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire",syncer.syncInt(casingTier)));
+                    textList.add(KeyUtil.lang(TextFormatting.GRAY, "线圈等级：%s",syncer.syncInt(coilTier)));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent());
-
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
 
     @SideOnly(Side.CLIENT)

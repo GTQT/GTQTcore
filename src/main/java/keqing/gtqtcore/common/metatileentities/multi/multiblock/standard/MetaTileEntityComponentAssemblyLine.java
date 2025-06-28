@@ -12,6 +12,8 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -19,6 +21,8 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -45,7 +49,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -57,6 +63,7 @@ import java.util.List;
 
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.GTQTAPI.MAP_CAL_CASING;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
 public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockController implements IOpticalComputationReceiver {
@@ -311,10 +318,10 @@ public class MetaTileEntityComponentAssemblyLine extends GTQTNoTierMultiblockCon
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
         if (this.isStructureFormed() && casingTier > 0) {
-            textList.add(new TextComponentTranslation("结构等级：%s", casingTier));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "结构等级 : %s", syncer.syncInt(casingTier)));
         }
     }
 

@@ -1,20 +1,27 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
-import gregtech.api.gui.GuiTextures;
-import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.BlockInfo;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -42,18 +49,15 @@ import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import static gregtech.api.GTValues.V;
 import static gregtech.api.unification.material.Materials.Steam;
 import static gregtech.api.util.RelativeDirection.*;
 
 //闪蒸
-public class MetaTileEntitySMSF extends MultiMapMultiblockController implements IProgressBarMultiblock {
+public class MetaTileEntitySMSF extends MultiMapMultiblockController implements ProgressBarMultiblock {
     int[] steam = new int[3];
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     FluidStack STEAM = Steam.getFluid(1000);
     private int coilLevel;
     private int number;
@@ -148,6 +152,21 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
         }
     }
 
+    //这里是警告
+    @Override
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        super.configureWarningText(builder);
+        builder.addCustom((manager, syncer) -> {
+            if (isStructureFormed()) {
+                FluidStack lubricantStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
+                if (lubricantStack == null || lubricantStack.amount < 1000) {
+                    manager.add(KeyUtil.lang(TextFormatting.RED,
+                            "gtqtcore.multiblock.sfm.no_water1"));
+                }
+            }
+        });
+    }
+
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
@@ -166,16 +185,30 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addCustomCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (getInputFluidInventory() != null) {
             FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
             int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
-            textList.add(new TextComponentTranslation("gtqtcore.msf.count1", number, coilLevel, TextFormattingUtil.formatNumbers(SteamAmount)));
+            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.gc.count1", syncer.syncString(TextFormattingUtil.formatNumbers(SteamAmount))));
         }
-        textList.add(new TextComponentTranslation("gtqtcore.msf.count2", (double) steam[0] / 1000, (double) steam[1] / 1000, (double) steam[2] / 1000));
-        if (getStatue()) textList.add(new TextComponentTranslation("gtqtcore.msf.good"));
-        else textList.add(new TextComponentTranslation("gtqtcore.msf.no"));
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.msf.count2", syncer.syncDouble(steam[0] / 1000.0), syncer.syncDouble(steam[1] / 1000.0), syncer.syncDouble(steam[2] / 1000.0)));
+        if (getStatue()) keyManager.add(KeyUtil.lang(TextFormatting.GREEN,
+                "gtqtcore.msf.good"));
+        else keyManager.add(KeyUtil.lang(TextFormatting.YELLOW,
+                "gtqtcore.msf.no"));
+
     }
 
     @Override
@@ -252,29 +285,29 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     }
 
     @Override
-    public int getNumProgressBars() {
+    public int getProgressBarCount() {
         return 3;
     }
 
     @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent cwutInfo = TextComponentUtil.stringWithColor(
-                TextFormatting.AQUA,
-                (steam[index] + 1000) + " / " + (10000) + " kPa");
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "gregtech.multiblock.msf.computation",
-                cwutInfo));
-    }
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        for (int i = 0; i < 3; i++) {
+            IntSyncValue hatch = new IntSyncValue(() -> steam[0]);
+            syncManager.syncValue("hatch" + i, hatch);
 
-    @Override
-    public double getFillPercentage(int index) {
-        return (double) (steam[index] + 1000) / (10000);
-    }
-
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
+            bars.add(barTest -> barTest
+                    .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                    .tooltipBuilder(tooltip -> {
+                        IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                                "%s / %s  kPa",
+                                hatch.getIntValue() + 100, 10000);
+                        tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                                "仓室压力",
+                                heatInfo));
+                    })
+                    .progress(() -> hatch.getIntValue() > 0 ?
+                            (double) (hatch.getIntValue() + 1000) / 10000 : 0));
+        }
     }
 
     private class MFSWorkableHandler extends MultiblockRecipeLogic {

@@ -36,12 +36,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import static gregtech.api.GTValues.CWT;
 import static gregtech.api.GTValues.VA;
 
 public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDataBank implements IOpticalComputationProvider {
@@ -143,23 +145,20 @@ public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDat
         }
     }
 
-    public int vacwu() {
-        if (tire <= 2) return 0;
-        return VA[this.tire] * 2;
+    public int MaxLimitCWU() {
+        return CWT[this.tire] * 4;
     }
 
     @Override
     public int requestCWUt(int cwut, boolean simulate, Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        return isActive() ? computationHandler.requestCWUt(cwut, simulate, seen) : 0;
+        return isActive() ? Math.min(computationHandler.requestCWUt(cwut, simulate, seen), MaxLimitCWU()) : 0;
     }
 
     @Override
-    public int getMaxCWUt(Collection<IOpticalComputationProvider> seen) {
+    public int getMaxCWUt(@NotNull Collection<IOpticalComputationProvider> seen) {
         seen.add(this);
-        if (computationHandler.getMaxCWUt(seen) > vacwu())
-            return Math.min(1024, isWorkingEnabled() ? computationHandler.getMaxCWUt(seen) : 0);
-        else return 0;
+        return isStructureFormed() ? Math.min(computationHandler.getMaxCWUt(seen), MaxLimitCWU()) : 0;
     }
 
     // allows chaining Network Switches together
@@ -252,8 +251,7 @@ public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDat
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.3"));
         tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.5"));
         tooltip.add(I18n.format("gtqtcore.machine.network_switch.tooltip.1"));
-        tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4",
-                TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
+        tooltip.add(I18n.format("gregtech.machine.network_switch.tooltip.4", TextFormattingUtil.formatNumbers(EUT_PER_HATCH)));
     }
     @Override
     public boolean usesMui2() {
@@ -271,7 +269,7 @@ public class MetaTileEntityResearchSystemNetworkSwitch extends MetaTileEntityDat
                 .addComputationUsageLine(computationHandler.getMaxCWUtForDisplay())
                 .addWorkingStatusLine();
         textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.tier", tire));
-        textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.max", computationHandler.getMaxCWUtForDisplay(), vacwu()));
+        textList.add(new TextComponentTranslation("gregtech.multiblock.kqns.max", computationHandler.getMaxCWUtForDisplay(), MaxLimitCWU()));
     }
 
     @Override

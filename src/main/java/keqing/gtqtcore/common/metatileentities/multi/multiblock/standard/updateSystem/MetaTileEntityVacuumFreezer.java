@@ -3,13 +3,10 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.update
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
@@ -25,12 +22,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
 
 import static gregtech.api.recipes.RecipeMaps.VACUUM_RECIPES;
 
@@ -90,48 +83,6 @@ public class MetaTileEntityVacuumFreezer extends GTQTRecipeMapMultiblockControll
         }
         if (dataId == GTQTValue.REQUIRE_DATA_UPDATE24) {
             this.writeCustomData(GTQTValue.UPDATE_TIER24, buf1 -> buf1.writeInt(this.tier));
-        }
-    }
-
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
-                .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
-                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(tl -> {
-                    if (isStructureFormed()) {
-                        int processingSpeed = tier == 0 ? 75 : 50 * (tier + 1);
-                        ITextComponent speedIncrease = TextComponentUtil.stringWithColor(
-                                getSpeedColor(processingSpeed),
-                                processingSpeed + "%");
-
-                        ITextComponent base = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.pyrolyse_oven.speed",
-                                speedIncrease);
-
-                        ITextComponent hover = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.pyrolyse_oven.speed_hover");
-
-                        tl.add(TextComponentUtil.setHover(base, hover));
-                    }
-                })
-                .addParallelsLine(recipeMapWorkable.getParallelLimit())
-                .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent());
-    }
-
-    private TextFormatting getSpeedColor(int speed) {
-        if (speed < 100) {
-            return TextFormatting.RED;
-        } else if (speed == 100) {
-            return TextFormatting.GRAY;
-        } else if (speed < 250) {
-            return TextFormatting.GREEN;
-        } else {
-            return TextFormatting.LIGHT_PURPLE;
         }
     }
 

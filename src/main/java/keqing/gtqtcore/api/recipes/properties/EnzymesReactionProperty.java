@@ -23,30 +23,14 @@ public class EnzymesReactionProperty extends RecipeProperty<Integer> {
 
     @Override
     public void drawInfo(Minecraft minecraft, int x, int y, int color, Object value) {
-        minecraft.fontRenderer.drawString(I18n.format("性状因子：",
-                castValue(value).toString()) + getTire(castValue(value)), x, y, color);
+        minecraft.fontRenderer.drawString(I18n.format("性状因子：%s",
+                castValue(value)), x, y, color);
     }
-
     public static EnzymesReactionProperty getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new EnzymesReactionProperty();
         }
         return INSTANCE;
-    }
-
-    private static String getTire(Integer Rate) {
-        Map.Entry<Integer, String> mapEntry = registeredTire.ceilingEntry(Rate);
-
-        if (mapEntry == null) {
-            throw new IllegalArgumentException("Tier is above registered maximum Casing Tier.");
-        }
-
-        return String.format("%s", mapEntry.getValue());
-    }
-
-    public static void registeredRate(int Rate, String shortName) {
-        Validate.notNull(shortName);
-        registeredTire.put(Rate, shortName);
     }
     @Override
     public NBTBase serialize(Object value) {

@@ -16,11 +16,15 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -50,12 +54,10 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static gregtech.api.capability.GregtechDataCodes.WORKABLE_ACTIVE;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getAccelerateByCWU;
 
 public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase implements IControllable {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     private final int BASE_EU_CONSUMPTION_PER_PUMP = 128;
     private IEnergyContainer energyContainers;
     private IMultipleTankHandler outputTankInventory;
@@ -217,29 +219,27 @@ public class MetaTileEntityOceanPumper extends MultiblockWithDisplayBase impleme
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.addCustom(this::addCustomCapacity);
 
-        if (this.isStructureFormed()) {
-            if (energyContainers != null && energyContainers.getEnergyCapacity() > 0) {
-                int energyContainer = GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage());
-                long maxVoltage = GTValues.V[energyContainer] / 2;
-                String voltageName = GTValues.VNF[energyContainer - 1];
-                textList.add(new TextComponentTranslation("gregtech.multiblock.max_energy_per_tick", maxVoltage, voltageName));
-            }
-
-            if (this.isActive() && drainEnergy(true)) {
-                textList.add(new TextComponentTranslation("gregtech.machine.miner.working").setStyle(new Style().setColor(TextFormatting.GOLD)));
-                textList.add(new TextComponentTranslation("当前抽取速率：%s", drainRate));
-            } else if (!drainEnergy(true))
-                textList.add(new TextComponentTranslation("gregtech.machine.miner.needspower").setStyle(new Style().setColor(TextFormatting.RED)));
-            else if (!this.isWorkingEnabled())
-                textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
-            else if (!insertFluid(true))
-                textList.add(new TextComponentTranslation("输出仓已满！").setStyle(new Style().setColor(TextFormatting.RED)));
-        }
     }
-
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (energyContainers != null && energyContainers.getEnergyCapacity() > 0) {
+            int energyContainer = GTUtility.getTierByVoltage(this.energyContainers.getInputVoltage());
+            long maxVoltage = GTValues.V[energyContainer] / 2;
+            String voltageName = GTValues.VNF[energyContainer];
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick", syncer.syncLong(maxVoltage), syncer.syncString(voltageName)));
+        }
+        if (this.isActive() && drainEnergy(true)) {
+            keyManager.add((KeyUtil.lang(TextFormatting.GRAY,"gregtech.machine.miner.working")));
+            keyManager.add((KeyUtil.lang(TextFormatting.GRAY,"当前抽取速率：%s", syncer.syncInt(drainRate))));
+        } else if (!drainEnergy(true))
+            keyManager.add((KeyUtil.lang(TextFormatting.RED,"gregtech.machine.miner.needspower")));
+        else if (!this.isWorkingEnabled())
+            keyManager.add((KeyUtil.lang(TextFormatting.RED,"gregtech.multiblock.work_paused")));
+        else if (!insertFluid(true))
+            keyManager.add((KeyUtil.lang(TextFormatting.RED,"输出仓已满！")));
+    }
     @Override
     protected BlockPattern createStructurePattern() {
         // BLYAAAAAAAAAAAAAAAT

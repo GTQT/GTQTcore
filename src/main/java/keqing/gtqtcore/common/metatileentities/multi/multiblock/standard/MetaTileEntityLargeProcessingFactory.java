@@ -30,11 +30,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class MetaTileEntityLargeProcessingFactory extends MultiMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
-
     public MetaTileEntityLargeProcessingFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.PROCESSING_MODE_A,

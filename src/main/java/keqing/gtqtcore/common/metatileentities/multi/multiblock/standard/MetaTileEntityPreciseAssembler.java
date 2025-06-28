@@ -8,12 +8,15 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.ConfigHolder;
@@ -39,6 +42,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -55,10 +59,7 @@ import static keqing.gtqtcore.api.GTQTAPI.*;
 import static keqing.gtqtcore.common.metatileentities.GTQTMetaTileEntities.PRECISE_ASSEMBLER;
 
 public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     private IOpticalComputationProvider computationProvider;
     private int CasingTier;
     private int InternalCasingTier;
@@ -87,11 +88,12 @@ public class MetaTileEntityPreciseAssembler extends GTQTOCMultiblockController {
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("外壳等级：%s 机器方块等级:%s", CasingTier, InternalCasingTier));
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed()){
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "外壳等级：%s 机器方块等级:%s", syncer.syncInt(CasingTier), syncer.syncInt(InternalCasingTier)));
+        }
     }
-
     @Override
     public boolean canBeDistinct() {
         return true;

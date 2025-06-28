@@ -12,6 +12,8 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -22,6 +24,7 @@ import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.cclop.ColourOperation;
@@ -45,6 +48,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -74,33 +78,6 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
         setOverclocking(3);
     }
 
-    public int getCurrentTemperature() {
-        return this.blastFurnaceTemperature;
-    }
-
-    protected class DigesterWorkable extends GTQTMultiblockLogic {
-
-        public DigesterWorkable(RecipeMapMultiblockController tileEntity) {
-            super(tileEntity);
-        }
-
-        @Override
-        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
-            super.modifyOverclockPre(ocParams, storage);
-            // coil EU/t discount
-            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
-                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
-                    storage.get(TemperatureProperty.getInstance(), 0)));
-        }
-
-        @Override
-        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
-                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
-            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
-                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
-        }
-    }
-
     private static IBlockState getCasingAState() {
         return MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.TUNGSTENSTEEL_ROBUST);
     }
@@ -111,6 +88,10 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
 
     private static IBlockState getHeatState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.TUNGSTENSTEEL_PIPE);
+    }
+
+    public int getCurrentTemperature() {
+        return this.blastFurnaceTemperature;
     }
 
     @Override
@@ -141,6 +122,13 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
             textList.add(new TextComponentTranslation("gregtech.multiblock.cracking_unit.energy", 100 - this.coilTier));
         }
         super.addDisplayText(textList);
+    }
+
+    @Override
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed())
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.cracking_unit.energy", syncer.syncInt(100 - this.coilTier)));
     }
 
     @Override
@@ -266,5 +254,28 @@ public class MetaTileEntityDigester extends GTQTNoTierMultiblockController imple
     @Override
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.COKING_TOWER_OVERLAY;
+    }
+
+    protected class DigesterWorkable extends GTQTMultiblockLogic {
+
+        public DigesterWorkable(RecipeMapMultiblockController tileEntity) {
+            super(tileEntity);
+        }
+
+        @Override
+        protected void modifyOverclockPre(OCParams ocParams, RecipePropertyStorage storage) {
+            super.modifyOverclockPre(ocParams, storage);
+            // coil EU/t discount
+            ocParams.setEut(OverclockingLogic.applyCoilEUtDiscount(ocParams.eut(),
+                    ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    storage.get(TemperatureProperty.getInstance(), 0)));
+        }
+
+        @Override
+        protected void runOverclockingLogic(OCParams ocParams, OCResult ocResult,
+                                            RecipePropertyStorage propertyStorage, long maxVoltage) {
+            heatingCoilOC(ocParams, ocResult, maxVoltage, ((IHeatingCoil) metaTileEntity).getCurrentTemperature(),
+                    propertyStorage.get(TemperatureProperty.getInstance(), 0));
+        }
     }
 }

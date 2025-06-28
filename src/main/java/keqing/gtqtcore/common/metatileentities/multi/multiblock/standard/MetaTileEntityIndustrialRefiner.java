@@ -38,10 +38,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class MetaTileEntityIndustrialRefiner extends GTQTNoTierMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     public MetaTileEntityIndustrialRefiner(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.MACERATOR_RECIPES,

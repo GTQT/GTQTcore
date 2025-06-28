@@ -6,12 +6,17 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.MetaBlocks;
@@ -31,6 +36,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,10 +51,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.Turbine
 
 
 public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     private int glass_tier;
 
     public MetaTileEntityGeneMutagenesis(ResourceLocation metaTileEntityId) {
@@ -120,18 +122,35 @@ public class MetaTileEntityGeneMutagenesis extends MultiMapMultiblockController 
     protected ICubeRenderer getFrontOverlay() {
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
-
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (!isStructureFormed()) return;
-        super.addDisplayText(textList);
-        if (getRadiationHatch().isAvailable()) {
-            textList.add(new TextComponentTranslation("放射仓等级：%s 辐射：%s Sv", getRadiationHatch().getTier(), getRadiationHatch().getRadiation()));
-            textList.add(new TextComponentString("辐射物质: " + getRadiationHatch().getMaterial().getLocalizedName()));
-            textList.add(new TextComponentString("已经工作: " + GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getWorkTime())));
-            textList.add(new TextComponentString("距离损坏: " + GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getTotalTick() - getRadiationHatch().getWorkTime())));
-        } else textList.add(new TextComponentTranslation("放射仓等级：%s", getRadiationHatch().getTier()));
-        textList.add(new TextComponentTranslation("玻璃等级：%s 耗时减免：%s", glass_tier, (10 - glass_tier) / 10.0));
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addCustomCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (isStructureFormed()) {
+            if (getRadiationHatch().isAvailable()) {
+                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "放射仓等级：%s 辐射：%s Sv", syncer.syncInt(getRadiationHatch().getTier()), syncer.syncInt(getRadiationHatch().getRadiation())));
+                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "辐射物质: %s", getRadiationHatch().getMaterial().getLocalizedName()));
+                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "已经工作: %s", syncer.syncString(GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getRadiation()))));
+                keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                        "剩余时间: %s", syncer.syncString(GTQTDateHelper.getTimeFromTicks(getRadiationHatch().getTotalTick() - getRadiationHatch().getWorkTime()))));
+            }
+            else keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "放射仓等级：%s", syncer.syncInt(getRadiationHatch().getTier())));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "玻璃等级：%s 玻璃储量：%s", syncer.syncInt(glass_tier), syncer.syncDouble((10 - glass_tier) / 10.0)));
+        }
     }
 
     public IRadiation getRadiationHatch() {

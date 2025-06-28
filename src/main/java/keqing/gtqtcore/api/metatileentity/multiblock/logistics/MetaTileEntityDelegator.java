@@ -151,17 +151,17 @@ public abstract class MetaTileEntityDelegator extends MetaTileEntity implements 
             addCapability(GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER, GregtechCapabilities.CAPABILITY_ENERGY_CONTAINER.cast(IEnergyContainer.DEFAULT));
         }
 
-        public static boolean hasCapability( Capability<?> capability) {
+        public static boolean hasCapability(Capability<?> capability) {
             return DEFAULT_CAPABILITIES.containsKey(capability);
         }
 
 
         @SuppressWarnings("unchecked")
-        public static <T> T getCapability( Capability<T> capability) {
+        public static <T> T getCapability(Capability<T> capability) {
             return (T) DEFAULT_CAPABILITIES.getOrDefault(capability, null);
         }
 
-        public static <T> void addCapability( Capability<T> capability,  T value) {
+        public static <T> void addCapability(Capability<T> capability, T value) {
             DEFAULT_CAPABILITIES.put(capability, capability.cast(value));
         }
     }

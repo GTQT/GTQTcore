@@ -1,5 +1,17 @@
 package keqing.gtqtcore.api.metatileentity;
 
+import com.cleanroommc.modularui.api.GuiAxis;
+import com.cleanroommc.modularui.api.IPanelHandler;
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.drawable.ItemDrawable;
+import com.cleanroommc.modularui.drawable.Rectangle;
+import com.cleanroommc.modularui.screen.ModularPanel;
+import com.cleanroommc.modularui.utils.Color;
+import com.cleanroommc.modularui.utils.MouseData;
+import com.cleanroommc.modularui.value.sync.*;
+import com.cleanroommc.modularui.widgets.ButtonWidget;
+import com.cleanroommc.modularui.widgets.layout.Flow;
+import com.cleanroommc.modularui.widgets.textfield.TextFieldWidget;
 import gregtech.api.capability.GregtechTileCapabilities;
 import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IDistinctBusController;
@@ -11,9 +23,17 @@ import gregtech.api.gui.widgets.*;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
+import gregtech.api.mui.GTGuis;
 import gregtech.api.recipes.RecipeMap;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.impl.ComputationRecipeLogic;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,6 +43,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import supercritical.api.gui.SCGuiTextures;
 
@@ -34,10 +55,7 @@ import static gregtech.api.GTValues.V;
 import static gregtech.api.GTValues.VA;
 
 public abstract class GTQTOCMultiblockController extends MultiMapMultiblockController implements IOpticalComputationReceiver {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     protected boolean setTier;
     protected int tier;
     protected boolean setMaxParallel;
@@ -53,7 +71,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
     protected boolean OCFirst;
     protected int limitAutoParallel;
     protected int energyHatchMaxWork = 32;
-    protected double Overclocking;
+    protected int Overclocking;
 
     public GTQTOCMultiblockController(ResourceLocation metaTileEntityId, RecipeMap<?>[] recipeMaps) {
         super(metaTileEntityId, recipeMaps);
@@ -76,7 +94,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         data.setBoolean("OCFirst", this.OCFirst);
         data.setInteger("limitAutoParallel", this.limitAutoParallel);
         data.setInteger("energyHatchMaxWork", this.energyHatchMaxWork);
-        data.setDouble("Overclocking", this.Overclocking);
+        data.setInteger("Overclocking", this.Overclocking);
 
         return super.writeToNBT(data);
     }
@@ -97,7 +115,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         this.OCFirst = data.getBoolean("OCFirst");
         this.limitAutoParallel = data.getInteger("limitAutoParallel");
         this.energyHatchMaxWork = data.getInteger("energyHatchMaxWork");
-        this.Overclocking = data.getDouble("Overclocking");
+        this.Overclocking = data.getInteger("Overclocking");
 
         super.readFromNBT(data);
     }
@@ -119,7 +137,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         buf.writeBoolean(this.OCFirst);
         buf.writeInt(this.limitAutoParallel);
         buf.writeInt(this.energyHatchMaxWork);
-        buf.writeDouble(this.Overclocking);
+        buf.writeInt(this.Overclocking);
     }
 
     public void receiveInitialSyncData(PacketBuffer buf) {
@@ -139,10 +157,10 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         this.OCFirst = buf.readBoolean();
         this.limitAutoParallel = buf.readInt();
         this.energyHatchMaxWork = buf.readInt();
-        this.Overclocking = buf.readDouble();
+        this.Overclocking = buf.readInt();
     }
 
-    protected void setOverclocking(double Overclocking) {
+    protected void setOverclocking(int Overclocking) {
         this.Overclocking = Overclocking;
     }
 
@@ -206,128 +224,6 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         this.customParallel = MathHelper.clamp(this.customParallel + parallelAmount, 1, getMaxParallel());
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (setTimeReduce) textList.add(new TextComponentTranslation("gui.time_reduction", timeReduce));
-    }
-
-    protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
-        ModularUI.Builder builder;
-
-        builder = ModularUI.builder(GuiTextures.BACKGROUND, 288, 208);
-
-        builder.image(4, 4, 190, 117, GuiTextures.DISPLAY);
-        builder.widget((new IndicatorImageWidget(174, 101, 17, 17, this.getLogo())).setWarningStatus(this.getWarningLogo(), this::addWarningText).setErrorStatus(this.getErrorLogo(), this::addErrorText));
-
-        ///////////////////////////智能并行组件
-        builder.image(200, 4, 80, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 10, this::addModel, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new ClickButtonWidget(200, 28, 80, 20, "gui.mode_switch",
-                clickData -> autoParallelModel = !autoParallelModel));
-
-        builder.image(200, 52, 80, 20, GuiTextures.DISPLAY);
-
-        builder.widget((new AdvancedTextWidget(204, 58, this::addInfo, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new IncrementButtonWidget(200, 76, 40, 20, 1, 4, 16, 64, this::setCurrentParallel)
-                .setDefaultTooltip()
-                .setShouldClientCallback(false));
-
-        builder.widget(new IncrementButtonWidget(240, 76, 40, 20, -1, -4, -16, -64, this::setCurrentParallel)
-                .setDefaultTooltip()
-                .setShouldClientCallback(false));
-
-        builder.widget(
-                new SliderWidget("gui.auto_parallel_limit", 200, 100, 80, 20, 1, getMaxParallel(), limitAutoParallel,
-                        this::setLimitAutoParallel).setBackground(SCGuiTextures.DARK_SLIDER_BACKGROUND)
-                        .setSliderIcon(SCGuiTextures.DARK_SLIDER_ICON));
-
-        builder.image(200, 124, 80, 20, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 129, this::addEnergyHatch, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.image(200, 142, 80, 18, GuiTextures.DISPLAY);
-        builder.widget((new AdvancedTextWidget(204, 146, this::addOC, 16777215)).setMaxWidthLimit(110).setClickHandler(this::handleDisplayClick));
-
-        builder.widget(new ClickButtonWidget(200, 160, 40, 20, "gui.reset", data ->
-                energyHatchMaxWork = 32).setTooltipText("gui.reset_tooltip"));
-
-        builder.widget(new ClickButtonWidget(240, 160, 40, 20, "gui.recommend", data ->
-        {
-            energyHatchMaxWork = (int) (this.energyContainer.getEnergyStored() / VA[maxVoltage]);
-            energyHatchMaxWork = Math.max(1, energyHatchMaxWork);
-            energyHatchMaxWork = Math.min(energyHatchMaxWork, 128);
-
-        }).setTooltipText("gui.recommend_tooltip"));
-
-        builder.widget(new ClickButtonWidget(200, 182, 80, 20, "gui.oc_parallel_mode",
-                clickData -> OCFirst = !OCFirst).setTooltipText("gui.oc_parallel_mode_tooltip"));
-
-        ///////////////////////////Main GUI
-
-        builder.label(9, 9, this.getMetaFullName(), 16777215);
-        builder.widget((new AdvancedTextWidget(9, 20, this::addDisplayText, 16777215)).setMaxWidthLimit(181).setClickHandler(this::handleDisplayClick));
-        IControllable controllable = this.getCapability(GregtechTileCapabilities.CAPABILITY_CONTROLLABLE, null);
-        TextureArea var10007;
-        BooleanSupplier var10008;
-        if (controllable != null) {
-            var10007 = GuiTextures.BUTTON_POWER;
-            Objects.requireNonNull(controllable);
-            var10008 = controllable::isWorkingEnabled;
-            Objects.requireNonNull(controllable);
-            builder.widget(new ImageCycleButtonWidget(173, 183, 18, 18, var10007, var10008, controllable::setWorkingEnabled));
-            builder.widget(new ImageWidget(173, 201, 18, 6, GuiTextures.BUTTON_POWER_DETAIL));
-        }
-
-        if (this.shouldShowVoidingModeButton()) {
-            builder.widget((new ImageCycleButtonWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_MULTIBLOCK, 4, this::getVoidingMode, this::setVoidingMode)).setTooltipHoverString(MultiblockWithDisplayBase::getVoidingModeTooltip));
-        } else {
-            builder.widget((new ImageWidget(173, 161, 18, 18, GuiTextures.BUTTON_VOID_NONE)).setTooltip("gui.multiblock_voiding_not_supported"));
-        }
-
-        label30: {
-            IDistinctBusController distinct = this;
-            if (distinct.canBeDistinct()) {
-                var10007 = GuiTextures.BUTTON_DISTINCT_BUSES;
-                Objects.requireNonNull(distinct);
-                var10008 = distinct::isDistinct;
-                Objects.requireNonNull(distinct);
-                builder.widget((new ImageCycleButtonWidget(173, 143, 18, 18, var10007, var10008, distinct::setDistinct)).setTooltipHoverString((i) -> "gregtech.multiblock.universal.distinct_" + (i == 0 ? "disabled" : "enabled")));
-                break label30;
-            }
-
-            builder.widget((new ImageWidget(173, 143, 18, 18, GuiTextures.BUTTON_NO_DISTINCT_BUSES)).setTooltip("gregtech.multiblock.universal.distinct_not_supported"));
-        }
-
-        builder.widget(this.getFlexButton(173, 125, 18, 18));
-        builder.bindPlayerInventory(entityPlayer.inventory, 125);
-        return builder;
-    }
-
-    public void setLimitAutoParallel(float value) {
-        limitAutoParallel = (int) value;
-    }
-
-    protected void addInfo(List<ITextComponent> textList) {
-        if (autoParallelModel)
-            textList.add(new TextComponentTranslation("%s / %s / %s", autoParallel, limitAutoParallel, getMaxParallel()));
-        else textList.add(new TextComponentTranslation("%s / %s", customParallel, getMaxParallel()));
-    }
-
-    protected void addModel(List<ITextComponent> textList) {
-        if (autoParallelModel)textList.add(new TextComponentTranslation("gui.auto_parallel_mode"));
-        else textList.add(new TextComponentTranslation("gui.manual_parallel_mode"));
-    }
-
-    protected void addEnergyHatch(List<ITextComponent> textList) {
-        textList.add(new TextComponentTranslation("gui.max_sustain", energyHatchMaxWork));
-    }
-
-    protected void addOC(List<ITextComponent> textList) {
-        if (OCFirst)textList.add(new TextComponentTranslation("gui.overclock_first_mode",+Overclocking));
-        else textList.add(new TextComponentTranslation("gui.parallel_first_mode"));
-    }
 
     protected class GTQTOCMultiblockLogic extends ComputationRecipeLogic {
         public GTQTOCMultiblockLogic(RecipeMapMultiblockController tileEntity) {
@@ -337,7 +233,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
 
         @Override
         protected double getOverclockingDurationFactor() {
-            return OCFirst ? 1/Overclocking : 0.5;
+            return OCFirst ? (double) 1 /Overclocking : 0.5;
         }
 
         @Override
@@ -351,6 +247,7 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
             super.update();
             if (autoParallelModel) {
                 autoParallel = (int) ((this.getEnergyStored() + energyContainer.getInputPerSec() / 19L) / (getMinVoltage() == 0 ? 1 : getMinVoltage()));
+                autoParallel = Math.max(autoParallel, 0);
                 autoParallel = Math.min(autoParallel, limitAutoParallel);
                 autoParallel = Math.min(autoParallel, getMaxParallel());
             }
@@ -381,5 +278,344 @@ public abstract class GTQTOCMultiblockController extends MultiMapMultiblockContr
         public void setMaxProgress(int maxProgress) {
             super.setMaxProgress((int) (maxProgress*timeReduce));
         }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addCustom(this::addCustomData)
+                .addWorkingStatusLine()
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    //这里是警告
+    @Override
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        super.configureWarningText(builder);
+
+    }
+
+
+    @Override
+    protected MultiblockUIFactory createUIFactory() {
+        return super.createUIFactory()
+                .createFlexButton((guiData, syncManager) -> {
+                    var throttle = syncManager.panel("throttle_panel", this::makeThrottlePanel, true);
+                    //配置按钮 打开新UI
+                    return new ButtonWidget<>()
+                            .size(18)
+                            .overlay(GTGuiTextures.FILTER_SETTINGS_OVERLAY.asIcon().size(16))
+                            .addTooltipLine(IKey.lang("设备性能调整"))
+                            .onMousePressed(i -> {
+                                if (throttle.isPanelOpen()) {
+                                    throttle.closePanel();
+                                } else {
+                                    throttle.openPanel();
+                                }
+                                return true;
+                            });
+                });
+    }
+
+    //留给外部自定义
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gui.time_reduction" , syncer.syncDouble(timeReduce)));
+    }
+    //新UI
+    protected ModularPanel makeThrottlePanel(PanelSyncManager syncManager, IPanelHandler syncHandler) {
+        StringSyncValue throttleValue = new StringSyncValue(() -> "并行限制："+limitAutoParallel, str -> {
+            try {
+                if (str.charAt(str.length() - 1) == '%') {
+                    str = str.substring(0, str.length() - 1);
+                }
+
+                this.limitAutoParallel = Integer.parseInt(str);
+            } catch (NumberFormatException ignored) {
+
+            }
+        });
+
+        DoubleSyncValue sliderValue = new DoubleSyncValue(
+                () -> (double) getLimitAutoParallel() / getMaxParallel(),
+                d -> setLimitAutoParallel((int) (d * getMaxParallel())));
+
+        StringSyncValue parallelValue = new StringSyncValue(
+                // 获取值的方法
+                () -> {
+                    if (autoParallelModel) {
+                        return "自动并行："+autoParallel + "/" + limitAutoParallel + "/" + getMaxParallel();
+                    } else {
+                        return "手动并行："+customParallel + "/" + getMaxParallel();
+                    }
+                },
+                str -> {}
+        );
+        StringSyncValue ovValue = new StringSyncValue(
+                // 获取值的方法
+                () -> {
+                    if (OCFirst) {
+                        return "超频优先："+Overclocking;
+                    } else {
+                        return "并行优先";
+                    }
+                },
+                str -> {}
+        );
+        StringSyncValue maxWorkTimeValue = new StringSyncValue(
+                // 获取值的方法
+                () -> "最大自持："+energyHatchMaxWork+"(tick)",
+                str -> {}
+        );
+        StringSyncValue customParallelValue = new StringSyncValue(
+                // 获取值的方法
+                () -> "手动并行："+customParallel,
+                str -> {}
+        );
+        BooleanSyncValue autoParallel = new BooleanSyncValue(this::getAutoParallel, this::setAutoParallel);
+        syncManager.syncValue("autoParallel", autoParallel);
+
+        BooleanSyncValue ocFirstModel = new BooleanSyncValue(this::getOCFirstModel, this::setOCFirstModel);
+        syncManager.syncValue("ocFirstModel", ocFirstModel);
+
+        IntSyncValue customParallel = new IntSyncValue(this::getCustomParallel, this::setCustomParallel);
+        syncManager.syncValue("customParallel", customParallel);
+
+        IntSyncValue maxParallelLimit = new IntSyncValue(this::getMaxParallelLimit, this::setMaxParallelLimit);
+        syncManager.syncValue("maxParallelLimit", maxParallelLimit);
+
+        IntSyncValue energyHatchWorkTime = new IntSyncValue(this::getWorkTime, this::setWorkTime);
+        syncManager.syncValue("energyHatchWorkTime", energyHatchWorkTime);
+
+        return GTGuis.createPopupPanel("boiler_throttle", 200, 200)
+                //名字
+                .child(Flow.row()
+                        .pos(4, 4)
+                        .height(16)
+                        .coverChildrenWidth()
+                        .child(new ItemDrawable(getStackForm())
+                                .asWidget()
+                                .size(16)
+                                .marginRight(4))
+                        .child(IKey.lang("机器性能设置")
+                                .asWidget()
+                                .heightRel(1.0f)))
+
+                //第一行 调整自动并行上限
+                .child(Flow.row()
+                        .top(20)
+                        .margin(4, 0)
+                        .coverChildrenHeight()
+                        .child(new com.cleanroommc.modularui.widgets.SliderWidget()
+                                .left(3)
+                                .background(new Rectangle().setColor(Color.BLACK.brighter(2)).asIcon().height(8))
+                                .bounds(0, 1)
+                                .setAxis(GuiAxis.X)
+                                .value(sliderValue)
+                                .widthRel(0.45f)
+                                .height(22))
+                        .child(new TextFieldWidget()
+                                .left(95)
+                                .widthRel(0.50f)
+                                .height(20)
+                                .setTextColor(Color.WHITE.darker(1))
+                                .setValidator(str -> {
+                                    if (str.charAt(str.length() - 1) == '%') {
+                                        str = str.substring(0, str.length() - 1);
+                                    }
+
+                                    try {
+                                        long l = Long.parseLong(str);
+                                        if (l < 0) l = 0;
+                                        else if (l > getMaxParallel()) l = getMaxParallel();
+                                        return String.valueOf(l);
+                                    } catch (NumberFormatException ignored) {
+                                        return throttleValue.getValue();
+                                    }
+                                })
+                                .value(throttleValue)
+                                .background(GTGuiTextures.DISPLAY)
+                        )
+                )
+                //第二行 调整手动并行上限
+                .child(Flow.row()
+                        .top(55)
+                        .child(new ButtonWidget<>()
+                                .left(5).widthRel(0.20f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("减小手动并行")))
+                                .onMousePressed(mouseButton -> {
+                                    customParallel.setValue(MathHelper.clamp(
+                                            customParallel.getValue() - GTQTUtil.getIncrementValue(MouseData.create(mouseButton)), 1,
+                                            maxParallelLimit.getValue()));
+                                    return true;
+                                })
+                                .onUpdateListener(w -> w.overlay(GTQTUtil.createAdjustOverlay(false)))
+                        )
+                        .child(new ButtonWidget<>()
+                                .left(55).widthRel(0.20f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("增大手动并行")))
+                                .onMousePressed(mouseButton -> {
+                                    customParallel.setValue(MathHelper.clamp(
+                                            customParallel.getValue() + GTQTUtil.getIncrementValue(MouseData.create(mouseButton)), 1,
+                                            maxParallelLimit.getValue()));
+                                    return true;
+                                })
+                                .onUpdateListener(w -> w.overlay(GTQTUtil.createAdjustOverlay(true))))
+
+                        .child(new TextFieldWidget()
+                                .left(100)
+                                .widthRel(0.45f)
+                                .height(20)
+                                .setValidator(str -> customParallelValue.getValue())
+                                .value(customParallelValue)
+                                .background(GTGuiTextures.DISPLAY)
+                        )
+                )
+                //超频优先 并行优先
+                .child(Flow.row()
+                        .top(90)
+                        .child(new ButtonWidget<>()
+                                .left(5).widthRel(0.45f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("gui.mode_switch")))
+                                .onMousePressed(mouseButton ->{
+                                    autoParallel.setValue(!autoParallel.getValue());
+                                    return true;
+                                })
+                                .onUpdateListener((w -> w.overlay(IKey.str("并行模式切换").color(Color.WHITE.main))))
+                        )
+                        .child(new TextFieldWidget()
+                                .left(100)
+                                .widthRel(0.45f)
+                                .height(20)
+                                .setValidator(str -> parallelValue.getValue())
+                                .value(parallelValue)
+                                .background(GTGuiTextures.DISPLAY)
+                        )
+                )
+                //调整是否开启自动并行
+                .child(Flow.row()
+                        .top(125)
+                        .child(new ButtonWidget<>()
+                                .left(5).widthRel(0.45f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("gui.oc_parallel_mode")))
+                                .onMousePressed(mouseButton ->{
+                                    ocFirstModel.setValue(!ocFirstModel.getValue());
+                                    return true;
+                                })
+                                .onUpdateListener((w -> w.overlay(IKey.str("超频/并行模式优先").color(Color.WHITE.main))))
+                        )
+                        .child(new TextFieldWidget()
+                                .left(100)
+                                .widthRel(0.45f)
+                                .height(20)
+                                .setValidator(str -> ovValue.getValue())
+                                .value(ovValue)
+                                .background(GTGuiTextures.DISPLAY)
+                        )
+                )
+                //最大自持
+                .child(Flow.row()
+                        .top(160)
+                        .child(new ButtonWidget<>()
+                                .left(5).widthRel(0.20f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("gui.reset")))
+                                .onMousePressed(mouseButton ->{
+                                    energyHatchWorkTime.setValue(32);
+                                    return true;
+                                })
+                                .onUpdateListener((w -> w.overlay(IKey.str("重置").color(Color.WHITE.main))))
+                        )
+                        .child(new ButtonWidget<>()
+                                .left(55).widthRel(0.20f)
+                                .height(22)
+                                .tooltip(tooltip -> tooltip
+                                        .addLine(IKey.lang("gui.recommend")))
+                                .onMousePressed(mouseButton ->{
+                                    int i;
+                                    if(this.energyContainer==null)return true;
+                                    if(this.energyContainer.getInputVoltage()==0)return true;
+                                    i = (int) (this.energyContainer.getEnergyStored() / this.energyContainer.getInputVoltage());
+                                    i = Math.max(1, i);
+                                    i = Math.min(i, 128);
+                                    energyHatchWorkTime.setValue(i);
+                                    return true;
+                                })
+                                .onUpdateListener((w -> w.overlay(IKey.str("推荐").color(Color.WHITE.main))))
+                        )
+                        .child(new TextFieldWidget()
+                                .left(100)
+                                .widthRel(0.45f)
+                                .height(20)
+                                .setValidator(str -> maxWorkTimeValue.getValue())
+                                .value(maxWorkTimeValue)
+                                .background(GTGuiTextures.DISPLAY)
+                        )
+                );
+    }
+
+    //控件
+    private void setMaxParallelLimit(int i) {
+
+    }
+
+    public int getMaxParallelLimit() {
+        if (autoParallelModel)return limitAutoParallel;
+        return getMaxParallel();
+    }
+
+    private void setCustomParallel(int i) {
+        customParallel = i;
+    }
+
+    private int getCustomParallel() {
+        return customParallel;
+    }
+
+    private void setWorkTime(int time) {
+        energyHatchMaxWork=time;
+    }
+
+    private int getWorkTime() {
+        return energyHatchMaxWork;
+    }
+
+    private void setOCFirstModel(boolean ocFirst) {
+        OCFirst=ocFirst;
+    }
+
+    private boolean getOCFirstModel() {
+        return OCFirst;
+    }
+
+    private void setAutoParallel(boolean autoParallel) {
+        autoParallelModel = autoParallel;
+    }
+
+    private boolean getAutoParallel() {
+        return autoParallelModel;
+    }
+
+    private void setLimitAutoParallel(int amount) {
+        this.limitAutoParallel = amount;
+    }
+
+    private int getLimitAutoParallel() {
+        return this.limitAutoParallel;
+    }
+
+    //文字显示
+    public String getParallel() {
+        if (autoParallelModel)return autoParallel+"/"+limitAutoParallel+"/"+getMaxParallel();
+        else return customParallel+"/"+getMaxParallel();
     }
 }

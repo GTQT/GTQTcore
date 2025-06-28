@@ -249,6 +249,9 @@ public class AlgaeFarmLogic {
     public int getMaxProgress() {
         return maxProgress;
     }
+    public int getProgress(){
+        return progressTime;
+    }
 
     public void setMaxProgress(int val) {
         maxProgress = val;

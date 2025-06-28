@@ -409,11 +409,11 @@ public class MetaTileEntityResearchSystemControlCenter extends MultiblockWithDis
         GPU = 0;
         RAM = 0;
         for (int Q = 0; Q < length; Q++) {
-            if (Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "ram"))
-                CPU += this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
             if (Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "cpu"))
-                GPU += this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
+                CPU += this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
             if (Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "gpu"))
+                GPU += this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
+            if (Objects.equals(this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getType(), "ram"))
                 RAM += this.getAbilities(KQCC_MULTIBLOCK_ABILITY).get(Q).getLevel();
         }
     }

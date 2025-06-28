@@ -8,6 +8,9 @@ import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -19,6 +22,7 @@ import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
@@ -55,10 +59,6 @@ import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 public class MetaTileEntitySepticTank extends MultiMapMultiblockController implements IHeatingCoil {
     private int tier;
     private int blastFurnaceTemperature;
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     public MetaTileEntitySepticTank(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.FERMENTING_RECIPES,
@@ -88,32 +88,30 @@ public class MetaTileEntitySepticTank extends MultiMapMultiblockController imple
         return new MetaTileEntitySepticTank(metaTileEntityId);
     }
 
-
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
-                .addEnergyUsageLine(getEnergyContainer())
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(tl -> {
-                    // Coil heat capacity line
-                    if (isStructureFormed()) {
-                        ITextComponent heatString = TextComponentUtil.stringWithColor(
-                                TextFormatting.RED,
-                                TextFormattingUtil.formatNumbers(blastFurnaceTemperature) + "K");
-
-                        tl.add(TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.blast_furnace.max_temperature",
-                                heatString));
-                        textList.add(new TextComponentTranslation("gtqtcore.tire", tier));
-                    }
-                })
+                .addCustom(this::addHeatCapacity)
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent());
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
 
+    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (isStructureFormed()) {
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(getCurrentTemperature()), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gtqtcore.tire", syncer.syncInt(tier)));
+        }
+    }
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);

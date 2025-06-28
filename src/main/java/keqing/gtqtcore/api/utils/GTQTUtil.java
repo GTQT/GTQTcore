@@ -1,5 +1,8 @@
 package keqing.gtqtcore.api.utils;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.utils.Color;
+import com.cleanroommc.modularui.utils.MouseData;
 import gregtech.api.GTValues;
 import gregtech.api.capability.INotifiableHandler;
 import gregtech.api.capability.impl.GhostCircuitItemStackHandler;
@@ -695,5 +698,46 @@ public class GTQTUtil {
             };
         }
         return new String(chars);
+    }
+    public static int getIncrementValue(MouseData data) {
+        int adjust = 1;
+        if (data.shift) adjust *= 4;
+        if (data.ctrl) adjust *= 16;
+        if (data.alt) adjust *= 64;
+        return adjust;
+    }
+
+    public static IKey createAdjustOverlay(boolean increment) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(increment ? '+' : '-');
+        builder.append(getIncrementValue(MouseData.create(-1)));
+
+        float scale = 1f;
+        if (builder.length() == 3) {
+            scale = 0.9f;
+        } else if (builder.length() == 4) {
+            scale = 0.8f;
+        } else if (builder.length() > 4) {
+            scale = 0.7f;
+        }
+        return IKey.str(builder.toString())
+                .color(Color.WHITE.main)
+                .scale(scale);
+    }
+
+    public static int rangeMetFormMte(BlockPos mte, BlockPos range){
+        return (int) Math.sqrt(mte.distanceSq(range));
+    }
+
+    public static int[] splitNumberToDigits(int number) {
+        number = Math.abs(number);
+        int length = number == 0 ? 1 : (int) Math.log10(number) + 1;
+        int[] digits = new int[length];
+
+        for (int i = length - 1; i >= 0; i--) {
+            digits[i] = number % 10;
+            number /= 10;
+        }
+        return digits;
     }
 }

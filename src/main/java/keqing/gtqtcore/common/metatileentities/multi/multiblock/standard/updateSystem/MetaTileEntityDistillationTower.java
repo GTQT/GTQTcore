@@ -8,16 +8,15 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
-import gregtech.api.util.GTTransferUtils;
-import gregtech.api.util.GTUtility;
-import gregtech.api.util.RelativeDirection;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.*;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
@@ -119,25 +118,13 @@ public class MetaTileEntityDistillationTower extends GTQTRecipeMapMultiblockCont
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed()) {
-            FluidStack stackInTank = importFluids.drain(Integer.MAX_VALUE, false);
-            if (stackInTank != null && stackInTank.amount > 0) {
-                ITextComponent fluidName = TextComponentUtil.setColor(GTUtility.getFluidTranslation(stackInTank),
-                        TextFormatting.AQUA);
-                textList.add(TextComponentUtil.translationWithColor(
-                        TextFormatting.GRAY,
-                        "gregtech.multiblock.distillation_tower.distilling_fluid",
-                        fluidName));
-            }
-        }
-        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTirev" , syncer.syncInt(casingTier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
         if (casingTier != tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
     }
-
 
     @Override
     protected BlockPattern createStructurePattern() {

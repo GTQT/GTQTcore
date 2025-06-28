@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.BooleanSyncValue;
+import com.cleanroommc.modularui.widgets.ButtonWidget;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
@@ -10,6 +13,8 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
@@ -45,10 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+
     boolean gasModel;
     private int clean_tier;
 
@@ -69,19 +71,33 @@ public class MetaTileEntityGasCollector extends RecipeMapMultiblockController {
         gasModel = data.getBoolean("gasModel");
     }
 
-
     @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::gasModel)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("普适集气模式"));
-        return group;
+    protected MultiblockUIFactory createUIFactory() {
+
+        return super.createUIFactory()
+                .createFlexButton((guiData, syncManager) -> {
+                    //配置按钮 打开新UI
+                    BooleanSyncValue ocFirstModel = new BooleanSyncValue(this::gasModel, this::setModel);
+                    syncManager.syncValue("ocFirstModel", ocFirstModel);
+
+                    return new ButtonWidget<>()
+                            .size(18)
+                            .overlay(GTGuiTextures.FILTER_SETTINGS_OVERLAY.asIcon().size(16))
+                            .addTooltipLine(IKey.lang("普适集气模式"))
+                            .onMousePressed(i -> {
+                                ocFirstModel.setBoolValue(!ocFirstModel.getValue());
+                                return true;
+                            });
+                });
     }
 
-    private void gasModel(Widget.ClickData clickData) {
-        this.gasModel = !gasModel;
+    private void setModel(boolean i) {
+        gasModel=i;
+    }
+
+
+    private boolean gasModel() {
+         return gasModel;
     }
 
     @Override

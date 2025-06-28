@@ -10,11 +10,14 @@ import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.cclop.ColourOperation;
@@ -35,6 +38,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -109,13 +113,13 @@ public class MetaTileEntityLargeOreWasher extends GTQTRecipeMapMultiblockControl
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.coilTire", coilLevel));
-        textList.add(new TextComponentTranslation("gtqtcore.casingTire", casingTier));
-        textList.add(new TextComponentTranslation("gtqtcore.tubeTire", tubeTier));
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.coilTire" , syncer.syncInt(coilLevel)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.casingTire" , syncer.syncInt(casingTier)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.tubeTire" , syncer.syncInt(tubeTier)));
         if (casingTier != tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
     }
 
     @Override

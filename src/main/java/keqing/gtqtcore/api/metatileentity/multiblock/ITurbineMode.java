@@ -7,5 +7,6 @@ import java.util.List;
 public interface ITurbineMode {
 
     List<IReinforcedRotorHolder> getRotorHolders();
+
     int getMode();
 }

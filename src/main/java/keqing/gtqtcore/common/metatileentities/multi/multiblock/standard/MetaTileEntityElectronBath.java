@@ -4,12 +4,15 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -31,6 +34,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -124,16 +128,14 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
         super.receiveInitialSyncData(buf);
         this.casingTier = buf.readInt();
     }
-
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
         if (!isStructureFormed()) return;
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "电极状态：%s 电极等级：%s" , syncer.syncBoolean(checkAvailable()),syncer.syncInt(ElectrodeTier)));
         if (casingTier != tubeTier)
-            textList.add(new TextComponentTranslation("gtqtcore.equal", casingTier, tubeTier));
-        textList.add(new TextComponentTranslation("电极状态：%s 电极等级：%s", checkAvailable(), ElectrodeTier));
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.equal" , syncer.syncInt(casingTier), syncer.syncInt(tubeTier)));
     }
-
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("谁还需要电解机", new Object[0]));

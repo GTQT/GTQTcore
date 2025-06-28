@@ -5,14 +5,16 @@ import gregtech.api.capability.IMultipleTankHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.*;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.BlockInfo;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
@@ -173,52 +175,45 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         super.addInformation(stack, player, tooltip, advanced);
     }
 
+
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addHeatCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
+    }
+
+    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
-            MultiblockDisplayText.builder(textList, isStructureFormed())
-                    .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
-                    .addEnergyUsageLine(getEnergyContainer())
-                    .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                    .addCustom(tl -> {
-                        // Coil heat capacity line
-                        if (isStructureFormed()) {
-                            ITextComponent heatString = TextComponentUtil.stringWithColor(
-                                    TextFormatting.RED,
-                                    TextFormattingUtil.formatNumbers(temperature) + "K");
-
-                            tl.add(TextComponentUtil.translationWithColor(
-                                    TextFormatting.GRAY,
-                                    "gregtech.multiblock.blast_furnace.max_temperature",
-                                    heatString));
-
-
-                        }
-                    })
-                    .addParallelsLine(recipeMapWorkable.getParallelLimit())
-                    .addWorkingStatusLine()
-                    .addProgressLine(recipeMapWorkable.getProgressPercent());
             if (getInputFluidInventory() != null) {
                 FluidStack LubricantStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
                 int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.machine.cryogenic_freezer.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-
+                keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.machine.cryogenic_freezer.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
                 if (isActive()) {
-                    textList.add(new TextComponentTranslation("gtqtcore.machine.cryogenic_freezer.subcooled"));
+                    keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.machine.cryogenic_freezer.subcooled"));
                 }
             }
+            var heatString = KeyUtil.number(TextFormatting.RED, syncer.syncInt(temperature), "K");
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
 
     @Override
-    protected void addWarningText(List<ITextComponent> textList) {
-        super.addWarningText(textList);
-        if (isStructureFormed()) {
-            FluidStack lubricantStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
-            if (lubricantStack == null || lubricantStack.amount == 0) {
-                textList.add(new TextComponentTranslation("gtqtcore.machine.cryogenic_freezer.warning"));
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        super.configureWarningText(builder);
+        builder.addCustom((manager, syncer) -> {
+            if (isStructureFormed()) {
+                FluidStack lubricantStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
+                if (lubricantStack == null || lubricantStack.amount == 0) {
+                    manager.add(KeyUtil.lang(TextFormatting.RED, "gtqtcore.machine.cryogenic_freezer.warning"));
+                }
             }
-        }
+        });
     }
 
     @Override
@@ -247,10 +242,9 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         this.temperature = Integer.MAX_VALUE;
     }
 
-    public boolean drainColdStack(boolean sim)
-    {
+    public boolean drainColdStack(boolean sim) {
         IMultipleTankHandler inputTank = getInputFluidInventory();
-        if(!sim&&!isStructureFormed())return false;
+        if (!sim && !isStructureFormed()) return false;
         if (GelidStack.isFluidStackIdentical(inputTank.drain(GelidStack, false))) {
             inputTank.drain(GelidStack, sim);
             return true;

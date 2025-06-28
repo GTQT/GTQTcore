@@ -30,6 +30,7 @@ import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.multi.electric.MetaTileEntityPowerSubstation;
 import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
+import keqing.gtqtcore.api.utils.GTQTUtil;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4;
@@ -61,6 +62,7 @@ import java.util.*;
 import static gregtech.api.GTValues.V;
 import static gregtech.api.util.RelativeDirection.*;
 import static keqing.gtqtcore.api.gui.GTQTGuiTextures.PSS_POWER;
+import static keqing.gtqtcore.api.utils.GTQTUtil.rangeMetFormMte;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
     @Override
@@ -376,18 +378,18 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         builder.widget((new ProgressWidget(() -> getRate(2), 3, 150, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 2)));
 
         builder.widget(new SlotWidget(this.inputCardInventory, 0, 274, 160, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT)
+                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.IN_SLOT_OVERLAY)
                 .setChangeListener(this::markDirty)
-                .setTooltipText("请放入坐标卡(MTE)"));
+                .setTooltipText("请放入坐标卡(绑定设备)"));
 
         builder.widget(new SlotWidget(this.outputCardInventory, 0, 274, 178, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT)
+                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.OUT_SLOT_OVERLAY)
                 .setChangeListener(this::markDirty));
 
         builder.widget(new SlotWidget(this.pssInventory, 0, 274, 196, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT)
+                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.BATTERY_OVERLAY)
                 .setChangeListener(this::markDirty)
-                .setTooltipText("请放入坐标卡(PSS)"));
+                .setTooltipText("请放入坐标卡(蓄能变电站)"));
 
         builder.widget(new ImageCycleButtonWidget(274, 218, 18, 18, PSS_POWER, () -> pssModel, data ->
         {
@@ -447,9 +449,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     y = compound.getInteger("y");
                     z = compound.getInteger("z");
 
-                    if (((x - this.getPos().getX()) * (x - this.getPos().getX())
-                            + (y - this.getPos().getY()) * (y - this.getPos().getY())
-                            + (z - this.getPos().getZ()) * (z - this.getPos().getZ())) <= 100) {
+                    if (GTQTUtil.rangeMetFormMte(new BlockPos(x,y,z),getPos())<=range) {
                         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
                         if (mte instanceof MetaTileEntityPowerSubstation) {
                             PSSmte = (MetaTileEntityPowerSubstation) mte;
@@ -479,7 +479,15 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         if (euStore < 0) euStore = 0;
         if (PSSmte == null) pssModel = false;
 
-        if (pssModel) euStore = PSSmte.getStoredLong();
+        if (pssModel)
+        {
+            if (rangeMetFormMte(new BlockPos(pssPos[0], pssPos[1], pssPos[2]),getPos())<=range)
+            {
+                pssModel = false;
+                PSSmte = null;
+            }
+            euStore = PSSmte.getStoredLong();
+        }
 
         else {
             euStore = Math.min(euStore, maxStore());
@@ -512,7 +520,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         }
         for (int i = 0; i < maxLength; i++) {
             if (io[i][0] == 1) {
-                if (!checkLoacl(i)) {
+                if (!checkLoacl(i)||GTQTUtil.rangeMetFormMte(new BlockPos(io[i][1], io[i][2], io[i][3]),getPos())>range) {
                     clean(false, i);
                 }
             }
@@ -709,10 +717,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     //距离计算
     public int getDistance(int x, int y, int z) {
-        double dx = x - this.getPos().getX();
-        double dy = y - this.getPos().getY();
-        double dz = z - this.getPos().getZ();
-        return (int) Math.sqrt(dx * dx + dy * dy + dz * dz);
+        return rangeMetFormMte(new BlockPos(x, y, z),getPos());
     }
 
     public ItemStack setCard() {
@@ -760,6 +765,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     //通过物品获取坐标
     public boolean checkLoacl(boolean sim) {
         ItemStack item = inputCardInventory.getStackInSlot(0);
+        if(!outputCardInventory.getStackInSlot(0).isEmpty())return false;
         if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
             NBTTagCompound compound = item.getTagCompound();
             if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {

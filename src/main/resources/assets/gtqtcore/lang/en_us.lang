@@ -3386,14 +3386,13 @@ gregtech.machine.biorea.gtqtupdate.2=Inject Raw Growth Medium, Enriched Bacteria
 gregtech.machine.biorea.gtqtupdate.3=Different recipes require different reaction concentrations (the minimum concentration is marked on the recipe). The higher the concentration, the greater the multiblock enhancement multiplier.
 gregtech.machine.biorea.gtqtupdate.4=Enjoy benefits such as reduced time and parallel processing. After work is completed, a portion of the reaction substrate will be consumed, so please replenish it.
 
-gregtech.machine.gene_mutagenesis.gtqtupdate.1=每升级一次玻璃级获得10%%耗时减免
-gregtech.machine.gene_mutagenesis.gtqtupdate.2=请往多方块的辐射仓里置入辐射源
-gregtech.machine.gene_mutagenesis.gtqtupdate.3=运行其他配方（除了基因诱变）无视反应条件，但是依旧会消耗辐射源的耐久
-gregtech.machine.gene_mutagenesis.gtqtupdate.4=获得等同于Pow(2,辐射源等级)的并行
+gregtech.machine.gene_mutagenesis.gtqtupdate.1=Gain a 10%% time reduction for each upgrade to the glass level
+gregtech.machine.gene_mutagenesis.gtqtupdate.2=Please insert a radiation source into the multi-block radiation chamber
+gregtech.machine.gene_mutagenesis.gtqtupdate.3=Running other recipes (with the exception of genetic mutagenesis) ignores reaction conditions, but still consumes the durability of the radiation source
+gregtech.machine.gene_mutagenesis.gtqtupdate.4=Obtain parallelism equivalent to Pow(2, radiation source level).
 
-gregtech.machine.bioreb.gtqtupdate.2=Use five basic microbial strains for linear combination, not supporting multiple combinations. Refer to JEI for the required pH and trait factors for the target strain. When the GUI shows a recipe found, click the start button. After processing, all original strain parameters will be reset.
-gregtech.machine.bioreb.gtqtupdate.3=Provide enriched microbial culture medium to increase the number of parallel processes (parallel does not consume additional original strains).
-gregtech.machine.bioreb.gtqtupdate.4=Provide water with a default pH of 7, hydrochloric acid with pH 4, and sodium hydroxide with pH 10. Other materials are currently not supported.
+gregtech.machine.bioreb.gtqtupdate.1=Linear combination of five basic flora, one round is deducted after the needs shown in the JEI are met (regardless of the number of parallels)
+gregtech.machine.bioreb.gtqtupdate.2=Feeding five basic flora into the input chamber increases the number of cached cultures on the device
 
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.1=Used for producing special high-energy fuel
 gtqtcore.machine.naquadah_fuel_refine_factory.tooltip.2=Requires different grades of §6Force Field Constraint Coil Casings§7 to contain massive lethal radiation leaks

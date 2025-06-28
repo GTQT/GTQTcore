@@ -14,6 +14,9 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiMapMultiblockController;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -21,6 +24,9 @@ import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockMultiblockCasing;
@@ -40,7 +46,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -48,6 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static gregtech.api.GTValues.ZPM;
+import static gregtech.api.unification.material.Materials.Steam;
 import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalAbilities;
 import static keqing.gtqtcore.api.pattern.GTQTTraceabilityPredicate.optionalStates;
@@ -59,10 +68,6 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingT
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.HYPER_CASING;
 
 public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockController implements IOpticalComputationReceiver {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
 
     int requestCWUt;
     private byte auxiliaryUpgradeNumber = 0;
@@ -159,11 +164,20 @@ public class MetaTileEntityNeutralNetworkNexus extends MultiMapMultiblockControl
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
+                .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
+                .addCustom(this::addCustomCapacity)
+                .addParallelsLine(recipeMapWorkable.getParallelLimit())
+                .addWorkingStatusLine()
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
 
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+        keyManager.add(KeyUtil.lang(TextFormatting.YELLOW, "gtqtcore.kqcc_accelerate",syncer.syncInt(requestCWUt), syncer.syncDouble(getAccelerateByCWU(requestCWUt))));
+    }
     @Override
     protected BlockPattern createStructurePattern() {
         return FactoryBlockPattern.start()

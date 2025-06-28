@@ -65,21 +65,21 @@ public class EnzymesRecipes {
         growth(Enzymesdz,Enzymesd);
         growth(Enzymesez,Enzymese);
 
-        enzymesmix(Enzymesaa,Iron,101,1,1);
-        enzymesmix(Enzymesab,Gold,102,1,2);
-        enzymesmix(Enzymesac,Mercury,103,1,3);
-        enzymesmix(Enzymesad,Titanium,104,1,4);
+        enzymesmix(Enzymesaa,Iron,10101,1,1);
+        enzymesmix(Enzymesab,Gold,10110,1,2);
+        enzymesmix(Enzymesac,Mercury,11011,1,3);
+        enzymesmix(Enzymesad,Titanium,11101,1,4);
 
-        enzymesmix(Enzymesba,Polyethylene,201,2,5);
-        enzymesmix(Enzymesbb,Oxygen,202,2,6);
-        enzymesmix(Enzymesbc,Hydrogen,203,2,7);
-        enzymesmix(Enzymesbd,Benzene,204,2,8);
+        enzymesmix(Enzymesba,Polyethylene,21021,2,5);
+        enzymesmix(Enzymesbb,Oxygen,21102,2,6);
+        enzymesmix(Enzymesbc,Hydrogen,12102,2,7);
+        enzymesmix(Enzymesbd,Benzene,10221,2,8);
 
-        enzymesmix(Enzymesca,Stearin,301,3,9);
-        enzymesmix(Enzymescb,Biomass,302,3,10);
-        enzymesmix(Enzymescc,Methane,303,3,11);
+        enzymesmix(Enzymesca,Stearin,12231,3,9);
+        enzymesmix(Enzymescb,Biomass,23211,3,10);
+        enzymesmix(Enzymescc,Methane,13221,3,11);
 
-        enzymesmix(Enzymesda,Brominatedepoxyresins,401,4,12);
+        enzymesmix(Enzymesda,Brominatedepoxyresins,24211,4,12);
 
         //物尽其用
         /*

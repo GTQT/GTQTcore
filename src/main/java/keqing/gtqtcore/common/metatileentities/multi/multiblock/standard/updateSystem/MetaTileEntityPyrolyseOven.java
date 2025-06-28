@@ -1,16 +1,19 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.updateSystem;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
 import gregtech.api.block.IHeatingCoilBlockStats;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -162,35 +165,28 @@ public class MetaTileEntityPyrolyseOven extends GTQTRecipeMapMultiblockControlle
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        MultiblockDisplayText.builder(textList, isStructureFormed())
-                .setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
-                .addEnergyUsageLine(recipeMapWorkable.getEnergyContainer())
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
+                .addEnergyUsageLine(this.getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(tl -> {
-                    if (isStructureFormed()) {
-                        int processingSpeed = coilTier == 0 ? 75 : 50 * (coilTier + 1);
-                        ITextComponent speedIncrease = TextComponentUtil.stringWithColor(
-                                getSpeedColor(processingSpeed),
-                                processingSpeed + "%");
+                .addCustom((textList, syncer) -> {
+                    if (!isStructureFormed()) return;
+                    int tier = syncer.syncInt(coilTier);
 
-                        ITextComponent base = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.pyrolyse_oven.speed",
-                                speedIncrease);
+                    int processingSpeed = tier == 0 ? 75 : 50 * (tier + 1);
+                    IKey speed = KeyUtil.number(() -> getSpeedColor(processingSpeed), processingSpeed, "%");
 
-                        ITextComponent hover = TextComponentUtil.translationWithColor(
-                                TextFormatting.GRAY,
-                                "gregtech.multiblock.pyrolyse_oven.speed_hover");
-
-                        tl.add(TextComponentUtil.setHover(base, hover));
-                    }
+                    IKey body = KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.pyrolyse_oven.speed", speed);
+                    IKey hover = KeyUtil.lang(TextFormatting.GRAY,
+                            "gregtech.multiblock.pyrolyse_oven.speed_hover");
+                    textList.add(KeyUtil.setHover(body, hover));
                 })
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
-                .addProgressLine(recipeMapWorkable.getProgressPercent());
+                .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
+                .addRecipeOutputLine(recipeMapWorkable);
     }
-
     private TextFormatting getSpeedColor(int speed) {
         if (speed < 100) {
             return TextFormatting.RED;

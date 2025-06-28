@@ -11,6 +11,9 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -20,6 +23,7 @@ import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -39,8 +43,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -147,27 +150,29 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            super.addDisplayText(textList);
-            if (getInputFluidInventory() != null) {
-                FluidStack LubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.amount", TextFormattingUtil.formatNumbers((liquidOxygenAmount))));
-            }
-            textList.add(new TextComponentTranslation("Temperature : %s", blastFurnaceTemperature));
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (getInputFluidInventory() != null) {
+            FluidStack fluidStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = fluidStack == null ? 0 : fluidStack.amount;
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.vc.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
         }
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "Temperature : %s", syncer.syncInt(blastFurnaceTemperature)));
+
     }
 
     @Override
-    protected void addWarningText(List<ITextComponent> textList) {
-        super.addWarningText(textList);
-        if (isStructureFormed()) {
-            FluidStack lubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
-            if (lubricantStack == null || lubricantStack.amount == 0) {
-                textList.add(new TextComponentTranslation("gtqtcore.multiblock.vc.no"));
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        super.configureWarningText(builder);
+        builder.addCustom((manager, syncer) -> {
+            if (isStructureFormed()) {
+                FluidStack lubricantStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+                if (lubricantStack == null || lubricantStack.amount == 0) {
+                    manager.add(KeyUtil.lang(TextFormatting.RED,
+                            "gtqtcore.multiblock.vc.nogtqtcore.multiblock.vc.no"));
+                }
             }
-        }
+        });
     }
 
     @Override
@@ -204,10 +209,9 @@ public class MetaTileEntityBlazingBlastFurnace extends GTQTNoTierMultiblockContr
         pyrotheumFluid = null;
     }
 
-    public boolean drainPyrotheum(boolean sim)
-    {
+    public boolean drainPyrotheum(boolean sim) {
         IMultipleTankHandler inputTank = getInputFluidInventory();
-        if(!sim&&!isStructureFormed())return false;
+        if (!sim && !isStructureFormed()) return false;
         if (pyrotheumFluid.isFluidStackIdentical(inputTank.drain(pyrotheumFluid, false))) {
             inputTank.drain(pyrotheumFluid, sim);
             return true;

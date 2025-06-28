@@ -316,22 +316,6 @@ public class CommonProxy {
         NeutronActivatorIOPartProperty.registeredPart(7, "钙离子");
         NeutronActivatorIOPartProperty.registeredPart(8, "硼离子");
 
-        EnzymesReactionProperty.registeredRate(101, "1 0 1 0 0 酸性");
-        EnzymesReactionProperty.registeredRate(102, "1 0 1 1 0 酸性");
-        EnzymesReactionProperty.registeredRate(103, "1 1 0 1 0 酸性");
-        EnzymesReactionProperty.registeredRate(104, "1 1 0 1 1 酸性");
-
-        EnzymesReactionProperty.registeredRate(201, "2 1 1 3 1 碱性");
-        EnzymesReactionProperty.registeredRate(202, "1 2 3 1 1 碱性");
-        EnzymesReactionProperty.registeredRate(203, "1 3 2 1 1 碱性");
-        EnzymesReactionProperty.registeredRate(204, "2 1 1 3 1 碱性");
-
-        EnzymesReactionProperty.registeredRate(301, "4 1 1 3 2 酸性");
-        EnzymesReactionProperty.registeredRate(302, "2 4 2 3 1 酸性");
-        EnzymesReactionProperty.registeredRate(303, "2 3 2 4 1 酸性");
-
-        EnzymesReactionProperty.registeredRate(401, "2 5 2 4 3 碱性");
-
         SwarmTierProperty.registerSwarmTier(1, "I");
         SwarmTierProperty.registerSwarmTier(2, "II");
         SwarmTierProperty.registerSwarmTier(3, "III");

@@ -128,14 +128,6 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        ITextComponent heatString = TextComponentUtil.stringWithColor(TextFormatting.RED, TextFormattingUtil.formatNumbers(this.blastFurnaceTemperature) + "K");
-        textList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
-        textList.add(new TextComponentTranslation("gtqtcore.kqcc_accelerate", requestCWUt, getAccelerateByCWU(requestCWUt)));
-        textList.add(new TextComponentTranslation("玻璃等级：%s 线圈等级:%s", glassTire, coilTier));
-    }
-    @Override
     protected void configureDisplayText(MultiblockUIBuilder builder) {
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(getEnergyContainer())
@@ -151,6 +143,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
+
     private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
             var heatString = KeyUtil.number(TextFormatting.RED,
@@ -160,6 +153,7 @@ public class MetaTileEntityHugeBlastFurnace extends GTQTNoTierMultiblockControll
                     "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
     }
+
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, @Nonnull List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("最强冶炼王", new Object[0]));

@@ -1,5 +1,11 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.DoubleSyncValue;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.value.sync.LongSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
+import com.cleanroommc.modularui.widgets.ButtonWidget;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.resources.TextureArea;
@@ -10,14 +16,22 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
+import gregtech.api.metatileentity.multiblock.ProgressBarMultiblock;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIFactory;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockBoilerCasing;
@@ -44,23 +58,24 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.function.IntSupplier;
+import java.util.function.UnaryOperator;
 
 import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.BIO_MULTIBLOCK_ABILITY;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BIOLOGICAL_REACTION_RECIPES;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.tumbaga;
 
 //要实现大机器中的渲染需要重写IFastRenderMetaTileEntity 接口，并实现renderMetaTileEntity和getRenderBoundingBox方法
-public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockController implements IProgressBarMultiblock, IFastRenderMetaTileEntity {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockController implements ProgressBarMultiblock, IFastRenderMetaTileEntity {
+
     int liquid = 0;
     int bio = 0;
     double rate = 0;
@@ -88,40 +103,52 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
         return true;
     }
 
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 18, 18, "", this::clear).setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS).setTooltipText("我不要了！"));
-        return group;
-    }
-
 
     @Override
-    public int getNumProgressBars() {
+    public int getProgressBarCount() {
         return 2;
     }
 
     @Override
-    public double getFillPercentage(int index) {
-        if (bio * 1.0 / liquid <= 1) return index == 0 ? rate : bio * 1.0 / liquid;
-        else return index == 0 ? rate : 1;
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
+        DoubleSyncValue rate = new DoubleSyncValue(this::getRate);
+        syncManager.syncValue("rate", rate);
+        DoubleSyncValue bio = new DoubleSyncValue(this::getBio);
+        syncManager.syncValue("bio", bio);
+
+        bars.add(barTest -> barTest
+                .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                .tooltipBuilder(tooltip -> {
+                    IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                            "%s / %s",
+                            rate.getDoubleValue()*100, 100);
+                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                            "生物浓度",
+                            heatInfo));
+                })
+                .progress(() -> rate.getDoubleValue() > 0 ?
+                        rate.getDoubleValue()*100 /100 : 0));
+
+        bars.add(barTest -> barTest
+                .texture(GTGuiTextures.PROGRESS_BAR_LCE_FUEL)
+                .tooltipBuilder(tooltip -> {
+                    IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                            "%s / %s",
+                            bio.getDoubleValue(), 4000);
+                    tooltip.add(KeyUtil.lang(TextFormatting.GRAY,
+                            "生物质储量",
+                            heatInfo));
+                })
+                .progress(() -> bio.getDoubleValue() > 0 ?
+                        bio.getDoubleValue() /4000 : 0));
     }
 
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_LCE_FUEL;
+    private double getBio() {
+        return bio;
     }
 
-    @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent cwutInfo;
-        if (index == 0) {
-            cwutInfo = TextComponentUtil.stringWithColor(TextFormatting.AQUA, rate * 100 + " / " + 100 + "R");
-        } else {
-            cwutInfo = TextComponentUtil.stringWithColor(TextFormatting.AQUA, bio + " / " + 4000 + " P");
-        }
-        hoverList.add(TextComponentUtil.translationWithColor(TextFormatting.GRAY, "gregtech.multiblock.pb.computation", cwutInfo));
+    private double getRate() {
+        return rate;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
@@ -141,12 +168,6 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntityBiologicalReaction(metaTileEntityId);
-    }
-
-    private void clear(Widget.ClickData clickData) {
-        this.getBiotHatch().drainBioAmount(bio);
-        this.getBiotHatch().drainWaterAmount(liquid);
-        rate = 0;
     }
 
     @Override
@@ -202,13 +223,14 @@ public class MetaTileEntityBiologicalReaction extends GTQTNoTierMultiblockContro
         return GTQTTextures.ALGAE_FARM_OVERLAY;
     }
 
-    @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.1", liquid, bio, rate));
-        textList.add(new TextComponentTranslation("gtqtcore.multiblock.br.3", glass_tier, clean_tier));
-    }
 
+    @Override
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.br.1" , syncer.syncInt(liquid), syncer.syncInt(bio), syncer.syncDouble(rate)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.br.3" , syncer.syncInt(glass_tier), syncer.syncInt(clean_tier)));
+    }
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, boolean advanced) {
         tooltip.add(TooltipHelper.RAINBOW_SLOW + I18n.format("微生物动物园", new Object[0]));

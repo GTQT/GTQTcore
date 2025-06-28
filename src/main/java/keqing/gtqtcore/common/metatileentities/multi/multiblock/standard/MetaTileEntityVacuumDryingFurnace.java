@@ -7,6 +7,8 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -15,6 +17,7 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
@@ -51,10 +54,6 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockContr
 
     int tier;
     private int temperature;
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     public MetaTileEntityVacuumDryingFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.DRYER_RECIPES,
@@ -78,14 +77,11 @@ public class MetaTileEntityVacuumDryingFurnace extends GTQTNoTierMultiblockContr
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
-                    TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
-        }
-        super.addDisplayText(textList);
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (isStructureFormed())
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "Temperature : %s", syncer.syncString(TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
     }
-
     @Override
     protected void formStructure(PatternMatchContext context) {
         super.formStructure(context);
