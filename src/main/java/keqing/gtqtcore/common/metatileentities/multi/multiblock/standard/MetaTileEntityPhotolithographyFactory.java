@@ -3,14 +3,21 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import com.google.common.collect.Lists;
+import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
+import gregtech.api.capability.impl.EnergyContainerList;
+import gregtech.api.capability.impl.FluidTankList;
+import gregtech.api.capability.impl.ItemHandlerList;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.Widget;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.items.itemhandlers.GTItemStackHandler;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
+import gregtech.api.metatileentity.interfaces.IRefreshBeforeConsumption;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockDisplayText;
@@ -25,6 +32,7 @@ import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
 import gregtech.common.blocks.BlockGlassCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gtqt.api.util.GTQTUtility;
 import keqing.gtqtcore.api.blocks.impl.WrappedIntTired;
 import keqing.gtqtcore.api.metatileentity.MetaTileEntityBaseWithControl;
 import keqing.gtqtcore.api.utils.GTQTCPUHelper;
@@ -45,6 +53,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -86,12 +95,60 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     FluidStack LASER5 = Zrbtmst.getFluid(1000);
     FluidStack WATER = DistilledWater.getFluid(100);
 
-
+    protected List<IRefreshBeforeConsumption> refreshBeforeConsumptions;
     //核心缓存： wafer等级0 wafer数量1 光刻胶等级2 耗时3
     public MetaTileEntityPhotolithographyFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
+        this.refreshBeforeConsumptions = new ArrayList<>();
+        resetTileAbilities();
+    }
+    public void refreshAllBeforeConsumption() {
+        for (IRefreshBeforeConsumption refresh : refreshBeforeConsumptions) {
+            refresh.refreshBeforeConsumption();
+        }
+    }
+    @Override
+    public void invalidateStructure() {
+        super.invalidateStructure();
+        resetTileAbilities();
+
+    }
+    protected void initializeAbilities() {
+        List<IItemHandler> inputItems = new ArrayList<>(this.getAbilities(MultiblockAbility.IMPORT_ITEMS));
+        inputItems.addAll(getAbilities(MultiblockAbility.DUAL_IMPORT));
+        this.inputInventory = new ItemHandlerList(inputItems);
+
+        List<IMultipleTankHandler> inputFluids = new ArrayList<>(getAbilities(MultiblockAbility.DUAL_IMPORT));
+        inputFluids.add(new FluidTankList(true, getAbilities(MultiblockAbility.IMPORT_FLUIDS)));
+        this.inputFluidInventory = GTQTUtility.mergeTankHandlers(inputFluids, true);
+
+        List<IItemHandler> outputItems = new ArrayList<>(this.getAbilities(MultiblockAbility.EXPORT_ITEMS));
+        outputItems.addAll(getAbilities(MultiblockAbility.DUAL_EXPORT));
+        this.outputInventory = new ItemHandlerList(outputItems);
+        List<IMultipleTankHandler> outputFluids = new ArrayList<>(getAbilities(MultiblockAbility.DUAL_EXPORT));
+        outputFluids.add(new FluidTankList(false, getAbilities(MultiblockAbility.EXPORT_FLUIDS)));
+        this.outputFluidInventory = GTQTUtility.mergeTankHandlers(outputFluids, false);;
+
+        List<IEnergyContainer> inputEnergy = new ArrayList<>(getAbilities(MultiblockAbility.INPUT_ENERGY));
+        inputEnergy.addAll(getAbilities(MultiblockAbility.SUBSTATION_INPUT_ENERGY));
+        inputEnergy.addAll(getAbilities(MultiblockAbility.INPUT_LASER));
+        this.energyContainer = new EnergyContainerList(inputEnergy);
+
+        for (IMultiblockPart part : getMultiblockParts()) {
+            if (part instanceof IRefreshBeforeConsumption refresh) {
+                refreshBeforeConsumptions.add(refresh);
+            }
+        }
     }
 
+    private void resetTileAbilities() {
+        this.inputInventory = new GTItemStackHandler(this, 0);
+        this.inputFluidInventory = new FluidTankList(true);
+        this.outputInventory = new GTItemStackHandler(this, 0);
+        this.outputFluidInventory = new FluidTankList(true);
+        this.energyContainer = new EnergyContainerList(Lists.newArrayList());
+        this.refreshBeforeConsumptions.clear();
+    }
     private static IBlockState getCasingState() {
         return GTQTMetaBlocks.blockMultiblockCasing4.getState(BlockMultiblockCasing4.TurbineCasingType.NQ_TURBINE_CASING);
     }
@@ -333,7 +390,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
     private void handelWater() {
         IMultipleTankHandler inputTank = getInputFluidInventory();
         if (waterAmount + 100 <= 64000) {
-            if (WATER.isFluidStackIdentical(WATER)) {
+            if (WATER.isFluidStackIdentical(inputTank.drain(WATER, false))) {
                 inputTank.drain(WATER, true);
                 waterAmount += 100;
             }
@@ -374,7 +431,7 @@ public class MetaTileEntityPhotolithographyFactory extends MetaTileEntityBaseWit
         if (check) {
             for (int i = 0; i < 4; i++) coreWork[i] = (core[i][1] != 0);
             work = coreWork[0] || coreWork[1] || coreWork[2] || coreWork[3];
-
+            refreshAllBeforeConsumption();
         }
 
         /*

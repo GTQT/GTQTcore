@@ -220,7 +220,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
         return getElectrodeHatch().stream()
                 .mapToInt(IElectrode::getElectrodeTier)
                 .min()
-                .orElse(5); // 默认值可根据业务需求调整
+                .orElse(5);
     }
 
     public boolean checkAvailable() {
@@ -242,7 +242,7 @@ public class MetaTileEntityElectronBath extends GTQTRecipeMapMultiblockControlle
 
         @Override
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && !getElectrodeHatch().isEmpty()) {
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
                 if (!work) {
                     setWork(true);
                     work = true;

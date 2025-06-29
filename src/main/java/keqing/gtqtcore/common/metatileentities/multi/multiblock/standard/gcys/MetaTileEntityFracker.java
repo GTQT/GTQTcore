@@ -195,7 +195,7 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
         BedrockFluidDepositDefinition definition = entry.getDefinition();
         if (definition == null) return false;
 
-        int amount = entry.getOperationsRemaining() + definition.getDepletionAmount()*10;
+        int amount = entry.getOperationsRemaining() + definition.getDepletionAmount() * 10;
         if (amount <= BedrockFluidVeinHandler.MAXIMUM_VEIN_OPERATIONS) {
             if (simulate) return true;
             entry.setOperationsRemaining(amount);
@@ -249,10 +249,12 @@ public class MetaTileEntityFracker extends MultiblockWithDisplayBase implements 
         super.renderMetaTileEntity(renderState, translation, pipeline);
         getFrontOverlay().renderOrientedState(renderState, translation, pipeline, getFrontFacing(), this.isActive(), this.isWorkingEnabled());
     }
+
     @Override
     public boolean usesMui2() {
         return false;
     }
+
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
         super.addDisplayText(textList);

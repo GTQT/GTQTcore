@@ -1,9 +1,7 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 
 import gregicality.multiblocks.api.capability.impl.GCYMHeatCoilRecipeLogic;
-import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregicality.multiblocks.common.block.GCYMMetaBlocks;
 import gregicality.multiblocks.common.block.blocks.BlockUniqueCasing;
 import gregtech.api.GTValues;
@@ -13,19 +11,16 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
-import gregtech.api.recipes.logic.OCParams;
-import gregtech.api.recipes.logic.OCResult;
-import gregtech.api.recipes.logic.OverclockingLogic;
-import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
 import gregtech.api.util.GTUtility;
-import gregtech.api.util.TextFormattingUtil;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.cube.OrientedOverlayRenderer;
 import gregtech.common.ConfigHolder;
@@ -33,7 +28,6 @@ import gregtech.common.blocks.BlockMetalCasing;
 import gregtech.common.blocks.BlockWireCoil.CoilType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
-import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
@@ -44,8 +38,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -56,7 +48,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static gregtech.api.recipes.logic.OverclockingLogic.heatingCoilOC;
 import static gregtech.api.unification.material.Materials.TungstenSteel;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing3.CasingType.grisium;
 
@@ -69,16 +60,6 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMAdvanceRecipeMapM
         this.recipeMapWorkable = new ArrayList();
         this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
     }
-    public void refreshThread(int thread) {
-        if (!this.checkWorkingEnable()) {
-            this.recipeMapWorkable = new ArrayList();
-
-            for(int i = 0; i < thread; ++i) {
-                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
-            }
-        }
-
-    }
 
     @Nonnull
     private static IBlockState getFrameState() {
@@ -90,18 +71,31 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMAdvanceRecipeMapM
         return GCYMMetaBlocks.UNIQUE_CASING.getState(BlockUniqueCasing.UniqueCasingType.HEAT_VENT);
     }
 
+    public void refreshThread(int thread) {
+        if (!this.checkWorkingEnable()) {
+            this.recipeMapWorkable = new ArrayList();
+
+            for (int i = 0; i < thread; ++i) {
+                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+            }
+        }
+
+    }
+
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity holder) {
         return new MetaTileEntityCrystallizationCrucible(metaTileEntityId);
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
+    protected void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
-                    TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(getCurrentTemperature()), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
-        super.addDisplayText(textList);
     }
 
     @Override
@@ -115,10 +109,10 @@ public class MetaTileEntityCrystallizationCrucible extends GCYMAdvanceRecipeMapM
 
         this.temperature += 100 * Math.max(0, GTUtility.getTierByVoltage(getEnergyContainer().getInputVoltage()) - GTValues.MV);
 
-        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : ((IThreadHatch)this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0)).getCurrentThread();
+        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0).getCurrentThread();
         this.recipeMapWorkable = new ArrayList();
 
-        for(int i = 0; i < this.thread; ++i) {
+        for (int i = 0; i < this.thread; ++i) {
             this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
         }
     }

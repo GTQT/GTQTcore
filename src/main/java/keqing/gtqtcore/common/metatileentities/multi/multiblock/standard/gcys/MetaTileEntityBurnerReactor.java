@@ -3,7 +3,6 @@ package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard.gcys;
 import gregicality.multiblocks.api.capability.impl.GCYMHeatCoilRecipeLogic;
 import gregicality.multiblocks.api.capability.impl.GCYMMultiblockRecipeLogic;
 import gregicality.multiblocks.api.metatileentity.GCYMAdvanceRecipeMapMultiblockController;
-import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.IThreadHatch;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -11,6 +10,8 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.MultiblockShapeInfo;
@@ -22,6 +23,7 @@ import gregtech.api.recipes.logic.OCResult;
 import gregtech.api.recipes.logic.OverclockingLogic;
 import gregtech.api.recipes.properties.RecipePropertyStorage;
 import gregtech.api.recipes.properties.impl.TemperatureProperty;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
@@ -76,22 +78,23 @@ public class MetaTileEntityBurnerReactor extends GCYMAdvanceRecipeMapMultiblockC
         this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
     }
 
-    public void refreshThread(int thread) {
-        if (!this.checkWorkingEnable()) {
-            this.recipeMapWorkable = new ArrayList();
-
-            for(int i = 0; i < thread; ++i) {
-                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
-            }
-        }
-
-    }
     private static IBlockState getBoilerCasingState() {
         return MetaBlocks.BOILER_CASING.getState(BlockBoilerCasing.BoilerCasingType.STEEL_PIPE);
     }
 
     private static IBlockState getFrameState() {
         return MetaBlocks.FRAMES.get(GTQTMaterials.Talonite).getBlock(GTQTMaterials.Talonite);
+    }
+
+    public void refreshThread(int thread) {
+        if (!this.checkWorkingEnable()) {
+            this.recipeMapWorkable = new ArrayList();
+
+            for (int i = 0; i < thread; ++i) {
+                this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
+            }
+        }
+
     }
 
     @Override
@@ -109,10 +112,10 @@ public class MetaTileEntityBurnerReactor extends GCYMAdvanceRecipeMapMultiblockC
 
         this.temperature = this.FireBoxTier * 900 + 900;
 
-        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : ((IThreadHatch)this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0)).getCurrentThread();
+        this.thread = this.getAbilities(MultiblockAbility.THREAD_HATCH).isEmpty() ? 1 : this.getAbilities(MultiblockAbility.THREAD_HATCH).get(0).getCurrentThread();
         this.recipeMapWorkable = new ArrayList();
 
-        for(int i = 0; i < this.thread; ++i) {
+        for (int i = 0; i < this.thread; ++i) {
             this.recipeMapWorkable.add(new GCYMHeatCoilRecipeLogic(this));
         }
     }
@@ -162,12 +165,14 @@ public class MetaTileEntityBurnerReactor extends GCYMAdvanceRecipeMapMultiblockC
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
+    protected void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
-                    TextFormatting.RED + TextFormattingUtil.formatNumbers(temperature) + "K"));
+            var heatString = KeyUtil.number(TextFormatting.RED,
+                    syncer.syncInt(getCurrentTemperature()), "K");
+
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY,
+                    "gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
-        super.addDisplayText(textList);
     }
 
     @Override
