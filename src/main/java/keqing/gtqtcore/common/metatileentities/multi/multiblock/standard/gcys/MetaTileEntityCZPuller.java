@@ -123,7 +123,7 @@ public class MetaTileEntityCZPuller extends RecipeMapMultiblockController implem
                 .where('S', selfPredicate())
                 .where('X', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID)))
                 .where('Y', states(MetaBlocks.METAL_CASING.getState(BlockMetalCasing.MetalCasingType.STEEL_SOLID))
-                        .or(autoAbilities(true,false))
+                        .or(autoAbilities(true, true, true, true, true, false, false))
                         .or(abilities(GTQTMultiblockAbility.PRESSURE_CONTAINER).setExactLimit(1))
                 )
                 .where('M', abilities(MultiblockAbility.MUFFLER_HATCH))
