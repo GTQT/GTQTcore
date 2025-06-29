@@ -119,8 +119,8 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
     private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (getInputFluidInventory() != null) {
             FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
-            int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
-            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.gc.count1",syncer.syncString(TextFormattingUtil.formatNumbers(SteamAmount))));
+            int SteamAmount = syncer.syncInt(SteamStack == null ? 0 : SteamStack.amount);
+            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.gc.count1", syncer.syncString(TextFormattingUtil.formatNumbers(SteamAmount))));
         }
 
         keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.msf.count2",syncer.syncDouble(steam[0] / 1000.0), syncer.syncDouble(steam[1] / 1000.0), syncer.syncDouble(steam[2] / 1000.0)));

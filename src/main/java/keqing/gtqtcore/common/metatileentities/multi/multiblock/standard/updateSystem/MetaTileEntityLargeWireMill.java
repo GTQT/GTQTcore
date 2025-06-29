@@ -72,7 +72,7 @@ public class MetaTileEntityLargeWireMill extends GTQTRecipeMapMultiblockControll
                 .aisle("XXFXXXX", "XTTTTTX", "XXFXXXX")
                 .aisle("XXFXXXX", "XSFXXXX", "XXFXXXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(24)
                         .or(autoAbilities()))
                 .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('F', states(getFrameState()))

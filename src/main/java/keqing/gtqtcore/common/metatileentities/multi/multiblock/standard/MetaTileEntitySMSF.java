@@ -199,7 +199,7 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
     private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         if (getInputFluidInventory() != null) {
             FluidStack SteamStack = getInputFluidInventory().drain(Steam.getFluid(Integer.MAX_VALUE), false);
-            int SteamAmount = SteamStack == null ? 0 : SteamStack.amount;
+            int SteamAmount = syncer.syncInt(SteamStack == null ? 0 : SteamStack.amount);
             keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.gc.count1", syncer.syncString(TextFormattingUtil.formatNumbers(SteamAmount))));
         }
 

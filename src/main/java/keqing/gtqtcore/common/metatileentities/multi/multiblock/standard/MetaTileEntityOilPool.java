@@ -134,7 +134,7 @@ public class MetaTileEntityOilPool extends NoEnergyMultiblockController {
                 .aisle("###XU", "XXXXX", "I###X")
                 .aisle("F###F", "XXXXX", "XXYXX")
                 .where('F', states(getFrameState()))
-                .where('X', states(GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.GALVANIZE_STEEL_CASING))
+                .where('X', states(GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.GALVANIZE_STEEL_CASING)).setMinGlobalLimited(25)
                         .or(abilities(MultiblockAbility.IMPORT_ITEMS))
                         .or(abilities(MultiblockAbility.EXPORT_ITEMS)))
                 .where('U', states(GTQTMetaBlocks.blockMultiblockCasing5.getState(BlockMultiblockCasing5.TurbineCasingType.GALVANIZE_STEEL_CASING))

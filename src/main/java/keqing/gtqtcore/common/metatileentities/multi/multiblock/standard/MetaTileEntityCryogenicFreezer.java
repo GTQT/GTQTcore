@@ -181,35 +181,36 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
         builder.setWorkingStatus(recipeMapWorkable.isWorkingEnabled(), recipeMapWorkable.isActive())
                 .addEnergyUsageLine(this.getEnergyContainer())
                 .addEnergyTierLine(GTUtility.getTierByVoltage(recipeMapWorkable.getMaxVoltage()))
-                .addCustom(this::addHeatCapacity)
+                .addCustom(this::addCustomData)
                 .addParallelsLine(recipeMapWorkable.getParallelLimit())
                 .addWorkingStatusLine()
                 .addProgressLine(recipeMapWorkable.getProgress(), recipeMapWorkable.getMaxProgress())
                 .addRecipeOutputLine(recipeMapWorkable);
     }
 
-    private void addHeatCapacity(KeyManager keyManager, UISyncer syncer) {
-        if (isStructureFormed()) {
-            if (getInputFluidInventory() != null) {
-                FluidStack LubricantStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
-                int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-                keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.machine.cryogenic_freezer.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
-                if (isActive()) {
-                    keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.machine.cryogenic_freezer.subcooled"));
-                }
+    @Override
+    public void addCustomData(KeyManager keyManager, UISyncer syncer) {
+        super.addCustomData(keyManager, syncer);
+        if (getInputFluidInventory() != null) {
+            FluidStack fluidStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = fluidStack == null ? 0 : fluidStack.amount;
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.vc.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
+            if (isActive()) {
+                keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.machine.cryogenic_freezer.subcooled"));
             }
-            var heatString = KeyUtil.number(TextFormatting.RED, syncer.syncInt(temperature), "K");
-            keyManager.add(KeyUtil.lang(TextFormatting.GRAY ,"gregtech.multiblock.blast_furnace.max_temperature", heatString));
         }
+        var heatString = KeyUtil.number(TextFormatting.RED, syncer.syncInt(temperature), "K");
+        keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.blast_furnace.max_temperature", heatString));
     }
 
     @Override
     protected void configureWarningText(MultiblockUIBuilder builder) {
         super.configureWarningText(builder);
         builder.addCustom((manager, syncer) -> {
-            if (isStructureFormed()) {
-                FluidStack lubricantStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
-                if (lubricantStack == null || lubricantStack.amount == 0) {
+            if (isStructureFormed() && getInputFluidInventory() != null) {
+                FluidStack fluidStack = getInputFluidInventory().drain(GelidCryotheum.getFluid(Integer.MAX_VALUE), false);
+                int liquidOxygenAmount = syncer.syncInt(fluidStack == null ? 0 : fluidStack.amount);
+                if (syncer.syncInt(liquidOxygenAmount) == 0) {
                     manager.add(KeyUtil.lang(TextFormatting.RED, "gtqtcore.machine.cryogenic_freezer.warning"));
                 }
             }
@@ -245,9 +246,11 @@ public class MetaTileEntityCryogenicFreezer extends GTQTNoTierMultiblockControll
     public boolean drainColdStack(boolean sim) {
         IMultipleTankHandler inputTank = getInputFluidInventory();
         if (!sim && !isStructureFormed()) return false;
-        if (GelidStack.isFluidStackIdentical(inputTank.drain(GelidStack, false))) {
-            inputTank.drain(GelidStack, sim);
-            return true;
+        if (inputTank != null) {
+            if (GelidStack.isFluidStackIdentical(inputTank.drain(GelidStack, false))) {
+                inputTank.drain(GelidStack, sim);
+                return true;
+            }
         }
         return false;
     }

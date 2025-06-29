@@ -107,6 +107,7 @@ public class MetaTileEntityStepper extends GTQTOCMultiblockController {
         tooltip.add(I18n.format("gtqt.machine.stepper.3"));
         tooltip.add(I18n.format("gtqt.machine.stepper.4"));
         tooltip.add(I18n.format("gtqt.machine.stepper.5"));
+        tooltip.add(TextFormatting.GOLD + I18n.format("试图切换光刻胶种类时请先退出缓存，否则不会替换已有光刻胶"));
         tooltip.add(TextFormatting.GOLD + I18n.format("使用螺丝刀右键控制器使多方块退出缓存光刻胶"));
     }
 

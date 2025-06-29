@@ -74,7 +74,7 @@ public class MetaTileEntityLargeBender extends GTQTRecipeMapMultiblockController
                 .aisle("XXXXXXX", "XTTTTTX", "XXXXXXX")
                 .aisle("XXXXXXX", "XSXFFFF", "XXXXXXX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(35)
                         .or(autoAbilities()))
                 .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('F', states(getFrameState()))

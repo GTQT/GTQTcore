@@ -77,7 +77,7 @@ public class MetaTileEntityLargeDesulphurization extends GTQTRecipeMapMultiblock
                 .aisle("CCCCC", "UPFPU", "UUFUU", " UFU ", " CCC ")
                 .aisle("CCCCC", "CCSCC", "CCCCC", " CCC ", " CCC ")
                 .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('C', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(60)
                         .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('U', heatingCoils())

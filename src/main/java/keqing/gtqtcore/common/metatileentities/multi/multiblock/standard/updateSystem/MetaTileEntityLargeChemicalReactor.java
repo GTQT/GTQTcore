@@ -74,7 +74,7 @@ public class MetaTileEntityLargeChemicalReactor extends GTQTRecipeMapMultiblockC
                 .aisle("XXXXX", "XPPPX", "XCCCX", "XPPPX", "XXXXX")
                 .aisle("X###X", "SXXXX", "X###X", "XXXXX", "X###X")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(40)
                         .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('C', heatingCoils())

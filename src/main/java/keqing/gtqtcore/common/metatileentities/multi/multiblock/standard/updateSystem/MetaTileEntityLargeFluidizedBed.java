@@ -84,7 +84,7 @@ public class MetaTileEntityLargeFluidizedBed extends GTQTRecipeMapMultiblockCont
                 .aisle("CCCCC", "UUFUU", "UPFPU", "UUFUU", "CCCCC")
                 .aisle("CCCCC", "CCCCC", "CCSCC", "CCCCC", "CCCCC")
                 .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('C', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(50)
                         .or(autoAbilities())
                         .or(abilities(GTQTMultiblockAbility.CATALYST_MULTIBLOCK_ABILITY).setMinGlobalLimited(0).setPreviewCount(1)))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())

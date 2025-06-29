@@ -73,7 +73,7 @@ public class MetaTileEntityLargeExtruder extends GTQTRecipeMapMultiblockControll
                 .aisle("XXXXXXX", "XPPPPPX", "XXXXXXX")
                 .aisle("XFFFFFX", "XSXXXXX", "XFFFFFX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(16)
                         .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('F', states(getFrameState()))

@@ -76,7 +76,7 @@ public class MetaTileEntityLargeThermalCentrifuge extends GTQTRecipeMapMultibloc
                 .aisle("CCCCC", "CP PC", "CG GC", " P P ", " P P ", "CG GC", "CP PC", " CCC ")
                 .aisle(" CCC ", " CSC ", " CCC ", "  C  ", "  C  ", " CCC ", " CUC ", " CCC ")
                 .where('S', selfPredicate())
-                .where('C', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('C', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(30)
                         .or(autoAbilities()))
                 .where('P', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('U', heatingCoils())

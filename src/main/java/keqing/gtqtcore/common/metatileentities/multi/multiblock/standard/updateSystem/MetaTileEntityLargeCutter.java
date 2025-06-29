@@ -74,7 +74,7 @@ public class MetaTileEntityLargeCutter extends GTQTRecipeMapMultiblockController
                 .aisle("XXXXXXX", "XTTTTTX", "XXXXXXX")
                 .aisle("XFFFFFX", "XSXXXXX", "XFFFFFX")
                 .where('S', selfPredicate())
-                .where('X', TiredTraceabilityPredicate.CP_CASING.get()
+                .where('X', TiredTraceabilityPredicate.CP_CASING.get().setMinGlobalLimited(18)
                         .or(autoAbilities()))
                 .where('T', TiredTraceabilityPredicate.CP_TUBE.get())
                 .where('F', states(getFrameState()))
