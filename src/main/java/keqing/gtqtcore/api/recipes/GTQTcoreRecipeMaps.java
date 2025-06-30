@@ -28,30 +28,30 @@ public class GTQTcoreRecipeMaps {
      */
     public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_A = new RecipeMapBuilder<>("processing_mode_a",
             new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .fluidInputs(2)
-            .itemOutputs(2)
-            .fluidOutputs(2)
+            .itemInputs(3)
+            .fluidInputs(3)
+            .itemOutputs(3)
+            .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.SCIENCE)
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_B = new RecipeMapBuilder<>("processing_mode_b",
             new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .fluidInputs(2)
-            .itemOutputs(2)
-            .fluidOutputs(2)
+            .itemInputs(3)
+            .fluidInputs(3)
+            .itemOutputs(3)
+            .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.SCIENCE)
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_MODE_C = new RecipeMapBuilder<>("processing_mode_c",
             new SimpleRecipeBuilder())
-            .itemInputs(2)
-            .fluidInputs(2)
-            .itemOutputs(2)
-            .fluidOutputs(2)
+            .itemInputs(3)
+            .fluidInputs(3)
+            .itemOutputs(3)
+            .fluidOutputs(3)
             .progressBar(GuiTextures.PROGRESS_BAR_ARC_FURNACE, HORIZONTAL)
             .sound(GTSoundEvents.SCIENCE)
             .build();

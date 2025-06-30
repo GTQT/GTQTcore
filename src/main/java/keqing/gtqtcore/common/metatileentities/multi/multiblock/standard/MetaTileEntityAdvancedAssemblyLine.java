@@ -357,55 +357,48 @@ public class MetaTileEntityAdvancedAssemblyLine extends GTQTNoTierMultiblockCont
 
     @Override
     public boolean checkRecipe(Recipe recipe, boolean consumeIfSuccess) {
-        if (consumeIfSuccess) {
-            return true;
-        } else {
-            if (ConfigHolder.machines.orderedAssembly) {
-                List<GTRecipeInput> inputs = recipe.getInputs();
-                List<IItemHandlerModifiable> itemInputInventory = this.getAbilities(MultiblockAbility.IMPORT_ITEMS);
-                if (itemInputInventory.size() < inputs.size()) {
-                    return false;
+        if (consumeIfSuccess) return true; // don't check twice
+        // check ordered items
+        if (ConfigHolder.machines.orderedAssembly) {
+            List<GTRecipeInput> inputs = recipe.getInputs();
+            List<IItemHandlerModifiable> itemInputInventory = getAbilities(MultiblockAbility.IMPORT_ITEMS);
+
+            // slot count is not enough, so don't try to match it
+            if (itemInputInventory.size() < inputs.size()) return false;
+
+            int itemIndex = 0;
+            for (GTRecipeInput input : inputs) {
+                while (itemIndex < itemInputInventory.size() &&
+                        itemInputInventory.get(itemIndex).getStackInSlot(0).isEmpty()) {
+                    itemIndex++;
                 }
+                if (itemIndex >= itemInputInventory.size()) return false;
+                if (!input.acceptsStack(itemInputInventory.get(itemIndex).getStackInSlot(0))) return false;
+                itemIndex++;
+            }
+
+            // check ordered fluids
+            if (ConfigHolder.machines.orderedFluidAssembly) {
+                inputs = recipe.getFluidInputs();
+                List<IFluidTank> fluidInputInventory = getAbilities(MultiblockAbility.IMPORT_FLUIDS);
+
+                // slot count is not enough, so don't try to match it
+                if (fluidInputInventory.size() < inputs.size()) return false;
 
                 for (int i = 0; i < inputs.size(); i++) {
-                    IItemHandlerModifiable inputHatch = itemInputInventory.get(i);
-                    boolean isEmpty = true;
-                    for (int j = 0; j < inputHatch.getSlots(); j++) {
-                        ItemStack item = inputHatch.getStackInSlot(j);
-                        if (item.isEmpty())
-                            continue;
-                        isEmpty = false;
-                        if (!(inputs.get(i)).acceptsStack(item)) {
-                            return false;
-                        }
-                    }
-
-                    if (isEmpty) {
+                    if (!inputs.get(i).acceptsFluid(fluidInputInventory.get(i).getFluid())) {
                         return false;
                     }
                 }
-
-                if (ConfigHolder.machines.orderedFluidAssembly) {
-                    inputs = recipe.getFluidInputs();
-                    List<IFluidTank> fluidInputInventory = this.getAbilities(MultiblockAbility.IMPORT_FLUIDS);
-                    if (fluidInputInventory.size() < inputs.size()) {
-                        return false;
-                    }
-
-                    for (int i = 0; i < inputs.size(); ++i) {
-                        if (!(inputs.get(i)).acceptsFluid((fluidInputInventory.get(i)).getFluid())) {
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            if (ConfigHolder.machines.enableResearch && recipe.hasProperty(ResearchProperty.getInstance())) {
-                return isRecipeAvailable(this.getAbilities(MultiblockAbility.DATA_ACCESS_HATCH), recipe) || isRecipeAvailable(this.getAbilities(MultiblockAbility.OPTICAL_DATA_RECEPTION), recipe);
-            } else {
-                return super.checkRecipe(recipe, consumeIfSuccess);
             }
         }
+
+        if (!ConfigHolder.machines.enableResearch || !recipe.hasProperty(ResearchProperty.getInstance())) {
+            return super.checkRecipe(recipe, consumeIfSuccess);
+        }
+
+        return isRecipeAvailable(getAbilities(MultiblockAbility.DATA_ACCESS_HATCH), recipe) ||
+                isRecipeAvailable(getAbilities(MultiblockAbility.OPTICAL_DATA_RECEPTION), recipe);
     }
 
     @Override

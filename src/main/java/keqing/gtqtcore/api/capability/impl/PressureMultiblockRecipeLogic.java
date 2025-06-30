@@ -21,7 +21,7 @@ public class PressureMultiblockRecipeLogic extends MultiblockRecipeLogic {
     }
 
     @Override
-    protected void updateRecipeProgress() {
+    public void updateRecipeProgress() {
         // do not simulate pressure so it keeps growing towards atmospheric
         if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit()) {
             drawEnergy(recipeEUt, false);
@@ -33,7 +33,7 @@ public class PressureMultiblockRecipeLogic extends MultiblockRecipeLogic {
             }
 
             if (this.hasNotEnoughEnergy) {
-                if (this.getEnergyInputPerSecond() > 19L * (long) this.recipeEUt) {
+                if (this.getEnergyInputPerSecond() > 19L * this.recipeEUt) {
                     this.hasNotEnoughEnergy = false;
                 }
             }

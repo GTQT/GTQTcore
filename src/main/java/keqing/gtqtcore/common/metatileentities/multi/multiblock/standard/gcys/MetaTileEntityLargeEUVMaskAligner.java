@@ -263,7 +263,7 @@ public class MetaTileEntityLargeEUVMaskAligner extends GCYMRecipeMapMultiblockCo
         }
 
         @Override
-        protected void updateRecipeProgress() {
+        public void updateRecipeProgress() {
             if (this.recipeCWUt == 0) {
                 super.updateRecipeProgress();
             } else {

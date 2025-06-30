@@ -484,7 +484,7 @@ public class MetaTileEntityEyeOfHarmony extends RecipeMapMultiblockController {
         }
 
 
-        protected void updateRecipeProgress() {
+        public void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {

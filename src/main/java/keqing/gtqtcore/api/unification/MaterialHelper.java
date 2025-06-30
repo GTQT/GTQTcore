@@ -13,7 +13,7 @@ import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass1.CasingTy
 
 public class MaterialHelper {
     public static Material[] Superconductor = {LVSuperconductor, MVSuperconductor, HVSuperconductor, EVSuperconductor, IVSuperconductor, LuVSuperconductor, ZPMSuperconductor, UVSuperconductor, UHVSuperconductor};
-    public static Material[] SecondPlate = {RedAlloy,GalvanizedSteel,Invar,Talonite,NiobiumTitanium,Ruridit,Naquadah,Europium,Duranium,Trinium,Neutronium};
+    public static Material[] SecondPlate = {RedAlloy,GalvanizedSteel,Invar,Talonite,Magnalium,NiobiumTitanium,Naquadah,Europium,Duranium,Trinium,Neutronium};
     public static BlockMultiblockGlass1.CasingType[] Glass = {TI_BORON_SILICATE_GLASS, W_BORON_SILICATE_GLASS, OSMIR_BORON_SILICATE_GLASS, NAQ_BORON_SILICATE_GLASS, FORCE_FIELD_CONSTRAINED_GLASS, COSMIC_MICROWAVE_BACKGROUND_RADIATION_ABSORPTION_GLASS, SPACETIME_SUPERCONDENSER_GLASS, SUPRACAUSAL_LIGHT_CONE_GLASS};
     public static Material[] Glue ={Materials.Glue,Polyethylene,PolyvinylChloride,Epoxy,ReinforcedEpoxyResin,Polytetrafluoroethylene,Zylon,Polybenzimidazole,Polyetheretherketone,Kevlar,KaptonK,KaptonE};
     public static BlockMachineCasing.MachineCasingType[] MachineCasing = {ULV, LV, MV, HV, EV, IV, LuV, ZPM, UV, UHV, UEV, UIV, UXV, OpV, MAX};

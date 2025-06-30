@@ -421,7 +421,7 @@ public class MetaTileEntityQuantumForceTransformer extends RecipeMapMultiblockCo
 
         //纳米蜂群仓的固有逻辑
         @Override
-        protected void updateRecipeProgress() {
+        public void updateRecipeProgress() {
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
                 this.drawEnergy(this.recipeEUt, false);
                 if (++this.progressTime > this.maxProgressTime) {

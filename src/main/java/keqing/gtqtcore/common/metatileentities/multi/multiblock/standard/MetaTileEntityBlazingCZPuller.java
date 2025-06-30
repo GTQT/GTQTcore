@@ -235,7 +235,7 @@ public class MetaTileEntityBlazingCZPuller extends GTQTNoTierMultiblockControlle
         }
 
         @Override
-        protected void updateRecipeProgress() {
+        public void updateRecipeProgress() {
 
             if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && isPressureSuit() && drainPyrotheum(false)) {
                 drawEnergy(recipeEUt, false);

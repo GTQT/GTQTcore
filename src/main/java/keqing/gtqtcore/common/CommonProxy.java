@@ -36,6 +36,7 @@ import keqing.gtqtcore.loaders.recipes.*;
 import keqing.gtqtcore.loaders.recipes.component.ComponentAssemblerRecipes;
 import keqing.gtqtcore.loaders.recipes.component.MaterialComponents;
 import keqing.gtqtcore.loaders.recipes.handlers.*;
+import keqing.gtqtcore.loaders.tweak.tweakRecipesManager;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -306,6 +307,7 @@ public class CommonProxy {
         AddHighTierMaterial.init();
 
         GTQTRecipesManager.init();
+        tweakRecipesManager.init();
 
         NeutronActivatorIOPartProperty.registeredPart(1, "质子");
         NeutronActivatorIOPartProperty.registeredPart(2, "氘核");

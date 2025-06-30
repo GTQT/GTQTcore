@@ -49,7 +49,7 @@ public class GCYMComputationRecipeLogic extends GCYMMultiblockRecipeLogic {
         this.isDurationTotalCWU = recipe.hasProperty(TotalComputationProperty.getInstance());
     }
 
-    protected void updateRecipeProgress() {
+    public void updateRecipeProgress() {
         if (this.recipeCWUt == 0) {
             super.updateRecipeProgress();
         } else {
