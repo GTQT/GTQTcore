@@ -535,8 +535,8 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<SimpleRecipeBuilder> FUEL_REFINE_FACTORY_RECIPES = new RecipeMapBuilder<>("fuel_refine_factory_recipes", new SimpleRecipeBuilder())
-            .itemInputs(3)
-            .itemOutputs(3)
+            .itemInputs(6)
+            .itemOutputs(6)
             .fluidInputs(6)
             .fluidOutputs(6)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
@@ -544,16 +544,10 @@ public class GTQTcoreRecipeMaps {
             .build();
 
     public static final RecipeMap<ForceFieldCoilRecipeBuilder> NAQUADAH_REFINE_FACTORY_RECIPES = new RecipeMapBuilder<>("naquadah_refine_factory_recipes", new ForceFieldCoilRecipeBuilder())
-            .itemInputs(3)
+            .itemInputs(6)
             .itemOutputs(6)
             .fluidInputs(6)
-            .fluidOutputs(3)
-            .itemSlotOverlay(GuiTextures.MOLECULAR_OVERLAY_1, false, false)
-            .itemSlotOverlay(GuiTextures.MOLECULAR_OVERLAY_2, false, true)
-            .itemSlotOverlay(GuiTextures.MOLECULAR_OVERLAY_3, false, true)
-            .itemSlotOverlay(GuiTextures.MOLECULAR_OVERLAY_4, true, false)
-            .itemSlotOverlay(GuiTextures.VIAL_OVERLAY_1, true, true)
-            .itemSlotOverlay(GuiTextures.VIAL_OVERLAY_2, true, true)
+            .fluidOutputs(6)
             .progressBar(GuiTextures.PROGRESS_BAR_ARROW_MULTIPLE, HORIZONTAL)
             .sound(GTValues.FOOLS.get() ? GTSoundEvents.SCIENCE : GTSoundEvents.CHEMICAL_REACTOR)
             .build();

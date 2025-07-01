@@ -132,7 +132,7 @@ public class ElementMaterials {
                         .enchantment(Enchantments.FORTUNE, 2)
                         .enchantment(Enchantments.SHARPNESS, 2).build())
                 .element(Elements.CosmicNeutronium)
-                .cableProperties(V[UIV], 256, 128, false)
+                .cableProperties(V[UHV], 256, 128, false)
                 .build();
         //  26013 Degenerate Rhenium
         DegenerateRhenium = new Material.Builder(getMaterialsId(), gtqtcoreId("degenerate_rhenium"))
@@ -149,11 +149,12 @@ public class ElementMaterials {
         //  26014 Infinity
         GTQTMaterials.Infinity = new Material.Builder(getMaterialsId(), gtqtcoreId("infinity"))
                 .ingot()
-                .liquid(new FluidBuilder().temperature((int) V[UIV]))
+                .liquid(new FluidBuilder().temperature((int) V[UEV]))
                 .iconSet(CUSTOM_INFINITY)
                 .element(Elements.Infinity)
                 .blast(12600, BlastProperty.GasTier.HIGHER)
                 .rotorStats(18.0f, 10.0f, 128000)
+                .cableProperties(V[UEV], 256, 128)
                 .toolStats(MaterialToolProperty.Builder.of(40.0F, 20.0F, 51200000, 8)
                         .attackSpeed(0.1F).enchantability(21)
                         .unbreakable()

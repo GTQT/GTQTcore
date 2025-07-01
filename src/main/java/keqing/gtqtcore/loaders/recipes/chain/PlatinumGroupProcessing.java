@@ -244,14 +244,15 @@ public class PlatinumGroupProcessing {
                 .EUt(VA[LV])
                 .buildAndRegister();
 
-        //  2RhRu + 2CCl4 + 3H2SO4 -> 2RuCl3 + Rh2(SO4)3 + 2HCl + CH4 + C (C lost)
+        //2RhRuO₄ + 2CCl₄ + 6H₂SO₄ → 2RuCl₃ + Rh₂(SO₄)₃ + 6HCl + CH₄ + C
         LARGE_CHEMICAL_RECIPES.recipeBuilder()
-                .input(dust, InertMetalMixture, 6)
+                .input(dust, InertMetalMixture, 12)
                 .fluidInputs(GTQTMaterials.CarbonTetrachloride.getFluid(2000))
-                .fluidInputs(SulfuricAcid.getFluid(3000))
+                .fluidInputs(SulfuricAcid.getFluid(6000))
                 .output(dust, GTQTMaterials.RutheniumChloride, 8)
+                .output(dust, Carbon)
                 .fluidOutputs(RhodiumSulfate.getFluid(1000))
-                .fluidOutputs(HydrochloricAcid.getFluid(2000))
+                .fluidOutputs(HydrochloricAcid.getFluid(6000))
                 .fluidOutputs(Methane.getFluid(1000))
                 .duration(100)
                 .EUt(VA[EV])

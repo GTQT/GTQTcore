@@ -34,11 +34,14 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
 
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLOTATION_RECIPES;
+
 public class MetaTileEntityFlotationFactory extends GTQTRecipeMapMultiblockController {
 
     public MetaTileEntityFlotationFactory(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
-                GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES
+                GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES,
+                FLOTATION_RECIPES
         });
         setTierFlag(true);
         //setTier(auto);

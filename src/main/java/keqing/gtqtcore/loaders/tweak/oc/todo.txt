@@ -1,0 +1,12 @@
+物品获取方法：
+ItemInfo cable = Items.get("cable");
+
+public interface ItemInfo {
+    String name();
+
+    Block block();
+
+    Item item();
+
+    ItemStack createItemStack(int var1);
+}

@@ -643,7 +643,7 @@ public class TechReSearchNET {
 
         // Advanced Force Field Constraint Coil
         ASSEMBLY_LINE_RECIPES.recipeBuilder()
-                .input(frameGt, Tritium, 1)
+                .input(frameGt, Tritanium, 1)
                 .input(FIELD_GENERATOR_UHV, 2)
                 .input(ELECTRIC_PUMP_UHV, 8)
                 .input(circuit, MarkerMaterials.Tier.UHV, 16)

@@ -5,6 +5,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.texture.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Matrix4;
+import gregicality.multiblocks.api.metatileentity.GCYMRecipeMapMultiblockController;
 import gregtech.api.capability.impl.MultiblockRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
@@ -12,6 +13,8 @@ import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
+import gregtech.api.recipes.RecipeMap;
+import gregtech.api.recipes.RecipeMaps;
 import gregtech.client.renderer.CubeRendererState;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.cclop.ColourOperation;
@@ -23,6 +26,7 @@ import gregtech.common.blocks.BlockBoilerCasing.BoilerCasingType;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
+import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
 import keqing.gtqtcore.common.block.GTQTMetaBlocks;
 import keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing5;
@@ -38,11 +42,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLOTATION_FACTORY_RECIPES;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.FLOTATION_RECIPES;
 
-public class MetaTileEntityFrothFlotationTank extends RecipeMapMultiblockController {
+public class MetaTileEntityFrothFlotationTank extends GCYMRecipeMapMultiblockController {
 
     public MetaTileEntityFrothFlotationTank(ResourceLocation metaTileEntityId) {
-        super(metaTileEntityId, FLOTATION_FACTORY_RECIPES);
+        super(metaTileEntityId, new RecipeMap[]{
+                FLOTATION_RECIPES
+        });
         this.recipeMapWorkable = new MultiblockRecipeLogic(this, true);
     }
 
