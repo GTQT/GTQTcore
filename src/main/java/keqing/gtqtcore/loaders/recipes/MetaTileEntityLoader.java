@@ -804,6 +804,14 @@ public class MetaTileEntityLoader {
                 'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
                 'B', FURNACE);
 
+        ModHandler.addShapedRecipe(true, "heat_alloy_furnace",
+                GTQTMetaTileEntities.HEAT_ALLOY_FURNACE.getStackForm(),
+                "BPB", "PCP", "BPB",
+                'C', new UnificationEntry(circuit, LV),
+                'P', new UnificationEntry(OrePrefix.plateDouble, Steel),
+                'B', ALLOY_SMELTER[1].getStackForm());
+
+
         ModHandler.addShapedRecipe("primitive_roaster", PRIMITIVE_ROASTER.getStackForm(),
                 "BhB", "BIB", "BPB",
                 'I', new ItemStack(IRON_BARS),

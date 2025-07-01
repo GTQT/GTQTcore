@@ -54,8 +54,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockControlle
     private int glass_tier;
     private int clean_tier;
     private int tubeTier;
-
-
+    
     public MetaTileEntityEnzymesReaction(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GTQTcoreRecipeMaps.ENZYMES_REACTION_RECIPES
@@ -172,6 +171,7 @@ public class MetaTileEntityEnzymesReaction extends GTQTNoTierMultiblockControlle
                 C -= digits[2];
                 D -= digits[3];
                 E -= digits[4];
+                return true;
             }
         return false;
     }

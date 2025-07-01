@@ -1660,6 +1660,7 @@ recipemap.dragon_fusion_unit_recipes.name=魔力聚合
 gtqtcore.machine.dragon_fusion_unit.name=魔力聚合装置
 gtqtcore.machine.dragon_fusion_unit.tooltip.1=龙之力量由此苏醒
 gtqtcore.machine.heat_furnace.name=热力熔炉
+gtqtcore.machine.heat_alloy_furnace.name=热力合金炉
 gtqtcore.machine.industrial_primitive_blast_furnace.name=工业级土高炉
 gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=附属高炉： %s 座
 

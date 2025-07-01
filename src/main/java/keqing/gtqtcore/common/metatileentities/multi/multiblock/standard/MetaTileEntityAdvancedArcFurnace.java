@@ -53,7 +53,8 @@ public class MetaTileEntityAdvancedArcFurnace extends MultiMapMultiblockControll
     public MetaTileEntityAdvancedArcFurnace(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 RecipeMaps.ARC_FURNACE_RECIPES,
-                RecipeMaps.FURNACE_RECIPES
+                RecipeMaps.FURNACE_RECIPES,
+                RecipeMaps.ALLOY_SMELTER_RECIPES
         });
         this.recipeMapWorkable = new AdvancedArcFurnaceWorkableHandler(this);
     }

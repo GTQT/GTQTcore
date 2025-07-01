@@ -25,7 +25,26 @@ public class index {
     static ItemStack securityStation = Mods.AppliedEnergistics2.getItem("security_station");
     //石英玻璃
     static ItemStack quartzGlass = Mods.AppliedEnergistics2.getItem("quartz_glass");
-
+    //照明面板
+    static ItemStack lightPanel = Mods.AppliedEnergistics2.getItem("part", 180, 1);
+    //me终端
+    static ItemStack mePanel = Mods.AppliedEnergistics2.getItem("part", 380, 1);
+    //样板终端 340
+    static ItemStack mePatternTerminal = Mods.AppliedEnergistics2.getItem("part", 340, 1);
+    //合成终端 360
+    static ItemStack mePatternTerminalEx = Mods.AppliedEnergistics2.getItem("part", 360, 1);
+    //接口终端 480
+    static ItemStack mePortableCell = Mods.AppliedEnergistics2.getItem("part", 480, 1);
+    //流体终端 520
+    static ItemStack meFluidTerminal = Mods.AppliedEnergistics2.getItem("part", 520, 1);
+    //输入总线 240
+    static ItemStack inputBus = Mods.AppliedEnergistics2.getItem("part", 240, 1);
+    //流体输入总线 241
+    static ItemStack fluidInputBus = Mods.AppliedEnergistics2.getItem("part", 241, 1);
+    //输出总线 260
+    static ItemStack outputBus = Mods.AppliedEnergistics2.getItem("part", 260, 1);
+    //流体输出总线 261
+    static ItemStack fluidOutputBus = Mods.AppliedEnergistics2.getItem("part", 261, 1);
     //CPU
     //合成单元
     static ItemStack craftingUnit = Mods.AppliedEnergistics2.getItem("crafting_unit");
@@ -58,7 +77,10 @@ public class index {
     static ItemStack engineeringModel = Mods.AppliedEnergistics2.getItem("material", 15, 1);
     static ItemStack engineeringBase = Mods.AppliedEnergistics2.getItem("material", 18, 1);
     static ItemStack engineeringProcessor = Mods.AppliedEnergistics2.getItem("material", 24, 1);
-
+    //硅
+    static ItemStack siliconModel = Mods.AppliedEnergistics2.getItem("material", 19, 1);
+    //陨石罗盘
+    static ItemStack skyCompass = Mods.AppliedEnergistics2.getItem("sky_compass");
     //成型 43
     static ItemStack forming = Mods.AppliedEnergistics2.getItem("material", 43, 1);
     //破坏 44

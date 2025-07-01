@@ -1680,6 +1680,7 @@ recipemap.dragon_fusion_unit_recipes.name=Dragon Fusion
 gtqtcore.machine.dragon_fusion_unit.name=Dragon Fusion Device
 gtqtcore.machine.dragon_fusion_unit.tooltip.1=Awakening the power of the dragon
 gtqtcore.machine.heat_furnace.name=Heat Furnace
+gtqtcore.machine.heat_alloy_furnace.name=Heat Alloy Furnace
 gtqtcore.machine.industrial_primitive_blast_furnace.name=Industrial Primitive Blast Furnace
 gtqtcore.machine.industrial_primitive_blast_furnace.auxiliary_blast_furnace=Auxiliary Blast Furnace: %s Units
 

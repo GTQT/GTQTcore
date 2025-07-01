@@ -326,7 +326,17 @@ public class MetaTileEntityMiningDrill extends RecipeMapMultiblockController {
     }
 
     public boolean checkCard() {
+        // 检查容器是否有效
+        if (containerInventory == null || containerInventory.getSlots() == 0) {
+            return false;
+        }
+
         ItemStack item = containerInventory.getStackInSlot(0);
+        // 检查物品是否为空
+        if (item.isEmpty()) {
+            return false;
+        }
+
         if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_ORE_CARD.getMetaValue()) {
             NBTTagCompound compound = item.getTagCompound();
             if (compound != null && compound.hasKey("dimension") && compound.hasKey("type")) {

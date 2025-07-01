@@ -1,15 +1,17 @@
 package keqing.gtqtcore.loaders.tweak.ae2;
 
-import gregtech.api.GTValues;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.ore.OrePrefix;
+import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.Mods;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 import keqing.gtqtcore.common.items.GTQTMetaItems;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import static gregtech.api.GTValues.*;
@@ -17,9 +19,11 @@ import static gregtech.api.recipes.RecipeMaps.ASSEMBLER_RECIPES;
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_BATH_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
 import static gregtech.api.unification.ore.OrePrefix.*;
-import static gtqt.api.util.MaterialHelper.*;
+import static gtqt.api.util.MaterialHelper.Cable;
 import static keqing.gtqtcore.api.unification.GTQTMaterials.Fluix;
 import static keqing.gtqtcore.api.unification.MaterialHelper.Glue;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getPistonByTier;
+import static keqing.gtqtcore.api.utils.GTQTUtil.getPumpByTier;
 import static keqing.gtqtcore.loaders.tweak.ae2.index.*;
 
 public class AE2MiscRecipes {
@@ -33,22 +37,210 @@ public class AE2MiscRecipes {
         FormingAndDestructionCoreRecipes();
         //升级卡
         UpgradeCardRecipes();
+        //模板
+        TemplateRecipes();
+        //面板
+        PanelRecipes();
+        //总线
+        BusRecipes();
+    }
 
+    private static void BusRecipes() {
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/import_bus");
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/import_bus_fluid");
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/export_bus");
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/export_bus_fluid");
+
+        for (int i = 1; i <= 5; i++) {
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(getPistonByTier(i + 1))
+                    .input(OrePrefix.plate, StainlessSteel, 4)
+                    .inputs(GTUtility.copy(2 * i, breaking))
+                    .circuitMeta(3)
+                    .fluidInputs(Glue[i + 1].getFluid(288))
+                    .outputs(GTUtility.copy((int) Math.pow(2, i), inputBus))
+                    .EUt(VA[i])
+                    .duration(200)
+                    .buildAndRegister();
+
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(getPistonByTier(i + 1))
+                    .input(OrePrefix.plate, StainlessSteel, 4)
+                    .inputs(GTUtility.copy(2 * i, forming))
+                    .circuitMeta(3)
+                    .fluidInputs(Glue[i + 1].getFluid(288))
+                    .outputs(GTUtility.copy((int) Math.pow(2, i), outputBus))
+                    .EUt(VA[i])
+                    .duration(200)
+                    .buildAndRegister();
+
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(getPumpByTier(i + 1))
+                    .input(OrePrefix.plate, StainlessSteel, 4)
+                    .inputs(GTUtility.copy(2 * i, breaking))
+                    .circuitMeta(3)
+                    .fluidInputs(Glue[i + 1].getFluid(288))
+                    .outputs(GTUtility.copy((int) Math.pow(2, i), fluidInputBus))
+                    .EUt(VA[i])
+                    .duration(200)
+                    .buildAndRegister();
+
+            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                    .input(getPumpByTier(i + 1))
+                    .input(OrePrefix.plate, StainlessSteel, 4)
+                    .inputs(GTUtility.copy(2 * i, forming))
+                    .circuitMeta(3)
+                    .fluidInputs(Glue[i + 1].getFluid(288))
+                    .outputs(GTUtility.copy((int) Math.pow(2, i), fluidOutputBus))
+                    .EUt(VA[i])
+                    .duration(200)
+                    .buildAndRegister();
+        }
+    }
+
+    private static void PanelRecipes() {
+        //照明面板
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/panels_semi_dark_monitor");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .input(MetaItems.COVER_SCREEN)
+                .inputs(GTUtility.copy(3, meGlassCable))
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .input(screw, RedAlloy, 2)
+                .inputs(calculationProcessor)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(lightPanel)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+        //Me终端
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/terminals");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(lightPanel)
+                .input(circuit, MarkerMaterials.Tier.MV)
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .input(screw, Copper, 2)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(mePanel)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+        //Me终端
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/terminals_pattern");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(mePanel)
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .inputs(blankPattern)
+                .inputs(engineeringProcessor)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(mePatternTerminal)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+        //Me合成终端
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/terminals_crafting");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(mePanel)
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .input(Blocks.CRAFTING_TABLE)
+                .inputs(engineeringProcessor)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(mePatternTerminalEx)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+        //接口终端
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/terminals_interface");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(mePanel)
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .inputs(controller)
+                .inputs(engineeringProcessor)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(mePortableCell)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+
+
+        //流体终端
+        ModHandler.removeRecipeByName("appliedenergistics2:network/parts/terminals_fluid");
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder()
+                .inputs(mePanel)
+                .input(OrePrefix.plate, Materials.Titanium, 4)
+                .inputs(GTUtility.copy(4, meGlassCable))
+                .inputs(engineeringProcessor)
+                .circuitMeta(3)
+                .fluidInputs(Lead.getFluid(576))
+                .outputs(meFluidTerminal)
+                .EUt(VA[HV])
+                .duration(200)
+                .buildAndRegister();
+    }
+
+    private static void TemplateRecipes() {
+        ModHandler.removeRecipeByName("appliedenergistics2:misc/meteors_sky_compass");
+        ModHandler.addShapedRecipe("meteors_sky_compass",
+                skyCompass,
+                "sPS", "PCP", "SPh",
+                'C', new UnificationEntry(stickLong, SteelMagnetic),
+                'P', new UnificationEntry(plate, Steel),
+                'S', new UnificationEntry(screw, Lead));
+
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(block, Steel)
+                .notConsumable(logicModel)
+                .outputs(logicModel)
+                .EUt(VA[HV])
+                .duration(100)
+                .buildAndRegister();
+
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(block, Steel)
+                .notConsumable(calculationModel)
+                .outputs(calculationModel)
+                .EUt(VA[HV])
+                .duration(100)
+                .buildAndRegister();
+
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(block, Steel)
+                .notConsumable(engineeringModel)
+                .outputs(engineeringModel)
+                .EUt(VA[HV])
+                .duration(100)
+                .buildAndRegister();
+
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder()
+                .input(block, Steel)
+                .notConsumable(siliconModel)
+                .outputs(siliconModel)
+                .EUt(VA[HV])
+                .duration(100)
+                .buildAndRegister();
     }
 
     private static void UpgradeCardRecipes() {
         ModHandler.removeRecipeByName("appliedenergistics2:materials/basiccard");
         ModHandler.removeRecipeByName("appliedenergistics2:materials/advancedcard");
-        for(int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             ASSEMBLER_RECIPES.recipeBuilder()
                     .inputs(GTUtility.copy((int) Math.pow(2, i), calculationProcessor))
                     .input(plate, Cable.get(i))
                     .input(plate, Gold, 2)
                     .input(plate, Aluminium, 3)
                     .circuitMeta(2)
-                    .fluidInputs(Glue[i+1].getFluid(288))
+                    .fluidInputs(Glue[i + 1].getFluid(288))
                     .outputs(GTUtility.copy((int) Math.pow(2, i), basicCard))
-                    .EUt(VA[HV+i])
+                    .EUt(VA[HV + i])
                     .duration(100)
                     .buildAndRegister();
 
@@ -58,12 +250,13 @@ public class AE2MiscRecipes {
                     .input(plate, Platinum, 2)
                     .input(plate, Titanium, 3)
                     .circuitMeta(2)
-                    .fluidInputs(Glue[i+1].getFluid(288))
+                    .fluidInputs(Glue[i + 1].getFluid(288))
                     .outputs(GTUtility.copy((int) Math.pow(2, i), advancedCard))
                     .EUt(VA[HV])
-                    .duration(100+i)
+                    .duration(100 + i)
                     .buildAndRegister();
         }
+        //部分卡的配方需要改动
     }
 
     private static void FormingAndDestructionCoreRecipes() {

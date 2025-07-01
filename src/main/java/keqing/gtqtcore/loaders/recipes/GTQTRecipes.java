@@ -63,78 +63,6 @@ public class GTQTRecipes {
         OrePrefix.rotor.addProcessingHandler(PropertyKey.INGOT, GTQTRecipes::processRotorA);
         wireGtSingle.addProcessingHandler(PropertyKey.WIRE, GTQTRecipes::processWireSingle);
         registerMortarRecipes();
-        singleMaterialRecipes();
-    }
-
-
-    private static void singleMaterialRecipes() {
-        ModHandler.addShapedRecipe(String.format("bplate_big_%s", Steel),
-                OreDictUnifier.get(plate_big, Steel),
-                "SSh", "SSB",
-                'S', new UnificationEntry(plate, Steel),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bplate_big_%s", Bronze),
-                OreDictUnifier.get(plate_big, Bronze),
-                "SSh", "SSB",
-                'S', new UnificationEntry(plate, Bronze),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bcylinder_%s", Steel),
-                OreDictUnifier.get(cylinder, Steel),
-                "hCT", "SAS", "LCB",
-                'T', new UnificationEntry(gearSmall, Steel),
-                'L', new UnificationEntry(stick, Steel),
-                'S', new UnificationEntry(plate_curved, Steel),
-                'A', new UnificationEntry(spring, Steel),
-                'C', new UnificationEntry(round_cover, Steel),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bcylinder_%s", Bronze),
-                OreDictUnifier.get(cylinder, Bronze),
-                "hCT", "SAS", "LCB",
-                'T', new UnificationEntry(gearSmall, Bronze),
-                'L', new UnificationEntry(stick, Bronze),
-                'S', new UnificationEntry(plate_curved, Bronze),
-                'A', new UnificationEntry(spring, Bronze),
-                'C', new UnificationEntry(round_cover, Bronze),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", Steel),
-                OreDictUnifier.get(motor_stick, Steel),
-                "ACh", "SSS", "AfB",
-                'S', new UnificationEntry(stickLong, Steel),
-                'A', new UnificationEntry(gear, Steel),
-                'C', new UnificationEntry(springSmall, Steel),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bmotor_stick_%s", Bronze),
-                OreDictUnifier.get(motor_stick, Bronze),
-                "ACh", "SSS", "AfB",
-                'S', new UnificationEntry(stickLong, Bronze),
-                'A', new UnificationEntry(gear, Bronze),
-                'C', new UnificationEntry(springSmall, Bronze),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bvalve_%s", Steel),
-                OreDictUnifier.get(valve, Steel),
-                "SAL", "fCh", "STB",
-                'S', new UnificationEntry(shell, Steel),
-                'T', new UnificationEntry(cylinder, Steel),
-                'A', new UnificationEntry(gearSmall, Steel),
-                'L', new UnificationEntry(stick, Steel),
-                'C', new UnificationEntry(ring, Steel),
-                'B', Items.FLINT);
-
-        ModHandler.addShapedRecipe(String.format("bvalve_%s", Bronze),
-                OreDictUnifier.get(valve, Bronze),
-                "SAL", "fCh", "STB",
-                'S', new UnificationEntry(shell, Bronze),
-                'T', new UnificationEntry(cylinder, Bronze),
-                'A', new UnificationEntry(gearSmall, Bronze),
-                'L', new UnificationEntry(stick, Bronze),
-                'C', new UnificationEntry(ring, Bronze),
-                'B', Items.FLINT);
     }
 
     private static void registerMortarRecipes() {
@@ -206,7 +134,6 @@ public class GTQTRecipes {
                 .input(plate_big, material, 1)
                 .fluidInputs(Water.getFluid(1000))
                 .outputs(OreDictUnifier.get(orePrefix, material, 4))
-                .output(dust, material, 1)
                 .duration(100)
                 .circuitMeta(1)
                 .EUt(GTValues.VA[HV])
@@ -218,7 +145,6 @@ public class GTQTRecipes {
                 .input(plate_big, material, 1)
                 .fluidInputs(Water.getFluid(1000))
                 .outputs(OreDictUnifier.get(orePrefix, material, 1))
-                .output(dust, material, 1)
                 .duration(100)
                 .circuitMeta(2)
                 .EUt(GTValues.VA[HV])

@@ -176,6 +176,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileEntityVacuumDryingFurnace VACUUM_DRYING_FURNACE;
     public static MetaTileEntityMiningDrill MINING_DRILL;
     public static MetaTileEntityHeatFurnace HEAT_FURNACE;
+    public static MetaTileEntityHeatAlloyFurnace HEAT_ALLOY_FURNACE;
     public static MetaTileEntityPrimitiveTreeFarmer PRIMITIVE_TREE_FARMER;
     public static MetaTileEntityAdvanceKQCC ADV_KQCC;
     public static MetaTileEntityEnergyInfuser ENERGY_INFUSER;
@@ -477,9 +478,12 @@ public class GTQTMetaTileEntities {
 
         //早期设备
         PRIMITIVE_TREE_FARMER = registerMetaTileEntity(150, new MetaTileEntityPrimitiveTreeFarmer(gtqtcoreId("primitive_tree_farmer")));
-        PRIMITIVE_ROASTER = registerMetaTileEntity(152, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
-        HEAT_FURNACE = registerMetaTileEntity(153, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
-        PRIMITIVE_REACTOR = registerMetaTileEntity(154, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
+        PRIMITIVE_ROASTER = registerMetaTileEntity(151, new MetaTileEntityPrimitiveRoaster(gtqtcoreId("primitive_roaster")));
+        PRIMITIVE_REACTOR = registerMetaTileEntity(152, new MetaTileEntityPrimitiveReactor(gtqtcoreId("primitive_reactor")));
+
+        HEAT_FURNACE = registerMetaTileEntity(155, new MetaTileEntityHeatFurnace(gtqtcoreId("heat_furnace")));
+        HEAT_ALLOY_FURNACE = registerMetaTileEntity(156, new MetaTileEntityHeatAlloyFurnace(gtqtcoreId("heat_alloy_furnace")));
+
 
         //正常设备
         DISSOLUTION_TANK = registerMetaTileEntity(201, new MetaTileEntityDissolutionTank(gtqtcoreId("dissolution_tank")));
