@@ -213,7 +213,9 @@ private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
         tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.3"));
         tooltip.add(I18n.format("gregtech.machine.gene_mutagenesis.gtqtupdate.4"));
     }
-
+    public boolean checkAvailable(){
+        return getRadiationHatch().isAvailable();
+    }
     protected class BiologicalReactionLogic extends MultiblockRecipeLogic {
 
         boolean work = false;
@@ -231,13 +233,15 @@ private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
             this.maxProgressTime = (int) (maxProgress * (10 - glass_tier) / 10.0);
         }
 
+        @Override
         protected void updateRecipeProgress() {
-            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true)) {
-                this.drawEnergy(this.recipeEUt, false);
+            if (this.canRecipeProgress && this.drawEnergy(this.recipeEUt, true) && checkAvailable()) {
                 if (!work) {
                     getRadiationHatch().setWork(true);
                     work = true;
                 }
+                this.drawEnergy(this.recipeEUt, false);
+
                 if (++progressTime > maxProgressTime) {
                     completeRecipe();
                     getRadiationHatch().setWork(false);

@@ -4270,7 +4270,6 @@ public class FirstDegreeMaterials {
         GTQTMaterials.RhodiumOxide = new Material.Builder(getMaterialsId(), gtqtcoreId("rhodium_oxide"))
                 .dust()
                 .color(0xD93D16)
-                .flags(DISABLE_DECOMPOSITION)
                 .iconSet(MaterialIconSet.METALLIC)
                 .components(Rhodium, 2, Oxygen, 3)
                 .build();
@@ -4377,7 +4376,7 @@ public class FirstDegreeMaterials {
                 .setFormula("Ca(OH)2", true);
 
         GTQTMaterials.SodiumCyanide = new Material.Builder(getMaterialsId(), gtqtcoreId("sodium_cyanide"))
-                .dust().fluid()
+                .dust()
                 .color(0x5F7C8C)
                 .iconSet(MaterialIconSet.METALLIC)
                 .flags(DISABLE_DECOMPOSITION)

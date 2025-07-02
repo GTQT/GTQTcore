@@ -519,7 +519,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(getWaferByTier(i))
                     .input(item1)
-                    .output(item2, (int) Math.pow(2, i - tier))
+                    .output(item2, 1 << (2 * (i - tier))) // 位运算优化：4^n = 2^(2n)
                     .output(getReticleByTier(tier))
                     .CWUt(CWT[i])
                     .buildAndRegister();
@@ -544,7 +544,7 @@ public class CPULine {
                     .Laser(tier)
                     .input(getWaferByTier(i))
                     .input(item1)
-                    .output(item2, (int) Math.pow(2, i - tier))
+                    .output(item2, 1 << (2 * (i - tier))) // 4^(i-tier)
                     .output(getReticleByTier(tier))
                     .CWUt(CWT[i])
                     .buildAndRegister();

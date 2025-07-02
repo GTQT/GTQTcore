@@ -324,6 +324,7 @@ public class PlatinumGroupProcessing {
         //  NaClO3 -> NaCl + 3O
         DRYER_RECIPES.recipeBuilder()
                 .input(dust,SodiumChlorate,5)
+                .circuitMeta(1)
                 .output(dust, Salt, 2)
                 .fluidOutputs(Oxygen.getFluid(3000))
                 .duration(100)
@@ -335,6 +336,7 @@ public class PlatinumGroupProcessing {
                 .input(dust, RarestMetalMixture, 12)
                 .input(dust,SodiumChlorate,10)
                 .fluidInputs(Oxygen.getFluid(1000))
+                .circuitMeta(2)
                 .output(dust, IridiumMetalResidue, 5)
                 .output(dust, OsmiumTetroxide, 5)
                 .output(dust, Salt, 4)

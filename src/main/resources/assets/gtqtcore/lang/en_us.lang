@@ -6701,6 +6701,16 @@ gui.parallel_first_mode=Parallel Mode
 # Advancements
 gtqtcore.advancement.lv.1_electrobath.name=Industrial electrolyzers
 gtqtcore.advancement.lv.1_electrobath.desc=Who needs an electrolyzer。
+##矿脉
+gtqtcore.veins.ore.gabbro_sphere=Gabbro Sphere
+gtqtcore.veins.ore.gneiss_sphere=Gneiss Sphere
+gtqtcore.veins.ore.limestone_sphere=Limestone Sphere
+gtqtcore.veins.ore.phyllite_sphere=Phyllite Sphere
+gtqtcore.veins.ore.quartzite_sphere=Quartzite Sphere
+gtqtcore.veins.ore.shale_sphere=Shale Sphere
+gtqtcore.veins.ore.slate_sphere=Slate Sphere
+gtqtcore.veins.ore.soapstoneo_sphere=Soapstone Sphere
+gtqtcore.veins.ore.kimberlite_sphere=Kimberlite Sphere
 ## Chat Calculator Descriptions
 gtqtcore.chat_calculator.help.1=§aUse mathematical expressions in the chat bar!§7 Use §b=§7 as a starting symbol to use this feature
 gtqtcore.chat_calculator.help.2=§7 §b+§7 and §b-§7: Add and subtract, or simply change their signs.
