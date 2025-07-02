@@ -70,20 +70,24 @@ public class HigherDegreeMaterials {
                 .components(Carbon, 1)
                 .build();
 
-        // 深红银矿
-        GTQTMaterials.Pyrargyrite = new Material.Builder(getMaterialsId(), gtqtcoreId("pyrargyrite"))
-                .ore(true)
-                .dust().fluid()
-                .color(0x8B4726)
-                .components(Silver, 3, Antimony, 1, Sulfur, 3)
+        //富铼辉钼矿 Rhenium-rich Molybdenite Ore
+        GTQTMaterials.RheniumMolybdenite = new Material.Builder(getMaterialsId(), gtqtcoreId("rhenium_molybdenite"))
+                .ore(true).dust().fluid()
+                .color(0x5A5A8C)
+                .iconSet(SHINY)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Molybdenite, 1, Rhenium, 1)
                 .build();
-        // 锌锑方辉银矿
-        GTQTMaterials.Zincantimonygalvanite = new Material.Builder(getMaterialsId(), gtqtcoreId("zincantimonygalvanite"))
-                .ore(true)
-                .dust().fluid()
-                .color(0x8B2252)
-                .components(Silver, 2, Zinc, 1, Sulfur, 2, Oxygen, 1)
+
+        //磷钇矿 Xenotime Ore)
+        GTQTMaterials.Xenotime = new Material.Builder(getMaterialsId(), gtqtcoreId("xenotime"))
+                .ore(true).dust().fluid()
+                .color(0xC2B280)
+                .iconSet(SAND)
+                .flags(DISABLE_DECOMPOSITION)
+                .components(Yttrium, 1, Phosphorus, 1, Oxygen, 4)
                 .build();
+
         //铬铅矿
         GTQTMaterials.Crocoite = new Material.Builder(getMaterialsId(), gtqtcoreId("crocoite"))
                 .ore(true)

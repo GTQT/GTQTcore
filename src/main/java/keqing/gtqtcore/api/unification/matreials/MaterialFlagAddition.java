@@ -45,15 +45,15 @@ public class MaterialFlagAddition {
         oreProp.setWashedIn(Mercury);
         oreProp.setDirectSmeltResult(Gold);
 
-        oreProp = Pyrargyrite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Copper, Iron, Antimony);
-        oreProp.setWashedIn(SodiumPersulfate);
-        oreProp.setDirectSmeltResult(Silver);
+        oreProp = RheniumMolybdenite.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Molybdenum, Rhenium, Sulfur);
+        oreProp.setWashedIn(Water);
+        oreProp.setDirectSmeltResult(RheniumMolybdenite);
 
-        oreProp = Zincantimonygalvanite.getProperty(PropertyKey.ORE);
-        oreProp.setOreByProducts(Zinc, Sulfur, Tin);
-        oreProp.setWashedIn(SodiumPersulfate);
-        oreProp.setDirectSmeltResult(Silver);
+        oreProp = Xenotime.getProperty(PropertyKey.ORE);
+        oreProp.setOreByProducts(Yttrium, Phosphate, RareEarth);
+        oreProp.setWashedIn(Mercury);
+        oreProp.setDirectSmeltResult(Xenotime);
 
         oreProp = Crocoite.getProperty(PropertyKey.ORE);
         oreProp.setOreByProducts(Lead, Chromite, Silver);

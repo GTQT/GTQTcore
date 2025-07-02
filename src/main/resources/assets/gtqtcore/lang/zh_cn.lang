@@ -4237,9 +4237,9 @@ item.material.oreprefix.oreKimberlite=金伯利岩%s矿石
 gtqtcore.material.amblygonite=磷铝锂石
 gtqtcore.material.cryolite=冰晶石
 gtqtcore.material.crocoite=铬铅矿
-gtqtcore.material.zincantimonygalvanite=锌锑方辉银矿
-gtqtcore.material.pyrargyrite=深红银矿
 gtqtcore.material.lignite=褐煤
+gtqtcore.material.rhenium_molybdenite=富铼辉钼矿
+gtqtcore.material.xenotime=磷钇矿
 gtqtcore.material.rich_gold_sulphide=含金多金属矿石
 gtqtcore.material.lean_gold_sulphide=贫硫化金矿石
 
@@ -6688,6 +6688,10 @@ gtqtcore.veins.ore.shale_sphere=页岩岩球
 gtqtcore.veins.ore.slate_sphere=板岩岩球
 gtqtcore.veins.ore.soapstoneo_sphere=皂石岩球
 gtqtcore.veins.ore.kimberlite_sphere=金伯利球
+
+gtqtcore.veins.ore.lignite=褐煤矿脉
+gtqtcore.veins.ore.cryolite=冰晶石矿脉
+gtqtcore.veins.ore.gashydrate=可燃冰矿脉
 ##  Chat Calculator Descriptions
 gtqtcore.chat_calculator.help.1=§a在聊天栏中使用数学表达式！§7使用§b=§7作为起始符号以使用该功能
 gtqtcore.chat_calculator.help.2=§7  §b+§7 与 §b-§7：加与减，亦或者单纯改变其符号。

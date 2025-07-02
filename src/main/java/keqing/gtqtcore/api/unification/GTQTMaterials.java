@@ -157,11 +157,11 @@ public class GTQTMaterials {
     public static Material RedMud;
     public static Material LeanGoldSulphide;
     public static Material RichGoldSulphide;
-    public static Material Pyrargyrite;
-    public static Material Zincantimonygalvanite;
     public static Material Crocoite;
     public static Material Cryolite;
     public static Material Lignite;
+    public static Material RheniumMolybdenite;
+    public static Material Xenotime;
     public static Material Amblygonite;
     public static Material PreTreatedCrudeOilContainingImpurities;
     public static Material Demulsifier;
