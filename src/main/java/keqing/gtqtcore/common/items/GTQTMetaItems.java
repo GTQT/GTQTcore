@@ -231,7 +231,6 @@ public class GTQTMetaItems {
     public static MetaItem<?>.MetaValueItem BRONZE_CROP;
     public static MetaItem<?>.MetaValueItem CARBON_CROP;
     public static MetaItem<?>.MetaValueItem GOLD_CROP;
-    public static MetaItem<?>.MetaValueItem PROSPECTOR_UV;
     public static MetaItem<?>.MetaValueItem COSMIC_CAPACITOR;
     public static MetaItem<?>.MetaValueItem COSMIC_DIODE;
     public static MetaItem<?>.MetaValueItem COSMIC_RESISTOR;

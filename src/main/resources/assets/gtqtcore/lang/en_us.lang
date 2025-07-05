@@ -4869,8 +4869,6 @@ tile.multiblock_casing7.gravity_stabilization_casing.name=Gravity Stabilization 
 tile.multiblock_casing7.protomatter_activation_coil.name=Protomatter Activation Coil
 tile.multiblock_casing7.antimatter_annihilation_matrix.name=Antimatter Annihilation Matrix
 
-metaitem.prospector.uv.name=Electric Prospecting Scanner (UV)
-metaitem.prospector.uiv.name=Electric Prospecting Scanner (UIV)
 gtqtcore.machine.mining_drill.name=Large Mining Drill
 recipemap.mining_drill.name=Mining Drill
 

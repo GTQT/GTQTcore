@@ -412,10 +412,6 @@ public class GTQTMetaItem1 extends StandardMetaItem {
         WRAP_CIRCUIT_OpV = this.addItem(413, "wrap.circuit.opv").setCreativeTabs(GTQTCore_TAB);
         WRAP_CIRCUIT_MAX = this.addItem(414, "wrap.circuit.max").setCreativeTabs(GTQTCore_TAB);
 
-        PROSPECTOR_UV = addItem(415, "prospector.uv").addComponents(ElectricStats.createElectricItem(16_000_000_000L, GTValues.UV), new ProspectorScannerBehavior(7, GTValues.UV)).setMaxStackSize(1).setCreativeTabs(GTQTCore_TO);
-
-        PROSPECTOR_UV = addItem(416, "prospector.uiv").addComponents(ElectricStats.createElectricItem(256_000_000_000L, GTValues.UIV), new ProspectorScannerBehavior(9, GTValues.UIV)).setMaxStackSize(1).setCreativeTabs(GTQTCore_TO);
-
         POS_BINDING_CARD = this.addItem(417, "pos_binding_card").setMaxStackSize(1).addComponents(new PosBindingCardBehaviors()).setCreativeTabs(GTQTCore_TAB);
 
         DEBUG_STRUCTURE_WRITER = this.addItem(418, "debug.structure_writer")

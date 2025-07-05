@@ -4849,8 +4849,6 @@ tile.multiblock_casing7.gravity_stabilization_casing.name=超重力量子锚定�
 tile.multiblock_casing7.protomatter_activation_coil.name=超活性源能共振线圈
 tile.multiblock_casing7.antimatter_annihilation_matrix.name=湮灭核心矩阵
 
-metaitem.prospector.uv.name=电动勘探扫描仪（UV）
-metaitem.prospector.uiv.name=电动勘探扫描仪（UIV）
 gtqtcore.machine.mining_drill.name=大型采矿钻机
 recipemap.mining_drill.name=矿机钻井
 
