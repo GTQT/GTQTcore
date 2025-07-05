@@ -56,13 +56,8 @@ import static keqing.gtqtcore.common.block.blocks.BlockIsaCasing.CasingType.SEPA
 
 public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController implements ProgressBarMultiblock {
 
-    int updatetime = 1;
     int[] steam = new int[3];
-    FluidStack STEAM = Steam.getFluid(1000 * updatetime);
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+    FluidStack STEAM = Steam.getFluid(1000);
     public MetaTileEntityGravitySeparator(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId, new RecipeMap[]{
                 GRAVITY_SEPARATOR_RECIPES,
@@ -78,30 +73,6 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
     @Override
     public boolean canBeDistinct() {
         return true;
-    }
-
-    @Override
-    @Nonnull
-    protected Widget getFlexButton(int x, int y, int width, int height) {
-        WidgetGroup group = new WidgetGroup(x, y, width, height);
-        group.addWidget(new ClickButtonWidget(0, 0, 9, 9, "", this::decrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_MINUS)
-                .setTooltipText("increment"));
-        group.addWidget(new ClickButtonWidget(9, 0, 9, 9, "", this::incrementThreshold)
-                .setButtonTexture(GuiTextures.BUTTON_THROTTLE_PLUS)
-                .setTooltipText("decrement"));
-        group.addWidget(
-                (new ImageCycleButtonWidget(0, 9, 18, 9, GuiTextures.BUTTON_MULTI_MAP, this.getAvailableRecipeMaps().length, this::getRecipeMapIndex, this::setRecipeMapIndex)).shouldUseBaseBackground().singleTexture().setTooltipHoverString((i) -> LocalizationUtils.format("gregtech.multiblock.multiple_recipemaps.header") + " " + LocalizationUtils.format("recipemap." + this.getAvailableRecipeMaps()[i].getUnlocalizedName() + ".name"))
-        );
-        return group;
-    }
-
-    private void incrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime + 1, 1, 20);
-    }
-
-    private void decrementThreshold(Widget.ClickData clickData) {
-        this.updatetime = MathHelper.clamp(updatetime - 1, 1, 20);
     }
 
     @Override
@@ -137,7 +108,7 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 800 * updatetime;
+                steam[0] = steam[0] + 1000;
 
             }
         }
@@ -170,7 +141,6 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
         data.setInteger("fluid1", steam[0]);
         data.setInteger("fluid2", steam[1]);
         data.setInteger("fluid3", steam[2]);
-        data.setInteger("updatetime", updatetime);
         return super.writeToNBT(data);
     }
 
@@ -180,7 +150,6 @@ public class MetaTileEntityGravitySeparator extends MultiMapMultiblockController
         steam[0] = data.getInteger("fluid1");
         steam[1] = data.getInteger("fluid2");
         steam[2] = data.getInteger("fluid3");
-        updatetime = data.getInteger("updatetime");
     }
 
     public boolean getStatue() {

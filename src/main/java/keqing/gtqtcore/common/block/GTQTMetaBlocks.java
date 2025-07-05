@@ -54,6 +54,7 @@ public class GTQTMetaBlocks {
     public static BlockPCBFactoryCasing blockPCBFactoryCasing;
     public static BlockParticleAcceleratorCasing blockParticleAcceleratorCasing;
     public static BlockQuantumCasing blockQuantumCasing;
+    public static BlockNicollDysonCasing blockNicollDysonCasing;
     public static BlockQuantumForceTransformerCasing blockQuantumForceTransformerCasing;
     public static BlockStepperCasing blockStepperCasing;
     public static BlockTransparentCasing blockTransparentCasing;
@@ -163,6 +164,9 @@ public class GTQTMetaBlocks {
         blockQuantumCasing = new BlockQuantumCasing();
         blockQuantumCasing.setRegistryName("quantum_casing");
 
+        blockNicollDysonCasing= new BlockNicollDysonCasing();
+        blockNicollDysonCasing.setRegistryName("nicoll_dyson_casing");
+
         blockQuantumForceTransformerCasing = new BlockQuantumForceTransformerCasing();
         blockQuantumForceTransformerCasing.setRegistryName("quantum_force_transformer_casing");
 
@@ -233,6 +237,7 @@ public class GTQTMetaBlocks {
         registerItemModel(blockPCBFactoryCasing);
         registerItemModel(blockParticleAcceleratorCasing);
         registerItemModel(blockQuantumCasing);
+        registerItemModel(blockNicollDysonCasing);
         registerItemModel(blockQuantumForceTransformerCasing);
         registerItemModel(blockStepperCasing);
         registerItemModel(blockTransparentCasing);

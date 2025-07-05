@@ -270,7 +270,7 @@ public class GTQTMetaTileEntities {
     public static MetaTileHighEnergyLaserHatch[] LASER_INPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileHighEnergyLaserHatch[] LASER_OUTPUT = new MetaTileHighEnergyLaserHatch[GTValues.V.length - 1];
     public static MetaTileEntityMSF MSF;
-    //public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
+    public static MetaTileEntityNicollDysonBeamer NICOLL_DYSON_BEAMER;
     public static MetaTileEntityEyeOfHarmony EOH;
     public static MetaTileEntityLargeBiomassGenerator LARGE_BIOMASS_GENERATOR;
     public static MetaTileEntityFluidRubbishBin FLUID_RUBBISH_BIN;
@@ -431,8 +431,12 @@ public class GTQTMetaTileEntities {
         MEGA_FUEL_CELL_TURBINE = registerMetaTileEntity(68, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_turbine.fuel_cell"), FUEL_CELL, 5, GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_MACHINE_CASING), GTQTMetaBlocks.blockMultiblockCasing3.getState(NITINOL_GEARBOX), GTQTTextures.NITINOL_CASING, true, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
         //超临界涡轮
-        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(70, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("high_pressure_steam_turbine"), false));
-        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(71, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("supercritical_steam_turbine"), true));
+        HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(70, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("high_pressure_steam_turbine"), false, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING),
+                MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX),
+                Textures.STABLE_TITANIUM_CASING, false, Textures.LARGE_STEAM_TURBINE_OVERLAY));
+        SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(71, new MetaTileEntityCombinedSteamTurbine(gtqtcoreId("supercritical_steam_turbine"), true, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250),
+                MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX),
+                GTQTTextures.MaragingSteel250, false, Textures.LARGE_STEAM_TURBINE_OVERLAY));
         MEGA_HIGH_PRESSURE_STEAM_TURBINE = registerMetaTileEntity(72, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_high_pressure_steam_turbine"), GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES, EV, MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX), Textures.STABLE_TITANIUM_CASING, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
         MEGA_SUPERCRITICAL_STEAM_TURBINE = registerMetaTileEntity(73, new MetaTileEntityMegaTurbine(gtqtcoreId("mega_supercritical_steam_turbine"), GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES, LuV, GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250), MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX), GTQTTextures.MaragingSteel250, false, GTQTTextures.MEGA_TURBINE_OVERLAY));
 
@@ -638,8 +642,7 @@ public class GTQTMetaTileEntities {
 
         EOH = registerMetaTileEntity(603, new MetaTileEntityEyeOfHarmony(gtqtcoreId("eye_of_harmony")));
 
-        if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
-            //NICOLL_DYSON_BEAMER = registerMetaTileEntity(604, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
+        //NICOLL_DYSON_BEAMER = registerMetaTileEntity(604, new MetaTileEntityNicollDysonBeamer(gtqtcoreId("nicoll_dyson_beamer")));
         if (GTQTCoreConfig.MachineSwitch.EndGameSwitch)
             SUPRACHRONAL_NEUTRONIUM_FORGE = registerMetaTileEntity(605, new MetaTileEntitySuprachronalNeutroniumForge(gtqtcoreId("suprachronal_neutronium_forge")));
 

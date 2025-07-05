@@ -89,7 +89,7 @@ public class MetaTileEntitySMSF extends MultiMapMultiblockController implements 
             IMultipleTankHandler inputTank = getInputFluidInventory();
             if (STEAM.isFluidStackIdentical(inputTank.drain(STEAM, false))) {
                 inputTank.drain(STEAM, true);
-                steam[0] = steam[0] + 360 * coilLevel;
+                steam[0] = steam[0] + 2000 * coilLevel;
 
             }
         }

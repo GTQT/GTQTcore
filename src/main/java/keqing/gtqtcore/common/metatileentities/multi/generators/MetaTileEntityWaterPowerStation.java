@@ -13,10 +13,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -35,6 +39,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -47,6 +52,7 @@ import java.util.Random;
 
 import static gregtech.api.unification.material.Materials.Lubricant;
 import static gregtech.api.util.RelativeDirection.*;
+import static keqing.gtqtcore.api.unification.GTQTMaterials.Pyrotheum;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockCasing4.TurbineCasingType.PD_TURBINE_CASING;
 
 //水电站
@@ -85,8 +91,19 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         return this.inputFluidInventory;
     }
     @Override
-    public boolean usesMui2() {
-        return false;
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.addCustom(this::addCustomCapacity);
+    }
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+        if (getInputFluidInventory() != null) {
+            FluidStack fluidStack = getInputFluidInventory().drain(Pyrotheum.getFluid(Integer.MAX_VALUE), false);
+            int liquidOxygenAmount = syncer.syncInt(fluidStack == null ? 0 : fluidStack.amount);
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gtqtcore.multiblock.vc.amount", syncer.syncString(TextFormattingUtil.formatNumbers((liquidOxygenAmount)))));
+        }
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.wps.count", syncer.syncInt(number), syncer.syncInt(coilLevel)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.wps.checkwater", syncer.syncInt(water), syncer.syncInt((number * 2 + 1) * (number * 2 + 1) * 4)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.wps.output1", syncer.syncLong(outputEu)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gtqtcore.wps.output2", syncer.syncLong(getEuOutput())));
     }
     @Override
     protected void addDisplayText(List<ITextComponent> textList) {
@@ -104,16 +121,22 @@ public class MetaTileEntityWaterPowerStation extends MultiblockWithDisplayBase {
         textList.add(new TextComponentTranslation("======================="));
     }
 
+
+
     @Override
-    protected void addWarningText(List<ITextComponent> textList) {
-        super.addWarningText(textList);
-        if (getInputFluidInventory() != null) {
-            FluidStack LubricantStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
-            int liquidOxygenAmount = LubricantStack == null ? 0 : LubricantStack.amount;
-            if (liquidOxygenAmount == 0)
-                textList.add(new TextComponentTranslation("缺少润滑！！"));
-        }
+    protected void configureWarningText(MultiblockUIBuilder builder) {
+        super.configureWarningText(builder);
+        builder.addCustom((manager, syncer) -> {
+            if (isStructureFormed() && getInputFluidInventory() != null) {
+                FluidStack fluidStack = getInputFluidInventory().drain(Lubricant.getFluid(Integer.MAX_VALUE), false);
+                int liquidOxygenAmount = syncer.syncInt(fluidStack == null ? 0 : fluidStack.amount);
+                if (syncer.syncInt(liquidOxygenAmount) == 0) {
+                    manager.add(KeyUtil.lang(TextFormatting.RED, "润滑不足！"));
+                }
+            }
+        });
     }
+
 
     @Override
     protected void updateFormedValid() {

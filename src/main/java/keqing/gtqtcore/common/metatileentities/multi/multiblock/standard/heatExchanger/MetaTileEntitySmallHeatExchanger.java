@@ -68,11 +68,6 @@ public class MetaTileEntitySmallHeatExchanger extends NoEnergyMultiblockControll
     }
 
     @Override
-    public boolean usesMui2() {
-        return false;
-    }
-
-    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity iGregTechTileEntity) {
         return new MetaTileEntitySmallHeatExchanger(metaTileEntityId);
     }

@@ -20,11 +20,15 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.util.GTTransferUtils;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.utils.TooltipHelper;
 import keqing.gtqtcore.api.capability.impl.FishPondLogic;
@@ -42,8 +46,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -60,15 +62,10 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBase implements IWorkable, IDataInfoProvider {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
     private final FishPondLogic logic;
     protected IMultipleTankHandler inputFluidInventory;
     protected IItemHandler outputItemInventory;
     private IEnergyContainer energyContainer;
-
     public MetaTileEntityIndustrialFishingPond(ResourceLocation metaTileEntityId) {
         super(metaTileEntityId);
         this.logic = new FishPondLogic(this, GTValues.IV);
@@ -277,43 +274,50 @@ public class MetaTileEntityIndustrialFishingPond extends MultiblockWithDisplayBa
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (!isStructureFormed())
-            return;
-
-        if (energyContainer != null && energyContainer.getEnergyCapacity() > 0) {
-            int energyContainer = getEnergyTier();
-            long maxVoltage = GTValues.V[energyContainer];
-            String voltageName = GTValues.VNF[energyContainer];
-            textList.add(new TextComponentTranslation("gregtech.multiblock.max_energy_per_tick", maxVoltage, voltageName));
-        }
-
-        if (!logic.isWorkingEnabled()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.work_paused"));
-
-        } else if (logic.isActive()) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.running"));
-            int currentProgress = (int) (logic.getProgressPercent() * 100);
-            textList.add(new TextComponentTranslation("gregtech.multiblock.progress", currentProgress));
-        } else {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.idling"));
-        }
-
-        if (logic.getMode() == 1)
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.industrial_fisher.mode1"));
-        else if (logic.getMode() == 2)
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.industrial_fisher.mode2"));
-        else
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.industrial_fisher.mode0"));
-
-        if (!drainEnergy(true)) {
-            textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle(new Style().setColor(TextFormatting.RED)));
-        }
-
-        if (logic.isInventoryFull())
-            textList.add(new TextComponentTranslation("gtqtcore.multiblock.industrial_fisher.inv_full").setStyle(new Style().setColor(TextFormatting.RED)));
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.addCustom(this::addCustomCapacity);
     }
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
+        // 能量信息
+        if (energyContainer != null && energyContainer.getEnergyCapacity() > 0) {
+            int energyTier = getEnergyTier();
+            long maxVoltage = GTValues.V[energyTier];
+            String voltageName = GTValues.VNF[energyTier];
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.max_energy_per_tick",
+                    syncer.syncLong(maxVoltage), syncer.syncString(voltageName)));
+        }
+
+        // 工作状态
+        if (!logic.isWorkingEnabled()) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.work_paused"));
+        } else if (logic.isActive()) {
+            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gregtech.multiblock.running"));
+            int currentProgress = (int) (logic.getProgressPercent() * 100);
+            keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "gregtech.multiblock.progress",
+                    syncer.syncInt(currentProgress)));
+        } else {
+            keyManager.add(KeyUtil.lang(TextFormatting.GRAY, "gregtech.multiblock.idling"));
+        }
+
+        // 模式显示
+        if (logic.getMode() == 1) {
+            keyManager.add(KeyUtil.lang(TextFormatting.BLUE, "gtqtcore.multiblock.industrial_fisher.mode1"));
+        } else if (logic.getMode() == 2) {
+            keyManager.add(KeyUtil.lang(TextFormatting.BLUE, "gtqtcore.multiblock.industrial_fisher.mode2"));
+        } else {
+            keyManager.add(KeyUtil.lang(TextFormatting.BLUE, "gtqtcore.multiblock.industrial_fisher.mode0"));
+        }
+
+        // 警告信息
+        if (!drainEnergy(true)) {
+            keyManager.add(KeyUtil.lang(TextFormatting.RED, "gregtech.multiblock.not_enough_energy"));
+        }
+
+        if (logic.isInventoryFull()) {
+            keyManager.add(KeyUtil.lang(TextFormatting.RED, "gtqtcore.multiblock.industrial_fisher.inv_full"));
+        }
+    }
+
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing side) {

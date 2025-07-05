@@ -44,8 +44,8 @@ public class TitleUtils {
 
 
     private static String getMode() {
-        if(ConfigHolder.expertMode.expertModeEnable)return "难度模式：专家";
-        if(ConfigHolder.easyMode.easyModeEnable)return "难度模式：简单";
+        //if(ConfigHolder.expertMode.expertModeEnable)return "难度模式：专家";
+        //if(ConfigHolder.easyMode.easyModeEnable)return "难度模式：简单";
         return "难度模式：标准";
     }
 }

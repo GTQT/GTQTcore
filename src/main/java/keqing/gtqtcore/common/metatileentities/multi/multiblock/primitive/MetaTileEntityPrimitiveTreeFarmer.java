@@ -10,10 +10,14 @@ import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.MultiblockWithDisplayBase;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.PatternMatchContext;
 import gregtech.api.unification.material.Materials;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.RelativeDirection;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
@@ -34,6 +38,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -80,16 +85,14 @@ public class MetaTileEntityPrimitiveTreeFarmer extends MultiblockWithDisplayBase
         work = data.getBoolean("work");
     }
     @Override
-    public boolean usesMui2() {
-        return false;
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.addCustom(this::addCustomCapacity);
     }
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
 
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        textList.add(new TextComponentTranslation("生成耗时：%s / %s", time, saplingsIn * 200));
-        textList.add(new TextComponentTranslation("输出原木：%s / 树苗：%s", saplingsIn, saplingsIn * 2));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "生成耗时：%s / %s", syncer.syncInt(time), syncer.syncInt(saplingsIn * 200)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "输出原木：%s / 树苗：%s", syncer.syncInt(saplingsIn), syncer.syncInt(saplingsIn*2)));
     }
-
 
     @Override
     protected void updateFormedValid() {

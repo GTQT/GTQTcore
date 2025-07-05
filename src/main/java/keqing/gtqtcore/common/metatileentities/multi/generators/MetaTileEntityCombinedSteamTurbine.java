@@ -12,6 +12,7 @@ import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.common.blocks.BlockTurbineCasing;
 import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.metatileentities.multi.electric.generator.MetaTileEntityLargeTurbine;
 import keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility;
 import keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps;
 import keqing.gtqtcore.client.textures.GTQTTextures;
@@ -30,60 +31,17 @@ public class MetaTileEntityCombinedSteamTurbine extends MetaTileEntityLargeTurbi
 
     private final boolean isSupercritical;
 
-    public MetaTileEntityCombinedSteamTurbine(ResourceLocation metaTileEntityId, boolean isSupercritical) {
+    public MetaTileEntityCombinedSteamTurbine(ResourceLocation metaTileEntityId, boolean isSupercritical,IBlockState casingState, IBlockState gearboxState, ICubeRenderer casingRenderer,
+                                              boolean hasMufflerHatch, ICubeRenderer frontOverlay) {
         super(metaTileEntityId,
               isSupercritical ? GTQTcoreRecipeMaps.SUPERCRITICAL_STEAM_TURBINE_RECIPES : GTQTcoreRecipeMaps.HIGH_PRESSURE_STEAM_TURBINE_RECIPES,
-              isSupercritical ? LuV : EV);
+              isSupercritical ? LuV : EV,casingState, gearboxState, casingRenderer, hasMufflerHatch, frontOverlay);
         this.isSupercritical = isSupercritical;
     }
 
     @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
-        return new MetaTileEntityCombinedSteamTurbine(metaTileEntityId, isSupercritical);
-    }
-
-    @Override
-    protected BlockPattern createStructurePattern() {
-        return FactoryBlockPattern.start()
-                .aisle("CCCC", "CHHC", "CCCC")
-                .aisle("CHHC", "RGGR", "CHHC")
-                .aisle("CCCC", "CSHC", "CCCC")
-                .where('S', selfPredicate())
-                .where('C', states(getCasingState()))
-                .where('G', states(getSecondCasingState()))
-                .where('R', metaTileEntities(MultiblockAbility.REGISTRY.get(GTQTMultiblockAbility.REINFORCED_ROTOR_HOLDER_ABILITY).stream()
-                        .filter(mte -> (mte instanceof ITieredMetaTileEntity) && (((ITieredMetaTileEntity) mte).getTier() >= tier))
-                        .toArray(MetaTileEntity[]::new))
-                        .addTooltips("gregtech.multiblock.pattern.clear_amount_3")
-                        .addTooltip("gregtech.multiblock.pattern.error.limited.1", GTValues.VN[tier])
-                        .setExactLimit(1)
-                        .or(abilities(MultiblockAbility.OUTPUT_ENERGY)).setExactLimit(1))
-                .where('H', states(getCasingState())
-                        .or(autoAbilities(false, true, false, false, true, true, true)))
-                .build();
-    }
-
-    private IBlockState getCasingState() {
-        return isSupercritical ?
-               GTQTMetaBlocks.blockMultiblockCasing1.getState(BlockMultiblockCasing1.CasingType.MaragingSteel250) :
-               MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_TURBINE_CASING);
-    }
-
-    private IBlockState getSecondCasingState() {
-        return isSupercritical ?
-               MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TUNGSTENSTEEL_GEARBOX) :
-               MetaBlocks.TURBINE_CASING.getState(BlockTurbineCasing.TurbineCasingType.TITANIUM_GEARBOX);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public ICubeRenderer getBaseTexture(IMultiblockPart iMultiblockPart) {
-        return isSupercritical ? GTQTTextures.MaragingSteel250 : Textures.STABLE_TITANIUM_CASING;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected ICubeRenderer getFrontOverlay() {
-        return Textures.LARGE_STEAM_TURBINE_OVERLAY;
+        return new MetaTileEntityCombinedSteamTurbine(metaTileEntityId, isSupercritical,casingState, gearboxState,
+                casingRenderer, hasMufflerHatch, frontOverlay);
     }
 }

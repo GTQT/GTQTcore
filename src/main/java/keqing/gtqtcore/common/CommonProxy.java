@@ -200,6 +200,7 @@ public class CommonProxy {
         registry.register(GTQTMetaBlocks.blockPCBFactoryCasing);
         registry.register(GTQTMetaBlocks.blockParticleAcceleratorCasing);
         registry.register(GTQTMetaBlocks.blockQuantumCasing);
+        registry.register(GTQTMetaBlocks.blockNicollDysonCasing);
         registry.register(GTQTMetaBlocks.blockQuantumForceTransformerCasing);
         registry.register(GTQTMetaBlocks.blockStepperCasing);
         registry.register(GTQTMetaBlocks.blockTransparentCasing);
@@ -272,6 +273,7 @@ public class CommonProxy {
         registry.register(createItemBlock(GTQTMetaBlocks.blockPCBFactoryCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockParticleAcceleratorCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockQuantumCasing, VariantItemBlock::new));
+        registry.register(createItemBlock(GTQTMetaBlocks.blockNicollDysonCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockQuantumForceTransformerCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockStepperCasing, VariantItemBlock::new));
         registry.register(createItemBlock(GTQTMetaBlocks.blockTransparentCasing, VariantItemBlock::new));

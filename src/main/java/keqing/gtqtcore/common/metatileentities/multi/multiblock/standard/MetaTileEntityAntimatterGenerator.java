@@ -1,5 +1,8 @@
 package keqing.gtqtcore.common.metatileentities.multi.multiblock.standard;
 
+import com.cleanroommc.modularui.api.drawable.IKey;
+import com.cleanroommc.modularui.value.sync.IntSyncValue;
+import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IEnergyContainer;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -9,16 +12,20 @@ import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
-import gregtech.api.metatileentity.multiblock.IMultiblockPart;
-import gregtech.api.metatileentity.multiblock.IProgressBarMultiblock;
-import gregtech.api.metatileentity.multiblock.MultiblockAbility;
-import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
+import gregtech.api.metatileentity.multiblock.*;
+import gregtech.api.metatileentity.multiblock.ui.KeyManager;
+import gregtech.api.metatileentity.multiblock.ui.MultiblockUIBuilder;
+import gregtech.api.metatileentity.multiblock.ui.TemplateBarBuilder;
+import gregtech.api.metatileentity.multiblock.ui.UISyncer;
+import gregtech.api.mui.GTGuiTextures;
 import gregtech.api.pattern.BlockPattern;
 import gregtech.api.pattern.FactoryBlockPattern;
 import gregtech.api.pattern.TraceabilityPredicate;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.KeyUtil;
 import gregtech.api.util.TextComponentUtil;
+import gregtech.api.util.TextFormattingUtil;
 import gregtech.client.renderer.ICubeRenderer;
 import gregtech.client.renderer.texture.Textures;
 import gregtech.client.utils.TooltipHelper;
@@ -47,6 +54,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import static gregtech.api.GTValues.*;
 import static gregtech.api.GTValues.VN;
@@ -55,11 +63,7 @@ import static keqing.gtqtcore.GTQTCoreConfig.MachineSwitch;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.ANTIMATTER_GENERATOR;
 import static keqing.gtqtcore.common.block.blocks.BlockMultiblockGlass.CasingType.ANTIMATTER_CONTAINMENT_CASING;
 
-public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockController implements IProgressBarMultiblock {
-    @Override
-    public boolean usesMui2() {
-        return false;
-    }
+public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockController implements ProgressBarMultiblock {
     private static final FluidStack HydrogenStack = Materials.Hydrogen.getPlasma(100);
     private static final FluidStack HeliumStack = Materials.Helium.getPlasma(100);
     private static final FluidStack NitrogenStack = Materials.Nitrogen.getPlasma(100);
@@ -215,18 +219,17 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     }
 
     @Override
-    protected void addDisplayText(List<ITextComponent> textList) {
-        super.addDisplayText(textList);
-        if (isStructureFormed()) {
-            textList.add(new TextComponentTranslation("正在湮灭: %s %s", getParticleHatch(0).getParticle().getDisplayName(), getParticleHatch(1).getParticle().getDisplayName()));
-            textList.add(new TextComponentString("湮灭能量: " + euBase + " " + VN[GTUtility.getTierByVoltage((long) euBase)]));
-            textList.add(new TextComponentTranslation("湮灭倍率: %s 倍", euBooster));
-            textList.add(new TextComponentString("总产生能量: " + euBase * euBooster + " " + VN[GTUtility.getTierByVoltage((long) (euBase * euBooster))]));
-
-            textList.add(new TextComponentTranslation("反应温度 : %s K/200000 K", heat));
-        }
+    protected void configureDisplayText(MultiblockUIBuilder builder) {
+        builder.addCustom(this::addCustomCapacity);
     }
+    private void addCustomCapacity(KeyManager keyManager, UISyncer syncer) {
 
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "正在湮灭: %s %s",syncer.syncString(getParticleHatch(0).getParticle().getDisplayName()), syncer.syncString(getParticleHatch(1).getParticle().getDisplayName())));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "湮灭能量: %s %s",syncer.syncString(TextFormattingUtil.formatNumbers(euBase)), syncer.syncString(VN[GTUtility.getTierByVoltage((long) euBase)])));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "湮灭倍率: %s 倍", syncer.syncDouble(euBooster)));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "总产生能量: %s %s",syncer.syncString(TextFormattingUtil.formatNumbers(euBase * euBooster)), syncer.syncString(VN[GTUtility.getTierByVoltage((long) (euBase * euBooster))])));
+        keyManager.add(KeyUtil.lang(TextFormatting.GREEN, "反应温度 : %s K/200000 K", syncer.syncInt(heat)));
+    }
     @Override
     protected void initializeAbilities() {
         super.initializeAbilities();
@@ -337,30 +340,28 @@ public class MetaTileEntityAntimatterGenerator extends RecipeMapMultiblockContro
     }
 
     @Override
-    public int getNumProgressBars() {
+    public int getProgressBarCount() {
         return 1;
     }
-
     @Override
-    public double getFillPercentage(int index) {
-        return (double) heat / 200000;
-    }
+    public void registerBars(List<UnaryOperator<TemplateBarBuilder>> bars, PanelSyncManager syncManager) {
 
-    @Override
-    public TextureArea getProgressBarTexture(int index) {
-        return GuiTextures.PROGRESS_BAR_HPCA_COMPUTATION;
-    }
+            IntSyncValue heat = new IntSyncValue(()->this.heat);
+            syncManager.syncValue("heat", heat);
 
-    @Override
-    public void addBarHoverText(List<ITextComponent> hoverList, int index) {
-        ITextComponent info = TextComponentUtil.stringWithColor(
-                getColor(),
-                heat + " / " + 200000 + " H");
+            bars.add(barTest -> barTest
+                    .texture(GTGuiTextures.PROGRESS_BAR_FUSION_HEAT)
+                    .tooltipBuilder(tooltip -> {
+                        IKey heatInfo = KeyUtil.string(TextFormatting.AQUA,
+                                "%s / %s  H",
+                                heat.getIntValue(), 200000);
+                        tooltip.add(KeyUtil.lang(
+                                "反应温度",
+                                heatInfo));
+                    })
+                    .progress(() -> heat.getIntValue() > 0 ?
+                            (double) (heat.getIntValue()) /200000 : 0));
 
-        hoverList.add(TextComponentUtil.translationWithColor(
-                TextFormatting.GRAY,
-                "反应温度：%s",
-                info));
     }
 
     private TextFormatting getColor() {

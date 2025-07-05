@@ -56,11 +56,6 @@ public class MetaTileEntityGeneratorArray extends FuelMultiblockController imple
     }
 
     @Override
-    public boolean usesMui2() {
-        return false;
-    }
-
-    @Override
     public MetaTileEntity createMetaTileEntity(IGregTechTileEntity tileEntity) {
         return new MetaTileEntityGeneratorArray(metaTileEntityId, tier);
     }

@@ -1,0 +1,31 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "variant": {
+      "singularity_reinforced_stellar_shielding_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/singularity_reinforced_stellar_shielding_casing"
+        }
+      },
+      "celestial_matter_guidance_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/celestial_matter_guidance_casing"
+        }
+      },
+      "boundless_gravitationally_severed_structure_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/boundless_gravitationally_severed_structure_casing"
+        }
+      },
+      "transcendentally_amplified_magnetic_confinement_casing": {
+        "model": "minecraft:cube_all",
+        "textures": {
+          "all": "gregtech:blocks/multiblock/quantumcasing/transcendentally_amplified_magnetic_confinement_casing"
+        }
+      }
+    }
+  }
+}
