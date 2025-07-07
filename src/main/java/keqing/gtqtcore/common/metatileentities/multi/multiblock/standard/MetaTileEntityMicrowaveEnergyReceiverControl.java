@@ -68,10 +68,10 @@ import static keqing.gtqtcore.api.gui.GTQTGuiTextures.PSS_POWER;
 import static keqing.gtqtcore.api.utils.GTQTUtil.rangeMetFormMte;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
-    @Override
+`    @Override
     public boolean usesMui2() {
         return false;
-    }
+    }`
     private final ItemStackHandler inputCardInventory;
     private final ItemStackHandler outputCardInventory;
     private final ItemStackHandler pssInventory;
