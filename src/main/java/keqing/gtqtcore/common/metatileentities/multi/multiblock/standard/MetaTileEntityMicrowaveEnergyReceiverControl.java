@@ -68,10 +68,6 @@ import static keqing.gtqtcore.api.gui.GTQTGuiTextures.PSS_POWER;
 import static keqing.gtqtcore.api.utils.GTQTUtil.rangeMetFormMte;
 
 public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntityBaseWithControl {
-`    @Override
-    public boolean usesMui2() {
-        return false;
-    }`
     private final ItemStackHandler inputCardInventory;
     private final ItemStackHandler outputCardInventory;
     private final ItemStackHandler pssInventory;
@@ -89,6 +85,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     int maxLength = 10;
     int[][] io = new int[64][5];
     int circuit;
+    int checkTime = 10;
 
     //分别为 启动？ 坐标（三位） 等级
     public MetaTileEntityMicrowaveEnergyReceiverControl(ResourceLocation metaTileEntityId) {
@@ -96,6 +93,11 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         this.inputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
         this.outputCardInventory = new NotifiableItemStackHandler(this, 1, null, false);
         this.pssInventory = new NotifiableItemStackHandler(this, 1, null, false);
+    }
+
+    @Override
+    public boolean usesMui2() {
+        return false;
     }
 
     @Override
@@ -138,7 +140,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("checkTime",checkTime);
+        data.setInteger("checkTime", checkTime);
         data.setTag("inputCardInventory", this.inputCardInventory.serializeNBT());
         data.setTag("outputCardInventory", this.outputCardInventory.serializeNBT());
         data.setTag("pssInventory", this.pssInventory.serializeNBT());
@@ -154,7 +156,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        checkTime=data.getInteger("checkTime");
+        checkTime = data.getInteger("checkTime");
         this.inputCardInventory.deserializeNBT(data.getCompoundTag("inputCardInventory"));
         this.outputCardInventory.deserializeNBT(data.getCompoundTag("outputCardInventory"));
         this.pssInventory.deserializeNBT(data.getCompoundTag("pssInventory"));
@@ -172,7 +174,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                 .setWorkingStatus(true, isActive() && isWorkingEnabled()) // transform into two-state system for display
                 .addCustom(tl -> {
                     if (isStructureFormed()) {
-                        if (pssModel&&PSSmte!=null) {
+                        if (pssModel && PSSmte != null) {
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "缓存电量：%s", PSSmte.getStoredLong()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "存储上限：%s", PSSmte.getCapacityLong()));
                             tl.add(TextComponentUtil.translationWithColor(TextFormatting.GREEN, "设备链接上限：%s 范围半径：%s", maxLength, range));
@@ -190,7 +192,6 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     }
                 });
     }
-
 
     protected void addDisplayText1(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -219,7 +220,6 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
             textList.add(new TextComponentTranslation("平均输出：%s", this.energyContainer.getOutputVoltage()));
         }
     }
-
 
     protected void addInfo1(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -264,7 +264,6 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     }
                 });
     }
-
 
     protected void addInfo5(List<ITextComponent> textList) {
         MultiblockDisplayText.builder(textList, isStructureFormed())
@@ -383,16 +382,16 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         builder.widget((new ProgressWidget(() -> getRate(2), 3, 150, 106, 3, GuiTextures.PROGRESS_BAR_MULTI_ENERGY_YELLOW, ProgressWidget.MoveType.HORIZONTAL)).setHoverTextConsumer((list) -> addBarHoverText(list, 2)));
 
         builder.widget(new SlotWidget(this.inputCardInventory, 0, 274, 160, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.IN_SLOT_OVERLAY)
+                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.IN_SLOT_OVERLAY)
                 .setChangeListener(this::markDirty)
                 .setTooltipText("请放入坐标卡(绑定设备)"));
 
         builder.widget(new SlotWidget(this.outputCardInventory, 0, 274, 178, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.OUT_SLOT_OVERLAY)
+                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.OUT_SLOT_OVERLAY)
                 .setChangeListener(this::markDirty));
 
         builder.widget(new SlotWidget(this.pssInventory, 0, 274, 196, true, true, true)
-                .setBackgroundTexture(GuiTextures.SLOT,GuiTextures.BATTERY_OVERLAY)
+                .setBackgroundTexture(GuiTextures.SLOT, GuiTextures.BATTERY_OVERLAY)
                 .setChangeListener(this::markDirty)
                 .setTooltipText("请放入坐标卡(蓄能变电站)"));
 
@@ -410,7 +409,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     public double getEnergy() {
-        if (pssModel && PSSmte != null) return (double) PSSmte.getStoredLong() /PSSmte.getCapacityLong();
+        if (pssModel && PSSmte != null) return (double) PSSmte.getStoredLong() / PSSmte.getCapacityLong();
         else return (double) euStore / maxStore();
     }
 
@@ -454,7 +453,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
                     y = compound.getInteger("y");
                     z = compound.getInteger("z");
 
-                    if (GTQTUtil.rangeMetFormMte(new BlockPos(x,y,z),getPos())<=range) {
+                    if (GTQTUtil.rangeMetFormMte(new BlockPos(x, y, z), getPos()) <= range) {
                         MetaTileEntity mte = GTUtility.getMetaTileEntity(this.getWorld(), new BlockPos(x, y, z));
                         if (mte instanceof MetaTileEntityPowerSubstation) {
                             PSSmte = (MetaTileEntityPowerSubstation) mte;
@@ -484,17 +483,13 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
         if (euStore < 0) euStore = 0;
         if (PSSmte == null) pssModel = false;
 
-        if (pssModel)
-        {
-            if (rangeMetFormMte(new BlockPos(pssPos[0], pssPos[1], pssPos[2]),getPos())<=range)
-            {
+        if (pssModel) {
+            if (rangeMetFormMte(new BlockPos(pssPos[0], pssPos[1], pssPos[2]), getPos()) <= range) {
                 pssModel = false;
                 PSSmte = null;
             }
             euStore = PSSmte.getStoredLong();
-        }
-
-        else {
+        } else {
             euStore = Math.min(euStore, maxStore());
             if (this.energyContainer != null && this.energyContainer.getEnergyStored() > 0 && euStore < maxStore()) {
                 if (euStore + this.energyContainer.getEnergyStored() > maxStore()) {
@@ -523,9 +518,9 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
             }
 
         }
-        if(getOffsetTimer()%checkTime==0) for (int i = 0; i < maxLength; i++) {
+        if (getOffsetTimer() % checkTime == 0) for (int i = 0; i < maxLength; i++) {
             if (io[i][0] == 1) {
-                if (!checkLoacl(i)||GTQTUtil.rangeMetFormMte(new BlockPos(io[i][1], io[i][2], io[i][3]),getPos())>range) {
+                if (!checkLoacl(i) || GTQTUtil.rangeMetFormMte(new BlockPos(io[i][1], io[i][2], io[i][3]), getPos()) > range) {
                     clean(false, i);
                 }
             }
@@ -539,7 +534,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
             }
         }
     }
-    int checkTime=10;
+
     @Override
     public boolean onScrewdriverClick(EntityPlayer playerIn,
                                       EnumHand hand,
@@ -549,10 +544,10 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     }
 
     private boolean changeCheckTime(EntityPlayer playerIn) {
-        if(getWorld().isRemote) {
+        if (getWorld().isRemote) {
             checkTime += 10;
             if (checkTime >= 200) checkTime = 10;
-            playerIn.sendMessage(new TextComponentString("蓄能变电站调整检测间隔:"+checkTime));
+            playerIn.sendMessage(new TextComponentString("蓄能变电站调整检测间隔:" + checkTime));
         }
         return true;
     }
@@ -740,7 +735,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
 
     //距离计算
     public int getDistance(int x, int y, int z) {
-        return rangeMetFormMte(new BlockPos(x, y, z),getPos());
+        return rangeMetFormMte(new BlockPos(x, y, z), getPos());
     }
 
     public ItemStack setCard() {
@@ -788,7 +783,7 @@ public class MetaTileEntityMicrowaveEnergyReceiverControl extends MetaTileEntity
     //通过物品获取坐标
     public boolean checkLoacl(boolean sim) {
         ItemStack item = inputCardInventory.getStackInSlot(0);
-        if(!outputCardInventory.getStackInSlot(0).isEmpty())return false;
+        if (!outputCardInventory.getStackInSlot(0).isEmpty()) return false;
         if (item.getItem() == GTQTMetaItems.GTQT_META_ITEM && item.getMetadata() == GTQTMetaItems.POS_BINDING_CARD.getMetaValue()) {
             NBTTagCompound compound = item.getTagCompound();
             if (compound != null && compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")) {

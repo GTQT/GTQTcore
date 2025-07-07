@@ -21,5 +21,15 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.cylinder);
         MetaItems.addOrePrefix(GTQTOrePrefix.valve);
         MetaItems.addOrePrefix(GTQTOrePrefix.shell);
+
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreGabbro);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreGneiss);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreLimestone);
+        MetaItems.addOrePrefix(GTQTOrePrefix.orePhyllite);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreQuartzite);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreShale);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreSlate);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreSoapstone);
+        MetaItems.addOrePrefix(GTQTOrePrefix.oreKimberlite);
     }
 }
