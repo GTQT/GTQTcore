@@ -122,7 +122,7 @@ public class BrineChain {
         // S + NaCN -> NaSCN
         CHEMICAL_RECIPES.recipeBuilder().duration(100).EUt(120)
                 .input(dust, Sulfur)
-                .output(dust,SodiumCyanide)
+                .input(dust,SodiumCyanide)
                 .fluidOutputs(SodiumThiocyanate.getFluid(1000))
                 .buildAndRegister();
 

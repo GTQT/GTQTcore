@@ -1,5 +1,8 @@
 package keqing.gtqtcore.api.unification;
 
+import gregtech.api.unification.material.Materials;
+import gregtech.api.unification.stack.MaterialStack;
+import gregtech.common.ConfigHolder;
 import gregtech.common.items.MetaItems;
 import keqing.gtqtcore.api.unification.ore.GTQTOrePrefix;
 
@@ -22,14 +25,16 @@ public class OrePrefixAdditions {
         MetaItems.addOrePrefix(GTQTOrePrefix.valve);
         MetaItems.addOrePrefix(GTQTOrePrefix.shell);
 
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreGabbro);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreGneiss);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreLimestone);
-        MetaItems.addOrePrefix(GTQTOrePrefix.orePhyllite);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreQuartzite);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreShale);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreSlate);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreSoapstone);
-        MetaItems.addOrePrefix(GTQTOrePrefix.oreKimberlite);
+        if (ConfigHolder.worldgen.allUniqueStoneTypes) {
+            GTQTOrePrefix.oreGabbro.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Gabbro, 144));
+            GTQTOrePrefix.oreGneiss.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Gneiss, 144));
+            GTQTOrePrefix.oreLimestone.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Limestone, 144));
+            GTQTOrePrefix.orePhyllite.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Phyllite, 144));
+            GTQTOrePrefix.oreQuartzite.addSecondaryMaterial(new MaterialStack(Materials.Quartzite, 144));
+            GTQTOrePrefix.oreShale.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Shale, 144));
+            GTQTOrePrefix.oreSlate.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Slate, 144));
+            GTQTOrePrefix.oreSoapstone.addSecondaryMaterial(new MaterialStack(Materials.Soapstone, 144));
+            GTQTOrePrefix.oreKimberlite.addSecondaryMaterial(new MaterialStack(GTQTMaterials.Kimberlite, 144));
+        }
     }
 }

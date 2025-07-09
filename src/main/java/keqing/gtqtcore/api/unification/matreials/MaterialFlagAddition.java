@@ -354,7 +354,7 @@ public class MaterialFlagAddition {
         /*
          *  CEu Vanilla Item Pipes
          *  Americium
-         *  Magnalium
+         *  ·
          *  Sterling Silver
          *  Tin
          *  Cupronickel

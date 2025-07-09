@@ -3,12 +3,11 @@ package keqing.gtqtcore.loaders.recipes.chain;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
 import keqing.gtqtcore.api.unification.GTQTMaterials;
 
-import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.ore.OrePrefix.dust;
-import static gregtech.api.unification.ore.OrePrefix.dustTiny;
+import static gregtech.api.unification.ore.OrePrefix.*;
+import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.BURNER_REACTOR_RECIPES;
 
 public class EDTAChain {
 
@@ -57,6 +56,27 @@ public class EDTAChain {
                 .fluidOutputs(Steam.getFluid(3000))
                 .blastFurnaceTemp(2700)
                 .duration(120).EUt(VA[MV]).buildAndRegister();
+
+        // CH₄ + NH₃ + 1.5O₂ → HCN + 3H₂O （铂催化，高温）
+        BURNER_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(Methane.getFluid(1000))
+                .fluidInputs(Ammonia.getFluid(1000))
+                .fluidInputs(Oxygen.getFluid(1500))
+                .notConsumable(plate, Platinum)
+                .fluidOutputs(GTQTMaterials.HydrogenCyanide.getFluid(1000))
+                .fluidOutputs(Steam.getFluid(3000))
+                .blastFurnaceTemp(1000)
+                .duration(100).EUt(VA[HV]).buildAndRegister();
+
+        // CH₄ + NH₃ → HCN + 3H₂ （无氧，高温催化）
+        BURNER_REACTOR_RECIPES.recipeBuilder()
+                .fluidInputs(Methane.getFluid(1000))
+                .fluidInputs(Ammonia.getFluid(1000))
+                .notConsumable(dust, Platinum)
+                .fluidOutputs(GTQTMaterials.HydrogenCyanide.getFluid(1000))
+                .fluidOutputs(Hydrogen.getFluid(3000))
+                .blastFurnaceTemp(4000)
+                .duration(120).EUt(VA[EV]).buildAndRegister();
 
         // NaOH + HCN -> NaCN + H2O
         CHEMICAL_RECIPES.recipeBuilder()

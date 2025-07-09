@@ -465,14 +465,14 @@ public class MetaTileEntityMachine {
                 "ABA", "CHC", "ABA",
                 'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.HV),
                 'C', new UnificationEntry(cableGtSingle, Gold),
-                'B', new UnificationEntry(plate, Talonite),
+                'B', new UnificationEntry(plate, Magnalium),
                 'A', new UnificationEntry(plate, Epoxy));
 
         ModHandler.addShapedRecipe(true, "ev_casing", HULL[4].getStackForm(),
                 "ABA", "CHC", "ABA",
                 'H', MACHINE_CASING.getItemVariant(BlockMachineCasing.MachineCasingType.EV),
                 'C', new UnificationEntry(cableGtSingle, Aluminium),
-                'B', new UnificationEntry(plate, NiobiumTitanium),
+                'B', new UnificationEntry(plate, Talonite),
                 'A', new UnificationEntry(plate, Polytetrafluoroethylene));
         //////////////////////////////////////玻璃
         FLUID_SOLIDFICATION_RECIPES.recipeBuilder().duration(120).EUt(120)

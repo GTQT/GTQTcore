@@ -25,31 +25,31 @@ public class GTQTStoneTypes {
     public GTQTStoneTypes(){
     }
     public static void init(){
-        GABBRO = new StoneType(12, "gabbro", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Gabbro,
+        GABBRO = new StoneType(12, "gabbro", SoundType.STONE, GTQTOrePrefix.oreGabbro, GTQTMaterials.Gabbro,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.GABBRO),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.GABBRO), false);
-        GNEISS = new StoneType(13, "gneiss", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Gneiss,
+        GNEISS = new StoneType(13, "gneiss", SoundType.STONE, GTQTOrePrefix.oreGneiss, GTQTMaterials.Gneiss,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.GNEISS),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.GNEISS), false);
-        LIMESTONE = new StoneType(14, "limestone", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Limestone,
+        LIMESTONE = new StoneType(14, "limestone", SoundType.STONE, GTQTOrePrefix.oreLimestone, GTQTMaterials.Limestone,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.LIMESTONE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.LIMESTONE), false);
-        PHYLLITE = new StoneType(15, "phyllite", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Phyllite,
+        PHYLLITE = new StoneType(15, "phyllite", SoundType.STONE, GTQTOrePrefix.orePhyllite, GTQTMaterials.Phyllite,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.PHYLLITE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.PHYLLITE), false);
-        QUARTZITE = new StoneType(16, "quartzite", SoundType.STONE, OrePrefix.ore, Materials.Quartzite,
+        QUARTZITE = new StoneType(16, "quartzite", SoundType.STONE, GTQTOrePrefix.oreQuartzite, Materials.Quartzite,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.QUARTZITE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.QUARTZITE), false);
-        SHALE = new StoneType(17, "shale", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Shale,
+        SHALE = new StoneType(17, "shale", SoundType.STONE, GTQTOrePrefix.oreShale, GTQTMaterials.Shale,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.SHALE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.SHALE), false);
-        SLATE = new StoneType(18, "slate", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Slate,
+        SLATE = new StoneType(18, "slate", SoundType.STONE, GTQTOrePrefix.oreSlate, GTQTMaterials.Slate,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.SLATE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.SLATE), false);
-        SOAPSTONE = new StoneType(19, "soapstone", SoundType.STONE, OrePrefix.ore, Materials.Soapstone,
+        SOAPSTONE = new StoneType(19, "soapstone", SoundType.STONE, GTQTOrePrefix.oreSoapstone, Materials.Soapstone,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.SOAPSTONE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.SOAPSTONE), false);
-        KIMBERLITE = new StoneType(20, "kimberlite", SoundType.STONE, OrePrefix.ore, GTQTMaterials.Kimberlite,
+        KIMBERLITE = new StoneType(20, "kimberlite", SoundType.STONE, GTQTOrePrefix.oreKimberlite, GTQTMaterials.Kimberlite,
                 () -> gtStoneState(GTQTStoneVariantBlock.StoneType.KIMBERLITE),
                 state -> gtStonePredicate(state, GTQTStoneVariantBlock.StoneType.KIMBERLITE), false);
     }
