@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.metatileentity.multiblock;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.IBatch;
 import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IDistinctBusController;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -42,7 +43,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController, IControllable {
+public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController, IControllable, IBatch {
 
     public final RecipeMap<?> recipeMap;
     public int recipeHeat;
@@ -308,5 +309,16 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         public long getMaximumOverclockVoltage() {
             return heat;
         }
+    }
+
+    @Override
+    public boolean isBatchEnable(){
+        return recipeMapWorkable.isBatchEnable();
+    }
+
+    @Override
+    public void setBatchEnable(boolean enable)
+    {
+        recipeMapWorkable.setBatchEnable(enable);
     }
 }

@@ -41,7 +41,7 @@ public class ComponentAssemblerRecipes {
                 "CWR", "WMW", "RWC",
                 'C', new UnificationEntry(cableGtSingle, Tin),
                 'W', new UnificationEntry(wireGtSingle, Copper),
-                'R', new UnificationEntry(plate_curved, Iron),
+                'R', new UnificationEntry(plate_curved, Steel),
                 'M', new UnificationEntry(stick, IronMagnetic));
 
         ModHandler.addShapedRecipe(true, "electric_piston_lv", ELECTRIC_PISTON_LV.getStackForm(),
@@ -65,7 +65,7 @@ public class ComponentAssemblerRecipes {
         //  LV
         COMPONENT_ASSEMBLER_RECIPES.recipeBuilder()
                 .input(cableGtSingle, Tin, 2)
-                .input(plate_curved, Iron, 2)
+                .input(plate_curved, Steel, 2)
                 .input(stick, IronMagnetic)
                 .input(wireGtSingle, Copper, 4)
                 .output(ELECTRIC_MOTOR_LV)

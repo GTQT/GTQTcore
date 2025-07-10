@@ -143,7 +143,7 @@ public class Batteries {
                 .fluidInputs(Ammonia.getFluid(30000))
                 .fluidInputs(Oxygen.getFluid(15000))
                 .output(dust,Halloysite,90)
-                .fluidOutputs(AmmoniumChloride.getFluid(30*144))
+                .output(dust,AmmoniumChloride,30)
                 .recipeLevel(4)
                 .circuitMeta(23)
                 .buildAndRegister();

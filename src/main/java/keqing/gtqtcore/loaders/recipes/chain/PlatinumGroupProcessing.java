@@ -150,7 +150,7 @@ public class PlatinumGroupProcessing {
         //  RuRhIr2Os(HNO3)3 + 3NaHSO4 -> RhRu + Ir2Os + 3NaNO3 + 3H2SO4
         CHEMICAL_BATH_RECIPES.recipeBuilder()
                 .input(dust, GTQTMaterials.PlatinumGroupResidue)
-                .fluidInputs(SodiumBisulfate.getFluid(L * 21))
+                .input(dust, SodiumHydroxide,21)
                 .output(dust, InertMetalMixture)
                 .output(dust, RarestMetalMixture)
                 .output(dust, GTQTMaterials.SodiumNitrate, 5)

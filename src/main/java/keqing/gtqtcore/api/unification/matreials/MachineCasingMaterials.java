@@ -600,6 +600,7 @@ public class MachineCasingMaterials {
                         .blastStats(VA[UHV], 1200)
                         .vacuumStats(VA[ZPM], 180))
                 .components(TitaniumTungstenCarbide, 6, AusteniticStainlessSteel904L, 3, Ruby, 3)
+                .cableProperties(V[EV], 4, 2, false)
                 .flags(GENERATE_PLATE, GENERATE_DOUBLE_PLATE, GENERATE_ROD, GENERATE_GEAR, GENERATE_SMALL_GEAR, GENERATE_BOLT_SCREW, GENERATE_ROTOR)
                 .build()
                 .setFormula("((WC)₇Ti₃)₃?₃");

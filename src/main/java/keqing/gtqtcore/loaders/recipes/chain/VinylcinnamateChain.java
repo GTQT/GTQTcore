@@ -5,6 +5,7 @@ import gregtech.api.unification.ore.OrePrefix;
 import static gregtech.api.GTValues.*;
 import static gregtech.api.recipes.RecipeMaps.CHEMICAL_RECIPES;
 import static gregtech.api.unification.material.Materials.*;
+import static gregtech.api.unification.ore.OrePrefix.dust;
 import static gregtechfoodoption.GTFOMaterialHandler.Acetaldehyde;
 import static gregtechfoodoption.GTFOMaterialHandler.AceticAnhydride;
 import static keqing.gtqtcore.api.recipes.GTQTcoreRecipeMaps.CHEMICAL_PLANT;
@@ -37,7 +38,7 @@ public class VinylcinnamateChain {
         //聚乙烯醇
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(PolyvinylAcetate.getFluid(144))
-                .notConsumable(SodiumHydroxide.getFluid(1000))
+                .notConsumable(dust, SodiumHydroxide)
                 .notConsumable(Methanol.getFluid(1000))
                 .fluidOutputs(PolyvinylAlcoholVinylalcoholPolymer.getFluid(144))
                 .duration(80).EUt(VA[EV]).buildAndRegister();
@@ -99,7 +100,7 @@ public class VinylcinnamateChain {
         //肉桂酸+氢氧化钠=肉桂酸钠
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(CinnamicAcid.getFluid(1000))
-                .fluidInputs(SodiumHydroxide.getFluid(1000))
+                .input(dust, SodiumHydroxide)
                 .fluidOutputs(Water.getFluid(1000))
                 .fluidOutputs(SodiumCinnamate.getFluid(1000))
                 .duration(400).EUt(VA[EV]).buildAndRegister();

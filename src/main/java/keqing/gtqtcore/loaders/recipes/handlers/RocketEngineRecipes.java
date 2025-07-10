@@ -109,7 +109,7 @@ public class RocketEngineRecipes {
 
         //HydraziniumChloride
         CHEMICAL_RECIPES.recipeBuilder()
-                .fluidInputs(AmmoniumChloride.getFluid(2000))
+                .input(dust,AmmoniumChloride,2)
                 .fluidInputs(Chlorine.getFluid(2000))
                 .fluidOutputs(HydraziniumChloride.getFluid(1000))
                 .fluidOutputs(HydrochloricAcid.getFluid(1000)) // 需中和处理

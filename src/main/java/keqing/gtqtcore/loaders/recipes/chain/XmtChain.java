@@ -101,7 +101,7 @@ public class XmtChain {
         CHEMICAL_RECIPES.recipeBuilder()
                 .fluidInputs(Ethylenediamine.getFluid(1000))
                 .fluidInputs(Chloromethane.getFluid(2000)) // 引入卤代烃
-                .fluidInputs(SodiumHydroxide.getFluid(1000)) // 碱性催化剂
+                .input(dust, SodiumHydroxide)
                 .fluidOutputs(QuaternaryAmmoniumIntermediate.getFluid(2000))
                 .fluidOutputs(SaltWater.getFluid(1000)) // 副产物盐水
                 .duration(200)
@@ -195,7 +195,7 @@ public class XmtChain {
         CENTRIFUGE_RECIPES.recipeBuilder()
                 .fluidInputs(OrganicSolventWaste.getFluid(4000))
                 .fluidOutputs(ThionylChloride.getFluid(1800))
-                .fluidOutputs(AmmoniumChloride.getFluid(1000))
+                .output(dust,AmmoniumChloride)
                 .duration(200)
                 .EUt(VA[EV])
                 .buildAndRegister();

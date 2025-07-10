@@ -389,7 +389,7 @@ public class TaraniumProcessing {
         ELECTROLYZER_RECIPES.recipeBuilder()
                 .input(dust, StoneResidue, 24)
                 .notConsumable(SEPARATION_ELECTROMAGNET)
-                .fluidInputs(SodiumHydroxide.getFluid(1000))
+                .input(dust, SodiumHydroxide)
                 .fluidInputs(Water.getFluid(1000))
                 .output(dust, SelectedStoneResidue)
                 .chancedOutput(dust, Magnetite, 2500, 0)

@@ -24,19 +24,11 @@ import static keqing.gtqtcore.api.unification.GTQTMaterials.*;
 
 public class AirDistillation {
     public static void init() {
-        vaccum(CarbonDioxide, 1);
-        vaccum(Radon, 2);
-        vaccum(Krypton, 2);
-        vaccum(Nitrogen, 3);
-        vaccum(Argon, 3);
-        vaccum(Xenon, 3);
         vaccum(Ozone, 3);
-        vaccum(Hydrogen, 4);
-        vaccum(Neon, 4);
         vaccum(MarsAir, 5);
         vaccum(BeneathAir, 5);
         vaccum(BetAir, 5);
-        vaccum(Helium, 6);
+
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(MarsAir.getFluid(FluidStorageKeys.LIQUID, 10000))

@@ -3,6 +3,7 @@ package keqing.gtqtcore.api.metatileentity.multiblock;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+import gregtech.api.capability.IBatch;
 import gregtech.api.capability.IControllable;
 import gregtech.api.capability.IDistinctBusController;
 import gregtech.api.capability.IMultipleTankHandler;
@@ -46,7 +47,7 @@ import static gregtech.api.GTValues.VOC;
 import static gregtech.api.GTValues.VOCN;
 import static keqing.gtqtcore.api.metatileentity.multiblock.GTQTMultiblockAbility.LASER_INPUT;
 
-public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements IDistinctBusController, IControllable {
+public abstract class RecipeMapLaserMultiblockController extends MultiblockWithDisplayBase implements IDistinctBusController, IControllable , IBatch {
     public final RecipeMap<?> recipeMap;
     protected MultiblockLaserRecipeLogic recipeMapWorkable;
     protected IItemHandlerModifiable inputInventory;
@@ -378,5 +379,16 @@ public abstract class RecipeMapLaserMultiblockController extends MultiblockWithD
     @Override
     public void setWorkingEnabled(boolean isWorkingAllowed) {
         recipeMapWorkable.setWorkingEnabled(isWorkingAllowed);
+    }
+
+    @Override
+    public boolean isBatchEnable(){
+        return recipeMapWorkable.isBatchEnable();
+    }
+
+    @Override
+    public void setBatchEnable(boolean enable)
+    {
+        recipeMapWorkable.setBatchEnable(enable);
     }
 }
