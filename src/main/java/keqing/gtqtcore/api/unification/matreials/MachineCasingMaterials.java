@@ -712,6 +712,7 @@ public class MachineCasingMaterials {
                 .ingot().fluid()
                 .iconSet(MaterialIconSet.SHINY)
                 .color(0x8B8B00)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Thorium,4)//能量水晶4 混沌 秩序
                 .build();
 
@@ -720,6 +721,7 @@ public class MachineCasingMaterials {
                 .ingot().fluid()
                 .iconSet(MaterialIconSet.SHINY)
                 .color(0x8B814C)
+                .flags(DISABLE_DECOMPOSITION)
                 .components(Okin,6,TitanSteel,6,BlackSteel,2)//需要补神秘5 能量水晶1
                 .blast(8100,  BlastProperty.GasTier.HIGH)
                 .build();
