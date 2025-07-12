@@ -43,7 +43,7 @@ import java.util.List;
 
 import static gregtech.api.GTValues.V;
 
-public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController, IControllable, IBatch {
+public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDisplayBase implements IDataInfoProvider, IDistinctBusController, IControllable{
 
     public final RecipeMap<?> recipeMap;
     public int recipeHeat;
@@ -309,16 +309,5 @@ public abstract class RecipeMapHeatMultiblockController extends MultiblockWithDi
         public long getMaximumOverclockVoltage() {
             return heat;
         }
-    }
-
-    @Override
-    public boolean isBatchEnable(){
-        return recipeMapWorkable.isBatchEnable();
-    }
-
-    @Override
-    public void setBatchEnable(boolean enable)
-    {
-        recipeMapWorkable.setBatchEnable(enable);
     }
 }
